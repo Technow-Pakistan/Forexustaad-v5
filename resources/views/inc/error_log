@@ -1,0 +1,13 @@
+[23-Jul-2020 09:42:21 UTC] PHP Parse error:  syntax error, unexpected 'public' (T_PUBLIC), expecting end of file in /home2/forexust/public_html/inc/component.php on line 3
+[23-Jul-2020 09:42:21 UTC] PHP Warning:  include(inc/counter.php): failed to open stream: No such file or directory in /home2/forexust/public_html/inc/home-left-sidebar.php on line 6
+[23-Jul-2020 09:42:21 UTC] PHP Warning:  include(inc/counter.php): failed to open stream: No such file or directory in /home2/forexust/public_html/inc/home-left-sidebar.php on line 6
+[23-Jul-2020 09:42:21 UTC] PHP Warning:  include(): Failed opening 'inc/counter.php' for inclusion (include_path='.:/opt/cpanel/ea-php71/root/usr/share/pear') in /home2/forexust/public_html/inc/home-left-sidebar.php on line 6
+[23-Jul-2020 09:42:21 UTC] PHP Warning:  include(inc/clients.php): failed to open stream: No such file or directory in /home2/forexust/public_html/inc/home-right-sidebar.php on line 5
+[23-Jul-2020 09:42:21 UTC] PHP Warning:  include(inc/clients.php): failed to open stream: No such file or directory in /home2/forexust/public_html/inc/home-right-sidebar.php on line 5
+[23-Jul-2020 09:42:21 UTC] PHP Warning:  include(): Failed opening 'inc/clients.php' for inclusion (include_path='.:/opt/cpanel/ea-php71/root/usr/share/pear') in /home2/forexust/public_html/inc/home-right-sidebar.php on line 5
+[23-Jul-2020 09:50:17 UTC] PHP Warning:  include(inc/counter.php): failed to open stream: No such file or directory in /home2/forexust/public_html/inc/home-left-sidebar.php on line 6
+[23-Jul-2020 09:50:17 UTC] PHP Warning:  include(inc/counter.php): failed to open stream: No such file or directory in /home2/forexust/public_html/inc/home-left-sidebar.php on line 6
+[23-Jul-2020 09:50:17 UTC] PHP Warning:  include(): Failed opening 'inc/counter.php' for inclusion (include_path='.:/opt/cpanel/ea-php71/root/usr/share/pear') in /home2/forexust/public_html/inc/home-left-sidebar.php on line 6
+[23-Jul-2020 09:50:17 UTC] PHP Warning:  include(inc/clients.php): failed to open stream: No such file or directory in /home2/forexust/public_html/inc/home-right-sidebar.php on line 5
+[23-Jul-2020 09:50:17 UTC] PHP Warning:  include(inc/clients.php): failed to open stream: No such file or directory in /home2/forexust/public_html/inc/home-right-sidebar.php on line 5
+[23-Jul-2020 09:50:17 UTC] PHP Warning:  include(): Failed opening 'inc/clients.php' for inclusion (include_path='.:/opt/cpanel/ea-php71/root/usr/share/pear') in /home2/forexust/public_html/inc/home-right-sidebar.php on line 5

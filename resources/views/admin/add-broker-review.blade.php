@@ -1,0 +1,124 @@
+@include('admin.include.header')
+		<!-- [ Main Content ] start -->
+		<section class="pcoded-main-container">
+			<div class="pcoded-content">
+				<!-- [ breadcrumb ] start -->
+				<div class="page-header">
+					<div class="page-block">
+						<div class="row align-items-center">
+							<div class="col-md-12">
+								<div class="page-header-title">
+									<h5 class="m-b-10">Broker Review</h5>
+								</div>
+								<ul class="breadcrumb">
+									<li class="breadcrumb-item">
+										<a href="index.html"><i class="feather icon-home"></i></a>
+									</li>
+									<li class="breadcrumb-item"><a href="all-broker-Review.html">All Brokers Review</a></li>
+									<li class="breadcrumb-item">
+										<a href="#!">Broker Review</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- [ breadcrumb ] end -->
+				<!-- [ Main Content ] start -->
+                <div class="row">
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header">Broker Review</div>
+							<div class="card-body">
+								@php 
+									$count = 0;
+									$titleId = 0;
+									$url = "new";
+								@endphp
+								@isset($brokerReview->image)
+									<?php $url = "edit/" . $brokerReview->id; ?>
+								@endisset
+								<form action="{{URL::to('/admin/brokersReview')}}/{{$url}}" method="post" enctype="multipart/form-data">
+									@isset($brokerReview->image)
+										<div>
+											<img src="{{URL::to('storage/app')}}/{{$brokerReview->image}}" alt="Your Image" />
+										</div>
+										@php 
+											$count++;
+											$titleId = $brokerReview->brokerId;
+										@endphp
+									@endisset
+										<div class="custom-file my-3 h-100">
+											<input type="file" class="form-control h-100" name="file_photo" id="customFile" {{($count == 0 ? 'required' : '' )}}>
+										</div>
+									<!-- <div class="custom-file my-3">
+										<input
+											type="file"
+											class="custom-file-input"
+											id="customFile"
+											name="file_photo"
+											onchange="sliderimgone(this);"
+											{{($count == 0 ? 'required' : '' )}}
+										/>
+										<label class="custom-file-label" for="customFile"
+											>Choose file</label
+										>
+									</div> -->
+									<div class="form-group">
+										<label for="">Title</label>
+										<div>
+											<select name="brokerId" class="form-control" id="">
+												@foreach($broker as $title)
+													<option value="{{$title->id}}" {{($titleId == $title->id ? 'selected' : '' )}}>{{$title->title}}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>	
+									<div class="form-group pt-4">
+										<label>Review Content</label>
+										<textarea
+											name="editor1"
+											class="form-control"
+											placeholder="Page Body"
+											required
+										>
+											<?php
+												if($count != 0){
+													$description = html_entity_decode($brokerReview->description);
+													echo $description;
+												}
+											?>
+										</textarea>
+									</div>
+									<div class="form-group">
+										<label for="">Use Ebeded Code For Videos</label>
+										<div>
+											<input type="text" name="videoCode" value="{{($count != 0 ? $brokerReview->videoCode : '' )}}" class="form-control" required>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="">Link</label>
+										<div>
+											<input type="text" name="link" value="{{($count != 0 ? $brokerReview->link : '' )}}" class="form-control" required>
+										</div>
+									</div>
+									<div>
+										<input type="submit" name="submit" id="submit" class="btn btn-outline-primary" value="{{($count != 0 ? 'Update' : 'Save' )}}">
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- [ Main Content ] end -->
+			</div>
+		</section>
+		<!-- [ Main Content ] end -->
+
+@include('admin.include.footer')
+        <!-- <script src="http://cdn.ckeditor.com/4.6.1/standard/ckeditor.js"></script>
+        <script>
+			CKEDITOR.replace("editor1");
+		</script> -->
+
+
