@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BlogPostModel;
+use App\Models\CommentsModel;
+use App\Models\ReplyModel;
 
 class BlogController extends Controller
 {
@@ -13,6 +15,7 @@ class BlogController extends Controller
     }
     public function DetailBlog(Request $request, $id){
         $BlogDetail = BlogPostModel::orderBy('id','desc')->where('permalink',$id)->first();
-        return view('blog.blogDetail',compact('BlogDetail'));
+        $totalComments = CommentsModel::orderBy('id','desc')->where('blogPostId',$BlogDetail->id)->get();
+        return view('blog.blogDetail',compact('BlogDetail','totalComments'));
     }
 }

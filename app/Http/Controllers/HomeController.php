@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ClientRegistrationModel;
 use App\Models\BlogPostModel;
+use App\Models\BrokerCompanyInformationModel;
 
 class HomeController extends Controller
 {
@@ -57,5 +58,9 @@ class HomeController extends Controller
     public function LogoutProcess(Request $request){
         $request->session()->pull("client");
         return back();
+    }
+    public function BrokerView(){
+        $totalData = BrokerCompanyInformationModel::all();
+        return view('home/brokerView',compact('totalData'));
     }
 }

@@ -33,15 +33,15 @@
 										<label for="bulk-action-selector-top" class="d-block ">Select Social Media</label>
 										<select name="iconName" class="form-control w-75 d-inline-block socialIcon" id="bulk-action-selector-top">
 											<option value="-1">Select</option>
-											<option value="Twitter">Twitter</option>
-											<option value="Youtube">Youtube</option>
-											<option value="Facebook">Facebook</option>
-											<option value="LinkedIn">LinkedIn</option>
-											<option value="GooglePlus">Google Plus</option>
-											<option value="Pinterest">Pinterest</option>
-											<option value="Snapchat">Snapchat</option>
-											<option value="Tiktok">Tiktok</option>
-											<option value="Instagram">Instagram</option>
+											<option class="Twitter" value="Twitter">Twitter</option>
+											<option class="Youtube" value="Youtube">Youtube</option>
+											<option class="Facebook" value="Facebook">Facebook</option>
+											<option class="LinkedIn" value="LinkedIn">LinkedIn</option>
+											<option class="GooglePlus" value="GooglePlus">Google Plus</option>
+											<option class="Pinterest" value="Pinterest">Pinterest</option>
+											<option class="Snapchat" value="Snapchat">Snapchat</option>
+											<option class="Tiktok" value="Tiktok">Tiktok</option>
+											<option class="Instagram" value="Instagram">Instagram</option>
 										</select>
 										
 									</div>
@@ -114,14 +114,12 @@
 		var id = $(this).attr('value');
 		var icon = $(this).parent().parent().parent().children()[0].innerText;
 		var link = $(this).parent().parent().parent().children()[1].innerText;
-		// var select = $(".socialIcon");
-		// var option = select.options[0];
-		// option.setAttribute('selected', true);
+		$(".socialIcon").find("."+icon).attr("selected",true);
 		$(".socialLink").val(link);
 		$(".socialButton").val("Update");
 		$(".socialButton").attr("class","btn btn-outline-danger mt-4 socialButton");
 		$(".socialForm").attr("action","{{URL::to('/admin/firstNav/edit/')}}/"+id+"");
-		console.log(id);
+		
 		
 	});
 </script>

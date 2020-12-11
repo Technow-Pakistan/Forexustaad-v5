@@ -26,6 +26,7 @@ use App\Http\Controllers\BorkerNewsController;
 use App\Http\Controllers\BorkerReviewController;
 use App\Http\Controllers\AdminMemberController;
 use App\Http\Controllers\ClientMemberController;
+use App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,9 +50,13 @@ Route::get('/blog-post.html',[BlogController::class,'Index']);
 Route::get('/Blog/{id}',[BlogController::class,'DetailBlog']);
 Route::get('/privacy-policy.html',[HomeController::class,'privacyPolicy']);
 Route::get('/term-of-services.html',[HomeController::class,'termServices']);
+Route::get('/brokerView',[HomeController::class,'BrokerView']);
+
+// Admin views
 
 Route::get('/admin',[AdminController::class,'Login']);
-    Route::post('/admin',[AdminController::class,'Index']);
+Route::post('/admin',[AdminController::class,'Index']);
+
 Route::group(['prefix' => 'admin',"middleware" => "IsLogin"],function(){
     Route::get('/dashboard',[AdminController::class,'Dashboard']);
     Route::get('/logout',[AdminController::class,'Logout']);  
@@ -77,6 +82,7 @@ Route::group(['prefix' => 'admin',"middleware" => "IsLogin"],function(){
     Route::group(['prefix' => 'logo-favicon'],function(){
         Route::post('/',[LogoPanelController::class,'AddFavicon']);
         Route::get('/delete/{id}',[LogoPanelController::class,'deleteFavicon']);
+        Route::post('/edit/{id}',[LogoPanelController::class,'EditFavicon']);
     });
     Route::group(['prefix' => 'sliding-images'],function(){
         Route::get('/',[SlidingImagesController::class,'Index']);
@@ -195,5 +201,15 @@ Route::group(['prefix' => 'admin',"middleware" => "IsLogin"],function(){
     Route::group(['prefix' => 'client'],function(){
         Route::get('/delete/{id}',[ClientMemberController::class,'Delete']);
         Route::get('/active/{id}',[ClientMemberController::class,'Active']);
+    });
+    Route::group(['prefix' => 'comment'],function(){
+        Route::get('/',[CommentController::class,'Index']);
+        Route::post('/',[CommentController::class,'Add']);
+        Route::get('/delete/{id}',[CommentController::class,'Remove']);
+        Route::group(['prefix' => 'reply'],function(){
+            Route::get('/{id}',[CommentController::class,'ReplyList']);
+            Route::post('/{id}',[CommentController::class,'AddReply']);
+            Route::get('/delete/{id}',[CommentController::class,'RemoveReply']);
+        });
     });
 });

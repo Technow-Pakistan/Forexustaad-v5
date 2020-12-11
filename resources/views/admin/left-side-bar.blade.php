@@ -82,6 +82,7 @@
 									<thead class="bg-primary text-white">
 										<tr>
 											<th>Image</th>
+											<th>Area</th>
 											<th>Start</th>
 											<th>End</th>
 											<th>Action</th>
@@ -104,6 +105,9 @@
 														echo $data->htmlLink;
 													@endphp
 												@endif
+											</td>
+											<td>
+												{{$data->area}}
 											</td>
 											<td>
 												{{$data->start}}

@@ -112,178 +112,195 @@
                                             </div>
                                             
                                         </div> -->
-                                        <div class="pt-5">
-                                            <div class="totalcom">
-                                                <h6>10 Comments</h6>
-                                            </div>
-                                            <div class="pt-3 border">
-                                                <ol class="commentsection p-0">
-                                                    <li>
-                                                        <div class="comentmain container-fluid">
-                                                            <div class=" row">
-                                                                <div class="col-md-2">
-                                                                    <div>
-                                                                        <div class="comment_avatar">
-                                                                            <img src="https://icon-library.net/images/avatar-icon-png/avatar-icon-png-8.jpg" class="img-fluid ">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-10">
-                                                                    <div>
-                                                                        <div class="comment_author clearfix">
-                                                                            <h5 class="float-left">Raheel Nawaz</h5>
-                                                                            <p class="float-right commenttime">
-                                                                                September 2, 2015 at 1:04 pm
-                                                                            </p>
-                                                                        </div>
-                                                                        <div class="comment_details">
-                                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                                                quis nos</p>
-                                                                        </div>
-                                                                        <div class="d-flex justify-content-end">
-                                                                            <i class="fa fa-heart-o mr-3"></i>
-                                                                            <i class="fa fa-reply replybox"></i>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <hr>
-                                                            <ul class="child-comment">
-                                                                <li class="p-3 ">
+                                        @if($BlogDetail->comment == 1)
+                                            <div class="pt-5">
+                                                <div class="totalcom">
+                                                    <h6>{{count($totalComments)}} Comments</h6>
+                                                </div>
+                                                <div class="pt-3 border">
+                                                    <ol class="commentsection p-0">
+                                                        @php $ij = 1 @endphp
+                                                        @foreach($totalComments as $comment)
+                                                            @php
+                                                                $replies = $comment->GetReplies();
+                                                            @endphp
+                                                            @if($ij != 1) 
+                                                                <hr> 
+                                                            @endif
+                                                            <li>
+                                                                <div class="comentmain container-fluid">
                                                                     <div class=" row">
                                                                         <div class="col-md-2">
                                                                             <div>
                                                                                 <div class="comment_avatar">
-                                                                                    <img src="https://icon-library.net/images/avatar-icon-png/avatar-icon-png-8.jpg" class="img-fluid ">
+                                                                                    @if($comment->image != null)
+                                                                                        <img src="{{URL::to('storage/app')}}/{{$comment->image}}" class="img-fluid borderRadius80">
+                                                                                    @else
+                                                                                        <img src="https://icon-library.net/images/avatar-icon-png/avatar-icon-png-8.jpg" class="img-fluid ">
+                                                                                    @endif
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-10">
                                                                             <div>
                                                                                 <div class="comment_author clearfix">
-                                                                                    <h5 class="float-left">Raheel Nawaz</h5>
+                                                                                    <h5 class="float-left">{{$comment->name}}</h5>
                                                                                     <p class="float-right commenttime">
-                                                                                        September 2, 2015 at 1:04 pm
+                                                                                        {{$comment->created_at->format("M d, Y")}} at {{$comment->created_at->format("H:i a")}}
                                                                                     </p>
                                                                                 </div>
                                                                                 <div class="comment_details">
-                                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                                                                                    <p>{{$comment->message}}</p>
                                                                                 </div>
-                                                                                <div class="d-flex justify-content-end">
+                                                                                <!-- <div class="d-flex justify-content-end">
                                                                                     <i class="fa fa-heart-o mr-3"></i>
                                                                                     <i class="fa fa-reply replybox"></i>
-                                                                                </div>
+                                                                                </div> -->
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </li>
-                                                    <hr>
-                                                    <li>
-                                                        <div class="comentmain container-fluid">
-                                                            <div class=" row">
-                                                                <div class="col-md-2">
-                                                                    <div>
-                                                                        <div class="comment_avatar">
-                                                                            <img src="https://icon-library.net/images/avatar-icon-png/avatar-icon-png-8.jpg" class="img-fluid ">
+                                                                    @foreach($replies as $reply)
+                                                                        <hr>
+                                                                        <ul class="child-comment">
+                                                                            <li class="p-3 ">
+                                                                                <div class=" row">
+                                                                                    <div class="col-md-2">
+                                                                                        <div>
+                                                                                            <div class="comment_avatar">
+                                                                                                <img src="https://icon-library.net/images/avatar-icon-png/avatar-icon-png-8.jpg" class="img-fluid ">
+                                                                                                
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-10">
+                                                                                        <div>
+                                                                                            <div class="comment_author clearfix">
+                                                                                                <h5 class="float-left">Forexustaad </h5>
+                                                                                                <p class="float-right commenttime">
+                                                                                                    {{$reply->created_at->format("M d, Y")}} at {{$reply->created_at->format("H:i a")}}
+                                                                                                </p>
+                                                                                            </div>
+                                                                                            <div class="comment_details">
+                                                                                                <p>{{$reply->message}}</p>
+                                                                                            </div>
+                                                                                            <!-- <div class="d-flex justify-content-end">
+                                                                                                <i class="fa fa-heart-o mr-3"></i>
+                                                                                                <i class="fa fa-reply replybox"></i>
+                                                                                            </div> -->
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    @endforeach
+                                                                </div>
+                                                            </li>
+                                                            @php $ij++ @endphp
+                                                        @endforeach
+                                                        <!-- <hr>
+                                                        <li>
+                                                            <div class="comentmain container-fluid">
+                                                                <div class=" row">
+                                                                    <div class="col-md-2">
+                                                                        <div>
+                                                                            <div class="comment_avatar">
+                                                                                <img src="https://icon-library.net/images/avatar-icon-png/avatar-icon-png-8.jpg" class="img-fluid ">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-10">
+                                                                        <div>
+                                                                            <div class="comment_author clearfix">
+                                                                                <h5 class="float-left">Raheel Nawaz</h5>
+                                                                                <p class="float-right commenttime">
+                                                                                    September 2, 2015 at 1:04 pm
+                                                                                </p>
+                                                                            </div>
+                                                                            <div class="comment_details">
+                                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                                                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                                                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                                                                    conseq.</p>
+                                                                            </div>
+                                                                            <div class="d-flex justify-content-end">
+                                                                                <i class="fa fa-heart-o mr-3"></i>
+                                                                                <i class="fa fa-reply replybox"></i>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-10">
-                                                                    <div>
-                                                                        <div class="comment_author clearfix">
-                                                                            <h5 class="float-left">Raheel Nawaz</h5>
-                                                                            <p class="float-right commenttime">
-                                                                                September 2, 2015 at 1:04 pm
-                                                                            </p>
+                                                                <hr>
+                                                                <ul class="child-comment">
+                                                                    <li class="p-3 ">
+                                                                        <div class=" row">
+                                                                            <div class="col-md-2">
+                                                                                <div>
+                                                                                    <div class="comment_avatar">
+                                                                                        <img src="https://icon-library.net/images/avatar-icon-png/avatar-icon-png-8.jpg" class="img-fluid ">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-10">
+                                                                                <div>
+                                                                                    <div class="comment_author clearfix">
+                                                                                        <h5 class="float-left">Raheel Nawaz</h5>
+                                                                                        <p class="float-right commenttime">
+                                                                                            September 2, 2015 at 1:04 pm
+                                                                                        </p>
+                                                                                    </div>
+                                                                                    <div class="comment_details">
+                                                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                                                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                                                                                    </div>
+                                                                                    <div class="d-flex justify-content-end">
+                                                                                        <i class="fa fa-heart-o mr-3"></i>
+                                                                                        <i class="fa fa-reply replybox"></i>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="comment_details">
-                                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                                                conseq.</p>
-                                                                        </div>
-                                                                        <div class="d-flex justify-content-end">
-                                                                            <i class="fa fa-heart-o mr-3"></i>
-                                                                            <i class="fa fa-reply replybox"></i>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                                    </li>
+                                                                </ul>
                                                             </div>
-                                                            <hr>
-                                                            <ul class="child-comment">
-                                                                <li class="p-3 ">
-                                                                    <div class=" row">
-                                                                        <div class="col-md-2">
-                                                                            <div>
-                                                                                <div class="comment_avatar">
-                                                                                    <img src="https://icon-library.net/images/avatar-icon-png/avatar-icon-png-8.jpg" class="img-fluid ">
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-10">
-                                                                            <div>
-                                                                                <div class="comment_author clearfix">
-                                                                                    <h5 class="float-left">Raheel Nawaz</h5>
-                                                                                    <p class="float-right commenttime">
-                                                                                        September 2, 2015 at 1:04 pm
-                                                                                    </p>
-                                                                                </div>
-                                                                                <div class="comment_details">
-                                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
-                                                                                </div>
-                                                                                <div class="d-flex justify-content-end">
-                                                                                    <i class="fa fa-heart-o mr-3"></i>
-                                                                                    <i class="fa fa-reply replybox"></i>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </li>
-                                                   
-                                                </ol>
-                                            </div>
-                                        </div>
-                                        <div class=" pt-5">
-                                            <div class="shadow p-5">
-                                                <div class="text-center">
-                                                    <h4>Leave A Reply</h4>
-                                                    <p>Your email address will not be published. Required fields are marked *</p>
+                                                        </li> -->
+                                                    
+                                                    </ol>
                                                 </div>
-                                                <div class="pt-3  container-fluid">
-                                                    <form>
-                                                        <div class="row">
-                                                            <div class="col-md-6 ">
-                                                                <div class="form-group">
-                                                                    <label for="exampleInputEmail1"></label>
-                                                                    <input type="mail" class="form-control form-input" id="exampleInputPassword1" placeholder="Name">
+                                            </div>
+                                            <div class=" pt-5">
+                                                <div class="shadow p-5">
+                                                    <div class="text-center">
+                                                        <h4>Leave A Reply</h4>
+                                                        <p>Your email address will not be published. Required fields are marked *</p>
+                                                    </div>
+                                                    <div class="pt-3  container-fluid">
+                                                        <form action="{{URL::to('/admin/comment')}}" method="post" enctype="multipart/form-data">
+                                                            <div class="row">
+                                                                <div class="col-md-6 ">
+                                                                    <div class="form-group">
+                                                                        <label for="exampleInputEmail1"></label>
+                                                                        <input type="mail" name="name" class="form-control form-input" id="exampleInputPassword1" placeholder="Name" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 ">
+                                                                    <div class="form-group">
+                                                                        <label for="exampleInputPassword1"></label>
+                                                                        <input type="mail" name="email" class="form-control form-input" id="exampleInputPassword1" placeholder="Enter email" required>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6 ">
-                                                                <div class="form-group">
-                                                                    <label for="exampleInputPassword1"></label>
-                                                                    <input type="mail" class="form-control form-input" id="exampleInputPassword1" placeholder="Enter email">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <textarea class="form-control mt-5" placeholder="Messeage" rows="5"></textarea>
-                                                        <button type="submit" class="btn btn-primary mb-4 mt-3">Submit</button>
-                                                    </form>
+                                                            <input type="file" name="file_photo" id="" class="form-control h-100">
+                                                            <textarea class="form-control mt-2" name="message" placeholder="Messeage" rows="5" required></textarea>
+                                                            <input type="hidden" name="blogPostId" value="{{$BlogDetail->id}}">
+                                                            <button type="submit" class="btn btn-primary mb-4 mt-3">Submit</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     </div>
                 </div>
-                               
-               
+
                 <div class="col-lg-3 col-md-6 col-sm-12 order-3 order-lg-3">
                 @include('inc.home-right-sidebar')
 
@@ -291,10 +308,14 @@
             </div>
         </div>
     </section>
-     
+
 <!--     <div id="particles-js" style="height: 0;"></div> -->
 </div>
-
+<style>
+    .borderRadius80{
+        border-radius: 80px;
+    }
+</style>
 
 @include('inc.footer')
 

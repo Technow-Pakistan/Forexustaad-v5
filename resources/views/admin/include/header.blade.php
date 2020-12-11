@@ -60,6 +60,7 @@
 								<li><a href="{{URL::to('admin/allCategories')}}">Add New</a></li>
 								<li><a href="{{URL::to('admin/category')}}">Categories</a></li>
 								<li><a href="{{URL::to('admin/tag')}}">Tags</a></li>
+								<li><a href="{{URL::to('admin/comment')}}">Comments</a></li>
 							</ul>
 						</li>
 						<li class="nav-item pcoded-menu-caption">
