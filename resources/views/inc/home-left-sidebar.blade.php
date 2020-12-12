@@ -132,7 +132,7 @@ foreach ($analysis as $analysiss_val => $value) {
             @foreach($AllLeftBanner as $TopBanner)
                 @if($TopBanner->area == "Top")
                     @if($TopBanner->id != $MainLeftBanner->id)
-                        @if($TopBanner->htmlLink == null)
+                        @if($TopBanner->banner != null)
                             <a href="{{$TopBanner->link}}">
                                 <img src="{{URL::to('storage/app')}}/{{$TopBanner->banner}}" class="mb-4">
                             </a>
@@ -150,7 +150,7 @@ foreach ($analysis as $analysiss_val => $value) {
             <!-- Banner Center Left -->
             @foreach($AllLeftBanner as $CenterBanner)
                 @if($CenterBanner->area == "Center")
-                    @if($CenterBanner->htmlLink == null)
+                    @if($CenterBanner->banner != null)
                         <a href="{{$CenterBanner->link}}">
                             <img src="{{URL::to('storage/app')}}/{{$CenterBanner->banner}}" class="mb-4">
                         </a>
@@ -178,7 +178,7 @@ foreach ($analysis as $analysiss_val => $value) {
             <!-- Banner Bottom Left -->
             @foreach($AllLeftBanner as $BottomBanner)
                 @if($BottomBanner->area == "Bottom")
-                    @if($BottomBanner->htmlLink == null)
+                    @if($BottomBanner->banner != null)
                         <a href="{{$BottomBanner->link}}">
                             <img src="{{URL::to('storage/app')}}/{{$BottomBanner->banner}}" class="mb-4">
                         </a>

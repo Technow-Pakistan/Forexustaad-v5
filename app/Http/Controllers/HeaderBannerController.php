@@ -38,6 +38,14 @@ class HeaderBannerController extends Controller
         $data->delete();
         return back();
     }
+    public function EditLeft(Request $request, $id){
+        $data = HeaderLeftBannerModel::find($id);
+        $data->fill($request->all());
+        $data->save();
+        return back();
+    }
+
+
     public function AddRight(Request $request){
         if ($request->file("file_photo") != null) {
             $path = $request->file("file_photo")->store("BannerImages");
@@ -59,6 +67,12 @@ class HeaderBannerController extends Controller
         
         $data = HeaderRightBannerModel::find($id);
         $data->delete();
+        return back();
+    }
+    public function EditRight(Request $request, $id){
+        $data = HeaderRightBannerModel::find($id);
+        $data->fill($request->all());
+        $data->save();
         return back();
     }
 }

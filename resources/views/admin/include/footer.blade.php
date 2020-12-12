@@ -1,7 +1,11 @@
 
 		<!-- Required Js -->
+		
 		<script>
-			CKEDITOR.replace("editor1");
+			CKEDITOR.replace( 'editor1', {
+			height: 300,
+			filebrowserUploadUrl: "{{URL::to('/upload.php')}}"
+			});
 		</script>
 		<script src="{{URL::to('/public/AdminAssets/assets/js/vendor-all.min.js')}}"></script>
 		<script src="{{URL::to('/public/AdminAssets/assets/js/plugins/bootstrap.min.js')}}"></script>

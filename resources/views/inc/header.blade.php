@@ -32,6 +32,13 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
 <!-- news Slider -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/css/swiper.min.css">
+
+
+<!-- Newletter -->
+
+<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/cd218c9f98ecf24ef623b52af/867964901ebaea03aa7601a97.js");</script>
+
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -129,7 +136,7 @@
                 <div class="row text-center align-items-center">
                     <div class="col">
                         <div class="a-img">
-                            @if($headerLeftBanner->htmlLink == null)
+                            @if($headerLeftBanner->banner != null)
                                 <a href="{{$headerLeftBanner->link}}">
                                     <img src="{{URL::to('/storage/app')}}/{{$headerLeftBanner->banner}}">   
                                 </a>
@@ -148,7 +155,7 @@
                     </div>
                     <div class="col text-right">
                     	<div class="a-img">
-                            @if($headerRightBanner->htmlLink == null)
+                            @if($headerRightBanner->banner != null)
                                 <a href="{{$headerRightBanner->link}}">
                                     <img src="{{URL::to('/storage/app')}}/{{$headerRightBanner->banner}}">   
                                 </a>
@@ -177,38 +184,41 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{URL::to('/')}}"><span>HOME</span> </a>
                             </li>
-                            <li class="nav-item dropdown">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{URL::to('/brokerView')}}"><span>Forex Broker List</span> </a>
+                            </li>
+                            <!-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Forex Broker List
                                 </a>
-                                <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="#">Broker Comparison</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Item 2</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">item 3</a>
-                                </div> -->
+                                </div>
+                            </li> -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{URL::to('/construction')}}"><span>ABOUT</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="about.php"><span>ABOUT</span></a>
+                                <a class="nav-link" href="{{URL::to('/construction')}}"><span>Trading Tools </span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="services.php"><span>Trading Tools </span></a>
+                                <a class="nav-link" href="{{URL::to('/construction')}}"><span>Education</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="contact-us.php"><span>Education</span></a>
+                                <a class="nav-link" href="{{URL::to('/construction')}}"><span>Promotions</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="contact-us.php"><span>Promotions</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="our-portfolio.php"><span>Member area</span></a>
+                                <a class="nav-link" href="{{URL::to('/construction')}}"><span>Member area</span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{URL::to('blog-post.html')}}"><span>blog</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="contact-us.php"><span>contact us</span></a>
+                                <a class="nav-link" href="{{URL::to('/construction')}}"><span>contact us</span></a>
                             </li>
                         </ul>
                     </div>

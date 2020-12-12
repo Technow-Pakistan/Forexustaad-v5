@@ -52,19 +52,16 @@
                                 <div class="col-lg-12">
                                         <div class="slide_content text-md-left text-sm-left">
                                             <h1><span class="highlight secondary-color">{{$imageData->title}}</h1>
-                                            <p>
-                                                @php
-                                                    $description = html_entity_decode($imageData->description);
-                                                    echo $description;
-                                                    $activeSlidingImage++;
-                                                @endphp
-                                            </p>
+                                            <p>{{$imageData->description}}</p>
                                             <a class="btn btn-primary btn-radial" href="{{$imageData->link}}" role="button">Learn More</a>
                                         </div>
                                     </div>
                                   </div> 
                                   </div> 
 
+                                  @php
+                                                    $activeSlidingImage++;
+                                                @endphp
                                   <div class="bannner-info">
                                     <ul>
                                         <li>
@@ -255,7 +252,7 @@
                                                 <ol class="swiper-wrapper" style="list-style-type: none; padding: 0px;">
                                                     <li class="swiper-slide" style="width: 130px;">
                                                         <a class="" href="javascript:void();"
-                                                            onClick="document.getElementById('vid_frame').src='https://youtube.com/embed/WAcnWtZjDWE?autoplay=1&rel=0&showinfo=0&autohide=1'">
+                                                            onClick="document.getElementById('vid_frame').src='https://youtu.be/X9JClP-XMyc?autoplay=1&rel=0&showinfo=0&autohide=1'">
                                                             <span class="vid-thumb">
                                                                 <img
                                                                     src="https://img.youtube.com/vi/WAcnWtZjDWE/mqdefault.jpg" />

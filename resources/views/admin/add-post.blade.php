@@ -110,7 +110,7 @@
                   <input type="hidden" name="userId" value="{{$value['id']}}">
                   <div class="form-group">
                      <label for="news-description" class="form-control-label m-0">Description (Max-character 200)</label>
-                     <p class="text-right text-danger m-0 descriptionCount">dsa</p>
+                     <p class="text-right text-danger m-0 descriptionCount"></p>
                      <textarea name="description" maxlength="200" class="form-control description" id="news-description" rows="5" cols="40" required="" placeholder="Enter your Description here ..."></textarea>
                   </div>
                   <br>
@@ -345,11 +345,11 @@
                      <div class="accordion-content accordion-desc">
                         <div class="form-group">
                            <div>
-                              <input type="checkbox" id="scales" name="comment" value="1">
+                              <input type="checkbox" id="scales" name="comment" value="1" checked>
                               <label for="scales">Allow Comments</label>
                            </div>
                            <div>
-                              <input type="checkbox" id="scales" name="scales">
+                              <input type="checkbox" id="scales" name="scales" checked>
                               <label for="scales">Allow pingbacks & trackbacks</label>
                            </div>
                         </div>

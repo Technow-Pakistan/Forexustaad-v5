@@ -34,16 +34,18 @@ class SlidingImagesController extends Controller
             $preimage = SlidingImagesModel::where('id',$id)->first();
             $SliderImage = $preimage->image;
         }
-        if ($request->editor1 != null) {
-            $description = htmlentities($request->editor1);
-        }
         $image = SlidingImagesModel::where('id',$id)->first();
         $image->image = $SliderImage;
         $image->title = $request->title;
         $image->link = $request->link;
-        $image->description = $description;
+        $image->description = $request->description;
         $image->save();
         return view('admin.edit-slide-img',compact("image"));
+    }
+    public function ProcessRemove(Request $request, $id){
+        $image = SlidingImagesModel::where('id',$id)->first();
+        $image->delete();
+        return redirect('admin/sliding-images');
     }
     
 }

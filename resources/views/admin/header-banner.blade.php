@@ -32,21 +32,23 @@
 						<div class="card">
 							<div class="card-header">Left Banner</div>
 							<div class="card-body">
-								<form action="" class="firstForm" method="post" enctype="multipart/form-data">
+								<form action="" class="firstForm bannerLeftForm" method="post" enctype="multipart/form-data">
 									<div class="form-group">
 										<span>
-											@if($totalData[0]->banner != null)
-												<img
-													id="slider1"
-													src="{{URL::to('/storage/app')}}/{{$totalData[0]->banner}}"
-													class="img-fluid"
-													alt="your image"
-												/>
-											@else
-												@php
-													echo $totalData[0]->htmlLink;
-												@endphp
-											@endif
+											<div class="bannerLeftTitle">
+												@if($totalData[0]->banner != null)
+													<img
+														id="slider1"
+														src="{{URL::to('/storage/app')}}/{{$totalData[0]->banner}}"
+														class="img-fluid"
+														alt="your image"
+													/>
+												@else
+													@php
+														echo $totalData[0]->htmlLink;
+													@endphp
+												@endif
+											</div>
 										</span>
 										<div class="custom-file my-3 h-100">
 											<input type="file" class="form-control h-100" name="file_photo" id="file1">
@@ -55,21 +57,21 @@
 									</div>
 									<div class="form-group pt-2">
 										<label for="">Enter Link</label>
-										<input type="link" name="link" class="form-control fileLink">
+										<input type="link" name="link" class="form-control fileLink bannerLeftLink">
 									</div>
 									<div class="form-group pt-2">
 										<label for="">Enter HTMLLink</label>
-										<textarea name="htmlLink" class="form-control htmlLink"></textarea>
+										<textarea name="htmlLink" class="form-control htmlLink bannerLeftHtmlLink"></textarea>
 									</div>
 									<div class="form-group pt-2">
 										<label for="" class="">Start Date </label>
-										<input type="date" class="form-control" name="start" required>
+										<input type="date" class="form-control bannerLeftStart" name="start" required>
 									</div>
 									<div class="form-group pt-2">
 										<label for="" class="">End Date </label>
-										<input type="date" class="form-control" name="end" required>
+										<input type="date" class="form-control bannerLeftEnd" name="end" required>
 									</div>
-									<input type="submit" class="btn btn-info mt-3 socialButton" value="Upload">
+									<input type="submit" class="btn btn-info mt-3 bannerLeftButton" value="Upload">
 									<p class="error1 text-danger"></p>
 								</form>
 								<table class="table mt-5">
@@ -86,16 +88,20 @@
 										<tr>
 											<td>
 												@if($data->banner != null)
-													<img
-														id="slider1"
-														src="{{URL::to('/storage/app')}}/{{$data->banner}}"
-														class="img-fluid"
-														alt="your image"
-													/>
+													<a href="{{$data->link}}">
+														<img
+															id="slider1"
+															src="{{URL::to('/storage/app')}}/{{$data->banner}}"
+															class="img-fluid"
+															alt="your image"
+														/>
+													</a>
 												@else
-													@php
-														echo $data->htmlLink;
-													@endphp
+													<div class="bannerContactHtmlLink">
+														@php
+															echo $data->htmlLink;
+														@endphp
+													</div>
 												@endif
 											</td>
 											<td>
@@ -106,7 +112,7 @@
 											</td>
 											<td>
 												<a href="#">
-													<i class="far fa-edit text-success mr-2 editlink" value="{{$data->id}}"></i>
+													<i class="far fa-edit text-success mr-2 editLeftlink" value="{{$data->id}}"></i>
 												</a>
 												<a href="{{URL::to('/admin/banner/header-banner/delete')}}/{{$data->id}}">
 													<i class="fa fa-times text-danger"></i>
@@ -123,21 +129,23 @@
 						<div class="card">
 							<div class="card-header">Right Banner</div>
 							<div class="card-body">
-								<form action="{{URL::to('admin/banner/header-banner/right')}}" method="post" class="Form2" enctype="multipart/form-data">
+								<form action="{{URL::to('admin/banner/header-banner/right')}}" method="post" class="Form2 bannerRightForm" enctype="multipart/form-data">
 									<div class="form-group">
 										<span>
-											@if($totalRightData[0]->banner != null)
-												<img
-													id="slider1"
-													src="{{URL::to('/storage/app')}}/{{$totalRightData[0]->banner}}"
-													class="img-fluid"
-													alt="your image"
-												/>
-											@else
-												@php
-													echo $totalRightData[0]->htmlLink;
-												@endphp
-											@endif
+											<div class="bannerRightTitle">
+												@if($totalRightData[0]->banner != null)
+													<img
+														id="slider1"
+														src="{{URL::to('/storage/app')}}/{{$totalRightData[0]->banner}}"
+														class="img-fluid"
+														alt="your image"
+													/>
+												@else
+													@php
+														echo $totalRightData[0]->htmlLink;
+													@endphp
+												@endif
+											</div>
 										</span>
 										<div class="custom-file my-3 h-100">
 											<input type="file" class="form-control h-100" name="file_photo" id="file2">
@@ -146,21 +154,21 @@
 									</div>
 									<div class="form-group pt-2">
 										<label for="">Enter Link</label>
-										<input type="link" name="link" class="form-control fileLink2">
+										<input type="link" name="link" class="form-control fileLink2 bannerRightLink">
 									</div>
 									<div class="form-group pt-2">
 										<label for="">Enter HTMLLink</label>
-										<textarea name="htmlLink" class="form-control htmlLink2"></textarea>
+										<textarea name="htmlLink" class="form-control htmlLink2 bannerRightHtmlLink"></textarea>
 									</div>
 									<div class="form-group pt-2">
 										<label for="" class="">Start Date </label>
-										<input type="date" class="form-control" name="start" required>
+										<input type="date" class="form-control bannerRightStart" name="start" required>
 									</div>
 									<div class="form-group pt-2">
 										<label for="" class="">End Date</label>
-										<input type="date" class="form-control" name="end" required>
+										<input type="date" class="form-control bannerRightEnd" name="end" required>
 									</div>
-									<input type="submit" class="btn btn-info mt-3 socialButton" value="Upload">
+									<input type="submit" class="btn btn-info mt-3 bannerRightButton" value="Upload">
 									<p class="error2 text-danger"></p>
 								</form>
 								<table class="table mt-5">
@@ -174,36 +182,40 @@
 									</thead>
 									<tbody class="border border-primary">
 										@foreach($totalRightData as $data)
-										<tr>
-											<td>
-												@if($data->banner != null)
-													<img
-														id="slider1"
-														src="{{URL::to('/storage/app')}}/{{$data->banner}}"
-														class="img-fluid"
-														alt="your image"
-													/>
-												@else													
-													@php
-														echo $data->htmlLink;
-													@endphp
-												@endif
-											</td>
-											<td>
-												{{$data->start}}
-											</td>
-											<td>
-												{{$data->end}}
-											</td>
-											<td>
-												<a href="#">
-													<i class="far fa-edit text-success mr-2 editlink" value="{{$data->id}}"></i>
-												</a>
-												<a href="{{URL::to('/admin/banner/header-banner/deleteright')}}/{{$data->id}}">
-													<i class="fa fa-times text-danger"></i>
-												</a>
-											</td>
-										</tr>
+											<tr>
+												<td>
+													@if($data->banner != null)
+														<a href="{{$data->link}}">
+															<img
+																id="slider1"
+																src="{{URL::to('/storage/app')}}/{{$data->banner}}"
+																class="img-fluid"
+																alt="your image"
+															/>
+														</a>
+													@else		
+														<div class="bannerContactRightHtmlLink">											
+															@php
+																echo $data->htmlLink;
+															@endphp
+														</div>
+													@endif
+												</td>
+												<td>
+													{{$data->start}}
+												</td>
+												<td>
+													{{$data->end}}
+												</td>
+												<td>
+													<a href="#">
+														<i class="far fa-edit text-success mr-2 editRightlink" value="{{$data->id}}"></i>
+													</a>
+													<a href="{{URL::to('/admin/banner/header-banner/deleteright')}}/{{$data->id}}">
+														<i class="fa fa-times text-danger"></i>
+													</a>
+												</td>
+											</tr>
 										@endforeach
 									</tbody>
 								</table>
@@ -216,6 +228,75 @@
 		</section>
 		<!-- [ Main Content ] end -->
 @include('admin.include.footer')
+
+	<!-- edit left Content -->
+	<script>
+		$(".editLeftlink").on("click",function(){
+			var id = $(this).attr('value');
+			var title = $(this).parent().parent().parent()[0].children[0].innerHTML;
+			title = title.trim();
+			var start = $(this).parent().parent().parent()[0].children[1].innerText;
+			var end = $(this).parent().parent().parent()[0].children[2].innerText;
+			$(".bannerLeftTitle").html(title);
+			$(".bannerLeftStart").val(start);
+			$(".bannerLeftEnd").val(end);
+			$(".bannerLeftButton").val("Update");
+			$(".bannerLeftButton").attr("class","btn btn-outline-danger mt-4 bannerLeftButton");
+			$(".bannerLeftForm").attr("action","{{URL::to('/admin/banner/header-banner/edit-left')}}/"+id+"");
+
+			var Link = $(".bannerLeftTitle").find('a').attr('href');
+		
+			var htmlLink = $(".bannerLeftTitle").find(".bannerContactHtmlLink");
+			if(htmlLink.length != 0){
+				var htmlLinkdata = $(".bannerContactHtmlLink").html();
+				htmlLinkdata = htmlLinkdata.trim();
+				$(".bannerLeftLink").val("");
+				$(".bannerLeftHtmlLink").val(htmlLinkdata);
+			}else{
+				$(".bannerLeftLink").val(Link);
+				$(".bannerLeftHtmlLink").val("");
+				$("#file1").attr("id"," ");
+			}
+				console.log(Link);
+			console.log(htmlLink);
+		});
+	</script>
+
+	<!-- edit right Content -->
+	<script>
+		$(".editRightlink").on("click",function(){
+			var id2 = $(this).attr('value');
+			var title2 = $(this).parent().parent().parent()[0].children[0].innerHTML;
+			title2 = title2.trim();
+			var start2 = $(this).parent().parent().parent()[0].children[1].innerText;
+			var end2 = $(this).parent().parent().parent()[0].children[2].innerText;
+			$(".bannerRightTitle").html(title2);
+			$(".bannerRightStart").val(start2);
+			$(".bannerRightEnd").val(end2);
+			$(".bannerRightButton").val("Update");
+			$(".bannerRightButton").attr("class","btn btn-outline-danger mt-4 bannerRightButton");
+			$(".bannerRightForm").attr("action","{{URL::to('/admin/banner/header-banner/edit-right')}}/"+id2+"");
+
+			var Link2 = $(".bannerRightTitle").find('a').attr('href');
+		
+			var htmlLink2 = $(".bannerRightTitle").find(".bannerContactRightHtmlLink");
+			if(htmlLink2.length != 0){
+				var htmlLinkdata2 = $(".bannerContactRightHtmlLink").html();
+				htmlLinkdata2 = htmlLinkdata2.trim();
+				$(".bannerRightLink").val("");
+				$(".bannerRightHtmlLink").val(htmlLinkdata2);
+			}else{
+				$(".bannerRightLink").val(Link2);
+				$(".bannerRightHtmlLink").val("");
+				$("#file2").attr("id"," ");
+			}
+				console.log(Link2);
+			console.log(htmlLink2);
+		});
+	</script>
+
+
+
 <script>
 	// check file error1
 	var _URL = window.URL || window.webkitURL;

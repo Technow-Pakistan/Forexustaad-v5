@@ -33,4 +33,10 @@ class RightSideBannerController extends Controller
         $data->delete();
         return back();
     }
+    public function ProcessEdit(Request $request, $id){
+        $data = RightSideBannerModel::find($id);
+        $data->fill($request->all());
+        $data->save();
+        return back();
+    }
 }

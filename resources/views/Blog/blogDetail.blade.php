@@ -4,6 +4,17 @@
     <section class="after_banner_content_area">
         <div class="container">
             <div class="row justify-content-center">
+                @php
+                    if(Session::has('error')){ 
+                        $error =Session::get('error');
+                    }
+                    @endphp
+                @isset($error)
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="alert alert-danger">{{$error}}</div>
+                        @php Session::pull('error') @endphp
+                    </div>
+                @endisset
                 <div class="col-lg-3 col-md-6 col-sm-12 order-2 order-lg-1">
                 @include('inc.home-left-sidebar')
                 </div>
@@ -267,6 +278,10 @@
                                                     </ol>
                                                 </div>
                                             </div>
+                                            @if(Session::has('client'))
+                                            @php
+                                                $client =Session::get('client');
+                                            @endphp
                                             <div class=" pt-5">
                                                 <div class="shadow p-5">
                                                     <div class="text-center">
@@ -275,7 +290,7 @@
                                                     </div>
                                                     <div class="pt-3  container-fluid">
                                                         <form action="{{URL::to('/admin/comment')}}" method="post" enctype="multipart/form-data">
-                                                            <div class="row">
+                                                            <!-- <div class="row">
                                                                 <div class="col-md-6 ">
                                                                     <div class="form-group">
                                                                         <label for="exampleInputEmail1"></label>
@@ -289,14 +304,18 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <input type="file" name="file_photo" id="" class="form-control h-100">
+                                                            <input type="file" name="file_photo" id="" class="form-control h-100"> -->
                                                             <textarea class="form-control mt-2" name="message" placeholder="Messeage" rows="5" required></textarea>
+                                                            <input type="hidden" name="name" value="{{$client->name}}">
+                                                            <input type="hidden" name="email" value="{{$client->email}}">
                                                             <input type="hidden" name="blogPostId" value="{{$BlogDetail->id}}">
+                                                            <input type="hidden" name="userId" value="{{$client->id}}">
                                                             <button type="submit" class="btn btn-primary mb-4 mt-3">Submit</button>
                                                         </form>
                                                     </div>
                                                 </div>
                                             </div>
+                                            @endif
                                         @endif
                                     </div>
                 </div>

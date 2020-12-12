@@ -31,24 +31,24 @@
                                 API Home Page
 							</div>	
 							<div class="card-body">	
-								<form class="navForm" action="" method="post">
+								<form class="apiForm" action="" method="post">
 									<div class="form-group">
 										<label for="">Title</label>
-										<input type="text" name="title" class="form-control" required>
+										<input type="text" name="title" class="form-control apiTitle" required>
 									</div>
 									<div class="form-group">
 										<label for="">API Link</label>
-										<textarea type="text" name="link" class="form-control" required></textarea>
+										<textarea type="text" name="link" class="form-control apiLink" required></textarea>
 									</div>
 									<div class="form-group">
 										<label for="">Area</label>
-										<select name="area" class="form-control" id="">
-											<option value="Top">Top</option>
-											<option value="Center">Center</option>
-											<option value="Bottom">Bottom</option>
+										<select name="area" class="form-control apiArea" id="">
+											<option class="Top" value="Top">Top</option>
+											<option class="Center" value="Center">Center</option>
+											<option class="Bottom" value="Bottom">Bottom</option>
 										</select>
 									</div>
-									<input type="submit" id="doaction" class="btn btn-outline-primary mt-4 navButton" value="Add">
+									<input type="submit" id="doaction" class="btn btn-outline-primary mt-4 apiButton" value="Add">
 								</form>
 							</div>
 						</div>
@@ -80,8 +80,8 @@
 												
 													<td>
 														<span class="badge badge-light-success">Active</span>
-														<div class="overlay-edit">
-															<!-- <a href="add-promotiton.html"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a> -->
+														<div class="overlay-edit editlink" value="{{$data->id}}">
+															<button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button>
 															<a type="button" href="{{URL::to('/admin/api/api-home/delete')}}/{{$data->id}}" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></a>
 														</div>
 													</td>
@@ -112,69 +112,88 @@
 
 	// Almost final example
 	// tr mai class row add krna h bs
-(function() {
-  var id_ = 'user-list-table';
-  var cols_ = document.querySelectorAll('#' + id_ + ' .row');
-  var dragSrcEl_ = null;
+	(function() {
+		var id_ = 'user-list-table';
+		var cols_ = document.querySelectorAll('#' + id_ + ' .row');
+		var dragSrcEl_ = null;
 
-  this.handleDragStart = function(e) {
-    e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/html', this.innerHTML);
+		this.handleDragStart = function(e) {
+			e.dataTransfer.effectAllowed = 'move';
+			e.dataTransfer.setData('text/html', this.innerHTML);
 
-    dragSrcEl_ = this;
+			dragSrcEl_ = this;
 
-    this.style.opacity = '0.4';
+			this.style.opacity = '0.4';
 
-  };
+		};
 
-  this.handleDragOver = function(e) {
-    if (e.preventDefault) {
-      e.preventDefault(); // Allows us to drop.
-    }
+		this.handleDragOver = function(e) {
+			if (e.preventDefault) {
+			e.preventDefault(); // Allows us to drop.
+			}
 
-    e.dataTransfer.dropEffect = 'move';
+			e.dataTransfer.dropEffect = 'move';
 
-    return false;
-  };
+			return false;
+		};
 
-  this.handleDragEnter = function(e) {
-  };
+		this.handleDragEnter = function(e) {
+		};
 
-  this.handleDragLeave = function(e) {
-  };
+		this.handleDragLeave = function(e) {
+		};
 
-  this.handleDrop = function(e) {
-    // this/e.target is current target element.
+		this.handleDrop = function(e) {
+			// this/e.target is current target element.
 
-    if (e.stopPropagation) {
-      e.stopPropagation(); // stops the browser from redirecting.
-    }
+			if (e.stopPropagation) {
+			e.stopPropagation(); // stops the browser from redirecting.
+			}
 
-    // Don't do anything if we're dropping on the same column we're dragging.
-    if (dragSrcEl_ != this) {
-      dragSrcEl_.innerHTML = this.innerHTML;
-      this.innerHTML = e.dataTransfer.getData('text/html');
-    }
+			// Don't do anything if we're dropping on the same column we're dragging.
+			if (dragSrcEl_ != this) {
+				dragSrcEl_.innerHTML = this.innerHTML;
+				this.innerHTML = e.dataTransfer.getData('text/html');
+			}
 
-    return false;
-  };
+			return false;
+		};
 
-  this.handleDragEnd = function(e) {
-    // this/e.target is the source node.
-    this.style.opacity = '1';
+		this.handleDragEnd = function(e) {
+			// this/e.target is the source node.
+			this.style.opacity = '1';
 
-    [].forEach.call(cols_, function (col) {
-    });
-  };
+			[].forEach.call(cols_, function (col) {
+			});
+		};
 
-  [].forEach.call(cols_, function (col) {
-    col.setAttribute('draggable', 'true');  // Enable columns to be draggable.
-    col.addEventListener('dragstart', this.handleDragStart, false);
-    col.addEventListener('dragenter', this.handleDragEnter, false);
-    col.addEventListener('dragover', this.handleDragOver, false);
-    col.addEventListener('dragleave', this.handleDragLeave, false);
-    col.addEventListener('drop', this.handleDrop, false);
-    col.addEventListener('dragend', this.handleDragEnd, false);
-  });
-})();
+		[].forEach.call(cols_, function (col) {
+			col.setAttribute('draggable', 'true');  // Enable columns to be draggable.
+			col.addEventListener('dragstart', this.handleDragStart, false);
+			col.addEventListener('dragenter', this.handleDragEnter, false);
+			col.addEventListener('dragover', this.handleDragOver, false);
+			col.addEventListener('dragleave', this.handleDragLeave, false);
+			col.addEventListener('drop', this.handleDrop, false);
+			col.addEventListener('dragend', this.handleDragEnd, false);
+		});
+	})();
+
+</script>
+	<!-- edit Content -->
+<script>
+	$(".editlink").on("click",function(){
+		var id = $(this).attr('value');
+		var title = $(this).parent().parent()[0].childNodes[1].innerText;
+		var api = $(this).parent().parent()[0].childNodes[3].innerText;
+		var area = $(this).parent().parent()[0].childNodes[5].innerText;
+		$(".apiTitle").val(title);
+		$(".apiLink").val(api);
+		$(".apiArea").find("."+area).attr("selected",true);
+		$(".apiArea").val(area);
+		$(".apiButton").val("Update");
+		$(".apiButton").attr("class","btn btn-outline-danger mt-4 apiButton");
+		$(".apiForm").attr("action","{{URL::to('/admin/api/api-home/edit/')}}/"+id+"");
+		console.log(title);
+		
+	});
 </script>

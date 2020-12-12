@@ -33,4 +33,12 @@ class LeftSideBannerController extends Controller
         $data->delete();
         return back();
     }
+    public function ProcessEdit(Request $request, $id){
+        
+        $data = LeftSideBannerModel::find($id);
+        $data->fill($request->all());
+        $data->save();
+        return back();
+    }
+
 }

@@ -32,20 +32,22 @@
 						<div class="card">
 							<div class="card-header">Right Side Bar Banner</div>
 							<div class="card-body">
-								<form action="" class="form1" method="post" enctype="multipart/form-data">
+								<form action="" class="form1 bannerForm" method="post" enctype="multipart/form-data">
 									<div class="text-lg-center">
-										@if($totalData[0]->banner != null)
-											<img
-												id="slider1"
-												src="{{URL::to('/storage/app')}}/{{$totalData[0]->banner}}"
-												class="img-fluid"
-												alt="your image"
-											/>							
-										@else
-											@php
-												echo $totalData[0]->htmlLink;
-											@endphp
-										@endif
+										<div class="bannerTitle">
+											@if($totalData[0]->banner != null)
+												<img
+													id="slider1"
+													src="{{URL::to('/storage/app')}}/{{$totalData[0]->banner}}"
+													class="img-fluid"
+													alt="your image"
+												/>							
+											@else
+												@php
+													echo $totalData[0]->htmlLink;
+												@endphp
+											@endif
+										</div>
 										<div class="custom-file my-3 h-100">
 											<input type="file" class="form-control h-100" name="file_photo" id="file1">
 										</div>
@@ -53,29 +55,29 @@
 									</div>
 									<div class="form-group pt-2">
 										<label for="">Enter Link</label>
-										<input type="link" name="link" class="form-control fileLink">
+										<input type="link" name="link" class="form-control fileLink bannerRightLink">
 									</div>
 									<div class="form-group pt-2">
 										<label for="">Enter HTMLLink</label>
-										<textarea name="htmlLink" class="form-control htmlLink"></textarea>
+										<textarea name="htmlLink" class="form-control htmlLink bannerRightHtmlLink"></textarea>
 									</div>
 									<div class="form-group pt-2">
 										<label for="" class="">Start Date </label>
-										<input type="date" class="form-control" name="start" required>
+										<input type="date" class="form-control bannerStart" name="start" required>
 									</div>
 									<div class="form-group pt-2">
 										<label for="" class="">End Date </label>
-										<input type="date" class="form-control" name="end" required>
+										<input type="date" class="form-control bannerEnd" name="end" required>
 									</div>
 									<div class="form-group pt-2">
 										<label for="">Area </label>
-										<select name="area" class="form-control" id="">
-											<option value="Top">Top</option>
-											<option value="Center">Center</option>
-											<option value="Bottom">Bottom</option>
+										<select name="area" class="form-control bannerArea" id="">
+											<option class="Top" value="Top">Top</option>
+											<option class="Center" value="Center">Center</option>
+											<option class="Bottom" value="Bottom">Bottom</option>
 										</select>
 									</div>
-									<input type="submit" class="btn btn-info mt-3 socialButton" value="Upload">
+									<input type="submit" class="btn btn-info mt-3 bannerButton" value="Upload">
 									<p class="error1 text-danger"></p>
 								</form>
 								<table class="table mt-5">
@@ -93,17 +95,21 @@
 										<tr>
 											<td>
 												@if($data->banner != null)
-													<img
-														id="slider1"
-														src="{{URL::to('/storage/app')}}/{{$data->banner}}"
-														class="img-fluid"
-														alt="your image"
-														width="300"
-													/>
+													<a href="{{$data->link}}">
+														<img
+															id="slider1"
+															src="{{URL::to('/storage/app')}}/{{$data->banner}}"
+															class="img-fluid"
+															alt="your image"
+															width="300"
+														/>
+													</a>
 												@else
-													@php
-														echo $data->htmlLink;
-													@endphp
+													<div class="bannerHtmlLink">
+														@php
+															echo $data->htmlLink;
+														@endphp
+													</div>
 												@endif
 											</td>
 											<td>
@@ -136,6 +142,41 @@
 		</section>
 		<!-- [ Main Content ] end -->
 @include('admin.include.footer')
+
+	<!-- edit Content -->
+	<script>
+		$(".editlink").on("click",function(){
+			var id = $(this).attr('value');
+			var title = $(this).parent().parent().parent()[0].children[0].innerHTML;
+			title = title.trim();
+			var area = $(this).parent().parent().parent()[0].children[1].innerText;
+			var start = $(this).parent().parent().parent()[0].children[2].innerText;
+			var end = $(this).parent().parent().parent()[0].children[3].innerText;
+			$(".bannerTitle").html(title);
+			$(".bannerStart").val(start);
+			$(".bannerEnd").val(end);
+			$(".bannerArea").find("."+area).attr("selected",true);
+			$(".bannerButton").val("Update");
+			$(".bannerButton").attr("class","btn btn-outline-danger mt-4 bannerButton");
+			$(".bannerForm").attr("action","{{URL::to('/admin/banner/right-side-banner/edit')}}/"+id+"");
+
+			var Link = $(".bannerTitle").find('a').attr('href');
+		
+			var htmlLink = $(".bannerTitle").find(".bannerHtmlLink");
+			if(htmlLink.length != 0){
+				var htmlLinkdata = $(".bannerHtmlLink").html();
+				htmlLinkdata = htmlLinkdata.trim();
+				$(".bannerRightLink").val("");
+				$(".bannerRightHtmlLink").val(htmlLinkdata);
+			}else{
+				$(".bannerRightLink").val(Link);
+				$(".bannerRightHtmlLink").val("");
+				$("#file1").attr("id"," ");
+			}
+				console.log(Link);
+			console.log(htmlLink);
+		});
+	</script>
 
 <script>
 	// check file error

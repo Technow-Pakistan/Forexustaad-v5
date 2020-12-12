@@ -41,8 +41,10 @@ use App\Http\Controllers\CommentController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
+Route::post('/comment1',[CommentController::class,'Add']);
+Route::post('/upload.php',[HomeController::class,'uploadPhp']);
 Route::get('/',[HomeController::class,'Index']);
+Route::get('/construction',[HomeController::class,'Construction']);
 Route::post('/clientRegistration',[HomeController::class,'RegistrationProcess']);
 Route::post('/clientLogin',[HomeController::class,'LoginProcess']);
 Route::get('/clientLogout',[HomeController::class,'LogoutProcess']);
@@ -90,6 +92,7 @@ Route::group(['prefix' => 'admin',"middleware" => "IsLogin"],function(){
     });
     Route::get('/edit-slider-image/{id}',[SlidingImagesController::class,'Edit']);
     Route::post('/edit-slider-image/{id}',[SlidingImagesController::class,'ProcessEdit']);
+    Route::get('/delete-slider-image/{id}',[SlidingImagesController::class,'ProcessRemove']);
     Route::group(['prefix' => 'edit-footer'],function(){
         Route::get('/',[FooterController::class,'Index']);
         Route::post('/webinar',[FooterController::class,'Webinar']);
@@ -102,17 +105,21 @@ Route::group(['prefix' => 'admin',"middleware" => "IsLogin"],function(){
             Route::get('/',[HeaderBannerController::class,'Index']);
             Route::post('/',[HeaderBannerController::class,'Add']);
             Route::get('/delete/{id}',[HeaderBannerController::class,'deleteLeft']);
+            Route::post('/edit-left/{id}',[HeaderBannerController::class,'EditLeft']);
             Route::post('/right',[HeaderBannerController::class,'AddRight']);
             Route::get('/deleteright/{id}',[HeaderBannerController::class,'deleteRight']);
+            Route::post('/edit-right/{id}',[HeaderBannerController::class,'EditRight']);
         });
         Route::group(['prefix' => 'left-side-banner'],function(){
             Route::get('/',[LeftSideBannerController::class,'Index']);
             Route::post('/',[LeftSideBannerController::class,'Add']);
+            Route::post('/edit/{id}',[LeftSideBannerController::class,'ProcessEdit']);
             Route::get('/delete/{id}',[LeftSideBannerController::class,'delete']);
         });
         Route::group(['prefix' => 'right-side-banner'],function(){
             Route::get('/',[RightSideBannerController::class,'Index']);
             Route::post('/',[RightSideBannerController::class,'Add']);
+            Route::post('/edit/{id}',[RightSideBannerController::class,'ProcessEdit']);
             Route::get('/delete/{id}',[RightSideBannerController::class,'delete']);
         });
     });
@@ -121,16 +128,19 @@ Route::group(['prefix' => 'admin',"middleware" => "IsLogin"],function(){
             Route::get('/',[ApiHomeController::class,'Index']);
             Route::post('/',[ApiHomeController::class,'Add']);
             Route::get('/delete/{id}',[ApiHomeController::class,'delete']);
+            Route::post('/edit/{id}',[ApiHomeController::class,'EditProcess']);
         });
         Route::group(['prefix' => 'api-left'],function(){
             Route::get('/',[ApiLeftController::class,'Index']);
             Route::post('/',[ApiLeftController::class,'Add']);
             Route::get('/delete/{id}',[ApiLeftController::class,'delete']);
+            Route::post('/edit/{id}',[ApiLeftController::class,'EditProcess']);
         });
         Route::group(['prefix' => 'api-right'],function(){
             Route::get('/',[ApiRightController::class,'Index']);
             Route::post('/',[ApiRightController::class,'Add']);
             Route::get('/delete/{id}',[ApiRightController::class,'delete']);
+            Route::post('/edit/{id}',[ApiRightController::class,'EditProcess']);
         });
     });
     Route::group(['prefix' => 'category'],function(){

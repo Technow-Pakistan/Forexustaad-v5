@@ -66,13 +66,17 @@ foreach ($analysis as $analysiss_val => $value) {
         </div>
 		<div class="row">
 			<div class="col-lg-12">
-				<p>Stay in touch with us to get latest updates.</p>
-				<div class="input-group mb-3">
-				  <input type="email" placeholder="Email" class="form-control" aria-label="Newsletter">
-				  <div class="input-group-append">
-				    <span class="input-group-text"><i class="fa fa-send"></i></span>
-				  </div>
-				</div>
+            <div id="mc_embed_signup">
+<form action="https://gmail.us4.list-manage.com/subscribe/post?u=cd218c9f98ecf24ef623b52af&amp;id=a708ee86ba" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL">Subscribe to our Newsletter!</label>
+	<input type="email" value="" class="form-control" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_cd218c9f98ecf24ef623b52af_a708ee86ba" tabindex="-1" value=""></div>
+    <div class="clear pt-3"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary btn-radial"></div>
+    </div>
+</form>
+</div>
 			</div>
 		</div>
 	</div>
@@ -117,7 +121,7 @@ foreach ($analysis as $analysiss_val => $value) {
             @foreach($AllRightBanner as $TopBanner)
                 @if($TopBanner->area == "Top")
                     @if($TopBanner->id != $MainRightBanner->id)
-                        @if($TopBanner->htmlLink == null)
+                        @if($TopBanner->banner != null)
                             <a href="{{$TopBanner->link}}">
                                 <img src="{{URL::to('storage/app')}}/{{$TopBanner->banner}}" class="mb-4">
                             </a>
@@ -135,7 +139,7 @@ foreach ($analysis as $analysiss_val => $value) {
             <!-- Banner Center Right -->
             @foreach($AllRightBanner as $CenterBanner)
                 @if($CenterBanner->area == "Center")
-                    @if($CenterBanner->htmlLink == null)
+                    @if($CenterBanner->banner != null)
                         <a href="{{$CenterBanner->link}}">
                             <img src="{{URL::to('storage/app')}}/{{$CenterBanner->banner}}" class="mb-4">
                         </a>
@@ -163,7 +167,7 @@ foreach ($analysis as $analysiss_val => $value) {
             <!-- Banner Bottom Right -->
             @foreach($AllRightBanner as $BottomBanner)
                 @if($BottomBanner->area == "Bottom")
-                    @if($BottomBanner->htmlLink == null)
+                    @if($BottomBanner->banner != null)
                         <a href="{{$BottomBanner->link}}">
                             <img src="{{URL::to('storage/app')}}/{{$BottomBanner->banner}}" class="mb-4">
                         </a>

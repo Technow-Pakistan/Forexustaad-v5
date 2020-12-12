@@ -23,6 +23,12 @@ class ApiHomeController extends Controller
         $data->delete();
         return back();
     }
-
+    public function EditProcess(Request $request, $id){
+        
+        $data = ApiHomeModel::find($id);
+        $data->fill($request->all());
+        $data->save();
+        return back();
+    }
     
 }

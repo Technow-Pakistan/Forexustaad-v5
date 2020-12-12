@@ -31,24 +31,24 @@
                                 Left Side Bar API
 							</div>	
 							<div class="card-body">
-								<form class="navForm" action="" method="post">
+								<form class="apiForm" action="" method="post">
 									<div class="form-group">
 										<label for="">Title</label>
-										<input type="text" name="title" class="form-control" required>
+										<input type="text" name="title" class="form-control apiTitle" required>
 									</div>
 									<div class="form-group">
 										<label for="">API Link</label>
-										<textarea type="text" name="link" class="form-control" required></textarea>
+										<textarea type="text" name="link" class="form-control apiLink" required></textarea>
 									</div>
 									<div class="form-group">
 										<label for="">Area</label>
-										<select name="area" class="form-control" id="">
+										<select name="area" class="form-control apiArea" id="">
 											<option value="Top">Top</option>
 											<option value="Center">Center</option>
 											<option value="Bottom">Bottom</option>
 										</select>
 									</div>
-									<input type="submit" id="doaction" class="btn btn-outline-primary mt-4 navButton" value="Add">
+									<input type="submit" id="doaction" class="btn btn-outline-primary mt-4 apiButton" value="Add">
 								</form>
 							</div>
 						</div>
@@ -80,8 +80,8 @@
 												
 													<td>
 														<span class="badge badge-light-success">Active</span>
-														<div class="overlay-edit">
-															<!-- <a href="add-promotiton.html"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a> -->
+														<div class="overlay-edit editlink" value="{{$data->id}}">
+															<button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button>
 															<a type="button" href="{{URL::to('/admin/api/api-left/delete')}}/{{$data->id}}" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></a>
 														</div>
 													</td>
@@ -176,5 +176,23 @@
     col.addEventListener('dragend', this.handleDragEnd, false);
   });
 })();
+</script>
+	<!-- edit Content -->
+<script>
+	$(".editlink").on("click",function(){
+		var id = $(this).attr('value');
+		var title = $(this).parent().parent()[0].childNodes[1].innerText;
+		var api = $(this).parent().parent()[0].childNodes[3].innerText;
+		var area = $(this).parent().parent()[0].childNodes[5].innerText;
+		$(".apiTitle").val(title);
+		$(".apiLink").val(api);
+		$(".apiArea").find("."+area).attr("selected",true);
+		$(".apiArea").val(area);
+		$(".apiButton").val("Update");
+		$(".apiButton").attr("class","btn btn-outline-danger mt-4 apiButton");
+		$(".apiForm").attr("action","{{URL::to('/admin/api/api-left/edit/')}}/"+id+"");
+		console.log(title);
+		
+	});
 </script>
 

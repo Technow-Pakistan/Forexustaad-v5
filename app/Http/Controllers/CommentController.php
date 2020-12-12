@@ -18,8 +18,8 @@ class CommentController extends Controller
         if ($request->file("file_photo") != null) {
             $path = $request->file("file_photo")->store("CommentImages");
             $Image = $path;
+            $data['image']=$Image;
         }
-        $data['image']=$Image;
         $comment = new CommentsModel;
         $comment->fill($data);
         $comment->save();

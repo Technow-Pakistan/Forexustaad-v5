@@ -22,6 +22,7 @@
 		<link rel="stylesheet" href="{{URL::to('/public/AdminAssets/assets/css/style.css')}}" />
 		<!-- Check Editor -->
 		<script src="http://cdn.ckeditor.com/4.6.1/standard/ckeditor.js"></script>
+		
 	</head>
 	<body class="">
 		<!-- [ Pre-loader ] start -->

@@ -9,6 +9,9 @@ use App\Models\BrokerCompanyInformationModel;
 
 class HomeController extends Controller
 {
+    public function Construction(){
+        return view('home/construction');
+    }
     public function Index(){
         $LatestBlogsData = BlogPostModel::orderBy('id','desc')->where('status',1)->where('pending',1)->where('stickToTop',1)->take(5)->get();
         return view('home/index',compact('LatestBlogsData'));
@@ -25,6 +28,7 @@ class HomeController extends Controller
         $registration = new ClientRegistrationModel;
         $registration->fill($request->all());
         $registration->save();
+        $request->session()->put("client",$registration);
         return back();
     }
     public function LoginProcess(Request $request){
@@ -62,5 +66,11 @@ class HomeController extends Controller
     public function BrokerView(){
         $totalData = BrokerCompanyInformationModel::all();
         return view('home/brokerView',compact('totalData'));
+    }
+    public function uploadPhp(Request $request){
+        if ($request->file("upload") != null) {
+            $path = $request->file("upload")->store("PostImages");
+        }
+        return view('admin.include.upload',compact('path'));
     }
 }
