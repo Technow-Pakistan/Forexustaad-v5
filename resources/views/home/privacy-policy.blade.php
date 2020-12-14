@@ -18,7 +18,7 @@
                     </div>
                 @endisset
                 <div class="col-lg-3 col-md-6 col-sm-12 order-2 order-lg-1">
-                @include('inc.home-left-sidebar')
+                    @include('inc.home-left-sidebar')
                 </div>
                 <div class="col-lg-6 col-md-12 order-1 order-lg-2">
 
@@ -45,7 +45,7 @@ We will collect personal information by lawful and fair means and, where appropr
                                
                
                 <div class="col-lg-3 col-md-6 col-sm-12 order-3 order-lg-3">
-                @include('inc.home-right-sidebar')
+                    @include('inc.home-right-sidebar')
 
                 </div>
             </div>

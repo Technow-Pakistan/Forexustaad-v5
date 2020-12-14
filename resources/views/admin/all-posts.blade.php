@@ -143,16 +143,16 @@
 													<td>
 														<span class="badge {{$post->status == 1 ? 'badge-light-success' : 'badge-light-danger'}}">{{$post->status == 1 ? 'Active' : 'Deactive'}}</span>
 														<div class="overlay-edit">
-															<!-- <a href="{{URL::to('/admin/post/edit')}}/{{$post->id}}">
+															<a href="{{URL::to('/ustaad/post/edit')}}/{{$post->id}}">
 																<button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button>
-															</a> -->
-															<button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button>
+															</a>
+															<!-- <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button> -->
 															@if($post->status == 1)
-																<a href="{{URL::to('/admin/post/delete')}}/{{$post->id}}">
+																<a href="{{URL::to('/ustaad/post/delete')}}/{{$post->id}}">
 																	<button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button>
 																</a>
 															@elseif($post->status == 0)
-																<a href="{{URL::to('/admin/post/active')}}/{{$post->id}}">
+																<a href="{{URL::to('/ustaad/post/active')}}/{{$post->id}}">
 																	<button type="button" class="btn btn-icon btn-success"><i class="feather icon-unlock"></i></button>
 																</a>
 															@endif

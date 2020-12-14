@@ -59,13 +59,13 @@
 												</td>
 												<td>{{$memberType->member}}</td>
 												<td>{{$memberDetail->mobile}}</td>
-												<td  class="veiwProfile"><a href="{{URL::to('admin/member/profile')}}/{{$member->id}}" class="veiwProfile">View Profile</a></td>
+												<td  class="veiwProfile"><a href="{{URL::to('ustaad/member/profile')}}/{{$member->id}}" class="veiwProfile">View Profile</a></td>
 												<td>{{$member->created_at->format(" d/m/y ")}}</td>
 												<td>
 													<span class="badge badge-light-success">Active</span>
 													<div class="overlay-edit">
-													<a href="{{URL::to('admin/member/edit')}}/{{$member->id}}"><button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
-													<a href="{{URL::to('admin/member/delete')}}/{{$member->id}}"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
+													<a href="{{URL::to('ustaad/member/edit')}}/{{$member->id}}"><button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
+													<a href="{{URL::to('ustaad/member/delete')}}/{{$member->id}}"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
 													</div>
 												</td>
 											</tr>

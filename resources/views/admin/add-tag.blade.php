@@ -738,7 +738,7 @@
 															<a href="#">
 																<i class="far fa-edit text-success mr-2"></i>
 															</a>
-															<a href="{{URL::to('/admin/tag/delete')}}/{{$data->id}}">
+															<a href="{{URL::to('/ustaad/tag/delete')}}/{{$data->id}}">
 																<i class="fa fa-times text-danger"></i>
 															</a>
 														</td>

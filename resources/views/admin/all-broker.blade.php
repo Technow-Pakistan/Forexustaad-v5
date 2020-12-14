@@ -138,13 +138,13 @@
 												<td>{{$data->title}}</td>
 												<td>{{$data->start}}</td>
 												<td>{{$data->end}}</td>
-												<td><a class="text-danger" href="{{URL::to('admin/brokersDetail')}}/{{$data->id}}"> Click For Details </a></td>
-												<td><a class="text-danger" href="{{URL::to('admin/brokersReview')}}/{{$data->id}}"> Click For Review </a></td>
+												<td><a class="text-danger" href="{{URL::to('ustaad/brokersDetail')}}/{{$data->id}}"> Click For Details </a></td>
+												<td><a class="text-danger" href="{{URL::to('ustaad/brokersReview')}}/{{$data->id}}"> Click For Review </a></td>
 												<td>
 													<span class="badge badge-light-success">Active</span>
 													<div class="overlay-edit">
-														<a href="{{URL::to('admin/editBroker')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
-														<a href="{{URL::to('admin/deleteBroker')}}/{{$data->id}}"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
+														<a href="{{URL::to('ustaad/editBroker')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
+														<a href="{{URL::to('ustaad/deleteBroker')}}/{{$data->id}}"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
 													</div>
 												</td>
 											</tr>

@@ -213,7 +213,7 @@
                             <div class="col-sm-12 col-md-6 bg-light">
                             <div class="wow animated fadeInUp mt-1">
                                  <div class="re_img w-100 p-4 ">
-                                    <a href="exness-and-raheel-nawaz-is-organizing-seminar-in-gujranwala-pakistan.php">
+                                    <a href="exness-and-raheel-nawaz-is-organizing-seminar-in-gujranwala-pakistan.html">
                                         <img src="{{URL::to('/public/assets/assets/img/blog-post/original-310x205.jpg')}}">
                                     </a>
                                 </div>
@@ -223,7 +223,7 @@
                                             
                                             <div class="new_description-details">
                                             <h6>
-                                                <a href="exness-and-raheel-nawaz-is-organizing-seminar-in-gujranwala-pakistan.php">  
+                                                <a href="exness-and-raheel-nawaz-is-organizing-seminar-in-gujranwala-pakistan.html">  
                                                     Exness and Raheel Nawaz is organized Seminar
                                                 </a>
                                             </h6>
@@ -487,7 +487,7 @@
                                             
                                             <div class="new_description-details">
                                             <h6>
-                                                <a href="best-currency-pair-to-trade.phpbest-currency-pair-to-trade.html">  
+                                                <a href="best-currency-pair-to-trade.html">  
                                                     The Best Currency Pair to Trade in Forex Market
                                                 </a>
                                             </h6>

@@ -114,7 +114,7 @@
 												<a href="#">
 													<i class="far fa-edit text-success mr-2 editLeftlink" value="{{$data->id}}"></i>
 												</a>
-												<a href="{{URL::to('/admin/banner/header-banner/delete')}}/{{$data->id}}">
+												<a href="{{URL::to('/ustaad/banner/header-banner/delete')}}/{{$data->id}}">
 													<i class="fa fa-times text-danger"></i>
 												</a>
 											</td>
@@ -129,7 +129,7 @@
 						<div class="card">
 							<div class="card-header">Right Banner</div>
 							<div class="card-body">
-								<form action="{{URL::to('admin/banner/header-banner/right')}}" method="post" class="Form2 bannerRightForm" enctype="multipart/form-data">
+								<form action="{{URL::to('ustaad/banner/header-banner/right')}}" method="post" class="Form2 bannerRightForm" enctype="multipart/form-data">
 									<div class="form-group">
 										<span>
 											<div class="bannerRightTitle">
@@ -211,7 +211,7 @@
 													<a href="#">
 														<i class="far fa-edit text-success mr-2 editRightlink" value="{{$data->id}}"></i>
 													</a>
-													<a href="{{URL::to('/admin/banner/header-banner/deleteright')}}/{{$data->id}}">
+													<a href="{{URL::to('/ustaad/banner/header-banner/deleteright')}}/{{$data->id}}">
 														<i class="fa fa-times text-danger"></i>
 													</a>
 												</td>
@@ -242,7 +242,7 @@
 			$(".bannerLeftEnd").val(end);
 			$(".bannerLeftButton").val("Update");
 			$(".bannerLeftButton").attr("class","btn btn-outline-danger mt-4 bannerLeftButton");
-			$(".bannerLeftForm").attr("action","{{URL::to('/admin/banner/header-banner/edit-left')}}/"+id+"");
+			$(".bannerLeftForm").attr("action","{{URL::to('/ustaad/banner/header-banner/edit-left')}}/"+id+"");
 
 			var Link = $(".bannerLeftTitle").find('a').attr('href');
 		
@@ -275,7 +275,7 @@
 			$(".bannerRightEnd").val(end2);
 			$(".bannerRightButton").val("Update");
 			$(".bannerRightButton").attr("class","btn btn-outline-danger mt-4 bannerRightButton");
-			$(".bannerRightForm").attr("action","{{URL::to('/admin/banner/header-banner/edit-right')}}/"+id2+"");
+			$(".bannerRightForm").attr("action","{{URL::to('/ustaad/banner/header-banner/edit-right')}}/"+id2+"");
 
 			var Link2 = $(".bannerRightTitle").find('a').attr('href');
 		

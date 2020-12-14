@@ -55,16 +55,16 @@
 												</td>
 												<td>{{$memberType->member}}</td>
 												<td>{{$member->mobile}}</td>
-												<!-- <td  class="veiwProfile"><a href="{{URL::to('admin/member/profile')}}/{{$member->id}}" class="veiwProfile">View Profile</a></td> -->
+												<!-- <td  class="veiwProfile"><a href="{{URL::to('ustaad/member/profile')}}/{{$member->id}}" class="veiwProfile">View Profile</a></td> -->
 												<td>{{$member->created_at->format(" d/m/y ")}}</td>
 												<td>
 													<span class="badge {{$member->status == 1 ? 'badge-light-success' : 'badge-light-danger'}}">{{$member->status == 1 ? 'Active' : 'Deactive'}}</span>
 													<div class="overlay-edit">
-														<!-- <a href="{{URL::to('admin/member/edit')}}/{{$member->id}}"><button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a> -->
+														<!-- <a href="{{URL::to('ustaad/member/edit')}}/{{$member->id}}"><button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a> -->
 														@if($member->status == 1)
-															<a href="{{URL::to('admin/client/delete')}}/{{$member->id}}"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
+															<a href="{{URL::to('ustaad/client/delete')}}/{{$member->id}}"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
 														@elseif($member->status == 0)
-															<a href="{{URL::to('admin/client/active')}}/{{$member->id}}"><button type="button" class="btn btn-icon btn-success"><i class="feather icon-unlock"></i></button></a>
+															<a href="{{URL::to('ustaad/client/active')}}/{{$member->id}}"><button type="button" class="btn btn-icon btn-success"><i class="feather icon-unlock"></i></button></a>
 														@endif
 													</div>
 												</td>

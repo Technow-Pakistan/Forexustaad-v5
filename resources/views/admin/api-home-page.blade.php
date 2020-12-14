@@ -82,7 +82,7 @@
 														<span class="badge badge-light-success">Active</span>
 														<div class="overlay-edit editlink" value="{{$data->id}}">
 															<button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button>
-															<a type="button" href="{{URL::to('/admin/api/api-home/delete')}}/{{$data->id}}" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></a>
+															<a type="button" href="{{URL::to('/ustaad/api/api-home/delete')}}/{{$data->id}}" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></a>
 														</div>
 													</td>
 												</tr>
@@ -192,7 +192,7 @@
 		$(".apiArea").val(area);
 		$(".apiButton").val("Update");
 		$(".apiButton").attr("class","btn btn-outline-danger mt-4 apiButton");
-		$(".apiForm").attr("action","{{URL::to('/admin/api/api-home/edit/')}}/"+id+"");
+		$(".apiForm").attr("action","{{URL::to('/ustaad/api/api-home/edit/')}}/"+id+"");
 		console.log(title);
 		
 	});

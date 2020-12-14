@@ -33,9 +33,9 @@
                                             </ul>
                                         </div>
                                         
-                                        <div>
+                                        <!-- <div>
                                             <img src="{{URL::to('storage/app')}}/{{$BlogDetail->image}}" class="img-fluid pt-3">
-                                        </div>
+                                        </div> -->
                                         <div class="pt-3">
                                             @php 
                                                 $Description = html_entity_decode($BlogDetail->detailDescription);
@@ -157,7 +157,7 @@
                                                                                 <div class="comment_author clearfix">
                                                                                     <h5 class="float-left">{{$comment->name}}</h5>
                                                                                     <p class="float-right commenttime">
-                                                                                        {{$comment->created_at->format("M d, Y")}} at {{$comment->created_at->format("H:i a")}}
+                                                                                        {{$comment->created_at->format("M d, Y")}} at {{$comment->created_at->format("h:i a")}}
                                                                                     </p>
                                                                                 </div>
                                                                                 <div class="comment_details">
@@ -289,7 +289,7 @@
                                                         <p>Your email address will not be published. Required fields are marked *</p>
                                                     </div>
                                                     <div class="pt-3  container-fluid">
-                                                        <form action="{{URL::to('/admin/comment')}}" method="post" enctype="multipart/form-data">
+                                                        <form action="{{URL::to('/comment1')}}" method="post" enctype="multipart/form-data">
                                                             <!-- <div class="row">
                                                                 <div class="col-md-6 ">
                                                                     <div class="form-group">
@@ -337,8 +337,3 @@
 </style>
 
 @include('inc.footer')
-
-
-
-
-

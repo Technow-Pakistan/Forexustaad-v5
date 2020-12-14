@@ -49,7 +49,14 @@ class FooterController extends Controller
     }
     public function CopyRight(Request $request){
         $copyRight = FooterCopyRightModel::where('id',1)->first();
-        $copyRight->fill($request->all());
+        if ($request->editor3 != null){
+            $description = htmlentities($request->editor3);
+            $copyRight->description = $description;
+        }
+        if ($request->editor2 != null){
+            $description2 = htmlentities($request->editor2);
+            $copyRight->description2 = $description2;
+        }
         $copyRight->save();
         return back();
     }

@@ -21,7 +21,7 @@
 		<!-- vendor css -->
 		<link rel="stylesheet" href="{{URL::to('/public/AdminAssets/assets/css/style.css')}}" />
 		<!-- Check Editor -->
-		<script src="http://cdn.ckeditor.com/4.6.1/standard/ckeditor.js"></script>
+		<script src="https://cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
 		
 	</head>
 	<body class="">
@@ -41,7 +41,7 @@
 							<label>Dashboard Design</label>
 						</li>
 						<li class="nav-item">
-							<a href="{{URL::to('/admin/dashboard')}}" class="nav-link"
+							<a href="{{URL::to('/ustaad/dashboard')}}" class="nav-link"
 								><span class="pcoded-micon"
 									><i class="feather icon-home"></i></span
 								><span class="pcoded-mtext">Dashboard</span></a
@@ -57,11 +57,11 @@
 								><span class="pcoded-mtext">Posts</span></a
 							>
 							<ul class="pcoded-submenu">
-								<li><a href="{{URL::to('admin/post/viewAll')}}">All Posts</a></li>
-								<li><a href="{{URL::to('admin/allCategories')}}">Add New</a></li>
-								<li><a href="{{URL::to('admin/category')}}">Categories</a></li>
-								<li><a href="{{URL::to('admin/tag')}}">Tags</a></li>
-								<li><a href="{{URL::to('admin/comment')}}">Comments</a></li>
+								<li><a href="{{URL::to('ustaad/post/viewAll')}}">All Posts</a></li>
+								<li><a href="{{URL::to('ustaad/allCategories')}}">Add New</a></li>
+								<li><a href="{{URL::to('ustaad/category')}}">Categories</a></li>
+								<li><a href="{{URL::to('ustaad/tag')}}">Tags</a></li>
+								<li><a href="{{URL::to('ustaad/comment')}}">Comments</a></li>
 							</ul>
 						</li>
 						<li class="nav-item pcoded-menu-caption">
@@ -74,14 +74,14 @@
 								><span class="pcoded-mtext">Header</span></a
 							>
 							<ul class="pcoded-submenu">
-								<li><a href="{{URL::to('admin/firstNav')}}">First Nav Bar</a></li>
-								<li><a href="{{URL::to('admin/navMenu')}}">Nav Menus</a></li>
-								<li><a href="{{URL::to('admin/logo-panel')}}">Logo Panel</a></li>
-								<li><a href="{{URL::to('admin/sliding-images')}}">Sliding Images</a></li>
+								<li><a href="{{URL::to('ustaad/firstNav')}}">First Nav Bar</a></li>
+								<li><a href="{{URL::to('ustaad/navMenu')}}">Nav Menus</a></li>
+								<li><a href="{{URL::to('ustaad/logo-panel')}}">Logo Panel</a></li>
+								<li><a href="{{URL::to('ustaad/sliding-images')}}">Sliding Images</a></li>
 							</ul>
 						</li>
 						<li class="nav-item">
-							<a href="{{URL::to('admin/edit-footer
+							<a href="{{URL::to('ustaad/edit-footer
 							')}}" class="nav-link"
 								><span class="pcoded-micon"
 									><i class="feather icon-box"></i></span
@@ -98,9 +98,9 @@
 								><span class="pcoded-mtext">Banners</span></a
 							>
 							<ul class="pcoded-submenu">
-								<li><a href="{{URL::to('admin/banner/header-banner')}}">Header Banner</a></li>
-								<li><a href="{{URL::to('admin/banner/left-side-banner')}}">Left Side Bar Banner</a></li>
-								<li><a href="{{URL::to('admin/banner/right-side-banner')}}">Right Side Bar</a></li>
+								<li><a href="{{URL::to('ustaad/banner/header-banner')}}">Header Banner</a></li>
+								<li><a href="{{URL::to('ustaad/banner/left-side-banner')}}">Left Side Bar Banner</a></li>
+								<li><a href="{{URL::to('ustaad/banner/right-side-banner')}}">Right Side Bar</a></li>
 							</ul>
 						</li>
 						<li class="nav-item pcoded-menu-caption">
@@ -113,9 +113,9 @@
 								><span class="pcoded-mtext">Api</span></a
 							>
 							<ul class="pcoded-submenu">
-								<li><a href="{{URL::to('admin/api/api-home')}}">API Home Page</a></li>
-								<li><a href="{{URL::to('admin/api/api-left')}}">API Left Side Bar </a></li>
-								<li><a href="{{URL::to('admin/api/api-right')}}">API Right Side</a></li>
+								<li><a href="{{URL::to('ustaad/api/api-home')}}">API Home Page</a></li>
+								<li><a href="{{URL::to('ustaad/api/api-left')}}">API Left Side Bar </a></li>
+								<li><a href="{{URL::to('ustaad/api/api-right')}}">API Right Side</a></li>
 							</ul>
 						</li>
 						<li class="nav-item pcoded-menu-caption">
@@ -128,13 +128,13 @@
 								><span class="pcoded-mtext">Brokers</span></a
 							>
 							<ul class="pcoded-submenu">
-								<li><a href="{{URL::to('admin/allbrokers')}}">All Brokers</a></li>
-								<li><a href="{{URL::to('admin/broker/add')}}">Add New Broker</a></li>
-								<li><a href="{{URL::to('/admin/brokerReview/new')}}">Add Broker Review</a></li>
+								<li><a href="{{URL::to('ustaad/allbrokers')}}">All Brokers</a></li>
+								<li><a href="{{URL::to('ustaad/broker/add')}}">Add New Broker</a></li>
+								<li><a href="{{URL::to('/ustaad/brokerReview/new')}}">Add Broker Review</a></li>
 								<li><a href="all-broker-promotion.html">All Broker Promotion</a></li>
 								<li><a href="add-promotiton.html">Add Promotion</a></li>
-								<li><a href="{{URL::to('/admin/brokersNews')}}">All Broker News</a></li>
-								<li><a href="{{URL::to('/admin/brokersNews/new')}}">Add Broker News</a></li>
+								<li><a href="{{URL::to('/ustaad/brokersNews')}}">All Broker News</a></li>
+								<li><a href="{{URL::to('/ustaad/brokersNews/new')}}">Add Broker News</a></li>
 								
 								
 							</ul>
@@ -149,8 +149,8 @@
 								><span class="pcoded-mtext">User</span></a
 							>
 							<ul class="pcoded-submenu">
-								<li><a href="{{URL::to('admin/member/userList')}}">User List</a></li>
-								<li><a href="{{URL::to('admin/member/clientList')}}">Client User List</a></li>
+								<li><a href="{{URL::to('ustaad/member/userList')}}">User List</a></li>
+								<li><a href="{{URL::to('ustaad/member/clientList')}}">Client User List</a></li>
 							</ul>
 						</li>
 						<li class="nav-item pcoded-menu-caption">
@@ -454,19 +454,19 @@
 										alt="User-Profile-Image"
 									/>
 									<span>John Doe</span>
-									<a href="{{URL::to('/admin/logout')}}" class="dud-logout" title="Logout">
+									<a href="{{URL::to('/ustaad/logout')}}" class="dud-logout" title="Logout">
 										<i class="feather icon-log-out"></i>
 									</a>
 								</div>
 								<ul class="pro-body">
 									<li>
-										<a href="{{URL::to('admin/member/profile')}}/{{$value['id']}}" class="dropdown-item"
+										<a href="{{URL::to('ustaad/member/profile')}}/{{$value['id']}}" class="dropdown-item"
 											><i class="feather icon-user"></i> Profile</a
 										>
 									</li>
 									
 									<li>
-										<a href="{{URL::to('admin/member/add')}}"  class="dropdown-item">
+										<a href="{{URL::to('ustaad/member/add')}}"  class="dropdown-item">
 											<i class="feather icon-user-plus"></i> Add User
 										</a>
 									</li>

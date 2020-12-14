@@ -11,7 +11,7 @@
                             <h5 class="m-b-10">Header</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{URL::to('/admin/dashboard')}}"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a></li>
                             <li class="breadcrumb-item"><a href="#!">Header</a></li>
                             <li class="breadcrumb-item"><a href="#!">First Nav Bar</a></li>
                         </ul>
@@ -89,7 +89,7 @@
 													<a href="#">
 														<i class="far fa-edit text-success mr-2 editlink" value="{{$data->id}}"></i>
 													</a>
-													<a href="{{URL::to('/admin/firstNav/delete')}}/{{$data->id}}">
+													<a href="{{URL::to('/ustaad/firstNav/delete')}}/{{$data->id}}">
 														<i class="fa fa-times text-danger"></i>
 													</a>
 												</td>
@@ -118,7 +118,7 @@
 		$(".socialLink").val(link);
 		$(".socialButton").val("Update");
 		$(".socialButton").attr("class","btn btn-outline-danger mt-4 socialButton");
-		$(".socialForm").attr("action","{{URL::to('/admin/firstNav/edit/')}}/"+id+"");
+		$(".socialForm").attr("action","{{URL::to('/ustaad/firstNav/edit/')}}/"+id+"");
 		
 		
 	});

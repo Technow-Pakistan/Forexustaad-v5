@@ -18,7 +18,7 @@
 						<div class="dropdown">
 							<a class="drp-icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon feather icon-camera"></i></a>
 							<div class="dropdown-menu">
-								<form action="{{URL::to('admin/member/addBackImg')}}/{{$memberDetail->adminTableId}}" name="form1" method="post" enctype="multipart/form-data">
+								<form action="{{URL::to('ustaad/member/addBackImg')}}/{{$memberDetail->adminTableId}}" name="form1" method="post" enctype="multipart/form-data">
 									<input type="file" name="file_photo" class="submit1" id="file" class="inputfile">
 									<label for="file"><a class="dropdown-item" href="#"><i class="feather icon-upload-cloud mr-2"></i>upload new</a></label>
 									<a class="dropdown-item" href="#"><i class="feather icon-image mr-2"></i>from photos</a>
@@ -56,7 +56,7 @@
 										</div>
 									</a>
 									<div class="dropdown-menu">
-										<form action="{{URL::to('admin/member/addUserImg')}}/{{$memberDetail->adminTableId}}" name="form2" method="post" enctype="multipart/form-data">
+										<form action="{{URL::to('ustaad/member/addUserImg')}}/{{$memberDetail->adminTableId}}" name="form2" method="post" enctype="multipart/form-data">
 											<input type="file" name="user_photo" class="submit2" id="file" class="inputfile">
 											<label for="file"><a class="dropdown-item" href="#"><i class="feather icon-upload-cloud mr-2"></i>upload new</a></label>
 											<a class="dropdown-item" href="#"><i class="feather icon-image mr-2"></i>from photos</a>

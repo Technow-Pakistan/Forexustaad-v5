@@ -38,7 +38,7 @@
 								@isset($brokerReview->image)
 									<?php $url = "edit/" . $brokerReview->id; ?>
 								@endisset
-								<form action="{{URL::to('/admin/brokersReview')}}/{{$url}}" method="post" enctype="multipart/form-data">
+								<form action="{{URL::to('/ustaad/brokersReview')}}/{{$url}}" method="post" enctype="multipart/form-data">
 									@isset($brokerReview->image)
 										<div>
 											<img src="{{URL::to('storage/app')}}/{{$brokerReview->image}}" alt="Your Image" />

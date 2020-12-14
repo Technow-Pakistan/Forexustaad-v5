@@ -35,7 +35,7 @@
 					@foreach($totalData as $data)
 						<div class="col-md-4">
 							<div class="card text-center">
-								<a href="{{URL::to('admin/post/new')}}/{{$data->id}}">
+								<a href="{{URL::to('ustaad/post/new')}}/{{$data->id}}">
 									<div class="card-body addn">
 										@if($i == 0)
 											<i class=" fas fa-clock text-danger"></i>

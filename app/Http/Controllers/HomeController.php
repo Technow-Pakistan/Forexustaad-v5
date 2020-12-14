@@ -67,10 +67,11 @@ class HomeController extends Controller
         $totalData = BrokerCompanyInformationModel::all();
         return view('home/brokerView',compact('totalData'));
     }
-    public function uploadPhp(Request $request){
-        if ($request->file("upload") != null) {
-            $path = $request->file("upload")->store("PostImages");
-        }
-        return view('admin.include.upload',compact('path'));
+    public function ImageSrc(Request $request){
+        if ($request->file("file") != null) {
+            $path = $request->file("file")->store("PostImages");
+        };
+        $url = "../storage/app/" . $path;
+        return $url;
     }
 }

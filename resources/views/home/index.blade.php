@@ -178,7 +178,7 @@
                                     <div class="content_area py-5">
                                         <div class="content_area_heading">
                                             <h1 class="heading_title wow animated fadeInUp">
-                                                What is Forex Trade?
+                                                Message From CEO
                                             </h1>
                                             <div class="heading_border wow animated fadeInUp">
                                                 <span class="two"></span><span class="three"></span>
@@ -186,15 +186,14 @@
                                         </div>
                                         <div class="content_area_text wow animated fadeInUp">
                                             <p>
-                                                Transforming your business with a collaborative approach to strategy,
-                                                creative & marketing. Explore your Best Web Business Partner.
+                                                 My Goal is to educate everyone about forex and help them reshape their future by teaching them how they can be financially in-depended and successful in life.
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 text-center p-0 order-1 order-sm-2">
                                     <div class="icon_area">
-                                        <img src="{{URL::to('/public/assets/assets/img/image-1-1.png')}}" class="wow animated fadeInUp">
+                                        <img src="{{URL::to('/public/assets/assets/img/img-head.png')}}" class="wow animated fadeInUp">
                                     </div>
                                 </div>
                             </div>
@@ -211,15 +210,12 @@
                                         <section class="vid-main-wrapper clearfix">
                                             <!-- THE YOUTUBE PLAYER -->
                                             <div class="vid-container">
-                                                <iframe id="vid_frame"
-                                                    src="https://www.youtube.com/embed/WAcnWtZjDWE?rel=0&showinfo=0&autohide=1&autoplay=1"
-                                                    frameborder="0" width="560" height="315" allow="autoplay"
-                                                    allowfullscreen></iframe>
+                                                <iframe width="560" height="315" src="https://www.youtube.com/embed/X9JClP-XMyc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                             </div>
                                         </section>
 
-                                        <section id="extra wrapper"
-                                            style="position: relative; padding-right: 32px; padding-left: 32px; background: #f6f6f6; height:152px;">
+                                        <!--<section id="extra wrapper"-->
+                                        <!--    style="position: relative; padding-right: 32px; padding-left: 32px; background: #f6f6f6; height:152px;">-->
 
                                             <!-- CUSTOM ARROWS -->
                                             <!-- <button title="Next" class="swiper-custom-next" style="position: absolute; padding: 10px 2px; right: 1px;top: 32%; z-index: 100;
@@ -247,46 +243,46 @@
                                             </button> -->
 
                                             <!-- Swiper -->
-                                            <nav class="swiper-container swiper-container-videos slider-produtos-destaque"
-                                                style="top: 30px;;">
-                                                <ol class="swiper-wrapper" style="list-style-type: none; padding: 0px;">
-                                                    <li class="swiper-slide" style="width: 130px;">
-                                                        <a class="" href="javascript:void();"
-                                                            onClick="document.getElementById('vid_frame').src='https://youtu.be/X9JClP-XMyc?autoplay=1&rel=0&showinfo=0&autohide=1'">
-                                                            <span class="vid-thumb">
-                                                                <img
-                                                                    src="https://img.youtube.com/vi/WAcnWtZjDWE/mqdefault.jpg" />
-                                                            </span>
-                                                            <p class="desc">Video 1</p>
-                                                        </a>
-                                                    </li>
+                                            <!--<nav class="swiper-container swiper-container-videos slider-produtos-destaque"-->
+                                            <!--    style="top: 30px;;">-->
+                                            <!--    <ol class="swiper-wrapper" style="list-style-type: none; padding: 0px;">-->
+                                            <!--        <li class="swiper-slide" style="width: 130px;">-->
+                                            <!--            <a class="" href="javascript:void();"-->
+                                            <!--                onClick="document.getElementById('vid_frame').src='https://youtu.be/X9JClP-XMyc?autoplay=1&rel=0&showinfo=0&autohide=1'">-->
+                                            <!--                <span class="vid-thumb">-->
+                                            <!--                    <img-->
+                                            <!--                        src="https://img.youtube.com/vi/WAcnWtZjDWE/mqdefault.jpg" />-->
+                                            <!--                </span>-->
+                                            <!--                <p class="desc">Video 1</p>-->
+                                            <!--            </a>-->
+                                            <!--        </li>-->
 
-                                                    <li class="swiper-slide" style="width: 130px;">
-                                                        <a href="javascript:void();"
-                                                            onClick="document.getElementById('vid_frame').src='https://youtube.com/embed/h8r5rbUmBzs?autoplay=1&rel=0&showinfo=0&autohide=1'">
-                                                            <span class="vid-thumb"><img
-                                                                    src="https://img.youtube.com/vi/h8r5rbUmBzs/mqdefault.jpg" /></span>
-                                                            <p class="desc">Video 2</p>
-                                                        </a>
-                                                    </li>
+                                            <!--        <li class="swiper-slide" style="width: 130px;">-->
+                                            <!--            <a href="javascript:void();"-->
+                                            <!--                onClick="document.getElementById('vid_frame').src='https://youtube.com/embed/h8r5rbUmBzs?autoplay=1&rel=0&showinfo=0&autohide=1'">-->
+                                            <!--                <span class="vid-thumb"><img-->
+                                            <!--                        src="https://img.youtube.com/vi/h8r5rbUmBzs/mqdefault.jpg" /></span>-->
+                                            <!--                <p class="desc">Video 2</p>-->
+                                            <!--            </a>-->
+                                            <!--        </li>-->
 
-                                                    <li class="swiper-slide" style="width: 130px;">
-                                                        <a href="javascript:void();"
-                                                            onClick="document.getElementById('vid_frame').src='https://youtube.com/embed/togt3pGntVc?autoplay=1&rel=0&showinfo=0&autohide=1'">
-                                                            <span class="vid-thumb"><img
-                                                                    src="https://img.youtube.com/vi/togt3pGntVc/mqdefault.jpg" /></span>
-                                                            <div class="desc">Video 3</div>
-                                                        </a>
-                                                    </li>
+                                            <!--        <li class="swiper-slide" style="width: 130px;">-->
+                                            <!--            <a href="javascript:void();"-->
+                                            <!--                onClick="document.getElementById('vid_frame').src='https://youtube.com/embed/togt3pGntVc?autoplay=1&rel=0&showinfo=0&autohide=1'">-->
+                                            <!--                <span class="vid-thumb"><img-->
+                                            <!--                        src="https://img.youtube.com/vi/togt3pGntVc/mqdefault.jpg" /></span>-->
+                                            <!--                <div class="desc">Video 3</div>-->
+                                            <!--            </a>-->
+                                            <!--        </li>-->
 
-                                                     <li class="swiper-slide" style="width: 130px;">
-                                                        <a href="javascript:void();"
-                                                            onClick="document.getElementById('vid_frame').src='https://youtube.com/embed/JyqD_zfXfi8?autoplay=1&rel=0&showinfo=0&autohide=1'">
-                                                            <span class="vid-thumb"><img
-                                                                    src="https://img.youtube.com/vi/JyqD_zfXfi8/mqdefault.jpg" /></span>
-                                                            <div class="desc">Video 4</div>
-                                                        </a>
-                                                    </li>
+                                            <!--         <li class="swiper-slide" style="width: 130px;">-->
+                                            <!--            <a href="javascript:void();"-->
+                                            <!--                onClick="document.getElementById('vid_frame').src='https://youtube.com/embed/JyqD_zfXfi8?autoplay=1&rel=0&showinfo=0&autohide=1'">-->
+                                            <!--                <span class="vid-thumb"><img-->
+                                            <!--                        src="https://img.youtube.com/vi/JyqD_zfXfi8/mqdefault.jpg" /></span>-->
+                                            <!--                <div class="desc">Video 4</div>-->
+                                            <!--            </a>-->
+                                            <!--        </li>-->
                                                         <!--
                                                     <li class="swiper-slide" style="width: 152px;">
                                                         <a href="javascript:void();"
@@ -297,14 +293,14 @@
                                                         </a>
                                                     </li> -->
 
-                                                </ol>
+                                                <!--</ol>-->
                                                 <!-- Add Pagination -->
                                                 <!-- <div class="swiper-pagination"></div> -->
                                                 <!-- If we need navigation buttons -->
 
-                                            </nav>
+                                        <!--    </nav>-->
 
-                                        </section>
+                                        <!--</section>-->
 
                                     </div>
                                 </div>
@@ -367,11 +363,11 @@ $recent_news = '';
                     <div class="new_img">
                         <img src="{{URL::to('storage/app')}}/{{$value->image}}">
                     </div>
-                    <div class="new_description">
+                    <!-- <div class="new_description">
                     <a href="{{URL::to('/Blog')}}/{{$value->permalink}}">
                         <i class="fa fa-link"></i>
                         </a>
-                    </div>
+                    </div> -->
                     <div class="new_description-details">
                     <h6>
                         <a href="{{URL::to('/Blog')}}/{{$value->permalink}}">

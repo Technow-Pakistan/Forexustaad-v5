@@ -12,10 +12,10 @@
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="{{URL::to('admin/dashboard')}}"><i class="feather icon-home"></i></a>
+										<a href="{{URL::to('ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
 									</li>
 									<li class="breadcrumb-item">
-										<a href="{{URL::to('admin/sliding-images')}}">Sliding Images</a>
+										<a href="{{URL::to('ustaad/sliding-images')}}">Sliding Images</a>
 									</li>
 									<li class="breadcrumb-item"><a href="#!">Edit Image</a></li>
 								</ul>
@@ -71,7 +71,7 @@
 									</div>
 									<div>
 										<input type="submit" name="submit" id="submit" class="btn btn-outline-primary" value="Save">
-										<a href="{{URL::to('/admin/delete-slider-image')}}/{{$image->id}}" class="text-center btn btn-outline-danger" id="detailLink1">Delete</a>
+										<a href="{{URL::to('/ustaad/delete-slider-image')}}/{{$image->id}}" class="text-center btn btn-outline-danger" id="detailLink1">Delete</a>
 									</div>
 								</form>
 							</div>

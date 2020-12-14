@@ -38,7 +38,7 @@
 								@isset($brokerNews->image)
 									<?php $url = "edit/" . $brokerNews->id; ?>
 								@endisset
-								<form action="{{URL::to('/admin/brokersNews')}}/{{$url}}" method="post" enctype="multipart/form-data">
+								<form action="{{URL::to('/ustaad/brokersNews')}}/{{$url}}" method="post" enctype="multipart/form-data">
 									@isset($brokerNews->image)
 										<div>
 											<img src="{{URL::to('storage/app')}}/{{$brokerNews->image}}" alt="Your Image" />

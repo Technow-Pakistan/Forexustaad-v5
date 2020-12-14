@@ -21,11 +21,11 @@
 						<div class="widget-col">
 						<h3 class="mb-4">Our Webinars</h3>
 						<ul class="list-unstyled">
-							<li><a href="http://goo.gl/2BnxlY"><i class="fa fa-arrow-right"></i> <span>{{$FooterWebinar[0]->webinar}}</span></a></li>
-							<li><a href="http://goo.gl/RaLVUN"><i class="fa fa-arrow-right"></i> <span>{{$FooterWebinar[1]->webinar}}</span></a></li>
-							<li><a href="http://goo.gl/ddgFcJ"><i class="fa fa-arrow-right"></i> <span>{{$FooterWebinar[2]->webinar}}</span></a></li>
-							<li><a href="http://goo.gl/VhGRYF"><i class="fa fa-arrow-right"></i> <span>{{$FooterWebinar[3]->webinar}}</span></a></li>
-							<li><a href="http://goo.gl/nUigIQ"><i class="fa fa-arrow-right"></i> <span>{{$FooterWebinar[4]->webinar}}</span></a></li>
+							<li><a href="{{URL::to('/what-is-forex-trading-in-urdu-webinar.html')}}"><i class="fa fa-arrow-right"></i> <span>{{$FooterWebinar[0]->webinar}}</span></a></li>
+							<li><a href="{{URL::to('/become-successful-forex-trader.html')}}"><i class="fa fa-arrow-right"></i> <span>{{$FooterWebinar[1]->webinar}}</span></a></li>
+							<li><a href="{{URL::to('/how-to-choose-a-forex-broker-in-urdu-webinar.html')}}"><i class="fa fa-arrow-right"></i> <span>{{$FooterWebinar[2]->webinar}}</span></a></li>
+							<li><a href="{{URL::to('/how-to-use-metatrader-4-full-training-in-urdu-part-1.html')}}"><i class="fa fa-arrow-right"></i> <span>{{$FooterWebinar[3]->webinar}}</span></a></li>
+							<li><a href="{{URL::to('/how-to-use-metatrader-4-full-training-in-urdu-part-2.html')}}"><i class="fa fa-arrow-right"></i> <span>{{$FooterWebinar[4]->webinar}}</span></a></li>
 						</ul>
 					</div>
 					</div> 
@@ -93,7 +93,10 @@
 					<div class="col-12 col-lg-5 col-md-12">
             <p>
 						<span>
-              {{$copyRight->description}}
+              @php
+                $description = $copyRight->description;
+                echo $description;
+              @endphp
             </span>
             
             <span class="text-white">
@@ -116,7 +119,12 @@
 					</div>
           
           <div class="col-12 col-lg-7 col-md-12">
-            <p>{{$copyRight->description2}}</p>
+            <p>
+              @php
+                $description = $copyRight->description;
+                echo $description;
+              @endphp
+            </p>
           </div>
 				</div>
 			</div>

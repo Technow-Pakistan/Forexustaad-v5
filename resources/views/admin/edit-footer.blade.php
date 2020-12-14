@@ -12,7 +12,7 @@
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="{{URL::to('/admin')}}"><i class="feather icon-home"></i></a>
+										<a href="{{URL::to('/ustaad')}}"><i class="feather icon-home"></i></a>
 									</li>
 									<li class="breadcrumb-item"><a href="#!">Invoice</a></li>
 									<li class="breadcrumb-item">
@@ -35,7 +35,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <p class="h2 text-primary py-3">Change Webinar Link</p>
-                                        <form action="{{URL::to('/admin/edit-footer/webinar')}}" method="post">
+                                        <form action="{{URL::to('/ustaad/edit-footer/webinar')}}" method="post">
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <div class="form-group">
@@ -85,7 +85,7 @@
                                 <div class="row pt-5">
                                     <div class="col-md-12">
                                         <p class="h2 text-primary py-3">Change Contact Details</p>
-                                        <form action="{{URL::to('/admin/edit-footer/contact')}}" method="post">
+                                        <form action="{{URL::to('/ustaad/edit-footer/contact')}}" method="post">
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <div class="form-group">
@@ -144,7 +144,7 @@
                                 </div> -->
                                 <div class="row">
                                     <div class="col-md-12">
-										<form action="{{URL::to('/admin/edit-footer/description')}}" method="post">
+										<form action="{{URL::to('/ustaad/edit-footer/description')}}" method="post">
 											<div class="form-group pt-4">
 												<p class="h2 text-primary py-3">Change Footer Details</p>
 												<textarea name="editor1" class="form-control" placeholder="Page Body">
@@ -181,15 +181,25 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <p class="h2 text-primary py-3">Left Description</p>
-                                        <form action="{{URL::to('/admin/edit-footer/copyRight')}}" method="post">
-                                            <textarea name="description" class="form-control" cols="30" rows="10">{{$copyRight->description}}</textarea>
+                                        <form action="{{URL::to('/ustaad/edit-footer/copyRight')}}" method="post">
+                                            <textarea name="editor1" class="form-control" cols="30" rows="10">
+                                                @php
+                                                    $description = $copyRight->description;
+                                                    echo $description;
+                                                @endphp
+                                            </textarea>
                                             <input type="submit" class="btn btn-primary mt-4" value="Submit">
                                         </form>
                                     </div>
                                     <div class="col-md-6">
                                         <p class="h2 text-primary py-3">Right Description</p>
-                                        <form action="{{URL::to('/admin/edit-footer/copyRight')}}" method="post">
-                                            <textarea name="description2" class="form-control" cols="30" rows="10">{{$copyRight->description2}}</textarea>
+                                        <form action="{{URL::to('/ustaad/edit-footer/copyRight')}}" method="post">
+                                            <textarea name="editor2" class="form-control" cols="30" rows="10">
+                                                @php
+                                                    $description = $copyRight->description2;
+                                                    echo $description;
+                                                @endphp
+                                            </textarea>
                                             <input type="submit" class="btn btn-primary mt-4" value="Submit">
                                         </form>
                                     </div>

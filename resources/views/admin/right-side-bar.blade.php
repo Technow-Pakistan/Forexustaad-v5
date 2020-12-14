@@ -125,7 +125,7 @@
 												<a href="#">
 													<i class="far fa-edit text-success mr-2 editlink" value="{{$data->id}}"></i>
 												</a>
-												<a href="{{URL::to('/admin/banner/right-side-banner/delete')}}/{{$data->id}}">
+												<a href="{{URL::to('/ustaad/banner/right-side-banner/delete')}}/{{$data->id}}">
 													<i class="fa fa-times text-danger"></i>
 												</a>
 											</td>
@@ -158,7 +158,7 @@
 			$(".bannerArea").find("."+area).attr("selected",true);
 			$(".bannerButton").val("Update");
 			$(".bannerButton").attr("class","btn btn-outline-danger mt-4 bannerButton");
-			$(".bannerForm").attr("action","{{URL::to('/admin/banner/right-side-banner/edit')}}/"+id+"");
+			$(".bannerForm").attr("action","{{URL::to('/ustaad/banner/right-side-banner/edit')}}/"+id+"");
 
 			var Link = $(".bannerTitle").find('a').attr('href');
 		

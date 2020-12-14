@@ -12,7 +12,7 @@
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="{{URL::to('admin/dashboard')}}"><i class="feather icon-home"></i></a>
+										<a href="{{URL::to('ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
 									</li>
 									<li class="breadcrumb-item"><a href="#!">Logo</a></li>
 									<!-- <li class="breadcrumb-item"><a href="#!">Invoice Summary</a></li> -->
@@ -93,7 +93,7 @@
 												<a href="#">
 													<i class="far fa-edit text-success mr-2 editlink" value="{{$data->id}}"></i>
 												</a>
-												<a href="{{URL::to('/admin/logo-panel/delete')}}/{{$data->id}}">
+												<a href="{{URL::to('/ustaad/logo-panel/delete')}}/{{$data->id}}">
 													<i class="fa fa-times text-danger"></i>
 												</a>
 											</td>
@@ -108,7 +108,7 @@
 						<div class="card">
 							<div class="card-header">Change or Add Favicon</div>
 							<div class="card-body">
-								<form action="{{URL::to('/admin/logo-favicon')}}" class="socialForm2" method="post" enctype="multipart/form-data">
+								<form action="{{URL::to('/ustaad/logo-favicon')}}" class="socialForm2" method="post" enctype="multipart/form-data">
 									<div class="form-group">
 										<span>
 											<img
@@ -175,7 +175,7 @@
 													<a href="#">
 														<i class="far fa-edit text-success mr-2 editlink2" value="{{$data->id}}"></i>
 													</a>
-													<a href="{{URL::to('/admin/logo-favicon/delete')}}/{{$data->id}}">
+													<a href="{{URL::to('/ustaad/logo-favicon/delete')}}/{{$data->id}}">
 														<i class="fa fa-times text-danger"></i>
 													</a>
 												</td>
@@ -208,7 +208,7 @@
 		$(".imageSrc").attr("src",src);
 		$(".socialButton").val("Update");
 		$(".socialButton").attr("class","btn btn-outline-danger mt-4 socialButton");
-		$(".socialForm").attr("action","{{URL::to('/admin/logo-panel/edit/')}}/"+id+"");
+		$(".socialForm").attr("action","{{URL::to('/ustaad/logo-panel/edit/')}}/"+id+"");
 		console.log(active);
 		
 	});
@@ -228,7 +228,7 @@
 		$(".imageSrc2").attr("src",src2);
 		$(".socialButton2").val("Update");
 		$(".socialButton2").attr("class","btn btn-outline-danger mt-4 socialButton2");
-		$(".socialForm2").attr("action","{{URL::to('/admin/logo-favicon/edit/')}}/"+id2+"");
+		$(".socialForm2").attr("action","{{URL::to('/ustaad/logo-favicon/edit/')}}/"+id2+"");
 		console.log(active2);
 		
 	});

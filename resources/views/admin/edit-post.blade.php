@@ -88,7 +88,7 @@
 				<!-- [ breadcrumb ] end -->
 				<!-- [ Main Content ] start -->
                 
-                <form id="" method="post" action="{{URL::to('admin/post/all')}}" class=""  enctype="multipart/form-data">
+                <form id="" method="post" action="{{URL::to('ustaad/post/all')}}" class=""  enctype="multipart/form-data">
    <div class="row">
       <div class="col-sm-8 col-xl-8 col-md-8 ">
          <div class="card">
@@ -99,11 +99,11 @@
                      <input name="mainTitle" class="form-control mainTitle"  id="news-title" type="text" value="{{$blogPostData->mainTitle}}" size="40" aria-required="true" required="">
                      <small>The title is how it appears on your Forex News Page.</small>
                   </div>
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                      <label for="sub-title" class="form-control-label">Sub Title</label>
                      <input name="subTitle" class="form-control " id="sub-title" type="text" value="{{$blogPostData->subTitle}}" size="40" aria-required="true" required="">
                      <small>This is subtitle is how it appears on your Forex News Page.</small>
-                  </div>
+                  </div> -->
                   <div class="form-group">
                      <label for="news-description" class="form-control-label">Description</label>
                      <textarea name="description" class="form-control" id="news-description" rows="5" cols="40" required="" placeholder="Enter your Description here ...">{{$blogPostData->description}}</textarea>
@@ -149,9 +149,9 @@
                            <div class="form-group">
                               <span>Visibility</span>
                               <span>
-                                 <select class="js-example-basic-hide-search col-sm-12" name="visibility[]" multiple="multiple" style="width: 75%" required>
+                                 <select class="js-example-basic-hide-search col-sm-12 visibility" name="visibility[]" value="hello" multiple="multiple" style="width: 75%" required>
                                     <optgroup label="Developer">
-                                       <option value="AL">VIP Members</option>
+                                       <option value="AL" >VIP Members</option>
                                        <option value="AL">Subscribers</option>
                                        <option value="AL">Paid Members</option>
                                     </optgroup>
@@ -191,7 +191,7 @@
                      <div class="accordion-content accordion-desc">
                         <div class="form-group">
                            <label for="">View Post</label>
-                           <textarea type="text" name="permalink" class="form-control permalink" >{{URL::to('Blogs')}}/{{$blogPostData->permalink}}</textarea>
+                           <textarea type="text" name="permalink" class="form-control permalink" >{{URL::to('Blogs')}}</textarea>
                         </div>
                      </div>
                   </div>
@@ -209,13 +209,11 @@
                   </div>
                   <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
                      <div class="accordion-content accordion-desc">
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                            <label for="">Serach</label>
                            <input type="text" class="form-control">
-                        </div>
+                        </div> -->
                         <div class="form-group">
-                           <div id="showmenu" class="text-primary pb-3">Add New Category</div>
-                           <div class="menu" style="display: none;">
                               <div class="newCategoryAppend">
                                  <ul class="pl-2 ulcat" style="list-style-type:none">
                                     @foreach($allMainCategory as $mainCategory)
@@ -237,6 +235,8 @@
                                     @endforeach
                                  </ul>
                               </div>
+                           <div id="showmenu" class="text-primary pb-3">Add New Category</div>
+                           <div class="menu" style="display: none;">
                               <div class="form-group">
                                  <label for="Add Category">Add Category</label>
                                  <input type="text" class="form-control newCategoryInput">
@@ -274,6 +274,7 @@
                            <label for="">Add Tags</label>
                            <div class=" ">
                               <select class="js-example-tokenizer col-sm-12" name="tag[]" multiple="multiple" required>
+                                 <option value="asd" selected >asd</option>
                                 @foreach($allTags as $tag)   
                                     <option value="{{$tag->tagName}}">{{$tag->tagName}}</option>
                                 @endforeach
@@ -301,6 +302,7 @@
                   <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
                      <div class="accordion-content accordion-desc">
                         <div class="form-group">
+                           <img src="{{URL::to('/storage/app')}}/{{$blogPostData->image}}" class="thumbnail" width="100%" height="100%" alt="">
                            <label for="">Upload Thumbnail</label>
                            <input type="file" id="img" name="img" accept="image/*" required>
                         </div>
@@ -380,12 +382,17 @@
         });
     }); 
     var link = $(".permalink").html();
-    $(".mainTitle").on("change",function(){
-        console.log("asd");
-        var title = $(".mainTitle").val();
+         var link = $(".permalink").html();
+         var title = $(".mainTitle").val();
         title = title.replace(/ /g, '-');
         var url = link + title;
         var mainLink = $(".permalink").html(url);
+    $(".mainTitle").on("change",function(){
+        console.log("asd");
+         title = $(".mainTitle").val();
+        title = title.replace(/ /g, '-');
+        url = link + title;
+        mainLink = $(".permalink").html(url);
         console.log(title);
     });
 
@@ -410,5 +417,6 @@
             }
         }
     })
+    $(".visibility").find(".select2-selection__rendered").append("<li class='select2-selection__choice' title='Subscribers'><span class='select2-selection__choice__remove' role='presentation'>×</span>Subscribers</li>")
     
 </script>

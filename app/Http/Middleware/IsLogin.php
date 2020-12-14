@@ -19,7 +19,7 @@ class IsLogin
         if($request->session()->has("admin")){
             return $next($request);
         }else{
-            return redirect('/admin');
+            return redirect('/ustaad');
         }
     }
 }

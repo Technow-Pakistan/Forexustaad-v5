@@ -517,7 +517,7 @@
 										</div>
 									</div>
 									<div>
-										<a href="{{URL::to('admin/editBroker')}}/{{$id}}">
+										<a href="{{URL::to('ustaad/editBroker')}}/{{$id}}">
 											<input type="submit" id="doaction" class="btn btn-outline-danger" value="Edit">
 										</a>
 									</div>
@@ -899,7 +899,7 @@
 										</div>
 									</div>
 									<div>
-										<a href="{{URL::to('admin/editBroker')}}/{{$id}}">
+										<a href="{{URL::to('ustaad/editBroker')}}/{{$id}}">
 											<input type="submit" id="doaction" class="btn btn-outline-danger" value="Edit">
 										</a>
 									</div>

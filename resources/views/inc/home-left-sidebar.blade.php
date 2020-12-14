@@ -114,7 +114,7 @@ foreach ($analysis as $analysiss_val => $value) {
 
 
 
-    <div class="row my-5">
+    <div class="row">
     <div class="col-lg-12">
         <div class="ver-a-img">
             <!-- Api Top Left -->

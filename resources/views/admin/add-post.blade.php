@@ -88,7 +88,7 @@
 				<!-- [ breadcrumb ] end -->
 				<!-- [ Main Content ] start -->
                 
-                <form id="" method="post" action="{{URL::to('admin/post/all')}}" class=""  enctype="multipart/form-data">
+                <form id="" method="post" action="{{URL::to('ustaad/post/all')}}" class=""  enctype="multipart/form-data">
    <div class="row">
       <div class="col-sm-8 col-xl-8 col-md-8 ">
          <div class="card">
@@ -113,6 +113,10 @@
                      <p class="text-right text-danger m-0 descriptionCount"></p>
                      <textarea name="description" maxlength="200" class="form-control description" id="news-description" rows="5" cols="40" required="" placeholder="Enter your Description here ..."></textarea>
                   </div>
+                  <br>
+                  <hr>
+                  <input type="file" name="srcImage" id="srcImage" class="srcImage">
+
                   <br>
                   <hr>
                   <p class="text-danger  h4  pb-3"> Enter the Fundamental Points</p>
@@ -427,5 +431,25 @@
        len = 200 - len;
        $(".descriptionCount").html("remaining: " + len);
     });
-    
+
+
+    // file src get
+    $(document).ready(function() {
+    $('#srcImage').change(function(){
+        var file_data = $('#srcImage').prop('files')[0];   
+        var form_data = new FormData();                  
+        form_data.append('file', file_data);
+        $.ajax({
+            url: "{{URL::to('/pro-img-disk.php')}}",
+            type: "POST",
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(data){
+               alert(data)
+            }
+        });
+    });
+});
 </script>

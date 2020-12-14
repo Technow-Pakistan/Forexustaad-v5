@@ -48,13 +48,13 @@
 												</td>
 												<td class="tdLinkScroll">{{$data->message}}</td>
 												<td>{{$blogPostData->mainTitle}}</td>
-												<td  class="veiwProfile"><a href="{{URL::to('admin/comment/reply')}}/{{$data->id}}" class="veiwProfile">View Replies</a></td>
+												<td  class="veiwProfile"><a href="{{URL::to('ustaad/comment/reply')}}/{{$data->id}}" class="veiwProfile">View Replies</a></td>
 												<td>{{$data->created_at->format(" d/m/y ")}}</td>
 												<td>
 													<span class="badge badge-light-success">Active</span>
 													<div class="overlay-edit">
-                                                        <!-- <a href="{{URL::to('admin/comment/edit')}}/{{$data->id}}"><button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a> -->
-                                                        <a href="{{URL::to('admin/comment/delete')}}/{{$data->id}}"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
+                                                        <!-- <a href="{{URL::to('ustaad/comment/edit')}}/{{$data->id}}"><button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a> -->
+                                                        <a href="{{URL::to('ustaad/comment/delete')}}/{{$data->id}}"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
 													</div>
 												</td>
 											</tr>
