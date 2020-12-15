@@ -1,6 +1,15 @@
 @include ('inc/header')
 
     <!-- /.End of tricker -->
+    <!-- /.End of tricker -->
+    <!-- /.End of tricker -->
+    <!-- /.End of tricker -->
+    <!-- /.End of tricker -->
+    <!-- /.End of tricker -->
+    <!-- /.End of tricker -->
+    <!-- /.End of tricker -->
+    <!-- /.End of tricker -->
+    <!-- /.End of tricker -->
     <section class="after_banner_content_area">
         <div class="container">
             <div class="row justify-content-center">
