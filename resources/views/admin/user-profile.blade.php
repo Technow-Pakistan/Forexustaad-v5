@@ -83,8 +83,8 @@
 										<i class="feather icon-map-pin mr-2 mt-1 f-18"></i>
 										<div class="media-body">
 											<p class="mb-0 text-muted">{{$memberDetail->address}}</p>
-											<p class="mb-0 text-muted">Baltimore, near MD Tower Maryland,</p>
-											<p class="mb-0 text-muted">Maryland (21201)</p>
+											<!-- <p class="mb-0 text-muted">Baltimore, near MD Tower Maryland,</p>
+											<p class="mb-0 text-muted">Maryland (21201)</p> -->
 										</div>
 									</div>
 								</div>
