@@ -98,7 +98,7 @@
                 echo $description;
               @endphp
             </span>
-
+            </p>
 					</div>
           
           <div class="col-12 col-lg-7 col-md-12">
