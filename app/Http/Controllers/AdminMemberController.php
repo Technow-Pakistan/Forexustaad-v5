@@ -12,7 +12,7 @@ class AdminMemberController extends Controller
     public function Index(Request $request, $id){
         $memberDetail = AdminMemberDetailModel::where('adminTableId',$id)->first();
         $member = AdminModel::find($id);
-        $memberId = AdminMemberModel::find($id);
+        $memberId = AdminMemberModel::find($member->memberId);
         return view('admin.user-profile',compact('memberDetail','memberId','member'));
     }
     public function Add(Request $request){

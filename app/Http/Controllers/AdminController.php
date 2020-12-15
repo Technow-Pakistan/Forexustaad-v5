@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AdminModel;
+use App\Models\AdminMemberModel;
+use App\Models\AdminMemberDetailModel;
+use App\Models\ClientRegistrationModel;
 
 class AdminController extends Controller
 {
@@ -30,7 +33,15 @@ class AdminController extends Controller
         if(!$request->session()->has("admin")){
             return  redirect("ustaad");
         };
-        return view('admin.index');
+        $Clients = ClientRegistrationModel::all();
+        $TotalClientNumber = count($Clients);
+        // $currentMonth = date('m');
+        // $MonthlyClients = ClientRegistrationModel::where('created_at',date('m'))->get();
+        // print_r($currentMonth);
+        // die;
+        // $MonthlyClientNumber = count($MonthlyClients);
+        
+        return view('admin.index',compact('TotalClientNumber'));
     }
     public function Logout(Request $request){
         $request->session()->pull("admin");

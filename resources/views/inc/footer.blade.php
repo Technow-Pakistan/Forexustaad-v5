@@ -91,23 +91,17 @@
 
 				<div class="row">
 					<div class="col-12 col-lg-5 col-md-12">
-            <p>
-						<span>
               @php
                 $description = html_entity_decode($copyRight->description);
                 echo $description;
               @endphp
-            </span>
-            </p>
 					</div>
           
           <div class="col-12 col-lg-7 col-md-12">
-            <p>
               @php
                 $description = html_entity_decode($copyRight->description2);
                 echo $description;
               @endphp
-            </p>
           </div>
 				</div>
 			</div>

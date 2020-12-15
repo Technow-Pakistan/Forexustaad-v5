@@ -182,7 +182,7 @@ foreach ($analysis as $analysiss_val => $value) {
             @endforeach
 
             <!-- Api Bottom Right -->
-            @foreach($AllRightBanner as $BottomApi)
+            @foreach($AllRightApi as $BottomApi)
                 @if($BottomApi->area == "Bottom")
                     <div class="mb-4">
                         @php
