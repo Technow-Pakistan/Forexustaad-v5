@@ -184,7 +184,7 @@
                                         <form action="{{URL::to('/ustaad/edit-footer/copyRight')}}" method="post">
                                             <textarea name="editor3" class="form-control" cols="30" rows="10">
                                                 @php
-                                                    $description = $copyRight->description;
+                                                    $description = html_entity_decode($copyRight->description);
                                                     echo $description;
                                                 @endphp
                                             </textarea>
@@ -196,7 +196,7 @@
                                         <form action="{{URL::to('/ustaad/edit-footer/copyRight')}}" method="post">
                                             <textarea name="editor2" class="form-control" cols="30" rows="10">
                                                 @php
-                                                    $description = $copyRight->description2;
+                                                    $description = html_entity_decode($copyRight->description2);
                                                     echo $description;
                                                 @endphp
                                             </textarea>

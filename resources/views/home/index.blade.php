@@ -199,90 +199,66 @@
                             </div>
                         </div>
                     </section>
-
-
-                    <section class="news-slid features">
+    <section class="news-slid features">
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12 order-2 order-sm-1">
                                     <div style="margin:0px auto">
 
-                                        <section class="vid-main-wrapper clearfix">
+                                    <section class="vid-main-wrapper clearfix">
                                             <!-- THE YOUTUBE PLAYER -->
                                             <div class="vid-container">
-                                                <iframe width="560" height="315" src="https://www.youtube.com/embed/X9JClP-XMyc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                <iframe id="vid_frame"
+                                                    src="https://www.youtube.com/embed/X9JClP-XMyc?rel=0&showinfo=0&autohide=1&autoplay=1"
+                                                    frameborder="0" width="560" height="315" allow="autoplay"
+                                                    allowfullscreen></iframe>
                                             </div>
                                         </section>
 
-                                        <!--<section id="extra wrapper"-->
-                                        <!--    style="position: relative; padding-right: 32px; padding-left: 32px; background: #f6f6f6; height:152px;">-->
-
-                                            <!-- CUSTOM ARROWS -->
-                                            <!-- <button title="Next" class="swiper-custom-next" style="position: absolute; padding: 10px 2px; right: 1px;top: 32%; z-index: 100;
-  display: inline-block;cursor: pointer;">
-                                                <svg style="position: relative; top: 1px;"
-                                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    viewBox="0 0 16 16">
-                                                    <g class="nc-icon-wrapper" fill="#111111">
-                                                        <polygon fill="#111111"
-                                                            points="4.9,15.7 3.4,14.3 9.7,8 3.4,1.7 4.9,0.3 12.6,8 ">
-                                                        </polygon>
-                                                    </g>
-                                                </svg>
-                                            </button>
-                                            <button title="Prev" class="swiper-custom-prev" style="position: absolute; padding: 10px 2px; left: 2px; top: 35%; z-index: 100;
-  display: inline-block;cursor: pointer;font-size: 15px;">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    viewBox="0 0 16 16">
-                                                    <g class="nc-icon-wrapper" fill="#111111">
-                                                        <polygon fill="#111111"
-                                                            points="11.1,15.7 3.4,8 11.1,0.3 12.6,1.7 6.3,8 12.6,14.3 ">
-                                                        </polygon>
-                                                    </g>
-                                                </svg>
-                                            </button> -->
+                                        <section id="extra wrapper"
+                                            style="position: relative; padding-right: 32px; padding-left: 32px; background: #f6f6f6; height:152px;">
 
                                             <!-- Swiper -->
-                                            <!--<nav class="swiper-container swiper-container-videos slider-produtos-destaque"-->
-                                            <!--    style="top: 30px;;">-->
-                                            <!--    <ol class="swiper-wrapper" style="list-style-type: none; padding: 0px;">-->
-                                            <!--        <li class="swiper-slide" style="width: 130px;">-->
-                                            <!--            <a class="" href="javascript:void();"-->
-                                            <!--                onClick="document.getElementById('vid_frame').src='https://youtu.be/X9JClP-XMyc?autoplay=1&rel=0&showinfo=0&autohide=1'">-->
-                                            <!--                <span class="vid-thumb">-->
-                                            <!--                    <img-->
-                                            <!--                        src="https://img.youtube.com/vi/WAcnWtZjDWE/mqdefault.jpg" />-->
-                                            <!--                </span>-->
-                                            <!--                <p class="desc">Video 1</p>-->
-                                            <!--            </a>-->
-                                            <!--        </li>-->
+                                            <nav class="swiper-container swiper-container-videos slider-produtos-destaque"
+                                                style="top: 30px;;">
+                                                <ol class="swiper-wrapper" style="list-style-type: none; padding: 0px;">
+                                                    <li class="swiper-slide" style="width: 130px;">
+                                                        <a class="" href="javascript:void();"
+                                                            onClick="document.getElementById('vid_frame').src='https://youtube.com/embed/WAcnWtZjDWE?autoplay=1&rel=0&showinfo=0&autohide=1'">
+                                                            <span class="vid-thumb">
+                                                                <img
+                                                                    src="https://i.ytimg.com/vi/X9JClP-XMyc/hqdefault.jpg" />
+                                                            </span>
+                                                            <p class="desc">Lecture 1</p>
+                                                        </a>
+                                                    </li>
 
-                                            <!--        <li class="swiper-slide" style="width: 130px;">-->
-                                            <!--            <a href="javascript:void();"-->
-                                            <!--                onClick="document.getElementById('vid_frame').src='https://youtube.com/embed/h8r5rbUmBzs?autoplay=1&rel=0&showinfo=0&autohide=1'">-->
-                                            <!--                <span class="vid-thumb"><img-->
-                                            <!--                        src="https://img.youtube.com/vi/h8r5rbUmBzs/mqdefault.jpg" /></span>-->
-                                            <!--                <p class="desc">Video 2</p>-->
-                                            <!--            </a>-->
-                                            <!--        </li>-->
+                                                    <li class="swiper-slide" style="width: 130px;">
+                                                        <a href="javascript:void();"
+                                                            onClick="document.getElementById('vid_frame').src='https://www.youtube.com/embed/UC0AhxFpilA?autoplay=1&rel=0&showinfo=0&autohide=1'">
+                                                            <span class="vid-thumb"><img
+                                                                    src="https://i.ytimg.com/vi/UC0AhxFpilA/hqdefault.jpg" /></span>
+                                                            <p class="desc">Lecture 2</p>
+                                                        </a>
+                                                    </li>
 
-                                            <!--        <li class="swiper-slide" style="width: 130px;">-->
-                                            <!--            <a href="javascript:void();"-->
-                                            <!--                onClick="document.getElementById('vid_frame').src='https://youtube.com/embed/togt3pGntVc?autoplay=1&rel=0&showinfo=0&autohide=1'">-->
-                                            <!--                <span class="vid-thumb"><img-->
-                                            <!--                        src="https://img.youtube.com/vi/togt3pGntVc/mqdefault.jpg" /></span>-->
-                                            <!--                <div class="desc">Video 3</div>-->
-                                            <!--            </a>-->
-                                            <!--        </li>-->
+                                                    <li class="swiper-slide" style="width: 130px;">
+                                                        <a href="javascript:void();"
+                                                            onClick="document.getElementById('vid_frame').src='https://www.youtube.com/embed/sbCrpno-pE4?autoplay=1&rel=0&showinfo=0&autohide=1'">
+                                                            <span class="vid-thumb"><img
+                                                                    src="https://i.ytimg.com/vi/sbCrpno-pE4/hqdefault.jpg" /></span>
+                                                            <div class="desc">Lecture 3</div>
+                                                        </a>
+                                                    </li>
 
-                                            <!--         <li class="swiper-slide" style="width: 130px;">-->
-                                            <!--            <a href="javascript:void();"-->
-                                            <!--                onClick="document.getElementById('vid_frame').src='https://youtube.com/embed/JyqD_zfXfi8?autoplay=1&rel=0&showinfo=0&autohide=1'">-->
-                                            <!--                <span class="vid-thumb"><img-->
-                                            <!--                        src="https://img.youtube.com/vi/JyqD_zfXfi8/mqdefault.jpg" /></span>-->
-                                            <!--                <div class="desc">Video 4</div>-->
-                                            <!--            </a>-->
-                                            <!--        </li>-->
+                                                     <li class="swiper-slide" style="width: 130px;">
+                                                        <a href="javascript:void();"
+                                                            onClick="document.getElementById('vid_frame').src='https://www.youtube.com/embed/iHncnJ2LM60?autoplay=1&rel=0&showinfo=0&autohide=1'">
+                                                            <span class="vid-thumb"><img
+                                                                    src="https://i.ytimg.com/vi/iHncnJ2LM60/hqdefault.jpg" /></span>
+                                                            <div class="desc">Lecture 4</div>
+                                                        </a>
+                                                    </li>
                                                         <!--
                                                     <li class="swiper-slide" style="width: 152px;">
                                                         <a href="javascript:void();"
@@ -293,14 +269,14 @@
                                                         </a>
                                                     </li> -->
 
-                                                <!--</ol>-->
+                                                </ol>
                                                 <!-- Add Pagination -->
                                                 <!-- <div class="swiper-pagination"></div> -->
                                                 <!-- If we need navigation buttons -->
 
-                                        <!--    </nav>-->
+                                            </nav>
 
-                                        <!--</section>-->
+                                        </section>
 
                                     </div>
                                 </div>
@@ -308,6 +284,7 @@
                             </div>
                         </div>
                     </section>
+
 
                     <section>
                         <div class="row">

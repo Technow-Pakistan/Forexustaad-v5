@@ -436,10 +436,18 @@
 						</div>
 					</li>
 					<li>
+									@php
+									 $memberData = App\Models\AdminMemberDetailModel::where('adminTableId',$value['id'])->first();
+									@endphp
+									@php
+										if($memberData->userImage == null ){
+											$memberData->userImage = "MemberImages/avatar-5.jpg";
+										}
+									@endphp
 						<div class="dropdown drp-user">
 							<a href="#!" class="dropdown-toggle" data-toggle="dropdown">
 								<img
-									src="{{URL::to('/public/AdminAssets/assets/images/user/avatar-1.jpg')}}"
+									src="{{URL::to('storage/app')}}/{{$memberData->userImage}}"
 									class="img-radius wid-40"
 									alt="User-Profile-Image"
 								/>
@@ -449,11 +457,11 @@
 							>
 								<div class="pro-head">
 									<img
-										src="{{URL::to('/public/AdminAssets/assets/images/user/avatar-1.jpg')}}"
+										src="{{URL::to('storage/app')}}/{{$memberData->userImage}}"
 										class="img-radius"
 										alt="User-Profile-Image"
 									/>
-									<span>John Doe</span>
+									<span>{{$value['username']}}</span>
 									<a href="{{URL::to('/ustaad/logout')}}" class="dud-logout" title="Logout">
 										<i class="feather icon-log-out"></i>
 									</a>

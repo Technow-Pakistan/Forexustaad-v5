@@ -42,7 +42,7 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="feather icon-mail"></i></span>
 								</div>
-								<input type="text" name="username" class="form-control" placeholder="Email address">
+								<input type="text" name="username" class="form-control" placeholder="Username">
 							</div>
 							<div class="input-group mb-4">
 								<div class="input-group-prepend">
