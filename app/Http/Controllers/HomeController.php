@@ -74,4 +74,8 @@ class HomeController extends Controller
         $url = "../storage/app/" . $path;
         return $url;
     }
+    public function brokerDetail(Request $request){
+       
+        return view('home/broker-detail');
+    }
 }
