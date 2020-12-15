@@ -1,14 +1,4 @@
 @include ('inc/header')
-
-    <!-- /.End of tricker -->
-    <!-- /.End of tricker -->
-    <!-- /.End of tricker -->
-    <!-- /.End of tricker -->
-    <!-- /.End of tricker -->
-    <!-- /.End of tricker -->
-    <!-- /.End of tricker -->
-    <!-- /.End of tricker -->
-    <!-- /.End of tricker -->
     <!-- /.End of tricker -->
     <section class="after_banner_content_area">
         <div class="container">
@@ -76,7 +66,7 @@
                                     <div class="col-md-2 col-sm-2 col-xs-12 text-align-center p-a-15">
                                         <div class="form-group">
                                         <div class="link pt-3">
-                                            <a href="#" class="text-danger">Visit Broker
+                                            <a href="{{URL::to('/broker-detail')}}/{{$data->id}}" class="text-danger">Visit Broker
                                                 
                                             </a>
                                             
