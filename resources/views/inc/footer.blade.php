@@ -94,34 +94,17 @@
             <p>
 						<span>
               @php
-                $description = $copyRight->description;
+                $description = html_entity_decode($copyRight->description);
                 echo $description;
               @endphp
             </span>
-            
-            <span class="text-white">
-              <a href="{{URL::to('/term-of-services.html')}}" class="text-white">TOS</a>
-            </span>
-            <span>
-              |
-            </span>
-            <!-- <span >
-              <a href="sitemap.xml" class="text-white">Site Map</a>
-            </span> -->
-            <span >
-              
-            </span>
-            <span >
-              <a href="{{URL::to('/privacy-policy.html')}}" class="text-white">Privacy Policy</a>
-            </span>
-            </p>
 
 					</div>
           
           <div class="col-12 col-lg-7 col-md-12">
             <p>
               @php
-                $description = $copyRight->description;
+                $description = html_entity_decode($copyRight->description2);
                 echo $description;
               @endphp
             </p>

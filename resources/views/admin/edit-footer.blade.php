@@ -182,7 +182,7 @@
                                     <div class="col-md-6">
                                         <p class="h2 text-primary py-3">Left Description</p>
                                         <form action="{{URL::to('/ustaad/edit-footer/copyRight')}}" method="post">
-                                            <textarea name="editor1" class="form-control" cols="30" rows="10">
+                                            <textarea name="editor3" class="form-control" cols="30" rows="10">
                                                 @php
                                                     $description = $copyRight->description;
                                                     echo $description;
