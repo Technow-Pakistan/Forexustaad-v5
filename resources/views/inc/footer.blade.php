@@ -90,14 +90,14 @@
 
 
 				<div class="row">
-					<div class="col-12 col-lg-5 col-md-12">
+					<div class="col-12 col-lg-5 col-md-12 text-light">
               @php
                 $description = html_entity_decode($copyRight->description);
                 echo $description;
               @endphp
 					</div>
           
-          <div class="col-12 col-lg-7 col-md-12">
+          <div class="col-12 col-lg-7 col-md-12 text-light">
               @php
                 $description = html_entity_decode($copyRight->description2);
                 echo $description;
@@ -192,11 +192,13 @@
 
      <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
 
+     <!--  -->
+
      <!-- Resources -->
-    <script src="{{URL::to('/public/assets/assets/amcharts4/core.js')}}"></script>
+    <!-- <script src="{{URL::to('/public/assets/assets/amcharts4/core.js')}}"></script>
     <script src="{{URL::to('/public/assets/assets/amcharts4/charts.js')}}"></script>
     <script src="{{URL::to('/public/assets/assets/amcharts4/themes/material.js')}}"></script>
-    <script src="{{URL::to('/public/assets/assets/amcharts4/themes/animated.js')}}"></script>
+    <script src="{{URL::to('/public/assets/assets/amcharts4/themes/animated.js')}}"></script> -->
      <!-- charts ends -->
      <script src="{{URL::to('/public/assets/assets/js/custom.js')}}"></script>
     <!--  <script type="text/javascript">

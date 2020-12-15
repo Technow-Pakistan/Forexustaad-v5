@@ -21,8 +21,10 @@
 		<!-- vendor css -->
 		<link rel="stylesheet" href="{{URL::to('/public/AdminAssets/assets/css/style.css')}}" />
 		<!-- Check Editor -->
-		<script src="https://cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
-		
+		<!-- <script src="https://cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script> -->
+
+		<link href='https://cdn.jsdelivr.net/npm/froala-editor@3.1.0/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
+		<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.1.0/js/froala_editor.pkgd.min.js'></script>
 	</head>
 	<body class="">
 		<!-- [ Pre-loader ] start -->

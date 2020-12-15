@@ -1,6 +1,6 @@
 @include('admin.include.header')
 
-<link rel="stylesheet" href="{{URL::to('/public/AdminAssets/assets/css/plugins/daterangepicker.css')}}" />
+<!-- <link rel="stylesheet" href="{{URL::to('/public/AdminAssets/assets/css/plugins/daterangepicker.css')}}" /> -->
 
 
 		<style>
@@ -88,7 +88,7 @@
 				<!-- [ breadcrumb ] end -->
 				<!-- [ Main Content ] start -->
                 
-                <form id="" method="post" action="{{URL::to('ustaad/post/all')}}" class=""  enctype="multipart/form-data">
+                <form id="SaveButton" method="post" action="{{URL::to('ustaad/post/all')}}" class=""  enctype="multipart/form-data">
    <div class="row">
       <div class="col-sm-8 col-xl-8 col-md-8 ">
          <div class="card">
@@ -116,18 +116,15 @@
                   <br>
                   <hr>
                   <input type="file" name="srcImage" id="srcImage" class="srcImage">
-
                   <br>
                   <hr>
                   <p class="text-danger  h4  pb-3"> Enter the Fundamental Points</p>
                   <div class="form-group">
-                     <textarea name="editor1" rows="10" cols="80">
-
-                     </textarea>
+                  <textarea id="myEditor"></textarea>
+                  <textarea name="editor1" class="textareaBlogPost"></textarea>
                   </div>
                   <p class="submit">
                      <input type="submit" name="submit" id="submit" class="btn btn-outline-primary" value="Post"> <span class="spinner"></span>
-                     <input type="reset" name="reset" id="reset" class="btn btn-outline-danger" value="reset"> <span class="spinner"></span>
                   </p>
                </div>
             </div>
@@ -453,3 +450,4 @@
     });
 });
 </script>
+
