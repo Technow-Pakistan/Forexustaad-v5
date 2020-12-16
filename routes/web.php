@@ -38,7 +38,7 @@ use App\Http\Controllers\HtmlPagesController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/broker-detail',[HomeController::class,'brokerDetail']);
+Route::get('/broker-detail/{id}',[HomeController::class,'brokerDetail']);
 Route::get('/advance-forex-trading-plan.html',[HtmlPagesController::class,'Page1']);
 Route::get('/advertise.html',[HtmlPagesController::class,'Page2']);
 Route::get('/always-trad-with-stop-loss.html',[HtmlPagesController::class,'Page3']);

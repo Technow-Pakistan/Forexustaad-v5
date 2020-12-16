@@ -20,7 +20,7 @@ class BrokerBottomInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
-        return redirect("admin/editBroker/".$id);
+        return redirect("ustaad/editBroker/".$id);
     }
     public function AddFeature(Request $request){
         if (!isset($request->brokerId)) {
@@ -31,7 +31,7 @@ class BrokerBottomInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
-        return redirect("admin/editBroker/".$id);
+        return redirect("ustaad/editBroker/".$id);
     }
     public function AddCustomerServices(Request $request){
         if (!isset($request->brokerId)) {
@@ -42,7 +42,7 @@ class BrokerBottomInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
-        return redirect("admin/editBroker/".$id);
+        return redirect("ustaad/editBroker/".$id);
     }
     public function AddReserchEducation(Request $request){
         if (!isset($request->brokerId)) {
@@ -53,7 +53,7 @@ class BrokerBottomInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
-        return redirect("admin/editBroker/".$id);
+        return redirect("ustaad/editBroker/".$id);
     }
     public function AddPromotion(Request $request){
         if (!isset($request->brokerId)) {
@@ -64,7 +64,7 @@ class BrokerBottomInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
-        return redirect("admin/editBroker/".$id);
+        return redirect("ustaad/editBroker/".$id);
     }
     
 }

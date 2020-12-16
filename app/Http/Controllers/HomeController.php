@@ -6,6 +6,15 @@ use Illuminate\Http\Request;
 use App\Models\ClientRegistrationModel;
 use App\Models\BlogPostModel;
 use App\Models\BrokerCompanyInformationModel;
+use App\Models\BrokerCommissionsFeesModel;
+use App\Models\BrokerDepositModel;
+use App\Models\BrokerAccountInfoModel;
+use App\Models\BrokerTradableAssetsModel;
+use App\Models\BrokerTradingPlatformModel;
+use App\Models\BrokerTradingFeaturesModel;
+use App\Models\BrokerCustomerServicesModel;
+use App\Models\BrokerReserchEducationModel;
+use App\Models\BrokerPromotionModel;
 
 class HomeController extends Controller
 {
@@ -74,8 +83,17 @@ class HomeController extends Controller
         $url = "../storage/app/" . $path;
         return $url;
     }
-    public function brokerDetail(Request $request){
-       
-        return view('home/broker-detail');
+    public function brokerDetail(Request $request, $id){
+        $broker1 = BrokerCompanyInformationModel::find($id);
+        $broker2 = BrokerDepositModel::where('brokerId',$id)->first();
+        $broker3 = BrokerCommissionsFeesModel::where('brokerId',$id)->first();
+        $broker4 = BrokerAccountInfoModel::where('brokerId',$id)->first();
+        $broker5 = BrokerTradableAssetsModel::where('brokerId',$id)->first();
+        $broker6 = BrokerTradingPlatformModel::where('brokerId',$id)->first();
+        $broker7 = BrokerTradingFeaturesModel::where('brokerId',$id)->first();
+        $broker8 = BrokerCustomerServicesModel::where('brokerId',$id)->first();
+        $broker9 = BrokerReserchEducationModel::where('brokerId',$id)->first();
+        $broker = BrokerPromotionModel::where('brokerId',$id)->first();
+        return view('home/broker-detail',compact('broker1','broker2','broker3','broker4','broker5','broker6','broker7','broker8','broker9','broker','id'));
     }
 }
