@@ -1,12 +1,12 @@
 
 		<!-- Required Js -->
 		
-		<script>
+		<!-- <script>
 			CKEDITOR.replace('editor1');
 			CKEDITOR.replace('editor2');
 			CKEDITOR.replace('editor3');
 			
-		</script>
+		</script> -->
 		<script src="{{URL::to('/public/AdminAssets/assets/js/vendor-all.min.js')}}"></script>
 		<script src="{{URL::to('/public/AdminAssets/assets/js/plugins/bootstrap.min.js')}}"></script>
 		<script src="{{URL::to('/public/AdminAssets/assets/js/pcoded.min.js')}}"></script>
@@ -24,3 +24,12 @@
 
 	</body>
 </html>
+		<script>
+			 
+			 new FroalaEditor('textarea#myEditor', {toolbarInline: false});
+					$(".textareaBlogPost").hide();
+					$("#SaveButton").on('submit',function(){
+						var data = $("#myEditor").val();
+						$(".textareaBlogPost").val(data);
+				});
+		</script>
