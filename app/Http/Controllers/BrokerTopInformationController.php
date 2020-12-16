@@ -57,7 +57,7 @@ class BrokerTopInformationController extends Controller
         $broker = new BrokerPromotionModel;
         $broker->brokerId = $id;
         $broker->save();
-        return redirect("admin/editBroker/".$id);
+        return redirect("ustaad/editBroker/".$id);
     }
     public function AddDeposit(Request $request){
         if (!isset($request->brokerId)) {
@@ -68,7 +68,7 @@ class BrokerTopInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
-        return redirect("admin/editBroker/".$id);
+        return redirect("ustaad/editBroker/".$id);
     }
     public function AddCommission(Request $request){
         if (!isset($request->brokerId)) {
@@ -79,7 +79,7 @@ class BrokerTopInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
-        return redirect("admin/editBroker/".$id);
+        return redirect("ustaad/editBroker/".$id);
     }
     public function AddAccountInfo(Request $request){
         if (!isset($request->brokerId)) {
@@ -90,7 +90,7 @@ class BrokerTopInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
-        return redirect("admin/editBroker/".$id);
+        return redirect("ustaad/editBroker/".$id);
     }
     public function AddTradableAssets(Request $request){
         if (!isset($request->brokerId)) {
@@ -101,7 +101,7 @@ class BrokerTopInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
-        return redirect("admin/editBroker/".$id);
+        return redirect("ustaad/editBroker/".$id);
     }
     
 }
