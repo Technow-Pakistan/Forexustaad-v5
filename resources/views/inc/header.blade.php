@@ -118,8 +118,8 @@
                                     {{$clientAccountData->name}}  <img src="{{URL::to('/public/assets/assets/img/user.png')}}" alt="user">
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <!-- <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a> -->
                                         <a class="dropdown-item" href="{{URL::to('/clientLogout')}}">Logout</a>
                                     </div>
                                     </div>

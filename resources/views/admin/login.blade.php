@@ -15,10 +15,10 @@
 	<meta name="keywords" content="">
 	
 	<!-- Favicon icon -->
-	<link rel="icon" href="{{URL::to('/public/AdminAssets/assets/images/favicon.png')}}" type="image/x-icon">
+	<link rel="icon" href="{{URL::to('/public/assets/assets/img/favicon.png')}}" type="image/x-icon">
 
 	<!-- vendor css -->
-	<link rel="stylesheet" href="{{URL::to('/public/AdminAssets/assets/css/style.css')}}">
+	<link rel="stylesheet" href="{{URL::to('/public/assets/assets/css/adminstyle.css')}}">
 	
 	
 
@@ -32,7 +32,7 @@
 			<div class="row align-items-center text-center">
 				<div class="col-md-12">
 					<div class="card-body">
-						<img src="{{URL::to('/public/AdminAssets/assets/images/logo.png')}}" alt="" class="img-fluid mb-4">
+						<img src="{{URL::to('/public/assets/assets/img/logo.png')}}" alt="" class="img-fluid mb-4">
 						<h4 class="mb-3 f-w-400">Signin</h4>
 						@isset($message)
 							<div class="alert alert-danger">{{$message}}</div>
@@ -69,9 +69,9 @@
 <!-- [ auth-signin ] end -->
 
 <!-- Required Js -->
-<script src="{{URL::to('/public/AdminAssets/assets/js/vendor-all.min.js')}}"></script>
-<script src="{{URL::to('/public/AdminAssets/assets/js/plugins/bootstrap.min.js')}}"></script>
-<script src="{{URL::to('/public/AdminAssets/assets/js/waves.min.js')}}"></script>
+<script src="{{URL::to('/public/assets/assets/js/vendor-all.min.js')}}"></script>
+		<script defer src="{{URL::to('/public/assets/node_modules/bootstrap/dist/js/bootstrap.js')}}"></script> 
+<!-- <script src="{{URL::to('/public/AdminAssets/assets/js/waves.min.js')}}"></script> -->
 
 
 
