@@ -186,7 +186,7 @@
      <script src="{{URL::to('/public/assets/assets/js/bootstrap-toggle.min.js')}}"></script>
      <!-- charts -->
       <!--news slide script  -->
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/js/swiper.min.js"></script>
+      
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.js"></script>
      <!-- Splide Slider -->
 
