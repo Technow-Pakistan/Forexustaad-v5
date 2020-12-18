@@ -8,7 +8,7 @@ use App\Models\ClientMemberModel;
 class ClientRegistrationModel extends Model
 {
     protected $table = "clients_registration";
-    protected $fillable = ["email","password","name","mobile","city","status"];
+    protected $fillable = ["email","password","name","mobile","city","status","confirmationEmail"];
 
     
     public function GetMember(){

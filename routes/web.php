@@ -85,7 +85,11 @@ Route::get('/what-is-forex-trading-in-urdu-webinar.html',[HtmlPagesController::c
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::post('//pro-img-disk.php',[HomeController::class,'ImageSrc']);
+Route::get('/subscriberConfirmation/{id}',[HomeController::class,'ConfirmationEmail']);
+Route::get('/uploader/upload.php',[HomeController::class,'ImageSrc15']);
+Route::post('/uploader/upload.php',[HomeController::class,'ImageSrc15']);
+Route::post('/pro-img-disk.php',[HomeController::class,'ImageSrc']);
+Route::post('/imageUploadFroala',[HomeController::class,'ImageSrc12']);
 Route::post('/comment1',[CommentController::class,'Add']);
 Route::get('/',[HomeController::class,'Index']);
 Route::get('/construction',[HomeController::class,'Construction']);

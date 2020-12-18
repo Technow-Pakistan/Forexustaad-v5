@@ -88,7 +88,7 @@
 				<!-- [ breadcrumb ] end -->
 				<!-- [ Main Content ] start -->
                 
-                <form id="" method="post" action="{{URL::to('ustaad/post/all')}}" class=""  enctype="multipart/form-data">
+                <form id="" method="post" action="{{URL::to('ustaad/post/edit')}}/{{$id}}" class=""  enctype="multipart/form-data">
    <div class="row">
       <div class="col-sm-8 col-xl-8 col-md-8 ">
          <div class="card">
@@ -104,15 +104,20 @@
                      <input name="subTitle" class="form-control " id="sub-title" type="text" value="{{$blogPostData->subTitle}}" size="40" aria-required="true" required="">
                      <small>This is subtitle is how it appears on your Forex News Page.</small>
                   </div> -->
+                  @php 
+                     $value =Session::get('admin');
+                  @endphp
+                  <input type="hidden" name="userId" value="{{$value['id']}}">
                   <div class="form-group">
-                     <label for="news-description" class="form-control-label">Description</label>
-                     <textarea name="description" class="form-control" id="news-description" rows="5" cols="40" required="" placeholder="Enter your Description here ...">{{$blogPostData->description}}</textarea>
+                     <label for="news-description" class="form-control-label">Description (Max-character 200)</label>
+                     <p class="text-right text-danger m-0 descriptionCount"></p>
+                     <textarea name="description" maxlength="200" class="form-control description" id="news-description" rows="5" cols="40" required="" placeholder="Enter your Description here ...">{{$blogPostData->description}}</textarea>
                   </div>
                   <br>
                   <hr>
                   <p class="text-danger  h4  pb-3"> Enter the Fundamental Points</p>
                   <div class="form-group">
-                     <textarea name="editor1" rows="10" cols="80">
+                  <textarea id="editor1" name="editor1">
                         @php
                            $detailDescription = html_entity_decode($blogPostData->detailDescription);
                            echo $detailDescription;
@@ -120,7 +125,7 @@
                      </textarea>
                   </div>
                   <p class="submit">
-                     <input type="submit" name="submit" id="submit" class="btn btn-outline-primary" value="Update"> <span class="spinner"></span>
+                     <input type="submit" name="submit" id="submit" class="btn btn-outline-danger" value="Update"> <span class="spinner"></span>
                      <!-- <input type="reset" name="reset" id="reset" class="btn btn-outline-danger" value="reset"> <span class="spinner"></span> -->
                   </p>
                </div>
@@ -140,7 +145,7 @@
                            <a class="accordion-msg" data-toggle="collapse"
                               data-parent="#accordion" href="#collapseOne"
                               aria-expanded="true" aria-controls="collapseOne">
-                           Status &amp; visibility
+                              Status &amp; visibility
                            </a>
                         </h5>
                      </div>
@@ -149,12 +154,23 @@
                            <div class="form-group">
                               <span>Visibility</span>
                               <span>
-                                 <select class="js-example-basic-hide-search col-sm-12 visibility" name="visibility[]" value="hello" multiple="multiple" style="width: 75%" required>
-                                    <optgroup label="Developer">
-                                       <option value="AL" >VIP Members</option>
-                                       <option value="AL">Subscribers</option>
-                                       <option value="AL">Paid Members</option>
-                                    </optgroup>
+                                 <select class="js-example-basic-hide-search col-sm-12 visibility" name="visibility[]" value="hello" multiple="multiple" style="width: 75%" required>                                 
+                                    @php $selectedAll = 0; @endphp
+                                    @for($i = 0; $i< count($visibilityPostData); $i++)
+                                       @if($visibilityPostData[$i]->visibility == 0)
+                                          @php   $selectedAll = 1;  @endphp
+                                       @endif
+                                    @endfor
+                                    <option value="0" {{$selectedAll == 1 ? 'selected' : ''}}>All</option>
+                                    @foreach($ClientMember as $member)
+                                       @php $selected = 0; @endphp
+                                       @for($i = 0; $i< count($visibilityPostData); $i++)
+                                          @if($member->id == $visibilityPostData[$i]->visibility)
+                                             @php   $selected = 1;  @endphp
+                                          @endif
+                                       @endfor
+                                       <option value="{{$member->id}}" {{$selected == 1 ? 'selected' : ''}}>{{$member->member}}</option>
+                                    @endforeach
                                  </select>
                               </span>
                            </div>
@@ -217,16 +233,28 @@
                               <div class="newCategoryAppend">
                                  <ul class="pl-2 ulcat" style="list-style-type:none">
                                     @foreach($allMainCategory as $mainCategory)
+                                       @php $checked = 0; @endphp
+                                       @for($i = 0; $i< count($mainCategoryPostData); $i++)
+                                          @if($mainCategory->categoryName == $mainCategoryPostData[$i]->mainCategory)
+                                             @php   $checked = 1;  @endphp
+                                          @endif
+                                       @endfor
                                        @php
                                           $subCategory = $mainCategory->GetSubCategory();
                                        @endphp
                                        <li class="{{$mainCategory->categoryName}}">
-                                          <input type="checkbox" name="category[]" value="{{$mainCategory->categoryName}}"> {{$mainCategory->categoryName}}
+                                          <input type="checkbox" name="category[]" value="{{$mainCategory->categoryName}}" {{$checked == 1 ? 'checked' : ''}}> {{$mainCategory->categoryName}}
                                           @if(count($subCategory) >= 1 )
                                              @foreach($subCategory as $sub)
+                                                @php $checked = 0; @endphp
+                                                @for($i = 0; $i< count($subCategoryPostData); $i++)
+                                                   @if($sub->categoryName == $subCategoryPostData[$i]->subCategory)
+                                                      @php   $checked = 1;  @endphp
+                                                   @endif
+                                                @endfor
                                                 <ul  style="list-style-type:none">
                                                    <li class="{{$sub->categoryName}}">
-                                                      <input type="checkbox" name="subCategory[]" value="{{$sub->categoryName}}"> {{$sub->categoryName}}
+                                                      <input type="checkbox" name="subCategory[]" value="{{$sub->categoryName}}" {{$checked == 1 ? 'checked' : ''}}> {{$sub->categoryName}}
                                                    </li>
                                                 </ul>
                                              @endforeach
@@ -274,14 +302,15 @@
                            <label for="">Add Tags</label>
                            <div class=" ">
                               <select class="js-example-tokenizer col-sm-12" name="tag[]" multiple="multiple" required>
-                                 <option value="asd" selected >asd</option>
-                                @foreach($allTags as $tag)   
-                                    <option value="{{$tag->tagName}}">{{$tag->tagName}}</option>
+                                @foreach($allTags as $tag)
+                                    @php $selected = 0; @endphp
+                                    @for($i = 0; $i< count($tagsPostData); $i++)
+                                       @if($tag->tagName == $tagsPostData[$i]->tag)
+                                          @php   $selected = 1;  @endphp
+                                       @endif
+                                    @endfor
+                                    <option value="{{$tag->tagName}}" {{$selected == 1 ? 'selected' : ''}}>{{$tag->tagName}}</option>
                                 @endforeach
-                                 <!-- <option value="WY">Wyoming</option>
-                                 <option value="WY">Coming</option>
-                                 <option value="WY">Hanry Die</option>
-                                 <option value="WY">John Doe</option> -->
                               </select>
                            </div>
                         </div>
@@ -304,12 +333,12 @@
                         <div class="form-group">
                            <img src="{{URL::to('/storage/app')}}/{{$blogPostData->image}}" class="thumbnail" width="100%" height="100%" alt="">
                            <label for="">Upload Thumbnail</label>
-                           <input type="file" id="img" name="img" accept="image/*" required>
+                           <input type="file" id="img" name="img" accept="image/*">
                         </div>
                      </div>
                   </div>
                </div>
-               <div class="accordion-panel">
+               <!-- <div class="accordion-panel">
                   <div class=" accordion-heading" role="tab" id="headingSix">
                      <h5 class="card-title accordion-title">
                         <a class="accordion-msg" data-toggle="collapse"
@@ -328,7 +357,7 @@
                         </div>
                      </div>
                   </div>
-               </div>
+               </div> -->
                <div class="accordion-panel">
                   <div class=" accordion-heading" role="tab" id="headingFive">
                      <h5 class="card-title accordion-title">
@@ -376,6 +405,10 @@
 <script src="{{URL::to('/public/AdminAssets/assets/js/plugins/daterangepicker.js')}}"></script>
 <script src="{{URL::to('/public/AdminAssets/assets/js/pages/ac-datepicker.js')}}"></script>
 <script>
+      CKEDITOR.replace('editor1',{
+         filebrowserBrowseUrl: "{{URL::to('/browser/browse.php')}}",
+         filebrowserUploadUrl: "{{URL::to('/uploader/upload.php')}}"
+      });
       $(document).ready(function() {
         $('#showmenu').click(function() {
                 $('.menu').slideToggle("fast");
@@ -419,4 +452,47 @@
     })
     $(".visibility").find(".select2-selection__rendered").append("<li class='select2-selection__choice' title='Subscribers'><span class='select2-selection__choice__remove' role='presentation'>×</span>Subscribers</li>")
     
+    // description Limit
+       var count = $(".description").val();
+       var len = count.length;
+       len = 200 - len;
+       $(".descriptionCount").html("remaining: " + len);
+    $(".description").on("keyup",function(){
+       var count = $(".description").val();
+       var len = count.length;
+
+       if(len == 0){
+          $(".descriptionCount").hide();
+       }else{
+          $(".descriptionCount").show();
+       }
+       len = 200 - len;
+       $(".descriptionCount").html("remaining: " + len);
+    });
+
+
+
+
+
+
+    // file src get
+    $(document).ready(function() {
+    $("#cke_248_label").attr("id",'cke_195_fileInput_input2');
+    $('#srcImage').change(function(){
+        var file_data = $('#srcImage').prop('files')[0];   
+        var form_data = new FormData();                  
+        form_data.append('file', file_data);
+        $.ajax({
+            url: "{{URL::to('/pro-img-disk.php')}}",
+            type: "POST",
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(data){
+               alert(data)
+            }
+        });
+    });
+});
 </script>
