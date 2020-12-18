@@ -16,15 +16,15 @@
 		<meta name="keywords" content="" />
 		<meta name="author" content="Codedthemes" />
 		<!-- Favicon icon -->
-		<link rel="icon" href="{{URL::to('/public/AdminAssets/assets/images/favicon.png')}}" type="image/x-icon" />
-		<link rel="stylesheet" href="{{URL::to('/public/AdminAssets/assets/css/plugins/select2.min.css')}}" />
+		<link rel="icon" href="{{URL::to('/public/assets/assets/img/favicon.png')}}" type="image/x-icon" />
+		<link rel="stylesheet" href="{{URL::to('/public/assets/assets/css/select2.min.css')}}" />
 		<!-- vendor css -->
-		<link rel="stylesheet" href="{{URL::to('/public/AdminAssets/assets/css/style.css')}}" />
-		<!-- Check Editor -->
-		<!-- <script src="https://cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script> -->
+		<link rel="stylesheet" href="{{URL::to('/public/assets/assets/css/adminstyle.css')}}" />
+		<!-- Check Editor --> 
+		<script src="https://cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
+		
 
-		<link href='https://cdn.jsdelivr.net/npm/froala-editor@3.1.0/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
-		<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.1.0/js/froala_editor.pkgd.min.js'></script>
+		
 	</head>
 	<body class="">
 		<!-- [ Pre-loader ] start -->
@@ -289,8 +289,8 @@
 				<a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
 				<a href="#!" class="b-brand">
 					<!-- ========   change your logo hear   ============ -->
-					<img src="{{URL::to('/public/AdminAssets/assets/images/logo.png')}}" alt="" class="logo" />
-					<img src="{{URL::to('/public/AdminAssets/assets/images/logo-icon.png')}}" alt="" class="logo-thumb" />
+					<img src="{{URL::to('/public/assets/assets/img/logo.png')}}" alt="" class="logo" />
+					<img src="{{URL::to('/public/assets/assets/img/logo-icon.png')}}" alt="" class="logo-thumb" />
 				</a>
 				<a href="#!" class="mob-toggler">
 					<i class="feather icon-more-vertical"></i>

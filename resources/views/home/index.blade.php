@@ -259,20 +259,11 @@
                                                             <div class="desc">Lecture 4</div>
                                                         </a>
                                                     </li>
-                                                        <!--
-                                                    <li class="swiper-slide" style="width: 152px;">
-                                                        <a href="javascript:void();"
-                                                            onClick="document.getElementById('vid_frame').src='https://youtube.com/embed/X8sSXU-J8fI?autoplay=1&rel=0&showinfo=0&autohide=1'">
-                                                            <span class="vid-thumb"><img
-                                                                    src="https://img.youtube.com/vi/X8sSXU-J8fI/mqdefault.jpg" /></span>
-                                                            <div class="desc">Video 5</div>
-                                                        </a>
-                                                    </li> -->
+                                                       
+                                                    
 
                                                 </ol>
-                                                <!-- Add Pagination -->
-                                                <!-- <div class="swiper-pagination"></div> -->
-                                                <!-- If we need navigation buttons -->
+                                                
 
                                             </nav>
 
