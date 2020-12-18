@@ -35,13 +35,12 @@ class AdminController extends Controller
         };
         $Clients = ClientRegistrationModel::all();
         $TotalClientNumber = count($Clients);
-        // $currentMonth = date('m');
-        // $MonthlyClients = ClientRegistrationModel::where('created_at',date('m'))->get();
-        // print_r($currentMonth);
-        // die;
-        // $MonthlyClientNumber = count($MonthlyClients);
+        $lastMonth = date("m",strtotime("0 months"));
+        $lastYear = date("Y",strtotime("0 months"));
+        $MonthlyClients = ClientRegistrationModel::whereMonth("created_at",$lastMonth)->whereYear("created_at",$lastYear)->get();
+        $MonthlyClientNumber = count($MonthlyClients);
         
-        return view('admin.index',compact('TotalClientNumber'));
+        return view('admin.index',compact('TotalClientNumber','MonthlyClientNumber'));
     }
     public function Logout(Request $request){
         $request->session()->pull("admin");

@@ -120,8 +120,8 @@
                   <hr>
                   <p class="text-danger  h4  pb-3"> Enter the Fundamental Points</p>
                   <div class="form-group">
-                  <textarea id="myEditor"></textarea>
-                  <textarea name="editor1" class="textareaBlogPost"></textarea>
+                     <!-- <textarea id="myEditor"></textarea> -->
+                     <textarea name="editor1" id="editor1"></textarea>
                   </div>
                   <p class="submit">
                      <input type="submit" name="submit" id="submit" class="btn btn-outline-primary" value="Post"> <span class="spinner"></span>
@@ -153,12 +153,10 @@
                               <span>Visibility</span>
                               <span>
                                  <select class="js-example-basic-hide-search col-sm-12" name="visibility[]" multiple="multiple" style="width: 75%" required>
-                                    <optgroup label="Developer">
-                                       <option value="ALl">All Members</option>
-                                       <option value="AL">VIP Members</option>
-                                       <option value="AL">Subscribers</option>
-                                       <option value="AL">Paid Members</option>
-                                    </optgroup>
+                                    <option value="0">All</option>
+                                    @foreach($ClientMember as $member)
+                                       <option value="{{$member->id}}">{{$member->member}}</option>
+                                    @endforeach
                                  </select>
                               </span>
                            </div>
@@ -281,10 +279,6 @@
                                 @foreach($allTags as $tag)   
                                     <option value="{{$tag->tagName}}">{{$tag->tagName}}</option>
                                 @endforeach
-                                 <!-- <option value="WY">Wyoming</option>
-                                 <option value="WY">Coming</option>
-                                 <option value="WY">Hanry Die</option>
-                                 <option value="WY">John Doe</option> -->
                               </select>
                            </div>
                         </div>
@@ -377,6 +371,13 @@
 <script src="{{URL::to('/public/AdminAssets/assets/js/plugins/daterangepicker.js')}}"></script>
 <script src="{{URL::to('/public/AdminAssets/assets/js/pages/ac-datepicker.js')}}"></script>
 <script>
+
+
+        $(".fr-form").on("click",function(){
+          
+        var file =  $(".fr-form").find("input>");
+        console.log(file); 
+        })
       $(document).ready(function() {
         $('#showmenu').click(function() {
                 $('.menu').slideToggle("fast");
@@ -415,6 +416,7 @@
         }
     });
 
+    // description Limit
     $(".descriptionCount").hide();
     $(".description").on("keyup",function(){
        var count = $(".description").val();

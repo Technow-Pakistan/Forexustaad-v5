@@ -11,6 +11,7 @@ use App\Models\BlogPostMainCategoryModel;
 use App\Models\BlogPostSubCategoryModel;
 use App\Models\BlogPostAllMainCategoryModel;
 use App\Models\BlogPostAllSubCategoryModel;
+use App\Models\ClientMemberModel;
 
 class BlogPostController extends Controller
 {
@@ -18,8 +19,9 @@ class BlogPostController extends Controller
         $allTags = BlogPostAllTagsModel::all();
         $allMainCategory = BlogPostAllMainCategoryModel::all();
         $allSubCategory = BlogPostAllSubCategoryModel::all();
+        $ClientMember = ClientMemberModel::all();
     
-        return view('admin.add-post',compact('id','allTags','allSubCategory','allMainCategory'));
+        return view('admin.add-post',compact('id','allTags','allSubCategory','allMainCategory','ClientMember'));
     }
     public function Add(Request $request){
         $data = $request->all();
@@ -59,10 +61,10 @@ class BlogPostController extends Controller
         if ($request->file("img") != null) {
             $path = $request->file("img")->store("BlogPostImages");
             $blogPostImage = $path;
+            $data['image'] = $blogPostImage;
         }
-        $data['image'] = $blogPostImage;
         // ckeditor Description
-        $detailDescription = htmlentities($request->editor1);
+        $detailDescription = htmlentities($request->detailDescription);
         $data['detailDescription'] = $detailDescription;
         // add Post data
         $blogPost = new BlogPostModel;
@@ -122,13 +124,14 @@ class BlogPostController extends Controller
         $allTags = BlogPostAllTagsModel::all();
         $allMainCategory = BlogPostAllMainCategoryModel::all();
         $allSubCategory = BlogPostAllSubCategoryModel::all();
+        $ClientMember = ClientMemberModel::all();
         $blogPostData = BlogPostModel::where('id',$id)->first();
         $visibilityPostData = BlogPostVisibilityModel::where('postId',$id)->get();
         $tagsPostData = BlogPostTagsModel::where('postId',$id)->get();
         $mainCategoryPostData = BlogPostMainCategoryModel::where('postId',$id)->get();
         $subCategoryPostData = BlogPostSubCategoryModel::where('postId',$id)->get();
     
-        return view('admin.edit-post',compact('id','allTags','allSubCategory','allMainCategory','blogPostData','visibilityPostData','tagsPostData','mainCategoryPostData','subCategoryPostData'));
+        return view('admin.edit-post',compact('id','allTags','allSubCategory','allMainCategory','blogPostData','visibilityPostData','tagsPostData','mainCategoryPostData','subCategoryPostData','ClientMember','id'));
     }
     public function EditProcess(Request $request, $id){
         $data = $request->all();
@@ -168,8 +171,20 @@ class BlogPostController extends Controller
         if ($request->file("img") != null) {
             $path = $request->file("img")->store("BlogPostImages");
             $blogPostImage = $path;
+            $data['image'] = $blogPostImage;
         }
-        $data['image'] = $blogPostImage;
+        // stickToTop
+        if ($request->stickToTop == null) {
+            $data['stickToTop'] = 0;
+        }
+        // pending
+        if ($request->pending == null) {
+            $data['pending'] = 1;
+        }
+        // comment
+        if ($request->comment == null) {
+            $data['comment'] = 0;
+        }
         // ckeditor Description
         $detailDescription = htmlentities($request->editor1);
         $data['detailDescription'] = $detailDescription;
@@ -179,6 +194,11 @@ class BlogPostController extends Controller
         $blogPost->save();
 
         $postId = $blogPost->id;
+        // Delete Previous Visibility
+        $blogPostPreviousVisibility = BlogPostVisibilityModel::where('postId',$postId)->get();
+        for ($i=0; $i < count($blogPostPreviousVisibility) ; $i++) { 
+            $blogPostPreviousVisibility[$i]->delete();
+        }
         // Add Post Visibility
         $visibility = $request->visibility;
         for ($i=0; $i < count($visibility) ; $i++) { 
@@ -186,6 +206,11 @@ class BlogPostController extends Controller
             $blogPostVisibility->visibility = $visibility[$i];
             $blogPostVisibility->postId = $postId;
             $blogPostVisibility->save();
+        }
+        // Delete Previous Tag
+        $blogPostPreviousTag = BlogPostTagsModel::where('postId',$postId)->get();
+        for ($i=0; $i < count($blogPostPreviousTag) ; $i++) { 
+            $blogPostPreviousTag[$i]->delete();
         }
         // Add Post Tags
         $tag = $request->tag;
@@ -201,6 +226,11 @@ class BlogPostController extends Controller
                 $newTag->save();
             }
         }
+        // Delete Previous Main Category
+        $blogPostPreviousMainCategory = BlogPostMainCategoryModel::where('postId',$postId)->get();
+        for ($i=0; $i < count($blogPostPreviousMainCategory) ; $i++) { 
+            $blogPostPreviousMainCategory[$i]->delete();
+        }
         // Add Post Main Category
         $mainCategory = $request->category;
         if($mainCategory != null){
@@ -211,8 +241,12 @@ class BlogPostController extends Controller
                 $blogPostmainCategory->save();
             }
         }
+        // Delete Previous Sub Category
+        $blogPostPreviousSubCategory = BlogPostSubCategoryModel::where('postId',$postId)->get();
+        for ($i=0; $i < count($blogPostPreviousSubCategory) ; $i++) { 
+            $blogPostPreviousSubCategory[$i]->delete();
+        }
         // Add Post Sub Category
-
         $subCategory = $request->subCategory;
         if($subCategory != null){
             for ($i=0; $i < count($subCategory) ; $i++) { 

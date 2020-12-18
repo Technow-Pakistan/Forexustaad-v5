@@ -31,7 +31,7 @@
 									><span>{{$TotalClientNumber}}</span>
 								</h2>
 								<p class="m-b-0">
-									This Month<span class="float-right">{{$TotalClientNumber}}</span>
+									This Month<span class="float-right">{{$MonthlyClientNumber}}</span>
 								</p>
 							</div>
 						</div>

@@ -55,5 +55,4 @@ class BorkerNewsController extends Controller
         $brokerNews->delete();
         return back();
     }
-    
 }
