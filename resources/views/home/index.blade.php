@@ -14,6 +14,17 @@
                         @php Session::pull('error') @endphp
                     </div>
                 @endisset
+                @php
+                    if(Session::has('success')){ 
+                        $success =Session::get('success');
+                    }
+                    @endphp
+                @isset($success)
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="alert alert-danger">{{$success}}</div>
+                        @php Session::pull('success') @endphp
+                    </div>
+                @endisset
                 <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6 col-6 order-2 order-lg-1">
                     <div class="text-center">
                         @if($MainLeftBanner->htmlLink == null )
@@ -106,60 +117,7 @@
                         echo $MainHomeApi->link
                     @endphp   
                 </li>
-                <!-- <li class="list-item">
-                    <div class="list-item-currency">BCCEUR </div>
-                    <div class="list-item-currency upgrade">
-                        <span>1,244.26331 <span class="arrow-up">&#8599;</span></span>
-                    </div>
-                </li>
-                <li class="list-item">
-                    <div class="list-item-currency">BTCGBP</div>
-                    <div class="list-item-currency downgrade">
-                        <span>7,088.48 <span class="arrow-down">&#8600;</span></span>
-                    </div>
-                </li>
-                <li class="list-item">
-                    <div class="list-item-currency">BCCUSD</div>
-                    <div class="list-item-currency downgrade">
-                        <span>1,470 <span class="arrow-down">&#8600;</span></span>
-                    </div>
-                </li>
-                <li class="list-item">
-                    <div class="list-item-currency">BTCEUR</div>
-                    <div class="list-item-currency downgrade">
-                        <span>8,444.84879 <span class="arrow-down">&#8600;</span></span>
-                    </div>
-                </li>
-                <li class="list-item">
-                    <div class="list-item-currency">BTCGBP</div>
-                    <div class="list-item-currency downgrade">
-                        <span>7,088.48 <span class="arrow-down">&#8600;</span></span>
-                    </div>
-                </li>
-                <li class="list-item">
-                    <div class="list-item-currency">BTCRUB</div>
-                    <div class="list-item-currency upgrade">
-                        <span>614,411.15205 <span class="arrow-up">&#8599;</span></span>
-                    </div>
-                </li>
-                <li class="list-item">
-                    <div class="list-item-currency">BTCUSD</div>
-                    <div class="list-item-currency downgrade">
-                        <span>10,487.9123 <span class="arrow-down">&#8600;</span></span>
-                    </div>
-                </li>
-                <li class="list-item">
-                    <div class="list-item-currency">BTGBTC</div>
-                    <div class="list-item-currency downgrade">
-                        <span>0.013 <span class="arrow-down">&#8600;</span></span>
-                    </div>
-                </li>
-                <li class="list-item">
-                    <div class="list-item-currency">BTGEUR</div>
-                    <div class="list-item-currency upgrade">
-                        <span>118.91234 <span class="arrow-up">&#8599;</span></span>
-                    </div>
-                </li> -->
+               
             </ul>
         </div>
     </div>
@@ -210,7 +168,7 @@
                                             <div class="vid-container">
                                                 <iframe id="vid_frame"
                                                     src="https://www.youtube.com/embed/X9JClP-XMyc?rel=0&showinfo=0&autohide=1&autoplay=1"
-                                                    frameborder="0" width="560" height="315" allow="autoplay"
+                                                    frameborder="0" width="560" height="315" allow=""
                                                     allowfullscreen></iframe>
                                             </div>
                                         </section>

@@ -50,15 +50,16 @@ class HomeController extends Controller
             $registration = new ClientRegistrationModel;
             $registration->fill($request->all());
             $registration->save();
-                Mail::to($request->email)->send(new SubscriberMail($registration));
+            Mail::to($request->email)->send(new SubscriberMail($registration));
+            $success = "Please check mail in spam for confirmation Subscription.";
+            $request->session()->put("success",$success);
         }else {
             $error = "Your account has already register.Please! login.";
             $request->session()->put("error",$error);
-            return back();
         }
-
         return back();
     }
+
     public function LoginProcess(Request $request){
         $password = md5($request->password);
         $login = ClientRegistrationModel::where('email',$request->username)->where('password',$password)->first();
@@ -124,39 +125,6 @@ class HomeController extends Controller
         // $msg = 'Image uploaded successfully'; 
         // $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
         echo json_encode(array('file_name'=>$request->file('upload')->getClientOriginalName()));
-    }
-    public function ImageSrc12(Request $request){
-        $allowedExts = array("gif", "jpeg", "jpg", "png");
-
-        // Get filename.
-        $temp = explode(".", $_FILES["image_param"]["name"]);
-    
-        // Get extension.
-        $extension = end($temp);
-    
-        // An image check is being done in the editor but it is best to
-        // check that again on the server side.
-        // Do not use $_FILES["file"]["type"] as it can be easily forged.
-        $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $mime = finfo_file($finfo, $_FILES["image_param"]["tmp_name"]);
-    
-        if ((($mime == "image/gif")
-        || ($mime == "image/jpeg")
-        || ($mime == "image/pjpeg")
-        || ($mime == "image/x-png")
-        || ($mime == "image/png"))
-        && in_array($extension, $allowedExts)) {
-            // Generate new random name.
-            $name = sha1(microtime()) . "." . $extension;
-    
-            // Save file in the uploads folder.
-            move_uploaded_file($_FILES["image_param"]["tmp_name"], getcwd() . "/storage/app/PostImages/" . $name);
-            // Generate response.
-            $response = new StdClass;
-            $response->link = "/storage/app/PostImages" . $name;
-        
-            echo stripslashes(json_encode($response));
-        }
     }
     public function brokerDetail(Request $request, $id){
         $broker1 = BrokerCompanyInformationModel::find($id);

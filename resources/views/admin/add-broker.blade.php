@@ -37,8 +37,8 @@
 											@endisset
 								<ul class="nav nav-pills nav-fill mb-3" role="tablist">
 									<li class="nav-item">
-										<a class="nav-link active" data-toggle="tab" href="#COMPANYINFORMATION
-										" role="tab">COMPANY INFORMATION
+										
+										<a class="nav-link" data-toggle="tab" href="#COMPANYINFORMATION" role="tab">COMPANY INFORMATION
 										</a>
 										<div class="slide bg-c-blue"></div>
 									</li>
@@ -65,13 +65,12 @@
 								</ul>
 								<!-- Tab panes -->
 								<div class="tab-content">
-									<div class="tab-pane active" id="COMPANYINFORMATION
-									" role="tabpanel">
-									<div class="">
-										<div class="card-header text-danger f-26">
-											COMPANY INFORMATION 
-										</div>
-										<div class="card-body">
+								<div class="tab-pane active" id="COMPANYINFORMATION" role="tabpanel">
+										<div class="">
+											<div class="card-header text-danger f-26">
+											COMPANY INFORMATION
+											</div>
+											<div class="card-body">
 											<form action="{{URL::to('ustaad/broker/addBroker')}}" method="post" enctype="multipart/form-data">
 												<div class="row">
 													<div class="col-sm-6">
@@ -146,7 +145,7 @@
 												</div>
 											</form>
 										</div>
-									</div>
+										</div>
 									</div>
 									<div class="tab-pane" id="DEPOSIT" role="tabpanel">
 										<div class="">
@@ -582,13 +581,12 @@
 								</ul>
 								<!-- Tab panes -->
 								<div class="tab-content">
-									<div class="tab-pane active" id="TRADINGPLATFORMS
-									" role="tabpanel">
-									<div class="">
-										<div class="card-header text-danger f-26">
+								<div class="tab-pane active" id="TRADINGPLATFORMS" role="tabpanel">
+										<div class="">
+											<div class="card-header text-danger f-26">
 											TRADING PLATFORMS
-										</div>
-										<div class="card-body">
+											</div>
+											<div class="card-body">
 											<form action="{{URL::to('ustaad/broker/addPlatform')}}" method="post" >
 												<div class="form-group">
 													<label for="">TRADING PLATFORMS</label>
@@ -614,7 +612,7 @@
 												</div>
 											</form>
 										</div>
-									</div>
+										</div>
 									</div>
 									<div class="tab-pane" id="TRADINGFEATURES" role="tabpanel">
 										<div class="">

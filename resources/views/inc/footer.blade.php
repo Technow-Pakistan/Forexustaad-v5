@@ -234,11 +234,35 @@
         $(window).scroll(function(){ 
             if ($(this).scrollTop() > 100) { 
                 $('.to-top').addClass('show-top-btn'); 
-            } else { 
+            } else {
                 $('.to-top').removeClass('show-top-btn'); 
             } 
         });
-     	});
+       });
+       
+$(".RegistrationButton").on("click",function(){
+  $(".heading_title").html("Registration");
+  $(".LoginForm").hide();
+  $(".RegistrationForm").show();
+});
+$(".RegistrationForm").on("submit",function(e){
+    e.preventDefault();
+  console.log("asd");
+  var password = $(".password").val();
+  var comfirmedPassword = $(".comfirmedPassword").val();
+  console.log("asd");
+  console.log(comfirmedPassword);
+  console.log(password);
+  if(password != comfirmedPassword){
+    e.preventDefault();
+    $(".RegistrationError").html("Your Password and Comfirmed Password is not matched.")
+  }
+});
+$(".LoginButton").on("click",function(){
+  $(".heading_title").html("Login");
+  $(".RegistrationForm").hide();
+  $(".LoginForm").show();
+})
      </script>
 
      <script>
@@ -268,7 +292,7 @@
               </p>
             </div>
 
-              <form action="{{URL::to('/clientRegistration')}}" class="RegistrationForm" method="post" class="quote_msg_form">
+              <form action="{{URL::to('/clientRegistration')}}" method="post" class="RegistrationForm" id="RegistrationFormPassword">
 
                   <div class="contact_us_form wow animated fadeInUp">
                     <div class="row">
@@ -294,24 +318,41 @@
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="form-group">
-                          <input type="password" class="form-control text-gray explore_form email password" placeholder="Your Password *" name="password" id="quote_email" required>
+                          <input type="password" class="form-control text-gray explore_form email password" placeholder="Your Password *" name="password" id="passwordchecker" required>
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="form-group">
-                          <input type="password" class="form-control text-gray explore_form email comfirmedPassword" placeholder="Comfirmed Password *" name="comfrimpassword" id="quote_email" required>
+                          <input type="password" class="form-control text-gray explore_form email comfirmedPassword" placeholder="Comfirmed Password *" name="comfrimpassword" id="comfirmedPasswordchecker" required>
                         </div>
                       </div>
                     </div>
                       <div class="form-group text-left">
                         <button type="submit" class="btn btn-primary text-uppercase quote_send_msg" data-type="quote">Register</button>
-                        <span class="text-danger RegistrationError"></span>
+                        <span class="text-danger RegistrationError" id="RegistrationErrorChecker"></span>
                       </div>
                   </div>
               </form>
 
-              
-              <form action="{{URL::to('/clientLogin')}}" class="LoginForm" method="post" class="quote_msg_form">
+              <script>
+                // your function
+                var my_func = function(event) {
+                  var password = document.getElementById("passwordchecker").value;
+                  var comfirmedPassword = document.getElementById("comfirmedPasswordchecker").value;
+                  console.log(comfirmedPassword);
+                  console.log(password);
+                  if(password != comfirmedPassword){
+                    document.getElementById("RegistrationErrorChecker").innerHTML = "Your Password and Comfirmed Password is not matched.";
+                    event.preventDefault();
+                  }
+                };
+                // your form
+                var form = document.getElementById("RegistrationFormPassword");
+                // attach event listener
+                form.addEventListener("submit", my_func, true);
+              </script>
+
+              <form action="{{URL::to('/clientLogin')}}" class="LoginForm" method="post">
 
                   <div class="contact_us_form wow animated fadeInUp">
                     <div class="form-group">
@@ -468,26 +509,6 @@ $(document).ready(function() {
   });
 });
 
-$(".RegistrationForm").on("submit",function(e){
-  var password = $(".password").val();
-  var comfirmedPassword = $(".comfirmedPassword").val();
-  console.log(comfirmedPassword);
-  console.log(password);
-  if(password != comfirmedPassword){
-    e.preventDefault();
-    $(".RegistrationError").html("Your Password and Comfirmed Password is not matched.")
-  }
-});
-$(".RegistrationButton").on("click",function(){
-  $(".heading_title").html("Registration");
-  $(".LoginForm").hide();
-  $(".RegistrationForm").show();
-})
-$(".LoginButton").on("click",function(){
-  $(".heading_title").html("Login");
-  $(".RegistrationForm").hide();
-  $(".LoginForm").show();
-})
 </script>
 </body>
 </html>
