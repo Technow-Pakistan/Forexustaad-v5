@@ -28,6 +28,7 @@ use App\Http\Controllers\AdminMemberController;
 use App\Http\Controllers\ClientMemberController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HtmlPagesController;
+use App\Http\Controllers\MemberController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -89,7 +90,6 @@ Route::get('/subscriberConfirmation/{id}',[HomeController::class,'ConfirmationEm
 Route::get('/uploader/upload.php',[HomeController::class,'ImageSrc15']);
 Route::post('/uploader/upload.php',[HomeController::class,'ImageSrc15']);
 Route::post('/pro-img-disk.php',[HomeController::class,'ImageSrc']);
-Route::post('/imageUploadFroala',[HomeController::class,'ImageSrc12']);
 Route::post('/comment1',[CommentController::class,'Add']);
 Route::get('/',[HomeController::class,'Index']);
 Route::get('/construction',[HomeController::class,'Construction']);
@@ -270,4 +270,11 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
             Route::get('/delete/{id}',[CommentController::class,'RemoveReply']);
         });
     });
+});
+
+// Users Panel Views
+
+Route::group(['prefix' => 'memberArea',"middleware" => "IsMemberLogin"],function(){
+    Route::get('/dashboard',[MemberController::class,'Dashboard']);
+    Route::get('/logout',[MemberController::class,'Logout']);
 });
