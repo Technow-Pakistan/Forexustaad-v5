@@ -30,6 +30,7 @@ use App\Http\Controllers\ClientMemberController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HtmlPagesController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\GalleryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -290,6 +291,9 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
             Route::post('/{id}',[CommentController::class,'AddReply']);
             Route::get('/delete/{id}',[CommentController::class,'RemoveReply']);
         });
+    });
+    Route::group(['prefix' => 'gallery'],function(){
+        Route::get('/{id}',[GalleryController::class,'Index']);
     });
 });
 

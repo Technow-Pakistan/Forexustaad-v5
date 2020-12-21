@@ -249,8 +249,18 @@
 								><span class="pcoded-mtext">Gallery</span></a
 							>
 							<ul class="pcoded-submenu">
-								<li><a href="gallery-grid.html">Grid</a></li>
-								<li><a href="gallery-masonry.html">Masonry</a></li>
+							@php
+								$totalData = scandir("storage/app");
+								$selectedImagesFloders = [];
+								foreach ($totalData as $data) {
+									if (strpos($data, 'Images') != false) {
+										array_push($selectedImagesFloders,$data);
+									}
+								}
+							   @endphp
+							   @foreach($selectedImagesFloders as $imageFloder)
+								<li><a href="{{URL::to('/ustaad/gallery')}}/{{$imageFloder}}">{{$imageFloder}}</a></li>
+								@endforeach
 							</ul>
 						</li>
 						

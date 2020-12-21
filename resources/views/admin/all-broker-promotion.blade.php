@@ -122,7 +122,7 @@
 												<th>Broker</th>
 												<th>Broker Name</th>
 												<th>Promotion Title</th>
-												<th>News Image</th>
+												<th>Promotion Image</th>
 												
 												<th>Status</th>
 											</tr>
