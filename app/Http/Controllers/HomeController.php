@@ -73,7 +73,7 @@ class HomeController extends Controller
             }
             if ($login->status != 0) {
                 $request->session()->put("client",$login);
-                return redirect('/memberArea/dashboard');
+                return redirect('/');
             }else {
                 $error = "Your account has been Blocked. Please contact with Administrator ";
                 $request->session()->put("error",$error);
@@ -89,7 +89,7 @@ class HomeController extends Controller
             }
             if ($mobile->status != 0) {
                 $request->session()->put("client",$mobile);
-                return redirect('/memberArea/dashboard');
+                return redirect('/');
             }else {
                 $error = "Your account has been Blocked. Please contact with Administrator ";
                 $request->session()->put("error",$error);
@@ -105,7 +105,7 @@ class HomeController extends Controller
         return back();
     }
     public function BrokerView(){
-        $totalData = BrokerCompanyInformationModel::all();
+        $totalData = BrokerCompanyInformationModel::orderBy('id','desc')->get();
         return view('broker/brokerView',compact('totalData'));
     }
     public function ImageSrc(Request $request){

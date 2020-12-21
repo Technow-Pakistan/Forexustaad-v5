@@ -115,7 +115,7 @@
                                 <div class="after-login">
                                     <div class="dropdown">
                                     <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{$clientAccountData->name}}  <img src="{{URL::to('/public/assets/assets/img/user.png')}}" alt="user">
+                                    {{$clientAccountData->name}}  <img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="user">
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <!-- <a class="dropdown-item" href="#">Action</a>
