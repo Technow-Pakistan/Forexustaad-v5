@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class ApiLeftModel extends Model
 {
     protected $table = "api_left";
-    protected $fillable = ["title","link","area"];
+    protected $fillable = ["title","link","area","poistion"];
 }

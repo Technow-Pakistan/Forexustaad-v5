@@ -21,9 +21,9 @@ class BorkerReviewController extends Controller
         if ($request->file("file_photo") != null) {
             $path = $request->file("file_photo")->store("BrokerReviewImages");
             $ReviewImage = $path;
+            $data['image'] = $ReviewImage;
         }
         $description = htmlentities($request->editor1);
-        $data['image'] = $ReviewImage;
         $data['description'] = $description;
         $Review = new BrokerReviewModel;
         $Review->fill($data);

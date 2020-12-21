@@ -12,9 +12,9 @@
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="index.html"><i class="feather icon-home"></i></a>
+										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
 									</li>
-									<li class="breadcrumb-item"><a href="all-posts.html">All Posts</a></li>
+									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/post/viewAll')}}">All Posts</a></li>
 									<li class="breadcrumb-item">
 										<a href="#!">New Post</a>
 									</li>

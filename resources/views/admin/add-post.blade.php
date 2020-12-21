@@ -70,15 +70,15 @@
 						<div class="row align-items-center">
 							<div class="col-md-12">
 								<div class="page-header-title">
-									<h5 class="m-b-10">Fundamental History</h5>
+									<h5 class="m-b-10">Add Post</h5>
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="index.html"><i class="feather icon-home"></i></a>
+										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
 									</li>
-									<li class="breadcrumb-item"><a href="#!">All Posts</a></li>
+									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/post/viewAll')}}">All Posts</a></li>
 									<li class="breadcrumb-item">
-										<a href="#!">Fundamental History</a>
+										<a href="#!">Post</a>
 									</li>
 								</ul>
 							</div>

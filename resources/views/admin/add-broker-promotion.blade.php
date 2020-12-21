@@ -8,15 +8,15 @@
 						<div class="row align-items-center">
 							<div class="col-md-12">
 								<div class="page-header-title">
-									<h5 class="m-b-10">Broker News</h5>
+									<h5 class="m-b-10">Broker Promotions</h5>
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
 										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
 									</li>
-									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/brokersNews')}}">All Brokers News</a></li>
+									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/brokersPromotions')}}">All Brokers Promotions</a></li>
 									<li class="breadcrumb-item">
-										<a href="#!">Broker News</a>
+										<a href="#!">Broker Promotions</a>
 									</li>
 								</ul>
 							</div>
@@ -28,7 +28,7 @@
                 <div class="row">
 					<div class="col-md-12">
 						<div class="card">
-							<div class="card-header">Broker News</div>
+							<div class="card-header">Broker Promotions</div>
 							<div class="card-body">
 								@php 
 									$count = 0;
@@ -38,7 +38,7 @@
 								@isset($brokerNews->image)
 									<?php $url = "edit/" . $brokerNews->id; ?>
 								@endisset
-								<form action="{{URL::to('/ustaad/brokersNews')}}/{{$url}}" method="post" enctype="multipart/form-data">
+								<form action="{{URL::to('/ustaad/brokersPromotions')}}/{{$url}}" method="post" enctype="multipart/form-data">
 									@isset($brokerNews->image)
 										<div>
 											<img src="{{URL::to('storage/app')}}/{{$brokerNews->image}}" alt="Your Image" />
@@ -52,9 +52,9 @@
 											<input type="file" class="form-control h-100" name="file_photo" id="customFile" {{($count == 0 ? 'required' : '' )}}>
 										</div>
 									<div class="form-group">
-										<label for="">News Title</label>
+										<label for="">Promotion Title</label>
 										<div>
-											<input type="text" name="NewsTitle" value="{{($count != 0 ? $brokerNews->NewsTitle : '' )}}" class="form-control" required>
+											<input type="text" name="PromotionTitle" value="{{($count != 0 ? $brokerNews->PromotionTitle : '' )}}" class="form-control" required>
 										</div>
 									</div>
 									<div class="form-group">
@@ -73,7 +73,7 @@
 										<textarea name="shortDescription" maxlength="200" class="form-control description" id="news-description" rows="3" cols="40" required="" placeholder="Enter your Description here ...">@if($count != 0){{$brokerReview->shortDescription}}@endif</textarea>
 									</div>
 									<div class="form-group pt-4">
-										<label>News Content</label>
+										<label>Promotion Content</label>
 										<textarea
 											name="editor1"
 											class="form-control"
@@ -130,3 +130,4 @@
 				$(".descriptionCount").html("remaining: " + len);
 			});
 		</script>
+

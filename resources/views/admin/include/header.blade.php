@@ -133,8 +133,8 @@
 								<li><a href="{{URL::to('ustaad/allbrokers')}}">All Brokers</a></li>
 								<li><a href="{{URL::to('ustaad/broker/add')}}">Add New Broker</a></li>
 								<li><a href="{{URL::to('/ustaad/brokerReview/new')}}">Add Broker Review</a></li>
-								<li><a href="all-broker-promotion.html">All Broker Promotion</a></li>
-								<li><a href="add-promotiton.html">Add Promotion</a></li>
+								<li><a href="{{URL::to('/ustaad/brokersPromotions')}}">All Broker Promotion</a></li>
+								<li><a href="{{URL::to('/ustaad/brokersPromotions/new')}}">Add Promotion</a></li>
 								<li><a href="{{URL::to('/ustaad/brokersNews')}}">All Broker News</a></li>
 								<li><a href="{{URL::to('/ustaad/brokersNews/new')}}">Add Broker News</a></li>
 								

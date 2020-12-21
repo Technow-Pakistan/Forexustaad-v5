@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\BrokerCompanyInformationModel;
 
-class BrokerNewsModel extends Model
+class BorkerPromotionsModel extends Model
 {
-    protected $table="broker_news";
-    protected $fillable = ["image","brokerId","description","videoCode","link","NewsTitle","shortDescription"];
+    protected $table="broker_promotion";
+    protected $fillable = ["image","brokerId","description","videoCode","link","PromotionTitle","shortDescription"];
 
     public function GetBrokerInfo(){
         $data = BrokerCompanyInformationModel::where('id',$this->brokerId)->first();
