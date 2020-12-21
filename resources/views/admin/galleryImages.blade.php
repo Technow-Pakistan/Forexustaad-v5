@@ -28,12 +28,16 @@
                 <h5 class="mt-4 mb-3">{{$id}}</h5>
                 <div class="card-columns">
                     @foreach($totalData as $data)
-                    <div class="card">
-                        <img class="img-fluid card-img-top" src="{{URL::to('storage/app')}}/{{$data}}" alt="Card image">
-                        <div class="card-body">
-                            <p>{{URL::to('storage/app')}}/{{$data}}</p>
+                        @php
+                            $title = str_replace("/","@-",$data);
+                        @endphp
+                        <div class="card">
+                            <img class="img-fluid card-img-top mainImageButton" src="{{URL::to('storage/app')}}/{{$data}}" alt="Card image">
+                            <a href="{{URL::to('/ustaad/gallery/delete')}}/{{$title}}" class="deleteImageButton"><i class="feather icon-trash text-danger"></i></a>
+                            <div class="card-body">
+                                <p>{{URL::to('storage/app')}}/{{$data}}</p>
+                            </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
             </div>
@@ -44,5 +48,16 @@
 </section>
 <!-- [ Main Content ] end -->
 @include('admin.include.footer')
+<style>
+    .deleteImageButton{
+        position:absolute;
+        top:10px;
+        right:10px;
+        font-size:20px;
+    }
+    .mainImageButton{
+        position:relative;
+    }
+</style>
     
    
