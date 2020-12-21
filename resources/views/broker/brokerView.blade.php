@@ -22,6 +22,7 @@
                         @foreach($totalData as $data)
                             @php
                                 $deposit = $data->GetAccountInfo();
+                                $title = str_replace(" ","-",$data->title);
                             @endphp
                             <div class="visibleoptions col-md-12 col-sm-12 col-xs-12 m-t-30 p-a-10">
                                 <div class="row">
@@ -30,7 +31,7 @@
                                             <img src="{{URL::to('storage/app')}}/{{$data->image}}" class="img-fluid" />
                                         </div>
                                         <div class="link pt-3">
-                                            <a href="#" class="text-danger">Exness Review</a>
+                                            <a href="{{URL::to('/brokerList/brokerReview')}}/{{$title}}" class="text-danger">{{$data->title}} Review</a>
                                         </div>
                                     </div>
                                     <div class="col-md-5 col-sm-6 col-xs-12 text-align-c768">
@@ -49,7 +50,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-sm-3 col-xs-12 text-align-center">
+                                    <div class="col-md-3 col-sm-3 col-xs-12 text-align-center border-r-grey">
                                         <div class="form-group">
                                             <label for="" class="f-14">Headquarters:</label>
                                             <span>
@@ -66,7 +67,7 @@
                                     <div class="col-md-2 col-sm-2 col-xs-12 text-align-center p-a-15">
                                         <div class="form-group">
                                         <div class="link pt-3">
-                                            <a href="{{URL::to('/broker-detail')}}/{{$data->id}}" class="text-danger">Visit Broker
+                                            <a href="{{URL::to('/brokerList/brokerDetail')}}/{{$title}}" class="text-danger">Visit Broker
                                                 
                                             </a>
                                             
@@ -76,6 +77,13 @@
                                                 </span>
                                         </div>
                                         
+                                    </div>
+                                    <div class="col-lg-12 col-sm-12 col-12 col-xl-12">
+                                        <div class="link">
+                                            <a href="{{URL::to('/brokerList/brokerNews')}}/{{$title}}"  class="text-danger mr-3">Broker News</a>
+                                            <a href="{{URL::to('brokerList/brokerPromotion')}}/{{$title}}"  class="text-danger mr-3">Broker Promotions</a>
+                                            <a href="#"  class="text-danger">Broker Training</a>
+                                        </div>
                                     </div>
                                 </div>
                             
@@ -93,5 +101,6 @@
             </div>
         </div>
     </section>
+</div>
 
 @include ('inc/footer')

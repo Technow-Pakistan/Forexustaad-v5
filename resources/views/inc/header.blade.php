@@ -75,10 +75,10 @@
                                     <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-linkedin-square"></i></a></li>
                                 @elseif($link->iconName == "Instagram")
                                     <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-instagram"></i></a></li>
-                                @elseif($link->iconName == "Snapchat")
-                                    <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-bell"></i></a></li>
+                                @elseif($link->iconName == "Snapchat")bell
+                                    <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-"></i></a></li>
                                 @elseif($link->iconName == "Tiktok")
-                                    <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="{{$link->link}}" target="_blank"><img src="{{URL::to('/public/assets/assets/img/tiktokLogo.png')}}" alt="tiktok" width="20" height="20"></a></li>
                                 @elseif($link->iconName == "Pinterest")
                                     <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-pinterest-p"></i></a></li>
                                 @endif
@@ -185,7 +185,7 @@
                                 <a class="nav-link" href="{{URL::to('/')}}"><span>HOME</span> </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{URL::to('/brokerView')}}"><span>Forex Broker List</span> </a>
+                                <a class="nav-link" href="{{URL::to('/brokerList')}}"><span>Forex Broker List</span> </a>
                             </li>
                             <!-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

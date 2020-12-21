@@ -8,15 +8,15 @@
 						<div class="row align-items-center">
 							<div class="col-md-12">
 								<div class="page-header-title">
-									<h5 class="m-b-10">First Nav Bar</h5>
+									<h5 class="m-b-10">Footer</h5>
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
 										<a href="{{URL::to('/ustaad')}}"><i class="feather icon-home"></i></a>
 									</li>
-									<li class="breadcrumb-item"><a href="#!">Invoice</a></li>
+									<li class="breadcrumb-item"><a href="#!">Navigation</a></li>
 									<li class="breadcrumb-item">
-										<a href="#!">Invoice Summary</a>
+										<a href="#!">Footer</a>
 									</li>
 								</ul>
 							</div>

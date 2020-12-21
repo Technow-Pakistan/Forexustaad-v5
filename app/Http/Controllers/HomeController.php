@@ -15,6 +15,9 @@ use App\Models\BrokerTradingFeaturesModel;
 use App\Models\BrokerCustomerServicesModel;
 use App\Models\BrokerReserchEducationModel;
 use App\Models\BrokerPromotionModel;
+use App\Models\BrokerReviewModel;
+use App\Models\BrokerNewsModel;
+use App\Models\BorkerPromotionsModel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SubscriberMail;
 
@@ -35,8 +38,7 @@ class HomeController extends Controller
         $registration->confirmationEmail = 1;
         $registration->save();
             $request->session()->put("client",$registration);
-
-        return redirect('/');
+            return redirect('/memberArea/dashboard');
     }
     public function termServices(){
         return view('home/term-of-services');
@@ -71,7 +73,7 @@ class HomeController extends Controller
             }
             if ($login->status != 0) {
                 $request->session()->put("client",$login);
-                return back();
+                return redirect('/memberArea/dashboard');
             }else {
                 $error = "Your account has been Blocked. Please contact with Administrator ";
                 $request->session()->put("error",$error);
@@ -87,7 +89,7 @@ class HomeController extends Controller
             }
             if ($mobile->status != 0) {
                 $request->session()->put("client",$mobile);
-                return back();
+                return redirect('/memberArea/dashboard');
             }else {
                 $error = "Your account has been Blocked. Please contact with Administrator ";
                 $request->session()->put("error",$error);
@@ -104,7 +106,7 @@ class HomeController extends Controller
     }
     public function BrokerView(){
         $totalData = BrokerCompanyInformationModel::all();
-        return view('home/brokerView',compact('totalData'));
+        return view('broker/brokerView',compact('totalData'));
     }
     public function ImageSrc(Request $request){
         if ($request->file("file") != null) {
@@ -127,7 +129,9 @@ class HomeController extends Controller
         echo json_encode(array('file_name'=>$request->file('upload')->getClientOriginalName()));
     }
     public function brokerDetail(Request $request, $id){
-        $broker1 = BrokerCompanyInformationModel::find($id);
+        $title = str_replace("-"," ",$id);
+        $broker1 = BrokerCompanyInformationModel::where('title',$title)->first();
+        $id = $broker1->id;
         $broker2 = BrokerDepositModel::where('brokerId',$id)->first();
         $broker3 = BrokerCommissionsFeesModel::where('brokerId',$id)->first();
         $broker4 = BrokerAccountInfoModel::where('brokerId',$id)->first();
@@ -137,6 +141,69 @@ class HomeController extends Controller
         $broker8 = BrokerCustomerServicesModel::where('brokerId',$id)->first();
         $broker9 = BrokerReserchEducationModel::where('brokerId',$id)->first();
         $broker = BrokerPromotionModel::where('brokerId',$id)->first();
-        return view('home/broker-detail',compact('broker1','broker2','broker3','broker4','broker5','broker6','broker7','broker8','broker9','broker','id'));
+        return view('broker/broker-detail',compact('broker1','broker2','broker3','broker4','broker5','broker6','broker7','broker8','broker9','broker','id'));
+    }
+    public function brokerReview(Request $request, $id){
+        $title = str_replace("-"," ",$id);
+        $broker1 = BrokerCompanyInformationModel::where('title',$title)->first();
+        $id = $broker1->id;
+        $totalData = BrokerReviewModel::orderBy('id','desc')->where('brokerId',$id)->get();
+       
+        if(count($totalData) != 0){
+            return view('broker.ReviewList',compact('totalData'));
+        }else{
+            return back();
+        }
+    }
+    public function brokerReviewDetail(Request $request, $id){
+        $ReviewTitle = str_replace("-"," ",$id);
+        $brokerReview = BrokerReviewModel::where('ReviewTitle',$ReviewTitle)->first();
+        if($brokerReview != null){
+            return view('broker.brokerReview',compact('brokerReview'));
+        }else{
+            return back();
+        }
+    }
+    public function brokerNews(Request $request, $id){
+        $title = str_replace("-"," ",$id);
+        $broker1 = BrokerCompanyInformationModel::where('title',$title)->first();
+        $id = $broker1->id;
+        $totalData = BrokerNewsModel::orderBy('id','desc')->where('brokerId',$id)->get();
+       
+        if(count($totalData) != 0){
+            return view('broker.NewsList',compact('totalData'));
+        }else{
+            return back();
+        }
+    }
+    public function brokerNewsDetail(Request $request, $id){
+        $NewsTitle = str_replace("-"," ",$id);
+        $brokerNews = BrokerNewsModel::where('NewsTitle',$NewsTitle)->first();
+        if($brokerNews != null){
+            return view('broker.brokerNews',compact('brokerNews'));
+        }else{
+            return back();
+        }
+    }
+    public function brokerPromotion(Request $request, $id){
+        $title = str_replace("-"," ",$id);
+        $broker1 = BrokerCompanyInformationModel::where('title',$title)->first();
+        $id = $broker1->id;
+        $totalData = BorkerPromotionsModel::orderBy('id','desc')->where('brokerId',$id)->get();
+       
+        if(count($totalData) != 0){
+            return view('broker.PromotionList',compact('totalData'));
+        }else{
+            return back();
+        }
+    }
+    public function brokerPromotionDetail(Request $request, $id){
+        $PromotionTitle = str_replace("-"," ",$id);
+        $brokerPromotion = BorkerPromotionsModel::where('PromotionTitle',$PromotionTitle)->first();
+        if($brokerPromotion != null){
+            return view('broker.brokerPromotion',compact('brokerPromotion'));
+        }else{
+            return back();
+        }
     }
 }

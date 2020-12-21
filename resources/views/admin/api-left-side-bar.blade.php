@@ -9,10 +9,10 @@
 							<div class="col-md-12">
 								<div class="page-header-title">
 									<h5 class="m-b-10">API Left Side Bar</h5>
-								</div>
+								</div> 
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="index.html"><i class="feather icon-home"></i></a>
+										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
 									</li>
 									<li class="breadcrumb-item"><a href="#!">API Left Side</a></li>
 									
@@ -59,6 +59,7 @@
 						<div class="card user-profile-list">
 							<div class="card-body">
 								<div class="dt-responsive table-responsive">
+											<form action="{{URL::to('/admin/apileftorder')}}" method="post">
 									<table class="table nowrap">
 										<thead>
 											<tr>
@@ -70,26 +71,30 @@
 											</tr>
 										</thead>
 										<tbody>
-											@foreach($totalData as $data)
-												<tr  draggable="true">
-													<td>
-														{{$data->title}}
-													</td>
-													<td class="tdLinkScroll">{{$data->link}}</td>
-													<td>{{$data->area}}</td>
-												
-													<td>
-														<span class="badge badge-light-success">Active</span>
-														<div class="overlay-edit editlink" value="{{$data->id}}">
-															<button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button>
-															<a type="button" href="{{URL::to('/ustaad/api/api-left/delete')}}/{{$data->id}}" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></a>
-														</div>
-													</td>
-												</tr>
-											@endforeach
+												@foreach($totalData as $data)
+													<tr class="row1">
+														<td>
+															<input type="hidden" name="poistion[]" value="{{$data->id}}">
+															{{$data->title}}
+														</td>
+														<td class="tdLinkScroll">{{$data->link}}</td>
+														<td>{{$data->area}}</td>
+													
+														<td>
+															<span class="badge badge-light-success">Active</span>
+															<div class="overlay-edit editlink" value="{{$data->id}}">
+																<button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button>
+																<a type="button" href="{{URL::to('/ustaad/api/api-left/delete')}}/{{$data->id}}" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></a>
+															</div>
+														</td>
+													</tr>
+												@endforeach
+
 										</tbody>
 										
 									</table>
+												<!-- <input type="submit" value="Submit"> -->
+											</form>
 								</div>
 							</div>
 						</div>
@@ -107,13 +112,10 @@
 		<script src="{{URL::to('public/AdminAssets/assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
 
 <script>
-	$('#user-list-table').DataTable();
 
-	// Almost final example
-	// tr mai class row add krna h bs
 (function() {
-  var id_ = 'user-list-table';
-  var cols_ = document.querySelectorAll('#' + id_ + ' .row');
+  var id_ = 'table';
+  var cols_ = document.querySelectorAll('.' + id_ + ' .row1');
   var dragSrcEl_ = null;
 
   this.handleDragStart = function(e) {
@@ -195,4 +197,5 @@
 		
 	});
 </script>
+
 

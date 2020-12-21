@@ -74,6 +74,18 @@ class BorkerController extends Controller
         $broker = BrokerPromotionModel::where('brokerId',$id)->first();
         return view('admin.edit-broker',compact('broker1','broker2','broker3','broker4','broker5','broker6','broker7','broker8','broker9','broker','id'));
     }
+    public function editBrokerCompanyInformation(Request $request, $id){
+        $data = $request->all();
+        if ($request->file("file_photo") != null) {
+            $path = $request->file("file_photo")->store("BrokerImages");
+            $companyImage = $path;
+            $data["image"] = $companyImage;
+        }
+        $broker1 = BrokerCompanyInformationModel::find($id);
+        $broker1->fill($data);
+        $broker1->save();
+        return back();
+    }
     public function Detail(Request $request, $id){
         $broker1 = BrokerCompanyInformationModel::find($id);
         $broker2 = BrokerDepositModel::where('brokerId',$id)->first();

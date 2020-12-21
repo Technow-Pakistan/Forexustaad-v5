@@ -9,13 +9,13 @@
 						<div class="row align-items-center">
 							<div class="col-md-12">
 								<div class="page-header-title">
-									<h5 class="m-b-10">Brokers News</h5>
+									<h5 class="m-b-10">Brokers Promotions</h5>
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
 										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
 									</li>
-									<li class="breadcrumb-item"><a href="#!">Brokers News List</a></li>
+									<li class="breadcrumb-item"><a href="#!">Brokers Promotions List</a></li>
 									
 								</ul>
 							</div>
@@ -121,7 +121,7 @@
 											<tr>
 												<th>Broker</th>
 												<th>Broker Name</th>
-												<th>News Title</th>
+												<th>Promotion Title</th>
 												<th>News Image</th>
 												
 												<th>Status</th>
@@ -139,7 +139,7 @@
 														</div>
 													</td>
 													<td>{{$broker->title}}</td>
-													<td>{{$news->NewsTitle}}</td>
+													<td>{{$news->PromotionTitle}}</td>
 													<td>
 														<div>
 															<img src="{{URL::to('storage/app')}}/{{$news->image}}" alt="" class="img-fluid" width="150">
@@ -149,8 +149,8 @@
 													<td>
 														<span class="badge badge-light-success">Active</span>
 														<div class="overlay-edit">
-															<a href="{{URL::to('/ustaad/brokersNews/edit')}}/{{$news->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
-															<a href="{{URL::to('/ustaad/brokersNews/delete')}}/{{$news->id}}"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
+															<a href="{{URL::to('/ustaad/brokersPromotions/edit')}}/{{$news->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
+															<a href="{{URL::to('/ustaad/brokersPromotions/delete')}}/{{$news->id}}"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
 														</div>
 													</td>
 												</tr>

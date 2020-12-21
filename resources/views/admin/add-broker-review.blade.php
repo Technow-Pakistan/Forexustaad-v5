@@ -12,9 +12,9 @@
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="index.html"><i class="feather icon-home"></i></a>
+										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
 									</li>
-									<li class="breadcrumb-item"><a href="all-broker-Review.html">All Brokers Review</a></li>
+									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/brokerReview')}}">All Brokers Review</a></li>
 									<li class="breadcrumb-item">
 										<a href="#!">Broker Review</a>
 									</li>
@@ -51,21 +51,14 @@
 										<div class="custom-file my-3 h-100">
 											<input type="file" class="form-control h-100" name="file_photo" id="customFile" {{($count == 0 ? 'required' : '' )}}>
 										</div>
-									<!-- <div class="custom-file my-3">
-										<input
-											type="file"
-											class="custom-file-input"
-											id="customFile"
-											name="file_photo"
-											onchange="sliderimgone(this);"
-											{{($count == 0 ? 'required' : '' )}}
-										/>
-										<label class="custom-file-label" for="customFile"
-											>Choose file</label
-										>
-									</div> -->
 									<div class="form-group">
-										<label for="">Title</label>
+										<label for="">Review Title</label>
+										<div>
+											<input type="text" name="ReviewTitle" value="{{($count != 0 ? $brokerReview->ReviewTitle : '' )}}" class="form-control" required>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="">Broker Title</label>
 										<div>
 											<select name="brokerId" class="form-control" id="">
 												@foreach($broker as $title)
@@ -74,6 +67,11 @@
 											</select>
 										</div>
 									</div>	
+									<div class="form-group">
+										<label for="news-description" class="form-control-label m-0">Description (Max-character 200)</label>
+										<p class="text-right text-danger m-0 descriptionCount"></p>
+										<textarea name="shortDescription" maxlength="200" class="form-control description" id="news-description" rows="3" cols="40" required="" placeholder="Enter your Description here ...">@if($count != 0){{$brokerReview->shortDescription}}@endif</textarea>
+									</div>
 									<div class="form-group pt-4">
 										<label>Review Content</label>
 										<textarea
@@ -90,7 +88,7 @@
 											?>
 										</textarea>
 									</div>
-									<div class="form-group">
+									<!-- <div class="form-group">
 										<label for="">Use Ebeded Code For Videos</label>
 										<div>
 											<input type="text" name="videoCode" value="{{($count != 0 ? $brokerReview->videoCode : '' )}}" class="form-control" required>
@@ -101,7 +99,7 @@
 										<div>
 											<input type="text" name="link" value="{{($count != 0 ? $brokerReview->link : '' )}}" class="form-control" required>
 										</div>
-									</div>
+									</div> -->
 									<div>
 										<input type="submit" name="submit" id="submit" class="btn btn-outline-primary" value="{{($count != 0 ? 'Update' : 'Save' )}}">
 									</div>
@@ -116,9 +114,21 @@
 		<!-- [ Main Content ] end -->
 
 @include('admin.include.footer')
-        <!-- <script src="http://cdn.ckeditor.com/4.6.1/standard/ckeditor.js"></script>
         <script>
-			CKEDITOR.replace("editor1");
-		</script> -->
+			// description Limit
+			$(".descriptionCount").hide();
+			$(".description").on("keyup",function(){
+			var count = $(".description").val();
+			var len = count.length;
+
+			if(len == 0){
+				$(".descriptionCount").hide();
+			}else{
+				$(".descriptionCount").show();
+			}
+				len = 200 - len;
+				$(".descriptionCount").html("remaining: " + len);
+			});
+		</script>
 
 
