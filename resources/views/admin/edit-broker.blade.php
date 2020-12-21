@@ -12,9 +12,9 @@
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="index.html"><i class="feather icon-home"></i></a>
+										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
 									</li>
-									<li class="breadcrumb-item"><a href="all-broker.html">All Broker</a></li>
+									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/allbrokers')}}">All Broker</a></li>
 									<li class="breadcrumb-item">
 										<a href="#!">Broker Details</a>
 									</li>
@@ -65,14 +65,13 @@
 								</ul>
 								<!-- Tab panes -->
 								<div class="tab-content">
-									<div class="tab-pane active" id="COMPANYINFORMATION
-									" role="tabpanel">
-									<div class="">
-										<div class="card-header text-danger f-26">
-											COMPANY INFORMATION 
-										</div>
-										<div class="card-body">
-											<form action="{{URL::to('ustaad/broker/editBroker')}}" method="post" enctype="multipart/form-data">
+								<div class="tab-pane active" id="COMPANYINFORMATION" role="tabpanel">
+										<div class="">
+											<div class="card-header text-danger f-26 ">
+												COMPANY INFORMATION
+											</div>
+											<div class="card-body">
+											<form action="{{URL::to('ustaad/editBroker')}}/{{$broker1->id}}" method="post" enctype="multipart/form-data">
 												<div class="row">
 													<div class="col-sm-6">
 														<div class="form-group">
@@ -82,20 +81,8 @@
 													</div>
 													<div class="col-sm-6">
 														<div class="form-group">
-														<label for="">Company Logo</label>
-															<div class="custom-file">
-																<input
-																	type="file"
-																	class="custom-file-input"
-																	id="customFile"
-																	name="file_photo"
-																	onchange="sliderimgone(this);"
-																	required
-																/>
-																<label class="custom-file-label" for="customFile"
-																	>Choose file</label
-																>
-															</div>
+															<img src="{{URL::to('storage/app')}}/{{$broker1->image}}" class="img-fluid mb-1">
+															<input type="file" name="file_photo" id="file_photo" class="form-control h-100">
 														</div>
 													</div>
 													<div class="col-sm-6">
@@ -146,7 +133,7 @@
 												</div>
 											</form>
 										</div>
-									</div>
+										</div>
 									</div>
 									<div class="tab-pane" id="DEPOSIT" role="tabpanel">
 										<div class="">
@@ -582,13 +569,12 @@
 								</ul>
 								<!-- Tab panes -->
 								<div class="tab-content">
-									<div class="tab-pane active" id="TRADINGPLATFORMS
-									" role="tabpanel">
-									<div class="">
-										<div class="card-header text-danger f-26">
+								<div class="tab-pane active" id="TRADINGPLATFORMS" role="tabpanel">
+										<div class="">
+											<div class="card-header text-danger f-26">
 											TRADING PLATFORMS
-										</div>
-										<div class="card-body">
+											</div>
+											<div class="card-body">
 											<form action="{{URL::to('ustaad/broker/addPlatform')}}" method="post" >
 												<div class="form-group">
 													<label for="">TRADING PLATFORMS</label>
@@ -614,7 +600,7 @@
 												</div>
 											</form>
 										</div>
-									</div>
+										</div>
 									</div>
 									<div class="tab-pane" id="TRADINGFEATURES" role="tabpanel">
 										<div class="">
@@ -947,5 +933,3 @@
 		<!-- [ Main Content ] end -->
 
 @include('admin.include.footer')
-
-

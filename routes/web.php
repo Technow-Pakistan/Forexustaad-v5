@@ -22,6 +22,7 @@ use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\BrokerTopInformationController;
 use App\Http\Controllers\BrokerBottomInformationController;
 use App\Http\Controllers\BorkerController;
+use App\Http\Controllers\BorkerPromotionsController;
 use App\Http\Controllers\BorkerNewsController;
 use App\Http\Controllers\BorkerReviewController;
 use App\Http\Controllers\AdminMemberController;
@@ -39,7 +40,19 @@ use App\Http\Controllers\MemberController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/broker-detail/{id}',[HomeController::class,'brokerDetail']);
+Route::post('/admin/apileftorder',[ApiLeftController::class,'Order']);
+
+Route::get('/brokerList',[HomeController::class,'BrokerView']);
+Route::get('/brokerList/brokerDetail/{id}',[HomeController::class,'brokerDetail']);
+Route::get('/brokerList/brokerReview/{id}',[HomeController::class,'brokerReview']);
+Route::get('/brokerList/brokerReview/ReviewDetail/{id}',[HomeController::class,'brokerReviewDetail']);
+Route::get('/brokerList/brokerNews/{id}',[HomeController::class,'brokerNews']);
+Route::get('/brokerList/brokerNews/NewsDetail/{id}',[HomeController::class,'brokerNewsDetail']);
+Route::get('/brokerList/brokerPromotion/{id}',[HomeController::class,'brokerPromotion']);
+Route::get('/brokerList/brokerPromotion/PromotionDetail/{id}',[HomeController::class,'brokerPromotionDetail']);
+
+
+
 Route::get('/advance-forex-trading-plan.html',[HtmlPagesController::class,'Page1']);
 Route::get('/advertise.html',[HtmlPagesController::class,'Page2']);
 Route::get('/always-trad-with-stop-loss.html',[HtmlPagesController::class,'Page3']);
@@ -100,7 +113,6 @@ Route::get('/blog-post.html',[BlogController::class,'Index']);
 Route::get('/Blog/{id}',[BlogController::class,'DetailBlog']);
 Route::get('/privacy-policy.html',[HomeController::class,'privacyPolicy']);
 Route::get('/term-of-services.html',[HomeController::class,'termServices']);
-Route::get('/brokerView',[HomeController::class,'BrokerView']);
 
 // Admin views
 
@@ -227,6 +239,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::get('/allbrokers',[BorkerController::class,'Index']);
     Route::get('/deleteBroker/{id}',[BorkerController::class,'delete']);
     Route::get('/editBroker/{id}',[BorkerController::class,'edit']);
+    Route::post('/editBroker/{id}',[BorkerController::class,'editBrokerCompanyInformation']);
     Route::group(['prefix' => 'brokersNews'],function(){
         Route::get('/',[BorkerNewsController::class,'Index']);
         Route::get('/new',[BorkerNewsController::class,'Add']);
@@ -234,6 +247,14 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/edit/{id}',[BorkerNewsController::class,'Edit']);
         Route::post('/edit/{id}',[BorkerNewsController::class,'EditNews']);
         Route::get('/delete/{id}',[BorkerNewsController::class,'Delete']);
+    });
+    Route::group(['prefix' => 'brokersPromotions'],function(){
+        Route::get('/',[BorkerPromotionsController::class,'Index']);
+        Route::get('/new',[BorkerPromotionsController::class,'Add']);
+        Route::post('/new',[BorkerPromotionsController::class,'AddPromotions']);
+        Route::get('/edit/{id}',[BorkerPromotionsController::class,'Edit']);
+        Route::post('/edit/{id}',[BorkerPromotionsController::class,'EditPromotions']);
+        Route::get('/delete/{id}',[BorkerPromotionsController::class,'Delete']);
     });
     Route::group(['prefix' => 'brokersReview'],function(){
         Route::get('/{id}',[BorkerReviewController::class,'Index']);

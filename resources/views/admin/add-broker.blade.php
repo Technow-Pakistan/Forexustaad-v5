@@ -12,9 +12,9 @@
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="index.html"><i class="feather icon-home"></i></a>
+										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
 									</li>
-									<li class="breadcrumb-item"><a href="all-broker.html">All Broker</a></li>
+									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/allbrokers')}}">All Broker</a></li>
 									<li class="breadcrumb-item">
 										<a href="#!">Broker Details</a>
 									</li>
@@ -81,20 +81,8 @@
 													</div>
 													<div class="col-sm-6">
 														<div class="form-group">
-														<label for="">Company Logo</label>
-															<div class="custom-file">
-																<input
-																	type="file"
-																	class="custom-file-input"
-																	id="customFile"
-																	name="file_photo"
-																	onchange="sliderimgone(this);"
-																	required
-																/>
-																<label class="custom-file-label" for="customFile"
-																	>Choose file</label
-																>
-															</div>
+															<label for="">Company Logo</label>
+															<input type="file" name="file_photo" id="file_photo" class="form-control h-100" required>
 														</div>
 													</div>
 													<div class="col-sm-6">

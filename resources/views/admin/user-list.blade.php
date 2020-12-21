@@ -11,7 +11,7 @@
 							<h5>User List</h5>
 						</div>
 						<ul class="breadcrumb">
-							<li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+							<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a></li>
 							<li class="breadcrumb-item"><a href="#!">user</a></li>
 							<li class="breadcrumb-item"><a href="#!">User list</a></li>
 						</ul>

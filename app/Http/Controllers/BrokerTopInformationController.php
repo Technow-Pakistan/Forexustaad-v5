@@ -24,8 +24,8 @@ class BrokerTopInformationController extends Controller
         if ($request->file("file_photo") != null) {
             $path = $request->file("file_photo")->store("BrokerImages");
             $companyImage = $path;
+            $data["image"] = $companyImage;
         }
-        $data["image"] = $companyImage;
         $broker = new BrokerCompanyInformationModel;
         $broker->fill($data);
         $broker->save();

@@ -13,7 +13,7 @@
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="index.html"><i class="feather icon-home"></i></a>
+										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
 									</li>
 									<li class="breadcrumb-item"><a href="#!">Brokers Review List</a></li>
 									
@@ -121,6 +121,7 @@
 											<tr>
 												<th>Broker</th>
 												<th>Broker Name</th>
+												<th>Review Title</th>
 												<th>Review Image</th>
 												
 												<th>Status</th>
@@ -138,6 +139,7 @@
 														</div>
 													</td>
 													<td>{{$broker->title}}</td>
+													<td>{{$news->ReviewTitle}}</td>
 													<td>
 														<div>
 															<img src="{{URL::to('storage/app')}}/{{$news->image}}" alt="" class="img-fluid" width="150">

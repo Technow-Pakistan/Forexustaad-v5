@@ -12,9 +12,9 @@
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="index.html"><i class="feather icon-home"></i></a>
+										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
 									</li>
-									<li class="breadcrumb-item"><a href="add-broker.html">Add Broker</a></li>
+									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/allbrokers')}}">Brokers List</a></li>
 									<li class="breadcrumb-item">
 										<a href="#!">Details</a>
 									</li>
