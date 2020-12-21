@@ -46,7 +46,7 @@
 											<tr>
 												<td>
 													<div class="d-inline-block align-middle">
-														<img src="{{URL::to('storage/app/MemberImages/avatar-5.jpg')}}" alt="user image" class="img-radius align-top m-r-15" style="width:40px;">
+														<img src="{{URL::to('public/assets/assets/img/user1.jpg')}}" alt="user image" class="img-radius align-top m-r-15" style="width:40px;">
 														<div class="d-inline-block">
 															<h6 class="m-b-0">{{$member->name}}</h6>
 															<p class="m-b-0">{{$member->email}}</p>
