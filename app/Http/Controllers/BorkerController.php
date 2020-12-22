@@ -13,6 +13,9 @@ use App\Models\BrokerTradingFeaturesModel;
 use App\Models\BrokerCustomerServicesModel;
 use App\Models\BrokerReserchEducationModel;
 use App\Models\BrokerPromotionModel;
+use App\Models\BrokerReviewModel;
+use App\Models\BrokerNewsModel;
+use App\Models\BorkerPromotionsModel;
 
 class BorkerController extends Controller
 {
@@ -58,6 +61,27 @@ class BorkerController extends Controller
         $broker = BrokerPromotionModel::where('brokerId',$id)->first();
         if ($broker != null) {
             $broker->delete();
+        }
+        $brokerReview = BrokerReviewModel::where('brokerId',$id)->get();
+        for ($i=0; $i < count($brokerReview) ; $i++) { 
+            $review = BrokerReviewModel::where('brokerId',$id)->first();
+            if ($review != null) {
+                $review->delete();
+            }
+        }
+        $brokerNews = BrokerNewsModel::where('brokerId',$id)->get();
+        for ($i=0; $i < count($brokerNews) ; $i++) { 
+            $news = BrokerNewsModel::where('brokerId',$id)->first();
+            if ($news != null) {
+                $news->delete();
+            }
+        }
+        $brokerPromotion = BorkerPromotionsModel::where('brokerId',$id)->get();
+        for ($i=0; $i < count($brokerPromotion) ; $i++) { 
+            $promotion = BorkerPromotionsModel::where('brokerId',$id)->first();
+            if ($promotion != null) {
+                $promotion->delete();
+            }
         }
         return back();
     }
