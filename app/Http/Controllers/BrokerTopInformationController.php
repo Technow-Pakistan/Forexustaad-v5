@@ -57,7 +57,7 @@ class BrokerTopInformationController extends Controller
         $broker = new BrokerPromotionModel;
         $broker->brokerId = $id;
         $broker->save();
-        return redirect("ustaad/editBroker/".$id);
+        return redirect("ustaad/editBroker/".$id)->with(['activeFormsData'=>$request->activeForm]);
     }
     public function AddDeposit(Request $request){
         if (!isset($request->brokerId)) {
@@ -68,7 +68,7 @@ class BrokerTopInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
-        return redirect("ustaad/editBroker/".$id);
+        return redirect("ustaad/editBroker/".$id)->with(['activeFormsData'=>$request->activeForm]);
     }
     public function AddCommission(Request $request){
         if (!isset($request->brokerId)) {
@@ -79,7 +79,7 @@ class BrokerTopInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
-        return redirect("ustaad/editBroker/".$id);
+        return redirect("ustaad/editBroker/".$id)->with(['activeFormsData'=>$request->activeForm]);
     }
     public function AddAccountInfo(Request $request){
         if (!isset($request->brokerId)) {
@@ -90,7 +90,7 @@ class BrokerTopInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
-        return redirect("ustaad/editBroker/".$id);
+        return redirect("ustaad/editBroker/".$id)->with(['activeFormsData'=>$request->activeForm]);
     }
     public function AddTradableAssets(Request $request){
         if (!isset($request->brokerId)) {
@@ -101,7 +101,7 @@ class BrokerTopInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
-        return redirect("ustaad/editBroker/".$id);
+        return redirect("ustaad/editBroker/".$id)->with(['activeFormsData'=>$request->activeForm]);
     }
     
 }

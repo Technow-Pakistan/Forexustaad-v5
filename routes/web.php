@@ -294,7 +294,9 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     });
     Route::group(['prefix' => 'gallery'],function(){
         Route::get('/{id}',[GalleryController::class,'Index']);
+        Route::post('/{id}',[GalleryController::class,'Add']);
         Route::get('delete/{id}',[GalleryController::class,'Delete']);
+        Route::get('edit/{id}',[GalleryController::class,'Edit']);
     });
 });
 
