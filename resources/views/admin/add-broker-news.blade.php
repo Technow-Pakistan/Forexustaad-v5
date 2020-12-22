@@ -70,7 +70,7 @@
 									<div class="form-group">
 										<label for="news-description" class="form-control-label m-0">Description (Max-character 200)</label>
 										<p class="text-right text-danger m-0 descriptionCount"></p>
-										<textarea name="shortDescription" maxlength="200" class="form-control description" id="news-description" rows="3" cols="40" required="" placeholder="Enter your Description here ...">@if($count != 0){{$brokerReview->shortDescription}}@endif</textarea>
+										<textarea name="shortDescription" maxlength="200" class="form-control description" id="news-description" rows="3" cols="40" required="" placeholder="Enter your Description here ...">@if($count != 0){{$brokerNews->shortDescription}}@endif</textarea>
 									</div>
 									<div class="form-group pt-4">
 										<label>News Content</label>

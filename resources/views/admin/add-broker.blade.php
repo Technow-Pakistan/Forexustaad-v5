@@ -38,7 +38,7 @@
 								<ul class="nav nav-pills nav-fill mb-3" role="tablist">
 									<li class="nav-item">
 										
-										<a class="nav-link" data-toggle="tab" href="#COMPANYINFORMATION" role="tab">COMPANY INFORMATION
+										<a class="nav-link active" data-toggle="tab" href="#COMPANYINFORMATION" role="tab">COMPANY INFORMATION
 										</a>
 										<div class="slide bg-c-blue"></div>
 									</li>
@@ -129,6 +129,7 @@
 													</div>
 												</div>
 												<div>
+													<input type="hidden" name="activeForm" class="form-control" value="COMPANY INFORMATION">
 													<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
 												</div>
 											</form>
@@ -154,6 +155,7 @@
 														<input type="hidden" name="brokerId" value="{{$id}}">
 													@endisset
 													<div>
+														<input type="hidden" name="activeForm" class="form-control" value="DEPOSIT & WITHDRAWAL">
 														<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
 													</div>
 												</form>
@@ -183,6 +185,7 @@
 													@endisset
 
 													<div>
+														<input type="hidden" name="activeForm" class="form-control" value="COMMISSIONS & FEES">
 														<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
 													</div>
 												</form>
@@ -335,6 +338,7 @@
 														<input type="hidden" name="brokerId" value="{{$id}}">
 													@endisset
 													<div>
+														<input type="hidden" name="activeForm" class="form-control" value="ACCOUNT INFORMATION">
 														<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
 													</div>
 												</form>
@@ -523,6 +527,7 @@
 														<input type="hidden" name="brokerId" value="{{$id}}">
 													@endisset
 													<div>
+														<input type="hidden" name="activeForm" class="form-control" value="TRADABLE ASSETS">
 														<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
 													</div>
 												</form>
@@ -596,6 +601,7 @@
 													<input type="hidden" name="brokerId" value="{{$id}}">
 												@endisset
 												<div>
+													<input type="hidden" name="activeForm" class="form-control" value="TRADING PLATFORMS">
 													<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
 												</div>
 											</form>
@@ -780,6 +786,7 @@
 														<input type="hidden" name="brokerId" value="{{$id}}">
 													@endisset
 													<div>
+														<input type="hidden" name="activeForm" class="form-control" value="TRADING FEATURES">
 														<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
 													</div>
 												</form>
@@ -813,6 +820,7 @@
 														<input type="hidden" name="brokerId" value="{{$id}}">
 													@endisset
 													<div>
+														<input type="hidden" name="activeForm" class="form-control" value="CUSTOMER SERVICE">
 														<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
 													</div>
 												</form>
@@ -886,6 +894,7 @@
 														<input type="hidden" name="brokerId" value="{{$id}}">
 													@endisset
 													<div>
+														<input type="hidden" name="activeForm" class="form-control" value="RESEARCH & EDUCATION">
 														<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
 													</div>
 												</form>
@@ -916,6 +925,7 @@
 														<input type="hidden" name="brokerId" value="{{$id}}">
 													@endisset
 													<div>
+														<input type="hidden" name="activeForm" class="form-control" value="PROMOTIONS">
 														<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
 													</div>
 												</form>
