@@ -6,7 +6,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Forex Ustaad</title>
+    <meta name="description" content="Forexustaad is the best platforms for learning free forex trading in urdu/hindi. So, join our free forex training now and reshape your future with us.
+">
+    <title>Forex Ustaad:Free Forex Training In Urdu/Hindi | Forexustaad</title>
     <!-- Fav Icon -->
     <link rel="icon" type="image/png" href="{{URL::to('/storage/app')}}/{{$MainFavicon->favicon}}">
     <!-- Dependency Styles -->
@@ -39,10 +41,12 @@
 <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/cd218c9f98ecf24ef623b52af/867964901ebaea03aa7601a97.js");</script>
 
 <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+
+<script data-ad-client="ca-pub-4965167409528757" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 
 <body>
-    
+
     <!-- Preloader starts -->
     <!-- <div id="loading">
   <img id="loading-image" src="assets/img/preloader.gif" alt="Loading..." />
@@ -86,7 +90,7 @@
                                 <!-- <li><a href="#"><i class="fa fa-briefcase"></i></a></li>
                                 <li><a href="#"><i class="fa fa-clock-o"></i></a></li> -->
                         </ul>
-                        
+
                     </div>
                     <div class="col-sm-6 col-right">
                     	<div class="d-flex justify-content-end align-items-center h-100">
@@ -95,10 +99,10 @@
                                     <a class="nav-link btn btn-outline-primary LoginButton" href="#" data-toggle="modal" data-target="#requestQuoteModal" href="javascript_void(0)">Login</a>
                                     &nbsp;|&nbsp;
                                     <a class="nav-link btn btn-outline-primary RegistrationButton" href="#" data-toggle="modal" data-target="#requestQuoteModal" href="javascript_void(0)">Register</a>
-                                    
+
                                 </div>
                             @endif
-                           
+
 	                        <div class="lang-button">
 	                            <a href="#">English</a>
 	                            <ul class="dropdown-list">
@@ -108,9 +112,9 @@
 	                            </ul>
                             </div>
                             @if(Session::has('client'))
-                            
+
                                 @php
-                                    $clientAccountData =Session::get('client');        
+                                    $clientAccountData =Session::get('client');
                                 @endphp
                                 <div class="after-login">
                                     <div class="dropdown">
@@ -138,7 +142,7 @@
                         <div class="a-img">
                             @if($headerLeftBanner->banner != null)
                                 <a href="{{$headerLeftBanner->link}}">
-                                    <img src="{{URL::to('/storage/app')}}/{{$headerLeftBanner->banner}}">   
+                                    <img src="{{URL::to('/storage/app')}}/{{$headerLeftBanner->banner}}">
                                 </a>
                             @else
                                 @php
@@ -157,7 +161,7 @@
                     	<div class="a-img">
                             @if($headerRightBanner->banner != null)
                                 <a href="{{$headerRightBanner->link}}">
-                                    <img src="{{URL::to('/storage/app')}}/{{$headerRightBanner->banner}}">   
+                                    <img src="{{URL::to('/storage/app')}}/{{$headerRightBanner->banner}}">
                                 </a>
                             @else
                                 @php
@@ -172,7 +176,7 @@
         <header>
             <div class="container">
                 <nav class="navbar navbar-expand-lg pl-0 pr-0 position-relative sticky-top">
-                    
+
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon cs-menu"></span>
                     </button>
