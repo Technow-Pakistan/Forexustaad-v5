@@ -37,35 +37,35 @@
 											@endisset
 								<ul class="nav nav-pills nav-fill mb-3" role="tablist">
 									<li class="nav-item">
-										<a class="nav-link active" data-toggle="tab" href="#COMPANYINFORMATION
+										<a class="nav-link @if(Session::has('activeFormsData')){{Session::get('activeFormsData') == 'COMPANY INFORMATION' ? 'active' : ''}}@else active @endif" data-toggle="tab" href="#COMPANYINFORMATION
 										" role="tab">COMPANY INFORMATION
 										</a>
 										<div class="slide bg-c-blue"></div>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" data-toggle="tab" href="#DEPOSIT" role="tab">DEPOSIT & WITHDRAWAL
+										<a class="nav-link @if(Session::has('activeFormsData')){{Session::get('activeFormsData') == 'DEPOSIT & WITHDRAWAL' ? 'active' : ''}}@endif" data-toggle="tab" href="#DEPOSIT" role="tab">DEPOSIT & WITHDRAWAL
 										</a>
 										<div class="slide bg-c-green"></div>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" data-toggle="tab" href="#COMMISSIONS" role="tab">COMMISSIONS & FEES
+										<a class="nav-link @if(Session::has('activeFormsData')){{Session::get('activeFormsData') == 'COMMISSIONS & FEES' ? 'active' : ''}}@endif" data-toggle="tab" href="#COMMISSIONS" role="tab">COMMISSIONS & FEES
 										</a>
 										<div class="slide bg-c-red"></div>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" data-toggle="tab" href="#ACCOUNT" role="tab">ACCOUNT INFORMATION
+										<a class="nav-link @if(Session::has('activeFormsData')){{Session::get('activeFormsData') == 'ACCOUNT INFORMATION' ? 'active' : ''}}@endif" data-toggle="tab" href="#ACCOUNT" role="tab">ACCOUNT INFORMATION
 										</a>
 										<div class="slide bg-c-yellow"></div>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" data-toggle="tab" href="#TRADABLE" role="tab">TRADABLE ASSETS</a>
+										<a class="nav-link @if(Session::has('activeFormsData')){{Session::get('activeFormsData') == 'TRADABLE ASSETS' ? 'active' : ''}}@endif" data-toggle="tab" href="#TRADABLE" role="tab">TRADABLE ASSETS</a>
 										<div class="slide bg-c-yellow"></div>
 									</li>
 									
 								</ul>
 								<!-- Tab panes -->
 								<div class="tab-content">
-								<div class="tab-pane active" id="COMPANYINFORMATION" role="tabpanel">
+									<div class="tab-pane @if(Session::has('activeFormsData')){{Session::get('activeFormsData') == 'COMPANY INFORMATION' ? 'active' : ''}}@else active @endif" id="COMPANYINFORMATION" role="tabpanel">
 										<div class="">
 											<div class="card-header text-danger f-26 ">
 												COMPANY INFORMATION
@@ -129,13 +129,14 @@
 													</div>
 												</div>
 												<div>
+													<input type="hidden" name="activeForm" class="form-control" value="COMPANY INFORMATION">
 													<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
 												</div>
 											</form>
 										</div>
 										</div>
 									</div>
-									<div class="tab-pane" id="DEPOSIT" role="tabpanel">
+									<div class="tab-pane @if(Session::has('activeFormsData')){{Session::get('activeFormsData') == 'DEPOSIT & WITHDRAWAL' ? 'active' : ''}}@endif" id="DEPOSIT" role="tabpanel">
 										<div class="">
 											<div class="card-header text-danger f-26">
 												DEPOSIT & WITHDRAWAL
@@ -154,13 +155,14 @@
 														<input type="hidden" name="brokerId" value="{{$id}}">
 													@endisset
 													<div>
+														<input type="hidden" name="activeForm" class="form-control" value="DEPOSIT & WITHDRAWAL">
 														<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
 													</div>
 												</form>
 											</div>
 										</div>
 									</div>
-									<div class="tab-pane" id="COMMISSIONS" role="tabpanel">
+									<div class="tab-pane @if(Session::has('activeFormsData')){{Session::get('activeFormsData') == 'COMMISSIONS & FEES' ? 'active' : ''}}@endif" id="COMMISSIONS" role="tabpanel">
 										<div class="">
 											<div class="card-header text-danger f-26">
 												COMMISSIONS & FEES
@@ -183,13 +185,14 @@
 													@endisset
 
 													<div>
+														<input type="hidden" name="activeForm" class="form-control" value="COMMISSIONS & FEES">
 														<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
 													</div>
 												</form>
 											</div>
 										</div>
 									</div>
-									<div class="tab-pane" id="ACCOUNT" role="tabpanel">
+									<div class="tab-pane @if(Session::has('activeFormsData')){{Session::get('activeFormsData') == 'ACCOUNT INFORMATION' ? 'active' : ''}}@endif" id="ACCOUNT" role="tabpanel">
 										<div class="">
 											<div class="card-header text-danger f-26">
 												ACCOUNT INFORMATION
@@ -335,13 +338,14 @@
 														<input type="hidden" name="brokerId" value="{{$id}}">
 													@endisset
 													<div>
+														<input type="hidden" name="activeForm" class="form-control" value="ACCOUNT INFORMATION">
 														<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
 													</div>
 												</form>
 											</div>
 										</div>
 									</div>
-									<div class="tab-pane" id="TRADABLE" role="tabpanel">
+									<div class="tab-pane @if(Session::has('activeFormsData')){{Session::get('activeFormsData') == 'TRADABLE ASSETS' ? 'active' : ''}}@endif" id="TRADABLE" role="tabpanel">
 										<div class="">
 											<div class="card-header text-danger f-26">
 												TRADABLE ASSETS
@@ -523,6 +527,7 @@
 														<input type="hidden" name="brokerId" value="{{$id}}">
 													@endisset
 													<div>
+														<input type="hidden" name="activeForm" class="form-control" value="TRADABLE ASSETS">
 														<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
 													</div>
 												</form>
@@ -540,36 +545,36 @@
 								<!-- Nav tabs -->
 								<ul class="nav nav-pills nav-fill mb-3" role="tablist">
 									<li class="nav-item">
-										<a class="nav-link active" data-toggle="tab" href="#TRADINGPLATFORMS" role="tab">TRADING PLATFORMS
+										<a class="nav-link @if(Session::has('activeFormsBottomData')){{Session::get('activeFormsBottomData') == 'TRADING PLATFORMS' ? 'active' : ''}}@else active @endif" data-toggle="tab" href="#TRADINGPLATFORMS" role="tab">TRADING PLATFORMS
 
 										</a>
 										<div class="slide bg-c-blue"></div>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" data-toggle="tab" href="#TRADINGFEATURES
+										<a class="nav-link @if(Session::has('activeFormsBottomData')){{Session::get('activeFormsBottomData') == 'TRADING FEATURES' ? 'active' : ''}}@endif" data-toggle="tab" href="#TRADINGFEATURES
 										" role="tab">TRADING FEATURES
 										</a>
 										<div class="slide bg-c-green"></div>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" data-toggle="tab" href="#CUSTOMER" role="tab">CUSTOMER SERVICE
+										<a class="nav-link @if(Session::has('activeFormsBottomData')){{Session::get('activeFormsBottomData') == 'CUSTOMER SERVICE' ? 'active' : ''}}@endif" data-toggle="tab" href="#CUSTOMER" role="tab">CUSTOMER SERVICE
 										</a>
 										<div class="slide bg-c-red"></div>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" data-toggle="tab" href="#RESEARCH" role="tab">RESEARCH & EDUCATION
+										<a class="nav-link @if(Session::has('activeFormsBottomData')){{Session::get('activeFormsBottomData') == 'RESEARCH & EDUCATION' ? 'active' : ''}}@endif" data-toggle="tab" href="#RESEARCH" role="tab">RESEARCH & EDUCATION
 										</a>
 										<div class="slide bg-c-yellow"></div>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" data-toggle="tab" href="#PROMOTIONS" role="tab">PROMOTIONS</a>
+										<a class="nav-link @if(Session::has('activeFormsBottomData')){{Session::get('activeFormsBottomData') == 'PROMOTIONS' ? 'active' : ''}}@endif" data-toggle="tab" href="#PROMOTIONS" role="tab">PROMOTIONS</a>
 										<div class="slide bg-c-yellow"></div>
 									</li>
 									
 								</ul>
 								<!-- Tab panes -->
 								<div class="tab-content">
-								<div class="tab-pane active" id="TRADINGPLATFORMS" role="tabpanel">
+									<div class="tab-pane @if(Session::has('activeFormsBottomData')){{Session::get('activeFormsBottomData') == 'TRADING PLATFORMS' ? 'active' : ''}}@else active @endif" id="TRADINGPLATFORMS" role="tabpanel">
 										<div class="">
 											<div class="card-header text-danger f-26">
 											TRADING PLATFORMS
@@ -596,13 +601,14 @@
 													<input type="hidden" name="brokerId" value="{{$id}}">
 												@endisset
 												<div>
+													<input type="hidden" name="activeForm" class="form-control" value="TRADING PLATFORMS">
 													<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
 												</div>
 											</form>
 										</div>
 										</div>
 									</div>
-									<div class="tab-pane" id="TRADINGFEATURES" role="tabpanel">
+									<div class="tab-pane @if(Session::has('activeFormsBottomData')){{Session::get('activeFormsBottomData') == 'TRADING FEATURES' ? 'active' : ''}}@endif" id="TRADINGFEATURES" role="tabpanel">
 										<div class="">
 											<div class="card-header text-danger f-26">
 												TRADING FEATURES
@@ -780,13 +786,14 @@
 														<input type="hidden" name="brokerId" value="{{$id}}">
 													@endisset
 													<div>
+														<input type="hidden" name="activeForm" class="form-control" value="TRADING FEATURES">
 														<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
 													</div>
 												</form>
 											</div>
 										</div>
 									</div>
-									<div class="tab-pane" id="CUSTOMER" role="tabpanel">
+									<div class="tab-pane @if(Session::has('activeFormsBottomData')){{Session::get('activeFormsBottomData') == 'CUSTOMER SERVICE' ? 'active' : ''}}@endif" id="CUSTOMER" role="tabpanel">
 										<div class="">
 											<div class="card-header text-danger f-26">
 												CUSTOMER SERVICE
@@ -813,13 +820,14 @@
 														<input type="hidden" name="brokerId" value="{{$id}}">
 													@endisset
 													<div>
+														<input type="hidden" name="activeForm" class="form-control" value="CUSTOMER SERVICE">
 														<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
 													</div>
 												</form>
 											</div>
 										</div>
 									</div>
-									<div class="tab-pane" id="RESEARCH" role="tabpanel">
+									<div class="tab-pane @if(Session::has('activeFormsBottomData')){{Session::get('activeFormsBottomData') == 'RESEARCH & EDUCATION' ? 'active' : ''}}@endif" id="RESEARCH" role="tabpanel">
 										<div class="">
 											<div class="card-header text-danger f-26">
 												RESEARCH & EDUCATION
@@ -886,13 +894,14 @@
 														<input type="hidden" name="brokerId" value="{{$id}}">
 													@endisset
 													<div>
+														<input type="hidden" name="activeForm" class="form-control" value="RESEARCH & EDUCATION">
 														<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
 													</div>
 												</form>
 											</div>
 										</div>
 									</div>
-									<div class="tab-pane" id="PROMOTIONS" role="tabpanel">
+									<div class="tab-pane @if(Session::has('activeFormsBottomData')){{Session::get('activeFormsBottomData') == 'PROMOTIONS' ? 'active' : ''}}@endif" id="PROMOTIONS" role="tabpanel">
 										<div class="">
 											<div class="card-header text-danger f-26">
 												PROMOTIONS
@@ -916,6 +925,7 @@
 														<input type="hidden" name="brokerId" value="{{$id}}">
 													@endisset
 													<div>
+														<input type="hidden" name="activeForm" class="form-control" value="PROMOTIONS">
 														<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
 													</div>
 												</form>

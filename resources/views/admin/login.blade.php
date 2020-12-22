@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
-
 <head>
 
 	<title>Forexustaad Admin Panel</title>
@@ -19,9 +16,6 @@
 
 	<!-- vendor css -->
 	<link rel="stylesheet" href="{{URL::to('/public/assets/assets/css/adminstyle.css')}}">
-	
-	
-
 
 </head>
 
@@ -73,9 +67,5 @@
 		<script defer src="{{URL::to('/public/assets/node_modules/bootstrap/dist/js/bootstrap.js')}}"></script> 
 <!-- <script src="{{URL::to('/public/AdminAssets/assets/js/waves.min.js')}}"></script> -->
 
-
-
 </body>
-
-
 </html>
