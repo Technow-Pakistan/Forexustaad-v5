@@ -31,6 +31,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HtmlPagesController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\MainWebinarController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -107,6 +108,7 @@ Route::post('/pro-img-disk.php',[HomeController::class,'ImageSrc']);
 Route::post('/comment1',[CommentController::class,'Add']);
 Route::get('/',[HomeController::class,'Index']);
 Route::get('/construction',[HomeController::class,'Construction']);
+Route::get('/webinar',[HomeController::class,'webinar']);
 Route::post('/clientRegistration',[HomeController::class,'RegistrationProcess']);
 Route::post('/clientLogin',[HomeController::class,'LoginProcess']);
 Route::get('/clientLogout',[HomeController::class,'LogoutProcess']);
@@ -124,6 +126,15 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::get('/dashboard',[AdminController::class,'Dashboard']);
     Route::get('/logout',[AdminController::class,'Logout']);  
     
+    Route::group(['prefix' => 'webinar'],function(){
+        Route::get('/',[MainWebinarController::class,'Index']);
+        Route::get('/add',[MainWebinarController::class,'Add']);
+        Route::post('/add',[MainWebinarController::class,'AddWebinar']);
+        Route::get('/delete/{id}',[MainWebinarController::class,'delete']);
+        Route::get('/edit/{id}',[MainWebinarController::class,'Edit']); 
+        Route::post('/edit/{id}',[MainWebinarController::class,'EditWebinar']);      
+    });
+
     Route::group(['prefix' => 'firstNav'],function(){
         Route::get('/',[FirstNavBarController::class,'Index']);
         Route::post('/',[FirstNavBarController::class,'create']);
@@ -243,6 +254,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::post('/editBroker/{id}',[BorkerController::class,'editBrokerCompanyInformation']);
     Route::group(['prefix' => 'brokersNews'],function(){
         Route::get('/',[BorkerNewsController::class,'Index']);
+        Route::get('/all/{id}',[BorkerNewsController::class,'All']);
         Route::get('/new',[BorkerNewsController::class,'Add']);
         Route::post('/new',[BorkerNewsController::class,'AddNews']);
         Route::get('/edit/{id}',[BorkerNewsController::class,'Edit']);
@@ -251,6 +263,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     });
     Route::group(['prefix' => 'brokersPromotions'],function(){
         Route::get('/',[BorkerPromotionsController::class,'Index']);
+        Route::get('/all/{id}',[BorkerPromotionsController::class,'All']);
         Route::get('/new',[BorkerPromotionsController::class,'Add']);
         Route::post('/new',[BorkerPromotionsController::class,'AddPromotions']);
         Route::get('/edit/{id}',[BorkerPromotionsController::class,'Edit']);

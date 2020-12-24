@@ -19,6 +19,7 @@ use App\Models\ApiRightModel;
 use App\Models\FirstNavBarModel;
 use App\Models\FooterCopyRightModel;
 use App\Models\BlogPostModel;
+use App\Models\MainWebinarModel;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -57,6 +58,7 @@ class AppServiceProvider extends ServiceProvider
         view()->share("AllRightApi",ApiRightModel::orderBy('id','desc')->get());
         view()->share("SocialMediaLink",FirstNavBarModel::all());
         view()->share("copyRight",FooterCopyRightModel::where('id',1)->first());
+        view()->share("latestWebinars", MainWebinarModel::orderBy('id','desc')->take(5)->get());
         view()->share("LatestBlogsData",BlogPostModel::orderBy('id','desc')->where('status',1)->where('pending',1)->where('stickToTop',1)->take(5)->get());
     }
 }

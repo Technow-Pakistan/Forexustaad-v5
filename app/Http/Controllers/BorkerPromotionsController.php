@@ -8,10 +8,13 @@ use App\Models\BrokerCompanyInformationModel;
 use App\Models\BorkerPromotionsModel;
 
 class BorkerPromotionsController extends Controller
-{
-    
+{    
     public function Index(Request $request){
-        $brokerNews = BorkerPromotionsModel::all();
+        $brokers = BrokerCompanyInformationModel::all();
+        return view('admin.broker-promotion',compact('brokers'));
+    }
+    public function All(Request $request, $id){
+        $brokerNews = BorkerPromotionsModel::where('brokerId',$id)->get();
         return view('admin.all-broker-promotion',compact('brokerNews'));
     }
     public function Add(Request $request){

@@ -72,6 +72,11 @@
 										<p class="text-right text-danger m-0 descriptionCount"></p>
 										<textarea name="shortDescription" maxlength="200" class="form-control description" id="news-description" rows="3" cols="40" required="" placeholder="Enter your Description here ...">@if($count != 0){{$brokerReview->shortDescription}}@endif</textarea>
 									</div>
+									<hr>
+										<input type="file" name="srcImage" id="srcImage" class="srcImage">
+										<input type="hidden" name="filePath" id="filePath" class="filePath" value="BrokerImages">
+									<br>
+									<hr>
 									<div class="form-group pt-4">
 										<label>Review Content</label>
 										<textarea
@@ -128,6 +133,29 @@
 			}
 				len = 200 - len;
 				$(".descriptionCount").html("remaining: " + len);
+			});
+
+			
+			// file src get
+			$(document).ready(function() {
+				$('#srcImage').change(function(){
+					var file_data = $('#srcImage').prop('files')[0];  
+        			var file_path = $('#filePath').val();   
+					var form_data = new FormData();                  
+					form_data.append('file', file_data);        
+        			form_data.append('filePath', file_path);
+					$.ajax({
+						url: "{{URL::to('/pro-img-disk.php')}}",
+						type: "POST",
+						data: form_data,
+						contentType: false,
+						cache: false,
+						processData:false,
+						success: function(data){
+						alert(data)
+						}
+					});
+				});
 			});
 		</script>
 

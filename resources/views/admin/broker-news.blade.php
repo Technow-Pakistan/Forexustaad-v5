@@ -1,5 +1,4 @@
 @include('admin.include.header')
-
 		<!-- [ Main Content ] start -->
 		<section class="pcoded-main-container">
 			<div class="pcoded-content">
@@ -9,13 +8,13 @@
 						<div class="row align-items-center">
 							<div class="col-md-12">
 								<div class="page-header-title">
-									<h5 class="m-b-10">Brokers Promotions</h5>
+									<h5 class="m-b-10">Brokers News List</h5>
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
 										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
 									</li>
-									<li class="breadcrumb-item"><a href="#!">Brokers Promotions</a></li>
+									<li class="breadcrumb-item"><a href="#!">Brokers News List</a></li>
 									
 								</ul>
 							</div>
@@ -29,7 +28,7 @@
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-header">
-                                Broker News
+
 							</div>	
 							<div class="card-body">
 								<div class="row">
@@ -121,39 +120,33 @@
 											<tr>
 												<th>Broker</th>
 												<th>Broker Name</th>
-												<th>Promotion Title</th>
-												<th>Promotion Image</th>
-												
+												<th>Broker News</th>
 												<th>Status</th>
 											</tr>
 										</thead>
 										<tbody>
-											@foreach($brokerNews as $news)
-												@php
-													$broker = $news->GetBrokerInfo();
-												@endphp
-												<tr  draggable="true">
-													<td>
-														<div>
-															<img src="{{URL::to('storage/app')}}/{{$broker->image}}" alt="" class="img-fluid" width="150">
-														</div>
-													</td>
-													<td>{{$broker->title}}</td>
-													<td>{{$news->PromotionTitle}}</td>
-													<td>
-														<div>
-															<img src="{{URL::to('storage/app')}}/{{$news->image}}" alt="" class="img-fluid" width="150">
-														</div>
-													</td>
-												
-													<td>
-														<span class="badge badge-light-success">Active</span>
-														<div class="overlay-edit">
-															<a href="{{URL::to('/ustaad/brokersPromotions/edit')}}/{{$news->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
-															<a href="{{URL::to('/ustaad/brokersPromotions/delete')}}/{{$news->id}}"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
-														</div>
-													</td>
-												</tr>
+											@foreach($brokers as $data)
+                                                @php
+                                                    $newsData = $data->getNewsInfo();
+                                                @endphp
+                                            @if($newsData)
+											<tr  draggable="true">
+												<td>
+													<div>
+														<img src="{{URL::to('storage/app')}}/{{$data->image}}" alt="" class="img-fluid" width="150">
+													</div>
+												</td>
+												<td>{{$data->title}}</td>
+												<td><a class="text-danger" href="{{URL::to('ustaad/brokersNews/all')}}/{{$data->id}}"> Click For News </a></td>
+												<td>
+													<span class="badge badge-light-success">Active</span>
+													<div class="overlay-edit">
+														<a href="{{URL::to('ustaad/editBroker')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
+														<a href="{{URL::to('ustaad/deleteBroker')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
+													</div>
+												</td>
+											</tr>
+                                            @endif
 											@endforeach
 										</tbody>
 										
@@ -246,5 +239,7 @@
   });
 })();
 </script>
+	</body>
+</html>
 
 
