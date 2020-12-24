@@ -168,17 +168,17 @@
                                             <div class="vid-container">
                                                 <iframe id="vid_frame"
                                                     src="https://www.youtube.com/embed/X9JClP-XMyc?rel=0&showinfo=0&autohide=1&autoplay=1"
-                                                    frameborder="0" width="560" height="315" allow=""
+                                                    frameborder="0" width="100%" height="315" allow=""
                                                     allowfullscreen></iframe>
                                             </div>
                                         </section>
 
                                         <section id="extra wrapper"
-                                            style="position: relative; padding-right: 32px; padding-left: 32px; background: #f6f6f6; height:152px;">
+                                            style="position: relative; padding-right: 44px; padding-left: 48px; background: #f6f6f6; height:152px;">
 
                                             <!-- Swiper -->
                                             <nav class="swiper-container swiper-container-videos slider-produtos-destaque"
-                                                style="top: 30px;;">
+                                                style="top: 8px;">
                                                 <ol class="swiper-wrapper" style="list-style-type: none; padding: 0px;">
                                                     <li class="swiper-slide" style="width: 130px;">
                                                         <a class="" href="javascript:void();"
@@ -969,53 +969,45 @@ $opinion_analysis = '';
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="news_responsive webinar_responsive bullet_style wow animated fadeInUp">
-                                        <?php
-$webinar = [
-    ['src' => 'video1.mp4', 'url' => '', 'anchor_text' => 'The great trend trading agency'],
-    ['src' => 'video1.mp4', 'url' => '', 'anchor_text' => 'Opening Event  Of Pakistan'],
-    ['src' => 'video1.mp4', 'url' => '', 'anchor_text' => 'The great trend trading agency'],
-    ['src' => 'video1.mp4', 'url' => '', 'anchor_text' => 'The great trend trading agency']
-];
-$recent_webinar = '';
-?>
-@foreach ($webinar as $webinars_val => $value) 
-        $recent_webinar .='
+                                  
+@foreach ($latestWebinars as $data) 
                 <div class="slide position-relative news">
 
                     <div class="new_img">
-                        <video src="{{URL::to('public/assets/assets/img/video')}}/{{$value['src']}}" controls width="100%"></video>
+                        <img src="{{URL::to('storage/app')}}/{{$data->image}}" width="100%"></video>
                     </div>
-                    <!-- <div class="new_description">
-                    <a href="{{$value['url']}}">
-                        <i class="fa fa-link"></i>
-                        </a>
-                    </div> -->
                     <div class="new_description-details">
 
 
                     <h6>
-                        <a href="{{$value['url']}}">
-                                {{$value['anchor_text']}}
+                        <a href="{{$data->link}}" target="_blank">
+                                {{$data->title}}
                             </a>
                     </h6>
                     <p>
-                        Transforming your business with a collaborative approach.
+                        {{$data->description}}
                     </p>
                     <div class="webinar-info">
                      <p class="m-0 date"> 
-                     Jan 23, 2020 - 8:00 AM EST 
+                                                @php
+                                                    $dateData = date_create($data->date);
+                                                    $date  = date_format($dateData,"d M");
+                                                    $timeData = date_create($data->time);
+                                                    $time  = date_format($timeData,"H:i A");
+                                                @endphp
+                        {{$date}} - {{$time}}
                      </p>
                      <p class="m-0 go-icon"> 
-                     <i class="fa fa-arrow-right"></i>
+                        <a href="{{$data->link}}" target="_blank"><i class="fa fa-arrow-right text-light"></i></a>
                      </p>
                      </div>
                     </div>
                 </div>
 @endforeach
-                                        <?php echo ($recent_webinar); ?>
+                                        
                                     </div>
                                     <div class="new_btn text-right wow animated fadeInUp">
-                                        <a href="">Show More Webinars <i class="fa fa-chevron-right"></i></a>
+                                        <a href="{{URL::to('/webinar')}}">Show More Webinars <i class="fa fa-chevron-right"></i></a>
                                     </div>
                                 </div>
                             </div>

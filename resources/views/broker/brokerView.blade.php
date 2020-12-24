@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 @php
-                    if(Session::has('error')){ 
+                    if(Session::has('error')){
                         $error =Session::get('error');
                     }
                     @endphp
@@ -19,6 +19,19 @@
                 </div>
                 <div class="col-lg-6 col-md-12 order-1 order-lg-2">
                     <div class="row">
+                  		<div class="col-sm-12">
+                    		<div class="news_us">
+                        		<div class="content_area_heading large-heading text-center">
+
+                            		<h1 class="heading_title wow animated fadeInUp">
+                               			Our Brokers
+                            		</h1>
+                            		<div class="heading_border wow animated fadeInUp">
+                                		<span class="one"></span><span class="two"></span><span class="three"></span>
+                            		</div>
+                        		</div>
+                    		</div>
+                        </div>
                         @foreach($totalData as $data)
                             @php
                                 $deposit = $data->GetAccountInfo();
@@ -68,15 +81,15 @@
                                         <div class="form-group">
                                         <div class="link pt-3">
                                             <a href="{{URL::to('/brokerList/brokerDetail')}}/{{$title}}" class="text-danger">Visit Broker
-                                                
+
                                             </a>
-                                            
+
                                         </div>
                                         <span class="f-10">Your capital is at risk
 
                                                 </span>
                                         </div>
-                                        
+
                                     </div>
                                     <div class="col-lg-12 col-sm-12 col-12 col-xl-12">
                                         <div class="link">
@@ -86,10 +99,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            
+
                             </div>
                         @endforeach
-                    
+
                     </div>
 
 
