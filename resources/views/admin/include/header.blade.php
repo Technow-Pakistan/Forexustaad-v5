@@ -39,244 +39,251 @@
 			<div class="navbar-wrapper">
 				<div class="navbar-content scroll-div">
 					<ul class="nav pcoded-inner-navbar">
-						<li class="nav-item pcoded-menu-caption">
-							<label>Dashboard Design</label>
-						</li>
-						<li class="nav-item">
-							<a href="{{URL::to('/ustaad/dashboard')}}" class="nav-link"
-								><span class="pcoded-micon"
-									><i class="feather icon-home"></i></span
-								><span class="pcoded-mtext">Dashboard</span></a
-							>
-						</li>
-						<li class="nav-item pcoded-menu-caption">
-							<label>Posts Area</label>
-						</li>
-						<li class="nav-item pcoded-hasmenu">
-							<a href="#!" class="nav-link"
-								><span class="pcoded-micon"
-									><i class="fab fa-blogger"></i></span
-								><span class="pcoded-mtext">Posts</span></a
-							>
-							<ul class="pcoded-submenu">
-								<li><a href="{{URL::to('ustaad/post/viewAll')}}">All Posts</a></li>
-								<li><a href="{{URL::to('ustaad/allCategories')}}">Add New</a></li>
-								<li><a href="{{URL::to('ustaad/category')}}">Categories</a></li>
-								<li><a href="{{URL::to('ustaad/tag')}}">Tags</a></li>
-								<li><a href="{{URL::to('ustaad/comment')}}">Comments</a></li>
-							</ul>
-						</li>
-						<li class="nav-item pcoded-menu-caption">
-							<label>Webinar Area</label>
-						</li>
-						<li class="nav-item pcoded-hasmenu">
-							<a href="#!" class="nav-link"
-								><span class="pcoded-micon"
-									><i class="fab fa-blogger"></i></span
-								><span class="pcoded-mtext">Webinar</span></a
-							>
-							<ul class="pcoded-submenu">
-								<li><a href="{{URL::to('ustaad/webinar')}}">All Webinar</a></li>
-								<li><a href="{{URL::to('ustaad/webinar/add')}}">Add Webinar</a></li>
-							</ul>
-						</li>
-						<li class="nav-item pcoded-menu-caption">
-							<label>Navigation</label>
-						</li>
-						<li class="nav-item pcoded-hasmenu">
-							<a href="#!" class="nav-link"
-								><span class="pcoded-micon"
-									><i class="feather icon-box"></i></span
-								><span class="pcoded-mtext">Header</span></a
-							>
-							<ul class="pcoded-submenu">
-								<li><a href="{{URL::to('ustaad/firstNav')}}">First Nav Bar</a></li>
-								<li><a href="{{URL::to('ustaad/navMenu')}}">Nav Menus</a></li>
-								<li><a href="{{URL::to('ustaad/logo-panel')}}">Logo Panel</a></li>
-								<li><a href="{{URL::to('ustaad/sliding-images')}}">Sliding Images</a></li>
-							</ul>
-						</li>
-						<li class="nav-item">
-							<a href="{{URL::to('ustaad/edit-footer
-							')}}" class="nav-link"
-								><span class="pcoded-micon"
-									><i class="feather icon-box"></i></span
-								><span class="pcoded-mtext">Footer</span></a
-							>
-						</li>
-						<li class="nav-item pcoded-menu-caption">
-							<label>Banner Panel</label>
-						</li>
-						<li class="nav-item pcoded-hasmenu">
-							<a href="#!" class="nav-link"
-								><span class="pcoded-micon"
-									><i class="feather icon-layers"></i></span
-								><span class="pcoded-mtext">Banners</span></a
-							>
-							<ul class="pcoded-submenu">
-								<li><a href="{{URL::to('ustaad/banner/header-banner')}}">Header Banner</a></li>
-								<li><a href="{{URL::to('ustaad/banner/left-side-banner')}}">Left Side Bar Banner</a></li>
-								<li><a href="{{URL::to('ustaad/banner/right-side-banner')}}">Right Side Bar</a></li>
-							</ul>
-						</li>
-						<li class="nav-item pcoded-menu-caption">
-							<label>Api Panel</label>
-						</li>
-						<li class="nav-item pcoded-hasmenu">
-							<a href="#!" class="nav-link"
-								><span class="pcoded-micon"
-									><i class="feather icon-layers"></i></span
-								><span class="pcoded-mtext">Api</span></a
-							>
-							<ul class="pcoded-submenu">
-								<li><a href="{{URL::to('ustaad/api/api-home')}}">API Home Page</a></li>
-								<li><a href="{{URL::to('ustaad/api/api-left')}}">API Left Side Bar </a></li>
-								<li><a href="{{URL::to('ustaad/api/api-right')}}">API Right Side</a></li>
-							</ul>
-						</li>
-						<li class="nav-item pcoded-menu-caption">
-							<label>Broker Area</label>
-						</li>
-						<li class="nav-item pcoded-hasmenu">
-							<a href="#!" class="nav-link"
-								><span class="pcoded-micon"
-									><i class="fab fa-blogger"></i></span
-								><span class="pcoded-mtext">Brokers</span></a
-							>
-							<ul class="pcoded-submenu">
-								<li><a href="{{URL::to('ustaad/allbrokers')}}">All Brokers</a></li>
-								<li><a href="{{URL::to('ustaad/broker/add')}}">Add New Broker</a></li>
-								<li><a href="{{URL::to('/ustaad/brokerReview/new')}}">Add Broker Review</a></li>
-								<li><a href="{{URL::to('/ustaad/brokersPromotions')}}">All Broker Promotion</a></li>
-								<li><a href="{{URL::to('/ustaad/brokersPromotions/new')}}">Add Promotion</a></li>
-								<li><a href="{{URL::to('/ustaad/brokersNews')}}">All Broker News</a></li>
-								<li><a href="{{URL::to('/ustaad/brokersNews/new')}}">Add Broker News</a></li>
-								
-								
-							</ul>
-						</li>
-						<li class="nav-item pcoded-menu-caption">
-							<label>User</label>
-						</li>
-						<li class="nav-item pcoded-hasmenu">
-							<a href="#!" class="nav-link"
-								><span class="pcoded-micon"
-									><i class="feather icon-users"></i></span
-								><span class="pcoded-mtext">User</span></a
-							>
-							<ul class="pcoded-submenu">
-								<li><a href="{{URL::to('ustaad/member/userList')}}">User List</a></li>
-								<li><a href="{{URL::to('ustaad/member/clientList')}}">Client User List</a></li>
-							</ul>
-						</li>
-						<li class="nav-item pcoded-menu-caption">
-							<label>SignUp</label>
-						</li>
-						<li class="nav-item pcoded-hasmenu">
-							<a href="#!" class="nav-link"
-								><span class="pcoded-micon"
-									><i class="feather icon-lock"></i></span
-								><span class="pcoded-mtext">Authentication</span></a
-							>
-							<ul class="pcoded-submenu">
-								<li><a href="auth-signup.html" target="_blank">Sign up</a></li>
-								<li>
-									<a href="auth-signup-img-side.html" target="_blank"
-										>Sign up v2</a
-									>
-								</li>
-								<li><a href="auth-signin.html" target="_blank">Sign in</a></li>
-								<li>
-									<a href="auth-signin-img-side.html" target="_blank"
-										>Sign in v2</a
-									>
-								</li>
-								<li>
-									<a href="auth-reset-password.html" target="_blank"
-										>Reset password</a
-									>
-								</li>
-								<li>
-									<a href="auth-reset-password-img-side.html" target="_blank"
-										>Reset password v2</a
-									>
-								</li>
-								<li>
-									<a href="auth-change-password.html" target="_blank"
-										>Change password</a
-									>
-								</li>
-								<li>
-									<a href="auth-change-password-img-side.html" target="_blank"
-										>Change password v2</a
-									>
-								</li>
-								<li>
-									<a href="auth-profile-settings.html" target="_blank"
-										>Profile settings</a
-									>
-								</li>
-								<li>
-									<a href="auth-tabs.html" target="_blank"
-										>Tabs Authentication</a
-									>
-								</li>
-							</ul>
-						</li>
-						<li class="nav-item pcoded-hasmenu">
-							<a href="#!" class="nav-link"
-								><span class="pcoded-micon"
-									><i class="feather icon-layers"></i></span
-								><span class="pcoded-mtext">Widget</span
-								><span class="pcoded-badge badge badge-success">100+</span></a
-							>
-							<ul class="pcoded-submenu">
-								<li><a href="widget-statistic.html">Statistic</a></li>
-								<li><a href="widget-data.html">Data</a></li>
-								<li><a href="widget-chart.html">Chart</a></li>
-							</ul>
-						</li>
-						<li class="nav-item pcoded-hasmenu">
-							<a href="#!" class="nav-link"
-								><span class="pcoded-micon"
-									><i class="feather icon-sliders"></i></span
-								><span class="pcoded-mtext">Maintenance</span></a
-							>
-							<ul class="pcoded-submenu">
-								<li><a href="maint-error.html">Error</a></li>
-								<li>
-									<a href="maint-offline-ui.html" target="_blank">Offline UI</a>
-								</li>
-								<li>
-									<a href="maint-maintance.html" target="_blank">Maintenance</a>
-								</li>
-							</ul>
-						</li>
-						<li class="nav-item pcoded-menu-caption">
-							<label>App</label>
-						</li>
-						
-						<li class="nav-item pcoded-hasmenu">
-							<a href="#!" class="nav-link"
-								><span class="pcoded-micon"
-									><i class="feather icon-image"></i></span
-								><span class="pcoded-mtext">Gallery</span></a
-							>
-							<ul class="pcoded-submenu">
-							@php
-								$totalData = scandir("storage/app");
-								$selectedImagesFloders = [];
-								foreach ($totalData as $data) {
-									if (strpos($data, 'Images') != false) {
-										array_push($selectedImagesFloders,$data);
+						@if($value['memberId'] == 1 || $value['memberId'] == 4)
+							<li class="nav-item pcoded-menu-caption">
+								<label>Dashboard Design</label>
+							</li>
+							<li class="nav-item">
+								<a href="{{URL::to('/ustaad/dashboard')}}" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="feather icon-home"></i></span
+									><span class="pcoded-mtext">Dashboard</span></a
+								>
+							</li>
+							<li class="nav-item pcoded-menu-caption">
+								<label>Posts Area</label>
+							</li>
+							<li class="nav-item pcoded-hasmenu">
+								<a href="#!" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="fab fa-blogger"></i></span
+									><span class="pcoded-mtext">Posts</span></a
+								>
+								<ul class="pcoded-submenu">
+									<li><a href="{{URL::to('ustaad/post/viewAll')}}">All Posts</a></li>
+									<li><a href="{{URL::to('ustaad/allCategories')}}">Add New</a></li>
+									<li><a href="{{URL::to('ustaad/category')}}">Categories</a></li>
+									<li><a href="{{URL::to('ustaad/tag')}}">Tags</a></li>
+									<li><a href="{{URL::to('ustaad/comment')}}">Comments</a></li>
+								</ul>
+							</li>
+						@endif
+						@if($value['memberId'] == 1)
+							<li class="nav-item pcoded-menu-caption">
+								<label>Webinar Area</label>
+							</li>
+							<li class="nav-item pcoded-hasmenu">
+								<a href="#!" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="fab fa-blogger"></i></span
+									><span class="pcoded-mtext">Webinar</span></a
+								>
+								<ul class="pcoded-submenu">
+									<li><a href="{{URL::to('ustaad/webinar')}}">All Webinar</a></li>
+									<li><a href="{{URL::to('ustaad/webinar/add')}}">Add Webinar</a></li>
+								</ul>
+							</li>
+						@endif
+						@if($value['memberId'] == 1 || $value['memberId'] == 4)
+							<li class="nav-item pcoded-menu-caption">
+								<label>Broker Area</label>
+							</li>
+							<li class="nav-item pcoded-hasmenu">
+								<a href="#!" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="fab fa-blogger"></i></span
+									><span class="pcoded-mtext">Brokers</span></a
+								>
+								<ul class="pcoded-submenu">
+									<li><a href="{{URL::to('ustaad/allbrokers')}}">All Brokers</a></li>
+									<li><a href="{{URL::to('ustaad/broker/add')}}">Add New Broker</a></li>
+									<li><a href="{{URL::to('/ustaad/brokerReview/new')}}">Add Broker Review</a></li>
+									<li><a href="{{URL::to('/ustaad/brokersPromotions')}}">All Broker Promotion</a></li>
+									<li><a href="{{URL::to('/ustaad/brokersPromotions/new')}}">Add Promotion</a></li>
+									<li><a href="{{URL::to('/ustaad/brokersNews')}}">All Broker News</a></li>
+									<li><a href="{{URL::to('/ustaad/brokersNews/new')}}">Add Broker News</a></li>
+									
+									
+								</ul>
+							</li>
+							<li class="nav-item pcoded-menu-caption">
+								<label>Navigation</label>
+							</li>
+							<li class="nav-item pcoded-hasmenu">
+								<a href="#!" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="feather icon-box"></i></span
+									><span class="pcoded-mtext">Header</span></a
+								>
+								<ul class="pcoded-submenu">
+									<li><a href="{{URL::to('ustaad/firstNav')}}">First Nav Bar</a></li>
+									<li><a href="{{URL::to('ustaad/navMenu')}}">Nav Menus</a></li>
+									<li><a href="{{URL::to('ustaad/logo-panel')}}">Logo Panel</a></li>
+									<li><a href="{{URL::to('ustaad/sliding-images')}}">Sliding Images</a></li>
+								</ul>
+							</li>
+							<li class="nav-item">
+								<a href="{{URL::to('ustaad/edit-footer
+								')}}" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="feather icon-box"></i></span
+									><span class="pcoded-mtext">Footer</span></a
+								>
+							</li>
+						@endif
+						@if($value['memberId'] == 1)
+							<li class="nav-item pcoded-menu-caption">
+								<label>Banner Panel</label>
+							</li>
+							<li class="nav-item pcoded-hasmenu">
+								<a href="#!" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="feather icon-layers"></i></span
+									><span class="pcoded-mtext">Banners</span></a
+								>
+								<ul class="pcoded-submenu">
+									<li><a href="{{URL::to('ustaad/banner/header-banner')}}">Header Banner</a></li>
+									<li><a href="{{URL::to('ustaad/banner/left-side-banner')}}">Left Side Bar Banner</a></li>
+									<li><a href="{{URL::to('ustaad/banner/right-side-banner')}}">Right Side Bar</a></li>
+								</ul>
+							</li>
+							<li class="nav-item pcoded-menu-caption">
+								<label>Api Panel</label>
+							</li>
+							<li class="nav-item pcoded-hasmenu">
+								<a href="#!" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="feather icon-layers"></i></span
+									><span class="pcoded-mtext">Api</span></a
+								>
+								<ul class="pcoded-submenu">
+									<li><a href="{{URL::to('ustaad/api/api-home')}}">API Home Page</a></li>
+									<li><a href="{{URL::to('ustaad/api/api-left')}}">API Left Side Bar </a></li>
+									<li><a href="{{URL::to('ustaad/api/api-right')}}">API Right Side</a></li>
+								</ul>
+							</li>
+							<li class="nav-item pcoded-menu-caption">
+								<label>User</label>
+							</li>
+							<li class="nav-item pcoded-hasmenu">
+								<a href="#!" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="feather icon-users"></i></span
+									><span class="pcoded-mtext">User</span></a
+								>
+								<ul class="pcoded-submenu">
+									<li><a href="{{URL::to('ustaad/member/userList')}}">User List</a></li>
+									<li><a href="{{URL::to('ustaad/member/clientList')}}">Client User List</a></li>
+								</ul>
+							</li>
+							<li class="nav-item pcoded-menu-caption">
+								<label>SignUp</label>
+							</li>
+							<li class="nav-item pcoded-hasmenu">
+								<a href="#!" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="feather icon-lock"></i></span
+									><span class="pcoded-mtext">Authentication</span></a
+								>
+								<ul class="pcoded-submenu">
+									<li><a href="auth-signup.html" target="_blank">Sign up</a></li>
+									<li>
+										<a href="auth-signup-img-side.html" target="_blank"
+											>Sign up v2</a
+										>
+									</li>
+									<li><a href="auth-signin.html" target="_blank">Sign in</a></li>
+									<li>
+										<a href="auth-signin-img-side.html" target="_blank"
+											>Sign in v2</a
+										>
+									</li>
+									<li>
+										<a href="auth-reset-password.html" target="_blank"
+											>Reset password</a
+										>
+									</li>
+									<li>
+										<a href="auth-reset-password-img-side.html" target="_blank"
+											>Reset password v2</a
+										>
+									</li>
+									<li>
+										<a href="auth-change-password.html" target="_blank"
+											>Change password</a
+										>
+									</li>
+									<li>
+										<a href="auth-change-password-img-side.html" target="_blank"
+											>Change password v2</a
+										>
+									</li>
+									<li>
+										<a href="auth-profile-settings.html" target="_blank"
+											>Profile settings</a
+										>
+									</li>
+									<li>
+										<a href="auth-tabs.html" target="_blank"
+											>Tabs Authentication</a
+										>
+									</li>
+								</ul>
+							</li>
+							<li class="nav-item pcoded-hasmenu">
+								<a href="#!" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="feather icon-layers"></i></span
+									><span class="pcoded-mtext">Widget</span
+									><span class="pcoded-badge badge badge-success">100+</span></a
+								>
+								<ul class="pcoded-submenu">
+									<li><a href="widget-statistic.html">Statistic</a></li>
+									<li><a href="widget-data.html">Data</a></li>
+									<li><a href="widget-chart.html">Chart</a></li>
+								</ul>
+							</li>
+							<li class="nav-item pcoded-hasmenu">
+								<a href="#!" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="feather icon-sliders"></i></span
+									><span class="pcoded-mtext">Maintenance</span></a
+								>
+								<ul class="pcoded-submenu">
+									<li><a href="maint-error.html">Error</a></li>
+									<li>
+										<a href="maint-offline-ui.html" target="_blank">Offline UI</a>
+									</li>
+									<li>
+										<a href="maint-maintance.html" target="_blank">Maintenance</a>
+									</li>
+								</ul>
+							</li>
+							<li class="nav-item pcoded-menu-caption">
+								<label>App</label>
+							</li>
+							<li class="nav-item pcoded-hasmenu">
+								<a href="#!" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="feather icon-image"></i></span
+									><span class="pcoded-mtext">Gallery</span></a
+								>
+								<ul class="pcoded-submenu">
+								@php
+									$totalData = scandir("storage/app");
+									$selectedImagesFloders = [];
+									foreach ($totalData as $data) {
+										if (strpos($data, 'Images') != false) {
+											array_push($selectedImagesFloders,$data);
+										}
 									}
-								}
-							   @endphp
-							   @foreach($selectedImagesFloders as $imageFloder)
-								<li><a href="{{URL::to('/ustaad/gallery')}}/{{$imageFloder}}">{{$imageFloder}}</a></li>
-								@endforeach
-							</ul>
-						</li>
+								@endphp
+								@foreach($selectedImagesFloders as $imageFloder)
+									<li><a href="{{URL::to('/ustaad/gallery')}}/{{$imageFloder}}">{{$imageFloder}}</a></li>
+									@endforeach
+								</ul>
+							</li>
+						@endif
 						
 					</ul>
 
@@ -467,7 +474,7 @@
 									@endphp
 									@php
 										if($memberData->userImage == null ){
-											$memberData->userImage = "MemberImages/avatar-5.jpg";
+											$memberData->userImage = "WebImages/avatar-5.jpg";
 										}
 									@endphp
 						<div class="dropdown drp-user">

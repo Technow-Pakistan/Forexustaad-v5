@@ -59,7 +59,7 @@ class BlogPostController extends Controller
         $data['permalink'] = end($permalink);
         // Img
         if ($request->file("img") != null) {
-            $path = $request->file("img")->store("BlogPostImages");
+            $path = $request->file("img")->store("PostImages");
             $blogPostImage = $path;
             $data['image'] = $blogPostImage;
         }
@@ -169,7 +169,7 @@ class BlogPostController extends Controller
         $data['permalink'] = end($permalink);
         // Img
         if ($request->file("img") != null) {
-            $path = $request->file("img")->store("BlogPostImages");
+            $path = $request->file("img")->store("PostImages");
             $blogPostImage = $path;
             $data['image'] = $blogPostImage;
         }

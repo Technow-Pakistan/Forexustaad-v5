@@ -8,7 +8,7 @@
 			<div class="card-header border-0 p-0 pb-0">
 				@php
 					if($memberDetail->backImage == null ){
-						$memberDetail->backImage = "MemberImages/cover.jpg";
+						$memberDetail->backImage = "WebImages/cover.jpg";
 					}
 				@endphp
 				<div class="cover-img-block">
@@ -20,7 +20,7 @@
 							<div class="dropdown-menu">
 								<form action="{{URL::to('ustaad/member/addBackImg')}}/{{$memberDetail->adminTableId}}" name="form1" method="post" enctype="multipart/form-data">
 									<input type="file" name="file_photo" class="submit1" id="file" class="inputfile">
-									<label for="file"><a class="dropdown-item" href="#"><i class="feather icon-upload-cloud mr-2"></i>upload new</a></label>
+									<!-- <label for="file"><a class="dropdown-item" href="#"><i class="feather icon-upload-cloud mr-2"></i>upload new</a></label> -->
 									<a class="dropdown-item" href="#"><i class="feather icon-image mr-2"></i>from photos</a>
 									<a class="dropdown-item" href="#"><i class="feather icon-film mr-2"></i> upload video</a>
 									<a class="dropdown-item" href="#"><i class="feather icon-trash-2 mr-2"></i>remove</a>
@@ -40,7 +40,7 @@
 										<div class="profile-dp">
 											@php
 												if($memberDetail->userImage == null ){
-													$memberDetail->userImage = "MemberImages/avatar-5.jpg";
+													$memberDetail->userImage = "WebImages/avatar-5.jpg";
 												}
 											@endphp
 											<div class="position-relative d-inline-block">
@@ -58,7 +58,7 @@
 									<div class="dropdown-menu">
 										<form action="{{URL::to('ustaad/member/addUserImg')}}/{{$memberDetail->adminTableId}}" name="form2" method="post" enctype="multipart/form-data">
 											<input type="file" name="user_photo" class="submit2" id="file" class="inputfile">
-											<label for="file"><a class="dropdown-item" href="#"><i class="feather icon-upload-cloud mr-2"></i>upload new</a></label>
+											<!-- <label for="file"><a class="dropdown-item" href="#"><i class="feather icon-upload-cloud mr-2"></i>upload new</a></label> -->
 											<a class="dropdown-item" href="#"><i class="feather icon-image mr-2"></i>from photos</a>
 											<a class="dropdown-item" href="#"><i class="feather icon-film mr-2"></i> upload video</a>
 											<a class="dropdown-item" href="#"><i class="feather icon-trash-2 mr-2"></i>remove</a>

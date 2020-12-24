@@ -19,7 +19,7 @@ class BorkerReviewController extends Controller
     public function AddReview(Request $request){
         $data = $request->all();
         if ($request->file("file_photo") != null) {
-            $path = $request->file("file_photo")->store("BrokerReviewImages");
+            $path = $request->file("file_photo")->store("BrokerImages");
             $ReviewImage = $path;
             $data['image'] = $ReviewImage;
         }
@@ -38,7 +38,7 @@ class BorkerReviewController extends Controller
     public function EditReview(Request $request, $id){
         $data = $request->all();
         if ($request->file("file_photo") != null) {
-            $path = $request->file("file_photo")->store("BrokerReviewImages");
+            $path = $request->file("file_photo")->store("BrokerImages");
             $ReviewImage = $path;
             $data['image'] = $ReviewImage;
         }

@@ -12,6 +12,8 @@ class GalleryController extends Controller
 {
     public function Index(Request $request, $id){
         $totalData = Storage::files($id);
+        // $totalData = array_reverse($totalData);
+        
         return view('admin.galleryImages',compact('totalData','id'));
     }
     public function Add(Request $request, $id){
@@ -19,7 +21,9 @@ class GalleryController extends Controller
         if ($request->file("file_photo") != null) {
             $path = $request->file("file_photo")->store($id);
         }
-        return back();
+        $totalData = Storage::files($id);
+        array_unshift($totalData,$path);
+        return view('admin.galleryImages',compact('totalData','id'));
     }
     public function Delete(Request $request, $id){
         $title = str_replace("@-","/",$id);

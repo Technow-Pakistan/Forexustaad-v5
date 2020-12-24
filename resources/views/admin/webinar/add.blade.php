@@ -48,27 +48,38 @@
 											$titleId = $webinar->brokerId;
 										@endphp
 									@endisset
-										<div class="custom-file my-3 h-100">
-											<input type="file" class="form-control h-100" name="file_photo" id="customFile" {{($count == 0 ? 'required' : '' )}}>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="custom-file">
+													<label for="">Thumbnail</label>
+													<input type="file" class="form-control h-100" name="file_photo" id="customFile" {{($count == 0 ? 'required' : '' )}}>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="">Title</label>
+													<div>
+														<input type="text" name="title" value="{{($count != 0 ? $webinar->title : '' )}}" class="form-control" required>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="">Webinar Contend Name</label>
+													<div>
+														<input type="text" name="nameOfPerson" value="{{($count != 0 ? $webinar->nameOfPerson : '' )}}" class="form-control" required>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="">Designation</label>
+													<div>
+														<input type="text" name="event" value="{{($count != 0 ? $webinar->event : '' )}}" class="form-control" required>
+													</div>
+												</div>	
+											</div>
 										</div>
-									<div class="form-group">
-										<label for="">Title</label>
-										<div>
-											<input type="text" name="title" value="{{($count != 0 ? $webinar->title : '' )}}" class="form-control" required>
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="">Webinar Contend Name</label>
-										<div>
-											<input type="text" name="nameOfPerson" value="{{($count != 0 ? $webinar->nameOfPerson : '' )}}" class="form-control" required>
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="">Designation</label>
-										<div>
-											<input type="text" name="event" value="{{($count != 0 ? $webinar->event : '' )}}" class="form-control" required>
-										</div>
-									</div>	
 									<div class="form-group">
 										<label for="">link</label>
 										<div>
@@ -80,18 +91,24 @@
 										<p class="text-right text-danger m-0 descriptionCount"></p>
 										<textarea name="description" maxlength="200" class="form-control description" id="news-description" rows="3" cols="40" required="" placeholder="Enter your Description here ...">@if($count != 0){{$webinar->description}}@endif</textarea>
 									</div>
-									<div class="form-group">
-										<label for="">Date</label>
-										<div>
-											<input type="date" name="date" value="{{($count != 0 ? $webinar->date : '' )}}" class="form-control" required>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="">Date</label>
+													<div>
+														<input type="date" name="date" value="{{($count != 0 ? $webinar->date : '' )}}" class="form-control" required>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="">Time</label>
+													<div>
+														<input type="time" name="time" value="{{($count != 0 ? $webinar->time : '' )}}" class="form-control" required>
+													</div>
+												</div>
+											</div>
 										</div>
-									</div>
-									<div class="form-group">
-										<label for="">Time</label>
-										<div>
-											<input type="time" name="time" value="{{($count != 0 ? $webinar->time : '' )}}" class="form-control" required>
-										</div>
-									</div>
 									<div>
 										<input type="submit" name="submit" id="submit" class="btn btn-outline-primary" value="{{($count != 0 ? 'Update' : 'Save' )}}">
 									</div>
