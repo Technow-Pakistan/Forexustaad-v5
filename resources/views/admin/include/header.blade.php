@@ -67,6 +67,20 @@
 							</ul>
 						</li>
 						<li class="nav-item pcoded-menu-caption">
+							<label>Webinar Area</label>
+						</li>
+						<li class="nav-item pcoded-hasmenu">
+							<a href="#!" class="nav-link"
+								><span class="pcoded-micon"
+									><i class="fab fa-blogger"></i></span
+								><span class="pcoded-mtext">Webinar</span></a
+							>
+							<ul class="pcoded-submenu">
+								<li><a href="{{URL::to('ustaad/webinar')}}">All Webinar</a></li>
+								<li><a href="{{URL::to('ustaad/webinar/add')}}">Add Webinar</a></li>
+							</ul>
+						</li>
+						<li class="nav-item pcoded-menu-caption">
 							<label>Navigation</label>
 						</li>
 						<li class="nav-item pcoded-hasmenu">

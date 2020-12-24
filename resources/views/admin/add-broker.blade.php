@@ -116,15 +116,22 @@
 														</div>
 													</div>
 													<div class="col-sm-6">
+														
+													</div>
+													<div class="col-sm-4">
+														Never End 
+														<input type="checkbox" name="neverEnd" id="neverEnd" value="1">
+													</div>
+													<div class="col-sm-4 txtTime">
 														<div class="form-group">
 															<label for="">Start Date</label>
-															<input type="date" name="start" class="form-control" required>
+															<input type="date" name="start" class="form-control" id="startDatetime">
 														</div>
 													</div>
-													<div class="col-sm-6">
+													<div class="col-sm-4 txtTime">
 														<div class="form-group">
 															<label for="">End Date</label>
-															<input type="date" name="end" class="form-control" required>
+															<input type="date" name="end" class="form-control" id="endDatetime">
 														</div>
 													</div>
 												</div>
@@ -945,3 +952,16 @@
 @include('admin.include.footer')
 
 
+<script>
+	$("#neverEnd").click(function(){
+		if(this.checked){
+			$(".txtTime").hide();
+			$("#startDatetime").attr("required",false);
+			$("#endDatetime").prop("required",false);
+		}else{
+			$(".txtTime").show();
+			$("#startDatetime").attr("required",true);
+			$("#endDatetime").prop("required",true);
+		}
+	})
+</script>

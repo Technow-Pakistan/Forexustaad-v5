@@ -15,7 +15,7 @@
 									<li class="breadcrumb-item">
 										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
 									</li>
-									<li class="breadcrumb-item"><a href="#!">Brokers News List</a></li>
+									<li class="breadcrumb-item"><a href="#!">Brokers News</a></li>
 									
 								</ul>
 							</div>

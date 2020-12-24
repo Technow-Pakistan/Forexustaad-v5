@@ -116,6 +116,7 @@
                   <br>
                   <hr>
                   <input type="file" name="srcImage" id="srcImage" class="srcImage">
+                  <input type="hidden" name="filePath" id="filePath" class="filePath" value="PostImages">
                   <br>
                   <hr>
                   <p class="text-danger  h4  pb-3"> Enter the Fundamental Points</p>
@@ -433,11 +434,13 @@
 
 
     // file src get
-    $(document).ready(function() {
-    $('#srcImage').change(function(){
-        var file_data = $('#srcImage').prop('files')[0];   
+   $(document).ready(function() {
+      $('#srcImage').change(function(){
+        var file_data = $('#srcImage').prop('files')[0]; 
+        var file_path = $('#filePath').val();   
         var form_data = new FormData();                  
-        form_data.append('file', file_data);
+        form_data.append('file', file_data);             
+        form_data.append('filePath', file_path);
         $.ajax({
             url: "{{URL::to('/pro-img-disk.php')}}",
             type: "POST",
@@ -449,7 +452,7 @@
                alert(data)
             }
         });
-    });
-});
+      });
+   });
 </script>
 

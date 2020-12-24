@@ -105,6 +105,12 @@ class BorkerController extends Controller
             $companyImage = $path;
             $data["image"] = $companyImage;
         }
+        if ($request->neverEnd == 1) {
+            $data["start"] = null;
+            $data["end"] = null;
+        }else {
+            $data["neverEnd"] = 0;
+        }
         $broker1 = BrokerCompanyInformationModel::find($id);
         $broker1->fill($data);
         $broker1->save();

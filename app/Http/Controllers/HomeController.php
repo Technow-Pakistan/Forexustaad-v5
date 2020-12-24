@@ -21,8 +21,14 @@ use App\Models\BorkerPromotionsModel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SubscriberMail;
 
+use App\Models\MainWebinarModel;
+
 class HomeController extends Controller
 {
+    public function webinar(){
+        $totalData = MainWebinarModel::orderBy('id','desc')->get();
+        return view('home/webinar',compact('totalData'));
+    }
     public function Construction(){
         return view('home/construction');
     }
@@ -91,7 +97,7 @@ class HomeController extends Controller
                 $request->session()->put("client",$mobile);
                 return redirect('/');
             }else {
-                $error = "Your account has been Blocked. Please contact with Administrator ";
+                $error = "Your account has been Blocked. Please contact with Administrator.";
                 $request->session()->put("error",$error);
                 return back();
             }
@@ -110,7 +116,7 @@ class HomeController extends Controller
     }
     public function ImageSrc(Request $request){
         if ($request->file("file") != null) {
-            $path = $request->file("file")->store("PostImages");
+            $path = $request->file("file")->store($request->filePath);
         };
         $url = "https://forexustaad.com/storage/app/" . $path;
         return $url;
