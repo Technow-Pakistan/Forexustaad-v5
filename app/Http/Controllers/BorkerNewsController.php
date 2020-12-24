@@ -23,7 +23,7 @@ class BorkerNewsController extends Controller
     public function AddNews(Request $request){
         $data = $request->all();
         if ($request->file("file_photo") != null) {
-            $path = $request->file("file_photo")->store("BrokerNewsImages");
+            $path = $request->file("file_photo")->store("BrokerImages");
             $NewsImage = $path;
         }
         $description = htmlentities($request->editor1);
@@ -42,7 +42,7 @@ class BorkerNewsController extends Controller
     public function EditNews(Request $request, $id){
         $data = $request->all();
         if ($request->file("file_photo") != null) {
-            $path = $request->file("file_photo")->store("BrokerNewsImages");
+            $path = $request->file("file_photo")->store("BrokerImages");
             $NewsImage = $path;
             $data['image'] = $NewsImage;
         }

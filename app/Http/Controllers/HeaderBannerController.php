@@ -17,7 +17,7 @@ class HeaderBannerController extends Controller
     }
     public function Add(Request $request){
         if ($request->file("file_photo") != null) {
-            $path = $request->file("file_photo")->store("BannerImages");
+            $path = $request->file("file_photo")->store("WebImages");
             $bannerImage = $path;
         }
 
@@ -48,7 +48,7 @@ class HeaderBannerController extends Controller
 
     public function AddRight(Request $request){
         if ($request->file("file_photo") != null) {
-            $path = $request->file("file_photo")->store("BannerImages");
+            $path = $request->file("file_photo")->store("WebImages");
             $bannerImage = $path;
         }
 

@@ -34,7 +34,7 @@ class MainWebinarController extends Controller
     public function EditWebinar(Request $request, $id){
         $data = $request->all();
         if ($request->file("file_photo") != null) {
-            $path = $request->file("file_photo")->store("BrokerReviewImages");
+            $path = $request->file("file_photo")->store("WebImages");
             $ReviewImage = $path;
             $data['image'] = $ReviewImage;
         }

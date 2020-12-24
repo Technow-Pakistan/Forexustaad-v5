@@ -18,7 +18,7 @@ class LogoPanelController extends Controller
     public function Add(Request $request){
 
         if ($request->file("file_photo") != null) {
-            $path = $request->file("file_photo")->store("logoImages");
+            $path = $request->file("file_photo")->store("WebImages");
             $logoImage = $path;
         }
         if(isset($request->active)){
@@ -45,7 +45,7 @@ class LogoPanelController extends Controller
     public function edit(Request $request, $id){
         $data = LogoPanelModel::find($id);
         if ($request->file("file_photo") != null) {
-            $path = $request->file("file_photo")->store("logoImages");
+            $path = $request->file("file_photo")->store("WebImages");
             $logoImage = $path;
             $data->logo = $logoImage;
         }
@@ -67,7 +67,7 @@ class LogoPanelController extends Controller
     public function AddFavicon(Request $request){
 
         if ($request->file("file_photo") != null) {
-            $path = $request->file("file_photo")->store("faviconImages");
+            $path = $request->file("file_photo")->store("WebImages");
             $faviconImage = $path;
         }
         if(isset($request->active)){
@@ -96,7 +96,7 @@ class LogoPanelController extends Controller
         $favicon = FaviconPanelModel::find($id);
 
         if ($request->file("file_photo") != null) {
-            $path = $request->file("file_photo")->store("faviconImages");
+            $path = $request->file("file_photo")->store("WebImages");
             $faviconImage = $path;
             $favicon->favicon = $faviconImage;
         }

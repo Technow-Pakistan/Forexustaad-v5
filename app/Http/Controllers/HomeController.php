@@ -123,7 +123,7 @@ class HomeController extends Controller
     }
     public function ImageSrc15(Request $request){
         if ($request->file("upload") != null) {
-            $path = $request->file("upload")->store("PostImage");
+            $path = $request->file("upload")->store("PostImages");
         };
         $request->upload->move(public_path('uploads'),
         $request->file('upload')->getClientOriginalName());
@@ -137,79 +137,109 @@ class HomeController extends Controller
     public function brokerDetail(Request $request, $id){
         $title = str_replace("-"," ",$id);
         $broker1 = BrokerCompanyInformationModel::where('title',$title)->first();
-        $id = $broker1->id;
-        $broker2 = BrokerDepositModel::where('brokerId',$id)->first();
-        $broker3 = BrokerCommissionsFeesModel::where('brokerId',$id)->first();
-        $broker4 = BrokerAccountInfoModel::where('brokerId',$id)->first();
-        $broker5 = BrokerTradableAssetsModel::where('brokerId',$id)->first();
-        $broker6 = BrokerTradingPlatformModel::where('brokerId',$id)->first();
-        $broker7 = BrokerTradingFeaturesModel::where('brokerId',$id)->first();
-        $broker8 = BrokerCustomerServicesModel::where('brokerId',$id)->first();
-        $broker9 = BrokerReserchEducationModel::where('brokerId',$id)->first();
-        $broker = BrokerPromotionModel::where('brokerId',$id)->first();
-        return view('broker/broker-detail',compact('broker1','broker2','broker3','broker4','broker5','broker6','broker7','broker8','broker9','broker','id'));
+        if ($broker1) {
+            $id = $broker1->id;
+            $broker2 = BrokerDepositModel::where('brokerId',$id)->first();
+            $broker3 = BrokerCommissionsFeesModel::where('brokerId',$id)->first();
+            $broker4 = BrokerAccountInfoModel::where('brokerId',$id)->first();
+            $broker5 = BrokerTradableAssetsModel::where('brokerId',$id)->first();
+            $broker6 = BrokerTradingPlatformModel::where('brokerId',$id)->first();
+            $broker7 = BrokerTradingFeaturesModel::where('brokerId',$id)->first();
+            $broker8 = BrokerCustomerServicesModel::where('brokerId',$id)->first();
+            $broker9 = BrokerReserchEducationModel::where('brokerId',$id)->first();
+            $broker = BrokerPromotionModel::where('brokerId',$id)->first();
+            return view('broker/broker-detail',compact('broker1','broker2','broker3','broker4','broker5','broker6','broker7','broker8','broker9','broker','id'));
+        }else{
+            return redirect('/');
+        }
     }
+
     public function brokerReview(Request $request, $id){
         $title = str_replace("-"," ",$id);
         $broker1 = BrokerCompanyInformationModel::where('title',$title)->first();
+        if ($broker1) {
         $id = $broker1->id;
-        $totalData = BrokerReviewModel::orderBy('id','desc')->where('brokerId',$id)->get();
-       
-        if(count($totalData) != 0){
-            return view('broker.ReviewList',compact('totalData'));
+            $totalData = BrokerReviewModel::orderBy('id','desc')->where('brokerId',$id)->get();
+        
+            if(count($totalData) != 0){
+                return view('broker.ReviewList',compact('totalData'));
+            }else{
+                return back();
+            }
         }else{
-            return back();
+            return redirect('/');
         }
     }
     public function brokerReviewDetail(Request $request, $id){
         $ReviewTitle = str_replace("-"," ",$id);
         $brokerReview = BrokerReviewModel::where('ReviewTitle',$ReviewTitle)->first();
-        if($brokerReview != null){
-            return view('broker.brokerReview',compact('brokerReview'));
+        if ($brokerReview) {
+            if($brokerReview != null){
+                return view('broker.brokerReview',compact('brokerReview'));
+            }else{
+                return back();
+            }
         }else{
-            return back();
+            return redirect('/');
         }
     }
     public function brokerNews(Request $request, $id){
         $title = str_replace("-"," ",$id);
         $broker1 = BrokerCompanyInformationModel::where('title',$title)->first();
-        $id = $broker1->id;
-        $totalData = BrokerNewsModel::orderBy('id','desc')->where('brokerId',$id)->get();
-       
-        if(count($totalData) != 0){
-            return view('broker.NewsList',compact('totalData'));
+        if ($broker1) {
+            $id = $broker1->id;
+            $totalData = BrokerNewsModel::orderBy('id','desc')->where('brokerId',$id)->get();
+           
+            if(count($totalData) != 0){
+                return view('broker.NewsList',compact('totalData'));
+            }else{
+                return back();
+            }
         }else{
-            return back();
+            return redirect('/');
         }
     }
     public function brokerNewsDetail(Request $request, $id){
         $NewsTitle = str_replace("-"," ",$id);
         $brokerNews = BrokerNewsModel::where('NewsTitle',$NewsTitle)->first();
-        if($brokerNews != null){
-            return view('broker.brokerNews',compact('brokerNews'));
+        if ($brokerNews) {
+
+            if($brokerNews != null){
+                return view('broker.brokerNews',compact('brokerNews'));
+            }else{
+                return back();
+            }
         }else{
-            return back();
+            return redirect('/');
         }
     }
     public function brokerPromotion(Request $request, $id){
         $title = str_replace("-"," ",$id);
         $broker1 = BrokerCompanyInformationModel::where('title',$title)->first();
-        $id = $broker1->id;
-        $totalData = BorkerPromotionsModel::orderBy('id','desc')->where('brokerId',$id)->get();
-       
-        if(count($totalData) != 0){
-            return view('broker.PromotionList',compact('totalData'));
+        if ($brokerNews) {
+            $id = $broker1->id;
+            $totalData = BorkerPromotionsModel::orderBy('id','desc')->where('brokerId',$id)->get();
+        
+            if(count($totalData) != 0){
+                return view('broker.PromotionList',compact('totalData'));
+            }else{
+                return back();
+            }
         }else{
-            return back();
+            return redirect('/');
         }
     }
     public function brokerPromotionDetail(Request $request, $id){
         $PromotionTitle = str_replace("-"," ",$id);
         $brokerPromotion = BorkerPromotionsModel::where('PromotionTitle',$PromotionTitle)->first();
-        if($brokerPromotion != null){
-            return view('broker.brokerPromotion',compact('brokerPromotion'));
+        if ($brokerNews) {
+            if($brokerPromotion != null){
+                return view('broker.brokerPromotion',compact('brokerPromotion'));
+            }else{
+                return back();
+            }
         }else{
-            return back();
+            return redirect('/');
         }
     }
 }

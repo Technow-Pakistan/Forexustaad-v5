@@ -71,16 +71,16 @@
                                                     , {{$data->event}}
 
                                                     </span><br><br>
-                                            <p id="demo{{$j}}" class="demo"></p>
+                                            <div id="demo{{$j}}" class="demo"></div>
                                         </div>
 
                                     </div>
                                     
                                     <div class="col-md-3 col-sm-12 col-xs-12 text-align-center">
                                         <div class="form-group">
-                                                    <p align="center" class="buttonRight">
-                                                        <a href="{{$data->link}}" class="btn btn-primary radial text-center p-2" target="_blank">Register</a>
-                                                    </p>
+                                            <p align="center" class="buttonRight">
+                                                <a href="{{$data->link}}" class="btn btn-primary radial text-center p-2" target="_blank">Register</a>
+                                            </p>
                                         </div>
 
                                     </div>
@@ -108,8 +108,8 @@
       var seconds{{$j}} = Math.floor((distance{{$j}} % (1000 * 60)) / 1000);
 
       // Output the result in an element with id="demo"
-      document.getElementById("demo{{$j}}").innerHTML = days{{$j}} + "d " + hours{{$j}} + "h "
-      + minutes{{$j}} + "m " + seconds{{$j}} + "s ";
+      document.getElementById("demo{{$j}}").innerHTML = "<div class='row'><div class='col-md-3 text-center'> D <br>" + days{{$j}} + "</div><div class='col-md-3 text-center'> H <br>" + hours{{$j}}
+      + "</div><div class='col-md-3 text-center'> M <br>" + minutes{{$j}} + "</div><div class='col-md-3 text-center'> S <br>" + seconds{{$j}} + "</div></div>";
 
       // If the count down is over, write some text
       if (distance{{$j}} < 0) {

@@ -13,7 +13,7 @@ class SlidingImagesController extends Controller
     }
     public function Add(Request $request){
         if ($request->file("file_photo") != null) {
-            $path = $request->file("file_photo")->store("SliderImages");
+            $path = $request->file("file_photo")->store("WebImages");
             $SliderImage = $path;
         }
         $image = new SlidingImagesModel;
@@ -28,7 +28,7 @@ class SlidingImagesController extends Controller
     }
     public function ProcessEdit(Request $request, $id){
         if ($request->file("file_photo") != null) {
-            $path = $request->file("file_photo")->store("SliderImages");
+            $path = $request->file("file_photo")->store("WebImages");
             $SliderImage = $path;
         }else{
             $preimage = SlidingImagesModel::where('id',$id)->first();

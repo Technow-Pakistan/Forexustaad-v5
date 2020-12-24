@@ -16,7 +16,7 @@ class CommentController extends Controller
     public function Add(Request $request){
         $data = $request->all();
         if ($request->file("file_photo") != null) {
-            $path = $request->file("file_photo")->store("CommentImages");
+            $path = $request->file("file_photo")->store("WebImages");
             $Image = $path;
             $data['image']=$Image;
         }
