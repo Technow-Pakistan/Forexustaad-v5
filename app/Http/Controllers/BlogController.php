@@ -15,7 +15,11 @@ class BlogController extends Controller
     }
     public function DetailBlog(Request $request, $id){
         $BlogDetail = BlogPostModel::orderBy('id','desc')->where('permalink',$id)->first();
-        $totalComments = CommentsModel::orderBy('id','desc')->where('blogPostId',$BlogDetail->id)->get();
-        return view('blog.blogDetail',compact('BlogDetail','totalComments'));
+        if ($BlogDetail) {
+            $totalComments = CommentsModel::orderBy('id','desc')->where('blogPostId',$BlogDetail->id)->get();
+            return view('blog.blogDetail',compact('BlogDetail','totalComments'));
+        }else{
+            return redirect('/');
+        }
     }
 }

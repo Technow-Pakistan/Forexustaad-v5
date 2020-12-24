@@ -57,7 +57,7 @@ class AdminMemberController extends Controller
     }
     public function AddBackImg(Request $request,$id){
         if ($request->file("file_photo") != null) {
-            $path = $request->file("file_photo")->store("MemberImages");
+            $path = $request->file("file_photo")->store("WebImages");
             $MemberImage = $path;
             $memberData = AdminMemberDetailModel::where('adminTableId',$id)->first();
             $memberData->backImage = $MemberImage;
@@ -67,7 +67,7 @@ class AdminMemberController extends Controller
     }
     public function AddUserImg(Request $request,$id){
         if ($request->file("user_photo") != null) {
-            $path = $request->file("user_photo")->store("MemberImages");
+            $path = $request->file("user_photo")->store("WebImages");
             $MemberImage = $path;
             $memberData = AdminMemberDetailModel::where('adminTableId',$id)->first();
             $memberData->userImage = $MemberImage;

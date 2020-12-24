@@ -24,7 +24,7 @@ class BorkerPromotionsController extends Controller
     public function AddPromotions(Request $request){
         $data = $request->all();
         if ($request->file("file_photo") != null) {
-            $path = $request->file("file_photo")->store("BrokerPromotionsImages");
+            $path = $request->file("file_photo")->store("BrokerImages");
             $NewsImage = $path;
         }
         $description = htmlentities($request->editor1);
@@ -43,7 +43,7 @@ class BorkerPromotionsController extends Controller
     public function EditPromotions(Request $request, $id){
         $data = $request->all();
         if ($request->file("file_photo") != null) {
-            $path = $request->file("file_photo")->store("BrokerPromotionsImages");
+            $path = $request->file("file_photo")->store("BrokerImages");
             $NewsImage = $path;
             $data['image'] = $NewsImage;
         }

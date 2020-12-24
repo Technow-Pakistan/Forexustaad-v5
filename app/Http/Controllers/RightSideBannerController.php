@@ -13,7 +13,7 @@ class RightSideBannerController extends Controller
     }
     public function Add(Request $request){
         if ($request->file("file_photo") != null) {
-            $path = $request->file("file_photo")->store("BannerImages");
+            $path = $request->file("file_photo")->store("WebImages");
             $bannerImage = $path;
         }
         $banner = new RightSideBannerModel;
