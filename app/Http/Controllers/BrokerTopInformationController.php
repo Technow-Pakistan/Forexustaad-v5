@@ -26,6 +26,10 @@ class BrokerTopInformationController extends Controller
             $companyImage = $path;
             $data["image"] = $companyImage;
         }
+        if ($request->neverEnd == 1) {
+            $data["start"] = null;
+            $data["end"] = null;
+        }
         $broker = new BrokerCompanyInformationModel;
         $broker->fill($data);
         $broker->save();

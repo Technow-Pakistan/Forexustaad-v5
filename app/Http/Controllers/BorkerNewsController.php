@@ -8,9 +8,12 @@ use App\Models\BrokerNewsModel;
 
 class BorkerNewsController extends Controller
 {
-    
     public function Index(Request $request){
-        $brokerNews = BrokerNewsModel::all();
+        $brokers = BrokerCompanyInformationModel::all();
+        return view('admin.broker-news',compact('brokers'));
+    }
+    public function All(Request $request, $id){
+        $brokerNews = BrokerNewsModel::where('brokerId',$id)->get();
         return view('admin.all-broker-news',compact('brokerNews'));
     }
     public function Add(Request $request){

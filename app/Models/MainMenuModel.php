@@ -8,5 +8,4 @@ class MainMenuModel extends Model
 {
     protected $table = "mainmenu";
     protected $fillable = ["menu","link"];
-
 }
