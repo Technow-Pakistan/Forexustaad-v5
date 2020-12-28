@@ -8,5 +8,4 @@ class TagModel extends Model
 {
     protected $table = "tag";
     protected $fillable = ["name","slug","description"];
-
 }

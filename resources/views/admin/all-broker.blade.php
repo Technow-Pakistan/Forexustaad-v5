@@ -141,10 +141,17 @@
 												<td><a class="text-danger" href="{{URL::to('ustaad/brokersDetail')}}/{{$data->id}}"> Click For Details </a></td>
 												<td><a class="text-danger" href="{{URL::to('ustaad/brokersReview')}}/{{$data->id}}"> Click For Review </a></td>
 												<td>
-													<span class="badge badge-light-success">Active</span>
+													@php
+														$paymentDate = date('Y-m-d');
+														$paymentDate=date('Y-m-d', strtotime($paymentDate));
+														//echo $paymentDate; // echos today! 
+														$contractDateBegin = date('Y-m-d', strtotime($data->start));
+														$contractDateEnd = date('Y-m-d', strtotime($data->end));
+													@endphp
+													<span class="badge {{((($paymentDate >= $contractDateBegin) && ($paymentDate <= $contractDateEnd)) || $data->neverEnd == 1) ? 'badge-light-success' : 'badge-light-danger'}}">{{((($paymentDate >= $contractDateBegin) && ($paymentDate <= $contractDateEnd)) || $data->neverEnd == 1) ? 'Active' : 'Deactive'}}</span>
 													<div class="overlay-edit">
 														<a href="{{URL::to('ustaad/editBroker')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
-														<a href="{{URL::to('ustaad/deleteBroker')}}/{{$data->id}}"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
+														<a href="{{URL::to('ustaad/deleteBroker')}}/{{$data->id}}"  class="btn-dialog"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
 													</div>
 												</td>
 											</tr>

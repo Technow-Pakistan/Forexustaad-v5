@@ -40,18 +40,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->share("headerLeftBanner",HeaderLeftBannerModel::orderBy('id','desc')->first());
-        view()->share("headerRightBanner",HeaderRightBannerModel::orderBy('id','desc')->first());
+        view()->share("headerLeftBanner",HeaderLeftBannerModel::orderBy('id','desc')->whereDate('start', '<=', date("Y-m-d"))->whereDate('end', '>=', date("Y-m-d"))->first());
+        view()->share("headerRightBanner",HeaderRightBannerModel::orderBy('id','desc')->whereDate('start', '<=', date("Y-m-d"))->whereDate('end', '>=', date("Y-m-d"))->first());
         view()->share("MainLogo",LogoPanelModel::orderBy('id','desc')->where('active',1)->first());
         view()->share("MainFavicon",FaviconPanelModel::orderBy('id','desc')->where('active',1)->first());
         view()->share("SlidingImagesData",SlidingImagesModel::orderBy('id','desc')->get());
         view()->share("FooterWebinar",FooterWebinarModel::all());
         view()->share("FooterDescription",FooterDescriptionModel::all());
         view()->share("FooterContact",FooterContactModel::all());
-        view()->share("MainLeftBanner",LeftSideBannerModel::where('area','Top')->first());
-        view()->share("MainRightBanner",RightSideBannerModel::where('area','Top')->first());
-        view()->share("AllLeftBanner",LeftSideBannerModel::orderBy('id','desc')->get());
-        view()->share("AllRightBanner",RightSideBannerModel::orderBy('id','desc')->get());
+        view()->share("MainLeftBanner",LeftSideBannerModel::where('area','Top')->whereDate('start', '<=', date("Y-m-d"))->whereDate('end', '>=', date("Y-m-d"))->first());
+        view()->share("MainRightBanner",RightSideBannerModel::where('area','Top')->whereDate('start', '<=', date("Y-m-d"))->whereDate('end', '>=', date("Y-m-d"))->first());
+        view()->share("AllLeftBanner",LeftSideBannerModel::orderBy('id','desc')->whereDate('start', '<=', date("Y-m-d"))->whereDate('end', '>=', date("Y-m-d"))->get());
+        view()->share("AllRightBanner",RightSideBannerModel::orderBy('id','desc')->whereDate('start', '<=', date("Y-m-d"))->whereDate('end', '>=', date("Y-m-d"))->get());
         view()->share("MainHomeApi",ApiHomeModel::where('area','Top')->first());
         view()->share("AllHomeApi",ApiHomeModel::orderBy('id','desc')->get());
         view()->share("AllLeftApi",ApiLeftModel::orderBy('id','desc')->get());

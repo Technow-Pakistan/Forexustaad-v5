@@ -273,43 +273,34 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="news_responsive news_slider bullet_style wow animated fadeInUp">
-                                        <?php
-$news = [
-    ['src' => '1.jpg', 'url' => '', 'anchor_text' => 'Fox Manager'],
-    ['src' => '2.jpg', 'url' => '', 'anchor_text' => 'Key Style'],
-    ['src' => '3.jpg', 'url' => '', 'anchor_text' => 'Health Engine'],
-    ['src' => '4.png', 'url' => '', 'anchor_text' => 'NGA'],
-    ['src' => '5.jpg', 'url' => '', 'anchor_text' => 'Alphaones Security'],
-    ['src' => '6.png', 'url' => '', 'anchor_text' => 'Mile Assets']
-];
-$recent_news = '';
-?>
-    @foreach ($LatestBlogsData as $value)
-                <div class="slide position-relative news">
-                    <div class="new_img">
-                        <img src="{{URL::to('storage/app')}}/{{$value->image}}">
-                    </div>
-                    <!-- <div class="new_description">
-                    <a href="{{URL::to('/Blog')}}/{{$value->permalink}}">
-                        <i class="fa fa-link"></i>
-                        </a>
-                    </div> -->
-                    <div class="new_description-details">
-                    <h6>
-                        <a href="{{URL::to('/Blog')}}/{{$value->permalink}}">
-                                {{$value->mainTitle}}
-                            </a>
-                    </h6>
-                    <p>
-                        {{$value->description}}
-                    </p>
-                    </div>
-                </div>
-    @endforeach
-                                        <?php echo ($recent_news); ?>
+                                        @foreach ($LatestBlogsData as $value)
+                                            @php
+                                                $paymentDate = date('Y-m-d');
+                                                $paymentDate=date('Y-m-d', strtotime($paymentDate));
+                                                //echo $paymentDate; // echos today! 
+                                                $contractDateBegin = date('Y-m-d', strtotime($value->publishDate));
+                                            @endphp
+                                            @if($paymentDate >= $contractDateBegin)
+                                                    <div class="slide position-relative news">
+                                                        <div class="new_img">
+                                                            <img src="{{URL::to('storage/app')}}/{{$value->image}}">
+                                                        </div>
+                                                        <div class="new_description-details">
+                                                        <h6>
+                                                            <a href="{{URL::to('/Blog')}}/{{$value->permalink}}">
+                                                                    {{$value->mainTitle}}
+                                                                </a>
+                                                        </h6>
+                                                        <p>
+                                                            {{$value->description}}
+                                                        </p>
+                                                        </div>
+                                                    </div>
+                                            @endif
+                                        @endforeach
                                     </div>
                                     <div class="new_btn text-right wow animated fadeInUp">
-                                        <a href="">Show More News <i class="fa fa-chevron-right"></i></a>
+                                        <a href="{{URL::to('/blog-post.html')}}">Show More News <i class="fa fa-chevron-right"></i></a>
                                     </div>
                                 </div>
                             </div>

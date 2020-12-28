@@ -7,6 +7,7 @@ use App\Models\AdminModel;
 use App\Models\AdminMemberModel;
 use App\Models\AdminMemberDetailModel;
 use App\Models\ClientRegistrationModel;
+use App\Models\TrashModel;
 
 class AdminController extends Controller
 {
@@ -45,6 +46,10 @@ class AdminController extends Controller
     public function Logout(Request $request){
         $request->session()->pull("admin");
         return redirect("ustaad");
+    }
+    public function Trash(Request $request){
+        $totalData = TrashModel::all();
+        return view('admin.all-trash',compact('totalData'));
     }
     
 }

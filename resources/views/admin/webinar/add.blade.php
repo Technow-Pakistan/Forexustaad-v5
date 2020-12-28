@@ -52,7 +52,7 @@
 											<div class="col-md-6">
 												<div class="custom-file">
 													<label for="">Thumbnail</label>
-													<input type="file" class="form-control h-100" name="file_photo" id="customFile" {{($count == 0 ? 'required' : '' )}}>
+													<input type="file" class="form-control" name="file_photo" id="customFile" {{($count == 0 ? 'required' : '' )}}>
 												</div>
 											</div>
 											<div class="col-md-6">
@@ -123,21 +123,25 @@
 		<!-- [ Main Content ] end -->
 
 @include('admin.include.footer')
-        <script>
-			// description Limit
+	<style>
+		.form-control{
+			height:40px;
+		}
+	</style>
+    <script>
+		// description Limit
+		$(".descriptionCount").hide();
+		$(".description").on("keyup",function(){
+		var count = $(".description").val();
+		var len = count.length;
+		if(len == 0){
 			$(".descriptionCount").hide();
-			$(".description").on("keyup",function(){
-			var count = $(".description").val();
-			var len = count.length;
-
-			if(len == 0){
-				$(".descriptionCount").hide();
-			}else{
-				$(".descriptionCount").show();
-			}
-				len = 200 - len;
-				$(".descriptionCount").html("remaining: " + len);
-			});
-		</script>
+		}else{
+			$(".descriptionCount").show();
+		}
+			len = 200 - len;
+			$(".descriptionCount").html("remaining: " + len);
+		});
+	</script>
 
 
