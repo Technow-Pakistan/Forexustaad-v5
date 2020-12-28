@@ -102,7 +102,8 @@ Route::get('/what-is-forex-trading-in-urdu-webinar.html',[HtmlPagesController::c
 //     return view('welcome');
 // });
 Route::get('/subscriberConfirmation/{id}',[HomeController::class,'ConfirmationEmail']);
-Route::get('/uploader/upload.php',[HomeController::class,'ImageSrc15']);
+Route::get('/forgetPassword/{id}',[HomeController::class,'ForgetPasswordChange']);
+Route::post('/forgetPassword/{id}',[HomeController::class,'ForgetPasswordChangeProcess']);
 Route::post('/uploader/upload.php',[HomeController::class,'ImageSrc15']);
 Route::post('/pro-img-disk.php',[HomeController::class,'ImageSrc']);
 Route::post('/comment1',[CommentController::class,'Add']);
@@ -111,6 +112,7 @@ Route::get('/construction',[HomeController::class,'Construction']);
 Route::get('/webinar',[HomeController::class,'webinar']);
 Route::post('/clientRegistration',[HomeController::class,'RegistrationProcess']);
 Route::post('/clientLogin',[HomeController::class,'LoginProcess']);
+Route::post('/clientForget',[HomeController::class,'ForgetProcess']);
 Route::get('/clientLogout',[HomeController::class,'LogoutProcess']);
 Route::get('/blog-post.html',[BlogController::class,'Index']);
 Route::get('/Blog/{id}',[BlogController::class,'DetailBlog']);
@@ -124,6 +126,7 @@ Route::post('/ustaad',[AdminController::class,'Index']);
 
 Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::get('/dashboard',[AdminController::class,'Dashboard']);
+    Route::get('/trash',[AdminController::class,'Trash']);
     Route::get('/logout',[AdminController::class,'Logout']);  
     
     Route::group(['prefix' => 'webinar'],function(){
@@ -199,12 +202,16 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::group(['prefix' => 'api-home'],function(){
             Route::get('/',[ApiHomeController::class,'Index']);
             Route::post('/',[ApiHomeController::class,'Add']);
+            Route::get('/trash/{id}',[ApiHomeController::class,'Trash']);
+            Route::get('/trashRestore/{id}',[ApiHomeController::class,'TrashRestore']);
             Route::get('/delete/{id}',[ApiHomeController::class,'delete']);
             Route::post('/edit/{id}',[ApiHomeController::class,'EditProcess']);
         });
         Route::group(['prefix' => 'api-left'],function(){
             Route::get('/',[ApiLeftController::class,'Index']);
             Route::post('/',[ApiLeftController::class,'Add']);
+            Route::get('/trash/{id}',[ApiLeftController::class,'Trash']);
+            Route::get('/trashRestore/{id}',[ApiLeftController::class,'TrashRestore']);
             Route::get('/delete/{id}',[ApiLeftController::class,'delete']);
             Route::post('/edit/{id}',[ApiLeftController::class,'EditProcess']);
         });
@@ -310,6 +317,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::post('/{id}',[GalleryController::class,'Add']);
         Route::get('delete/{id}',[GalleryController::class,'Delete']);
         Route::get('edit/{id}',[GalleryController::class,'Edit']);
+        Route::post('edit/{id}',[GalleryController::class,'EditProcess']);
     });
 });
 
