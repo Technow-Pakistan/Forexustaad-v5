@@ -35,10 +35,20 @@ class GalleryController extends Controller
     }
     public function Edit(Request $request, $id){
         $title = str_replace("@-","/",$id);
-        $path = "storage/app/" . $title;
-        $data = GalleryImagesDetailModel::where();
-        return view('admin.galleryImagesEdit',compact('data','id'));
-        
-        return back();
+        $data = GalleryImagesDetailModel::where('imgPath',$title)->first();
+        $count = 1;
+        if ($data == null) {
+            $count = 0;
+        }
+        return view('admin.galleryImagesEdit',compact('data','title','count'));  
+    }
+    public function EditProcess(Request $request, $id){
+        $title = str_replace("@-","/",$id);
+        $data = $request->all();
+        $data['imgPath'] = $title;
+        $image = new GalleryImagesDetailModel;
+        $image->fill($data);
+        $image->save();
+        return back();  
     }
 }

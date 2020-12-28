@@ -262,7 +262,13 @@ $(".LoginButton").on("click",function(){
   $(".heading_title").html("Login");
   $(".RegistrationForm").hide();
   $(".LoginForm").show();
-})
+    $(".passwordHide").show();
+    $(".passwordHide").attr("required",true);
+    $(".ForgetButton").html("Login");
+    $(".ForgetPassword").show();
+    $(".LoginForm").attr("action","{{URL::to('/clientLogin')}}");
+    $(".LoginEmail").attr("placeholder","Enter Email or Phone number");
+});
      </script>
 
      <script>
@@ -356,13 +362,14 @@ $(".LoginButton").on("click",function(){
 
                   <div class="contact_us_form wow animated fadeInUp">
                     <div class="form-group">
-                      <input type="text" class="form-control text-gray explore_form name abc_into" placeholder="Enter Email or Phone number" name="username" id="quote_name" required>
+                      <input type="text" class="form-control text-gray explore_form name abc_into LoginEmail" placeholder="Enter Email or Phone number" name="username" id="quote_name" required>
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control text-gray explore_form name abc_into" placeholder="Enter Password" name="password" id="quote_name" required>
+                      <input type="password" class="form-control text-gray explore_form name abc_into passwordHide" placeholder="Enter Password" name="password" id="quote_name" required>
                     </div>
                     <div class="form-group text-left">
-                      <button type="submit" class="btn btn-primary text-uppercase quote_send_msg" data-type="quote">Login</button>
+                      <button type="submit" class="btn btn-primary text-uppercase quote_send_msg ForgetButton" data-type="quote">Login</button><br>
+                      <a href="#" class="text-danger ForgetPassword">Forget Password</a>
                       <span class="text-danger LoginError"></span>
                     </div>
                   </div>
@@ -434,6 +441,15 @@ $('a[href="#top"]')
 <script type="text/javascript">
     $(window).on('load', function(){
      $('#loading').hide();
+  });
+  $(".ForgetPassword").on("click",function(){
+    $(".heading_title").html("Forget Password");
+    $(".passwordHide").hide();
+    $(".ForgetButton").html("Send Mail");
+    $(".ForgetPassword").hide();
+    $(".passwordHide").attr("required",false);
+    $(".LoginForm").attr("action","{{URL::to('/clientForget')}}");
+    $(".LoginEmail").attr("placeholder","Enter Email");
   });
 </script>
 

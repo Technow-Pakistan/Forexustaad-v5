@@ -20,7 +20,7 @@ use App\Models\BorkerPromotionsModel;
 class BorkerController extends Controller
 {
     public function Index(Request $request){
-        $broker = BrokerCompanyInformationModel::all();
+        $broker = BrokerCompanyInformationModel::orderBy('id','desc')->get();
         return view('admin.all-broker',compact('broker'));
     }
     public function delete(Request $request, $id){

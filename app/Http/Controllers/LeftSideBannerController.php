@@ -34,11 +34,14 @@ class LeftSideBannerController extends Controller
         return back();
     }
     public function ProcessEdit(Request $request, $id){
-        
+        $banner = $request->all();
+        if ($request->file("file_photo") != null) {
+            $path = $request->file("file_photo")->store("WebImages");
+            $banner['banner'] = $path;
+        }
         $data = LeftSideBannerModel::find($id);
-        $data->fill($request->all());
+        $data->fill($banner);
         $data->save();
         return back();
     }
-
 }

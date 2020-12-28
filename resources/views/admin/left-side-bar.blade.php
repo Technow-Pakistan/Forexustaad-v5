@@ -35,18 +35,12 @@
 								<form action="" method="post" class="form1 bannerForm" enctype="multipart/form-data">
 									<div class="text-lg-center">
 										<div class="bannerTitle">
-											@if($totalData[0]->banner != null)
 												<img
 													id="slider1"
-													src="{{URL::to('/storage/app')}}/{{$totalData[0]->banner}}"
+													src=""
 													class="img-fluid"
 													alt="your image"
 												/>
-											@else
-												@php
-													echo $totalData[0]->htmlLink;
-												@endphp
-											@endif
 										</div>
 										<div class="custom-file my-3 h-100">
 											<input type="file" class="form-control h-100" name="file_photo" id="file1">
@@ -125,7 +119,7 @@
 													<a href="#">
 														<i class="far fa-edit text-success mr-2 editlink" value="{{$data->id}}"></i>
 													</a>
-													<a href="{{URL::to('/ustaad/banner/left-side-banner/delete')}}/{{$data->id}}">
+													<a href="{{URL::to('/ustaad/banner/left-side-banner/delete')}}/{{$data->id}}" class="btn-dialog">
 														<i class="fa fa-times text-danger"></i>
 													</a>
 												</td>
@@ -144,6 +138,7 @@
 @include('admin.include.footer')
 	<!-- edit Content -->
 	<script>
+			$(".bannerTitle").hide();
 		$(".editlink").on("click",function(){
 			var id = $(this).attr('value');
 			var title = $(this).parent().parent().parent()[0].children[0].innerHTML;
@@ -151,6 +146,7 @@
 			var area = $(this).parent().parent().parent()[0].children[1].innerText;
 			var start = $(this).parent().parent().parent()[0].children[2].innerText;
 			var end = $(this).parent().parent().parent()[0].children[3].innerText;
+			$(".bannerTitle").show();
 			$(".bannerTitle").html(title);
 			$(".bannerStart").val(start);
 			$(".bannerEnd").val(end);
