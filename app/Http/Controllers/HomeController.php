@@ -16,10 +16,12 @@ use App\Models\BrokerCustomerServicesModel;
 use App\Models\BrokerReserchEducationModel;
 use App\Models\BrokerPromotionModel;
 use App\Models\BrokerReviewModel;
+use App\Models\ForgetPasswordModel;
 use App\Models\BrokerNewsModel;
 use App\Models\BorkerPromotionsModel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SubscriberMail;
+use App\Mail\ForgetPasswordMail;
 
 use App\Models\MainWebinarModel;
 
@@ -46,6 +48,31 @@ class HomeController extends Controller
             $request->session()->put("client",$registration);
             return redirect('/memberArea/dashboard');
     }
+    public function ForgetPasswordChange(Request $request, $id){
+        date_default_timezone_set("Asia/Karachi");
+        $data = ForgetPasswordModel::orderBy('id','desc')->where('link',$id)->first();
+        $time = strtotime($data->time);
+        $time2 = date('H:i:s',$time);
+        $time = date("H:i:s");
+        if ($time <= $time2) {
+            $email = base64_decode($id);
+            $registration = ClientRegistrationModel::where('email',$email)->first();
+            return view("home.Forget-password",compact('registration'));
+        }else {
+            $error = "Your link is expired. Please! try again";
+            $request->session()->put("error",$error);
+        }
+        return redirect("/");
+    }
+    public function ForgetPasswordChangeProcess(Request $request, $id){
+            $email = base64_decode($id);
+            $password = md5($request->password);
+            $registration = ClientRegistrationModel::where('email',$email)->first();
+            $registration->password = $password;
+            $registration->save();
+            $request->session()->put("client",$registration);
+            return redirect('/');
+    }
     public function termServices(){
         return view('home/term-of-services');
     }
@@ -63,6 +90,34 @@ class HomeController extends Controller
             $request->session()->put("success",$success);
         }else {
             $error = "Your account has already register.Please! login.";
+            $request->session()->put("error",$error);
+        }
+        return back();
+    }
+
+    public function ForgetProcess(Request $request){
+        $email = ClientRegistrationModel::where('email',$request->username)->first();
+       
+        if ($email != null) {
+            $forgetemail = base64_encode($email->email);
+            date_default_timezone_set("Asia/Karachi");
+            $time = date("Y/m/d H:i:s a");
+            $td = date("H:i:s");
+            $td = strtotime($td) + 60*60;
+            $td = date('H:i:s', $td);
+            $time = date("Y/m/d $td");
+            $data = new ForgetPasswordModel;
+            $data->link = $forgetemail;
+            $data->time = $time;
+            $data->save();
+            $email['link'] = $forgetemail;
+            $email['time'] = $time;
+            
+            Mail::to($request->username)->send(new ForgetPasswordMail($email));
+            $success = "Please check mail in spam for Forget Password.";
+            $request->session()->put("success",$success);
+        }else {
+            $error = "Your account has not register.";
             $request->session()->put("error",$error);
         }
         return back();
@@ -125,14 +180,11 @@ class HomeController extends Controller
         if ($request->file("upload") != null) {
             $path = $request->file("upload")->store("PostImages");
         };
-        $request->upload->move(public_path('uploads'),
-        $request->file('upload')->getClientOriginalName());
-
-        // $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-        // $url = "http://localhost/forexustaad/storage/app/" . $path;
-        // $msg = 'Image uploaded successfully'; 
-        // $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
-        echo json_encode(array('file_name'=>$request->file('upload')->getClientOriginalName()));
+        $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+        $url = "http://localhost/forexustaad/storage/app/" . $path;
+        $msg = 'Image uploaded successfully';
+        $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
+        echo $response;
     }
     public function brokerDetail(Request $request, $id){
         $title = str_replace("-"," ",$id);

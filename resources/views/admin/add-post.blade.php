@@ -113,13 +113,13 @@
                      <p class="text-right text-danger m-0 descriptionCount"></p>
                      <textarea name="description" maxlength="200" class="form-control description" id="news-description" rows="5" cols="40" required="" placeholder="Enter your Description here ..."></textarea>
                   </div>
-                  <br>
+                  <!-- <br>
                   <hr>
                   <input type="file" name="srcImage" id="srcImage" class="srcImage">
                   <input type="hidden" name="filePath" id="filePath" class="filePath" value="PostImages">
                   <br>
-                  <hr>
-                  <p class="text-danger  h4  pb-3"> Enter the Fundamental Points</p>
+                  <hr> -->
+                  <p class="text-danger  h4  pb-3"> Enter Detail Description</p>
                   <div class="form-group">
                      <!-- <textarea id="myEditor"></textarea> -->
                      <textarea name="editor1" id="editor1"></textarea>

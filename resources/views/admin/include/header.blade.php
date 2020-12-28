@@ -21,8 +21,10 @@
 		<!-- vendor css -->
 		<link rel="stylesheet" href="{{URL::to('/public/assets/assets/css/adminstyle.css')}}" />
 		<!-- Check Editor --> 
-		<script src="https://cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
-		
+		<script src="https://cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
+
+		<!-- animate -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
 
 		
 	</head>
@@ -39,7 +41,6 @@
 			<div class="navbar-wrapper">
 				<div class="navbar-content scroll-div">
 					<ul class="nav pcoded-inner-navbar">
-						@if($value['memberId'] == 1 || $value['memberId'] == 4)
 							<li class="nav-item pcoded-menu-caption">
 								<label>Dashboard Design</label>
 							</li>
@@ -48,6 +49,16 @@
 									><span class="pcoded-micon"
 										><i class="feather icon-home"></i></span
 									><span class="pcoded-mtext">Dashboard</span></a
+								>
+							</li>
+							<li class="nav-item pcoded-menu-caption">
+								<label>Trash</label>
+							</li>
+							<li class="nav-item">
+								<a href="{{URL::to('/ustaad/trash')}}" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="feather icon-trash"></i></span
+									><span class="pcoded-mtext">Trash</span></a
 								>
 							</li>
 							<li class="nav-item pcoded-menu-caption">
@@ -67,8 +78,6 @@
 									<li><a href="{{URL::to('ustaad/comment')}}">Comments</a></li>
 								</ul>
 							</li>
-						@endif
-						@if($value['memberId'] == 1)
 							<li class="nav-item pcoded-menu-caption">
 								<label>Webinar Area</label>
 							</li>
@@ -83,8 +92,6 @@
 									<li><a href="{{URL::to('ustaad/webinar/add')}}">Add Webinar</a></li>
 								</ul>
 							</li>
-						@endif
-						@if($value['memberId'] == 1 || $value['memberId'] == 4)
 							<li class="nav-item pcoded-menu-caption">
 								<label>Broker Area</label>
 							</li>
@@ -130,8 +137,7 @@
 									><span class="pcoded-mtext">Footer</span></a
 								>
 							</li>
-						@endif
-						@if($value['memberId'] == 1)
+						@if($value['memberId'] != 4)
 							<li class="nav-item pcoded-menu-caption">
 								<label>Banner Panel</label>
 							</li>
@@ -269,17 +275,17 @@
 									><span class="pcoded-mtext">Gallery</span></a
 								>
 								<ul class="pcoded-submenu">
-								@php
-									$totalData = scandir("storage/app");
-									$selectedImagesFloders = [];
-									foreach ($totalData as $data) {
-										if (strpos($data, 'Images') != false) {
-											array_push($selectedImagesFloders,$data);
+									@php
+										$totalData = scandir("storage/app");
+										$selectedImagesFloders = [];
+										foreach ($totalData as $data) {
+											if (strpos($data, 'Images') != false) {
+												array_push($selectedImagesFloders,$data);
+											}
 										}
-									}
-								@endphp
-								@foreach($selectedImagesFloders as $imageFloder)
-									<li><a href="{{URL::to('/ustaad/gallery')}}/{{$imageFloder}}">{{$imageFloder}}</a></li>
+									@endphp
+									@foreach($selectedImagesFloders as $imageFloder)
+										<li><a href="{{URL::to('/ustaad/gallery')}}/{{$imageFloder}}">{{$imageFloder}}</a></li>
 									@endforeach
 								</ul>
 							</li>
