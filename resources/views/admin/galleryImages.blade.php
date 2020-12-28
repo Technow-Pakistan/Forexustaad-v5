@@ -60,7 +60,7 @@
                         <div class="card">
                             <img class="img-fluid card-img-top mainImageButton popupOpenDetail" id="popup-open" src="{{URL::to('storage/app')}}/{{$data}}" alt="Card image" title="Image Detail" popupData="{{$extension[$num]}}@/{{$fileImageSize}} Kb@/{{$dimensions[0]}} pixels@/{{$dimensions[1]}} pixels@/{{URL::to('storage/app')}}/{{$data}}">
                             <a href="{{URL::to('/ustaad/gallery/delete')}}/{{$title}}" class="deleteImageButton"><i class="feather icon-trash text-danger"></i></a>
-                            <a href="#" class="editImageButton"><i class="feather icon-edit text-primary"></i></a>
+                            <a href="{{URL::to('/ustaad/gallery/edit')}}/{{$title}}" class="editImageButton"><i class="feather icon-edit text-primary"></i></a>
                         </div>
                     @endforeach
                 </div>

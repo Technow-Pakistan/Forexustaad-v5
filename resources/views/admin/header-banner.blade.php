@@ -36,18 +36,12 @@
 									<div class="form-group">
 										<span>
 											<div class="bannerLeftTitle">
-												@if($totalData[0]->banner != null)
 													<img
 														id="slider1"
-														src="{{URL::to('/storage/app')}}/{{$totalData[0]->banner}}"
+														src=""
 														class="img-fluid"
 														alt="your image"
 													/>
-												@else
-													@php
-														echo $totalData[0]->htmlLink;
-													@endphp
-												@endif
 											</div>
 										</span>
 										<div class="custom-file my-3 h-100">
@@ -114,7 +108,7 @@
 												<a href="#">
 													<i class="far fa-edit text-success mr-2 editLeftlink" value="{{$data->id}}"></i>
 												</a>
-												<a href="{{URL::to('/ustaad/banner/header-banner/delete')}}/{{$data->id}}">
+												<a href="{{URL::to('/ustaad/banner/header-banner/delete')}}/{{$data->id}}" class="btn-dialog">
 													<i class="fa fa-times text-danger"></i>
 												</a>
 											</td>
@@ -133,18 +127,12 @@
 									<div class="form-group">
 										<span>
 											<div class="bannerRightTitle">
-												@if($totalRightData[0]->banner != null)
 													<img
 														id="slider1"
-														src="{{URL::to('/storage/app')}}/{{$totalRightData[0]->banner}}"
+														src=""
 														class="img-fluid"
 														alt="your image"
 													/>
-												@else
-													@php
-														echo $totalRightData[0]->htmlLink;
-													@endphp
-												@endif
 											</div>
 										</span>
 										<div class="custom-file my-3 h-100">
@@ -211,7 +199,7 @@
 													<a href="#">
 														<i class="far fa-edit text-success mr-2 editRightlink" value="{{$data->id}}"></i>
 													</a>
-													<a href="{{URL::to('/ustaad/banner/header-banner/deleteright')}}/{{$data->id}}">
+													<a href="{{URL::to('/ustaad/banner/header-banner/deleteright')}}/{{$data->id}}" class="btn-dialog">
 														<i class="fa fa-times text-danger"></i>
 													</a>
 												</td>
@@ -231,12 +219,14 @@
 
 	<!-- edit left Content -->
 	<script>
+			$(".bannerLeftTitle").hide();
 		$(".editLeftlink").on("click",function(){
 			var id = $(this).attr('value');
 			var title = $(this).parent().parent().parent()[0].children[0].innerHTML;
 			title = title.trim();
 			var start = $(this).parent().parent().parent()[0].children[1].innerText;
 			var end = $(this).parent().parent().parent()[0].children[2].innerText;
+			$(".bannerLeftTitle").show();
 			$(".bannerLeftTitle").html(title);
 			$(".bannerLeftStart").val(start);
 			$(".bannerLeftEnd").val(end);
@@ -264,12 +254,14 @@
 
 	<!-- edit right Content -->
 	<script>
+			$(".bannerRightTitle").hide();
 		$(".editRightlink").on("click",function(){
 			var id2 = $(this).attr('value');
 			var title2 = $(this).parent().parent().parent()[0].children[0].innerHTML;
 			title2 = title2.trim();
 			var start2 = $(this).parent().parent().parent()[0].children[1].innerText;
 			var end2 = $(this).parent().parent().parent()[0].children[2].innerText;
+			$(".bannerRightTitle").show();
 			$(".bannerRightTitle").html(title2);
 			$(".bannerRightStart").val(start2);
 			$(".bannerRightEnd").val(end2);
