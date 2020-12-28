@@ -64,7 +64,7 @@ class BlogPostController extends Controller
             $data['image'] = $blogPostImage;
         }
         // ckeditor Description
-        $detailDescription = htmlentities($request->detailDescription);
+        $detailDescription = htmlentities($request->editor1);
         $data['detailDescription'] = $detailDescription;
         // add Post data
         $blogPost = new BlogPostModel;
