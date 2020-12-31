@@ -43,4 +43,16 @@ class MainWebinarController extends Controller
         $Review->save();
         return back();
     }
+    public function Deactive(Request $request, $id){
+        $data = MainWebinarModel::find($id);
+        $data->status = 0;
+        $data->save();
+        return back();
+    }
+    public function Active(Request $request, $id){
+        $memberData = MainWebinarModel::where('id',$id)->first();
+        $memberData->status = 1 ;
+        $memberData->save();
+        return back();
+    }
 }

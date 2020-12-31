@@ -52,10 +52,16 @@
 													<td>{{$data->date}}</td>
 													<td>{{$data->time}}</td>
 													<td>
-														<span class="badge badge-light-success">Active</span>
+														<span class="badge {{$data->status == 1 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 1 ? 'Active' : 'Deactive'}}</span>
 														<div class="overlay-edit">
 															<a href="{{URL::to('/ustaad/webinar/edit')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
-															<!-- <a href="{{URL::to('/ustaad/brokersNews/delete')}}/{{$data->id}}"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a> -->
+															@if($data->status == 1)
+																<a href="{{URL::to('/ustaad/webinar/deactive')}}/{{$data->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"><i class="feather icon-trash-2"></i></a>
+															@elseif($data->status == 0)
+																<a href="{{URL::to('/ustaad/webinar/active')}}/{{$data->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal">
+																	<i class="feather icon-unlock"></i>
+																</a>
+															@endif
 														</div>
 													</td>
 												</tr>

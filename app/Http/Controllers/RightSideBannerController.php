@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RightSideBannerModel;
+use App\Models\TrashModel;
 
 class RightSideBannerController extends Controller
 {
     public function Index(Request $request){
-        $totalData = RightSideBannerModel::orderBy('id','desc')->get();
+        $totalData = RightSideBannerModel::orderBy('id','desc')->where('trash',0)->get();
         return view('admin.right-side-bar',compact('totalData'));
     }
     public function Add(Request $request){
@@ -29,6 +30,8 @@ class RightSideBannerController extends Controller
         return back();
     }
     public function delete(Request $request, $id){
+        $Trash = TrashModel::where('deleteId',$id)->where('category',"Right Side Banner")->first();
+        $Trash->delete();
         $data = RightSideBannerModel::find($id);
         $data->delete();
         return back();
@@ -42,6 +45,28 @@ class RightSideBannerController extends Controller
         $data = RightSideBannerModel::find($id);
         $data->fill($banner);
         $data->save();
+        return back();
+    }
+    public function Trash(Request $request, $id){
+        $user = $request->session()->get("admin");
+        $data = RightSideBannerModel::find($id);
+        $data->trash = 1;
+        $data->save();
+        $Trash = new TrashModel;
+        $Trash->adminTableId = $user->id;
+        $Trash->trashItem = "banner/right-side-banner";
+        $Trash->category = "Right Side Banner";
+        $Trash->deleteId = $id;
+        $Trash->deleteTitle = $data->title;
+        $Trash->save();
+        return back();
+    }
+    public function TrashRestore(Request $request, $id){
+        $data = RightSideBannerModel::find($id);
+        $data->trash = 0;
+        $data->save();
+        $Trash = TrashModel::where('deleteId',$id)->where('category',"Right Side Banner")->first();
+        $Trash->delete();
         return back();
     }
 }

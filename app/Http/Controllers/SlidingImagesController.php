@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SlidingImagesModel;
+use App\Models\TrashModel;
 
 class SlidingImagesController extends Controller
 {
     public function Index(Request $request){
-        $images = SlidingImagesModel::all();
+        $images = SlidingImagesModel::orderBy('id','desc')->where('trash',0)->get();
         return view('admin.sliding-images',compact("images"));
     }
     public function Add(Request $request){
@@ -43,9 +44,34 @@ class SlidingImagesController extends Controller
         return view('admin.edit-slide-img',compact("image"));
     }
     public function ProcessRemove(Request $request, $id){
+        $Trash = TrashModel::where('deleteId',$id)->where('category',"Sliding Images")->first();
+        $Trash->delete();
+
         $image = SlidingImagesModel::where('id',$id)->first();
         $image->delete();
-        return redirect('admin/sliding-images');
+        return redirect('ustaad/sliding-images');
+    }
+    public function Trash(Request $request, $id){
+        $user = $request->session()->get("admin");
+        $data = SlidingImagesModel::find($id);
+        $data->trash = 1;
+        $data->save();
+        $Trash = new TrashModel;
+        $Trash->adminTableId = $user->id;
+        $Trash->trashItem = "sliding-images";
+        $Trash->category = "Sliding Images";
+        $Trash->deleteId = $id;
+        $Trash->deleteTitle = $data->iconName;
+        $Trash->save();
+        return redirect('ustaad/sliding-images');
+    }
+    public function TrashRestore(Request $request, $id){
+        $data = SlidingImagesModel::find($id);
+        $data->trash = 0;
+        $data->save();
+        $Trash = TrashModel::where('deleteId',$id)->where('category',"Sliding Images")->first();
+        $Trash->delete();
+        return back();
     }
     
 }

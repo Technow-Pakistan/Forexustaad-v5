@@ -89,7 +89,7 @@
 													<a href="#">
 														<i class="far fa-edit text-success mr-2 editlink" value="{{$data->id}}"></i>
 													</a>
-													<a href="{{URL::to('/ustaad/firstNav/delete')}}/{{$data->id}}">
+													<a href="{{URL::to('/ustaad/firstNav/trash')}}/{{$data->id}}">
 														<i class="fa fa-times text-danger"></i>
 													</a>
 												</td>

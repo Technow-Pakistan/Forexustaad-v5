@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\LogoPanelModel;
 use App\Models\FaviconPanelModel;
+use App\Models\TrashModel;
 
 class LogoPanelController extends Controller
 {
     public function Index(Request $request){
-        $totalData = LogoPanelModel::all();
+        $totalData = LogoPanelModel::orderBy('id','desc')->where('trash',0)->get();
         $featureLogo = LogoPanelModel::where('active',1)->first();
-        $totalfaviconData = FaviconPanelModel::all();
+        $totalfaviconData = FaviconPanelModel::orderBy('id','desc')->where('trash',0)->get();
         $featurefavicon = FaviconPanelModel::where('active',1)->first();
         return view('admin.logo_panel',compact("totalData","featureLogo","totalfaviconData","featurefavicon"));
     }
@@ -37,6 +38,8 @@ class LogoPanelController extends Controller
         return back();
     }
     public function delete(Request $request, $id){
+        $Trash = TrashModel::where('deleteId',$id)->where('category',"Logo")->first();
+        $Trash->delete();
         
         $data = LogoPanelModel::find($id);
         $data->delete();
@@ -59,6 +62,28 @@ class LogoPanelController extends Controller
         }
         $data->active = $active;
         $data->save();
+        return back();
+    }
+    public function TrashLeft(Request $request, $id){
+        $user = $request->session()->get("admin");
+        $data = LogoPanelModel::find($id);
+        $data->trash = 1;
+        $data->save();
+        $Trash = new TrashModel;
+        $Trash->adminTableId = $user->id;
+        $Trash->trashItem = "logo-panel";
+        $Trash->category = "Logo";
+        $Trash->deleteId = $id;
+        $Trash->deleteTitle = $data->title;
+        $Trash->save();
+        return back();
+    }
+    public function TrashLeftRestore(Request $request, $id){
+        $data = LogoPanelModel::find($id);
+        $data->trash = 0;
+        $data->save();
+        $Trash = TrashModel::where('deleteId',$id)->where('category',"Logo")->first();
+        $Trash->delete();
         return back();
     }
 
@@ -86,6 +111,8 @@ class LogoPanelController extends Controller
         return back();
     }
     public function deleteFavicon(Request $request, $id){
+        $Trash = TrashModel::where('deleteId',$id)->where('category',"Favicon")->first();
+        $Trash->delete();
         
         $data = FaviconPanelModel::find($id);
         $data->delete();
@@ -110,6 +137,28 @@ class LogoPanelController extends Controller
         }
         $favicon->active = $active;
         $favicon->save();
+        return back();
+    }
+    public function TrashRight(Request $request, $id){
+        $user = $request->session()->get("admin");
+        $data = FaviconPanelModel::find($id);
+        $data->trash = 1;
+        $data->save();
+        $Trash = new TrashModel;
+        $Trash->adminTableId = $user->id;
+        $Trash->trashItem = "logo-favicon";
+        $Trash->category = "Favicon";
+        $Trash->deleteId = $id;
+        $Trash->deleteTitle = $data->title;
+        $Trash->save();
+        return back();
+    }
+    public function TrashRightRestore(Request $request, $id){
+        $data = FaviconPanelModel::find($id);
+        $data->trash = 0;
+        $data->save();
+        $Trash = TrashModel::where('deleteId',$id)->where('category',"Favicon")->first();
+        $Trash->delete();
         return back();
     }
     

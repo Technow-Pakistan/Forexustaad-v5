@@ -10,7 +10,7 @@ use App\Models\BorkerPromotionsModel;
 class BrokerCompanyInformationModel extends Model
 {
     protected $table="broker_company_information";
-    protected $fillable = ["image","title","regulations","headquaters","foundation","traded","employees","start","end","neverEnd"];
+    protected $fillable = ["image","title","regulations","headquaters","foundation","traded","employees","start","end","neverEnd","trash"];
 
     public function GetAccountInfo(){
         $get = BrokerAccountInfoModel::where('brokerId',$this->id)->first();
