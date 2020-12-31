@@ -9,7 +9,7 @@ use App\Models\TrashModel;
 class ApiLeftController extends Controller
 {
     public function Index(Request $request){
-        $totalData = ApiLeftModel::orderBy('poistion','asc')->where('Trash',0)->get();
+        $totalData = ApiLeftModel::where('trash',0)->get();
         return view('admin.api-left-side-bar',compact("totalData"));
     }
     public function Add(Request $request){
@@ -21,7 +21,7 @@ class ApiLeftController extends Controller
     public function Order(Request $request){
         $count = count($request->poistion);
         $num = 1;
-        for ($i=0; $i <$count ; $i++) { 
+        for ($i=0; $i <$count ; $i++) {
             $Api = ApiLeftModel::where('id',$request->poistion[$i])->first();
             $Api->poistion = $num;
             $Api->save();
@@ -37,7 +37,7 @@ class ApiLeftController extends Controller
         return back();
     }
     public function EditProcess(Request $request, $id){
-        
+
         $data = ApiLeftModel::find($id);
         $data->fill($request->all());
         $data->save();

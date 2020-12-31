@@ -28,7 +28,7 @@
 							<li><a href="{{URL::to('/how-to-use-metatrader-4-full-training-in-urdu-part-2.html')}}"><i class="fa fa-arrow-right"></i> <span>{{$FooterWebinar[4]->webinar}}</span></a></li>
 						</ul>
 					</div>
-					</div> 
+					</div>
 					<div class="col-sm-6 col-md-4 px-4">
 						<div class="widget-col">
 						<h3 class="mb-4">Contact Us</h3>
@@ -44,7 +44,7 @@
 				</div>
 				<!-- /.footer-widget -->
         <!-- <div class="row footer-login align-items-center">
-           
+
           <div class="col-lg-4 col-md-6 col-sm-12">
               <div class="footer-login-inner d-flex justify-content-between align-items-center">
                 <div class="login-text">
@@ -78,7 +78,7 @@
                 <img src="{{URL::to('/public/assets/assets/img/google.png')}}" alt="ios">
               </div>
             </div>        </div> -->
-            
+
 			</div>
 			<!-- /.container -->
 		</footer>
@@ -86,7 +86,7 @@
 		<section class="copyright-section secondary-bg-color">
 
 			<div class="container">
-          
+
 
 
 				<div class="row">
@@ -96,7 +96,7 @@
                 echo $description;
               @endphp
 					</div>
-          
+
           <div class="col-12 col-lg-7 col-md-12 text-light">
               @php
                 $description = html_entity_decode($copyRight->description2);
@@ -173,12 +173,12 @@
   }
 });
 </script> -->
-     <script src="{{URL::to('/public/assets/assets/js/jquery-3.2.1.min.js')}}"></script> 
+     <script src="{{URL::to('/public/assets/assets/js/jquery-3.2.1.min.js')}}"></script>
      <!-- <script src="assets/js/isotope.pkgd.min.js"></script> -->
-     <script src="{{URL::to('/public/assets/assets/js/wow.js')}}"></script> 
-     <script defer src="{{URL::to('/public/assets/assets/js/slick.js')}}"></script> 
+     <script src="{{URL::to('/public/assets/assets/js/wow.js')}}"></script>
+     <script defer src="{{URL::to('/public/assets/assets/js/slick.js')}}"></script>
      <script src="{{URL::to('/public/assets/assets/js/jquery.marquee.min.js')}}"></script>
-     <script defer src="{{URL::to('/public/assets/node_modules/bootstrap/dist/js/bootstrap.js')}}"></script> 
+     <script defer src="{{URL::to('/public/assets/node_modules/bootstrap/dist/js/bootstrap.js')}}"></script>
      <script src="{{URL::to('/public/assets/assets/js/popper.min.js')}}"></script>
      <script src="{{URL::to('/public/assets/assets/js/jquery.dataTables.min.js')}}"></script>
      <script src="{{URL::to('/public/assets/assets/js/dataTables.bootstrap.min.js')}}"></script>
@@ -186,34 +186,18 @@
      <script src="{{URL::to('/public/assets/assets/js/bootstrap-toggle.min.js')}}"></script>
      <!-- charts -->
       <!--news slide script  -->
-      
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.js"></script>
      <!-- Splide Slider -->
 
      <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
 
-     <!--  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/js/swiper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.js"></script>
 
-     <!-- Resources -->
-    <!-- <script src="{{URL::to('/public/assets/assets/amcharts4/core.js')}}"></script>
-    <script src="{{URL::to('/public/assets/assets/amcharts4/charts.js')}}"></script>
-    <script src="{{URL::to('/public/assets/assets/amcharts4/themes/material.js')}}"></script>
-    <script src="{{URL::to('/public/assets/assets/amcharts4/themes/animated.js')}}"></script> -->
      <!-- charts ends -->
      <script src="{{URL::to('/public/assets/assets/js/custom.js')}}"></script>
-    <!--  <script type="text/javascript">
-        $(function() {
-            // init Isotope
-            let $grid = $('.projects-grid').isotope();
-            // filter items on button click
-            $('.filter-button-group button.isotope-nav').on( 'click', function() {
-                $('.filter-button-group button.isotope-nav').removeClass('active');
 
-                let filterValue = $(this).addClass('active').data('filter');
-                $grid.isotope({ filter: filterValue });
-            });
-        });
-     </script> -->
 
       <script>
      	$(document).ready(function(){
@@ -227,19 +211,19 @@
 		       $("#search_top_bar").hide();
 		       $("#close_popup").hide();
 		    });
-     
+
 
 
         // $('#to-top').hide();
-        $(window).scroll(function(){ 
-            if ($(this).scrollTop() > 100) { 
-                $('.to-top').addClass('show-top-btn'); 
+        $(window).scroll(function(){
+            if ($(this).scrollTop() > 100) {
+                $('.to-top').addClass('show-top-btn');
             } else {
-                $('.to-top').removeClass('show-top-btn'); 
-            } 
+                $('.to-top').removeClass('show-top-btn');
+            }
         });
        });
-       
+
 $(".RegistrationButton").on("click",function(){
   $(".heading_title").html("Registration");
   $(".LoginForm").hide();
@@ -289,12 +273,12 @@ $(".LoginButton").on("click",function(){
             <div class="content_area_heading large-heading text-center fadeInUp wow mb-5">
               <div class="heading_border fadeInUp wow">
                 <span class="one"></span><span class="two"></span><span class="three"></span>
-              </div>  
+              </div>
               <h1 class="heading_title fadeInUp wow secondary-text-color">
                Register
               </h1>
               <p class="heading-description fadeInUp wow w-100" data-wow-delay="0.2s">
-               Lorem Ipsum has been the industrys standard dummy text ever since the 1500s 
+               Lorem Ipsum has been the industrys standard dummy text ever since the 1500s
               </p>
             </div>
 
@@ -379,7 +363,7 @@ $(".LoginButton").on("click",function(){
           </div>
           <!-- <div class="col-md-2"></div> -->
         </div>
-        
+
       </div>
     </div>
   </div>
@@ -398,8 +382,8 @@ $('a[href="#top"]')
   .click(function(event) {
     // On-page links
     if (
-      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
-      && 
+      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
+      &&
       location.hostname == this.hostname
     ) {
       // Figure out element to scroll to
@@ -436,7 +420,7 @@ $('a[href="#top"]')
               vidDefer[i].setAttribute('src',vidDefer[i].getAttribute('data-src'));
         } } }
         window.onload = initVideo;
-</script> 
+</script>
 
 <script type="text/javascript">
     $(window).on('load', function(){
@@ -458,7 +442,7 @@ $('a[href="#top"]')
 <!-- news slide script -->
 
 <script>
-  /* webflow only this section swiper pagination */
+/* webflow only this section swiper pagination */
 $(document).ready(function() {
   /* add html by js (no way to add this HTML by webflow UI beacuse this is CMS list*/
   var part1 = "<div class=swiper-pagination></div>";
@@ -487,19 +471,19 @@ var mySwiper1 = new Swiper(".swiper-container-videos", {
   // If loop true set photoswipe - counterEl: false
   loop: false,
   /* slidesPerView || auto - if you want to set width by css like flickity.js layout - in this case width:80% by CSS */
-  slidesPerView: "false",
+  slidesPerView: "auto",
   spaceBetween: 15,
   centeredSlides: false,
 
   // If we need pagination
-  // pagination: {
-  //   el: ".swiper-pagination",
-  //   clickable: true
-  // },
-  // navigation: {
-  //   nextEl: ".swiper-custom-next",
-  //   prevEl: ".swiper-custom-prev"
-  // },
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true
+  },
+  navigation: {
+    nextEl: ".swiper-custom-next",
+    prevEl: ".swiper-custom-prev"
+  },
 
   keyboard: {
     enabled: true,
@@ -524,6 +508,7 @@ $(document).ready(function() {
     });
   });
 });
+
 
 </script>
 </body>

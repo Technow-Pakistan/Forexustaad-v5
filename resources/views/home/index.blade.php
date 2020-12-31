@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 @php
-                    if(Session::has('error')){ 
+                    if(Session::has('error')){
                         $error =Session::get('error');
                     }
                     @endphp
@@ -15,7 +15,7 @@
                     </div>
                 @endisset
                 @php
-                    if(Session::has('success')){ 
+                    if(Session::has('success')){
                         $success =Session::get('success');
                     }
                     @endphp
@@ -50,15 +50,15 @@
                                 @endfor
                             </ol>
                             <div class="carousel-inner">
-                                @php 
+                                @php
                                     $activeSlidingImage = 1;
                                 @endphp
                                 @foreach($SlidingImagesData as $imageData)
                                 <div class="carousel-item {{$activeSlidingImage == 1 ? 'active' : ''}}">
                                     <img src="{{URL::to('storage/app')}}/{{$imageData->image}}" class="d-block w-100 wow animated" alt="slide1" style="visibility: visible;">
-                        
+
                                     <div class="carousel-caption d-flex slide1 last-slide">
-                                    
+
                                 <div class="row no-gutters w-100 slide_row">
                                 <div class="col-lg-12">
                                         <div class="slide_content text-md-left text-sm-left">
@@ -67,8 +67,8 @@
                                             <a class="btn btn-primary btn-radial" href="{{$imageData->link}}" role="button">Learn More</a>
                                         </div>
                                     </div>
-                                  </div> 
-                                  </div> 
+                                  </div>
+                                  </div>
 
                                   @php
                                                     $activeSlidingImage++;
@@ -115,9 +115,9 @@
                 <li class="list-ite">
                     @php
                         echo $MainHomeApi->link
-                    @endphp   
+                    @endphp
                 </li>
-               
+
             </ul>
         </div>
     </div>
@@ -157,25 +157,33 @@
                             </div>
                         </div>
                     </section>
-    <section class="news-slid features">
+
+                    <section class="news-slid features">
                         <div class="container">
-                            <div class="row justify-content-center">
+                            <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12 order-2 order-sm-1">
                                     <div style="margin:0px auto">
 
                                     <section class="vid-main-wrapper clearfix">
                                             <!-- THE YOUTUBE PLAYER -->
                                             <div class="vid-container">
-                                                <iframe id="vid_frame"
-                                                    src="https://www.youtube.com/embed/X9JClP-XMyc?rel=0&showinfo=0&autohide=1&autoplay=1"
-                                                    frameborder="0" width="100%" height="315" allow=""
-                                                    allowfullscreen></iframe>
+                                                <div class="fluid-width-video-wrapper" style="padding-top: 55%;">
+                                                    <iframe id="vid_frame" src="https://www.youtube.com/embed/X9JClP-XMyc?rel=0&amp;showinfo=0&amp;autohide=1&amp;autoplay=1" frameborder="0" allow="" allowfullscreen=""></iframe>
+                                                </div>
                                             </div>
                                         </section>
 
                                         <section id="extra wrapper"
                                             style="position: relative; padding-right: 44px; padding-left: 48px; background: #f6f6f6; height:152px;">
-
+                                            <!-- CUSTOM ARROWS -->
+                          <button title="Next" class="swiper-custom-next" style="position: absolute; padding: 10px 2px; right: 1px;top: 32%; z-index: 100;
+                          display: inline-block;cursor: pointer;">
+                      <svg style="position: relative; top: 1px;" xmlns="" width="16" height="16" viewBox="0 0 16 16"><g class="nc-icon-wrapper" fill="#111111"><polygon fill="#111111" points="4.9,15.7 3.4,14.3 9.7,8 3.4,1.7 4.9,0.3 12.6,8 "></polygon></g></svg>
+                            </button>
+                          <button title="Prev" class="swiper-custom-prev" style="position: absolute; padding: 10px 2px; left: 2px; top: 35%; z-index: 100;
+                          display: inline-block;cursor: pointer;font-size: 15px;">
+                           <svg xmlns="" width="16" height="16" viewBox="0 0 16 16"><g class="nc-icon-wrapper" fill="#111111"><polygon fill="#111111" points="11.1,15.7 3.4,8 11.1,0.3 12.6,1.7 6.3,8 12.6,14.3 "></polygon></g></svg>
+                          </button>
                                             <!-- Swiper -->
                                             <nav class="swiper-container swiper-container-videos slider-produtos-destaque"
                                                 style="top: 8px;">
@@ -217,11 +225,11 @@
                                                             <div class="desc">Lecture 4</div>
                                                         </a>
                                                     </li>
-                                                       
-                                                    
+
+
 
                                                 </ol>
-                                                
+
 
                                             </nav>
 
@@ -235,7 +243,11 @@
                     </section>
 
 
-                    <section>
+
+
+
+
+                      <section class="mt-4">
                         <div class="row">
                             <div class="col-sm-12">
                                 @foreach($AllHomeApi as $TopApi)
@@ -243,7 +255,7 @@
                                         @if($TopApi->id != $MainHomeApi->id)
                                             @php
                                                 echo $TopApi->link
-                                            @endphp   
+                                            @endphp
                                         @endif
                                     @endif
                                 @endforeach
@@ -277,7 +289,7 @@
                                             @php
                                                 $paymentDate = date('Y-m-d');
                                                 $paymentDate=date('Y-m-d', strtotime($paymentDate));
-                                                //echo $paymentDate; // echos today! 
+                                                //echo $paymentDate; // echos today!
                                                 $contractDateBegin = date('Y-m-d', strtotime($value->publishDate));
                                             @endphp
                                             @if($paymentDate >= $contractDateBegin)
@@ -333,7 +345,7 @@ $analysis = [
 $opinion_analysis = '';
 ?>
 @foreach ($analysis as $analysiss_val => $value)
-        
+
         <div class="col-md-6">
                 <div class="media">
               <img class="mr-3" src="{{URL::to('public/assets/assets/img/latest_news')}}/{{$value['src']}}" alt="Generic placeholder image">
@@ -357,7 +369,7 @@ $opinion_analysis = '';
                                     @if($CenterApi->area == "Center")
                                         @php
                                             echo $CenterApi->link
-                                        @endphp   
+                                        @endphp
                                     @endif
                                 @endforeach
                             </div>
@@ -383,7 +395,7 @@ $opinion_analysis = '';
                                             <div class="services_icon_wrapper">
                                                 <div class="spin_hexagon">
                                                     <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 177.4 197.4">
+                                                        xmlns="" viewBox="0 0 177.4 197.4">
                                                         <path
                                                             d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
                                                         </path>
@@ -391,7 +403,7 @@ $opinion_analysis = '';
                                                 </div>
                                                 <div class="spin_hexagon">
                                                     <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 177.4 197.4">
+                                                        xmlns="" viewBox="0 0 177.4 197.4">
                                                         <path
                                                             d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
                                                         </path>
@@ -416,7 +428,7 @@ $opinion_analysis = '';
                                             <div class="services_icon_wrapper">
                                                 <div class="spin_hexagon">
                                                     <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 177.4 197.4">
+                                                        xmlns="" viewBox="0 0 177.4 197.4">
                                                         <path
                                                             d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
                                                         </path>
@@ -424,7 +436,7 @@ $opinion_analysis = '';
                                                 </div>
                                                 <div class="spin_hexagon">
                                                     <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 177.4 197.4">
+                                                        xmlns="" viewBox="0 0 177.4 197.4">
                                                         <path
                                                             d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
                                                         </path>
@@ -448,7 +460,7 @@ $opinion_analysis = '';
                                             <div class="services_icon_wrapper">
                                                 <div class="spin_hexagon">
                                                     <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 177.4 197.4">
+                                                        xmlns="" viewBox="0 0 177.4 197.4">
                                                         <path
                                                             d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
                                                         </path>
@@ -456,7 +468,7 @@ $opinion_analysis = '';
                                                 </div>
                                                 <div class="spin_hexagon">
                                                     <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 177.4 197.4">
+                                                        xmlns="" viewBox="0 0 177.4 197.4">
                                                         <path
                                                             d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
                                                         </path>
@@ -480,7 +492,7 @@ $opinion_analysis = '';
                                             <div class="services_icon_wrapper">
                                                 <div class="spin_hexagon">
                                                     <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 177.4 197.4">
+                                                        xmlns="" viewBox="0 0 177.4 197.4">
                                                         <path
                                                             d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
                                                         </path>
@@ -488,7 +500,7 @@ $opinion_analysis = '';
                                                 </div>
                                                 <div class="spin_hexagon">
                                                     <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 177.4 197.4">
+                                                        xmlns="" viewBox="0 0 177.4 197.4">
                                                         <path
                                                             d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
                                                         </path>
@@ -512,7 +524,7 @@ $opinion_analysis = '';
                                             <div class="services_icon_wrapper">
                                                 <div class="spin_hexagon">
                                                     <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 177.4 197.4">
+                                                        xmlns="" viewBox="0 0 177.4 197.4">
                                                         <path
                                                             d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
                                                         </path>
@@ -520,7 +532,7 @@ $opinion_analysis = '';
                                                 </div>
                                                 <div class="spin_hexagon">
                                                     <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 177.4 197.4">
+                                                        xmlns="" viewBox="0 0 177.4 197.4">
                                                         <path
                                                             d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
                                                         </path>
@@ -544,7 +556,7 @@ $opinion_analysis = '';
                                             <div class="services_icon_wrapper">
                                                 <div class="spin_hexagon">
                                                     <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 177.4 197.4">
+                                                        xmlns="" viewBox="0 0 177.4 197.4">
                                                         <path
                                                             d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
                                                         </path>
@@ -552,7 +564,7 @@ $opinion_analysis = '';
                                                 </div>
                                                 <div class="spin_hexagon">
                                                     <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 177.4 197.4">
+                                                        xmlns="" viewBox="0 0 177.4 197.4">
                                                         <path
                                                             d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
                                                         </path>
@@ -960,8 +972,8 @@ $opinion_analysis = '';
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="news_responsive webinar_responsive bullet_style wow animated fadeInUp">
-                                  
-@foreach ($latestWebinars as $data) 
+
+@foreach ($latestWebinars as $data)
                 <div class="slide position-relative news">
 
                     <div class="new_img">
@@ -979,7 +991,7 @@ $opinion_analysis = '';
                         {{$data->description}}
                     </p>
                     <div class="webinar-info">
-                     <p class="m-0 date"> 
+                     <p class="m-0 date">
                                                 @php
                                                     $dateData = date_create($data->date);
                                                     $date  = date_format($dateData,"d M");
@@ -988,14 +1000,14 @@ $opinion_analysis = '';
                                                 @endphp
                         {{$date}} - {{$time}}
                      </p>
-                     <p class="m-0 go-icon"> 
+                     <p class="m-0 go-icon">
                         <a href="{{$data->link}}" target="_blank"><i class="fa fa-arrow-right text-light"></i></a>
                      </p>
                      </div>
                     </div>
                 </div>
 @endforeach
-                                        
+
                                     </div>
                                     <div class="new_btn text-right wow animated fadeInUp">
                                         <a href="{{URL::to('/webinar')}}">Show More Webinars <i class="fa fa-chevron-right"></i></a>
@@ -1763,7 +1775,7 @@ $opinion_analysis = '';
                                     @if($BottomApi->area == "Bottom")
                                         @php
                                             echo $BottomApi->link
-                                        @endphp   
+                                        @endphp
                                     @endif
                                 @endforeach
                             </div>
@@ -1897,8 +1909,8 @@ $opinion_analysis = '';
                                                     <a href="https://www.forextime.com/?partner_id=4907100"
                                                         class="btn btn-mine radial">Trade</a>
 
-                                                </label> 
-                                                       
+                                                </label>
+
                                             </div>
                                         </td>
                                     </tr>
@@ -1910,7 +1922,7 @@ $opinion_analysis = '';
 
                     <!-- <section class="free-forex-signals mt-5">
     	<div class="content_area_heading large-heading text-center">
-                            
+
                             <h1 class="heading_title wow animated fadeInUp">
                                 Free Forex Signals
                             </h1>
@@ -1938,7 +1950,7 @@ $opinion_analysis = '';
     							<strong>EUR/USD</strong>
     							<small>46 min ago</small>
     						</div>
-    						
+
     						<div class="tbl-list d-flex justify-content-between align-items-center">
     							<strong>From</strong>
     							<strong><small>GMT + 5:00 </small>0.56</strong>
@@ -1974,7 +1986,7 @@ $opinion_analysis = '';
     							<strong>EUR/USD</strong>
     							<small>46 min ago</small>
     						</div>
-    						
+
     						<div class="tbl-list d-flex justify-content-between align-items-center">
     							<strong>From</strong>
     							<strong><small>GMT + 5:00 </small>0.56</strong>
@@ -2033,9 +2045,9 @@ $opinion_analysis = '';
     </section>
     <!-- <section class="free-signals">
         <div class="container">
-    
+
     <div class="content_area_heading large-heading text-center">
-                            
+
                             <h1 class="heading_title wow animated fadeInUp">
                                 Free Signals
                             </h1>
@@ -2043,7 +2055,7 @@ $opinion_analysis = '';
                                 <span class="one"></span><span class="two"></span><span class="three"></span>
                             </div>
                         </div>
-   
+
     <div class="scroll-tbl"><table id="free-signals-list" class="table table-striped">
         <thead>
             <tr>
@@ -2092,7 +2104,7 @@ $opinion_analysis = '';
                 	<p class="m-0"><strong>18:30 PM</strong></p>
                 </td>
                 <td><button class="btn btn-secondary bg-dark btn-sm text-white">Register Now</button>
-                	
+
                 </td>
                 <td><i class="fa fa-comment-o fa-lg"></i></td>
             </tr>
@@ -2132,7 +2144,7 @@ $opinion_analysis = '';
                 <td><button class="btn btn-secondary bg-dark btn-sm text-white">Sign in</button></td>
                 <td>&nbsp;</td>
             </tr>
-            
+
         </tbody>
     </table></div>
 </div>

@@ -2197,7 +2197,7 @@ button.navbar-toggler {
 /* news slider */
 
 /* ####################################
-           SITON STYLES 
+           SITON STYLES
 ####################################### */
 
 .swiper-custom-next.swiper-button-disabled,
@@ -2259,10 +2259,11 @@ button.navbar-toggler {
 .swiper-container-videos .selected {
 	border-bottom: 1px solid #c4c4c4;
 }
-/*  
+/*
 slidesPerView: "auto" so the width of each slide set by CSS */
 .swiper-container-videos .swiper-slide {
-	max-width: auto;
+    max-width: auto;
+    padding: 5px;
 	width: 36%;
 	text-align: center;
 	font-size: 18px;
@@ -2441,7 +2442,7 @@ p.post-meta {
 		color: red;
 		font-weight: 900;
 
-	
+
 }
 .f-14{
 	font-size: 14px;

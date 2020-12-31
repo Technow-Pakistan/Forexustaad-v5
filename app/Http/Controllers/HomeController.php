@@ -97,7 +97,7 @@ class HomeController extends Controller
 
     public function ForgetProcess(Request $request){
         $email = ClientRegistrationModel::where('email',$request->username)->first();
-       
+
         if ($email != null) {
             $forgetemail = base64_encode($email->email);
             date_default_timezone_set("Asia/Karachi");
@@ -112,7 +112,7 @@ class HomeController extends Controller
             $data->save();
             $email['link'] = $forgetemail;
             $email['time'] = $time;
-            
+
             Mail::to($request->username)->send(new ForgetPasswordMail($email));
             $success = "Please check mail in spam for Forget Password.";
             $request->session()->put("success",$success);
@@ -212,7 +212,7 @@ class HomeController extends Controller
         if ($broker1) {
         $id = $broker1->id;
             $totalData = BrokerReviewModel::orderBy('id','desc')->where('brokerId',$id)->get();
-        
+
             if(count($totalData) != 0){
                 return view('broker.ReviewList',compact('totalData'));
             }else{
@@ -241,7 +241,7 @@ class HomeController extends Controller
         if ($broker1) {
             $id = $broker1->id;
             $totalData = BrokerNewsModel::orderBy('id','desc')->where('brokerId',$id)->get();
-           
+
             if(count($totalData) != 0){
                 return view('broker.NewsList',compact('totalData'));
             }else{
@@ -268,10 +268,10 @@ class HomeController extends Controller
     public function brokerPromotion(Request $request, $id){
         $title = str_replace("-"," ",$id);
         $broker1 = BrokerCompanyInformationModel::where('title',$title)->first();
-        if ($brokerNews) {
+        if ($broker1) {
             $id = $broker1->id;
             $totalData = BorkerPromotionsModel::orderBy('id','desc')->where('brokerId',$id)->get();
-        
+
             if(count($totalData) != 0){
                 return view('broker.PromotionList',compact('totalData'));
             }else{
@@ -284,7 +284,7 @@ class HomeController extends Controller
     public function brokerPromotionDetail(Request $request, $id){
         $PromotionTitle = str_replace("-"," ",$id);
         $brokerPromotion = BorkerPromotionsModel::where('PromotionTitle',$PromotionTitle)->first();
-        if ($brokerNews) {
+        if ($brokerPromotion) {
             if($brokerPromotion != null){
                 return view('broker.brokerPromotion',compact('brokerPromotion'));
             }else{
