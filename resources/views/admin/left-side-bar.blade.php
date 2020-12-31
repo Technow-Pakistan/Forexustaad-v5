@@ -119,7 +119,7 @@
 													<a href="#">
 														<i class="far fa-edit text-success mr-2 editlink" value="{{$data->id}}"></i>
 													</a>
-													<a href="{{URL::to('/ustaad/banner/left-side-banner/delete')}}/{{$data->id}}" class="btn-dialog">
+													<a href="{{URL::to('/ustaad/banner/left-side-banner/trash')}}/{{$data->id}}" class="addAction" data-toggle="modal" data-target="#myModal">
 														<i class="fa fa-times text-danger"></i>
 													</a>
 												</td>

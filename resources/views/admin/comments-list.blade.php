@@ -54,7 +54,7 @@
 													<span class="badge badge-light-success">Active</span>
 													<div class="overlay-edit">
                                                         <!-- <a href="{{URL::to('ustaad/comment/edit')}}/{{$data->id}}"><button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a> -->
-                                                        <a href="{{URL::to('ustaad/comment/delete')}}/{{$data->id}}"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
+                                                        <a href="{{URL::to('ustaad/comment/delete')}}/{{$data->id}}" class="addAction" data-toggle="modal" data-target="#myModal"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
 													</div>
 												</td>
 											</tr>

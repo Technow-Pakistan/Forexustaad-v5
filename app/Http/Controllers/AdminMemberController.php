@@ -75,4 +75,16 @@ class AdminMemberController extends Controller
         }
         return back();
     }
+    public function Deactive(Request $request, $id){
+        $data = AdminModel::find($id);
+        $data->status = 0;
+        $data->save();
+        return back();
+    }
+    public function Active(Request $request, $id){
+        $memberData = AdminModel::where('id',$id)->first();
+        $memberData->status = 1 ;
+        $memberData->save();
+        return back();
+    }
 }

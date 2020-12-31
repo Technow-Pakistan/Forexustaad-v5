@@ -59,6 +59,6 @@ class AppServiceProvider extends ServiceProvider
         view()->share("SocialMediaLink",FirstNavBarModel::all());
         view()->share("copyRight",FooterCopyRightModel::where('id',1)->first());
         view()->share("latestWebinars", MainWebinarModel::orderBy('id','desc')->take(5)->get());
-        view()->share("LatestBlogsData",BlogPostModel::orderBy('id','desc')->where('status',1)->where('pending',1)->where('stickToTop',1)->take(5)->get());
+        view()->share("LatestBlogsData",BlogPostModel::orderBy('id','desc')->where('status',1)->where('pending',1)->where('stickToTop',1)->whereDate('publishDate', '<=', date("Y-m-d"))->take(5)->get());
     }
 }

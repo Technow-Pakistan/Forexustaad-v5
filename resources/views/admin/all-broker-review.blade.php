@@ -150,7 +150,7 @@
 														<span class="badge badge-light-success">Active</span>
 														<div class="overlay-edit">
 															<a href="{{URL::to('/ustaad/brokersReview/edit')}}/{{$news->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
-															<a href="{{URL::to('/ustaad/brokersReview/delete')}}/{{$news->id}}"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
+															<a href="{{URL::to('/ustaad/brokersReview/delete')}}/{{$news->id}}" data-toggle="modal" data-target="#myModal" class="addAction"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
 														</div>
 													</td>
 												</tr>

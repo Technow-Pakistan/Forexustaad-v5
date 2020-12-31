@@ -148,12 +148,12 @@
 															</a>
 															<!-- <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button> -->
 															@if($post->status == 1)
-																<a href="{{URL::to('/ustaad/post/delete')}}/{{$post->id}}">
-																	<button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button>
+																<a href="{{URL::to('/ustaad/post/delete')}}/{{$post->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal">
+																	<i class="feather icon-trash-2"></i>
 																</a>
 															@elseif($post->status == 0)
-																<a href="{{URL::to('/ustaad/post/active')}}/{{$post->id}}">
-																	<button type="button" class="btn btn-icon btn-success"><i class="feather icon-unlock"></i></button>
+																<a href="{{URL::to('/ustaad/post/active')}}/{{$post->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal">
+																	<i class="feather icon-unlock"></i>
 																</a>
 															@endif
 														</div>

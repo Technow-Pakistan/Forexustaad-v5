@@ -10,7 +10,7 @@ use App\Models\BlogPostVisibilityModel;
 class BlogPostModel extends Model
 {
     protected $table="blog_post";
-    protected $fillable = ["mainTitle","userId","description","detailDescription","publishDate","stickToTop","pending","permalink","image","excerpt","comment"];
+    protected $fillable = ["mainTitle","userId","description","detailDescription","publishDate","stickToTop","pending","permalink","image","excerpt","comment","publishNow","publishTime"];
 
     public function GetCategory(){
         $category = BlogPostMainCategoryModel::where('postId',$this->id)->first();

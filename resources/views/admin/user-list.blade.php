@@ -62,10 +62,16 @@
 												<td  class="veiwProfile"><a href="{{URL::to('ustaad/member/profile')}}/{{$member->id}}" class="veiwProfile">View Profile</a></td>
 												<td>{{$member->created_at->format(" d/m/y ")}}</td>
 												<td>
-													<span class="badge badge-light-success">Active</span>
+													<span class="badge {{$member->status == 1 ? 'badge-light-success' : 'badge-light-danger'}}">{{$member->status == 1 ? 'Active' : 'Deactive'}}</span>
 													<div class="overlay-edit">
-													<a href="{{URL::to('ustaad/member/edit')}}/{{$member->id}}"><button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
-													<a href="{{URL::to('ustaad/member/delete')}}/{{$member->id}}"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
+														<a href="{{URL::to('ustaad/member/edit')}}/{{$member->id}}"><button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
+														@if($member->status == 1)
+															<a href="{{URL::to('/ustaad/member/deactive')}}/{{$member->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"><i class="feather icon-trash-2"></i></a>
+														@elseif($member->status == 0)
+															<a href="{{URL::to('/ustaad/member/active')}}/{{$member->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal">
+																	<i class="feather icon-unlock"></i>
+																</a>
+														@endif
 													</div>
 												</td>
 											</tr>

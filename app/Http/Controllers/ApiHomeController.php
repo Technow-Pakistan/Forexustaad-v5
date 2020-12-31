@@ -19,7 +19,7 @@ class ApiHomeController extends Controller
     }
     public function delete(Request $request, $id){
         $Trash = TrashModel::where('deleteId',$id)->where('category',"Api Home")->first();
-        $data->delete();
+        $Trash->delete();
         $data = ApiHomeModel::find($id);
         $data->delete();
         return back();

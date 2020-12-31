@@ -62,9 +62,9 @@
 													<div class="overlay-edit">
 														<!-- <a href="{{URL::to('ustaad/member/edit')}}/{{$member->id}}"><button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a> -->
 														@if($member->status == 1)
-															<a href="{{URL::to('ustaad/client/delete')}}/{{$member->id}}"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
+															<a href="{{URL::to('ustaad/client/delete')}}/{{$member->id}}" class="addAction" data-toggle="modal" data-target="#myModal"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
 														@elseif($member->status == 0)
-															<a href="{{URL::to('ustaad/client/active')}}/{{$member->id}}"><button type="button" class="btn btn-icon btn-success"><i class="feather icon-unlock"></i></button></a>
+															<a href="{{URL::to('ustaad/client/active')}}/{{$member->id}}" class="addAction" data-toggle="modal" data-target="#myModal"><button type="button" class="btn btn-icon btn-success"><i class="feather icon-unlock"></i></button></a>
 														@endif
 													</div>
 												</td>

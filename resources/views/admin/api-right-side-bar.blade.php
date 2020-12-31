@@ -81,7 +81,7 @@
 														<span class="badge badge-light-success">Active</span>
 														<div class="overlay-edit editlink" value="{{$data->id}}">
 															<button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button>
-															<a type="button" href="{{URL::to('/ustaad/api/api-right/delete')}}/{{$data->id}}" class="btn btn-icon btn-danger btn-dialog"><i class="feather icon-trash-2 btn-dialog"></i></a>
+															<a type="button" href="{{URL::to('/ustaad/api/api-right/trash')}}/{{$data->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"><i class="feather icon-trash-2"></i></a>
 														</div>
 													</td>
 												</tr>
