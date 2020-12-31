@@ -53,6 +53,11 @@ class BlogPostController extends Controller
                 }
             }   
         }
+        // Publish
+        if ($request->publishNow == 1) {
+            $data["publishDate"] = date("Y-m-d");
+            $data["publishTime"] = date("H:i:s");
+        }
         // Permalink
         $permalink = $request->permalink;
         $permalink = explode("/",$permalink);
@@ -162,6 +167,13 @@ class BlogPostController extends Controller
                     $blogPostNewSubCategory->save();
                 }
             }   
+        }
+        // Publish
+        if ($request->publishNow == 1) {
+            $data["publishDate"] = date("Y-m-d");
+            $data["publishTime"] = date("H:i:s");
+        }else{
+            $data["publishNow"] = 0;
         }
         // Permalink
         $permalink = $request->permalink;

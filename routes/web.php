@@ -127,13 +127,17 @@ Route::post('/ustaad',[AdminController::class,'Index']);
 Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::get('/dashboard',[AdminController::class,'Dashboard']);
     Route::get('/trash',[AdminController::class,'Trash']);
+    Route::get('/trashGallery',[AdminController::class,'TrashGallery']);
+    Route::get('trashGallery/delete/{id}',[AdminController::class,'TrashGalleryImageDelete']);
+    Route::get('trashGallery/restore/{id}',[AdminController::class,'TrashGalleryImageRestore']);
     Route::get('/logout',[AdminController::class,'Logout']);  
     
     Route::group(['prefix' => 'webinar'],function(){
         Route::get('/',[MainWebinarController::class,'Index']);
         Route::get('/add',[MainWebinarController::class,'Add']);
         Route::post('/add',[MainWebinarController::class,'AddWebinar']);
-        Route::get('/delete/{id}',[MainWebinarController::class,'delete']);
+        Route::get('/deactive/{id}',[MainWebinarController::class,'Deactive']);
+        Route::get('/active/{id}',[MainWebinarController::class,'Active']);
         Route::get('/edit/{id}',[MainWebinarController::class,'Edit']); 
         Route::post('/edit/{id}',[MainWebinarController::class,'EditWebinar']);      
     });
@@ -141,33 +145,43 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::group(['prefix' => 'firstNav'],function(){
         Route::get('/',[FirstNavBarController::class,'Index']);
         Route::post('/',[FirstNavBarController::class,'create']);
+        Route::get('/trash/{id}',[FirstNavBarController::class,'Trash']);
+        Route::get('/trashRestore/{id}',[FirstNavBarController::class,'TrashRestore']);
         Route::get('/delete/{id}',[FirstNavBarController::class,'delete']);
         Route::post('/edit/{id}',[FirstNavBarController::class,'edit']);      
     });
     Route::group(['prefix' => 'navMenu'],function(){
         Route::get('/',[MainMenuController::class,'Index']);
         Route::post('/',[MainMenuController::class,'create']);
+        Route::get('/trash/{id}',[MainMenuController::class,'Trash']);
+        Route::get('/trashRestore/{id}',[MainMenuController::class,'TrashRestore']);
         Route::get('/delete/{id}',[MainMenuController::class,'delete']);
         Route::post('/edit/{id}',[MainMenuController::class,'edit']);
     });
     Route::group(['prefix' => 'logo-panel'],function(){
         Route::get('/',[LogoPanelController::class,'Index']);
         Route::post('/',[LogoPanelController::class,'Add']);
+        Route::get('/trash/{id}',[LogoPanelController::class,'TrashLeft']);
+        Route::get('/trashRestore/{id}',[LogoPanelController::class,'TrashLeftRestore']);
         Route::get('/delete/{id}',[LogoPanelController::class,'delete']);
         Route::post('/edit/{id}',[LogoPanelController::class,'edit']);
     });
     Route::group(['prefix' => 'logo-favicon'],function(){
         Route::post('/',[LogoPanelController::class,'AddFavicon']);
+        Route::get('/trash/{id}',[LogoPanelController::class,'TrashRight']);
+        Route::get('/trashRestore/{id}',[LogoPanelController::class,'TrashRightRestore']);
         Route::get('/delete/{id}',[LogoPanelController::class,'deleteFavicon']);
         Route::post('/edit/{id}',[LogoPanelController::class,'EditFavicon']);
     });
     Route::group(['prefix' => 'sliding-images'],function(){
         Route::get('/',[SlidingImagesController::class,'Index']);
         Route::post('/',[SlidingImagesController::class,'Add']);
+        Route::get('/trash/{id}',[SlidingImagesController::class,'Trash']);
+        Route::get('/trashRestore/{id}',[SlidingImagesController::class,'TrashRestore']);
+        Route::get('/delete/{id}',[SlidingImagesController::class,'ProcessRemove']);
     });
     Route::get('/edit-slider-image/{id}',[SlidingImagesController::class,'Edit']);
     Route::post('/edit-slider-image/{id}',[SlidingImagesController::class,'ProcessEdit']);
-    Route::get('/delete-slider-image/{id}',[SlidingImagesController::class,'ProcessRemove']);
     Route::group(['prefix' => 'edit-footer'],function(){
         Route::get('/',[FooterController::class,'Index']);
         Route::post('/webinar',[FooterController::class,'Webinar']);
@@ -179,21 +193,29 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::group(['prefix' => 'header-banner'],function(){
             Route::get('/',[HeaderBannerController::class,'Index']);
             Route::post('/',[HeaderBannerController::class,'Add']);
-            Route::get('/delete/{id}',[HeaderBannerController::class,'deleteLeft']);
+            Route::get('/left/delete/{id}',[HeaderBannerController::class,'deleteLeft']);
+            Route::get('/left/trash/{id}',[HeaderBannerController::class,'TrashLeft']);
+            Route::get('/left/trashRestore/{id}',[HeaderBannerController::class,'TrashLeftRestore']);
             Route::post('/edit-left/{id}',[HeaderBannerController::class,'EditLeft']);
             Route::post('/right',[HeaderBannerController::class,'AddRight']);
-            Route::get('/deleteright/{id}',[HeaderBannerController::class,'deleteRight']);
+            Route::get('/right/trash/{id}',[HeaderBannerController::class,'TrashRight']);
+            Route::get('/right/trashRestore/{id}',[HeaderBannerController::class,'TrashRightRestore']);
+            Route::get('/right/deleteright/{id}',[HeaderBannerController::class,'deleteRight']);
             Route::post('/edit-right/{id}',[HeaderBannerController::class,'EditRight']);
         });
         Route::group(['prefix' => 'left-side-banner'],function(){
             Route::get('/',[LeftSideBannerController::class,'Index']);
             Route::post('/',[LeftSideBannerController::class,'Add']);
+            Route::get('/trash/{id}',[LeftSideBannerController::class,'Trash']);
+            Route::get('/trashRestore/{id}',[LeftSideBannerController::class,'TrashRestore']);
             Route::post('/edit/{id}',[LeftSideBannerController::class,'ProcessEdit']);
             Route::get('/delete/{id}',[LeftSideBannerController::class,'delete']);
         });
         Route::group(['prefix' => 'right-side-banner'],function(){
             Route::get('/',[RightSideBannerController::class,'Index']);
             Route::post('/',[RightSideBannerController::class,'Add']);
+            Route::get('/trash/{id}',[RightSideBannerController::class,'Trash']);
+            Route::get('/trashRestore/{id}',[RightSideBannerController::class,'TrashRestore']);
             Route::post('/edit/{id}',[RightSideBannerController::class,'ProcessEdit']);
             Route::get('/delete/{id}',[RightSideBannerController::class,'delete']);
         });
@@ -218,6 +240,8 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::group(['prefix' => 'api-right'],function(){
             Route::get('/',[ApiRightController::class,'Index']);
             Route::post('/',[ApiRightController::class,'Add']);
+            Route::get('/trash/{id}',[ApiRightController::class,'Trash']);
+            Route::get('/trashRestore/{id}',[ApiRightController::class,'TrashRestore']);
             Route::get('/delete/{id}',[ApiRightController::class,'delete']);
             Route::post('/edit/{id}',[ApiRightController::class,'EditProcess']);
         });
@@ -254,9 +278,11 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::post('/addCustomerServices',[BrokerBottomInformationController::class,'AddCustomerServices']);
         Route::post('/addResearchEducation',[BrokerBottomInformationController::class,'AddReserchEducation']);
         Route::post('/addPromotion',[BrokerBottomInformationController::class,'AddPromotion']);
+        Route::get('/delete/{id}',[BorkerController::class,'delete']);
+        Route::get('/trash/{id}',[BorkerController::class,'Trash']);
+        Route::get('/trashRestore/{id}',[BorkerController::class,'TrashRestore']);
     });
     Route::get('/allbrokers',[BorkerController::class,'Index']);
-    Route::get('/deleteBroker/{id}',[BorkerController::class,'delete']);
     Route::get('/editBroker/{id}',[BorkerController::class,'edit']);
     Route::post('/editBroker/{id}',[BorkerController::class,'editBrokerCompanyInformation']);
     Route::group(['prefix' => 'brokersNews'],function(){
@@ -293,7 +319,8 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/userList',[AdminMemberController::class,'UserList']);
         Route::get('/edit/{id}',[AdminMemberController::class,'Edit']);
         Route::post('/edit/{id}',[AdminMemberController::class,'EditMember']);
-        Route::get('/delete/{id}',[AdminMemberController::class,'Delete']);
+        Route::get('/deactive/{id}',[AdminMemberController::class,'Deactive']);
+        Route::get('/active/{id}',[AdminMemberController::class,'Active']);
         Route::post('/addBackImg/{id}',[AdminMemberController::class,'AddBackImg']);
         Route::post('/addUserImg/{id}',[AdminMemberController::class,'AddUserImg']);
         Route::get('/clientList',[ClientMemberController::class,'ClientList']);
@@ -315,7 +342,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::group(['prefix' => 'gallery'],function(){
         Route::get('/{id}',[GalleryController::class,'Index']);
         Route::post('/{id}',[GalleryController::class,'Add']);
-        Route::get('delete/{id}',[GalleryController::class,'Delete']);
+        Route::get('trash/{id}',[GalleryController::class,'Trash']);
         Route::get('edit/{id}',[GalleryController::class,'Edit']);
         Route::post('edit/{id}',[GalleryController::class,'EditProcess']);
     });

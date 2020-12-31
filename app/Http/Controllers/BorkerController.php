@@ -16,14 +16,17 @@ use App\Models\BrokerPromotionModel;
 use App\Models\BrokerReviewModel;
 use App\Models\BrokerNewsModel;
 use App\Models\BorkerPromotionsModel;
+use App\Models\TrashModel;
 
 class BorkerController extends Controller
 {
     public function Index(Request $request){
-        $broker = BrokerCompanyInformationModel::orderBy('id','desc')->get();
+        $broker = BrokerCompanyInformationModel::orderBy('id','desc')->where('Trash',0)->get();
         return view('admin.all-broker',compact('broker'));
     }
     public function delete(Request $request, $id){
+        $Trash = TrashModel::where('deleteId',$id)->where('category',"Broker")->first();
+        $data->delete();
         $broker = BrokerCompanyInformationModel::find($id);
         $broker->delete();
         $broker = BrokerCommissionsFeesModel::where('brokerId',$id)->first();
@@ -128,5 +131,59 @@ class BorkerController extends Controller
         $broker9 = BrokerReserchEducationModel::where('brokerId',$id)->first();
         $broker = BrokerPromotionModel::where('brokerId',$id)->first();
         return view('admin.view-broker',compact('id','broker1','broker2','broker3','broker4','broker5','broker6','broker7','broker8','broker9','broker','id'));
+    }
+    public function Trash(Request $request, $id){
+        $user = $request->session()->get("admin");
+        $data = BrokerCompanyInformationModel::find($id);
+        $data->trash = 1;
+        $data->save();
+        $brokerNews = BrokerNewsModel::where('brokerId',$id)->get();
+        for ($i=0; $i < count($brokerNews) ; $i++) { 
+            $news = BrokerNewsModel::where('brokerId',$id)->first();
+            if ($news != null) {
+                $news->trash = 1;
+                $news->save();
+            }
+        }
+        $brokerPromotion = BorkerPromotionsModel::where('brokerId',$id)->get();
+        for ($i=0; $i < count($brokerPromotion) ; $i++) { 
+            $promotion = BorkerPromotionsModel::where('brokerId',$id)->first();
+            if ($promotion != null) {
+                $promotion->trash = 1;
+                $promotion->save();
+            }
+        }
+        $Trash = new TrashModel;
+        $Trash->adminTableId = $user->id;
+        $Trash->trashItem = "broker";
+        $Trash->category = "Broker";
+        $Trash->deleteId = $id;
+        $Trash->deleteTitle = $data->title;
+        $Trash->save();
+        return back();
+    }
+    public function TrashRestore(Request $request, $id){
+        $data = BrokerCompanyInformationModel::find($id);
+        $data->trash = 0;
+        $data->save();
+        $brokerNews = BrokerNewsModel::where('brokerId',$id)->get();
+        for ($i=0; $i < count($brokerNews) ; $i++) { 
+            $news = BrokerNewsModel::where('brokerId',$id)->first();
+            if ($news != null) {
+                $news->trash = 0;
+                $news->save();
+            }
+        }
+        $brokerPromotion = BorkerPromotionsModel::where('brokerId',$id)->get();
+        for ($i=0; $i < count($brokerPromotion) ; $i++) { 
+            $promotion = BorkerPromotionsModel::where('brokerId',$id)->first();
+            if ($promotion != null) {
+                $promotion->trash = 0;
+                $promotion->save();
+            }
+        }
+        $Trash = TrashModel::where('deleteId',$id)->where('category',"Broker")->first();
+        $Trash->delete();
+        return back();
     }
 }

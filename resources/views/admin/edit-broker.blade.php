@@ -122,13 +122,13 @@
 														Never End 
 														<input type="checkbox" name="neverEnd" id="neverEnd" value="1" {{$broker1->neverEnd == 1 ? 'checked' : ''}}>
 													</div>
-													<div class="col-sm-4 txtTime" style="{{$broker1->neverEnd == 1 ? 'display:none' : ''}}">
+													<div class="col-sm-4 txtTime">
 														<div class="form-group">
 															<label for="">Start Date</label>
 															<input type="date" name="start" class="form-control" id="startDatetime" value="{{$broker1->start}}">
 														</div>
 													</div>
-													<div class="col-sm-4 txtTime" style="{{$broker1->neverEnd == 1 ? 'display:none' : ''}}">
+													<div class="col-sm-4 txtTime">
 														<div class="form-group">
 															<label for="">End Date</label>
 															<input type="date" name="end" class="form-control" id="endDatetime" value="{{$broker1->end}}">
@@ -953,7 +953,15 @@
 
 
 <script>
-	
+	if($("#neverEnd").prop('checked') == true){
+		$(".txtTime").hide();
+		$("#startDatetime").attr("required",false);
+		$("#endDatetime").prop("required",false);
+	}else{
+		$(".txtTime").show();
+		$("#startDatetime").attr("required",true);
+		$("#endDatetime").prop("required",true);
+	}
 	$("#neverEnd").click(function(){
 		if(this.checked){
 			$(".txtTime").hide();

@@ -76,7 +76,7 @@
 													<a href="#">
 														<i class="far fa-edit text-success mr-2 editlink" value="{{$data->id}}"></i>
 													</a>
-													<a href="{{URL::to('/ustaad/navMenu/delete')}}/{{$data->id}}">
+													<a href="{{URL::to('/ustaad/navMenu/trash')}}/{{$data->id}}" class="addAction" data-toggle="modal" data-target="#myModal">
 														<i class="fa fa-times text-danger"></i>
 													</a>
 												</td>

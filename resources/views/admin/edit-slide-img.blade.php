@@ -71,7 +71,7 @@
 									</div>
 									<div>
 										<input type="submit" name="submit" id="submit" class="btn btn-outline-primary" value="Save">
-										<a href="{{URL::to('/ustaad/delete-slider-image')}}/{{$image->id}}" class="text-center btn btn-outline-danger" id="detailLink1">Delete</a>
+										<a href="{{URL::to('/ustaad/sliding-images/trash')}}/{{$image->id}}" class="text-center btn btn-outline-danger addAction" id="detailLink1" data-toggle="modal" data-target="#myModal">Delete</a>
 									</div>
 								</form>
 							</div>

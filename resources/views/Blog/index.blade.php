@@ -34,34 +34,44 @@
                     		</div>
                         </div>
                         @foreach($BlogData as $data)
-                            <div class=" col-sm-12 col-md-6 bg-light">
-                                <div class="wow animated fadeInUp mt-1">
-                                    <div class="re_img w-100 p-4">
-                                        <a href="{{URL::to('Blog')}}/{{$data->permalink}}">
-                                            <img src="{{URL::to('/storage/app')}}/{{$data->image}}" >               
-                                        </a>
-                                    </div>
-                                    <div class="container-fluid ">
-                                        <div class="row">
-                                            <div class="col-sm-12 ">
-                                                
-                                                <div class="new_description-details">
-                                                    <h6>
-                                                        <a href="{{URL::to('Blog')}}/{{$data->permalink}}">
-                                                            {{$data->mainTitle}}
-                                                        </a>
-                                                    </h6>
-                                                    <p>
-                                                        {{$data->description}}
-                                                    </p>
-                                                
+                            @php 
+                                $go = 1;
+                                if($data->publishDate == date("Y-m-d")){
+                                    if($data->publishTime >= date("H:i:s")){
+                                        $go = 0;
+                                    }
+                                }
+                            @endphp
+                            @if($go == 1)
+                                <div class=" col-sm-12 col-md-6 bg-light">
+                                    <div class="wow animated fadeInUp mt-1">
+                                        <div class="re_img w-100 p-4">
+                                            <a href="{{URL::to('Blog')}}/{{$data->permalink}}">
+                                                <img src="{{URL::to('/storage/app')}}/{{$data->image}}" >               
+                                            </a>
+                                        </div>
+                                        <div class="container-fluid ">
+                                            <div class="row">
+                                                <div class="col-sm-12 ">
+                                                    
+                                                    <div class="new_description-details">
+                                                        <h6>
+                                                            <a href="{{URL::to('Blog')}}/{{$data->permalink}}">
+                                                                {{$data->mainTitle}}
+                                                            </a>
+                                                        </h6>
+                                                        <p>
+                                                            {{$data->description}}
+                                                        </p>
+                                                    
+                                                    </div>
                                                 </div>
-                                            </div>
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
                         @endforeach
                 			<div class="col-sm-12 col-md-6 bg-light">
                 			<div class="wow animated fadeInUp mt-1">
