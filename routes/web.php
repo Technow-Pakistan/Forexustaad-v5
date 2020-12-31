@@ -127,22 +127,22 @@ Route::post('/ustaad',[AdminController::class,'Index']);
 Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::get('/dashboard',[AdminController::class,'Dashboard']);
     Route::get('/trash',[AdminController::class,'Trash']);
-    Route::get('/logout',[AdminController::class,'Logout']);  
-    
+    Route::get('/logout',[AdminController::class,'Logout']);
+
     Route::group(['prefix' => 'webinar'],function(){
         Route::get('/',[MainWebinarController::class,'Index']);
         Route::get('/add',[MainWebinarController::class,'Add']);
         Route::post('/add',[MainWebinarController::class,'AddWebinar']);
         Route::get('/delete/{id}',[MainWebinarController::class,'delete']);
-        Route::get('/edit/{id}',[MainWebinarController::class,'Edit']); 
-        Route::post('/edit/{id}',[MainWebinarController::class,'EditWebinar']);      
+        Route::get('/edit/{id}',[MainWebinarController::class,'Edit']);
+        Route::post('/edit/{id}',[MainWebinarController::class,'EditWebinar']);
     });
 
     Route::group(['prefix' => 'firstNav'],function(){
         Route::get('/',[FirstNavBarController::class,'Index']);
         Route::post('/',[FirstNavBarController::class,'create']);
         Route::get('/delete/{id}',[FirstNavBarController::class,'delete']);
-        Route::post('/edit/{id}',[FirstNavBarController::class,'edit']);      
+        Route::post('/edit/{id}',[FirstNavBarController::class,'edit']);
     });
     Route::group(['prefix' => 'navMenu'],function(){
         Route::get('/',[MainMenuController::class,'Index']);

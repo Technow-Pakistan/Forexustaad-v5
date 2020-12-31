@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
-    public function Dashboard(Request $request){
+    public function Dashboard(request $request){
         return view('member.dashboard');
     }
 }

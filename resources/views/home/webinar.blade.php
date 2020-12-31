@@ -22,7 +22,7 @@
                   		<div class="col-sm-12">
                     		<div class="news_us">
                         		<div class="content_area_heading large-heading text-center">
-                            
+
                             		<h1 class="heading_title wow animated fadeInUp">
                                			Our Webinars
                             		</h1>
@@ -37,7 +37,7 @@
                             <div class="visibleoptions col-md-12 col-sm-12 col-xs-12 m-t-30 p-a-10">
                                 <div class="row">
                                     <div class="col-md-3 col-sm-3 col-xs-12 text-align-center border-r-grey p-a-15">
-                                        
+
                                         <div class="text-center">
                                             <span>
                                                 <i class="fa fa-calendar" aria-hidden="true"></i>
@@ -57,6 +57,7 @@
                                                 <br>
 
                                                 </span>
+                                                <div id="demo{{$j}}" class="demo"></div>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12 text-align-c768 border-r-grey">
@@ -70,12 +71,13 @@
 
                                                     , {{$data->event}}
 
-                                                    </span><br><br>
-                                            <div id="demo{{$j}}" class="demo"></div>
+                                                    </span><br>
+                                                    <span>{{$data->description}}</span>
+
                                         </div>
 
                                     </div>
-                                    
+
                                     <div class="col-md-3 col-sm-12 col-xs-12 text-align-center">
                                         <div class="form-group">
                                             <p align="center" class="buttonRight">
@@ -84,7 +86,7 @@
                                         </div>
 
                                     </div>
-                                  
+
                                 </div>
 
                             </div>
@@ -108,8 +110,8 @@
       var seconds{{$j}} = Math.floor((distance{{$j}} % (1000 * 60)) / 1000);
 
       // Output the result in an element with id="demo"
-      document.getElementById("demo{{$j}}").innerHTML = "<div class='row'><div class='col-md-3 text-center'> D <br>" + days{{$j}} + "</div><div class='col-md-3 text-center'> H <br>" + hours{{$j}}
-      + "</div><div class='col-md-3 text-center'> M <br>" + minutes{{$j}} + "</div><div class='col-md-3 text-center'> S <br>" + seconds{{$j}} + "</div></div>";
+      document.getElementById("demo{{$j}}").innerHTML = "<div class='row'><div class='col-md-12 d-flex justify-content-around '> D <br>" + days{{$j}} + "<div class=''> H <br>" + hours{{$j}}
+      + "</div><div class=''> M <br>" + minutes{{$j}} + "</div><div class=' '> S <br>" + seconds{{$j}} + "</div></div></div>";
 
       // If the count down is over, write some text
       if (distance{{$j}} < 0) {
@@ -142,7 +144,7 @@
       text-align: center;
       font-size: 20px;
     }
-    .buttonRight{  
+    .buttonRight{
       margin-top: 45px;
     }
     .color-red {
