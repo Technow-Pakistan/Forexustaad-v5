@@ -163,7 +163,15 @@
                            </div>
                            <div class="form-group">
                               <span>Publish</span>
-                              <input type="date" name="publishDate" class="form-control" required/>
+                              <input type="checkbox" name="publishNow" id="PublishNow" value="1">
+                              <div class="row" id="txtTime">
+                                 <div class="col-md-6">
+                                    <input type="date" name="publishDate" class="form-control" id="startDate" required/>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <input type="time" name="publishTime" class="form-control" id="starttime" required/>
+                                 </div>
+                              </div>
                            </div>
                            <div class="form-group">
                               <div>
@@ -373,6 +381,17 @@
 <script src="{{URL::to('/public/AdminAssets/assets/js/pages/ac-datepicker.js')}}"></script>
 <script>
 
+	$("#PublishNow").click(function(){
+		if(this.checked){
+			$("#txtTime").hide();
+			$("#startDate").attr("required",false);
+			$("#starttime").prop("required",false);
+		}else{
+			$("#txtTime").show();
+			$("#startDate").attr("required",true);
+			$("#starttime").prop("required",true);
+		}
+	})
 
         $(".fr-form").on("click",function(){
           

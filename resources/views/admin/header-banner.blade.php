@@ -108,7 +108,7 @@
 												<a href="#">
 													<i class="far fa-edit text-success mr-2 editLeftlink" value="{{$data->id}}"></i>
 												</a>
-												<a href="{{URL::to('/ustaad/banner/header-banner/delete')}}/{{$data->id}}" class="btn-dialog">
+												<a href="{{URL::to('/ustaad/banner/header-banner/left/trash')}}/{{$data->id}}" class="addAction" data-toggle="modal" data-target="#myModal">
 													<i class="fa fa-times text-danger"></i>
 												</a>
 											</td>
@@ -199,7 +199,7 @@
 													<a href="#">
 														<i class="far fa-edit text-success mr-2 editRightlink" value="{{$data->id}}"></i>
 													</a>
-													<a href="{{URL::to('/ustaad/banner/header-banner/deleteright')}}/{{$data->id}}" class="btn-dialog">
+													<a href="{{URL::to('/ustaad/banner/header-banner/right/trash')}}/{{$data->id}}" class="addAction" data-toggle="modal" data-target="#myModal">
 														<i class="fa fa-times text-danger"></i>
 													</a>
 												</td>

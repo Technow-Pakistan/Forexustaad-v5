@@ -76,7 +76,7 @@
 									<li class="breadcrumb-item">
 										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
 									</li>
-									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/post/viewAll')}}">Posts</a></li>
+									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/post/viewAll')}}">All Posts</a></li>
 									<li class="breadcrumb-item">
 										<a href="#!">Post</a>
 									</li>
@@ -113,12 +113,6 @@
                      <p class="text-right text-danger m-0 descriptionCount"></p>
                      <textarea name="description" maxlength="200" class="form-control description" id="news-description" rows="5" cols="40" required="" placeholder="Enter your Description here ...">{{$blogPostData->description}}</textarea>
                   </div>
-                  <!-- <br>
-                  <hr>
-                  <input type="file" name="srcImage" id="srcImage" class="srcImage">
-                  <input type="hidden" name="filePath" id="filePath" class="filePath" value="PostImages">
-                  <br>
-                  <hr> -->
                   <p class="text-danger  h4  pb-3"> Enter Detail Description</p>
                   <div class="form-group">
                   <textarea id="editor1" name="editor1">
@@ -180,7 +174,22 @@
                            </div>
                            <div class="form-group">
                               <span>Publish</span>
-                              <input type="date" name="publishDate" value="{{$blogPostData->publishDate}}" class="form-control" required/>
+                              <input type="checkbox" name="publishNow" id="PublishNow" value="1" {{$blogPostData->publishNow == 1 ? 'checked' : ''}}>
+                              <div class="row" id="txtTime">
+                                 <div class="col-md-6">
+                                    <input type="date" name="publishDate" value="{{$blogPostData->publishDate}}" class="form-control" id="startDate" required/>
+                                 </div>
+                                 <div class="col-md-6">
+                                    @php
+                                       if($blogPostData->publishNow == 1){
+                                          $time = $blogPostData->updated_at->format("H:i");
+                                       }else{
+                                          $time = $blogPostData->publishTime;
+                                       }
+                                    @endphp
+                                    <input type="time" name="publishTime" value="{{$time}}" class="form-control" id="starttime" required/>
+                                 </div>
+                              </div>
                            </div>
                            <div class="form-group">
                               <div>
@@ -404,7 +413,32 @@
        
 
 @include('admin.include.footer')
+<script>
 
+if($("#PublishNow").prop('checked') == true){
+			$("#txtTime").hide();
+			$("#startDate").attr("required",false);
+			$("#starttime").prop("required",false);
+		}else{
+			$("#txtTime").show();
+			$("#startDate").attr("required",true);
+			$("#starttime").prop("required",true);
+		}
+
+    $("#PublishNow").click(function(){
+		if(this.checked){
+			$("#txtTime").hide();
+			$("#startDate").attr("required",false);
+			$("#starttime").prop("required",false);
+		}else{
+			$("#txtTime").show();
+			$("#startDate").attr("required",true);
+			$("#starttime").prop("required",true);
+		}
+	})
+
+
+</script>
 <script src="{{URL::to('/public/AdminAssets/assets/js/plugins/moment.min.js')}}"></script>
 <script src="{{URL::to('/public/AdminAssets/assets/js/plugins/daterangepicker.js')}}"></script>
 <script src="{{URL::to('/public/AdminAssets/assets/js/pages/ac-datepicker.js')}}"></script>
@@ -418,6 +452,8 @@
                 $('.menu').slideToggle("fast");
         });
     }); 
+
+
     var link = $(".permalink").html();
          var link = $(".permalink").html();
          var title = $(".mainTitle").val();

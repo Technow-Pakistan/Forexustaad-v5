@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MainMenuModel;
+use App\Models\TrashModel;
 
 class MainMenuController extends Controller
 {
     public function Index(Request $request){
-        $totalData = MainMenuModel::all();
+        $totalData = MainMenuModel::orderBy('id','desc')->where('trash',0)->get();
         return view('admin.mainMenus',compact('totalData'));
     }
     public function create(Request $request){
@@ -20,6 +21,8 @@ class MainMenuController extends Controller
         return view('admin.mainMenus',compact('totalData'));
     }
     public function delete(Request $request, $id){
+        $Trash = TrashModel::where('deleteId',$id)->where('category',"Navbar Menus")->first();
+        $Trash->delete();
         
         $data = MainMenuModel::find($id);
         $data->delete();
@@ -30,6 +33,28 @@ class MainMenuController extends Controller
         $data = MainMenuModel::find($id);
         $data->fill($request->all());
         $data->save();
+        return back();
+    }
+    public function Trash(Request $request, $id){
+        $user = $request->session()->get("admin");
+        $data = MainMenuModel::find($id);
+        $data->trash = 1;
+        $data->save();
+        $Trash = new TrashModel;
+        $Trash->adminTableId = $user->id;
+        $Trash->trashItem = "navMenu";
+        $Trash->category = "Navbar Menus";
+        $Trash->deleteId = $id;
+        $Trash->deleteTitle = $data->menu;
+        $Trash->save();
+        return back();
+    }
+    public function TrashRestore(Request $request, $id){
+        $data = MainMenuModel::find($id);
+        $data->trash = 0;
+        $data->save();
+        $Trash = TrashModel::where('deleteId',$id)->where('category',"Navbar Menus")->first();
+        $Trash->delete();
         return back();
     }
     

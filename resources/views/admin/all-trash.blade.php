@@ -140,7 +140,7 @@
 														<a href="{{URL::to('/ustaad')}}/{{$data->trashItem}}/trashRestore/{{$data->deleteId}}">
 															<button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button>
 														</a>
-														<a href="{{URL::to('/ustaad/')}}/{{$data->trashItem}}/delete/{{$data->deleteId}}">
+														<a href="{{URL::to('/ustaad/')}}/{{$data->trashItem}}/delete/{{$data->deleteId}}" class="addAction" data-toggle="modal" data-target="#myModal">
 															<button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button>
 														</a>
 														</div>

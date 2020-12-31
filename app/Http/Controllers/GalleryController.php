@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Models\GalleryImagesDetailModel;
+use App\Models\TrashGalleryModel;
 
 class GalleryController extends Controller
 {
@@ -25,11 +26,22 @@ class GalleryController extends Controller
         array_unshift($totalData,$path);
         return view('admin.galleryImages',compact('totalData','id'));
     }
-    public function Delete(Request $request, $id){
+    public function Trash(Request $request, $id){
         $title = str_replace("@-","/",$id);
         $path = "storage/app/" . $title;
+        $changes = explode("/",$title);
+        $belongs = $changes[0];
+        $changes[0] = "trash";
+        $newPath = implode("/",$changes);
+        $changePath = "storage/app/" . $newPath;
+        $user = $request->session()->get("admin");
+        $data = new TrashGalleryModel;
+        $data->adminTableId = $user->id;
+        $data->belongs = $belongs;
+        $data->image = $newPath;
+        $data->save();
         if(File::exists($path)) {
-            File::delete($path);
+            rename($path,$changePath);
         }
         return back();
     }
