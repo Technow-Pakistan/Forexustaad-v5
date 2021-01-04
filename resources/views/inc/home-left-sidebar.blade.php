@@ -11,9 +11,9 @@
                     <div class="service_us">
                         <div class="content_area_heading large-heading ">
                             
-                            <h1 class="heading_title wow animated fadeInUp">
+                            <p class="h1 heading_title wow animated fadeInUp">
                                 Our Process
-                            </h1>
+                            </p>
                             <div class="heading_border wow animated fadeInUp">
                                 <span class="two"></span><span class="three"></span>
                             </div>
@@ -66,9 +66,9 @@
     <div class="container">
         <div class="content_area_heading large-heading">
         
-            <h1 class="heading_title wow animated fadeInUp">
+            <p class="h1 heading_title wow animated fadeInUp">
               Upcoming Webinars
-            </h1>
+            </p>
             <div class="heading_border wow animated fadeInUp">
                 <span class="two"></span><span class="three"></span>
             </div>
@@ -211,9 +211,9 @@ foreach ($analysis as $analysiss_val => $value) {
 <section class="currency-rates">
     <div class="content_area_heading large-heading ">
                             
-                            <h1 class="heading_title wow animated fadeInUp">
+                            <p class="h1 heading_title wow animated fadeInUp">
                                 Central Bank Rates
-                            </h1>
+                            </p>
                             <div class="heading_border wow animated fadeInUp">
                                 <span class="two"></span><span class="three"></span>
                             </div>

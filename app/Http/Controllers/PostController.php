@@ -12,7 +12,7 @@ use App\Models\BlogPostSubCategoryModel;
 class PostController extends Controller
 {
     public function Index(Request $request){
-        $allPosts = BlogPostModel::all();
+        $allPosts = BlogPostModel::orderBy('id','desc')->get();
         return view('admin.all-posts',compact('allPosts'));
     }
     public function Remove(Request $request, $id){

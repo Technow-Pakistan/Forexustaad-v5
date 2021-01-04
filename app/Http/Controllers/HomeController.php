@@ -28,8 +28,9 @@ use App\Models\MainWebinarModel;
 class HomeController extends Controller
 {
     public function webinar(){
+        $title = "Webinar";
         $totalData = MainWebinarModel::orderBy('id','desc')->get();
-        return view('home/webinar',compact('totalData'));
+        return view('home/webinar',compact('totalData','title'));
     }
     public function Construction(){
         return view('home/construction');
@@ -166,8 +167,9 @@ class HomeController extends Controller
         return back();
     }
     public function BrokerView(){
+        $title = "Our Broker";
         $totalData = BrokerCompanyInformationModel::orderBy('id','desc')->get();
-        return view('broker/brokerView',compact('totalData'));
+        return view('broker/brokerView',compact('title','totalData'));
     }
     public function ImageSrc(Request $request){
         if ($request->file("file") != null) {
@@ -200,7 +202,8 @@ class HomeController extends Controller
             $broker8 = BrokerCustomerServicesModel::where('brokerId',$id)->first();
             $broker9 = BrokerReserchEducationModel::where('brokerId',$id)->first();
             $broker = BrokerPromotionModel::where('brokerId',$id)->first();
-            return view('broker/broker-detail',compact('broker1','broker2','broker3','broker4','broker5','broker6','broker7','broker8','broker9','broker','id'));
+            $title = $broker1->title;
+            return view('broker/broker-detail',compact('broker1','title','broker2','broker3','broker4','broker5','broker6','broker7','broker8','broker9','broker','id'));
         }else{
             return redirect('/');
         }
@@ -214,7 +217,8 @@ class HomeController extends Controller
             $totalData = BrokerReviewModel::orderBy('id','desc')->where('brokerId',$id)->get();
 
             if(count($totalData) != 0){
-                return view('broker.ReviewList',compact('totalData'));
+                $title = $broker1->title;
+                return view('broker.ReviewList',compact('totalData','title'));
             }else{
                 return back();
             }
@@ -227,7 +231,8 @@ class HomeController extends Controller
         $brokerReview = BrokerReviewModel::where('ReviewTitle',$ReviewTitle)->first();
         if ($brokerReview) {
             if($brokerReview != null){
-                return view('broker.brokerReview',compact('brokerReview'));
+                $title = $broker1->title;
+                return view('broker.brokerReview',compact('brokerReview','title'));
             }else{
                 return back();
             }
@@ -243,7 +248,8 @@ class HomeController extends Controller
             $totalData = BrokerNewsModel::orderBy('id','desc')->where('brokerId',$id)->get();
 
             if(count($totalData) != 0){
-                return view('broker.NewsList',compact('totalData'));
+                $title = $broker1->title;
+                return view('broker.NewsList',compact('totalData','title'));
             }else{
                 return back();
             }
@@ -257,7 +263,8 @@ class HomeController extends Controller
         if ($brokerNews) {
 
             if($brokerNews != null){
-                return view('broker.brokerNews',compact('brokerNews'));
+                $title = $broker1->title;
+                return view('broker.brokerNews',compact('brokerNews','title'));
             }else{
                 return back();
             }
@@ -273,7 +280,8 @@ class HomeController extends Controller
             $totalData = BorkerPromotionsModel::orderBy('id','desc')->where('brokerId',$id)->get();
 
             if(count($totalData) != 0){
-                return view('broker.PromotionList',compact('totalData'));
+                $title = $broker1->title;
+                return view('broker.PromotionList',compact('totalData','title'));
             }else{
                 return back();
             }
@@ -286,7 +294,8 @@ class HomeController extends Controller
         $brokerPromotion = BorkerPromotionsModel::where('PromotionTitle',$PromotionTitle)->first();
         if ($brokerPromotion) {
             if($brokerPromotion != null){
-                return view('broker.brokerPromotion',compact('brokerPromotion'));
+                $title = $broker1->title;
+                return view('broker.brokerPromotion',compact('brokerPromotion','title'));
             }else{
                 return back();
             }
