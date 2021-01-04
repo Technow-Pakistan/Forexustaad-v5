@@ -90,6 +90,10 @@
 										<label for="news-description" class="form-control-label m-0">Description (Max-character 200)</label>
 										<p class="text-right text-danger m-0 descriptionCount"></p>
 										<textarea name="description" maxlength="200" class="form-control description" id="news-description" rows="3" cols="40" required="" placeholder="Enter your Description here ...">@if($count != 0){{$webinar->description}}@endif</textarea>
+									</div>	
+									<div class="form-group">
+										<label for="news-description" class="form-control-label m-0">Video Link</label>
+										<input type="text" name="embedCode" value="{{($count != 0 ? $webinar->embedCode : '' )}}" class="form-control">
 									</div>
 										<div class="row">
 											<div class="col-md-6">
