@@ -173,6 +173,56 @@
 								</ul>
 							</li>
 							<li class="nav-item pcoded-menu-caption">
+								<label>App</label>
+							</li>
+							<li class="nav-item pcoded-hasmenu">
+								<a href="#!" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="feather icon-image"></i></span
+									><span class="pcoded-mtext">Gallery</span></a
+								>
+								<ul class="pcoded-submenu">
+									@php
+										$totalData = scandir("storage/app");
+										$selectedImagesFloders = [];
+										foreach ($totalData as $data) {
+											if (strpos($data, 'Images') != false) {
+												array_push($selectedImagesFloders,$data);
+											}
+										}
+									@endphp
+									@foreach($selectedImagesFloders as $imageFloder)
+										<li><a href="{{URL::to('/ustaad/gallery')}}/{{$imageFloder}}">{{$imageFloder}}</a></li>
+									@endforeach
+								</ul>
+							</li>
+							<li class="nav-item pcoded-menu-caption">
+								<label>Contact</label>
+							</li>
+							<li class="nav-item">
+								<a href="{{URL::to('ustaad/contact')}}" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="feather icon-image"></i></span
+									><span class="pcoded-mtext">Contact</span></a
+								>
+							</li>
+							@if($value["memberId"] == 1)
+								<li class="nav-item pcoded-menu-caption">
+									<label>Trash area</label>
+								</li>
+								<li class="nav-item pcoded-hasmenu">
+									<a href="#!" class="nav-link"
+										><span class="pcoded-micon"
+											><i class="feather icon-trash"></i></span
+										><span class="pcoded-mtext">Trash</span></a
+									>
+									<ul class="pcoded-submenu">
+										<li><a href="{{URL::to('/ustaad/trash')}}">Trash</a></li>
+										<li><a href="{{URL::to('/ustaad/trashGallery')}}">Gallery Trash</a></li>
+									</ul>
+								</li>
+							@endif
+							<li class="nav-item pcoded-menu-caption">
 								<label>SignUp</label>
 							</li>
 							<li class="nav-item pcoded-hasmenu">
@@ -255,46 +305,6 @@
 									</li>
 								</ul>
 							</li>
-							<li class="nav-item pcoded-menu-caption">
-								<label>App</label>
-							</li>
-							<li class="nav-item pcoded-hasmenu">
-								<a href="#!" class="nav-link"
-									><span class="pcoded-micon"
-										><i class="feather icon-image"></i></span
-									><span class="pcoded-mtext">Gallery</span></a
-								>
-								<ul class="pcoded-submenu">
-									@php
-										$totalData = scandir("storage/app");
-										$selectedImagesFloders = [];
-										foreach ($totalData as $data) {
-											if (strpos($data, 'Images') != false) {
-												array_push($selectedImagesFloders,$data);
-											}
-										}
-									@endphp
-									@foreach($selectedImagesFloders as $imageFloder)
-										<li><a href="{{URL::to('/ustaad/gallery')}}/{{$imageFloder}}">{{$imageFloder}}</a></li>
-									@endforeach
-								</ul>
-							</li>
-							@if($value["memberId"] == 1)
-								<li class="nav-item pcoded-menu-caption">
-									<label>Trash area</label>
-								</li>
-								<li class="nav-item pcoded-hasmenu">
-									<a href="#!" class="nav-link"
-										><span class="pcoded-micon"
-											><i class="feather icon-trash"></i></span
-										><span class="pcoded-mtext">Trash</span></a
-									>
-									<ul class="pcoded-submenu">
-										<li><a href="{{URL::to('/ustaad/trash')}}">Trash</a></li>
-										<li><a href="{{URL::to('/ustaad/trashGallery')}}">Gallery Trash</a></li>
-									</ul>
-								</li>
-							@endif
 						@endif
 						
 					</ul>

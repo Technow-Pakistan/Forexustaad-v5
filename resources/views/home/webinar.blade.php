@@ -81,7 +81,20 @@
                                     <div class="col-md-3 col-sm-12 col-xs-12 text-align-center">
                                         <div class="form-group">
                                             <p align="center" class="buttonRight">
-                                                <a href="{{$data->link}}" class="btn btn-primary radial text-center p-2" target="_blank">Register</a>
+                                                @php
+                                                    $date = date("Y-m-d");
+                                                    $time = date("H:i:s");
+                                                    $PublishDate = $data->date;
+                                                    $PublishTime = $data->time;
+                                                @endphp
+                                                @if($date < $PublishDate || ($date == $PublishDate && $time <= $PublishTime))
+                                                    <a href="{{$data->link}}" class="btn btn-primary radial text-center p-2" target="_blank">Register</a>
+                                                @else
+                                                    <span class="demo">Expired</span>
+                                                    @if($data->embedCode)
+                                                        <a href="{{$data->embedCode}}" class="text-center p-2 webinarVideoLink" target="_blank">View Video</a>
+                                                    @endif
+                                                @endif
                                             </p>
                                         </div>
 
@@ -116,7 +129,7 @@
       // If the count down is over, write some text
       if (distance{{$j}} < 0) {
         clearInterval(x{{$j}});
-        document.getElementById("demo{{$j}}").innerHTML = "EXPIRED";
+        document.getElementById("demo{{$j}}").innerHTML = "";
       }
     }, 1000);
 </script>
@@ -148,6 +161,9 @@
       margin-top: 45px;
     }
     .color-red {
-    color: #CD0511;
-}
+        color: #CD0511;
+    }
+    .webinarVideoLink{
+        display:inline-block;
+    }
     </style>
