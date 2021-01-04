@@ -9,9 +9,9 @@
     <div class="container">
         <div class="content_area_heading large-heading">
         
-            <h1 class="heading_title wow animated fadeInUp">
+            <p class="h1 heading_title wow animated fadeInUp">
                Most Read
-            </h1>
+            </p>
             <div class="heading_border wow animated fadeInUp">
                 <span class="two"></span><span class="three"></span>
             </div>
@@ -57,9 +57,9 @@ foreach ($analysis as $analysiss_val => $value) {
 <section class="newsletter">
 	<div class="container">
 		 <div class="content_area_heading large-heading">
-            <h1 class="heading_title wow animated fadeInUp">
+            <p class="h1 heading_title wow animated fadeInUp">
                Get Updates
-            </h1>
+            </p>
             <div class="heading_border wow animated fadeInUp">
                 <span class="two"></span><span class="three"></span>
             </div>

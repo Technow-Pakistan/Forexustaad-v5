@@ -4,9 +4,9 @@
 				<div class="col-12">
 					<div class="content_area_heading large-heading fadeInUp wow">
 						
-						<h1 class="heading_title wow animated fadeInUp">
+						<p class=" h1heading_title wow animated fadeInUp">
 							Our Sponsers
-						</h1>
+						</p>
 						<div class="heading_border wow animated fadeInUp">
 							<span class="two"></span><span class="three"></span>
 						</div>	
