@@ -21,9 +21,9 @@ foreach ($counter as $counter_val => $value) {
   <div class="col-sm-12">
         <div class="service_us">
             <div class="content_area_heading large-heading ">
-                <h1 class="heading_title wow animated fadeInUp">
+                <p class="h1 heading_title wow animated fadeInUp">
                     Facts & Figures
-                </h1>
+                </p>
                 <div class="heading_border wow animated fadeInUp">
                     <span class="two"></span><span class="three"></span>
                 </div>

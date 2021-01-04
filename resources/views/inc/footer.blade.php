@@ -274,9 +274,9 @@ $(".LoginButton").on("click",function(){
               <div class="heading_border fadeInUp wow">
                 <span class="one"></span><span class="two"></span><span class="three"></span>
               </div>
-              <h1 class="heading_title fadeInUp wow secondary-text-color">
+              <p class="h1 heading_title fadeInUp wow secondary-text-color">
                Register
-              </h1>
+              </p>
               <p class="heading-description fadeInUp wow w-100" data-wow-delay="0.2s">
                Lorem Ipsum has been the industrys standard dummy text ever since the 1500s
               </p>
@@ -511,5 +511,21 @@ $(document).ready(function() {
 
 
 </script>
+                    <script>
+                        
+                            // Show hide popover
+                          $(document).ready(function(){
+                            $("#toggler12").click(function(){
+                              console.log(this);
+                              $("#toggler12345").find("#navbarSupportedContent1").toggle(800,"swing");
+                            });
+                          });
+                        $(document).on("click", function(event){
+                            var $trigger = $("#toggler12345");
+                            if($trigger !== event.target && !$trigger.has(event.target).length){
+                                $("#navbarSupportedContent1").slideUp(800,"swing");
+                            }            
+                        });
+                    </script>
 </body>
 </html>

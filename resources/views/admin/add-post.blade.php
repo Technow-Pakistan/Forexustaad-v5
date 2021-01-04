@@ -88,7 +88,7 @@
 				<!-- [ breadcrumb ] end -->
 				<!-- [ Main Content ] start -->
                 
-                <form id="SaveButton" method="post" action="{{URL::to('ustaad/post/all')}}" class=""  enctype="multipart/form-data">
+                <form id="SaveButton" method="post" action="{{URL::to('ustaad/post/all')}}" class="PostFormSubmit"  enctype="multipart/form-data">
    <div class="row">
       <div class="col-sm-8 col-xl-8 col-md-8 ">
          <div class="card">
@@ -126,6 +126,7 @@
                   </div>
                   <p class="submit">
                      <input type="submit" name="submit" id="submit" class="btn btn-outline-primary" value="Post"> <span class="spinner"></span>
+                     <p class="errorCategory0 text-danger"></p>
                   </p>
                </div>
             </div>
@@ -162,7 +163,7 @@
                               </span>
                            </div>
                            <div class="form-group">
-                              <span>Publish</span>
+                              <span>Publish Now</span>
                               <input type="checkbox" name="publishNow" id="PublishNow" value="1">
                               <div class="row" id="txtTime">
                                  <div class="col-md-6">
@@ -202,7 +203,7 @@
                      <div class="accordion-content accordion-desc">
                         <div class="form-group">
                            <label for="">View Post</label>
-                           <textarea type="text" name="permalink" class="form-control permalink" >{{URL::to('Blogs')}}/</textarea>
+                           <textarea type="text" name="permalink" class="form-control permalink" >{{URL::to('Posts')}}/</textarea>
                         </div>
                      </div>
                   </div>
@@ -255,14 +256,18 @@
                               <div class="form-group">
                                  <label for="">Parent Category</label>
                                  <select name="Pcategory" id="selectedIndex" class="form-control partentcat">
-                                    <option value="None" selected>None</option>
+                                    @if($value['memberId'] == 1)
+                                       <option value="None" selected>None</option>
+                                    @endif
                                     @foreach($allMainCategory as $mainCategory)
                                        <option value="{{$mainCategory->categoryName}}">{{$mainCategory->categoryName}}</option>                                       
                                     @endforeach
                                  </select>
                                  <!-- <input type="text" class="form-control"> -->
                               </div>
-                              <input type="" name="" id="submit" class="btn btn-outline-primary newCategoryRegister" value="Add New Category">
+                              <div class="form-group text-center">
+                                 <p name="" id="submit" class="btn btn-outline-primary newCategoryRegister">Add New Category</p>
+                              </div>
                            </div>
                         </div>
                      </div>
@@ -373,13 +378,27 @@
 		<!-- [ Main Content ] end -->
 
        
-
+<style>
+   #showmenu{
+      cursor: pointer;
+   }
+   #submit{
+      cursor: pointer;
+   }
+</style>
 @include('admin.include.footer')
 
 <script src="{{URL::to('/public/AdminAssets/assets/js/plugins/moment.min.js')}}"></script>
 <script src="{{URL::to('/public/AdminAssets/assets/js/plugins/daterangepicker.js')}}"></script>
 <script src="{{URL::to('/public/AdminAssets/assets/js/pages/ac-datepicker.js')}}"></script>
 <script>
+      $(".PostFormSubmit").on("submit",function(e) {
+         var categoryExits = $("input[name='category[]']").map(function(){if($(this).prop('checked') == true){return $(this).val()} ;}).get();
+         if(categoryExits.length == 0){
+            e.preventDefault();
+            $(".errorCategory0").html("Category not selected");
+         };
+      })
 
 	$("#PublishNow").click(function(){
 		if(this.checked){
@@ -393,11 +412,6 @@
 		}
 	})
 
-        $(".fr-form").on("click",function(){
-          
-        var file =  $(".fr-form").find("input>");
-        console.log(file); 
-        })
       $(document).ready(function() {
         $('#showmenu').click(function() {
                 $('.menu').slideToggle("fast");

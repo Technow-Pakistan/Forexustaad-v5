@@ -115,8 +115,8 @@ Route::post('/clientLogin',[HomeController::class,'LoginProcess']);
 Route::post('/clientForget',[HomeController::class,'ForgetProcess']);
 Route::get('/clientLogout',[HomeController::class,'LogoutProcess']);
 Route::get('/blog-post.html',[BlogController::class,'Index']);
-Route::get('/Blog/{id}',[BlogController::class,'DetailBlog']);
-Route::get('/privacy-policy.html',[HomeController::class,'privacyPolicy']);
+Route::get('/Posts/{id}/{id2}',[BlogController::class,'DetailBlog']);
+Route::get('/privacy-policy.html/de',[HomeController::class,'privacyPolicy']);
 Route::get('/term-of-services.html',[HomeController::class,'termServices']);
 
 // Admin views
