@@ -512,6 +512,7 @@ $(document).on("click", function(event){
     });
   });
 </script>
+<<<<<<< HEAD
 
 
 
@@ -539,5 +540,23 @@ $(document).on("click", function(event){
 });
 
     </script>
+=======
+                    <script>
+                        
+                            // Show hide popover
+                          $(document).ready(function(){
+                            $("#toggler12").click(function(){
+                              console.log(this);
+                              $("#toggler12345").find("#navbarSupportedContent1").toggle(800,"swing");
+                            });
+                          });
+                        $(document).on("click", function(event){
+                            var $trigger = $("#toggler12345");
+                            if($trigger !== event.target && !$trigger.has(event.target).length){
+                                $("#navbarSupportedContent1").slideUp(800,"swing");
+                            }            
+                        });
+                    </script>
+>>>>>>> b2b4800f9e92f739fada4a9a76da0f91f7a5e9ad
 </body>
 </html>

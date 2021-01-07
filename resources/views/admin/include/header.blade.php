@@ -221,7 +221,94 @@
 										<li><a href="{{URL::to('/ustaad/trashGallery')}}">Gallery Trash</a></li>
 									</ul>
 								</li>
+<<<<<<< HEAD
 							@endif <br><br><br><br>
+=======
+							@endif
+							<li class="nav-item pcoded-menu-caption">
+								<label>SignUp</label>
+							</li>
+							<li class="nav-item pcoded-hasmenu">
+								<a href="#!" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="feather icon-lock"></i></span
+									><span class="pcoded-mtext">Authentication</span></a
+								>
+								<ul class="pcoded-submenu">
+									<li><a href="auth-signup.html" target="_blank">Sign up</a></li>
+									<li>
+										<a href="auth-signup-img-side.html" target="_blank"
+											>Sign up v2</a
+										>
+									</li>
+									<li><a href="auth-signin.html" target="_blank">Sign in</a></li>
+									<li>
+										<a href="auth-signin-img-side.html" target="_blank"
+											>Sign in v2</a
+										>
+									</li>
+									<li>
+										<a href="auth-reset-password.html" target="_blank"
+											>Reset password</a
+										>
+									</li>
+									<li>
+										<a href="auth-reset-password-img-side.html" target="_blank"
+											>Reset password v2</a
+										>
+									</li>
+									<li>
+										<a href="auth-change-password.html" target="_blank"
+											>Change password</a
+										>
+									</li>
+									<li>
+										<a href="auth-change-password-img-side.html" target="_blank"
+											>Change password v2</a
+										>
+									</li>
+									<li>
+										<a href="auth-profile-settings.html" target="_blank"
+											>Profile settings</a
+										>
+									</li>
+									<li>
+										<a href="auth-tabs.html" target="_blank"
+											>Tabs Authentication</a
+										>
+									</li>
+								</ul>
+							</li>
+							<li class="nav-item pcoded-hasmenu">
+								<a href="#!" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="feather icon-layers"></i></span
+									><span class="pcoded-mtext">Widget</span
+									><span class="pcoded-badge badge badge-success">100+</span></a
+								>
+								<ul class="pcoded-submenu">
+									<li><a href="widget-statistic.html">Statistic</a></li>
+									<li><a href="widget-data.html">Data</a></li>
+									<li><a href="widget-chart.html">Chart</a></li>
+								</ul>
+							</li>
+							<li class="nav-item pcoded-hasmenu">
+								<a href="#!" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="feather icon-sliders"></i></span
+									><span class="pcoded-mtext">Maintenance</span></a
+								>
+								<ul class="pcoded-submenu">
+									<li><a href="maint-error.html">Error</a></li>
+									<li>
+										<a href="maint-offline-ui.html" target="_blank">Offline UI</a>
+									</li>
+									<li>
+										<a href="maint-maintance.html" target="_blank">Maintenance</a>
+									</li>
+								</ul>
+							</li>
+>>>>>>> b2b4800f9e92f739fada4a9a76da0f91f7a5e9ad
 						@endif
 						
 					</ul>

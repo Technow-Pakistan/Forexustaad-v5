@@ -29,30 +29,45 @@
 								<thead>
 									<tr>
 										<th>Name</th>
+<<<<<<< HEAD
 										<th>Phone</th>
 										<th>Email</th>
 										<th>Message</th>
 										<th>Country</th>
+=======
+										<th>Email</th>
+										<th>Message</th>
+>>>>>>> b2b4800f9e92f739fada4a9a76da0f91f7a5e9ad
 									</tr>
 								</thead>
 								<tbody>
 									@foreach($totalData as $data)
 											<tr>
 												<td>{{$data->name}}</td>
+<<<<<<< HEAD
 												<td>{{$data->phone}}</td>
 												<td>{{$data->email}}</td>
 												<td class="tdLinkScroll">{{$data->message}}</td>
 												<td>{{$data->country}}</td>
+=======
+												<td>{{$data->email}}</td>
+												<td class="messageData">{{$data->message}}</td>
+>>>>>>> b2b4800f9e92f739fada4a9a76da0f91f7a5e9ad
 											</tr>
 									@endforeach
 								</tbody>
 								<tfoot>
 									<tr>
 										<th>Name</th>
+<<<<<<< HEAD
 										<th>Phone</th>
 										<th>Email</th>
 										<th>Message</th>
 										<th>Country</th>
+=======
+										<th>Email</th>
+										<th>Message</th>
+>>>>>>> b2b4800f9e92f739fada4a9a76da0f91f7a5e9ad
 									</tr>
 								</tfoot>
 							</table>
@@ -65,6 +80,18 @@
 	</div>
 </div>
 <!-- [ Main Content ] end -->
+<<<<<<< HEAD
+=======
+<style>
+	.veiwProfile:hover{
+			color:white;
+	}
+    .messageData{
+        max-width: 350px;
+        overflow: auto;
+    }
+</style>
+>>>>>>> b2b4800f9e92f739fada4a9a76da0f91f7a5e9ad
 
 @include('admin.include.footer')
 
