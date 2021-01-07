@@ -24,14 +24,9 @@
     <link href="{{URL::to('/public/assets/assets/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{URL::to('/public/assets/assets/css/bootstrap-toggle.min.css')}}" rel="stylesheet">
 
-    <!-- Link to the file hosted on your server, -->
-<link rel="stylesheet" href="path-to-the-file/splide.min.css">
 
-<!-- or the one installed in node_modules directory, -->
-<link rel="stylesheet" href="{{URL::to('/public/assets/node_modules/@splidejs/splide/dist/css/splide.min.css')}}">
 
-<!-- or the reference on CDN -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
+
 <!-- news Slider -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/css/swiper.min.css">
 
@@ -409,7 +404,6 @@
         <!--=========================-->
         <!-- /#header -->
 {{--contact modal  --}}
-
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -425,40 +419,41 @@
                                 <img src="{{URL::to('public/assets/assets/img/send.svg')}}" class="img-fluid float-right" style="width: 63px;">
                             </div>
                             <div class="pt-3 ">
-                                <form>
+                                <form action="{{URL::to('/contact/add')}}" class="ContactFormSubmit" method="post">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="fn" class="fontpop">Your Name <i class=" text-bl fa fa-check-circle-o"></i></label>
-                                                <input type="text" class="form-control" id="fn" placeholder="Enter Your Name">
+                                                <input type="text" name="name" class="form-control" id="fn" placeholder="Enter Your Name">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="email" class="fontpop">Email Address <i class=" text-bl fa fa-check-circle-o"></i></label>
-                                                <input type="email" class="form-control" id="email" placeholder="Enter Email">
+                                                <input type="email" name="email" class="form-control emailContact" id="email" placeholder="Enter Email">
                                                 <small id="emailHelp" class="form-text text-muted font9">We'll never share your email with anyone else.</small>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="phonenum" class="fontpop">Phone Number <i class=" text-bl fa fa-check-circle-o"></i></label>
-                                                <input type="tel" class="form-control" id="phonenum" placeholder="Enter Your Number">
+                                                <input type="tel" name="phone" class="form-control" id="phonenum" placeholder="Enter Your Number">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="country" class="fontpop">Enter Country <i class=" text-bl fa fa-check-circle-o"></i></label>
-                                                <input type="text" class="form-control" id="country" placeholder="Country">
+                                                <input type="text" name="country" class="form-control" id="country" placeholder="Country">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group ">
                                                 <label for="exampleCheck1" class="fontpop">Message <i class=" text-bl fa fa-check-circle-o"></i></label>
-                                                <textarea class="form-control" rows="7" placeholder="Enter your message here"></textarea>
+                                                <textarea class="form-control" name="message" rows="7" placeholder="Enter your message here"></textarea>
                                             </div>
                                         </div>
-                                        <input type="submit" name="" class="btn btn-primary1 text-center">
+                                        <input type="submit" class="btn btn-primary1 text-center">
+                                        <p class="Contacterror text-danger text-right w-100"></p>
                                     </div>
                                 </form>
                             </div>
