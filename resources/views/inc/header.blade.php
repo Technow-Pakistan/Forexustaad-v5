@@ -74,11 +74,7 @@
 
                                 <button class="navbar-toggler" id="toggler12" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
                                     <span class="navbar-toggler-icon cs-menu"></span>
-<<<<<<< HEAD
                                 </button>
-=======
-                                </button> 
->>>>>>> b2b4800f9e92f739fada4a9a76da0f91f7a5e9ad
                                 <div class="mainClass">
                                     <ul class="social-icons d-flex list-unstyled h-100 align-items-center mt-2 mb-0">
                                         @foreach($SocialMediaLink as $link)
@@ -114,11 +110,6 @@
                                         </div>
                                     @endif
 
-<<<<<<< HEAD
-
-=======
-                                    
->>>>>>> b2b4800f9e92f739fada4a9a76da0f91f7a5e9ad
                                     @if(Session::has('client'))
 
                                         @php
@@ -139,7 +130,6 @@
                                     @endif
 
                                 </div>
-<<<<<<< HEAD
 
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent1">
                                     <ul class="navbar-nav">
@@ -155,53 +145,6 @@
                                     </ul>
                                 </div>
 
-=======
-                                
-                                <div class="collapse navbar-collapse" id="navbarSupportedContent1">
-                                    <ul class="navbar-nav">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{URL::to('/')}}"><span>HOME</span> </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{URL::to('/brokerList')}}"><span>Forex</span> </a>
-                                        </li>
-                                        <!-- <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Forex Broker List
-                                            </a>
-                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" href="#">Broker Comparison</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Item 2</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">item 3</a>
-                                            </div>
-                                        </li> -->
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{URL::to('/construction')}}"><span>ABOUT</span></a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{URL::to('/construction')}}"><span>Trading</span></a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{URL::to('/construction')}}"><span>Education</span></a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{URL::to('/construction')}}"><span>Promotions</span></a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{URL::to('/construction')}}"><span>Member</span></a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{URL::to('blog-post.html')}}"><span>blog</span></a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{URL::to('/construction')}}"><span>contact</span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            
->>>>>>> b2b4800f9e92f739fada4a9a76da0f91f7a5e9ad
                             </nav>
                         </div>
                         <div class="col-sm-6 col-right mainHide">
@@ -237,7 +180,6 @@
                                         &nbsp;|&nbsp;
                                         <a class="nav-link btn btn-outline-primary RegistrationButton" href="#" data-toggle="modal" data-target="#requestQuoteModal" href="javascript_void(0)">Register</a>
 
-<<<<<<< HEAD
                                     </div>
                                 @endif
                                 @if(Session::has('client'))
@@ -331,101 +273,6 @@
                                     </div>
                                 @endif
 
-=======
-                                    </div>
-                                @endif
-                                @if(Session::has('client'))
-
-                                    @php
-                                        $clientAccountData =Session::get('client');
-                                    @endphp
-                                    <div class="after-login">
-                                        <div class="dropdown">
-                                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="user">
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <!-- <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a> -->
-                                            <a class="dropdown-item" href="{{URL::to('/clientLogout')}}">Logout</a>
-                                        </div>
-                                        </div>
-                                    </div>
-                                @endif
-
-                            </div>
-                        </div>
-                        <style>
-                            .mainClass{
-                                display:none !important;
-                            }
-                                @media (max-width: 575px){
-                                .mainClass{
-                                    display:flex !important;
-                                }  
-                                .mainHide{
-                                    display:none !important;
-                                }
-                            #navbarSupportedContent1 .navbar-nav .nav-link{
-                                padding: 10px 0px !important;
-                                color: #fff;
-                                font-family: "Morton-Bold";
-                                font-size: 14px;
-                                text-transform: uppercase;
-
-                            }
-                            }
-                            #navbarSupportedContent1 .navbar-nav .nav-link{
-                                padding: 0px 0px;
-                                color: #fff;
-                                font-family: "Morton-Bold";
-                                font-size: 14px;
-                                text-transform: uppercase;
-
-                            }
-                        </style>
-                    @else
-                        <div class="col-sm-6 col-left">
-                            <!-- Socials -->
-                            <ul class="social-icons d-flex list-unstyled h-100 align-items-center m-0">
-                                @foreach($SocialMediaLink as $link)
-                                    @if($link->iconName == "Facebook")
-                                        <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                                    @elseif($link->iconName == "Twitter")
-                                        <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                                    @elseif($link->iconName == "GooglePlus")
-                                        <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-                                    @elseif($link->iconName == "Youtube")
-                                        <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
-                                    @elseif($link->iconName == "LinkedIn")
-                                        <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-linkedin-square"></i></a></li>
-                                    @elseif($link->iconName == "Instagram")
-                                        <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-instagram"></i></a></li>
-                                    @elseif($link->iconName == "Snapchat")
-                                        <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-bell"></i></a></li>
-                                    @elseif($link->iconName == "Tiktok")
-                                        <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-                                    @elseif($link->iconName == "Pinterest")
-                                        <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-pinterest-p"></i></a></li>
-                                    @endif
-                                @endforeach
-                                    <!-- <li><a href="#"><i class="fa fa-briefcase"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-clock-o"></i></a></li> -->
-                            </ul>
-                            
-                        </div>
-                        <div class="col-sm-6 col-right">
-                            <div class="d-flex justify-content-end align-items-center h-100">
-                                @if(!Session::has('client'))
-                                    <div class="lang-area d-flex justify-content-center align-items-center">
-                                        <a class="nav-link btn btn-outline-primary LoginButton" href="#" data-toggle="modal" data-target="#requestQuoteModal" href="javascript_void(0)">Login</a>
-                                        &nbsp;|&nbsp;
-                                        <a class="nav-link btn btn-outline-primary RegistrationButton" href="#" data-toggle="modal" data-target="#requestQuoteModal" href="javascript_void(0)">Register</a>
-
-                                    </div>
-                                @endif
-
->>>>>>> b2b4800f9e92f739fada4a9a76da0f91f7a5e9ad
                                 <div class="lang-button">
                                     <a href="#">English</a>
                                     <ul class="dropdown-list">
@@ -445,11 +292,6 @@
                                         {{$clientAccountData->name}}  <img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="user">
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-<<<<<<< HEAD
-=======
-                                            <!-- <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a> -->
->>>>>>> b2b4800f9e92f739fada4a9a76da0f91f7a5e9ad
                                             <a class="dropdown-item" href="{{URL::to('/clientLogout')}}">Logout</a>
                                         </div>
                                         </div>
