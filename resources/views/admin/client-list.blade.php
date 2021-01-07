@@ -45,7 +45,7 @@
 												$memberType = $member->GetMember();
 											@endphp
 											<tr>
-												<td>
+												<td class="tdLinkScroll">
 													<div class="d-inline-block align-middle">
 														<img src="{{URL::to('public/assets/assets/img/user1.jpg')}}" alt="user image" class="img-radius align-top m-r-15" style="width:40px;">
 														<div class="d-inline-block">

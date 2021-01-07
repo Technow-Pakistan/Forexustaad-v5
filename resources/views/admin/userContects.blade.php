@@ -29,24 +29,30 @@
 								<thead>
 									<tr>
 										<th>Name</th>
+										<th>Phone</th>
 										<th>Email</th>
 										<th>Message</th>
+										<th>Country</th>
 									</tr>
 								</thead>
 								<tbody>
 									@foreach($totalData as $data)
 											<tr>
 												<td>{{$data->name}}</td>
+												<td>{{$data->phone}}</td>
 												<td>{{$data->email}}</td>
-												<td class="messageData">{{$data->message}}</td>
+												<td class="tdLinkScroll">{{$data->message}}</td>
+												<td>{{$data->country}}</td>
 											</tr>
 									@endforeach
 								</tbody>
 								<tfoot>
 									<tr>
 										<th>Name</th>
+										<th>Phone</th>
 										<th>Email</th>
 										<th>Message</th>
+										<th>Country</th>
 									</tr>
 								</tfoot>
 							</table>
@@ -59,15 +65,6 @@
 	</div>
 </div>
 <!-- [ Main Content ] end -->
-<style>
-	.veiwProfile:hover{
-			color:white;
-	}
-    .messageData{
-        max-width: 350px;
-        overflow: auto;
-    }
-</style>
 
 @include('admin.include.footer')
 

@@ -83,12 +83,41 @@ class HomeController extends Controller
         $email = ClientRegistrationModel::where('email',$request->email)->first();
         $mobile = ClientRegistrationModel::where('mobile',$request->mobile)->first();
         if ($email == null && $mobile == null ) {
-            $registration = new ClientRegistrationModel;
-            $registration->fill($request->all());
-            $registration->save();
-            Mail::to($request->email)->send(new SubscriberMail($registration));
-            $success = "Please check mail in spam for confirmation Subscription.";
-            $request->session()->put("success",$success);
+
+            //captcha integration started
+            $url = "https://www.google.com/recaptcha/api/siteverify";
+            $testdata = [
+                "secret" => "6LfoWyEaAAAAAH8jCKDwBkS71bJQIrMPwD3y2ykv",
+                "response" => $_POST["token"],
+                "remoteip" => $_SERVER["REMOTE_ADDR"]
+            ];
+
+            $options = array(
+                'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query($testdata)
+                )
+            );
+
+
+            //captcha integration ended
+            $context  = stream_context_create($options);
+            $response = file_get_contents($url, false, $context);
+
+            $res = json_decode($response, true);
+            if (isset($res['success']) && $res['success'] == 1) {
+                $registration = new ClientRegistrationModel;
+                $registration->fill($request->all());
+                $registration->save();
+                Mail::to($request->email)->send(new SubscriberMail($registration));
+                $success = "Please check mail in spam for confirmation Subscription.";
+                $request->session()->put("success",$success);
+            }else {
+                $error = "Your email does not pass captcha test. Please! try again";
+                $request->session()->put("error",$error);
+            }
+
         }else {
             $error = "Your account has already register.Please! login.";
             $request->session()->put("error",$error);

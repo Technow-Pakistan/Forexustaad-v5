@@ -33,6 +33,7 @@ use App\Http\Controllers\HtmlPagesController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\MainWebinarController;
+use App\Http\Controllers\SignalController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -120,6 +121,8 @@ Route::get('/Posts/{id}/{id2}',[BlogController::class,'DetailBlog']);
 Route::get('/privacy-policy.html/de',[HomeController::class,'privacyPolicy']);
 Route::get('/term-of-services.html',[HomeController::class,'termServices']);
 Route::get('/contact-us',[ContactController::class,'contact']);
+Route::get('/signal',[SignalController::class,'signal']);
+Route::post('/contact/add',[ContactController::class,'Add']);
 
 
 // Admin views
