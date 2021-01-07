@@ -221,6 +221,9 @@
 										<li><a href="{{URL::to('/ustaad/trashGallery')}}">Gallery Trash</a></li>
 									</ul>
 								</li>
+<<<<<<< HEAD
+							@endif <br><br><br><br>
+=======
 							@endif
 							<li class="nav-item pcoded-menu-caption">
 								<label>SignUp</label>
@@ -305,31 +308,10 @@
 									</li>
 								</ul>
 							</li>
+>>>>>>> b2b4800f9e92f739fada4a9a76da0f91f7a5e9ad
 						@endif
 						
 					</ul>
-
-					<div class="card text-center">
-						<div class="card-block">
-							<button
-								type="button"
-								class="close"
-								data-dismiss="alert"
-								aria-hidden="true"
-							>
-								&times;
-							</button>
-							<i class="feather icon-sunset f-40"></i>
-							<h6 class="mt-3">Help?</h6>
-							<p>Please contact us on our email for need any support</p>
-							<a
-								href="#!"
-								target="_blank"
-								class="btn btn-primary btn-sm text-white m-0"
-								>Support</a
-							>
-						</div>
-					</div>
 				</div>
 			</div>
 		</nav>
