@@ -88,7 +88,7 @@
 				<!-- [ breadcrumb ] end -->
 				<!-- [ Main Content ] start -->
                 
-                <form id="" method="post" action="{{URL::to('ustaad/post/edit')}}/{{$id}}" class=""  enctype="multipart/form-data">
+                <form id="" method="post" action="{{URL::to('ustaad/post/edit')}}/{{$id}}" class="PostFormSubmit"  enctype="multipart/form-data">
    <div class="row">
       <div class="col-sm-8 col-xl-8 col-md-8 ">
          <div class="card">
@@ -115,7 +115,7 @@
                   </div>
                   <p class="text-danger  h4  pb-3"> Enter Detail Description</p>
                   <div class="form-group">
-                  <textarea id="editor1" name="editor1">
+                     <textarea id="editor1" name="editor1">
                         @php
                            $detailDescription = html_entity_decode($blogPostData->detailDescription);
                            echo $detailDescription;
@@ -124,6 +124,7 @@
                   </div>
                   <p class="submit">
                      <input type="submit" name="submit" id="submit" class="btn btn-outline-danger" value="Update"> <span class="spinner"></span>
+                     <p class="errorCategory0 text-danger"></p>
                      <!-- <input type="reset" name="reset" id="reset" class="btn btn-outline-danger" value="reset"> <span class="spinner"></span> -->
                   </p>
                </div>
@@ -173,7 +174,7 @@
                               </span>
                            </div>
                            <div class="form-group">
-                              <span>Publish</span>
+                              <span>Publish Now</span>
                               <input type="checkbox" name="publishNow" id="PublishNow" value="1" {{$blogPostData->publishNow == 1 ? 'checked' : ''}}>
                               <div class="row" id="txtTime">
                                  <div class="col-md-6">
@@ -220,7 +221,7 @@
                      <div class="accordion-content accordion-desc">
                         <div class="form-group">
                            <label for="">View Post</label>
-                           <textarea type="text" name="permalink" class="form-control permalink" >{{URL::to('Blogs')}}</textarea>
+                           <textarea type="text" name="permalink" class="form-control permalink" >{{URL::to('Posts')}}/</textarea>
                         </div>
                      </div>
                   </div>
@@ -232,7 +233,7 @@
                            data-parent="#accordion" href="#collapseSeven"
                            aria-expanded="false"
                            aria-controls="collapseSeven">
-                        Category
+                           Category
                         </a>
                      </h5>
                   </div>
@@ -256,7 +257,7 @@
                                           $subCategory = $mainCategory->GetSubCategory();
                                        @endphp
                                        <li class="{{$mainCategory->categoryName}}">
-                                          <input type="checkbox" name="category[]" value="{{$mainCategory->categoryName}}" {{$checked == 1 ? 'checked' : ''}}> {{$mainCategory->categoryName}}
+                                          <input type="checkbox" name="category[]" class="categoryExitsDataValue" value="{{$mainCategory->categoryName}}" {{$checked == 1 ? 'checked' : ''}}> {{$mainCategory->categoryName}}
                                           @if(count($subCategory) >= 1 )
                                              @foreach($subCategory as $sub)
                                                 @php $checked = 0; @endphp
@@ -267,7 +268,7 @@
                                                 @endfor
                                                 <ul  style="list-style-type:none">
                                                    <li class="{{$sub->categoryName}}">
-                                                      <input type="checkbox" name="subCategory[]" value="{{$sub->categoryName}}" {{$checked == 1 ? 'checked' : ''}}> {{$sub->categoryName}}
+                                                      <input type="checkbox" name="subCategory[]" value="{{$sub->categoryName}}" class="dataSubCategory" {{$checked == 1 ? 'checked' : ''}}> {{$sub->categoryName}}
                                                    </li>
                                                 </ul>
                                              @endforeach
@@ -285,14 +286,18 @@
                               <div class="form-group">
                                  <label for="">Parent Category</label>
                                  <select name="Pcategory" id="selectedIndex" class="form-control partentcat">
-                                    <option value="None" selected>None</option>
+                                    @if($value['memberId'] == 1)
+                                       <option value="None" selected>None</option>
+                                    @endif
                                     @foreach($allMainCategory as $mainCategory)
                                        <option value="{{$mainCategory->categoryName}}">{{$mainCategory->categoryName}}</option>                                       
                                     @endforeach
                                  </select>
                                  <!-- <input type="text" class="form-control"> -->
                               </div>
-                              <input type="" name="" id="submit" class="btn btn-outline-primary newCategoryRegister" value="Add New Category">
+                              <div class="form-group text-center">
+                                 <p name="" id="submit" class="btn btn-outline-primary newCategoryRegister">Add New Category</p>
+                              </div>
                            </div>
                         </div>
                      </div>
@@ -410,51 +415,61 @@
 		</section>
 		<!-- [ Main Content ] end -->
 
-       
+   
+<style>
+   #showmenu{
+      cursor: pointer;
+   }
+   #submit{
+      cursor: pointer;
+   }
+</style>       
 
 @include('admin.include.footer')
-<script>
-
-if($("#PublishNow").prop('checked') == true){
-			$("#txtTime").hide();
-			$("#startDate").attr("required",false);
-			$("#starttime").prop("required",false);
-		}else{
-			$("#txtTime").show();
-			$("#startDate").attr("required",true);
-			$("#starttime").prop("required",true);
-		}
-
-    $("#PublishNow").click(function(){
-		if(this.checked){
-			$("#txtTime").hide();
-			$("#startDate").attr("required",false);
-			$("#starttime").prop("required",false);
-		}else{
-			$("#txtTime").show();
-			$("#startDate").attr("required",true);
-			$("#starttime").prop("required",true);
-		}
-	})
-
-
-</script>
 <script src="{{URL::to('/public/AdminAssets/assets/js/plugins/moment.min.js')}}"></script>
 <script src="{{URL::to('/public/AdminAssets/assets/js/plugins/daterangepicker.js')}}"></script>
 <script src="{{URL::to('/public/AdminAssets/assets/js/pages/ac-datepicker.js')}}"></script>
 <script>
-      CKEDITOR.replace('editor1',{
-         filebrowserBrowseUrl: "{{URL::to('/browser/browse.php')}}",
-         filebrowserUploadUrl: "{{URL::to('/uploader/upload.php')}}"
-      });
-      $(document).ready(function() {
-        $('#showmenu').click(function() {
-                $('.menu').slideToggle("fast");
-        });
-    }); 
+      $(".PostFormSubmit").on("submit",function(e) {
+         var categoryExits = $("input[name='category[]']").map(function(){if($(this).prop('checked') == true){return $(this).val()} ;}).get();
+         if(categoryExits.length == 0){
+            e.preventDefault();
+            $(".errorCategory0").html("Category not selected");
+         };
+      })
+      $(".dataSubCategory").on("click",function() {
+         console.log("da");
+         var data =  $(this).prop('checked');
+         if (data == true) {
+            console.log("des");
+            var data2 = $(this).parent().parent().parent().children()[0];
+            var data3 = $(data2).prop("checked",true);
+            console.log(data2);
+         }
+      })
+      if($("#PublishNow").prop('checked') == true){
+			$("#txtTime").hide();
+			$("#startDate").attr("required",false);
+			$("#starttime").prop("required",false);
+		}else{
+			$("#txtTime").show();
+			$("#startDate").attr("required",true);
+			$("#starttime").prop("required",true);
+		}
 
+      $("#PublishNow").click(function(){
+         if(this.checked){
+            $("#txtTime").hide();
+            $("#startDate").attr("required",false);
+            $("#starttime").prop("required",false);
+         }else{
+            $("#txtTime").show();
+            $("#startDate").attr("required",true);
+            $("#starttime").prop("required",true);
+         }
+      })
 
-    var link = $(".permalink").html();
+         var link = $(".permalink").html();
          var link = $(".permalink").html();
          var title = $(".mainTitle").val();
         title = title.replace(/ /g, '-');
@@ -469,24 +484,36 @@ if($("#PublishNow").prop('checked') == true){
         console.log(title);
     });
 
+
+</script>
+<script>
+      $(document).ready(function() {
+        $('#showmenu').click(function() {
+                $('.menu').slideToggle("fast");
+        });
+    }); 
+
+
     $(".newCategoryRegister").on("click",function(){
         var input = $(".newCategoryInput").val();
         if (input != "") {
             var selectedIndex =$('#selectedIndex').find(":selected").text();
             if (selectedIndex == "None") {
-                $(".ulcat").append("<li  class='"+input+"'><input type='checkbox' name='category[]' value="+input+"> "+input+"</li>");
+                $(".ulcat").append("<li  class='"+input+"'><input type='checkbox' name='category[]'  class='categoryExitsDataValue' value="+input+"> "+input+"</li>");
                 $(".partentcat").append("<option value="+input+">"+input+"</option>");
                 $(".newCategoryInput").val("");
                 var old = $(".newMainCategory").val();
                 var newCat = old + "@" + input;
                 $(".newMainCategory").val(newCat);
+                $(".newCategoryInput").val("");
             }else{
                 var className = "." + selectedIndex;
-                var asd = $(".ulcat").find(className).append("<ul style='list-style-type:none'><li class='"+input+"'><input type='checkbox' name='subCategory[]' value="+input+"@"+selectedIndex+"> "+input+"</li></ul>");
+                var asd = $(".ulcat").find(className).append("<ul style='list-style-type:none'><li class='"+input+"'><input type='checkbox' name='subCategory[]' value="+input+"@"+selectedIndex+"  class='dataSubCategory'> "+input+"</li></ul>");
                
                 var oldSub = $(".newSubCategory").val();
                 var newSubCat =  oldSub + "," + input + "@" + selectedIndex;
                 $(".newSubCategory").val(newSubCat);
+                $(".newCategoryInput").val("");
             }
         }
     })
@@ -509,9 +536,6 @@ if($("#PublishNow").prop('checked') == true){
        len = 200 - len;
        $(".descriptionCount").html("remaining: " + len);
     });
-
-
-
 
 
 

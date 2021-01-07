@@ -1990,8 +1990,8 @@ button.navbar-toggler {
 .free-signals .cbFlags {
 	width: 20px;
 }
-.free-signals {
-	margin-top: 50px;
+.d-initial-flex{
+    display: inline-flex;
 }
 .free-signals tr td,
 .free-signals tr th {
@@ -2455,3 +2455,47 @@ p.post-meta {
 	font-size: 10px;
 }
 /* Broker Detail */
+.bg-darkpurple{
+   background-image:  linear-gradient(45deg, #ff0024, #0d5fe9);
+   /* width: 100%;
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 40px;
+    font-weight: 500;
+    text-transform: capitalize;
+    border: none; */
+}
+.icc i {
+    font-size: 50px;
+    color: #fff;
+}
+.contactpage i {
+    color: #fff;
+    font-size: 30px;
+}
+.btn-primary1{
+    background-image:  linear-gradient(45deg, #ff0024, #0d5fe9);
+   width: 100%;
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 40px;
+    font-weight: 500;
+    text-transform: capitalize;
+    border: none;
+}
+.btn-primary1:hover{
+    background-image:  linear-gradient(45deg, #0d5fe9, #ff0024);
+    color: white;
+}
+.sendmsgspan {
+    font-size: 31px;
+    font-weight: 500;
+    color: #0d5fe9;
+}
+.dropdown-menu{
+    left: auto;
+    right:0 !important;
+}
+
+
+

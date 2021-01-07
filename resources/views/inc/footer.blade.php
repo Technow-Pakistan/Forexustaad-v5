@@ -229,19 +229,7 @@ $(".RegistrationButton").on("click",function(){
   $(".LoginForm").hide();
   $(".RegistrationForm").show();
 });
-$(".RegistrationForm").on("submit",function(e){
-    e.preventDefault();
-  console.log("asd");
-  var password = $(".password").val();
-  var comfirmedPassword = $(".comfirmedPassword").val();
-  console.log("asd");
-  console.log(comfirmedPassword);
-  console.log(password);
-  if(password != comfirmedPassword){
-    e.preventDefault();
-    $(".RegistrationError").html("Your Password and Comfirmed Password is not matched.")
-  }
-});
+
 $(".LoginButton").on("click",function(){
   $(".heading_title").html("Login");
   $(".RegistrationForm").hide();
@@ -259,6 +247,9 @@ $(".LoginButton").on("click",function(){
          new WOW().init();
      </script>
 
+
+
+
 <!-- Request Quote Modal -->
 <div class="modal fade" id="requestQuoteModal" tabindex="-1" role="dialog" aria-labelledby="requestQuoteModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -274,9 +265,9 @@ $(".LoginButton").on("click",function(){
               <div class="heading_border fadeInUp wow">
                 <span class="one"></span><span class="two"></span><span class="three"></span>
               </div>
-              <h1 class="heading_title fadeInUp wow secondary-text-color">
+              <p class="h1 heading_title fadeInUp wow secondary-text-color">
                Register
-              </h1>
+              </p>
               <p class="heading-description fadeInUp wow w-100" data-wow-delay="0.2s">
                Lorem Ipsum has been the industrys standard dummy text ever since the 1500s
               </p>
@@ -298,7 +289,7 @@ $(".LoginButton").on("click",function(){
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="form-group">
-                          <input type="text" class="form-control text-gray explore_form email" placeholder="Your Email *" name="email" id="quote_email" required>
+                          <input type="email" class="form-control text-gray explore_form email" placeholder="Your Email *" name="email" id="quote_email" required>
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
@@ -317,6 +308,7 @@ $(".LoginButton").on("click",function(){
                         </div>
                       </div>
                     </div>
+                        <input type="hidden" name="token" id="token" value="">
                       <div class="form-group text-left">
                         <button type="submit" class="btn btn-primary text-uppercase quote_send_msg" data-type="quote">Register</button>
                         <span class="text-danger RegistrationError" id="RegistrationErrorChecker"></span>
@@ -324,23 +316,7 @@ $(".LoginButton").on("click",function(){
                   </div>
               </form>
 
-              <script>
-                // your function
-                var my_func = function(event) {
-                  var password = document.getElementById("passwordchecker").value;
-                  var comfirmedPassword = document.getElementById("comfirmedPasswordchecker").value;
-                  console.log(comfirmedPassword);
-                  console.log(password);
-                  if(password != comfirmedPassword){
-                    document.getElementById("RegistrationErrorChecker").innerHTML = "Your Password and Comfirmed Password is not matched.";
-                    event.preventDefault();
-                  }
-                };
-                // your form
-                var form = document.getElementById("RegistrationFormPassword");
-                // attach event listener
-                form.addEventListener("submit", my_func, true);
-              </script>
+
 
               <form action="{{URL::to('/clientLogin')}}" class="LoginForm" method="post">
 
@@ -373,7 +349,7 @@ $(".LoginButton").on("click",function(){
 
 <!-- back to top -->
 <!-- <a href="#top" class="to-top"><i class="fa fa-angle-up"></i></a> -->
-<script type="text/javascript">
+< type="text/javascript">
 
 // Select all links with hashes
 $('a[href="#top"]')
@@ -412,17 +388,17 @@ $('a[href="#top"]')
   });
 
 
-</script>
-<script>function initVideo() {
+</>
+<>function initVideo() {
           var vidDefer = document.getElementsByTagName('iframe');
           for (var i=0; i<vidDefer.length; i++) {
             if(vidDefer[i].getAttribute('data-src')) {
               vidDefer[i].setAttribute('src',vidDefer[i].getAttribute('data-src'));
         } } }
         window.onload = initVideo;
-</script>
+</>
 
-<script type="text/javascript">
+< type="text/javascript">
     $(window).on('load', function(){
      $('#loading').hide();
   });
@@ -435,7 +411,7 @@ $('a[href="#top"]')
     $(".LoginForm").attr("action","{{URL::to('/clientForget')}}");
     $(".LoginEmail").attr("placeholder","Enter Email");
   });
-</script>
+</>
 
 
 
@@ -510,6 +486,58 @@ $(document).ready(function() {
 });
 
 
+</>
+<script>
+
+    // Show hide popover
+
+    var toggleIdCount = 0;
+$(document).on("click", function(event){
+    var $trigger = $("#toggler12345");
+    if($trigger != event.target && !$trigger.has(event.target).length){
+        $("#navbarSupportedContent1").slideUp(800,"swing");
+        toggleIdCount = 0;
+    }
+});
+  $(document).ready(function(){
+    $("#toggler12").click(function(){
+        console.log(toggleIdCount);
+      if (toggleIdCount == 0) {
+        $("#toggler12345").find("#navbarSupportedContent1").slideDown(800,"swing");
+        toggleIdCount = 1;
+      }else{
+        $("#toggler12345").find("#navbarSupportedContent1").slideUp(800,"swing");
+        toggleIdCount = 0;
+      }
+    });
+  });
 </script>
+
+
+
+    <script>
+        grecaptcha.ready(function() {
+            grecaptcha.execute('6LfoWyEaAAAAAC-Bs8wiRSMTBSLB3AR8Nq8eS3kH', {action: 'homepage'}).then(function(token) {
+                document.getElementById("token").value = token;
+            });
+        });
+        $(".RegistrationForm").on("submit",function(e){
+  var email = $(".emailRegistration").val();
+  var emailHost = email.split("@")
+  console.log(email);
+  if (emailHost[1] != "gmail.com" && emailHost[1] != "yahoo.com"){
+    e.preventDefault();
+    $(".RegistrationError").html("Please! correct your email.")
+  }else{
+    var password = $(".password").val();
+    var comfirmedPassword = $(".comfirmedPassword").val();
+    if(password != comfirmedPassword){
+      e.preventDefault();
+      $(".RegistrationError").html("Your Password and Comfirmed Password is not matched.")
+    }
+  }
+});
+
+    </script>
 </body>
 </html>

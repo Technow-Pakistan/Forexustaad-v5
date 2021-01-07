@@ -52,20 +52,6 @@
 								>
 							</li>
 							<li class="nav-item pcoded-menu-caption">
-								<label>Trash area</label>
-							</li>
-							<li class="nav-item pcoded-hasmenu">
-								<a href="#!" class="nav-link"
-									><span class="pcoded-micon"
-										><i class="feather icon-trash"></i></span
-									><span class="pcoded-mtext">Trash</span></a
-								>
-								<ul class="pcoded-submenu">
-									<li><a href="{{URL::to('/ustaad/trash')}}">Trash</a></li>
-									<li><a href="{{URL::to('/ustaad/trashGallery')}}">Gallery Trash</a></li>
-								</ul>
-							</li>
-							<li class="nav-item pcoded-menu-caption">
 								<label>Posts Area</label>
 							</li>
 							<li class="nav-item pcoded-hasmenu">
@@ -187,89 +173,6 @@
 								</ul>
 							</li>
 							<li class="nav-item pcoded-menu-caption">
-								<label>SignUp</label>
-							</li>
-							<li class="nav-item pcoded-hasmenu">
-								<a href="#!" class="nav-link"
-									><span class="pcoded-micon"
-										><i class="feather icon-lock"></i></span
-									><span class="pcoded-mtext">Authentication</span></a
-								>
-								<ul class="pcoded-submenu">
-									<li><a href="auth-signup.html" target="_blank">Sign up</a></li>
-									<li>
-										<a href="auth-signup-img-side.html" target="_blank"
-											>Sign up v2</a
-										>
-									</li>
-									<li><a href="auth-signin.html" target="_blank">Sign in</a></li>
-									<li>
-										<a href="auth-signin-img-side.html" target="_blank"
-											>Sign in v2</a
-										>
-									</li>
-									<li>
-										<a href="auth-reset-password.html" target="_blank"
-											>Reset password</a
-										>
-									</li>
-									<li>
-										<a href="auth-reset-password-img-side.html" target="_blank"
-											>Reset password v2</a
-										>
-									</li>
-									<li>
-										<a href="auth-change-password.html" target="_blank"
-											>Change password</a
-										>
-									</li>
-									<li>
-										<a href="auth-change-password-img-side.html" target="_blank"
-											>Change password v2</a
-										>
-									</li>
-									<li>
-										<a href="auth-profile-settings.html" target="_blank"
-											>Profile settings</a
-										>
-									</li>
-									<li>
-										<a href="auth-tabs.html" target="_blank"
-											>Tabs Authentication</a
-										>
-									</li>
-								</ul>
-							</li>
-							<li class="nav-item pcoded-hasmenu">
-								<a href="#!" class="nav-link"
-									><span class="pcoded-micon"
-										><i class="feather icon-layers"></i></span
-									><span class="pcoded-mtext">Widget</span
-									><span class="pcoded-badge badge badge-success">100+</span></a
-								>
-								<ul class="pcoded-submenu">
-									<li><a href="widget-statistic.html">Statistic</a></li>
-									<li><a href="widget-data.html">Data</a></li>
-									<li><a href="widget-chart.html">Chart</a></li>
-								</ul>
-							</li>
-							<li class="nav-item pcoded-hasmenu">
-								<a href="#!" class="nav-link"
-									><span class="pcoded-micon"
-										><i class="feather icon-sliders"></i></span
-									><span class="pcoded-mtext">Maintenance</span></a
-								>
-								<ul class="pcoded-submenu">
-									<li><a href="maint-error.html">Error</a></li>
-									<li>
-										<a href="maint-offline-ui.html" target="_blank">Offline UI</a>
-									</li>
-									<li>
-										<a href="maint-maintance.html" target="_blank">Maintenance</a>
-									</li>
-								</ul>
-							</li>
-							<li class="nav-item pcoded-menu-caption">
 								<label>App</label>
 							</li>
 							<li class="nav-item pcoded-hasmenu">
@@ -293,31 +196,35 @@
 									@endforeach
 								</ul>
 							</li>
+							<li class="nav-item pcoded-menu-caption">
+								<label>Contact</label>
+							</li>
+							<li class="nav-item">
+								<a href="{{URL::to('ustaad/contact')}}" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="feather icon-image"></i></span
+									><span class="pcoded-mtext">Contact</span></a
+								>
+							</li>
+							@if($value["memberId"] == 1)
+								<li class="nav-item pcoded-menu-caption">
+									<label>Trash area</label>
+								</li>
+								<li class="nav-item pcoded-hasmenu">
+									<a href="#!" class="nav-link"
+										><span class="pcoded-micon"
+											><i class="feather icon-trash"></i></span
+										><span class="pcoded-mtext">Trash</span></a
+									>
+									<ul class="pcoded-submenu">
+										<li><a href="{{URL::to('/ustaad/trash')}}">Trash</a></li>
+										<li><a href="{{URL::to('/ustaad/trashGallery')}}">Gallery Trash</a></li>
+									</ul>
+								</li>
+							@endif <br><br><br><br>
 						@endif
 						
 					</ul>
-
-					<div class="card text-center">
-						<div class="card-block">
-							<button
-								type="button"
-								class="close"
-								data-dismiss="alert"
-								aria-hidden="true"
-							>
-								&times;
-							</button>
-							<i class="feather icon-sunset f-40"></i>
-							<h6 class="mt-3">Help?</h6>
-							<p>Please contact us on our email for need any support</p>
-							<a
-								href="#!"
-								target="_blank"
-								class="btn btn-primary btn-sm text-white m-0"
-								>Support</a
-							>
-						</div>
-					</div>
 				</div>
 			</div>
 		</nav>

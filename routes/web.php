@@ -28,10 +28,12 @@ use App\Http\Controllers\BorkerReviewController;
 use App\Http\Controllers\AdminMemberController;
 use App\Http\Controllers\ClientMemberController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HtmlPagesController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\MainWebinarController;
+use App\Http\Controllers\SignalController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -115,9 +117,13 @@ Route::post('/clientLogin',[HomeController::class,'LoginProcess']);
 Route::post('/clientForget',[HomeController::class,'ForgetProcess']);
 Route::get('/clientLogout',[HomeController::class,'LogoutProcess']);
 Route::get('/blog-post.html',[BlogController::class,'Index']);
-Route::get('/Blog/{id}',[BlogController::class,'DetailBlog']);
-Route::get('/privacy-policy.html',[HomeController::class,'privacyPolicy']);
+Route::get('/Posts/{id}/{id2}',[BlogController::class,'DetailBlog']);
+Route::get('/privacy-policy.html/de',[HomeController::class,'privacyPolicy']);
 Route::get('/term-of-services.html',[HomeController::class,'termServices']);
+Route::get('/contact-us',[ContactController::class,'contact']);
+Route::get('/signal',[SignalController::class,'signal']);
+Route::post('/contact/add',[ContactController::class,'Add']);
+
 
 // Admin views
 
@@ -130,16 +136,18 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::get('/trashGallery',[AdminController::class,'TrashGallery']);
     Route::get('trashGallery/delete/{id}',[AdminController::class,'TrashGalleryImageDelete']);
     Route::get('trashGallery/restore/{id}',[AdminController::class,'TrashGalleryImageRestore']);
-    Route::get('/logout',[AdminController::class,'Logout']);  
-    
+    Route::get('/logout',[AdminController::class,'Logout']);
+    Route::group(['prefix' => 'contact'],function(){
+        Route::get('/',[ContactController::class,'Index']);
+    });
     Route::group(['prefix' => 'webinar'],function(){
         Route::get('/',[MainWebinarController::class,'Index']);
         Route::get('/add',[MainWebinarController::class,'Add']);
         Route::post('/add',[MainWebinarController::class,'AddWebinar']);
         Route::get('/deactive/{id}',[MainWebinarController::class,'Deactive']);
         Route::get('/active/{id}',[MainWebinarController::class,'Active']);
-        Route::get('/edit/{id}',[MainWebinarController::class,'Edit']); 
-        Route::post('/edit/{id}',[MainWebinarController::class,'EditWebinar']);      
+        Route::get('/edit/{id}',[MainWebinarController::class,'Edit']);
+        Route::post('/edit/{id}',[MainWebinarController::class,'EditWebinar']);
     });
 
     Route::group(['prefix' => 'firstNav'],function(){
@@ -148,7 +156,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/trash/{id}',[FirstNavBarController::class,'Trash']);
         Route::get('/trashRestore/{id}',[FirstNavBarController::class,'TrashRestore']);
         Route::get('/delete/{id}',[FirstNavBarController::class,'delete']);
-        Route::post('/edit/{id}',[FirstNavBarController::class,'edit']);      
+        Route::post('/edit/{id}',[FirstNavBarController::class,'edit']);
     });
     Route::group(['prefix' => 'navMenu'],function(){
         Route::get('/',[MainMenuController::class,'Index']);

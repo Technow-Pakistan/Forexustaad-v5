@@ -27,15 +27,17 @@
                 @endisset
                 <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6 col-6 order-2 order-lg-1">
                     <div class="text-center">
-                        @if($MainLeftBanner->htmlLink == null )
-                            <a href="{{$MainLeftBanner->link}}">
-                                <img src="{{URL::to('/storage/app')}}/{{$MainLeftBanner->banner}}" width="160" height="600" alt="" />
-                            </a>
-                        @else
-                            @php
-                                echo $MainLeftBanner->htmlLink;
-                            @endphp
-                        @endif
+                        @isset($MainLeftBanner)
+                            @if($MainLeftBanner->htmlLink == null )
+                                <a href="{{$MainLeftBanner->link}}">
+                                    <img src="{{URL::to('/storage/app')}}/{{$MainLeftBanner->banner}}" width="160" height="600" alt="" />
+                                </a>
+                            @else
+                                @php
+                                    echo $MainLeftBanner->htmlLink;
+                                @endphp
+                            @endif
+                        @endisset
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-12 order-1 order-lg-2">
@@ -94,15 +96,17 @@
                 </div>
                 <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6 col-6 order-3 order-lg-3">
                     <div class="text-center">
-                        @if($MainRightBanner->htmlLink == null )
-                            <a href="{{$MainRightBanner->link}}">
-                                <img src="{{URL::to('/storage/app')}}/{{$MainRightBanner->banner}}" width="160" height="600" alt="" />
-                            </a>
-                        @else
-                            @php
-                                echo $MainRightBanner->htmlLink;
-                            @endphp
-                        @endif
+                        @isset($MainRightBanner)
+                            @if($MainRightBanner->htmlLink == null )
+                                <a href="{{$MainRightBanner->link}}">
+                                    <img src="{{URL::to('/storage/app')}}/{{$MainRightBanner->banner}}" width="160" height="600" alt="" />
+                                </a>
+                            @else
+                                @php
+                                    echo $MainRightBanner->htmlLink;
+                                @endphp
+                            @endif
+                        @endisset
                     </div>
                 </div>
             </div>
@@ -157,7 +161,7 @@
                             </div>
                         </div>
                     </section>
-
+                    @if(Session::has('client'))
                     <section class="news-slid features">
                         <div class="container">
                             <div class="row">
@@ -173,17 +177,19 @@
                                             </div>
                                         </section>
 
+
+
                                         <section id="extra wrapper"
                                             style="position: relative; padding-right: 44px; padding-left: 48px; background: #f6f6f6; height:152px;">
                                             <!-- CUSTOM ARROWS -->
-                          <button title="Next" class="swiper-custom-next" style="position: absolute; padding: 10px 2px; right: 1px;top: 32%; z-index: 100;
-                          display: inline-block;cursor: pointer;">
-                      <svg style="position: relative; top: 1px;" xmlns="" width="16" height="16" viewBox="0 0 16 16"><g class="nc-icon-wrapper" fill="#111111"><polygon fill="#111111" points="4.9,15.7 3.4,14.3 9.7,8 3.4,1.7 4.9,0.3 12.6,8 "></polygon></g></svg>
-                            </button>
-                          <button title="Prev" class="swiper-custom-prev" style="position: absolute; padding: 10px 2px; left: 2px; top: 35%; z-index: 100;
-                          display: inline-block;cursor: pointer;font-size: 15px;">
-                           <svg xmlns="" width="16" height="16" viewBox="0 0 16 16"><g class="nc-icon-wrapper" fill="#111111"><polygon fill="#111111" points="11.1,15.7 3.4,8 11.1,0.3 12.6,1.7 6.3,8 12.6,14.3 "></polygon></g></svg>
-                          </button>
+                                            <button title="Next" class="swiper-custom-next" style="position: absolute; padding: 10px 2px; right: 1px;top: 32%; z-index: 100;
+                                            display: inline-block;cursor: pointer;">
+                                            <svg style="position: relative; top: 1px;" xmlns="" width="16" height="16" viewBox="0 0 16 16"><g class="nc-icon-wrapper" fill="#111111"><polygon fill="#111111" points="4.9,15.7 3.4,14.3 9.7,8 3.4,1.7 4.9,0.3 12.6,8 "></polygon></g></svg>
+                                                </button>
+                                            <button title="Prev" class="swiper-custom-prev" style="position: absolute; padding: 10px 2px; left: 2px; top: 35%; z-index: 100;
+                                            display: inline-block;cursor: pointer;font-size: 15px;">
+                                            <svg xmlns="" width="16" height="16" viewBox="0 0 16 16"><g class="nc-icon-wrapper" fill="#111111"><polygon fill="#111111" points="11.1,15.7 3.4,8 11.1,0.3 12.6,1.7 6.3,8 12.6,14.3 "></polygon></g></svg>
+                                            </button>
                                             <!-- Swiper -->
                                             <nav class="swiper-container swiper-container-videos slider-produtos-destaque"
                                                 style="top: 8px;">
@@ -235,13 +241,14 @@
 
                                         </section>
 
+
                                     </div>
                                 </div>
 
                             </div>
                         </div>
                     </section>
-
+                @endif
 
 
 
@@ -287,27 +294,35 @@
                                     <div class="news_responsive news_slider bullet_style wow animated fadeInUp">
                                         @foreach ($LatestBlogsData as $value)
                                             @php
+                                                $go = 1;
+                                                if($value->publishDate == date("Y-m-d")){
+                                                    if($value->publishTime >= date("H:i:s")){
+                                                        $go = 0;
+                                                    }
+                                                }
                                                 $paymentDate = date('Y-m-d');
                                                 $paymentDate=date('Y-m-d', strtotime($paymentDate));
                                                 //echo $paymentDate; // echos today!
                                                 $contractDateBegin = date('Y-m-d', strtotime($value->publishDate));
                                             @endphp
-                                            @if($paymentDate >= $contractDateBegin)
-                                                    <div class="slide position-relative news">
-                                                        <div class="new_img">
-                                                            <img src="{{URL::to('storage/app')}}/{{$value->image}}">
+                                            @if($go == 1)
+                                                @if($paymentDate >= $contractDateBegin)
+                                                        <div class="slide position-relative news">
+                                                            <div class="new_img">
+                                                                <img src="{{URL::to('storage/app')}}/{{$value->image}}">
+                                                            </div>
+                                                            <div class="new_description-details">
+                                                            <h6>
+                                                                <a href="{{URL::to('/Blog')}}/{{$value->permalink}}">
+                                                                        {{$value->mainTitle}}
+                                                                    </a>
+                                                            </h6>
+                                                            <p>
+                                                                {{$value->description}}
+                                                            </p>
+                                                            </div>
                                                         </div>
-                                                        <div class="new_description-details">
-                                                        <h6>
-                                                            <a href="{{URL::to('/Blog')}}/{{$value->permalink}}">
-                                                                    {{$value->mainTitle}}
-                                                                </a>
-                                                        </h6>
-                                                        <p>
-                                                            {{$value->description}}
-                                                        </p>
-                                                        </div>
-                                                    </div>
+                                                @endif
                                             @endif
                                         @endforeach
                                     </div>
@@ -2043,112 +2058,7 @@ $opinion_analysis = '';
             </div>
         </div>
     </section>
-    <!-- <section class="free-signals">
-        <div class="container">
-
-    <div class="content_area_heading large-heading text-center">
-
-                            <h1 class="heading_title wow animated fadeInUp">
-                                Free Signals
-                            </h1>
-                            <div class="heading_border wow animated fadeInUp">
-                                <span class="one"></span><span class="two"></span><span class="three"></span>
-                            </div>
-                        </div>
-
-    <div class="scroll-tbl"><table id="free-signals-list" class="table table-striped">
-        <thead>
-            <tr>
-                <th>Symbols/Pairs</th>
-                <th>Status</th>
-                <th>Price</th>
-                <th>Stop Lose</th>
-                <th>Take Profit</th>
-                <th>Valid Till</th>
-                <th>Signal</th>
-                <th>&nbsp;</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <p class="mb-2"><span class="flag-icon flag-icon-ad">&nbsp;</span>
-                    <span class="flag-icon flag-icon-us">&nbsp;</span></p>
-                    <h6 class="m-0 font-weight-bold"><strong>EUR/USD</strong></h6>
-                    <h6 class="m-0 text-danger font-weight-bold">59 min ago</h6>
-                </td>
-                <td><button class="btn btn-success btn-sm">Active</button></td>
-                <td>$18.90</td>
-                <td class="text-danger">1.90934</td>
-                <td class="text-success">1.90934</td>
-                <td class="text-center">
-                	<p class="m-0"><strong>5 Dec 2020</strong></p>
-                	<p class="m-0"><strong>18:30 PM</strong></p>
-                </td>
-                <td><button class="btn btn-warning btn-sm text-white">Buy</button></td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>
-                    <p class="mb-2"><span class="flag-icon flag-icon-ad">&nbsp;</span>
-                    <span class="flag-icon flag-icon-us">&nbsp;</span></p>
-                    <h6 class="m-0 font-weight-bold"><strong>EUR/USD</strong></h6>
-                    <h6 class="m-0 text-danger font-weight-bold">59 min ago</h6>
-                </td>
-                <td><button class="btn btn-secondary btn-sm">N/A</button></td>
-                <td><strong class="font-weight-bold">Premium Only</strong></td>
-                <td class="text-danger">N/A</td>
-                <td class="text-success">N/A</td>
-                <td class="text-center">
-                	<p class="m-0"><strong>5 Dec 2020</strong></p>
-                	<p class="m-0"><strong>18:30 PM</strong></p>
-                </td>
-                <td><button class="btn btn-secondary bg-dark btn-sm text-white">Register Now</button>
-
-                </td>
-                <td><i class="fa fa-comment-o fa-lg"></i></td>
-            </tr>
-            <tr>
-                <td>
-                    <p class="mb-2"><span class="flag-icon flag-icon-ad">&nbsp;</span>
-                    <span class="flag-icon flag-icon-us">&nbsp;</span></p>
-                    <h6 class="m-0 font-weight-bold"><strong>EUR/USD</strong></h6>
-                    <h6 class="m-0 text-danger font-weight-bold">59 min ago</h6>
-                </td>
-                <td><button class="btn btn-success btn-sm">Active</button></td>
-                <td>$18.90</td>
-                <td class="text-danger">1.90934</td>
-                <td class="text-success">1.90934</td>
-                <td class="text-center">
-                	<p class="m-0"><strong>5 Dec 2020</strong></p>
-                	<p class="m-0"><strong>18:30 PM</strong></p>
-                </td>
-                <td><button class="btn btn-danger btn-sm text-white">Sell</button></td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>
-                    <p class="mb-2"><span class="flag-icon flag-icon-ad">&nbsp;</span>
-                    <span class="flag-icon flag-icon-us">&nbsp;</span></p>
-                    <h6 class="m-0 font-weight-bold"><strong>EUR/USD</strong></h6>
-                    <h6 class="m-0 text-danger font-weight-bold">59 min ago</h6>
-                </td>
-                <td><button class="btn btn-secondary btn-sm">Pending</button></td>
-                <td><strong class="font-weight-bold">Registered Users</strong></td>
-                <td class="text-danger">1.90934</td>
-                <td class="text-success">1.90934</td>
-                <td class="text-center">
-                	<p class="m-0"><strong>5 Dec 2020</strong></p>
-                	<p class="m-0"><strong>18:30 PM</strong></p>
-                </td>
-                <td><button class="btn btn-secondary bg-dark btn-sm text-white">Sign in</button></td>
-                <td>&nbsp;</td>
-            </tr>
-
-        </tbody>
-    </table></div>
-</div>
-    </section> -->
+   
     <!--     <div id="particles-js" style="height: 0;"></div> -->
 </div>
 @include ('inc/footer')

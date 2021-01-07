@@ -41,12 +41,13 @@
                                         $go = 0;
                                     }
                                 }
+								$category = $data->GetCategory();
                             @endphp
                             @if($go == 1)
                                 <div class=" col-sm-12 col-md-6 bg-light">
                                     <div class="wow animated fadeInUp mt-1">
                                         <div class="re_img w-100 p-4">
-                                            <a href="{{URL::to('Blog')}}/{{$data->permalink}}">
+                                            <a href="{{URL::to('Posts')}}/{{$category->mainCategory}}/{{$data->permalink}}">
                                                 <img src="{{URL::to('/storage/app')}}/{{$data->image}}" >               
                                             </a>
                                         </div>
@@ -56,7 +57,7 @@
                                                     
                                                     <div class="new_description-details">
                                                         <h6>
-                                                            <a href="{{URL::to('Blog')}}/{{$data->permalink}}">
+                                                            <a href="{{URL::to('Posts')}}/{{$category->mainCategory}}/{{$data->permalink}}">
                                                                 {{$data->mainTitle}}
                                                             </a>
                                                         </h6>

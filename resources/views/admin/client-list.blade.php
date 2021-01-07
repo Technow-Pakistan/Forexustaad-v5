@@ -34,6 +34,7 @@
 										<th>Phone Number</th>
 										<!-- <th>Profile</th> -->
 										<th>Start date</th>
+										<th>Confirm mailer</th>
 										<th>Status</th>
 									</tr>
 								</thead>
@@ -44,7 +45,7 @@
 												$memberType = $member->GetMember();
 											@endphp
 											<tr>
-												<td>
+												<td class="tdLinkScroll">
 													<div class="d-inline-block align-middle">
 														<img src="{{URL::to('public/assets/assets/img/user1.jpg')}}" alt="user image" class="img-radius align-top m-r-15" style="width:40px;">
 														<div class="d-inline-block">
@@ -57,8 +58,9 @@
 												<td>{{$member->mobile}}</td>
 												<!-- <td  class="veiwProfile"><a href="{{URL::to('ustaad/member/profile')}}/{{$member->id}}" class="veiwProfile">View Profile</a></td> -->
 												<td>{{$member->created_at->format(" d/m/y ")}}</td>
+												<td><span class="badge {{$member->confirmationEmail == 1 ? 'badge-light-success' : 'badge-light-danger'}}">{{$member->confirmationEmail == 1 ? 'Comfirm' : 'UnComfirm'}}</span></td>
 												<td>
-													<span class="badge {{$member->status == 1 ? 'badge-light-success' : 'badge-light-danger'}}">{{$member->status == 1 ? 'Active' : 'Deactive'}}</span>
+													<span class="badge {{($member->status == 1 && $member->confirmationEmail == 1) ? 'badge-light-success' : 'badge-light-danger'}}">{{($member->status == 1 && $member->confirmationEmail == 1) ? 'Active' : 'Deactive'}}</span>
 													<div class="overlay-edit">
 														<!-- <a href="{{URL::to('ustaad/member/edit')}}/{{$member->id}}"><button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a> -->
 														@if($member->status == 1)
@@ -78,6 +80,7 @@
 										<th>Position</th>
 										<th>Phone Number</th>
 										<th>Start date</th>
+										<th>Confirm mailer</th>
 										<th>Status</th>
 									</tr>
 								</tfoot>
