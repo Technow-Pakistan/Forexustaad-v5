@@ -121,11 +121,8 @@ Route::get('/Posts/{id}/{id2}',[BlogController::class,'DetailBlog']);
 Route::get('/privacy-policy.html/de',[HomeController::class,'privacyPolicy']);
 Route::get('/term-of-services.html',[HomeController::class,'termServices']);
 Route::get('/contact-us',[ContactController::class,'contact']);
-<<<<<<< HEAD
 Route::get('/signal',[SignalController::class,'signal']);
 Route::post('/contact/add',[ContactController::class,'Add']);
-=======
->>>>>>> b2b4800f9e92f739fada4a9a76da0f91f7a5e9ad
 
 
 // Admin views
