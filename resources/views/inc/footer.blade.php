@@ -289,7 +289,7 @@ $(".LoginButton").on("click",function(){
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="form-group">
-                          <input type="email" class="form-control text-gray explore_form email" placeholder="Your Email *" name="email" id="quote_email" required>
+                            <input type="email" class="form-control text-gray explore_form email" placeholder="Your Email *" name="email" id="quote_email" required>
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
@@ -514,30 +514,45 @@ $(document).on("click", function(event){
 </script>
 
 
-
-    <script>
-        grecaptcha.ready(function() {
-            grecaptcha.execute('6LfoWyEaAAAAAC-Bs8wiRSMTBSLB3AR8Nq8eS3kH', {action: 'homepage'}).then(function(token) {
-                document.getElementById("token").value = token;
-            });
+<script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6LfoWyEaAAAAAC-Bs8wiRSMTBSLB3AR8Nq8eS3kH', {action: 'homepage'}).then(function(token) {
+            document.getElementById("token").value = token;
         });
-        $(".RegistrationForm").on("submit",function(e){
-  var email = $(".emailRegistration").val();
-  var emailHost = email.split("@")
-  console.log(email);
-  if (emailHost[1] != "gmail.com" && emailHost[1] != "yahoo.com"){
-    e.preventDefault();
-    $(".RegistrationError").html("Please! correct your email.")
-  }else{
-    var password = $(".password").val();
-    var comfirmedPassword = $(".comfirmedPassword").val();
-    if(password != comfirmedPassword){
-      e.preventDefault();
-      $(".RegistrationError").html("Your Password and Comfirmed Password is not matched.")
-    }
-  }
-});
+    });
+    $(".ContactFormSubmit").on("submit",function(e){
+      var email = $(".emailRegistration").val();
+      var emailHost = email.split("@")
+      console.log(email);
+      if (emailHost[1] != "gmail.com" && emailHost[1] != "yahoo.com"){
+        e.preventDefault();
+        $(".RegistrationError").html("Please! correct your email.")
+      }else{
+        var password = $(".password").val();
+        var comfirmedPassword = $(".comfirmedPassword").val();
+        if(password != comfirmedPassword){
+          e.preventDefault();
+          $(".RegistrationError").html("Your Password and Comfirmed Password is not matched.")
+        }
+      }
+    });
+    $(".ContactFormSubmit").on("submit",function(e){
+      var email = $(".emailContact").val();
+      var emailHost = email.split("@")
+      console.log(email);
+      if (emailHost[1] != "gmail.com" && emailHost[1] != "yahoo.com"){
+        e.preventDefault();
+        $(".Contacterror").html("Please! correct your email.")
+      }
+    });
 
-    </script>
+</script>
+
+    <script type="text/javascript">
+        var blink = document.getElementById('blink');
+        setInterval(function() {
+          blink.style.opacity = (blink.style.opacity == 0 ? 1 : 0);
+        }, 500);
+      </script>
 </body>
 </html>
