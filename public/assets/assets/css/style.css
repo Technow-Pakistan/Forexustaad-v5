@@ -2457,13 +2457,6 @@ p.post-meta {
 /* Broker Detail */
 .bg-darkpurple{
    background-image:  linear-gradient(45deg, #ff0024, #0d5fe9);
-   /* width: 100%;
-    color: #fff;
-    padding: 15px 30px;
-    border-radius: 40px;
-    font-weight: 500;
-    text-transform: capitalize;
-    border: none; */
 }
 .icc i {
     font-size: 50px;
@@ -2496,6 +2489,12 @@ p.post-meta {
     left: auto;
     right:0 !important;
 }
-
-
-
+.blink_text {
+    animation-name: blinker;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+   }
+   .grecaptcha-badge{
+	display:none!important
+}

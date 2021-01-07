@@ -371,7 +371,7 @@
                                 <a class="nav-link" href="{{URL::to('/construction')}}"><span>Trading Tools </span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{URL::to('/construction')}}"><span>Signals <sup>new</sup></span></a>
+                                <a class="nav-link" href="{{URL::to('/construction')}}"><span>Signals <sup id="blink">new</sup></span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{URL::to('blog-post.html')}}"><span>blog</span></a>
