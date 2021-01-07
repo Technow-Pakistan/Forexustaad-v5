@@ -1,28 +1,28 @@
-@font-face {
+/* @font-face {
 	font-family: "Morton-Light";
-	src: url(../fonts/Morton/Morton-Light.ttf);
+	src: url("../fonts/Morton/Morton-Light.otf");
 	font-display: swap;
 }
 @font-face {
 	font-family: "Morton-ExtraBold";
-	src: url(../fonts/Morton/Morton-ExtraBold.ttf);
+	src: url(../fonts/Morton/Morton-ExtraBold.otf);
 	font-display: swap;
 }
 @font-face {
 	font-family: "Morton-Bold";
-	src: url(../fonts/Morton/Morton-Bold.ttf);
+	src: url(../fonts/Morton/Morton-Bold.otf);
 	font-display: swap;
 }
 @font-face {
 	font-family: "Morton-Regular";
-	src: url(../fonts/Morton/Morton-Regular.ttf);
+	src: url("../fonts/Morton/Morton-Regular.otf");
 	font-display: swap;
 }
 @font-face {
 	font-family: "Morton-Black";
-	src: url(../fonts/Morton/Morton-Black.ttf);
+	src: url(../fonts/Morton/Morton-Black.otf);
 	font-display: swap;
-}
+} */
 ::selection {
 	background-color: #0d5fe9;
 	color: #fff;
@@ -2498,3 +2498,10 @@ p.post-meta {
    .grecaptcha-badge{
 	display:none!important
 }
+#blink {
+    font-size: 10px;
+    font-weight: bold;
+    font-family: sans-serif;
+    color: #ff0024;
+    transition: 0.4s;
+  }
