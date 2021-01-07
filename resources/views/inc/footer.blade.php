@@ -349,7 +349,7 @@ $(".LoginButton").on("click",function(){
 
 <!-- back to top -->
 <!-- <a href="#top" class="to-top"><i class="fa fa-angle-up"></i></a> -->
-< type="text/javascript">
+<script type="text/javascript">
 
 // Select all links with hashes
 $('a[href="#top"]')
@@ -388,17 +388,17 @@ $('a[href="#top"]')
   });
 
 
-</>
-<>function initVideo() {
+</script>
+<script>function initVideo() {
           var vidDefer = document.getElementsByTagName('iframe');
           for (var i=0; i<vidDefer.length; i++) {
             if(vidDefer[i].getAttribute('data-src')) {
               vidDefer[i].setAttribute('src',vidDefer[i].getAttribute('data-src'));
         } } }
         window.onload = initVideo;
-</>
+</script>
 
-< type="text/javascript">
+<script type="text/javascript">
     $(window).on('load', function(){
      $('#loading').hide();
   });
@@ -411,7 +411,7 @@ $('a[href="#top"]')
     $(".LoginForm").attr("action","{{URL::to('/clientForget')}}");
     $(".LoginEmail").attr("placeholder","Enter Email");
   });
-</>
+</script>
 
 
 
@@ -486,7 +486,7 @@ $(document).ready(function() {
 });
 
 
-</>
+</script>
 <script>
 
     // Show hide popover
