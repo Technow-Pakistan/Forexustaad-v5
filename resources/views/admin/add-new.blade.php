@@ -35,7 +35,18 @@
 					@foreach($totalData as $data)
 						<div class="col-md-4">
 							<div class="card text-center">
-								<a href="{{URL::to('ustaad/post/new')}}/{{$data->id}}">
+								@php
+									if($i == 1){
+										$url = URL::to('ustaad/analysis/add');
+									}elseif($i == 2){
+										$url = URL::to('ustaad/post/new') . "/" . $data->id;
+									}elseif($i == 3){
+										$url = URL::to('ustaad/signals/add');
+									}else{
+										$url = "#";
+									}
+								@endphp
+								<a href="{{$url}}">
 									<div class="card-body addn">
 										@if($i == 0)
 											<i class=" fas fa-clock text-danger"></i>

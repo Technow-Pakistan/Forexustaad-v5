@@ -87,4 +87,13 @@ class AdminMemberController extends Controller
         $memberData->save();
         return back();
     }
+    public function ChangePassword(Request $request){
+        return view('admin.user-changePassword');
+    }
+    public function ChangePasswordProcess(Request $request){
+        $user = AdminModel::where('username',$request->username)->first();
+        $user->password = $request->password;
+        $user->save();
+        return back();
+    }
 }

@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class SlidingImagesModel extends Model
 {
     protected $table = "slider_images";
-    protected $filable = ["image","title","link","description","trash"];
+protected $fillable = ["image","title","link","description","trash"];
 }

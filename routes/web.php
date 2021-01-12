@@ -34,6 +34,9 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\MainWebinarController;
 use App\Http\Controllers\SignalController;
+use App\Http\Controllers\ComposeEmailController;
+use App\Http\Controllers\StrategiesController;
+use App\Http\Controllers\AnalysisController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,6 +47,8 @@ use App\Http\Controllers\SignalController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 Route::post('/admin/apileftorder',[ApiLeftController::class,'Order']);
 
 Route::get('/brokerList',[HomeController::class,'BrokerView']);
@@ -137,8 +142,46 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::get('trashGallery/delete/{id}',[AdminController::class,'TrashGalleryImageDelete']);
     Route::get('trashGallery/restore/{id}',[AdminController::class,'TrashGalleryImageRestore']);
     Route::get('/logout',[AdminController::class,'Logout']);
+    Route::group(['prefix' => 'strategies'],function(){
+        Route::get('/',[StrategiesController::class,'Index']);
+        Route::get('/new',[StrategiesController::class,'Add']);
+        Route::post('/new',[StrategiesController::class,'AddStrategy']);
+        Route::get('/edit/{id}',[StrategiesController::class,'Edit']);
+        Route::post('/edit/{id}',[StrategiesController::class,'EditStrategy']);
+        Route::get('/delete/{id}',[StrategiesController::class,'Delete']);
+        Route::get('/active/{id}',[StrategiesController::class,'Active']);
+    });
+    Route::group(['prefix' => 'analysis'],function(){
+        Route::get('/',[AnalysisController::class,'Index']);
+        Route::get('/add',[AnalysisController::class,'Add']);
+        Route::post('/add',[AnalysisController::class,'AddProcess']);
+        Route::get('/edit/{id}',[SignalController::class,'Edit']);
+        Route::post('/edit/{id}',[SignalController::class,'EditProcess']);
+        Route::get('/delete/{id}',[SignalController::class,'Delete']);
+        Route::get('/active/{id}',[SignalController::class,'Active']);
+    });
     Route::group(['prefix' => 'contact'],function(){
         Route::get('/',[ContactController::class,'Index']);
+        Route::post('/',[ContactController::class,'SelectedTrash']);
+        Route::post('/unTrash',[ContactController::class,'UnTrash']);
+        Route::get('/starMessage/{id}',[ContactController::class,'StarMessage']);
+        Route::get('/emailRead/{id}',[ContactController::class,'EmailRead']);
+        Route::get('/emailCompose',[ComposeEmailController::class,'Index']);
+        Route::post('/DraftMail',[ComposeEmailController::class,'DraftMail']);
+        Route::post('/SendMail',[ComposeEmailController::class,'SendMail']);
+        Route::get('/sendEmailRead/{id}',[ComposeEmailController::class,'SendEmailRead']);
+        Route::get('/draftEmailRead/{id}',[ComposeEmailController::class,'draftEmailRead']);
+        Route::post('/draftEmailRead/{id}',[ComposeEmailController::class,'draftEmailSave']);
+        Route::post('/SendDraftMail/{id}',[ComposeEmailController::class,'draftEmailSend']);
+    });
+    Route::group(['prefix' => 'signals'],function(){
+        Route::get('/',[SignalController::class,'Index']);
+        Route::get('/add',[SignalController::class,'Add']);
+        Route::post('/add',[SignalController::class,'AddProcess']);
+        Route::get('/edit/{id}',[SignalController::class,'Edit']);
+        Route::post('/edit/{id}',[SignalController::class,'EditProcess']);
+        Route::get('/delete/{id}',[SignalController::class,'Delete']);
+        Route::get('/active/{id}',[SignalController::class,'Active']);
     });
     Route::group(['prefix' => 'webinar'],function(){
         Route::get('/',[MainWebinarController::class,'Index']);
@@ -324,6 +367,8 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/profile/{id}',[AdminMemberController::class,'Index']);
         Route::get('/add',[AdminMemberController::class,'Add']);
         Route::post('/add',[AdminMemberController::class,'AddMember']);
+        Route::get('/changePassword',[AdminMemberController::class,'ChangePassword']);
+        Route::post('/changePassword',[AdminMemberController::class,'ChangePasswordProcess']);
         Route::get('/userList',[AdminMemberController::class,'UserList']);
         Route::get('/edit/{id}',[AdminMemberController::class,'Edit']);
         Route::post('/edit/{id}',[AdminMemberController::class,'EditMember']);
@@ -358,7 +403,10 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
 
 // Users Panel Views
 
-Route::group(['prefix' => 'memberArea',"middleware" => "IsMemberLogin"],function(){
+Route::group(['prefix' => '',"middleware" => "IsMemberLogin"],function(){
+    Route::get('/strategies',[StrategiesController::class,'ViewAll']);
+    Route::get('/strategies/{id}',[StrategiesController::class,'StrategyDetail']);
+    
     Route::get('/dashboard',[MemberController::class,'Dashboard']);
     Route::get('/logout',[MemberController::class,'Logout']);
 });
