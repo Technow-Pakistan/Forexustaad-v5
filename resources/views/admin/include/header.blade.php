@@ -62,10 +62,25 @@
 								>
 								<ul class="pcoded-submenu">
 									<li><a href="{{URL::to('ustaad/post/viewAll')}}">All Posts</a></li>
+									<li><a href="{{URL::to('ustaad/signals')}}">All Signals</a></li>
 									<li><a href="{{URL::to('ustaad/allCategories')}}">Add New</a></li>
 									<li><a href="{{URL::to('ustaad/category')}}">Categories</a></li>
 									<li><a href="{{URL::to('ustaad/tag')}}">Tags</a></li>
 									<li><a href="{{URL::to('ustaad/comment')}}">Comments</a></li>
+								</ul>
+							</li>
+							<li class="nav-item pcoded-menu-caption">
+								<label>Strategies Area</label>
+							</li>
+							<li class="nav-item pcoded-hasmenu">
+								<a href="#!" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="fab fa-blogger"></i></span
+									><span class="pcoded-mtext">Strategies</span></a
+								>
+								<ul class="pcoded-submenu">
+									<li><a href="{{URL::to('ustaad/strategies')}}">All Strategies</a></li>
+									<li><a href="{{URL::to('ustaad/strategies/new')}}">Add Strategy</a></li>
 								</ul>
 							</li>
 							<li class="nav-item pcoded-menu-caption">
@@ -196,7 +211,7 @@
 									@endforeach
 								</ul>
 							</li>
-							<li class="nav-item pcoded-menu-caption">
+							<!-- <li class="nav-item pcoded-menu-caption">
 								<label>Contact</label>
 							</li>
 							<li class="nav-item">
@@ -205,7 +220,7 @@
 										><i class="feather icon-image"></i></span
 									><span class="pcoded-mtext">Contact</span></a
 								>
-							</li>
+							</li> -->
 							@if($value["memberId"] == 1)
 								<li class="nav-item pcoded-menu-caption">
 									<label>Trash area</label>
@@ -378,7 +393,7 @@
 					</li>
 					<li>
 						<div class="dropdown">
-							<a href="#!" class="displayChatbox dropdown-toggle"
+							<a href="{{URL::to('ustaad/contact')}}" class="displayChatbox dropdown-toggle"
 								><i class="icon feather icon-mail"></i
 								><span class="badge bg-success"
 									><span class="sr-only"></span></span
@@ -428,15 +443,15 @@
 											<i class="feather icon-user-plus"></i> Add User
 										</a>
 									</li>
+									<!-- <li>
+										<a href="email_inbox.html" class="dropdown-item">
+											<i class="feather icon-mail"></i> My Messages
+										</a>
+									</li> -->
 									<li>
-										<a href="email_inbox.html" class="dropdown-item"
-											><i class="feather icon-mail"></i> My Messages</a
-										>
-									</li>
-									<li>
-										<a href="auth-signin.html" class="dropdown-item"
-											><i class="feather icon-lock"></i> Lock Screen</a
-										>
+										<a href="{{URL::to('ustaad/member/changePassword')}}" class="dropdown-item">
+											<i class="feather icon-lock"></i> Change Password
+										</a>
 									</li>
 								</ul>
 							</div>
@@ -448,7 +463,7 @@
 		<!-- [ Header ] end -->
 
 		<!-- [ chat user list ] start -->
-		<section class="header-user-list">
+		<!-- <section class="header-user-list">
 			<a href="#!" class="h-close-text"><i class="feather icon-x"></i></a>
 			<ul class="nav nav-tabs" id="chatTab" role="tablist">
 				<li class="nav-item">
@@ -1003,7 +1018,7 @@
 					</div>
 				</div>
 			</div>
-		</section>
+		</section> -->
 		<!-- [ chat user list ] end -->
 
 		<!-- [ chat message ] start -->

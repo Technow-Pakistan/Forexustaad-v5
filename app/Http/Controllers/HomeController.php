@@ -164,7 +164,7 @@ class HomeController extends Controller
             }
             if ($login->status != 0) {
                 $request->session()->put("client",$login);
-                return redirect('/');
+                return back();
             }else {
                 $error = "Your account has been Blocked. Please contact with Administrator ";
                 $request->session()->put("error",$error);
