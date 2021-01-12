@@ -44,7 +44,143 @@
                               </tr>
                            </thead>
                            <tbody>
-                              <tr class="text-center">
+                              @foreach($signalData as $data)
+                                       @php
+	                                       $loginClientData = Session::get('client');
+                                          $go = 1;
+                                          $profits = explode('@',$data->takeProfit);
+                                          $time1 = strtotime($data->time);
+                                          $time = date('h:i A', $time1);
+                                          $date1 = strtotime($data->date);
+                                          $date = date('d M Y', $date1);
+                                          if($data->date == date("Y-m-d")){
+                                             if($data->time >= date("H:i:s")){
+                                                $go = 0;
+                                             }
+                                          }
+                                          if($data->date > date("Y-m-d")){
+                                             $go = 0;
+                                          }
+                                          $timeDate1 = strtotime(date("Y-m-d H:i:s"));
+                                          $timeDate2 = strtotime($data->created_at->format("Y-m-d H:i:s"));
+                                          $minsDate = ($timeDate1 - $timeDate2) / 60;
+                                       @endphp
+                                 <tr class="text-center">
+                                    <td>
+                                       <p class="mb-2"><span class="flag-icon flag-icon-ad">&nbsp;</span>
+                                          <span class="flag-icon flag-icon-us">&nbsp;</span>
+                                       </p>
+                                       <h6 class="m-0 font-weight-bold"><strong>{{$data->forexPairs}}</strong></h6>
+                                       @if($go == 0)
+                                          <h6 class="m-0 text-danger">{{intval($minsDate)}} min ago</h6>
+                                       @else
+                                          <h6 class="m-0 text-danger">Expired</h6>
+                                       @endif
+                                    </td>
+                                    <td>
+                                       @if($go == 0)
+                                          <button class="btn btn-success btn-sm buttonBlinking">Active</button>
+                                       @else
+                                          <button class="btn btn-secondary btn-sm">N/A</button>
+                                       @endif
+                                    </td>
+                                    <td>
+                                       @if($data->selectUser == "Register User" && !Session::has('client'))
+                                          <strong class="font-weight-bold">Registered Users</strong>
+                                       @elseif($data->selectUser == "Premium User")
+                                          @if(!Session::has('client'))
+                                             <strong class="font-weight-bold">Premium Only</strong>
+                                          @elseif(isset($loginClientData->memberType) && $loginClientData->memberType == 1)
+                                             <strong class="font-weight-bold">Premium Only</strong>
+                                          @else
+                                             {{$data->price}}
+                                          @endif
+                                       @else
+                                          {{$data->price}}
+                                       @endif
+                                    </td>
+                                    <td class="text-danger">
+                                       @if($data->selectUser == "Register User" && !Session::has('client'))
+                                          N/A
+                                       @elseif($data->selectUser == "Premium User")
+                                          @if(!Session::has('client'))
+                                             N/A
+                                          @elseif(isset($loginClientData->memberType) && $loginClientData->memberType == 1)
+                                             N/A
+                                          @else
+                                             @if($data->price == null)
+                                                {{$data->stopLose}}
+                                             @else
+                                                N/A
+                                             @endif
+                                          @endif
+                                       @else
+                                             @if($data->price == null)
+                                                {{$data->stopLose}}
+                                             @else
+                                                N/A
+                                             @endif
+                                       @endif
+                                    </td>
+                                    <td class="text-success">
+                                       @if($data->selectUser == "Register User" && !Session::has('client'))
+                                          N/A
+                                       @elseif($data->selectUser == "Premium User")
+                                          @if(!Session::has('client'))
+                                             N/A
+                                          @elseif(isset($loginClientData->memberType) && $loginClientData->memberType == 1)
+                                             N/A
+                                          @else
+                                             @if($data->price == null)
+                                                {{$profits[0]}}
+                                             @else
+                                                N/A
+                                             @endif
+                                          @endif
+                                       @else
+                                             @if($data->price == null)
+                                                {{$profits[0]}}
+                                             @else
+                                                N/A
+                                             @endif
+                                       @endif
+                                    </td>
+                                    <td class="text-center d-initial-flex">
+                                       <p class="m-0"><strong> {{$date}} <br></strong></p>
+                                       <p class="m-0"><strong> {{$time}} </strong></p>
+                                    </td>
+                                    <td colspan="2" class="pl-0">
+                                       @if($go == 0)
+                                          @if($data->selectUser == "Register User" && !Session::has('client'))
+                                             <button class="btn btn-secondary bg-dark btn-sm text-white buttonBlinking">Sign in</button>
+                                          @elseif($data->selectUser == "Premium User")
+                                             @if(!Session::has('client'))
+                                                <button class="btn btn-secondary bg-dark btn-sm text-white buttonBlinking">Sign in</button>
+                                             @elseif(isset($loginClientData->memberType) && $loginClientData->memberType == 1)
+                                                <button class="btn btn-secondary bg-dark btn-sm text-white buttonBlinking">Sign in</button>
+                                             @else
+                                                <button class="btn {{strpos($data->buySale, 'Buy') !== false ? 'btn-warning' : 'btn-danger' }} btn-sm text-white buttonBlinking">{{$data->buySale}}</button>
+                                             @endif
+                                          @else
+                                             <button class="btn {{strpos($data->buySale, 'Buy') !== false ? 'btn-warning' : 'btn-danger' }} btn-sm text-white buttonBlinking">{{$data->buySale}}</button>
+                                          @endif
+                                       @else
+                                          <button class="btn btn-secondary btn-sm">N/A</button>
+                                       @endif
+                                             @if($data->comments != null && $go == 0)
+                                                <!-- <i class="fa fa-comment-o fa-lg "></i> -->
+                                             @endif
+                                    </td>
+                                 </tr>
+                                 @if($data->comments != null && $go == 0)
+                                    <tr class="text-center d-initial-flex" style="display:none">
+                                       <td colspan="8">
+                                          {{$data->comments}}
+                                       </td>
+                                    </tr>
+                                 @endif
+                              @endforeach
+                              <!-- <tr class="text-center">
                                  <td>
                                     <p class="mb-2"><span class="flag-icon flag-icon-ad">&nbsp;</span>
                                        <span class="flag-icon flag-icon-us">&nbsp;</span>
@@ -89,7 +225,7 @@
                                        <span class="flag-icon flag-icon-us">&nbsp;</span>
                                     </p>
                                     <h6 class="m-0 font-weight-bold"><strong>EUR/USD</strong></h6>
-                                    <h6 class="m-0 text-danger">59 min ago</h6>
+                                    <h6 class="m-0 text-danger">58  min ago</h6>
                                  </td>
                                  <td><button class="btn btn-success btn-sm">Active</button></td>
                                  <td>$18.90</td>
@@ -120,7 +256,7 @@
                                  </td>
                                  <td><button class="btn btn-secondary bg-dark btn-sm text-white">Sign in</button></td>
                                  <td>&nbsp;</td>
-                              </tr>
+                              </tr> -->
                            </tbody>
                         </table>
                      </div>
