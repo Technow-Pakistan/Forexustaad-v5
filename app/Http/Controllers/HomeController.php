@@ -27,9 +27,14 @@ use App\Models\MainWebinarModel;
 
 class HomeController extends Controller
 {
+    public function VipWebinar(){
+        $title = "Webinar";
+        $totalData = MainWebinarModel::orderBy('id','desc')->where('vipMember',1)->get();
+        return view('vipWebinar/webinar',compact('totalData','title'));
+    }
     public function webinar(){
         $title = "Webinar";
-        $totalData = MainWebinarModel::orderBy('id','desc')->get();
+        $totalData = MainWebinarModel::orderBy('id','desc')->where('vipMember',0)->get();
         return view('home/webinar',compact('totalData','title'));
     }
     public function Construction(){
@@ -260,7 +265,7 @@ class HomeController extends Controller
         $brokerReview = BrokerReviewModel::where('ReviewTitle',$ReviewTitle)->first();
         if ($brokerReview) {
             if($brokerReview != null){
-                $title = $broker1->title;
+                $title = $brokerReview->title;
                 return view('broker.brokerReview',compact('brokerReview','title'));
             }else{
                 return back();
@@ -292,7 +297,7 @@ class HomeController extends Controller
         if ($brokerNews) {
 
             if($brokerNews != null){
-                $title = $broker1->title;
+                $title = $brokerNews->title;
                 return view('broker.brokerNews',compact('brokerNews','title'));
             }else{
                 return back();
@@ -323,7 +328,7 @@ class HomeController extends Controller
         $brokerPromotion = BorkerPromotionsModel::where('PromotionTitle',$PromotionTitle)->first();
         if ($brokerPromotion) {
             if($brokerPromotion != null){
-                $title = $broker1->title;
+                $title = $brokerPromotion->title;
                 return view('broker.brokerPromotion',compact('brokerPromotion','title'));
             }else{
                 return back();

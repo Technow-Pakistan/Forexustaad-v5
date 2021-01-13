@@ -34,9 +34,10 @@
 											<tr>
 												<th>Image</th>
 												<th>Title</th>
+												<th>Member</th>
 												<th>Date</th>
 												<th>Time</th>
-												
+
 												<th>Status</th>
 											</tr>
 										</thead>
@@ -49,6 +50,7 @@
 														</div>
 													</td>
 													<td>{{$data->title}}</td>
+													<td>{{$data->vipMember == 1 ? 'Vip Member' : 'Free Member'}}</td>
 													<td>{{$data->date}}</td>
 													<td>{{$data->time}}</td>
 													<td>
@@ -67,7 +69,7 @@
 												</tr>
 											@endforeach
 										</tbody>
-										
+
 									</table>
 								</div>
 							</div>
