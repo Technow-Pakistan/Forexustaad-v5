@@ -1,14 +1,12 @@
 @include('admin.include.header')
 	@php
 		$count = 0;
-		$titleId = 0;
 		$url = "new";
 	@endphp
-	@isset($brokerNews->image)
+	@isset($lecture->id)
 		@php
-			$url = "edit/" . $brokerNews->id;
+			$url = "edit/" . $lecture->id;
 			$count++;
-			$titleId = $brokerNews->brokerId;
 		@endphp
 	@endisset
 		<!-- [ Main Content ] start -->
@@ -46,13 +44,13 @@
 									<div class="form-group">
 										<label for="">Lecture Title</label>
 										<div>
-											<input type="text" name="title" value="{{($count != 0 ? $brokerNews->title : '' )}}" class="form-control" required>
+											<input type="text" name="title" value="{{($count != 0 ? $lecture->title : '' )}}" class="form-control" required>
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="">Embed Code</label>
 										<div>
-											<input type="text" name="embed" value="{{($count != 0 ? $brokerNews->embed : '' )}}" class="form-control" required>
+											<textarea name="embed" id="" class="form-control" required>{{($count != 0 ? $lecture->embed : '' )}}</textarea>
 										</div>
 									</div>
 									<div class="form-group">
@@ -65,7 +63,7 @@
 										>
 											<?php
 												if($count != 0){
-													$description = html_entity_decode($brokerNews->description);
+													$description = html_entity_decode($lecture->description);
 													echo $description;
 												}
 											?>

@@ -35,7 +35,7 @@
                               <tr class="text-center">
                                  <th>Symbols/Pairs</th>
                                  <th>Status</th>
-                                 <th>Price</th>
+                                 <th>Users</th>
                                  <th>Stop Lose</th>
                                  <th>Take Profit</th>
                                  <th>Valid Till</th>
