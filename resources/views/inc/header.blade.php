@@ -129,13 +129,13 @@
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent1">
                                     <ul class="navbar-nav">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{URL::to('/construction')}}"><span>Advance Training</span> </a>
+                                            <a class="nav-link" href="{{URL::to('/advance/all')}}"><span>Advance Training</span> </a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{URL::to('/strategies')}}"><span>Strategies</span> </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{URL::to('/construction')}}"><span>Weekly Webinar</span> </a>
+                                            <a class="nav-link" href="{{URL::to('/vipWebinar')}}"><span>Weekly Webinar</span> </a>
                                         </li>
                                     </ul>
                                 </div>
