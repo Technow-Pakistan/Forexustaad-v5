@@ -70,6 +70,20 @@
 								</ul>
 							</li>
 							<li class="nav-item pcoded-menu-caption">
+								<label>training Area</label>
+							</li>
+							<li class="nav-item pcoded-hasmenu">
+								<a href="#!" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="fab fa-blogger"></i></span
+									><span class="pcoded-mtext">Advance</span></a
+								>
+								<ul class="pcoded-submenu">
+									<li><a href="{{URL::to('ustaad/lecture')}}">All Lectures</a></li>
+									<li><a href="{{URL::to('ustaad/lecture/new')}}">Add Lecture</a></li>
+								</ul>
+							</li>
+							<li class="nav-item pcoded-menu-caption">
 								<label>Strategies Area</label>
 							</li>
 							<li class="nav-item pcoded-hasmenu">

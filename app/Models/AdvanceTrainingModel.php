@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class AdvanceTrainingModel extends Model
 {
     protected $table="advance_training_lecture";
-    protected $fillable = ["title","embed","description"];
+    protected $fillable = ["title","embed","description","status"];
 }
