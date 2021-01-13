@@ -264,7 +264,7 @@
 
 		<!-- custom-chart js -->
 		<script src="{{URL::to('/public/assets/assets/js/dashboard-main.js')}}"></script>
-		<script src="https://cdn.tiny.cloud/1/hkemh60vfhq4w7kvvdv59h4ml0yn66nigaxbgv7xbj0ttyk8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+		<!-- <script src="https://cdn.tiny.cloud/1/hkemh60vfhq4w7kvvdv59h4ml0yn66nigaxbgv7xbj0ttyk8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
 		
         @php 
           $value =Session::get('admin');

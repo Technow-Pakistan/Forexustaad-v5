@@ -37,6 +37,7 @@ use App\Http\Controllers\SignalController;
 use App\Http\Controllers\ComposeEmailController;
 use App\Http\Controllers\StrategiesController;
 use App\Http\Controllers\AnalysisController;
+use App\Http\Controllers\AdvanceTrainingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -142,6 +143,15 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::get('trashGallery/delete/{id}',[AdminController::class,'TrashGalleryImageDelete']);
     Route::get('trashGallery/restore/{id}',[AdminController::class,'TrashGalleryImageRestore']);
     Route::get('/logout',[AdminController::class,'Logout']);
+    Route::group(['prefix' => 'lecture'],function(){
+        Route::get('/',[AdvanceTrainingController::class,'Index']);
+        Route::get('/new',[AdvanceTrainingController::class,'Add']);
+        Route::post('/new',[AdvanceTrainingController::class,'AddLecture']);
+        Route::get('/edit/{id}',[AdvanceTrainingController::class,'Edit']);
+        Route::post('/edit/{id}',[AdvanceTrainingController::class,'EditLecture']);
+        Route::get('/delete/{id}',[AdvanceTrainingController::class,'Delete']);
+        Route::get('/active/{id}',[AdvanceTrainingController::class,'Active']);
+    });
     Route::group(['prefix' => 'strategies'],function(){
         Route::get('/',[StrategiesController::class,'Index']);
         Route::get('/new',[StrategiesController::class,'Add']);
@@ -406,7 +416,9 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
 Route::group(['prefix' => '',"middleware" => "IsMemberLogin"],function(){
     Route::get('/strategies',[StrategiesController::class,'ViewAll']);
     Route::get('/strategies/{id}',[StrategiesController::class,'StrategyDetail']);
+    Route::get('/advance/{id}',[AdvanceTrainingController::class,'ViewAll']);
+    Route::get('/vipWebinar',[HomeController::class,'VipWebinar']);
     
-    Route::get('/dashboard',[MemberController::class,'Dashboard']);
-    Route::get('/logout',[MemberController::class,'Logout']);
+    // Route::get('/dashboard',[MemberController::class,'Dashboard']);
+    // Route::get('/logout',[MemberController::class,'Logout']);
 });

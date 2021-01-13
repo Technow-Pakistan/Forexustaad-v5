@@ -9,22 +9,32 @@ use App\Models\AdvanceTrainingModel;
 class AdvanceTrainingController extends Controller
 {
 
+    public function ViewAll (Request $request, $id){
+        if($id == "all"){
+            $lecture = AdvanceTrainingModel::orderBy('id','asc')->first();
+        }else{
+            $title = str_replace('-',' ',$id);
+            $lecture = AdvanceTrainingModel::where('title',$title)->first();
+        }
+        $nextId = $lecture->id + 1;
+        $nextLecture = AdvanceTrainingModel::where('id',$nextId)->first();
+        $lastId = $lecture->id - 1;
+        $lastLecture = AdvanceTrainingModel::where('id',$lastId)->first();
+        $Lectures = AdvanceTrainingModel::all();
+        return view('training.advance.advance',compact('Lectures','lecture','lastLecture','nextLecture'));
+    }
+
     // Admin Panel
 
     public function Index(Request $request){
-        $Strategies = AdvanceTrainingModel::orderBy('id','desc')->get();
-        return view('admin.strategies.index',compact('Strategies'));
+        $Lectures = AdvanceTrainingModel::orderBy('id','desc')->get();
+        return view('admin.training.advance.index',compact('Lectures'));
     }
     public function Add(Request $request){
-        return view('admin.strategies.add');
+        return view('admin.training.advance.add');
     }
-    public function AddStrategy(Request $request){
+    public function AddLecture(Request $request){
         $data = $request->all();
-        if ($request->file("file_photo") != null) {
-            $path = $request->file("file_photo")->store("WebImages");
-            $image = $path;
-        }
-        $data['image'] = $image;
         $description = htmlentities($request->editor1);
         $data['description'] = $description;
         $news = new AdvanceTrainingModel;
@@ -33,16 +43,11 @@ class AdvanceTrainingController extends Controller
         return back();
     }
     public function Edit(Request $request, $id){
-        $strategy = AdvanceTrainingModel::find($id);
-        return view('admin.strategies.add',compact("strategy"));
+        $lecture = AdvanceTrainingModel::find($id);
+        return view('admin.training.advance.add',compact("lecture"));
     }
-    public function EditStrategy(Request $request, $id){
+    public function EditLecture(Request $request, $id){
         $data = $request->all();
-        if ($request->file("file_photo") != null) {
-            $path = $request->file("file_photo")->store("WebImages");
-            $image = $path;
-            $data['image'] = $image;
-        }
         $description = htmlentities($request->editor1);
         $data['description'] = $description;
         $news = AdvanceTrainingModel::find($id);
