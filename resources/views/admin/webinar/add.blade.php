@@ -30,7 +30,7 @@
 						<div class="card">
 							<div class="card-header">Add Webinar</div>
 							<div class="card-body">
-								@php 
+								@php
 									$count = 0;
 									$titleId = 0;
 									$url = "add";
@@ -43,7 +43,7 @@
 										<div>
 											<img src="{{URL::to('storage/app')}}/{{$webinar->image}}" alt="Your Image" />
 										</div>
-										@php 
+										@php
 											$count++;
 											$titleId = $webinar->brokerId;
 										@endphp
@@ -77,20 +77,33 @@
 													<div>
 														<input type="text" name="event" value="{{($count != 0 ? $webinar->event : '' )}}" class="form-control" required>
 													</div>
-												</div>	
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="">Member</label>
+													<div>
+                                                        <select name="vipMember" class="form-control" id="">
+                                                            <option value="0" {{($count != 0 && $webinar->vipMember == 0 ? 'selected' : '' )}}>Free Member</option>
+                                                            <option value="1" {{($count != 0 && $webinar->vipMember == 1 ? 'selected' : '' )}}>Vip Member</option>
+                                                        </select>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="">link</label>
+													<div>
+                                                        <textarea name="link" id="link" class="form-control" required>{{($count != 0 ? $webinar->link : '' )}}</textarea>
+													</div>
+												</div>
 											</div>
 										</div>
-									<div class="form-group">
-										<label for="">link</label>
-										<div>
-											<input type="text" name="link" value="{{($count != 0 ? $webinar->link : '' )}}" class="form-control" required>
-										</div>
-									</div>	
 									<div class="form-group">
 										<label for="news-description" class="form-control-label m-0">Description (Max-character 200)</label>
 										<p class="text-right text-danger m-0 descriptionCount"></p>
 										<textarea name="description" maxlength="200" class="form-control description" id="news-description" rows="3" cols="40" required="" placeholder="Enter your Description here ...">@if($count != 0){{$webinar->description}}@endif</textarea>
-									</div>	
+									</div>
 									<div class="form-group">
 										<label for="news-description" class="form-control-label m-0">Video Link</label>
 										<input type="text" name="embedCode" value="{{($count != 0 ? $webinar->embedCode : '' )}}" class="form-control">
