@@ -116,8 +116,8 @@
                                             <img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="user">
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <!-- <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a> -->
+                                                <!-- <a class="dropdown-item" href="#">Action</a> -->
+                                                <!-- <a class="dropdown-item" href="#">Change Password</a> -->
                                                 <a class="dropdown-item" href="{{URL::to('/clientLogout')}}">Logout</a>
                                             </div>
                                             </div>
@@ -129,7 +129,7 @@
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent1">
                                     <ul class="navbar-nav">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{URL::to('/advance/all')}}"><span>Advance Training</span> </a>
+                                            <a class="nav-link" href="{{URL::to('/vipTraining/advance/all')}}"><span>Advance Training</span> </a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{URL::to('/strategies')}}"><span>Strategies</span> </a>
@@ -359,8 +359,15 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{URL::to('/brokerList')}}"><span>Forex Brokers</span> </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{URL::to('/construction')}}"><span>Forex Education</span> </a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link  dropdown-toggle text-light" href="#" data-toggle="dropdown">
+                                    Forex Education
+                                </a>
+                                <ul class="dropdown-menu fade-up">
+                                    <li><a class="dropdown-item" href="{{URL::to('/training/Basic/all')}}">Basic Training</a></li>
+                                    <li><a class="dropdown-item" href="{{URL::to('/training/Advance/all')}}">Advance Training</a></li>
+                                    <li><a class="dropdown-item" href="{{URL::to('/training/Habbit/all')}}">50 Habbit Training</a></li>
+                                </ul>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{URL::to('/construction')}}"><span>Trading Tools </span></a>

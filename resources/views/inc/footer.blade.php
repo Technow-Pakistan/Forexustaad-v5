@@ -114,6 +114,9 @@
 
 	</div>
   <style>
+	.dropdown-toggle::after {
+		display:none;
+	}
     .buttonBlinking21 {
       text-align: center;
 

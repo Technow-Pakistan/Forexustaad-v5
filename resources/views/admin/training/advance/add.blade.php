@@ -5,7 +5,7 @@
 	@endphp
 	@isset($lecture->id)
 		@php
-			$url = "edit/" . $lecture->id;
+			$url = $category . "/edit/" . $lecture->id;
 			$count++;
 		@endphp
 	@endisset
@@ -24,7 +24,7 @@
 									<li class="breadcrumb-item">
 										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
 									</li>
-									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/lecture')}}">All Lectures</a></li>
+									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/lecture')}}">All Training</a></li>
 									<li class="breadcrumb-item">
 										<a href="#!">{{($count != 0 ? 'Edit' : 'Add' )}} Lecture</a>
 									</li>
@@ -41,6 +41,25 @@
 							<div class="card-header">Lecture</div>
 							<div class="card-body">
 								<form action="{{URL::to('/ustaad/lecture')}}/{{$url}}" method="post" enctype="multipart/form-data">
+									<div class="form-group">
+										<label for="">Training Category</label>
+										<div>
+											<select name="lectureCategory" id="lectureCategory" class="form-control" {{($count != 0 ? 'disabled' : '' )}}>
+												<option value="basic" {{($category == 'basic' ? 'selected' : '' )}}>Basic Training</option>
+												<option value="advance" {{($category == 'advance' ? 'selected' : '' )}}>Advance Training</option>
+												<option value="habbit" {{($category == 'habbit' ? 'selected' : '' )}}>50 Habbits Training</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group vipMember">
+										<label for="">Member</label>
+										<div>
+											<select name="vipMember" id="vipMember" class="form-control">
+												<option value="0" {{($count != 0 && $lecture->vipMember == 0 ? 'selected' : '' )}}>Free Member</option>
+												<option value="1" {{($count != 0 && $lecture->vipMember == 1 ? 'selected' : '' )}}>Vip Member</option>
+											</select>
+										</div>
+									</div>
 									<div class="form-group">
 										<label for="">Lecture Title</label>
 										<div>
@@ -83,3 +102,16 @@
 		<!-- [ Main Content ] end -->
 
 @include('admin.include.footer')
+<script>
+	@if($category != "advance")
+		$(".vipMember").hide();
+	@endif
+	$("#lectureCategory").on("change",function () {
+		var category = $(this).val();
+		if(category == "advance"){
+			$(".vipMember").show();
+		}else{
+			$(".vipMember").hide();
+		}
+	})
+</script>

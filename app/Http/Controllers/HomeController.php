@@ -27,6 +27,9 @@ use App\Models\MainWebinarModel;
 
 class HomeController extends Controller
 {
+    public function ChangePassword(){
+        return view('home/changePassword');
+    }
     public function VipWebinar(){
         $title = "Webinar";
         $totalData = MainWebinarModel::orderBy('id','desc')->where('vipMember',1)->get();
@@ -336,5 +339,10 @@ class HomeController extends Controller
         }else{
             return redirect('/');
         }
+    }
+    public function userregistration(){
+
+        return view('home/user-registration');
+
     }
 }
