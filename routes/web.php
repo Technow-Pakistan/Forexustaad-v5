@@ -38,6 +38,7 @@ use App\Http\Controllers\ComposeEmailController;
 use App\Http\Controllers\StrategiesController;
 use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\AdvanceTrainingController;
+use App\Http\Controllers\AdvanceCommentsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,6 +51,7 @@ use App\Http\Controllers\AdvanceTrainingController;
 */
 
 
+Route::get('/training/{id1}/{id}',[AdvanceTrainingController::class,'ViewAll']);
 Route::post('/admin/apileftorder',[ApiLeftController::class,'Order']);
 
 Route::get('/brokerList',[HomeController::class,'BrokerView']);
@@ -147,10 +149,10 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/',[AdvanceTrainingController::class,'Index']);
         Route::get('/new',[AdvanceTrainingController::class,'Add']);
         Route::post('/new',[AdvanceTrainingController::class,'AddLecture']);
-        Route::get('/edit/{id}',[AdvanceTrainingController::class,'Edit']);
-        Route::post('/edit/{id}',[AdvanceTrainingController::class,'EditLecture']);
-        Route::get('/delete/{id}',[AdvanceTrainingController::class,'Delete']);
-        Route::get('/active/{id}',[AdvanceTrainingController::class,'Active']);
+        Route::get('/{id1}/edit/{id}',[AdvanceTrainingController::class,'Edit']);
+        Route::post('/{id1}/edit/{id}',[AdvanceTrainingController::class,'EditLecture']);
+        Route::get('/{id1}/delete/{id}',[AdvanceTrainingController::class,'Delete']);
+        Route::get('/{id1}/active/{id}',[AdvanceTrainingController::class,'Active']);
     });
     Route::group(['prefix' => 'strategies'],function(){
         Route::get('/',[StrategiesController::class,'Index']);
@@ -416,9 +418,11 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
 Route::group(['prefix' => '',"middleware" => "IsMemberLogin"],function(){
     Route::get('/strategies',[StrategiesController::class,'ViewAll']);
     Route::get('/strategies/{id}',[StrategiesController::class,'StrategyDetail']);
-    Route::get('/advance/{id}',[AdvanceTrainingController::class,'ViewAll']);
     Route::get('/vipWebinar',[HomeController::class,'VipWebinar']);
-    
+    Route::get('/vipTraining/advance/{id}',[AdvanceTrainingController::class,'ViewVipAll']);
+    Route::get('/changePassword',[HomeController::class,'ChangePassword']);
+    Route::post('/advance/comment/add',[AdvanceCommentsController::class,'Add']);
+    Route::get('/user-registration',[HomeController::class,'userregistration']);
     // Route::get('/dashboard',[MemberController::class,'Dashboard']);
     // Route::get('/logout',[MemberController::class,'Logout']);
 });
