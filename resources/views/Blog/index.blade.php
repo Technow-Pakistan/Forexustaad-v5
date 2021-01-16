@@ -32,6 +32,18 @@
                             		</div>
                         		</div>
                     		</div>
+                    		<div class="news_us">
+                        		<div class="content_area_heading large-heading text-right">
+									<a href="{{URL::to('training/Basic/all')}}">
+										<h1 class="heading_title wow animated fadeInUp">
+											Basic Training
+										</h1>
+										<div class="heading_border wow animated fadeInUp">
+											<span class="one"></span><span class="two"></span><span class="three"></span>
+										</div>
+									</a>
+                        		</div>
+                    		</div>
                         </div>
                         @foreach($BlogData as $data)
                             @php 

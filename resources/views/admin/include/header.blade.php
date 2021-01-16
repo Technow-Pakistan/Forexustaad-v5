@@ -76,10 +76,10 @@
 								<a href="#!" class="nav-link"
 									><span class="pcoded-micon"
 										><i class="fab fa-blogger"></i></span
-									><span class="pcoded-mtext">Advance</span></a
+									><span class="pcoded-mtext">Training</span></a
 								>
 								<ul class="pcoded-submenu">
-									<li><a href="{{URL::to('ustaad/lecture')}}">All Lectures</a></li>
+									<li><a href="{{URL::to('ustaad/lecture')}}">All Training</a></li>
 									<li><a href="{{URL::to('ustaad/lecture/new')}}">Add Lecture</a></li>
 								</ul>
 							</li>
