@@ -23,30 +23,13 @@
                         		<div class="content_area_heading large-heading text-center">
                             
                             		<h1 class="heading_title wow animated fadeInUp">
-										{{$category == "Habbit" ? '50 ' . $category : $category}} Trainning
+										Vip Advance Trainning
                             		</h1>
                             		<div class="heading_border wow animated fadeInUp">
                                 		<span class="one"></span><span class="two"></span><span class="three"></span>
                             		</div>
                         		</div>
                     		</div>
-							@if($category == "Basic")
-								<div class="news_us">
-									<div class="content_area_heading large-heading text-right">
-										<a href="{{URL::to('blog-post.html')}}">
-											<h1 class="heading_title wow animated fadeInUp">
-												{{$category == "Basic" ? 'Blog View' : ''}}
-											</h1>
-											<div class="heading_border wow animated fadeInUp">
-												<span class="one"></span><span class="two"></span><span class="three"></span>
-											</div>
-										</a>
-									</div>
-								</div>
-							@endif
-				<!-- <h4 class="text-center mt-5">
-					Advance Trainning
-				</h4> -->
 				<div class="card mt-5 rounded-lg shadow-lg">
 					<div class="card-header pre-header">
 						 <div class="d-flex justify-content-between">
@@ -66,12 +49,12 @@
 						 	<div>
 						 		<div class="d-flex">
 									<span class="pt-3 pr-2">
-										<a href="{{isset($lastTitle) ? URL::to('/training'). '/' . $category . '/' . $lastTitle : '#!'}}" class="text-white">
+										<a href="{{isset($lastTitle) ? URL::to('/vipTraining/advance'). '/' . $lastTitle : '#!'}}" class="text-white">
 											<i class="fa fa-chevron-left" aria-hidden="true"></i>
 										</a>
 									</span>
 									<span class="pt-3">
-										<a href="{{isset($nextTitle) ? URL::to('/training'). '/' . $category . '/' . $nextTitle : '#!'}}" class="text-white">
+										<a href="{{isset($nextTitle) ? URL::to('/vipTraining/advance'). '/' . $category . '/' . $nextTitle : '#!'}}" class="text-white">
 											<i class="fa fa-chevron-right" aria-hidden="true"></i>
 										</a>
 									</span>
@@ -95,7 +78,7 @@
 				@php
 					$title = str_replace(' ','-',$data->title);
 				@endphp
-				<li><a class="dropdown-item" href="{{URL::to('/training'). '/' .  $category . '/' . $title}}">{{$data->id . '. ' . $data->title}}  </a></li>
+				<li><a class="dropdown-item" href="{{URL::to('/vipTraining/advance'). '/' . $title}}">{{$data->id . '. ' . $data->title}}  </a></li>
 			@endforeach
 	    </ul>
 	</li>
@@ -112,66 +95,57 @@
 					</div>
 					<div class="card-body">
 						<ul class="nav nav-tabs" id="myTab" role="tablist">
-							<li class="nav-item">
-								<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><i class="fa fa-file-video-o" aria-hidden="true"></i> Video</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><i class="fa fa-book" aria-hidden="true"></i> Reading</a>
-							</li>
-						</ul>
-						<div class="tab-content" id="myTabContent">
-							<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-								<div class="video-iframe pt-3">
-									@if($lecture->status == 0)
-										@if($category == "Advance"  && $lecture->id != 1)
-											@if($commentAllow != null)
-												@php
-													$date3 = $commentAllow->created_at;
-													$date4 = date('Y-m-d H:i:s', strtotime($date3 . ' +24 hours '));
-													$date5 = date('Y-m-d H:i:s');
-												@endphp	
-												@if($date4 <= $date5)
-													@php echo $lecture->embed @endphp
-												@else
-													<p>Please submit your previous home work first.</p>
-												@endif
-											@else
-												<p>Please submit your previous home work first.</p>
-											@endif
-										@else
-											@php echo $lecture->embed @endphp
-										@endif
-									@else
-										<p>This lecture has been delete contact to administrator.</p>
-									@endif
-								</div>
-							</div>
-							<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-								<div class="pt-3">
-									<h4>Links or text related to video</h1><br>
-									@if($lecture->status == 0)
-										@if($category == "Advance" && $lecture->id != 1)
-											@if($commentAllow != null)
-												@php 
-													$Description = html_entity_decode($data->description);
-													echo $Description;
-												@endphp
-											@else
-												<p>Please submit your previous home work first.</p>
-											@endif
-										@else
-											@php 
-												$Description = html_entity_decode($data->description);
-												echo $Description;
-											@endphp
-										@endif
-									@else
-										<p>This lecture has been delete contact to administrator.</p>
-									@endif
-									
-								</div>
-							</div>
-						</div>
+  <li class="nav-item">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><i class="fa fa-file-video-o" aria-hidden="true"></i> Video</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><i class="fa fa-book" aria-hidden="true"></i> Reading</a>
+  </li>
+  
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+  	<div class="video-iframe pt-3">
+		@if($lecture->status == 0)
+			@if($category == "Advance"  && $lecture->id != $Lecture1Done->id)
+				@if($commentAllow != null)
+					@php
+						$date3 = $commentAllow->created_at;
+						$date4 = date('Y-m-d H:i:s', strtotime($date3 . ' +24 hours '));
+						$date5 = date('Y-m-d H:i:s');
+					@endphp	
+					@if($date4 <= $date5)
+						@php echo $lecture->embed @endphp
+					@else
+						<p>Please submit your previous home work first.</p>
+					@endif
+				@else
+					<p>Please submit your previous home work first.</p>
+				@endif
+			@else
+				@php echo $lecture->embed @endphp
+			@endif
+		@else
+			<p>This lecture has been delete contact to administrator.</p>
+		@endif
+  	</div>
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+  	<div class="pt-3">
+		  <h4>Links or text related to video</h1><br>
+		@if($lecture->status == 0)
+            @php 
+                $Description = html_entity_decode($data->description);
+                echo $Description;
+            @endphp
+		@else
+			<p>This lecture has been delete contact to administrator.</p>
+		@endif
+  		
+  	</div>
+  </div>
+  
+</div>
 					</div>
 				</div>
 				@if(Session::has('client'))
@@ -358,9 +332,7 @@
 							</div>
 					</div>
 				@endif
-				
 			</div>
-			
             <div class="col-lg-3 col-md-6 col-sm-12 order-3 order-lg-3">
                @include('inc.home-right-sidebar')
             </div>
@@ -370,8 +342,6 @@
 
 </div>
 @include('inc.footer')
-
-
 <style>
 		.pre-header {
     		background-image: linear-gradient(45deg, #ff0024, #0d5fe9);
