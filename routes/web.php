@@ -423,6 +423,9 @@ Route::group(['prefix' => '',"middleware" => "IsMemberLogin"],function(){
     Route::get('/changePassword',[HomeController::class,'ChangePassword']);
     Route::post('/advance/comment/add',[AdvanceCommentsController::class,'Add']);
     Route::get('/user-registration',[HomeController::class,'userregistration']);
+    Route::post('/user-registration',[HomeController::class,'userregistrationUpdate']);
+    Route::post('/user-registration/Account',[HomeController::class,'userregistrationAccountAdd']);
+    Route::get('/user-profile',[HomeController::class,'userProfile']);
     // Route::get('/dashboard',[MemberController::class,'Dashboard']);
     // Route::get('/logout',[MemberController::class,'Logout']);
 });
