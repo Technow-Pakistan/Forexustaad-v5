@@ -139,6 +139,9 @@ Route::get('/ustaad',[AdminController::class,'Login']);
 Route::post('/ustaad',[AdminController::class,'Index']);
 
 Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
+    Route::get('/viewClientProfile/{id}',[AdminController::class,'ViewClientProfile']);
+    Route::post('/changeMemberType/{id}',[AdminController::class,'ChangeMemberType']);
+
     Route::get('/dashboard',[AdminController::class,'Dashboard']);
     Route::get('/trash',[AdminController::class,'Trash']);
     Route::get('/trashGallery',[AdminController::class,'TrashGallery']);
