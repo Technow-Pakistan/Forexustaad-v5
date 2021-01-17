@@ -114,8 +114,24 @@
 
 	</div>
   <style>
+		.pre-header {
+    		background-image: linear-gradient(45deg, #ff0024, #0d5fe9);
+    		color: white;
+		}
+		@media all and (min-width: 992px) {
+			.navbar .nav-item .dropdown-menu{  display:block; opacity: 0;  visibility: hidden; transition:.3s; margin-top:0;  }
+			.navbar .nav-item:hover .nav-link{ color: #fff;  }
+			.navbar .dropdown-menu.fade-down{ top:80%; transform: rotateX(-75deg); transform-origin: 0% 0%; }
+			.navbar .dropdown-menu.fade-up{ top:180%;  }
+			.navbar .nav-item:hover .dropdown-menu{ transition: .3s; opacity:1; visibility:visible; top:100%; transform: rotateX(0deg); }
+		}
 	.dropdown-toggle::after {
 		display:none;
+	}
+	.dropdown-menu{
+		right: 0!important;
+		left: auto;
+		
 	}
     .buttonBlinking21 {
       text-align: center;

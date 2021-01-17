@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ClientRegistrationModel;
+use App\Models\ClientMemberModel;
 use App\Models\BlogPostModel;
 use App\Models\BrokerCompanyInformationModel;
 use App\Models\BrokerCommissionsFeesModel;
@@ -22,6 +23,7 @@ use App\Models\BorkerPromotionsModel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SubscriberMail;
 use App\Mail\ForgetPasswordMail;
+use App\Models\ClientAccountDetailModel;
 
 use App\Models\MainWebinarModel;
 
@@ -340,9 +342,73 @@ class HomeController extends Controller
             return redirect('/');
         }
     }
-    public function userregistration(){
+    public function userregistration(Request $request){
+        $allBroker = BrokerCompanyInformationModel::where('trash',0)->get();
+        $value = $request->session()->get("client");
+        $id = $value['id'];
+        $clientAccount = ClientAccountDetailModel::where('clientId',$id)->get();
+        $clientAccount1 = ClientAccountDetailModel::where('clientId',$id)->first();
+        return view('home/user-registration',compact('allBroker','clientAccount','clientAccount1'));
+    }
+    public function userregistrationUpdate(Request $request){
+        $id = $request->updateId;
+        $data = $request->all();
+        if ($request->password != null) {
+            $password = md5($request->password);
+            $data['password'] = $password;
+        }
+        if ($request->file("file_photo") != null) {
+            $path = $request->file("file_photo")->store("WebImages");
+            $Image = $path;
+            $data["image"] = $Image;
+        }
+        $data["social"] = implode("@#",$request->social);
+        $data["socialLink"]= implode("@#",$request->socialLink);
+        if($request->addMobile != null){
+            $addMobile45 = $request->addMobile;
+            $data["addMobile"] = implode("@#",$addMobile45);
+        }
+        if($request->addEmail != null){
+            $addEmail45 = $request->addEmail;
+            $data["addEmail"]= implode("@#",$addEmail45);
+        }
+        $clientUpdate = ClientRegistrationModel::where('id',$id)->first();
+        if ($request->password == null) {
+            $data['password'] = $clientUpdate->password;
+        }
+        $clientUpdate->fill($data);
+        $clientUpdate->save();
+        $request->session()->pull("client");
+        $request->session()->put("client",$clientUpdate);
+        return back();
 
-        return view('home/user-registration');
-
+    }
+    public function userregistrationAccountAdd(Request $request){
+        $deleteData =  ClientAccountDetailModel::where('clientId',$request->clientId)->get();
+        
+        for ($i=0; $i < count($deleteData) ; $i++) {
+            $deleteData[$i]->delete();
+        }
+        $data = $request->all();
+        $array = $request->brokerId;
+        for ($i=0; $i < count($array) ; $i++) {
+            $ClientAccount = new ClientAccountDetailModel; 
+            $ClientAccount->brokerId = $request->brokerId[$i];
+            $ClientAccount->clientId = $request->clientId;
+            $ClientAccount->accountNumber = $request->accountNumber[$i];
+            $ClientAccount->accountemail = $request->accountemail[$i];
+            $ClientAccount->accountdeposit = $request->accountdeposit[$i];
+            $ClientAccount->accountName = $request->accountName[$i];
+            $ClientAccount->save();
+        }
+        return back();
+    }
+    public function userProfile(Request $request){
+        $value = $request->session()->get("client");
+        $id = $value['id'];
+        $totalClientInfo = ClientRegistrationModel::where('id',$id)->first();
+        $clientAccount = ClientAccountDetailModel::where('clientId',$id)->get();
+        $clientMember = ClientMemberModel::where('id',$totalClientInfo->memberType)->first();
+        return view('home/user-profile',compact('totalClientInfo','clientMember','clientAccount'));
     }
 }
