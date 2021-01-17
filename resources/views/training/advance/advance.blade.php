@@ -133,7 +133,7 @@
 												@if($date4 <= $date5)
 													@php echo $lecture->embed @endphp
 												@else
-													<p>Please submit your previous home work first.</p>
+													<p>Please! wait for 24 Hours.</p>
 												@endif
 											@else
 												<p>Please submit your previous home work first.</p>
@@ -152,10 +152,19 @@
 									@if($lecture->status == 0)
 										@if($category == "Advance" && $lecture->id != 1)
 											@if($commentAllow != null)
-												@php 
-													$Description = html_entity_decode($data->description);
-													echo $Description;
-												@endphp
+												@php
+													$date3 = $commentAllow->created_at;
+													$date4 = date('Y-m-d H:i:s', strtotime($date3 . ' +24 hours '));
+													$date5 = date('Y-m-d H:i:s');
+												@endphp	
+												@if($date4 <= $date5)
+													@php 
+														$Description = html_entity_decode($data->description);
+														echo $Description;
+													@endphp
+												@else
+													<p>Please! wait for 24 Hours.</p>
+												@endif
 											@else
 												<p>Please submit your previous home work first.</p>
 											@endif
