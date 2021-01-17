@@ -32,7 +32,7 @@
 										<th>Name</th>
 										<th>Position</th>
 										<th>Phone Number</th>
-										<!-- <th>Profile</th> -->
+										<th>Profile</th>
 										<th>Start date</th>
 										<th>Confirm mailer</th>
 										<th>Status</th>
@@ -56,6 +56,7 @@
 												</td>
 												<td>{{$memberType->member}}</td>
 												<td>{{$member->mobile}}</td>
+												<td><a href="{{URL::to('/ustaad/viewClientProfile')}}/{{$member->id}}">Veiw Profile</a></td>
 												<!-- <td  class="veiwProfile"><a href="{{URL::to('ustaad/member/profile')}}/{{$member->id}}" class="veiwProfile">View Profile</a></td> -->
 												<td>{{$member->created_at->format(" d/m/y ")}}</td>
 												<td><span class="badge {{$member->confirmationEmail == 1 ? 'badge-light-success' : 'badge-light-danger'}}">{{$member->confirmationEmail == 1 ? 'Comfirm' : 'UnComfirm'}}</span></td>
@@ -79,6 +80,7 @@
 										<th>Name</th>
 										<th>Position</th>
 										<th>Phone Number</th>
+										<th>Profile</th>
 										<th>Start date</th>
 										<th>Confirm mailer</th>
 										<th>Status</th>

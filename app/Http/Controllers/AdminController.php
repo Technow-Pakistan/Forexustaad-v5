@@ -9,6 +9,8 @@ use App\Models\AdminModel;
 use App\Models\AdminMemberModel;
 use App\Models\AdminMemberDetailModel;
 use App\Models\ClientRegistrationModel;
+use App\Models\ClientAccountDetailModel;
+use App\Models\ClientMemberModel;
 use App\Models\TrashModel;
 use App\Models\TrashGalleryModel;
 use App\Models\BlogPostModel;
@@ -16,6 +18,18 @@ use App\Models\BrokerCompanyInformationModel;
 
 class AdminController extends Controller
 {
+    public function ViewClientProfile(Request $request, $id){
+        $totalClientInfo = ClientRegistrationModel::where('id',$id)->first();
+        $clientAccount = ClientAccountDetailModel::where('clientId',$id)->get();
+        $clientMember = ClientMemberModel::where('id',$totalClientInfo->memberType)->first();
+        return view('admin.client.user-profile',compact('totalClientInfo','clientMember','clientAccount'));
+    }
+    public function ChangeMemberType(Request $request, $id){
+        $totalClientInfo = ClientRegistrationModel::where('id',$id)->first();
+        $totalClientInfo->memberType = $request->memberType;
+        $totalClientInfo->save();
+        return back();
+    }
     public function Index(Request $request){
         $username = $request->username;
         $password = $request->password;
