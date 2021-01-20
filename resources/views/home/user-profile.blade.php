@@ -39,6 +39,7 @@
                                         <div class="mt-3">
                                           <h4>{{$totalClientInfo->name}}</h4>
                                           <p class="text-secondary mb-1">{{$clientMember->member}}</p>
+                                          <a href="{{URL::to('user-registration')}}">Edit Profile</a>
                                         </div>
                                       </div>
                                     </div>

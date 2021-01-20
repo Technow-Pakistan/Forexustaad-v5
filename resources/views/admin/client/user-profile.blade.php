@@ -1,31 +1,33 @@
-@include('inc.header')
-
-        <!-- Content Area -->
-
-        <div class="content_area">
-    <section class="after_banner_content_area">
-        <div class="container">
-            <div class="row justify-content-center">
-                @php
-                    if(Session::has('error')){ 
-                        $error =Session::get('error');
-                    }
-                    @endphp
-                @isset($error)
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="alert alert-danger">{{$error}}</div>
-                        @php Session::pull('error') @endphp
-                    </div>
-                @endisset
-                <div class="col-lg-3 col-md-6 col-sm-12 order-2 order-lg-1">
-                    @include('inc.home-left-sidebar')
-                </div>
-                <div class="col-lg-6 col-md-12 order-1 order-lg-2">
-                    <div class="">
+@include('admin.include.header')
+		<section class="pcoded-main-container">
+			<div class="pcoded-content">
+				<!-- [ breadcrumb ] start -->
+				<div class="page-header">
+					<div class="page-block">
+						<div class="row align-items-center">
+							<div class="col-md-12">
+								<div class="page-header-title">
+									<h5 class="m-b-10">Forex Signals</h5>
+								</div>
+								<ul class="breadcrumb">
+									<li class="breadcrumb-item">
+										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
+									</li>
+									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/member/clientList')}}">All Client Users</a></li>
+									<li class="breadcrumb-item">
+										<a href="#!">Profile</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- [ breadcrumb ] end -->
+				<!-- [ Main Content ] start -->
+                <div class="card">
+                    <div class="card-body" style="background-color: lightgray;">
                         <div class="">
-
-
-
+                            <div class="">
                               <div class="row gutters-sm">
                                 <div class="col-md-4 mb-3">
                                   <div class="card">
@@ -45,7 +47,7 @@
                                             <p class="text-secondary mb-1">{{$clientMember->member}}</p>
                                             <form action="{{URL::to('/ustaad/changeMemberType')}}/{{$totalClientInfo->id}}" method="post"> 
                                             
-                                              <a class="btn pl-0" data-toggle="collapse" data-target="#demo123">Change Member Type</a>
+                                              <a class="btn pl-0" href="#!" data-toggle="collapse" data-target="#demo123">Change Member Type</a>
                                               <div id="demo123" class="collapse">
                                                 <label for="">Select Member Type</label>
                                                 <select name="memberType" class="form-control" id="">
@@ -54,8 +56,6 @@
                                                 </select>
                                                 <input type="submit" class="btn btn-primary btn-outline mt-2" value="Submit">
                                               </div>
-                                              
-                                            
                                             </form>
                                           @endif
                                         </div>
@@ -96,7 +96,7 @@
                                       <hr>
                                       <div class="row">
                                         <div class="col-sm-3">
-                                          <h6 class="mb-0">Email</h6>
+                                          <h6 class="mb-0 pt-2">Email</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                           {{$totalClientInfo->email}}
@@ -111,7 +111,7 @@
                                       <hr>
                                       <div class="row">
                                         <div class="col-sm-3">
-                                          <h6 class="mb-0">Phone</h6>
+                                          <h6 class="mb-0 pt-2">Phone</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                           {{$totalClientInfo->mobile}}
@@ -185,21 +185,15 @@
                               </div>
                             </div>
                         </div>
-
-
+                    </div>
                 </div>
-                               
-               
-                <div class="col-lg-3 col-md-6 col-sm-12 order-3 order-lg-3">
-                    @include('inc.home-right-sidebar')
+				<!-- [ Main Content ] end -->
+			</div>
+		</section>
+		<!-- [ Main Content ] end -->
 
-                </div>
-            </div>
-        </div>
-    </section>
-     
-<!--     <div id="particles-js" style="height: 0;"></div> -->
-</div>
+
+@include('admin.include.footer')
 
 <style>
 
@@ -251,5 +245,3 @@
     box-shadow: none!important;
 }
 </style>
-
-@include('inc.footer')

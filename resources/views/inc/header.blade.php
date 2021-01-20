@@ -116,8 +116,19 @@
                                             <img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="user">
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <!-- <a class="dropdown-item" href="#">Action</a> -->
-                                                <!-- <a class="dropdown-item" href="#">Change Password</a> -->
+                                                <a class="dropdown-item" href="{{URL::to('/user-profile')}}">User Profile</a>
+                                                @php
+                                                    $ikju = 0;
+                                                    foreach($ClientAccountDetailInfo as $clientAccount){
+                                                        if($clientAccount->clientId == $clientAccountData->id){    
+                                                            $ikju = 1;
+                                                        }
+                                                    }
+                                                @endphp
+                                                @if($ikju == 0)
+                                                    <a class="dropdown-item" href="{{URL::to('/user-registration')}}">Become Vip Member</a>
+                                                @endif
+                                                <a class="dropdown-item" href="{{URL::to('/changePassword')}}">Change Password</a>
                                                 <a class="dropdown-item" href="{{URL::to('/clientLogout')}}">Logout</a>
                                             </div>
                                             </div>
@@ -185,11 +196,18 @@
                                     <div class="after-login">
                                         <div class="dropdown">
                                         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="user">
+                                            @if($clientAccountData->image == null)
+                                                <img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="user">
+                                            @else
+                                                <img src="{{URL::to('/storage/app')}}/{{$clientAccountData->image}}" alt="user">
+                                            @endif
                                         </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <!-- <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a> -->
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 200px;">
+                                            <a class="dropdown-item" href="{{URL::to('/user-profile')}}">User Profile</a>
+                                            @if($ikju == 0)
+                                                <a class="dropdown-item" href="{{URL::to('/user-registration')}}">Become Vip Member</a>
+                                            @endif
+                                            <a class="dropdown-item" href="{{URL::to('/changePassword')}}">Change Password</a>
                                             <a class="dropdown-item" href="{{URL::to('/clientLogout')}}">Logout</a>
                                         </div>
                                         </div>

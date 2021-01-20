@@ -51,7 +51,10 @@
                                             <form action="" method="post" class="form-material MailForm">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">To</label>
-                                                    <input type="email" name="emailTo" class="form-control" value="{{isset($data) ? $data->emailTo : ''}}" id="exampleInputEmail1" placeholder="Enter email" required>
+                                                    <input type="email" name="emailTo" class="form-control" value="{{isset($data) ? $data->emailTo : ''}}{{isset($info) ? $info->email : ''}}" id="exampleInputEmail1" placeholder="Enter email" {{isset($info) ? "disabled" : ""}} required>
+                                                    @isset($info)
+                                                        <input type="hidden" name="emailTo" value="{{$info->email}}">
+                                                    @endisset
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">

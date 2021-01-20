@@ -106,8 +106,6 @@ Route::get('/what-is-candlestick-strategy-in-urduhindi-part-1.html',[HtmlPagesCo
 Route::get('/what-is-forex-trading.html',[HtmlPagesController::class,'Page39']);
 Route::get('/what-is-forex-trading-in-urdu-webinar.html',[HtmlPagesController::class,'Page40']);
 
-
-
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -130,6 +128,7 @@ Route::get('/privacy-policy.html/de',[HomeController::class,'privacyPolicy']);
 Route::get('/term-of-services.html',[HomeController::class,'termServices']);
 Route::get('/contact-us',[ContactController::class,'contact']);
 Route::get('/signal',[SignalController::class,'signal']);
+Route::get('/signal/{id}',[SignalController::class,'signalView']);
 Route::post('/contact/add',[ContactController::class,'Add']);
 
 
@@ -188,6 +187,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/draftEmailRead/{id}',[ComposeEmailController::class,'draftEmailRead']);
         Route::post('/draftEmailRead/{id}',[ComposeEmailController::class,'draftEmailSave']);
         Route::post('/SendDraftMail/{id}',[ComposeEmailController::class,'draftEmailSend']);
+        Route::get('/reply/{id}',[ComposeEmailController::class,'EmailReply']);
     });
     Route::group(['prefix' => 'signals'],function(){
         Route::get('/',[SignalController::class,'Index']);
@@ -197,6 +197,15 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::post('/edit/{id}',[SignalController::class,'EditProcess']);
         Route::get('/delete/{id}',[SignalController::class,'Delete']);
         Route::get('/active/{id}',[SignalController::class,'Active']);
+        Route::get('/addPair',[SignalController::class,'AddPair']);
+        Route::post('/addPair',[SignalController::class,'AddPairProcess']);
+        Route::post('pair/edit/{id}',[SignalController::class,'EditPairProcess']);
+        Route::get('/pair/delete/{id}',[SignalController::class,'DeletePairProcess']);
+        Route::get('/pair/active/{id}',[SignalController::class,'ActivePairProcess']);
+        Route::post('/pairCategory',[SignalController::class,'AddPairCategoryProcess']);
+        Route::post('/pairCategory/edit/{id}',[SignalController::class,'EditPairCategoryProcess']);
+        Route::get('/pairCategory/delete/{id}',[SignalController::class,'DeletePairCategoryProcess']);
+        Route::get('/pairCategory/active/{id}',[SignalController::class,'ActivePairCategoryProcess']);
     });
     Route::group(['prefix' => 'webinar'],function(){
         Route::get('/',[MainWebinarController::class,'Index']);
@@ -424,7 +433,9 @@ Route::group(['prefix' => '',"middleware" => "IsMemberLogin"],function(){
     Route::get('/vipWebinar',[HomeController::class,'VipWebinar']);
     Route::get('/vipTraining/advance/{id}',[AdvanceTrainingController::class,'ViewVipAll']);
     Route::get('/changePassword',[HomeController::class,'ChangePassword']);
+    Route::post('/changePassword',[HomeController::class,'ChangePasswordAdd']);
     Route::post('/advance/comment/add',[AdvanceCommentsController::class,'Add']);
+    Route::post('/signal/comment/add',[SignalController::class,'AddComment']);
     Route::get('/user-registration',[HomeController::class,'userregistration']);
     Route::post('/user-registration',[HomeController::class,'userregistrationUpdate']);
     Route::post('/user-registration/Account',[HomeController::class,'userregistrationAccountAdd']);

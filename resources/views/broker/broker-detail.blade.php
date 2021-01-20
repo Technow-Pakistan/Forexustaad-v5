@@ -656,7 +656,7 @@
                               <tr>
                                  <td>Link</td>
                                  <td></td>
-                                 <td>{{$broker->link}}</td>
+                                 <td><a href="{{$broker->link}}">{{$broker->link}}</a></td>
                                  <td></td>
                               </tr>
                               

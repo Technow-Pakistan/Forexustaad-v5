@@ -40,14 +40,14 @@
                                     <input name="slug" id="cat-slug" type="text" class="form-control" value="" size="40" required>
                                     <small>The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</small>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="parent" class="form-control-label">Parent Category</label>
                                     <select name="parent" id="parent" class="form-control">
                                         <option value="-1">None</option>
                                         <option class="level-0" value="1">Uncategorized</option>
                                     </select>
                                     <small>Categories, unlike tags, can have a hierarchy. You might have a Jazz category, and under that have children categories for Bebop and Big Band. Totally optional.</small>
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <label for="cat-description" class="form-control-label">Description</label>
                                     <textarea name="description" class="form-control" id="cat-description" rows="5" cols="40" required></textarea>
@@ -86,13 +86,13 @@
                                     </div>
                                     <br class="clear">
                                     <div class=" p-3">
-                                        <table class="table">
+                                        <table class="table" id="user-list-table">
                                             <thead class="bg-primary text-white">
                                                 <tr>
                                                     <th class="w-25">Name</th>
                                                     <th>Description</th>
                                                     <th>Slug</th>
-                                                    <th>Count</th>
+                                                    <!-- <th>Count</th> -->
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -102,12 +102,12 @@
 														<td class="w-25">{{$data->name}}</td>
 														<td>{{$data->description}}</td>
 														<td><small>{{$data->slug}}</small></td>
-														<td>3</td>
+														<!-- <td>3</td> -->
 														<td>
-															<a href="#">
+															<a href="#" class="editlink" value="$data->id">
 																<i class="far fa-edit text-success mr-2"></i>
 															</a>
-															<a href="{{URL::to('/ustaad/category/delete')}}/{{$data->id}}">
+															<a href="{{URL::to('/ustaad/category/delete')}}/{{$data->id}}" class="addAction" data-toggle="modal" data-target="#myModal">
 																<i class="fa fa-times text-danger"></i>
 															</a>
 														</td>
@@ -126,3 +126,16 @@
 		</section>
 		<!-- [ Main Content ] end -->
 @include('admin.include.footer')
+<script>
+
+    $(".editlink").on("click",function(){
+		var id = $(this).attr('value');
+		var icon = $(this).parent().parent().parent().children()[0].innerText;
+		var link = $(this).parent().parent().parent().children()[1].innerText;
+		$(".socialIcon").find("."+link).attr("selected",true);
+		$(".socialLink").val(icon);
+		$(".socialButton").val("Update");
+		$(".socialButton").attr("class","btn btn-outline-danger mt-4 socialButton");
+		$(".socialForm").attr("action","{{URL::to('/ustaad/signals/pair/edit/')}}/"+id+"");
+	});
+</script>

@@ -28,18 +28,19 @@
                         @php
                             $value =Session::get('client');
                         @endphp
-                        <form class="ForgetPasswordForm" action="" method="post">
-                        <label for="" class="text-left forgetLabel">Your Email:</label>
-                          <input type="text" value="{{$value->email}}" disabled/>
-                        <label for="" class="text-left forgetLabel">Old Password:</label>
-                          <input type="password" class="oldPassword" name="oldpassword" placeholder="Password" required/>
-                        <label for="" class="text-left forgetLabel">Password:</label>
-                          <input type="password" class="password" name="password" placeholder="Password" required/>
-                        <label for="" class="text-left forgetLabel">Confirm Password:</label>
-                          <input type="password" class="confirmPassword" placeholder="Confirm Password" required/>
+                          <form class="ChangeForm" action="" method="post">
+                          <label for="" class="text-left forgetLabel">Your Email:</label>
+                            <input type="text" value="{{$value->email}}" disabled/>
+                            <input type="hidden" name="email" value="{{$value->email}}"/>
+                          <label for="" class="text-left forgetLabel">Old Password:</label>
+                            <input type="password" class="oldPassword1" name="oldPassword" placeholder="Password" required/>
+                          <label for="" class="text-left forgetLabel">Password:</label>
+                            <input type="password" class="password1" name="password" placeholder="Password" required/>
+                          <label for="" class="text-left forgetLabel">Confirm Password:</label>
+                            <input type="password" class="confirmPassword1" placeholder="Confirm Password" required/>
 
-                          <button type="submit">Change Password</button><br>
-                          <div class="error6 text-danger"></div>
+                            <button type="submit">Change Password</button><br>
+                            <div class="error6 text-danger"></div>
                         </form>
                       </div>
                       <style>
@@ -61,17 +62,10 @@
 @include ('inc/footer')
 
 <script>
-                        $(".ForgetPasswordForm").on("submit",function(e){
-                          var oldPassword = $(".oldPassword").val();
-                          var confirmOldPassword = {{$value->password}};
-                          if(oldPassword != confirmPassword) {
-                            var error = "Your Password and Comfirmed Password is not matched.";
-                            $(".error6").html(error);
-                            e.preventDefault();
-                          }
-                          var password = $(".password").val();
-                          var confirmPassword = $(".confirmPassword").val();
-                          if(password != confirmPassword) {
+                        $(".ChangeForm").on("submit",function(e){
+                          var password1 = $(".password1").val();
+                          var confirmPassword1 = $(".confirmPassword1").val();
+                          if(password1 != confirmPassword1) {
                             var error = "Your Password and Comfirmed Password is not matched.";
                             $(".error6").html(error);
                             e.preventDefault();
