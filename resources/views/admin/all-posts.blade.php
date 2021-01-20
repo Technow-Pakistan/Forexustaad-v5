@@ -10,22 +10,22 @@
 								<div class="page-header-title">
 									<h5 class="m-b-10">All Posts</h5>
 								</div>
-								<ul class="breadcrumb">
-									<li class="breadcrumb-item">
-										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
-									</li>
-									<li class="breadcrumb-item"><a href="#!">All Posts</a></li>
-									<!-- <li class="breadcrumb-item">
-										<a href="#!">Invoice Summary</a>
-									</li> -->
-								</ul>
+								<div class="d-flex justify-content-between">
+									<ul class="breadcrumb p-0 m-0 bg-white">
+										<li class="breadcrumb-item">
+											<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
+										</li>
+										<li class="breadcrumb-item"><a href="#!">All Posts</a></li>
+									</ul>
+									<a href="{{URL::to('ustaad/post/new/4')}}">Add New Post</a>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- [ breadcrumb ] end -->
 				<!-- [ Main Content ] start -->
-				<div class="row">
+				<!-- <div class="row">
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-header">
@@ -110,7 +110,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="card user-profile-list">

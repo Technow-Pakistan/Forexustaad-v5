@@ -25,7 +25,10 @@
 
 		<!-- animate -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
-
+		<!-- data Tables -->
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css"/>
+  
+		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 
 	</head>
 	<body class="">
@@ -61,9 +64,9 @@
 									><span class="pcoded-mtext">Posts</span></a
 								>
 								<ul class="pcoded-submenu">
-									<li><a href="{{URL::to('ustaad/post/viewAll')}}">All Posts</a></li>
-									<li><a href="{{URL::to('ustaad/signals')}}">All Signals</a></li>
-									<li><a href="{{URL::to('ustaad/allCategories')}}">Add New</a></li>
+									<!-- <li><a href="{{URL::to('ustaad/post/viewAll')}}">All Posts</a></li>
+									<li><a href="{{URL::to('ustaad/signals')}}">All Signals</a></li> -->
+									<li><a href="{{URL::to('ustaad/allCategories')}}">View All</a></li>
 									<li><a href="{{URL::to('ustaad/category')}}">Categories</a></li>
 									<li><a href="{{URL::to('ustaad/tag')}}">Tags</a></li>
 									<li><a href="{{URL::to('ustaad/comment')}}">Comments</a></li>
@@ -83,7 +86,7 @@
 									<li><a href="{{URL::to('ustaad/lecture/new')}}">Add Lecture</a></li>
 								</ul>
 							</li>
-							<li class="nav-item pcoded-menu-caption">
+							<!-- <li class="nav-item pcoded-menu-caption">
 								<label>Strategies Area</label>
 							</li>
 							<li class="nav-item pcoded-hasmenu">
@@ -96,7 +99,7 @@
 									<li><a href="{{URL::to('ustaad/strategies')}}">All Strategies</a></li>
 									<li><a href="{{URL::to('ustaad/strategies/new')}}">Add Strategy</a></li>
 								</ul>
-							</li>
+							</li> -->
 							<li class="nav-item pcoded-menu-caption">
 								<label>Webinar Area</label>
 							</li>
