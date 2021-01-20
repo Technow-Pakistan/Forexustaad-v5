@@ -66,7 +66,7 @@
 								<ul class="pcoded-submenu">
 									<!-- <li><a href="{{URL::to('ustaad/post/viewAll')}}">All Posts</a></li>
 									<li><a href="{{URL::to('ustaad/signals')}}">All Signals</a></li> -->
-									<li><a href="{{URL::to('ustaad/allCategories')}}">View All</a></li>
+									<li><a href="{{URL::to('ustaad/allCategories')}}">Add New</a></li>
 									<li><a href="{{URL::to('ustaad/category')}}">Categories</a></li>
 									<li><a href="{{URL::to('ustaad/tag')}}">Tags</a></li>
 									<li><a href="{{URL::to('ustaad/comment')}}">Comments</a></li>
