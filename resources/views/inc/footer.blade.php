@@ -277,13 +277,13 @@
        });
 
 $(".RegistrationButton").on("click",function(){
-  $(".heading_title").html("Registration");
+  $(".heading_title-change4").html("Registration");
   $(".LoginForm").hide();
   $(".RegistrationForm").show();
 });
 
 $(".LoginButton").on("click",function(){
-  $(".heading_title").html("Login");
+  $(".heading_title-change4").html("Login");
   $(".RegistrationForm").hide();
   $(".LoginForm").show();
     $(".passwordHide").show();
@@ -317,7 +317,7 @@ $(".LoginButton").on("click",function(){
               <div class="heading_border fadeInUp wow">
                 <span class="one"></span><span class="two"></span><span class="three"></span>
               </div>
-              <p class="h1 heading_title fadeInUp wow secondary-text-color">
+              <p class="h1 heading_title fadeInUp wow secondary-text-color heading_title-change4">
                Register
               </p>
               <p class="heading-description fadeInUp wow w-100" data-wow-delay="0.2s">
@@ -455,7 +455,7 @@ $('a[href="#top"]')
      $('#loading').hide();
   });
   $(".ForgetPassword").on("click",function(){
-    $(".heading_title").html("Forget Password");
+    $(".heading_title-change4").html("Forget Password");
     $(".passwordHide").hide();
     $(".ForgetButton").html("Send Mail");
     $(".ForgetPassword").hide();

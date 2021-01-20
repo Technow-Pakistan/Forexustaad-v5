@@ -67,7 +67,7 @@
                                         <ul class="mb-2 nav nav-tab flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                             <li class="nav-item mail-section inboxData">
                                                 <a class="nav-link text-left active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="false">
-                                                    <span><i class="feather icon-inbox"></i> Inbox</span>
+                                                    <span><i class="feather icon-inbox"></i>Inbox</span>
                                                     <span class="float-right">{{count($totalData)}}</span>
                                                 </a>
                                             </li>
@@ -150,14 +150,19 @@
                                                                                         <a href="{{URL::to('/ustaad/contact/starMessage')}}/{{$data->id}}"><i class="feather {{$data->star == 1 ? 'icon-star-on text-c-yellow' : 'icon-star'}} ml-2"></i></a>
                                                                                     </div>
                                                                                 </td>
-                                                                                <td><a href="{{URL::to('/ustaad/contact/emailRead')}}/{{$data->id}}" class="email-name waves-effect">{{$data->name}}</a></td>
-                                                                                <td><a href="{{URL::to('/ustaad/contact/emailRead')}}/{{$data->id}}" class="email-name waves-effect">{{$data->message}}</a></td>
-                                                                                <td class="email-time">{{$data->created_at->format("dM,Y h:i a")}}</td>
+                                                                                <td data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor">{{$data->email}}</td>
+                                                                                <td data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor">{{$data->name}}</td>
+                                                                                <td class="email-time" data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor">{{$data->created_at->format("dM,Y h:i a")}}</td>
+                                                                                <td><a href="{{URL::to('ustaad/contact/reply')}}/{{$data->id}}"  class="text-primary">Reply</a></td>
+                                                                            </tr>
+                                                                            <tr  id="demo{{$countCheck}}" class="collapse viewMessageInfo">
+                                                                                <td colspan="5">
+                                                                                    <p class="ml-5"><strong class="mr-3">Message: </strong>{{$data->message}}</p>
+                                                                                </td>
                                                                             </tr>
                                                                             @php $countCheck++ @endphp
                                                                         @endif
                                                                     @endforeach
-
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -184,9 +189,15 @@
                                                                                         <a href="{{URL::to('/ustaad/contact/starMessage')}}/{{$data->id}}"><i class="feather icon-star-on text-c-yellow ml-2"></i></a>
                                                                                     </div>
                                                                                 </td>
-                                                                                <td><a href="{{URL::to('/ustaad/contact/emailRead')}}/{{$data->id}}" class="email-name waves-effect">{{$data->name}}</a></td>
-                                                                                <td><a href="{{URL::to('/ustaad/contact/emailRead')}}/{{$data->id}}" class="email-name waves-effect">{{$data->message}}</a></td>
-                                                                                <td class="email-time">{{$data->created_at->format("dM,Y h:i a")}}</td>
+                                                                                <td  data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor">{{$data->email}}</td>
+                                                                                <td  data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor">{{$data->name}}</td>
+                                                                                <td class="email-time Cursor"  data-toggle="collapse" data-target="#demo{{$countCheck}}">{{$data->created_at->format("dM,Y h:i a")}}</td>
+                                                                                <td><a href="{{URL::to('ustaad/contact/reply')}}/{{$data->id}}" class="text-primary">Reply</a></td>
+                                                                            </tr>
+                                                                            <tr  id="demo{{$countCheck}}" class="collapse viewMessageInfo">
+                                                                                <td colspan="5">
+                                                                                    <p class="ml-5"><strong class="mr-3">Message: </strong>{{$data->message}}</p>
+                                                                                </td>
                                                                             </tr>
                                                                             @php $countCheck++ @endphp
                                                                         @endif
@@ -209,14 +220,17 @@
                                                                                     <div class="checkbox checkbox-primary checkbox-fill d-inline">
                                                                                         <input type="checkbox" name="sent[]" id="checkbox-s-infill-{{$countCheck}}" value="{{$data->id}}">
                                                                                         <label for="checkbox-s-infill-{{$countCheck}}" class="cr"></label>
-                                                                                        <a href="{{URL::to('/ustaad/contact/sendEmailRead')}}/{{$data->id}}" class="email-name waves-effect">{{$data->emailTo}}</a></td>
+                                                                                        <a href="#!" data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor email-name waves-effect">{{$data->emailTo}}</a></td>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                        <td>
-                                                                            <a href="{{URL::to('/ustaad/contact/sendEmailRead')}}/{{$data->id}}" class="email-name waves-effect">{{$data->message}}</a>
+                                                                        <td  data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor"> {{$data->subject}} </td>
+                                                                        <td class="email-time Cursor"  data-toggle="collapse" data-target="#demo{{$countCheck}}">{{$data->created_at->format("dM,Y h:i a")}}</td>
+                                                                    </tr>
+                                                                    <tr  id="demo{{$countCheck}}" class="collapse viewMessageInfo">
+                                                                        <td colspan="4">
+                                                                            <p class="ml-5"><strong class="mr-3">Message: </strong>@php echo $data->message @endphp</p>
                                                                         </td>
-                                                                        <td class="email-time">{{$data->created_at->format("dM,Y h:i a")}}</td>
                                                                     </tr>
                                                                     @php $countCheck++ @endphp
                                                                 @endif
@@ -268,39 +282,47 @@
                                                                                     <div class="checkbox checkbox-primary checkbox-fill d-inline">
                                                                                         <input type="checkbox" name="sentTrash[]" id="checkbox-s-infill-{{$countCheck}}" value="{{$data->id}}"> 
                                                                                         <label for="checkbox-s-infill-{{$countCheck}}" class="cr"></label>
-                                                                                        <a href="{{URL::to('/ustaad/contact/draftEmailRead')}}/{{$data->id}}" class="email-name waves-effect">{{$data->emailTo}}</a>
+                                                                                        <a href="#!"   data-toggle="collapse" data-target="#demo{{$countCheck}}" class="email-name waves-effect Cursor">{{$data->emailTo}}</a>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
-                                                                        <td>
-                                                                            <a href="{{URL::to('/ustaad/contact/draftEmailRead')}}/{{$data->id}}" class="email-name waves-effect">{{$data->message}}</a>    
+                                                                        <td   data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor"> {{$data->message}} </td>
+                                                                        <td class="email-time Cursor"   data-toggle="collapse" data-target="#demo{{$countCheck}}">{{$data->created_at->format("dM,Y h:i a")}}</td>
+                                                                    </tr>
+                                                                    <tr  id="demo{{$countCheck}}" class="collapse viewMessageInfo">
+                                                                        <td colspan="4">
+                                                                            <p class="ml-5"><strong class="mr-3">Message: </strong>{{$data->message}}</p>
                                                                         </td>
-                                                                        <td class="email-time">{{$data->created_at->format("dM,Y h:i a")}}</td>
                                                                     </tr>
                                                                     @php $countCheck++ @endphp
                                                                 @endif
                                                             @endforeach
-                                                                    @foreach($totalData as $data)
-                                                                        @if($data->trashMail == 1)
-                                                                            <tr class="{{$data->read == 1 ? 'read' : 'unread'}}">
-                                                                                <td>
-                                                                                    <div class="check-star">
-                                                                                        <div class="form-group d-inline">
-                                                                                            <div class="checkbox checkbox-primary checkbox-fill d-inline">
-                                                                                                <input type="checkbox"  name="inboxTrash[]" id="checkbox-s-infill-{{$countCheck}}" value="{{$data->id}}">
-                                                                                                <label for="checkbox-s-infill-{{$countCheck}}" class="cr"></label>
-                                                                                                <a href="{{URL::to('/ustaad/contact/emailRead')}}/{{$data->id}}" class="email-name waves-effect">{{$data->name}}</a>
-                                                                                            </div>
-                                                                                        </div>
+                                                            @foreach($totalData as $data)
+                                                                @if($data->trashMail == 1)
+                                                                    <tr class="{{$data->read == 1 ? 'read' : 'unread'}}">
+                                                                        <td>
+                                                                            <div class="check-star">
+                                                                                <div class="form-group d-inline">
+                                                                                    <div class="checkbox checkbox-primary checkbox-fill d-inline">
+                                                                                        <input type="checkbox"  name="inboxTrash[]" id="checkbox-s-infill-{{$countCheck}}" value="{{$data->id}}">
+                                                                                        <label for="checkbox-s-infill-{{$countCheck}}" class="cr"></label>
+                                                                                        <a href="#!" data-toggle="collapse" data-target="#demo{{$countCheck}}" class="email-name waves-effect Cursor">{{$data->email}}</a>
                                                                                     </div>
-                                                                                </td>
-                                                                                <td><a href="{{URL::to('/ustaad/contact/emailRead')}}/{{$data->id}}" class="email-name waves-effect">{{$data->message}}</a></td>
-                                                                                <td class="email-time">{{$data->created_at->format("dM,Y h:i a")}}</td>
-                                                                            </tr>
-                                                                            @php $countCheck++ @endphp
-                                                                        @endif
-                                                                    @endforeach
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor">{{$data->name}}</td>
+                                                                        <td class="email-time Cursor" data-toggle="collapse" data-target="#demo{{$countCheck}}">{{$data->created_at->format("dM,Y h:i a")}}</td>
+                                                                    </tr>
+                                                                    <tr  id="demo{{$countCheck}}" class="collapse viewMessageInfo">
+                                                                        <td colspan="4">
+                                                                            <p class="ml-5"><strong class="mr-3">Message: </strong>@php echo $data->message @endphp</p>
+                                                                        </td>
+                                                                    </tr>
+                                                                    @php $countCheck++ @endphp
+                                                                @endif
+                                                            @endforeach
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -310,7 +332,7 @@
                                     <!-- [ inbox-right section ] end -->
                                 </div>
                             </div>
-                        </div>
+                        </di
                     </div>
                 </div>
             </div>
@@ -321,6 +343,14 @@
 
 @include('admin.include.footer')
 
+<style>
+    .Cursor{
+       cursor: pointer;
+    }
+    .viewMessageInfo{
+
+    }
+</style>
 <script>
     $("#UnTrashData").hide();
     $("#UnTrashData").on("click",function() {

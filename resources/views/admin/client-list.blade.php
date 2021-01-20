@@ -47,7 +47,11 @@
 											<tr>
 												<td class="tdLinkScroll">
 													<div class="d-inline-block align-middle">
-														<img src="{{URL::to('public/assets/assets/img/user1.jpg')}}" alt="user image" class="img-radius align-top m-r-15" style="width:40px;">
+														@if($member->image == null)
+															<img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="user" class="img-radius align-top m-r-15" style="width:40px;">
+														@else
+															<img src="{{URL::to('/storage/app')}}/{{$member->image}}" alt="user" class="img-radius align-top m-r-15" style="width:40px;">
+														@endif
 														<div class="d-inline-block">
 															<h6 class="m-b-0">{{$member->name}}</h6>
 															<p class="m-b-0">{{$member->email}}</p>
@@ -104,11 +108,4 @@
 
 @include('admin.include.footer')
 
-<!-- datatable Js -->
-<script src="assets/js/plugins/jquery.dataTables.min.js"></script>
-<script src="assets/js/plugins/dataTables.bootstrap4.min.js"></script>
 
-
-<script>
-	$('#user-list-table').DataTable();
-</script>

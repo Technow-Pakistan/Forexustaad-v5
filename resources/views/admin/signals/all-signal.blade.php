@@ -8,17 +8,20 @@
 						<div class="row align-items-center">
 							<div class="col-md-12">
 								<div class="page-header-title">
-									<h5 class="m-b-10">Forex Signals</h5>
+									<h5 class="m-b-10">Signals</h5>
 								</div>
-								<ul class="breadcrumb">
-									<li class="breadcrumb-item">
-										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
-									</li>
-									<li class="breadcrumb-item"><a href="#!">All Signals</a></li>
-									<!-- <li class="breadcrumb-item">
-										<a href="#!">Invoice Summary</a>
-									</li> -->
-								</ul>
+								<div class="d-flex justify-content-between">
+									<ul class="breadcrumb p-0 m-0 bg-white">
+										<li class="breadcrumb-item">
+											<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
+										</li>
+										<li class="breadcrumb-item"><a href="#!">All Signals</a></li>
+									</ul>
+									<div>
+										<a href="{{URL::to('ustaad/signals/add')}}"> Add New Signal</a> / 
+										<a href="{{URL::to('ustaad/signals/addPair')}}">Add Category & Pair </a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -42,9 +45,12 @@
 										</thead>
 										<tbody>
 											@foreach($signalData as $data)
+												@php 
+													$pair = $data->getPair();
+												@endphp
 												<tr>
 													<td>{{$data->selectUser}}</td>
-													<td>{{$data->forexPairs}}</td>
+													<td>{{ isset($pair->pair) ? $pair->pair : $data->forexPairs}}</td>
 													<td>{{$data->date}}</td>
 													<td>
                                                         @php 

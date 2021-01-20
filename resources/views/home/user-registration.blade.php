@@ -105,12 +105,12 @@
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
-                                                                            <input type="mail" name="email" value="{{$clientValue['email']}}" placeholder="Enter Your Mail" disabled class="form-control">
+                                                                            <input type="email" name="email" value="{{$clientValue['email']}}" placeholder="Enter Your Mail" disabled class="form-control">
                                                                         <!-- Enter the estimate profit -->
                                                                         @for($i=0; $i < count($emails); $i++)
                                                                             <div class="dynamic-field" id="dynamic-field-{{$i+1}}">
                                                                                 <label class="d-none"></label>
-                                                                                <input type="mail" name="addEmail[]" value="{{$emails[$i]}}" placeholder="Enter Your Mail" class="form-control">
+                                                                                <input type="email" name="addEmail[]" value="{{$emails[$i]}}" placeholder="Enter Your Mail" class="form-control">
                                                                             </div>
                                                                         @endfor
                                                                         <!-- when user click on add new please on append of id aff show a new Take profit text field we can add multiple profit  -->
@@ -130,14 +130,9 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-md-6">
+                                                                <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <input type="file" name="file_photo" class="form-control p-0" {{$clientValue['image'] == null ? 'required' : ''}}/>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group">
-                                                                        <input type="password" name="password" class="form-control" placeholder="Password *"/>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -185,7 +180,7 @@
                                                                 </div>
                                                             </div>
                                                                 <div class="col-md-12">
-                                                                    <textarea name="description" id="" class="form-control" cols="30" rows="5" placeholder="Describe YourSelf">{{$clientValue['description']}}</textarea>
+                                                                    <textarea name="description" id="" class="form-control" cols="30" rows="5" placeholder="Describe YourSelf" required>{{$clientValue['description']}}</textarea>
                                                                 </div>
                                                                 <div class="col-md-12 justify-content-end d-flex pt-2">
                                                                     <input type="hidden" name="updateId" value="{{$clientValue['id']}}">
@@ -250,19 +245,19 @@
                                                                                     </div>
                                                                                     <div class="col-md-6">
                                                                                         <div class="form-group">
-                                                                                            <input type="text" class="form-control" name="accountNumber[]" placeholder="Account Number *" value="" />
+                                                                                            <input type="text" class="form-control" name="accountNumber[]" placeholder="Account Number *" value="" required />
                                                                                         </div>
                                                                                         <div class="form-group">
-                                                                                            <input type="text" class="form-control" name="accountName[]" placeholder="Account Name *" value="" />
+                                                                                            <input type="text" class="form-control" name="accountName[]" placeholder="Account Name *" value="" required/>
                                                                                         </div>
 
                                                                                     </div>
                                                                                     <div class="col-md-6">
                                                                                         <div class="form-group">
-                                                                                            <input type="mail" class="form-control" name="accountemail[]" placeholder="Account Email *" value="" />
+                                                                                            <input type="mail" class="form-control" name="accountemail[]" placeholder="Account Email *" value="" required/>
                                                                                         </div>
                                                                                         <div class="form-group">
-                                                                                            <input type="numbers" class="form-control" name="accountdeposit[]" placeholder="Deposit" value="" />
+                                                                                            <input type="numbers" class="form-control" name="accountdeposit[]" placeholder="Deposit" value="" required/>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
