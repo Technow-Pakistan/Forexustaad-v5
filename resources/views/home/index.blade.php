@@ -177,19 +177,17 @@
                                             </div>
                                         </section>
 
-
-
                                         <section id="extra wrapper"
                                             style="position: relative; padding-right: 44px; padding-left: 48px; background: #f6f6f6; height:152px;">
                                             <!-- CUSTOM ARROWS -->
-                                            <button title="Next" class="swiper-custom-next" style="position: absolute; padding: 10px 2px; right: 1px;top: 32%; z-index: 100;
-                                            display: inline-block;cursor: pointer;">
-                                            <svg style="position: relative; top: 1px;" xmlns="" width="16" height="16" viewBox="0 0 16 16"><g class="nc-icon-wrapper" fill="#111111"><polygon fill="#111111" points="4.9,15.7 3.4,14.3 9.7,8 3.4,1.7 4.9,0.3 12.6,8 "></polygon></g></svg>
-                                                </button>
-                                            <button title="Prev" class="swiper-custom-prev" style="position: absolute; padding: 10px 2px; left: 2px; top: 35%; z-index: 100;
-                                            display: inline-block;cursor: pointer;font-size: 15px;">
-                                            <svg xmlns="" width="16" height="16" viewBox="0 0 16 16"><g class="nc-icon-wrapper" fill="#111111"><polygon fill="#111111" points="11.1,15.7 3.4,8 11.1,0.3 12.6,1.7 6.3,8 12.6,14.3 "></polygon></g></svg>
-                                            </button>
+                          <button title="Next" class="swiper-custom-next" style="position: absolute; padding: 10px 2px; right: 1px;top: 32%; z-index: 100;
+                          display: inline-block;cursor: pointer;">
+                      <svg style="position: relative; top: 1px;" xmlns="" width="16" height="16" viewBox="0 0 16 16"><g class="nc-icon-wrapper" fill="#111111"><polygon fill="#111111" points="4.9,15.7 3.4,14.3 9.7,8 3.4,1.7 4.9,0.3 12.6,8 "></polygon></g></svg>
+                            </button>
+                          <button title="Prev" class="swiper-custom-prev" style="position: absolute; padding: 10px 2px; left: 2px; top: 35%; z-index: 100;
+                          display: inline-block;cursor: pointer;font-size: 15px;">
+                           <svg xmlns="" width="16" height="16" viewBox="0 0 16 16"><g class="nc-icon-wrapper" fill="#111111"><polygon fill="#111111" points="11.1,15.7 3.4,8 11.1,0.3 12.6,1.7 6.3,8 12.6,14.3 "></polygon></g></svg>
+                          </button>
                                             <!-- Swiper -->
                                             <nav class="swiper-container swiper-container-videos slider-produtos-destaque"
                                                 style="top: 8px;">
@@ -231,7 +229,60 @@
                                                             <div class="desc">Lecture 4</div>
                                                         </a>
                                                     </li>
+                                                    <li class="swiper-slide" style="width: 130px;">
+                                                        <a href="javascript:void();"
+                                                            onClick="document.getElementById('vid_frame').src='https://www.youtube.com/embed/6FokO8ntMvo?autoplay=1&rel=0&showinfo=0&autohide=1'">
 
+                                                            <span class="vid-thumb"><img
+                                                                    src="https://i.ytimg.com/vi/6FokO8ntMvo/hqdefault.jpg" /></span>
+                                                            <div class="desc">Lecture 5</div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="swiper-slide" style="width: 130px;">
+                                                        <a href="javascript:void();"
+                                                            onClick="document.getElementById('vid_frame').src='https://www.youtube.com/embed/pmL632FYHfc?autoplay=1&rel=0&showinfo=0&autohide=1'">
+
+                                                            <span class="vid-thumb"><img
+                                                                    src="https://i.ytimg.com/vi/pmL632FYHfc/hqdefault.jpg" /></span>
+                                                            <div class="desc">Lecture 6</div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="swiper-slide" style="width: 130px;">
+                                                        <a href="javascript:void();"
+                                                            onClick="document.getElementById('vid_frame').src='https://www.youtube.com/embed/FQLN-vMWNTE?autoplay=1&rel=0&showinfo=0&autohide=1'">
+
+                                                            <span class="vid-thumb"><img
+                                                                    src="https://i.ytimg.com/vi/FQLN-vMWNTE/hqdefault.jpg" /></span>
+                                                            <div class="desc">Lecture 7</div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="swiper-slide" style="width: 130px;">
+                                                        <a href="javascript:void();"
+                                                            onClick="document.getElementById('vid_frame').src='https://www.dailymotion.com/embed/video/x23uw26?autoplay=1&rel=0&showinfo=0&autohide=1'">
+
+                                                            <span class="vid-thumb"><img
+                                                                    src="https://s1.dmcdn.net/v/7c2ZE1PeDikEO94Hj/x480" style="height:90px;" /></span>
+                                                            <div class="desc">Lecture 8</div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="swiper-slide" style="width: 130px;">
+                                                        <a href="javascript:void();"
+                                                            onClick="document.getElementById('vid_frame').src='https://www.youtube.com/embed/vFG45cY6Em0?autoplay=1&rel=0&showinfo=0&autohide=1'">
+
+                                                            <span class="vid-thumb"><img
+                                                                    src="https://i.ytimg.com/vi/vFG45cY6Em0/hqdefault.jpg"  /></span>
+                                                            <div class="desc">Lecture 9</div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="swiper-slide" style="width: 130px;">
+                                                        <a href="javascript:void();"
+                                                            onClick="document.getElementById('vid_frame').src='https://player.vimeo.com/video/126562298?autoplay=1&rel=0&showinfo=0&autohide=1'">
+
+                                                            <span class="vid-thumb"><img
+                                                                    src="https://i.vimeocdn.com/video/517171722_130x73.jpg" style="height:90px;" /></span>
+                                                            <div class="desc">Lecture 10</div>
+                                                        </a>
+                                                    </li>
 
 
                                                 </ol>
@@ -240,7 +291,6 @@
                                             </nav>
 
                                         </section>
-
 
                                     </div>
                                 </div>
@@ -1935,118 +1985,6 @@ $opinion_analysis = '';
 
                     </section>
 
-                    <!-- <section class="free-forex-signals mt-5">
-    	<div class="content_area_heading large-heading text-center">
-
-                            <h1 class="heading_title wow animated fadeInUp">
-                                Free Forex Signals
-                            </h1>
-
-                            <div class="heading_border wow animated fadeInUp">
-                                <span class="one"></span><span class="two"></span><span class="three"></span>
-                            </div>
-                            <p class="mb-5">ForexSignals provides <strong>Free Forex Signals Online</strong> with realtime <a href="#">Performance</a> and <a href="#">totals.</a><br>
-                            	To stay informed <a href="#">Refresh this page</a> or <a href="#"> Subscribe by E-mail</a>
-                            </p>
-
-                        </div>
-    	<div class="row">
-    		<div class="col-sm-6">
-    			<div class="free-forex-signals-inner">
-    				<div class="card">
-    					<div class="card-header d-flex justify-content-between align-items-center">
-    						<p class="mb-2"><span class="flag-icon flag-icon-ad">&nbsp;</span>
-                    			<span class="flag-icon flag-icon-us">&nbsp;</span></p>
-                    		<h6 class="m-0 font-weight-bold"><strong>EUR/USD</strong></h6>
-
-    					</div>
-    					<div class="card-body">
-    						<div class="tbl-list d-flex justify-content-between align-items-center">
-    							<strong>EUR/USD</strong>
-    							<small>46 min ago</small>
-    						</div>
-
-    						<div class="tbl-list d-flex justify-content-between align-items-center">
-    							<strong>From</strong>
-    							<strong><small>GMT + 5:00 </small>0.56</strong>
-    						</div>
-
-    						<div class="tbl-list d-flex justify-content-between align-items-center">
-    							<strong>Till</strong>
-    							<strong><small>GMT + 5:00 </small>6.56</strong>
-    						</div>
-
-    						<div class="card-img">
-    							<i class="fa fa-bell-o text-danger"></i>
-    						</div>
-    						<div class="text-center">
-    						<button class="btn btn-primary">Login</button>
-    						<button class="btn btn-secondary bg-dark btn-lg text-uppercase">Register</button>
-    					</div>
-    					</div>
-    				</div>
-    			</div>
-    		</div>
-    		<div class="col-sm-6">
-    			<div class="free-forex-signals-inner locked">
-    				<div class="card">
-    					<div class="card-header d-flex justify-content-between align-items-center">
-    						<p class="mb-2"><span class="flag-icon flag-icon-ad">&nbsp;</span>
-                    			<span class="flag-icon flag-icon-us">&nbsp;</span></p>
-                    		<h6 class="m-0 font-weight-bold"><strong>EUR/USD</strong></h6>
-
-    					</div>
-    					<div class="card-body">
-    						<div class="tbl-list d-flex justify-content-between align-items-center">
-    							<strong>EUR/USD</strong>
-    							<small>46 min ago</small>
-    						</div>
-
-    						<div class="tbl-list d-flex justify-content-between align-items-center">
-    							<strong>From</strong>
-    							<strong><small>GMT + 5:00 </small>0.56</strong>
-    						</div>
-
-    						<div class="tbl-list d-flex justify-content-between align-items-center">
-    							<strong>Till</strong>
-    							<strong><small>GMT + 5:00 </small>6.56</strong>
-    						</div>
-
-    						<div class="card-img">
-    							<i class="fa fa-lock text-danger"></i>
-    						</div>
-    						<div class="tbl-list d-flex justify-content-between align-items-center">
-    							<strong>Buy</strong>
-    							<small>0.9812</small>
-    						</div>
-    						<div class="tbl-list d-flex justify-content-between align-items-center">
-    							<strong>Take Profit* at</strong>
-    							<small>0.983</small>
-    						</div>
-    						<div class="tbl-list d-flex justify-content-between align-items-center">
-    							<strong>Stop Loss* at</strong>
-    							<small>0.9787</small>
-    						</div>
-    						<div class="tbl-list d-flex justify-content-between align-items-center">
-    							<strong>Condition for new Signals</strong>
-    							<small>
-    								<i class="fa fa-bell"></i>
-    								<i class="fa fa-bell"></i>
-    								<i class="fa fa-bell-o"></i>
-    								<i class="fa fa-bell-o"></i>
-    								<i class="fa fa-bell-o"></i>
-    							</small>
-    						</div>
-    						<div class="locked-overlay">
-    							<a href="#">Unlock Now</a>
-
-    						</div>
-    					</div>
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-    </section> -->
 
 
 
@@ -2058,7 +1996,7 @@ $opinion_analysis = '';
             </div>
         </div>
     </section>
-   
+
     <!--     <div id="particles-js" style="height: 0;"></div> -->
 </div>
 @include ('inc/footer')
