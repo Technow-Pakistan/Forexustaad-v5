@@ -1,4 +1,5 @@
 <!-- The Modal -->
+
  <div class="modal fade" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -99,7 +100,9 @@
 		</div>
 
 <script>
-
+  $(document).ready( function () {
+      $('#user-list-table').DataTable();
+  } );
 
   var awsmDialog = (function(){
     function $(selector){
@@ -266,6 +269,13 @@
 		<script src="{{URL::to('/public/assets/assets/js/dashboard-main.js')}}"></script>
 		<!-- <script src="https://cdn.tiny.cloud/1/hkemh60vfhq4w7kvvdv59h4ml0yn66nigaxbgv7xbj0ttyk8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
 		
+<!-- datatable Js -->
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css"/>
+  
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+
+
         @php 
           $value =Session::get('admin');
         @endphp
@@ -285,6 +295,16 @@
         $(".addActionForm").attr("action",href);
       })
 		</script>
+
+<script>
+	$('#user-list-table').DataTable({
+        responsive: true
+    });
+	$('#user-list-table1').DataTable({
+        responsive: true
+    });
+	new $.fn.dataTable.FixedHeader( table );
+</script>
 	</body>
 </html>
 

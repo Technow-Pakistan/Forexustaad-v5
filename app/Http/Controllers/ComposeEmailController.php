@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ComposeEmailModel;
+use App\Models\UserContactModel;
 use Illuminate\Support\Facades\Mail;
 
 class ComposeEmailController extends Controller
@@ -78,5 +79,9 @@ class ComposeEmailController extends Controller
             $message->setBody($Email->message);
         });
         return redirect("ustaad/contact/emailCompose");
+    }
+    public function EmailReply(Request $request, $id){
+        $info = UserContactModel::find($id);
+        return view('admin.emailCompose',compact('info'));
     }
 }

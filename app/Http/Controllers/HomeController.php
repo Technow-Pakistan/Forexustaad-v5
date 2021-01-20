@@ -32,6 +32,23 @@ class HomeController extends Controller
     public function ChangePassword(){
         return view('home/changePassword');
     }
+    public function ChangePasswordAdd(Request $request){
+        $oldPassword = md5($request->oldPassword);
+        $password = md5($request->password);
+        $data = ClientRegistrationModel::where('email',$request->email)->first();
+        if($data->password == $oldPassword){
+            $data->password = $password;
+            $data->save();
+            $error = "Your Password has Changed.";
+            $request->session()->put("error",$error);
+            $request->session()->put("client",$data);
+            return redirect('/');  
+        }else {
+            $error = "Your old Password does not match with your previous password.";
+            $request->session()->put("error",$error);
+            return back();   
+        }
+    }
     public function VipWebinar(){
         $title = "Webinar";
         $totalData = MainWebinarModel::orderBy('id','desc')->where('vipMember',1)->get();

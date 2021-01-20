@@ -39,9 +39,11 @@
 									if($i == 1){
 										$url = URL::to('ustaad/analysis/add');
 									}elseif($i == 2){
-										$url = URL::to('ustaad/post/new') . "/" . $data->id;
+										$url = URL::to('/ustaad/post/viewAll');
 									}elseif($i == 3){
-										$url = URL::to('ustaad/signals/add');
+										$url = URL::to('/ustaad/signals');
+									}elseif($i == 4){
+										$url = URL::to('ustaad/strategies');
 									}else{
 										$url = "#";
 									}
@@ -50,15 +52,14 @@
 									<div class="card-body addn">
 										@if($i == 0)
 											<i class=" fas fa-clock text-danger"></i>
-										@endif
-										@if($i == 1)
+										@elseif($i == 1)
 											<i class=" far fa-chart-bar text-danger"></i>
-										@endif
-										@if($i == 2)
+										@elseif($i == 2)
 											<i class="  fab fa-blogger text-danger"></i>
-										@endif
-										@if($i == 3)
+										@elseif($i == 3)
 											<i class="  fas fa-chart-line text-danger"></i>
+										@else
+											<i class=" fas fa-clock text-danger"></i>
 										@endif
 											<h4 class="card-title">{{$data->name}}</h4>
 										@php $i++ @endphp

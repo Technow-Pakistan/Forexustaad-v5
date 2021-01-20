@@ -52,10 +52,11 @@
                             $extension = explode(".",$data);
                             $number = count($extension);
                             $num = $number-1;
-                            $size = get_headers("http://localhost/forexustaad/storage/app/$data",1);
+                            $url3 = URL::to('/storage/app') . '/' . $data;
+                            $size = get_headers("$url3",1);
                             $ImageSize = $size["Content-Length"] / 1024;
                             $fileImageSize = number_format($ImageSize,2);
-                            $dimensions = getimagesize("http://localhost/forexustaad/storage/app/$data");
+                            $dimensions = getimagesize("$url3");
                         @endphp
                         <div class="card">
                             <img class="img-fluid card-img-top mainImageButton popupOpenDetail" id="popup-open" src="{{URL::to('storage/app')}}/{{$data}}" alt="Card image" title="Image Detail" popupData="{{$extension[$num]}}@/{{$fileImageSize}} Kb@/{{$dimensions[0]}} pixels@/{{$dimensions[1]}} pixels@/{{URL::to('storage/app')}}/{{$data}}">

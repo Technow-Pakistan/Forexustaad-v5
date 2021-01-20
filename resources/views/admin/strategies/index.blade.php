@@ -10,12 +10,15 @@
 								<div class="page-header-title">
 									<h5 class="m-b-10">Strategies</h5>
 								</div>
-								<ul class="breadcrumb">
-									<li class="breadcrumb-item">
-										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
-									</li>
-									<li class="breadcrumb-item"><a href="#!">All Strategies</a></li>
-								</ul>
+								<div class="d-flex justify-content-between">
+									<ul class="breadcrumb p-0 m-0 bg-white">
+										<li class="breadcrumb-item">
+											<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
+										</li>
+										<li class="breadcrumb-item"><a href="#!">All Strategies</a></li>
+									</ul>
+									<a href="{{URL::to('ustaad/strategies/new')}}">Add New Strategy</a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -40,7 +43,7 @@
 										<tbody>
 											@foreach($Strategies as $data)
 												<tr>
-													<td><img src="{{URL::to('storage/app')}}/{{$data->image}}" height="150px" alt="Your Image" /></td>
+													<td><img src="{{URL::to('storage/app')}}/{{$data->image}}" height="70px" alt="Your Image" /></td>
 													<td>{{$data->title}}</td>
 													<td>{{$data->created_at->format("M d, Y")}}</td>
 													<td>
