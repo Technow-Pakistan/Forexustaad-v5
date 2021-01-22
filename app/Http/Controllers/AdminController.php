@@ -52,6 +52,11 @@ class AdminController extends Controller
     public function Dashboard(Request $request){
         if(!$request->session()->has("admin")){
             return  redirect("ustaad");
+        }else{
+            $admin = $request->session()->get("admin");
+            if($admin['memberId'] == 6){
+                return  redirect("ustaad/broker/category");
+            } 
         };
         $Clients = ClientRegistrationModel::all();
         $TotalClientNumber = count($Clients);

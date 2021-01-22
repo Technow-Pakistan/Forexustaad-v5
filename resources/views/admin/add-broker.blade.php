@@ -137,6 +137,7 @@
 												</div>
 												<div>
 													<input type="hidden" name="activeForm" class="form-control" value="COMPANY INFORMATION">
+													<input type="hidden" name="categoryId" class="form-control" value="{{$id}}">
 													<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
 												</div>
 											</form>

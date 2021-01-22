@@ -34,6 +34,7 @@
 									$count = 0;
 									$titleId = 0;
 									$url = "new";
+									$value3 =Session::get('admin');
 								@endphp
 								@isset($brokerNews->image)
 									<?php $url = "edit/" . $brokerNews->id; ?>
@@ -62,7 +63,13 @@
 										<div>
 											<select name="brokerId" class="form-control" id="">
 												@foreach($broker as $title)
-													<option value="{{$title->id}}" {{($titleId == $title->id ? 'selected' : '' )}}>{{$title->title}}</option>
+													@if($value3['memberId'] == 6)
+														@if($title->userId == $value3['id'])
+															<option value="{{$title->id}}" {{($titleId == $title->id ? 'selected' : '' )}}>{{$title->title}}</option>
+														@endif
+													@else
+														<option value="{{$title->id}}" {{($titleId == $title->id ? 'selected' : '' )}}>{{$title->title}}</option>
+													@endif
 												@endforeach
 											</select>
 										</div>

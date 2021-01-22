@@ -298,7 +298,7 @@
         $("#findtwo").html("");
         for (let i = 0; i < javascript_array2.length; i++){
             if (javascript_array2[i].categoryId == selectedOption) {
-                $("#findtwo").prepend("<option value='"+javascript_array2[i].pair+"'>"+javascript_array2[i].pair+"</option>");
+                $("#findtwo").prepend("<option value='"+javascript_array2[i].id+"'>"+javascript_array2[i].pair+"</option>");
             }
             
         }

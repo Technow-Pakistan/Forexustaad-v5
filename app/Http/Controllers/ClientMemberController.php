@@ -23,5 +23,10 @@ class ClientMemberController extends Controller
         $memberData->save();
         return back();
     }
-    
+    public function ConfirmEmail(Request $request, $id){
+        $memberData = ClientRegistrationModel::where('id',$id)->first();
+        $memberData->confirmationEmail = 1 ;
+        $memberData->save();
+        return back();
+    }
 }

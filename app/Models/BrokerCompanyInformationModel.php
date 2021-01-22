@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\BrokerAccountInfoModel;
 use App\Models\BrokerNewsModel;
 use App\Models\BorkerPromotionsModel;
+use App\Models\BrokerCategoryModel;
 
 class BrokerCompanyInformationModel extends Model
 {
     protected $table="broker_company_information";
-    protected $fillable = ["image","title","regulations","headquaters","foundation","traded","employees","start","end","neverEnd","trash"];
+    protected $fillable = ["image","title","regulations","headquaters","foundation","traded","employees","start","end","neverEnd","trash","categoryId","userId"];
 
     public function GetAccountInfo(){
         $get = BrokerAccountInfoModel::where('brokerId',$this->id)->first();
@@ -22,6 +23,10 @@ class BrokerCompanyInformationModel extends Model
     }
     public function getPromotionsInfo(){
         $get = BorkerPromotionsModel::where('brokerId',$this->id)->first();
+        return $get;
+    }
+    public function getCategory(){
+        $get = BrokerCategoryModel::where('id',$this->categoryId)->first();
         return $get;
     }
 }

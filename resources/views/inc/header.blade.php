@@ -202,7 +202,7 @@
                                                 <img src="{{URL::to('/storage/app')}}/{{$clientAccountData->image}}" alt="user">
                                             @endif
                                         </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 200px;">
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 200px;z-index:10000;">
                                             <a class="dropdown-item" href="{{URL::to('/user-profile')}}">User Profile</a>
                                             @if($ikju == 0)
                                                 <a class="dropdown-item" href="{{URL::to('/user-registration')}}">Become Vip Member</a>
@@ -361,7 +361,7 @@
         </div>
         <header>
             <div class="container">
-                <nav class="navbar navbar-expand-lg pl-0 pr-0 position-relative sticky-top">
+                <nav class="navbar navbar-expand-lg pl-0 pr-0 position-relative sticky-top" style="z-index: 10;">
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon cs-menu"></span>
@@ -375,7 +375,7 @@
                                 <a class="nav-link" href="{{URL::to('/')}}"><span>HOME</span> </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{URL::to('/brokerList')}}"><span>Forex Brokers</span> </a>
+                                <a class="nav-link" href="{{URL::to('/brokerList')}}"><span>Brokers</span> </a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link  dropdown-toggle text-light" href="#" data-toggle="dropdown">

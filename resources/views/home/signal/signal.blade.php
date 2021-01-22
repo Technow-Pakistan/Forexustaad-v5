@@ -30,7 +30,7 @@
                         </div>
                      </div>
                      <div class="scroll-tbl">
-                        <h4 class="ml-2">Current Signals</h4>
+                        <h4 class="ml-2 Color0d5fe9">Current Signals</h4>
                         <table id="free-signals-list" class="table table-striped">
                            <thead>
                               <tr class="text-center">
@@ -76,30 +76,12 @@
                                                 <span class="flag-icon flag-icon-us">&nbsp;</span>
                                              </p>
                                              <h6 class="m-0 font-weight-bold"><strong>{{$pair->pair}}</strong></h6>
-                                             @if($go == 0)
-                                                <h6 class="m-0 text-danger">{{intval($minsDate)}} min ago</h6>
-                                             @else
-                                                <h6 class="m-0 text-danger">Expired</h6>
-                                             @endif
+                                             <h6 class="m-0 text-danger">{{intval($minsDate)}} min ago</h6>
                                           </td>
                                           <td>
-                                             @if($go == 0)
-                                                <button class="btn btn-success btn-sm buttonBlinking">Active</button>
-                                             @else
-                                                <button class="btn btn-secondary btn-sm">N/A</button>
-                                             @endif
+                                             <button class="btn btn-success btn-sm buttonBlinking">Active</button>
                                           </td>
-                                          <td>
-                                             @if($data->selectUser == "Register User" && !Session::has('client'))
-                                                <strong class="font-weight-bold">Registered Users</strong>
-                                             @elseif($data->selectUser == "Premium User")
-                                                @if(!Session::has('client'))
-                                                   <strong class="font-weight-bold">Premium Only</strong>
-                                                @elseif(isset($loginClientData->memberType) && $loginClientData->memberType == 1)
-                                                   <strong class="font-weight-bold">Premium Only</strong>
-                                                @endif
-                                             @endif
-                                          </td>
+                                          <td><strong class="font-weight-bold">{{$data->selectUser}}</strong></td>
                                           <td class="text-center d-initial-flex">
                                              <p class="m-0 pr-2"><strong> {{$date}}</strong></p>
                                              <p class="m-0"><strong> {{$time}} </strong></p>
@@ -107,19 +89,19 @@
                                           <td colspan="2" class="pl-0">
                                              @if($go == 0)
                                                 @if($data->selectUser == "Register User" && !Session::has('client'))
-                                                   <a href="#!" data-toggle="collapse" data-target="#demo5">View Signal</a>
-                                                      <div id="demo5" class="collapse">
+                                                   <a href="#!" data-toggle="collapse" data-target="#demo{{$data->id}}">View Signal</a>
+                                                      <div id="demo{{$data->id}}" class="collapse">
                                                          <p>Please! <br> Login First</p>
                                                       </div>
                                                 @elseif($data->selectUser == "Premium User")
                                                    @if(!Session::has('client'))
-                                                      <a href="#!" data-toggle="collapse" data-target="#demo6">View Signal</a>
-                                                      <div id="demo6" class="collapse">
+                                                      <a href="#!" data-toggle="collapse" data-target="#demo{{$data->id}}">View Signal</a>
+                                                      <div id="demo{{$data->id}}" class="collapse">
                                                          <p>Please! <br> Login First</p>
                                                       </div>
                                                    @elseif(isset($loginClientData->memberType) && $loginClientData->memberType == 1)
-                                                      <a href="#!" data-toggle="collapse" data-target="#demo7">View Signal</a>
-                                                      <div id="demo7" class="collapse">
+                                                      <a href="#!" data-toggle="collapse" data-target="#demo{{$data->id}}">View Signal</a>
+                                                      <div id="demo{{$data->id}}" class="collapse">
                                                          <p>Get <br> Premium First</p>
                                                       </div>
                                                    @endif
@@ -135,7 +117,7 @@
                         </table>
                      </div>
                      <div class="scroll-tbl">
-                        <h4 class="ml-2">Expired Signals</h4>
+                        <h4 class="ml-2 Colorff0024">Expired Signals</h4>
                         <table id="free-signals-list" class="table table-striped">
                            <thead>
                               <tr class="text-center">
@@ -180,30 +162,12 @@
                                           <span class="flag-icon flag-icon-us">&nbsp;</span>
                                        </p>
                                        <h6 class="m-0 font-weight-bold"><strong></strong></h6>
-                                       @if($go == 0)
-                                          <h6 class="m-0 text-danger">{{intval($minsDate)}} min ago</h6>
-                                       @else
-                                          <h6 class="m-0 text-danger">Expired</h6>
-                                       @endif
+                                       <h6 class="m-0 text-danger">Expired</h6>
                                     </td>
                                     <td>
-                                       @if($go == 0)
-                                          <button class="btn btn-success btn-sm buttonBlinking">Active</button>
-                                       @else
-                                          <button class="btn btn-secondary btn-sm">Expired</button>
-                                       @endif
+                                       <button class="btn btn-secondary btn-sm">Expired</button>
                                     </td>
-                                    <td>
-                                       @if($data->selectUser == "Register User" && !Session::has('client'))
-                                          <strong class="font-weight-bold">Registered Users</strong>
-                                       @elseif($data->selectUser == "Premium User")
-                                          @if(!Session::has('client'))
-                                             <strong class="font-weight-bold">Premium Only</strong>
-                                          @elseif(isset($loginClientData->memberType) && $loginClientData->memberType == 1)
-                                             <strong class="font-weight-bold">Premium Only</strong>
-                                          @endif
-                                       @endif
-                                    </td>
+                                    <td><strong class="font-weight-bold">{{$data->selectUser}}</strong></td>
                                     <td class="text-center d-initial-flex">
                                        <p class="m-0 pr-2"><strong> {{$date}} </strong></p>
                                        <p class="m-0"><strong> {{$time}} </strong></p>
@@ -229,3 +193,11 @@
 
 </div>
 @include('inc.footer')
+<style>
+   .Color0d5fe9{
+      color: #0d5fe9;
+   }
+   .Colorff0024{
+      color:#ff0024;
+   }
+</style>

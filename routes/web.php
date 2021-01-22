@@ -39,6 +39,7 @@ use App\Http\Controllers\StrategiesController;
 use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\AdvanceTrainingController;
 use App\Http\Controllers\AdvanceCommentsController;
+use App\Http\Controllers\BrokerCategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,7 +53,6 @@ use App\Http\Controllers\AdvanceCommentsController;
 
 
 Route::get('/training/{id1}/{id}',[AdvanceTrainingController::class,'ViewAll']);
-Route::post('/admin/apileftorder',[ApiLeftController::class,'Order']);
 
 Route::get('/brokerList',[HomeController::class,'BrokerView']);
 Route::get('/brokerList/brokerDetail/{id}',[HomeController::class,'brokerDetail']);
@@ -138,6 +138,7 @@ Route::get('/ustaad',[AdminController::class,'Login']);
 Route::post('/ustaad',[AdminController::class,'Index']);
 
 Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
+    Route::post('/apileftorder',[ApiLeftController::class,'Order']);
     Route::get('/viewClientProfile/{id}',[AdminController::class,'ViewClientProfile']);
     Route::post('/changeMemberType/{id}',[AdminController::class,'ChangeMemberType']);
 
@@ -148,6 +149,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::get('trashGallery/restore/{id}',[AdminController::class,'TrashGalleryImageRestore']);
     Route::get('/logout',[AdminController::class,'Logout']);
     Route::group(['prefix' => 'lecture'],function(){
+        Route::post('/order',[AdvanceTrainingController::class,'Order']);
         Route::get('/',[AdvanceTrainingController::class,'Index']);
         Route::get('/new',[AdvanceTrainingController::class,'Add']);
         Route::post('/new',[AdvanceTrainingController::class,'AddLecture']);
@@ -342,7 +344,13 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::post('/all',[BlogPostController::class,'Add']);
     });
     Route::group(['prefix' => 'broker'],function(){
-        Route::get('/add',[BrokerTopInformationController::class,'Index']);
+        Route::get('/category',[BrokerCategoryController::class,'Category']);
+        Route::get('/addCategory',[BrokerCategoryController::class,'Index']);
+        Route::post('/addCategory',[BrokerCategoryController::class,'AddCategoryProcess']);
+        Route::post('/editCategory/{id}',[BrokerCategoryController::class,'EditCategoryProcess']);
+        Route::get('/deleteCategory/{id}',[BrokerCategoryController::class,'DeleteCategoryProcess']);
+        Route::get('/activeCategory/{id}',[BrokerCategoryController::class,'ActiveCategoryProcess']);
+        Route::get('/add/{id}',[BrokerTopInformationController::class,'Index']);
         Route::post('/addBroker',[BrokerTopInformationController::class,'Add']);
         Route::post('/addDeposit',[BrokerTopInformationController::class,'AddDeposit']);
         Route::post('/addCommission',[BrokerTopInformationController::class,'AddCommission']);
@@ -357,11 +365,13 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/trash/{id}',[BorkerController::class,'Trash']);
         Route::get('/trashRestore/{id}',[BorkerController::class,'TrashRestore']);
     });
-    Route::get('/allbrokers',[BorkerController::class,'Index']);
+    Route::get('/allbrokers/{id}',[BorkerController::class,'Index']);
     Route::get('/editBroker/{id}',[BorkerController::class,'edit']);
     Route::post('/editBroker/{id}',[BorkerController::class,'editBrokerCompanyInformation']);
+
+    Route::get('brokersNew/{id}',[BorkerNewsController::class,'Index']);
+
     Route::group(['prefix' => 'brokersNews'],function(){
-        Route::get('/',[BorkerNewsController::class,'Index']);
         Route::get('/all/{id}',[BorkerNewsController::class,'All']);
         Route::get('/new',[BorkerNewsController::class,'Add']);
         Route::post('/new',[BorkerNewsController::class,'AddNews']);
@@ -369,8 +379,9 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::post('/edit/{id}',[BorkerNewsController::class,'EditNews']);
         Route::get('/delete/{id}',[BorkerNewsController::class,'Delete']);
     });
+    Route::get('brokersPromotion/{id}',[BorkerPromotionsController::class,'Index']);
+
     Route::group(['prefix' => 'brokersPromotions'],function(){
-        Route::get('/',[BorkerPromotionsController::class,'Index']);
         Route::get('/all/{id}',[BorkerPromotionsController::class,'All']);
         Route::get('/new',[BorkerPromotionsController::class,'Add']);
         Route::post('/new',[BorkerPromotionsController::class,'AddPromotions']);
@@ -403,6 +414,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/clientList',[ClientMemberController::class,'ClientList']);
     });
     Route::group(['prefix' => 'client'],function(){
+        Route::post('/confirmEmail/{id}',[ClientMemberController::class,'ConfirmEmail']);
         Route::get('/delete/{id}',[ClientMemberController::class,'Delete']);
         Route::get('/active/{id}',[ClientMemberController::class,'Active']);
     });
