@@ -16,11 +16,16 @@ use App\Models\BrokerPromotionModel;
 
 class BrokerTopInformationController extends Controller
 {
-    public function Index(Request $request){
-        return view('admin.add-broker');
+    public function Index(Request $request, $id){
+        return view('admin.add-broker',compact('id'));
     }
     public function Add(Request $request){
         $data = $request->all();
+        $userID = $request->session()->get('admin');
+        $data['userId'] = $userID->id;
+        if ($userID['memberId'] == 6 ) {
+            $data['userId'] = $userID->id;
+        }
         if ($request->file("file_photo") != null) {
             $path = $request->file("file_photo")->store("BrokerImages");
             $companyImage = $path;

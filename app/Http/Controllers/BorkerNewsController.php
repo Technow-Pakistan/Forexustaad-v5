@@ -8,9 +8,15 @@ use App\Models\BrokerNewsModel;
 
 class BorkerNewsController extends Controller
 {
-    public function Index(Request $request){
-        $brokers = BrokerCompanyInformationModel::all();
-        return view('admin.broker-news',compact('brokers'));
+    public function Index(Request $request, $id){
+        if($id == 6){
+            $userID = $request->session()->get('admin');
+            $brokers = BrokerCompanyInformationModel::orderBy('id','desc')->where('Trash',0)->where('userId',$userID->id)->get();
+            return view('admin.broker-news',compact('brokers'));
+        }else{
+            $brokers = BrokerCompanyInformationModel::all();
+            return view('admin.broker-news',compact('brokers'));
+        }
     }
     public function All(Request $request, $id){
         $brokerNews = BrokerNewsModel::where('brokerId',$id)->get();
@@ -22,6 +28,8 @@ class BorkerNewsController extends Controller
     }
     public function AddNews(Request $request){
         $data = $request->all();
+        $userID = $request->session()->get('admin');
+        $data['userId'] = $userID->id;
         if ($request->file("file_photo") != null) {
             $path = $request->file("file_photo")->store("BrokerImages");
             $NewsImage = $path;

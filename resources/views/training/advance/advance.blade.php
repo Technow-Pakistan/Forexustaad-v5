@@ -60,7 +60,7 @@
 									}
 								@endphp
 						 		<p class="h5 p-3">
-						 			Lecture {{$lecture->id}}: {{$lecture->title}}
+						 			Lecture {{$lecture->poistion}}: {{$lecture->title}}
 						 		</p>
 						 	</div>
 						 	<div>
@@ -95,7 +95,7 @@
 				@php
 					$title = str_replace(' ','-',$data->title);
 				@endphp
-				<li><a class="dropdown-item" href="{{URL::to('/training'). '/' .  $category . '/' . $title}}">{{$data->id . '. ' . $data->title}}  </a></li>
+				<li><a class="dropdown-item" href="{{URL::to('/training'). '/' .  $category . '/' . $title}}">{{$data->poistion . '. ' . $data->title}}  </a></li>
 			@endforeach
 	    </ul>
 	</li>
@@ -123,7 +123,7 @@
 							<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 								<div class="video-iframe pt-3">
 									@if($lecture->status == 0)
-										@if($category == "Advance"  && $lecture->id != 1)
+										@if($category == "Advance"  && $lecture->poistion != 1)
 											@if($commentAllow != null)
 												@php
 													$date3 = $commentAllow->created_at;
@@ -150,7 +150,7 @@
 								<div class="pt-3">
 									<h4>Links or text related to video</h1><br>
 									@if($lecture->status == 0)
-										@if($category == "Advance" && $lecture->id != 1)
+										@if($category == "Advance" && $lecture->poistion != 1)
 											@if($commentAllow != null)
 												@php
 													$date3 = $commentAllow->created_at;
@@ -159,7 +159,7 @@
 												@endphp	
 												@if($date4 <= $date5)
 													@php 
-														$Description = html_entity_decode($data->description);
+														$Description = html_entity_decode($lecture->description);
 														echo $Description;
 													@endphp
 												@else
@@ -170,7 +170,7 @@
 											@endif
 										@else
 											@php 
-												$Description = html_entity_decode($data->description);
+												$Description = html_entity_decode($lecture->description);
 												echo $Description;
 											@endphp
 										@endif

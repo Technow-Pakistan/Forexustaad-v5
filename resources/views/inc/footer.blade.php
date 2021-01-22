@@ -341,7 +341,7 @@ $(".LoginButton").on("click",function(){
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="form-group">
-                            <input type="email" class="form-control text-gray explore_form email" placeholder="Your Email *" name="email" id="quote_email" required>
+                            <input type="email" class="form-control text-gray explore_form email emailRegistration" placeholder="Your Email *" name="email" id="quote_email" required>
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
@@ -572,7 +572,7 @@ $(document).on("click", function(event){
             document.getElementById("token").value = token;
         });
     });
-    $(".ContactFormSubmit").on("submit",function(e){
+    $(".RegistrationForm").on("submit",function(e){
       var email = $(".emailRegistration").val();
       var emailHost = email.split("@")
       console.log(email);

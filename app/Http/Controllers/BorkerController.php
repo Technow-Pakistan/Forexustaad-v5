@@ -20,7 +20,12 @@ use App\Models\TrashModel;
 
 class BorkerController extends Controller
 {
-    public function Index(Request $request){
+    public function Index(Request $request,$id){
+        if ($id == 6) {
+            $userID = $request->session()->get('admin');
+            $broker = BrokerCompanyInformationModel::orderBy('id','desc')->where('Trash',0)->where('userId',$userID->id)->get();
+            return view('admin.all-broker',compact('broker'));
+        }
         $broker = BrokerCompanyInformationModel::orderBy('id','desc')->where('Trash',0)->get();
         return view('admin.all-broker',compact('broker'));
     }

@@ -44,6 +44,7 @@
 			<div class="navbar-wrapper">
 				<div class="navbar-content scroll-div">
 					<ul class="nav pcoded-inner-navbar">
+						@if($value['memberId'] != 6)
 							<li class="nav-item pcoded-menu-caption">
 								<label>Dashboard Design</label>
 							</li>
@@ -114,6 +115,7 @@
 									<li><a href="{{URL::to('ustaad/webinar/add')}}">Add Webinar</a></li>
 								</ul>
 							</li>
+						@endif
 							<li class="nav-item pcoded-menu-caption">
 								<label>Broker Area</label>
 							</li>
@@ -124,17 +126,16 @@
 									><span class="pcoded-mtext">Brokers</span></a
 								>
 								<ul class="pcoded-submenu">
-									<li><a href="{{URL::to('ustaad/allbrokers')}}">All Brokers</a></li>
-									<li><a href="{{URL::to('ustaad/broker/add')}}">Add New Broker</a></li>
+									<li><a href="{{URL::to('ustaad/allbrokers')}}/{{$value['memberId']}}">All Brokers</a></li>
+									<li><a href="{{URL::to('/ustaad/brokersPromotion')}}/{{$value['memberId']}}">All Broker Promotion</a></li>
+									<li><a href="{{URL::to('/ustaad/brokersNew')}}/{{$value['memberId']}}">All Broker News</a></li>
+									<li><a href="{{URL::to('ustaad/broker/category')}}">Add New Broker</a></li>
 									<li><a href="{{URL::to('/ustaad/brokerReview/new')}}">Add Broker Review</a></li>
-									<li><a href="{{URL::to('/ustaad/brokersPromotions')}}">All Broker Promotion</a></li>
 									<li><a href="{{URL::to('/ustaad/brokersPromotions/new')}}">Add Promotion</a></li>
-									<li><a href="{{URL::to('/ustaad/brokersNews')}}">All Broker News</a></li>
 									<li><a href="{{URL::to('/ustaad/brokersNews/new')}}">Add Broker News</a></li>
-
-
 								</ul>
 							</li>
+						@if($value['memberId'] != 6)
 							<li class="nav-item pcoded-menu-caption">
 								<label>Navigation</label>
 							</li>
@@ -255,6 +256,7 @@
 								</li>
 							@endif <br><br><br><br>
 						@endif
+						@endif
 
 					</ul>
 				</div>
@@ -303,6 +305,7 @@
 					</li>
 				</ul>
 				<ul class="navbar-nav ml-auto">
+					@if($value['memberId'] != 6)
 					<li>
 						<div class="dropdown">
 							<a class="dropdown-toggle" href="#" data-toggle="dropdown"
@@ -417,6 +420,7 @@
 							></a>
 						</div>
 					</li>
+					@endif
 					<li>
 									@php
 									 $memberData = App\Models\AdminMemberDetailModel::where('adminTableId',$value['id'])->first();
@@ -454,12 +458,13 @@
 											><i class="feather icon-user"></i> Profile</a
 										>
 									</li>
-
-									<li>
-										<a href="{{URL::to('ustaad/member/add')}}"  class="dropdown-item">
-											<i class="feather icon-user-plus"></i> Add User
-										</a>
-									</li>
+									@if($value['memberId'] == 1 || $value['memberId'] == 2)
+										<li>
+											<a href="{{URL::to('ustaad/member/add')}}"  class="dropdown-item">
+												<i class="feather icon-user-plus"></i> Add User
+											</a>
+										</li>
+									@endif
 									<!-- <li>
 										<a href="email_inbox.html" class="dropdown-item">
 											<i class="feather icon-mail"></i> My Messages

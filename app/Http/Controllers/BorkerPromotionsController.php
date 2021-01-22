@@ -9,9 +9,15 @@ use App\Models\BorkerPromotionsModel;
 
 class BorkerPromotionsController extends Controller
 {    
-    public function Index(Request $request){
-        $brokers = BrokerCompanyInformationModel::all();
-        return view('admin.broker-promotion',compact('brokers'));
+    public function Index(Request $request, $id){
+        if($id == 6){
+            $userID = $request->session()->get('admin');
+            $brokers = BrokerCompanyInformationModel::orderBy('id','desc')->where('Trash',0)->where('userId',$userID->id)->get();
+            return view('admin.broker-promotion',compact('brokers'));
+        }else{
+            $brokers = BrokerCompanyInformationModel::all();
+            return view('admin.broker-promotion',compact('brokers'));
+        }
     }
     public function All(Request $request, $id){
         $brokerNews = BorkerPromotionsModel::where('brokerId',$id)->get();
@@ -23,6 +29,8 @@ class BorkerPromotionsController extends Controller
     }
     public function AddPromotions(Request $request){
         $data = $request->all();
+        $userID = $request->session()->get('admin');
+        $data['userId'] = $userID->id;
         if ($request->file("file_photo") != null) {
             $path = $request->file("file_photo")->store("BrokerImages");
             $NewsImage = $path;
