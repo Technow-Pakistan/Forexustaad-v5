@@ -38,6 +38,7 @@
 									<table id="user-list-table" class="table nowrap">
 										<thead>
 											<tr>
+												<th>ID</th>
 												<th>Broker</th>
 												<th>Broker Name</th>
 												<th>Category</th>
@@ -45,15 +46,17 @@
 												<th>End Date</th> -->
 												<th>Broker Details</th>
 												<th>Broker Review</th>
-												<th>Status</th>
+												<th style="width:100px">Status</th>
 											</tr>
 										</thead>
 										<tbody>
+											@php $id3=1 @endphp
 											@foreach($broker as $data)
 											@php
 												$category = $data->getCategory();
 											@endphp
 											<tr  draggable="true">
+												<td>{{$id3}}</td>
 												<td>
 													<div>
 														<img src="{{URL::to('storage/app')}}/{{$data->image}}" alt="" class="img-fluid" width="150">
@@ -73,13 +76,37 @@
 														$contractDateBegin = date('Y-m-d', strtotime($data->start));
 														$contractDateEnd = date('Y-m-d', strtotime($data->end));
 													@endphp
-													<span class="badge {{((($paymentDate >= $contractDateBegin) && ($paymentDate <= $contractDateEnd)) || $data->neverEnd == 1) ? 'badge-light-success' : 'badge-light-danger'}}">{{((($paymentDate >= $contractDateBegin) && ($paymentDate <= $contractDateEnd)) || $data->neverEnd == 1) ? 'Active' : 'Deactive'}}</span>
-													<div class="overlay-edit">
-														<a href="{{URL::to('ustaad/editBroker')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
-														<a href="{{URL::to('ustaad/broker/trash')}}/{{$data->id}}"  class="addAction" data-toggle="modal" data-target="#myModal"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
-													</div>
+													@if($data->pending == 0)
+														<span class="badge {{((($paymentDate >= $contractDateBegin) && ($paymentDate <= $contractDateEnd)) || $data->neverEnd == 1) ? 'badge-light-success' : 'badge-light-danger'}}">{{((($paymentDate >= $contractDateBegin) && ($paymentDate <= $contractDateEnd)) || $data->neverEnd == 1) ? 'Active' : 'Deactive'}}</span>
+														<div class="overlay-edit">
+															@if($value['memberId'] != 6)
+																<form action="{{URL::to('ustaad/broker')}}/{{$data->star == 0 ? 'star' : 'unstar'}}/{{$data->id}}" method="post">
+																	<span>
+																		<input type="checkbox" class="AllowBroker hiddenCheckBox" name="pending" id="option{{$id3}}" value="0">
+																		<label for="option{{$id3}}" class="mt-2 mr-2"><i class="fa fa-star {{$data->star == 1 ? 'yellowStar' : ''}}"></i></label>
+																	</span>
+																</form>
+															@endif
+															<a href="{{URL::to('ustaad/editBroker')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
+															<a href="{{URL::to('ustaad/broker/trash')}}/{{$data->id}}"  class="addAction" data-toggle="modal" data-target="#myModal"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
+														</div>
+													@elseif($value['memberId'] != 6)
+														<form action="{{URL::to('ustaad/broker/allow')}}/{{$data->id}}" method="post">
+															<span class="badge badge-light-warning">
+																Allow
+																<input type="checkbox" class="AllowBroker" name="pending" id="" value="0">
+															</span>
+														</form>
+													@elseif($value['memberId'] == 6)
+														<span class="badge badge-light-warning">Pending</span>
+														<div class="overlay-edit">
+															<a href="{{URL::to('ustaad/editBroker')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
+															<a href="{{URL::to('ustaad/broker/trash')}}/{{$data->id}}"  class="addAction" data-toggle="modal" data-target="#myModal"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
+														</div>
+													@endif
 												</td>
 											</tr>
+											@php $id3++ @endphp
 											@endforeach
 										</tbody>
 										
@@ -94,8 +121,21 @@
 			</div>
 		</section>
 		<!-- [ Main Content ] end -->
-
+<style>
+	.hiddenCheckBox{
+		display:none;
+	}
+	.yellowStar{
+		color:yellow;
+	}
+</style>
 @include('admin.include.footer')
+<script>
+	$(".AllowBroker").on('change',function() {
+		var data = $(this).parent().parent();
+		data.submit();
+	})
+</script>
         <!-- Data Table -->
 		<script src="assets/js/plugins/jquery.dataTables.min.js"></script>
 		<script src="assets/js/plugins/dataTables.bootstrap4.min.js"></script>
@@ -106,71 +146,71 @@
 
 	// Almost final example
 	// tr mai class row add krna h bs
-(function() {
-  var id_ = 'user-list-table';
-  var cols_ = document.querySelectorAll('#' + id_ + ' .row');
-  var dragSrcEl_ = null;
+	(function() {
+		var id_ = 'user-list-table';
+		var cols_ = document.querySelectorAll('#' + id_ + ' .row');
+		var dragSrcEl_ = null;
 
-  this.handleDragStart = function(e) {
-    e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/html', this.innerHTML);
+		this.handleDragStart = function(e) {
+			e.dataTransfer.effectAllowed = 'move';
+			e.dataTransfer.setData('text/html', this.innerHTML);
 
-    dragSrcEl_ = this;
+			dragSrcEl_ = this;
 
-    this.style.opacity = '0.4';
+			this.style.opacity = '0.4';
 
-  };
+		};
 
-  this.handleDragOver = function(e) {
-    if (e.preventDefault) {
-      e.preventDefault(); // Allows us to drop.
-    }
+		this.handleDragOver = function(e) {
+			if (e.preventDefault) {
+			e.preventDefault(); // Allows us to drop.
+			}
 
-    e.dataTransfer.dropEffect = 'move';
+			e.dataTransfer.dropEffect = 'move';
 
-    return false;
-  };
+			return false;
+		};
 
-  this.handleDragEnter = function(e) {
-  };
+		this.handleDragEnter = function(e) {
+		};
 
-  this.handleDragLeave = function(e) {
-  };
+		this.handleDragLeave = function(e) {
+		};
 
-  this.handleDrop = function(e) {
-    // this/e.target is current target element.
+		this.handleDrop = function(e) {
+			// this/e.target is current target element.
 
-    if (e.stopPropagation) {
-      e.stopPropagation(); // stops the browser from redirecting.
-    }
+			if (e.stopPropagation) {
+			e.stopPropagation(); // stops the browser from redirecting.
+			}
 
-    // Don't do anything if we're dropping on the same column we're dragging.
-    if (dragSrcEl_ != this) {
-      dragSrcEl_.innerHTML = this.innerHTML;
-      this.innerHTML = e.dataTransfer.getData('text/html');
-    }
+			// Don't do anything if we're dropping on the same column we're dragging.
+			if (dragSrcEl_ != this) {
+			dragSrcEl_.innerHTML = this.innerHTML;
+			this.innerHTML = e.dataTransfer.getData('text/html');
+			}
 
-    return false;
-  };
+			return false;
+		};
 
-  this.handleDragEnd = function(e) {
-    // this/e.target is the source node.
-    this.style.opacity = '1';
+		this.handleDragEnd = function(e) {
+			// this/e.target is the source node.
+			this.style.opacity = '1';
 
-    [].forEach.call(cols_, function (col) {
-    });
-  };
+			[].forEach.call(cols_, function (col) {
+			});
+		};
 
-  [].forEach.call(cols_, function (col) {
-    col.setAttribute('draggable', 'true');  // Enable columns to be draggable.
-    col.addEventListener('dragstart', this.handleDragStart, false);
-    col.addEventListener('dragenter', this.handleDragEnter, false);
-    col.addEventListener('dragover', this.handleDragOver, false);
-    col.addEventListener('dragleave', this.handleDragLeave, false);
-    col.addEventListener('drop', this.handleDrop, false);
-    col.addEventListener('dragend', this.handleDragEnd, false);
-  });
-})();
+		[].forEach.call(cols_, function (col) {
+			col.setAttribute('draggable', 'true');  // Enable columns to be draggable.
+			col.addEventListener('dragstart', this.handleDragStart, false);
+			col.addEventListener('dragenter', this.handleDragEnter, false);
+			col.addEventListener('dragover', this.handleDragOver, false);
+			col.addEventListener('dragleave', this.handleDragLeave, false);
+			col.addEventListener('drop', this.handleDrop, false);
+			col.addEventListener('dragend', this.handleDragEnd, false);
+		});
+	})();
 </script>
 	</body>
 </html>

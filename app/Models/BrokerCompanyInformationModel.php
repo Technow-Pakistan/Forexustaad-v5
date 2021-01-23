@@ -7,14 +7,19 @@ use App\Models\BrokerAccountInfoModel;
 use App\Models\BrokerNewsModel;
 use App\Models\BorkerPromotionsModel;
 use App\Models\BrokerCategoryModel;
+use App\Models\PromoteBrokerModel;
 
 class BrokerCompanyInformationModel extends Model
 {
     protected $table="broker_company_information";
-    protected $fillable = ["image","title","regulations","headquaters","foundation","traded","employees","start","end","neverEnd","trash","categoryId","userId"];
+    protected $fillable = ["image","title","regulations","headquaters","foundation","traded","employees","start","end","neverEnd","trash","categoryId","userId","pending","star"];
 
     public function GetAccountInfo(){
         $get = BrokerAccountInfoModel::where('brokerId',$this->id)->first();
+        return $get;
+    }
+    public function GetPromotionLinkInfo(){
+        $get = BrokerPromotionModel::where('brokerId',$this->id)->first();
         return $get;
     }
     public function getNewsInfo(){

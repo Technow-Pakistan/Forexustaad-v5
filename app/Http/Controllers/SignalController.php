@@ -79,9 +79,9 @@ class SignalController extends Controller
     }
     public function EditProcess(Request $request, $id){
         $signal = $request->all();
-        if($request->result != null){
-            $data['date'] = date("Y-m-d");
-            $data['time'] = date("H:i");
+        if($request->expired != null){
+            $signal['date'] = date("Y-m-d");
+            $signal['time'] = date("H:i");
         }
         $profit = $request->takeProfit;
         $profit = implode("@",$profit);

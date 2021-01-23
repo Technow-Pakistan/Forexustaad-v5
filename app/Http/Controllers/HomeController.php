@@ -225,7 +225,7 @@ class HomeController extends Controller
     }
     public function BrokerView(){
         $title = "Our Broker";
-        $totalData = BrokerCompanyInformationModel::orderBy('id','desc')->where('trash',0)->get();
+        $totalData = BrokerCompanyInformationModel::orderBy('id','desc')->where('trash',0)->where('pending',0)->get();
         $totalBrokerCategories = BrokerCategoryModel::where('active',0)->get();
         return view('broker/brokerView',compact('title','totalData','totalBrokerCategories'));
     }
