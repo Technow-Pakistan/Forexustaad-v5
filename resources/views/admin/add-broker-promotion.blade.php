@@ -1,3 +1,6 @@
+@php
+	$value =Session::get('admin');
+@endphp
 @include('admin.include.header')
 		<!-- [ Main Content ] start -->
 		<section class="pcoded-main-container">
@@ -14,7 +17,7 @@
 									<li class="breadcrumb-item">
 										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
 									</li>
-									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/brokersPromotions')}}">All Brokers Promotions</a></li>
+									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/brokersPromotion')}}/{{$value['memberId']}}">All Brokers Promotions</a></li>
 									<li class="breadcrumb-item">
 										<a href="#!">Broker Promotions</a>
 									</li>

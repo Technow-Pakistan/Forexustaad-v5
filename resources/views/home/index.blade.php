@@ -344,6 +344,7 @@
                                     <div class="news_responsive news_slider bullet_style wow animated fadeInUp">
                                         @foreach ($LatestBlogsData as $value)
                                             @php
+								                $category = $value->GetCategory();
                                                 $go = 1;
                                                 if($value->publishDate == date("Y-m-d")){
                                                     if($value->publishTime >= date("H:i:s")){
@@ -363,7 +364,7 @@
                                                             </div>
                                                             <div class="new_description-details">
                                                             <h6>
-                                                                <a href="{{URL::to('/Blog')}}/{{$value->permalink}}">
+                                                                <a href="{{URL::to('/Posts')}}/{{$category->mainCategory}}/{{$value->permalink}}">
                                                                         {{$value->mainTitle}}
                                                                     </a>
                                                             </h6>
@@ -651,370 +652,6 @@ $opinion_analysis = '';
                         </div>
                     </section>
 
-                    <!-- education Tabs -->
-                    <!-- <section>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home"
-                                            role="tab" aria-controls="home" aria-selected="true">Basic Training</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile"
-                                            role="tab" aria-controls="profile" aria-selected="false">Paid Training</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact"
-                                            role="tab" aria-controls="contact" aria-selected="false">Forex Books</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="home" role="tabpanel"
-                                        aria-labelledby="home-tab">
-                                        <div id="catab9" class="cat-tabs-wrap cat-tabs-wrap1" style="display: block;">
-                                            <div>
-                                                <ul>
-                                                    <li class="first-news">
-                                                        <div class="post-thumbnail tie-appear">
-                                                            <a href="" rel="bookmark">
-                                                                <img width="310" height="165" src=""
-                                                                    class="attachment-tie-medium size-tie-medium wp-post-image tie-appear"
-                                                                    alt="" loading="lazy"> <span
-                                                                    class="fa overlay-icon"></span>
-                                                            </a>
-                                                        </div>
-                                                        <h2 class="post-box-title"><a href="" rel="bookmark">Nexus 6
-                                                                review</a></h2>
-                                                        <p class="post-meta">
-                                                            <span title="Nice"
-                                                                class="post-single-rate post-small-rate stars-small">
-                                                                <span style="width: 78.571428571429%"></span>
-                                                            </span>
-                                                            <span class="tie-date">Dec 24,
-                                                                2014</span>
-                                                        </p>
-                                                        <div class="entry">
-                                                            <p>Don’t act so surprised, Your Highness. You weren’t on any
-                                                                mercy mission this time. Several …</p>
-                                                            <a class="btn btn-mine radial" href="">Read
-                                                                More »</a>
-                                                        </div>
-                                                    </li>
-                                                    <li class="tie_video">
-                                                        <div class="post-thumbnail tie-appear">
-                                                            <a href="" rel="bookmark"><img width="110" height="75"
-                                                                    src=""
-                                                                    class="attachment-tie-small size-tie-small wp-post-image tie-appear"
-                                                                    alt="" loading="lazy"><span
-                                                                    class="fa overlay-icon"></span></a>
-                                                        </div>
-                                                        <h3 class="post-box-title"><a href="" rel="bookmark">Apple iPad
-                                                                review</a></h3>
-                                                        <p class="post-meta">
-                                                            <span title="Good"
-                                                                class="post-single-rate post-small-rate stars-small">
-                                                                <span style="width: 89.5714285714%"></span>
-                                                            </span>
-                                                            <span class="tie-date">Dec 24,
-                                                                2014</span>
-                                                        </p>
-                                                    </li>
-                                                    <li class="tie_thumb">
-                                                        <div class="post-thumbnail tie-appear">
-                                                            <a href="" rel="bookmark"><img width="110" height="75"
-                                                                    src=""
-                                                                    class="attachment-tie-small size-tie-small wp-post-image tie-appear"
-                                                                    alt="" loading="lazy"><span
-                                                                    class="fa overlay-icon"></span></a>
-                                                        </div>
-                                                        <h3 class="post-box-title"><a href="" rel="bookmark">BlackBerry
-                                                                Classic review</a></h3>
-                                                        <p class="post-meta">
-                                                            <span title="Not Bad"
-                                                                class="post-single-rate post-small-rate stars-small">
-                                                                <span style="width: 76.1428571429%"></span>
-                                                            </span>
-                                                            <span class="tie-date">Nov 24,
-                                                                2014</span>
-                                                        </p>
-                                                    </li>
-                                                    <li class="tie_lightbox">
-                                                        <div class="post-thumbnail tie-appear">
-                                                            <a href="" rel="bookmark"><img width="110" height="75"
-                                                                    src=""
-                                                                    class="attachment-tie-small size-tie-small wp-post-image tie-appear"
-                                                                    alt="" loading="lazy"><span
-                                                                    class="fa overlay-icon"></span></a>
-                                                        </div>
-                                                        <h3 class="post-box-title"><a href="" rel="bookmark">Apple iMac
-                                                                with Retina 5K display review</a>
-                                                        </h3>
-                                                        <p class="post-meta">
-                                                            <span title="Great"
-                                                                class="post-single-rate post-small-rate stars-small">
-                                                                <span style="width: 81.25%"></span>
-                                                            </span>
-                                                            <span class="tie-date">Nov 24,
-                                                                2014</span>
-                                                        </p>
-                                                    </li>
-                                                    <li>
-                                                        <div class="post-thumbnail tie-appear">
-                                                            <a href="" rel="bookmark"><img width="110" height="75"
-                                                                    src=""
-                                                                    class="attachment-tie-small size-tie-small wp-post-image tie-appear"
-                                                                    alt="" loading="lazy"><span
-                                                                    class="fa overlay-icon"></span></a>
-                                                        </div>
-                                                        <h3 class="post-box-title"><a href="" rel="bookmark">iPhone 6
-                                                                Plus review</a></h3>
-                                                        <p class="post-meta">
-                                                            <span title="Graet"
-                                                                class="post-single-rate post-small-rate stars-small">
-                                                                <span style="width: 87.142857142857%"></span>
-                                                            </span>
-                                                            <span class="tie-date">Nov 24,
-                                                                2014</span>
-                                                        </p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="profile" role="tabpanel"
-                                        aria-labelledby="profile-tab">
-                                        <div id="catab9" class="cat-tabs-wrap cat-tabs-wrap1" style="display: block;">
-                                            <div>
-                                                <ul>
-                                                    <li class="first-news">
-                                                        <div class="post-thumbnail tie-appear">
-                                                            <a href="" rel="bookmark">
-                                                                <img width="310" height="165" src=""
-                                                                    class="attachment-tie-medium size-tie-medium wp-post-image tie-appear"
-                                                                    alt="" loading="lazy"> <span
-                                                                    class="fa overlay-icon"></span>
-                                                            </a>
-                                                        </div>
-                                                        <h2 class="post-box-title"><a href="" rel="bookmark">Nexus 6
-                                                                review</a></h2>
-                                                        <p class="post-meta">
-                                                            <span title="Nice"
-                                                                class="post-single-rate post-small-rate stars-small">
-                                                                <span style="width: 78.571428571429%"></span>
-                                                            </span>
-                                                            <span class="tie-date">Dec 24,
-                                                                2014</span>
-                                                        </p>
-                                                        <div class="entry">
-                                                            <p>Don’t act so surprised, Your Highness. You weren’t on any
-                                                                mercy mission this time. Several …</p>
-                                                            <a class="btn btn-mine radial" href="">Read
-                                                                More »</a>
-                                                        </div>
-                                                    </li>
-                                                    <li class="tie_video">
-                                                        <div class="post-thumbnail tie-appear">
-                                                            <a href="" rel="bookmark"><img width="110" height="75"
-                                                                    src=""
-                                                                    class="attachment-tie-small size-tie-small wp-post-image tie-appear"
-                                                                    alt="" loading="lazy"><span
-                                                                    class="fa overlay-icon"></span></a>
-                                                        </div>
-                                                        <h3 class="post-box-title"><a href="" rel="bookmark">Apple iPad
-                                                                review</a></h3>
-                                                        <p class="post-meta">
-                                                            <span title="Good"
-                                                                class="post-single-rate post-small-rate stars-small">
-                                                                <span style="width: 89.5714285714%"></span>
-                                                            </span>
-                                                            <span class="tie-date">Dec 24,
-                                                                2014</span>
-                                                        </p>
-                                                    </li>
-                                                    <li class="tie_thumb">
-                                                        <div class="post-thumbnail tie-appear">
-                                                            <a href="" rel="bookmark"><img width="110" height="75"
-                                                                    src=""
-                                                                    class="attachment-tie-small size-tie-small wp-post-image tie-appear"
-                                                                    alt="" loading="lazy"><span
-                                                                    class="fa overlay-icon"></span></a>
-                                                        </div>
-                                                        <h3 class="post-box-title"><a href="" rel="bookmark">BlackBerry
-                                                                Classic review</a></h3>
-                                                        <p class="post-meta">
-                                                            <span title="Not Bad"
-                                                                class="post-single-rate post-small-rate stars-small">
-                                                                <span style="width: 76.1428571429%"></span>
-                                                            </span>
-                                                            <span class="tie-date">Nov 24,
-                                                                2014</span>
-                                                        </p>
-                                                    </li>
-                                                    <li class="tie_lightbox">
-                                                        <div class="post-thumbnail tie-appear">
-                                                            <a href="" rel="bookmark"><img width="110" height="75"
-                                                                    src=""
-                                                                    class="attachment-tie-small size-tie-small wp-post-image tie-appear"
-                                                                    alt="" loading="lazy"><span
-                                                                    class="fa overlay-icon"></span></a>
-                                                        </div>
-                                                        <h3 class="post-box-title"><a href="" rel="bookmark">Apple iMac
-                                                                with Retina 5K display review</a>
-                                                        </h3>
-                                                        <p class="post-meta">
-                                                            <span title="Great"
-                                                                class="post-single-rate post-small-rate stars-small">
-                                                                <span style="width: 81.25%"></span>
-                                                            </span>
-                                                            <span class="tie-date">Nov 24,
-                                                                2014</span>
-                                                        </p>
-                                                    </li>
-                                                    <li>
-                                                        <div class="post-thumbnail tie-appear">
-                                                            <a href="" rel="bookmark"><img width="110" height="75"
-                                                                    src=""
-                                                                    class="attachment-tie-small size-tie-small wp-post-image tie-appear"
-                                                                    alt="" loading="lazy"><span
-                                                                    class="fa overlay-icon"></span></a>
-                                                        </div>
-                                                        <h3 class="post-box-title"><a href="" rel="bookmark">iPhone 6
-                                                                Plus review</a></h3>
-                                                        <p class="post-meta">
-                                                            <span title="Graet"
-                                                                class="post-single-rate post-small-rate stars-small">
-                                                                <span style="width: 87.142857142857%"></span>
-                                                            </span>
-                                                            <span class="tie-date">Nov 24,
-                                                                2014</span>
-                                                        </p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-
-                                    </div>
-                                    <div class="tab-pane fade" id="contact" role="tabpanel"
-                                        aria-labelledby="contact-tab">
-                                        <div id="catab9" class="cat-tabs-wrap cat-tabs-wrap1" style="display: block;">
-                                            <div>
-                                                <ul>
-                                                    <li class="first-news">
-                                                        <div class="post-thumbnail tie-appear">
-                                                            <a href="" rel="bookmark">
-                                                                <img width="310" height="165" src=""
-                                                                    class="attachment-tie-medium size-tie-medium wp-post-image tie-appear"
-                                                                    alt="" loading="lazy"> <span
-                                                                    class="fa overlay-icon"></span>
-                                                            </a>
-                                                        </div>
-                                                        <h2 class="post-box-title"><a href="" rel="bookmark">Nexus 6
-                                                                review</a></h2>
-                                                        <p class="post-meta">
-                                                            <span title="Nice"
-                                                                class="post-single-rate post-small-rate stars-small">
-                                                                <span style="width: 78.571428571429%"></span>
-                                                            </span>
-                                                            <span class="tie-date">Dec 24,
-                                                                2014</span>
-                                                        </p>
-                                                        <div class="entry">
-                                                            <p>Don’t act so surprised, Your Highness. You weren’t on any
-                                                                mercy mission this time. Several …</p>
-                                                            <a class="btn btn-mine radial" href="">Read
-                                                                More »</a>
-                                                        </div>
-                                                    </li>
-                                                    <li class="tie_video">
-                                                        <div class="post-thumbnail tie-appear">
-                                                            <a href="" rel="bookmark"><img width="110" height="75"
-                                                                    src=""
-                                                                    class="attachment-tie-small size-tie-small wp-post-image tie-appear"
-                                                                    alt="" loading="lazy"><span
-                                                                    class="fa overlay-icon"></span></a>
-                                                        </div>
-                                                        <h3 class="post-box-title"><a href="" rel="bookmark">Apple iPad
-                                                                review</a></h3>
-                                                        <p class="post-meta">
-                                                            <span title="Good"
-                                                                class="post-single-rate post-small-rate stars-small">
-                                                                <span style="width: 89.5714285714%"></span>
-                                                            </span>
-                                                            <span class="tie-date">Dec 24,
-                                                                2014</span>
-                                                        </p>
-                                                    </li>
-                                                    <li class="tie_thumb">
-                                                        <div class="post-thumbnail tie-appear">
-                                                            <a href="" rel="bookmark"><img width="110" height="75"
-                                                                    src=""
-                                                                    class="attachment-tie-small size-tie-small wp-post-image tie-appear"
-                                                                    alt="" loading="lazy"><span
-                                                                    class="fa overlay-icon"></span></a>
-                                                        </div>
-                                                        <h3 class="post-box-title"><a href="" rel="bookmark">BlackBerry
-                                                                Classic review</a></h3>
-                                                        <p class="post-meta">
-                                                            <span title="Not Bad"
-                                                                class="post-single-rate post-small-rate stars-small">
-                                                                <span style="width: 76.1428571429%"></span>
-                                                            </span>
-                                                            <span class="tie-date">Nov 24,
-                                                                2014</span>
-                                                        </p>
-                                                    </li>
-                                                    <li class="tie_lightbox">
-                                                        <div class="post-thumbnail tie-appear">
-                                                            <a href="" rel="bookmark"><img width="110" height="75"
-                                                                    src=""
-                                                                    class="attachment-tie-small size-tie-small wp-post-image tie-appear"
-                                                                    alt="" loading="lazy"><span
-                                                                    class="fa overlay-icon"></span></a>
-                                                        </div>
-                                                        <h3 class="post-box-title"><a href="" rel="bookmark">Apple iMac
-                                                                with Retina 5K display review</a>
-                                                        </h3>
-                                                        <p class="post-meta">
-                                                            <span title="Great"
-                                                                class="post-single-rate post-small-rate stars-small">
-                                                                <span style="width: 81.25%"></span>
-                                                            </span>
-                                                            <span class="tie-date">Nov 24,
-                                                                2014</span>
-                                                        </p>
-                                                    </li>
-                                                    <li>
-                                                        <div class="post-thumbnail tie-appear">
-                                                            <a href="" rel="bookmark"><img width="110" height="75"
-                                                                    src=""
-                                                                    class="attachment-tie-small size-tie-small wp-post-image tie-appear"
-                                                                    alt="" loading="lazy"><span
-                                                                    class="fa overlay-icon"></span></a>
-                                                        </div>
-                                                        <h3 class="post-box-title"><a href="" rel="bookmark">iPhone 6
-                                                                Plus review</a></h3>
-                                                        <p class="post-meta">
-                                                            <span title="Graet"
-                                                                class="post-single-rate post-small-rate stars-small">
-                                                                <span style="width: 87.142857142857%"></span>
-                                                            </span>
-                                                            <span class="tie-date">Nov 24,
-                                                                2014</span>
-                                                        </p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section> -->
 
 
 
@@ -1872,7 +1509,28 @@ $opinion_analysis = '';
                                     </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($StarBrokerHome as $starBroker)
+                                    @php
+                                        $deposit = $starBroker->GetAccountInfo();
+                                        $promotion = $starBroker->GetPromotionLinkInfo();
+                                    @endphp
                                     <tr>
+                                        <td>
+                                            <img src="{{URL::to('storage/app')}}/{{$starBroker->image}}" width="200" height="33">
+                                        </td>
+                                        <td>{{$starBroker->regulations}}</td>
+                                        <td>{{$deposit->min}}</td>
+                                        <td>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <a href="{{$promotion->link}}"
+                                                        class="btn btn-mine radial">Trade</a>
+                                                </label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                    <!-- <tr>
                                         <td>
                                             <img src="{{URL::to('/public/assets/assets/img/exness.png')}}" width="200" height="33">
                                         </td>
@@ -1978,7 +1636,7 @@ $opinion_analysis = '';
 
                                             </div>
                                         </td>
-                                    </tr>
+                                    </tr> -->
                                 </tbody>
                             </table>
                         </div>

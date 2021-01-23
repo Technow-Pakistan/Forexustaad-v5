@@ -344,6 +344,9 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::post('/all',[BlogPostController::class,'Add']);
     });
     Route::group(['prefix' => 'broker'],function(){
+        Route::post('/allow/{id}',[BrokerTopInformationController::class,'AllowBrokerProcess']);
+        Route::post('/star/{id}',[BrokerTopInformationController::class,'StarBrokerProcess']);
+        Route::post('/unstar/{id}',[BrokerTopInformationController::class,'UnStarBrokerProcess']);
         Route::get('/category',[BrokerCategoryController::class,'Category']);
         Route::get('/addCategory',[BrokerCategoryController::class,'Index']);
         Route::post('/addCategory',[BrokerCategoryController::class,'AddCategoryProcess']);

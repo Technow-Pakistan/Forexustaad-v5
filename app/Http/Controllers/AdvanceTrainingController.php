@@ -13,7 +13,6 @@ use App\Models\HabbitCommentsModel;
 
 class AdvanceTrainingController extends Controller
 {
-
     public function ViewVipAll  (Request $request, $id){
             $clientInformation = $request->session()->get('client');
             $userId = $clientInformation["memberType"];

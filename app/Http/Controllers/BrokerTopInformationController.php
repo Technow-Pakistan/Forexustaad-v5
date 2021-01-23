@@ -25,6 +25,7 @@ class BrokerTopInformationController extends Controller
         $data['userId'] = $userID->id;
         if ($userID['memberId'] == 6 ) {
             $data['userId'] = $userID->id;
+            $data['pending'] = 1;
         }
         if ($request->file("file_photo") != null) {
             $path = $request->file("file_photo")->store("BrokerImages");
@@ -111,6 +112,24 @@ class BrokerTopInformationController extends Controller
         $broker->save();
         $id = $broker->brokerId;
         return redirect("ustaad/editBroker/".$id)->with(['activeFormsData'=>$request->activeForm]);
+    }
+    public function AllowBrokerProcess(Request $request, $id){
+        $broker = BrokerCompanyInformationModel::find($id);
+        $broker->pending = 0;
+        $broker->save();
+        return back();
+    }
+    public function StarBrokerProcess(Request $request, $id){
+        $broker = BrokerCompanyInformationModel::find($id);
+        $broker->star = 1;
+        $broker->save();
+        return back();
+    }
+    public function UnStarBrokerProcess(Request $request, $id){
+        $broker = BrokerCompanyInformationModel::find($id);
+        $broker->star = 0;
+        $broker->save();
+        return back();
     }
     
 }

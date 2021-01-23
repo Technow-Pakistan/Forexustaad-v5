@@ -261,6 +261,10 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label>Expired</label>
+                                <input type="checkbox" name="expired" id="expired" value="1">
+                            </div>
                             <p class="submit text-right">
                                 <input type="submit" name="submit" id="submit" class="btn btn-outline-primary" value="Update"> <span class="spinner"></span>
                                 <input type="reset" name="reset" id="reset" class="btn btn-outline-danger" value="reset"> <span class="spinner"></span>
