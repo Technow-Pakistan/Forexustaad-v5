@@ -1,3 +1,6 @@
+@php
+	$value =Session::get('admin');
+@endphp
 @include('admin.include.header')
 		<!-- [ Main Content ] start -->
 		<section class="pcoded-main-container">
@@ -14,7 +17,7 @@
 									<li class="breadcrumb-item">
 										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
 									</li>
-									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/brokersNews')}}">All Brokers News</a></li>
+									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/brokersNew')}}/{{$value['memberId']}}">All Brokers News</a></li>
 									<li class="breadcrumb-item">
 										<a href="#!">Broker News</a>
 									</li>
@@ -34,6 +37,7 @@
 									$count = 0;
 									$titleId = 0;
 									$url = "new";
+									$value3 =Session::get('admin');
 								@endphp
 								@isset($brokerNews->image)
 									<?php $url = "edit/" . $brokerNews->id; ?>
@@ -62,7 +66,13 @@
 										<div>
 											<select name="brokerId" class="form-control" id="">
 												@foreach($broker as $title)
-													<option value="{{$title->id}}" {{($titleId == $title->id ? 'selected' : '' )}}>{{$title->title}}</option>
+													@if($value3['memberId'] == 6)
+														@if($title->userId == $value3['id'])
+															<option value="{{$title->id}}" {{($titleId == $title->id ? 'selected' : '' )}}>{{$title->title}}</option>
+														@endif
+													@else
+														<option value="{{$title->id}}" {{($titleId == $title->id ? 'selected' : '' )}}>{{$title->title}}</option>
+													@endif
 												@endforeach
 											</select>
 										</div>

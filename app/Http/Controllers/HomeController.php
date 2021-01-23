@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SubscriberMail;
 use App\Mail\ForgetPasswordMail;
 use App\Models\ClientAccountDetailModel;
+use App\Models\BrokerCategoryModel;
 
 use App\Models\MainWebinarModel;
 
@@ -74,7 +75,7 @@ class HomeController extends Controller
         $registration->confirmationEmail = 1;
         $registration->save();
             $request->session()->put("client",$registration);
-            return redirect('/memberArea/dashboard');
+            return redirect('/');
     }
     public function ForgetPasswordChange(Request $request, $id){
         date_default_timezone_set("Asia/Karachi");
@@ -224,8 +225,9 @@ class HomeController extends Controller
     }
     public function BrokerView(){
         $title = "Our Broker";
-        $totalData = BrokerCompanyInformationModel::orderBy('id','desc')->get();
-        return view('broker/brokerView',compact('title','totalData'));
+        $totalData = BrokerCompanyInformationModel::orderBy('id','desc')->where('trash',0)->where('pending',0)->get();
+        $totalBrokerCategories = BrokerCategoryModel::where('active',0)->get();
+        return view('broker/brokerView',compact('title','totalData','totalBrokerCategories'));
     }
     public function ImageSrc(Request $request){
         if ($request->file("file") != null) {

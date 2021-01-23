@@ -63,7 +63,16 @@
 												<td><a href="{{URL::to('/ustaad/viewClientProfile')}}/{{$member->id}}">Veiw Profile</a></td>
 												<!-- <td  class="veiwProfile"><a href="{{URL::to('ustaad/member/profile')}}/{{$member->id}}" class="veiwProfile">View Profile</a></td> -->
 												<td>{{$member->created_at->format(" d/m/y ")}}</td>
-												<td><span class="badge {{$member->confirmationEmail == 1 ? 'badge-light-success' : 'badge-light-danger'}}">{{$member->confirmationEmail == 1 ? 'Comfirm' : 'UnComfirm'}}</span></td>
+												<td>
+													@if($member->confirmationEmail == 1)
+														<span class="badge badge-light-success">Comfirm</span>
+													@else
+														<form action="{{URL::to('ustaad/client/confirmEmail')}}/{{$member->id}}" method="post">
+															<span class="badge badge-light-danger">UnComfirm</span>
+															<input type="checkbox" name="confirmationEmail" class="AdminConfirmationEmail" id="" value="1">
+														</form>
+													@endif
+												</td>
 												<td>
 													<span class="badge {{($member->status == 1 && $member->confirmationEmail == 1) ? 'badge-light-success' : 'badge-light-danger'}}">{{($member->status == 1 && $member->confirmationEmail == 1) ? 'Active' : 'Deactive'}}</span>
 													<div class="overlay-edit">
@@ -107,5 +116,11 @@
 </style>
 
 @include('admin.include.footer')
+<script>
+	$(".AdminConfirmationEmail").on('change',function() {
+		var data = $(this).parent();
+		data.submit();
+	})
+</script>
 
 

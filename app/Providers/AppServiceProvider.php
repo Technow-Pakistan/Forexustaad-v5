@@ -21,6 +21,7 @@ use App\Models\FooterCopyRightModel;
 use App\Models\BlogPostModel;
 use App\Models\MainWebinarModel;
 use App\Models\ClientAccountDetailModel;
+use App\Models\BrokerCompanyInformationModel;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -61,6 +62,7 @@ class AppServiceProvider extends ServiceProvider
         view()->share("copyRight",FooterCopyRightModel::where('id',1)->first());
         view()->share("latestWebinars", MainWebinarModel::orderBy('id','desc')->take(5)->get());
         view()->share("LatestBlogsData",BlogPostModel::orderBy('id','desc')->where('status',1)->where('pending',1)->where('stickToTop',1)->whereDate('publishDate', '<=', date("Y-m-d"))->take(5)->get());
+        view()->share("StarBrokerHome",BrokerCompanyInformationModel::orderBy('id','asc')->where('star',1)->where('pending',0)->where('trash',0)->skip(0)->take(10)->get());
         view()->share("ClientAccountDetailInfo",ClientAccountDetailModel::all());
     }
 }

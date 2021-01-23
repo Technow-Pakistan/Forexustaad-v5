@@ -59,42 +59,44 @@
 						<div class="card user-profile-list">
 							<div class="card-body">
 								<div class="dt-responsive table-responsive">
-											<form action="{{URL::to('/admin/apileftorder')}}" method="post">
-									<table class="table nowrap">
-										<thead>
-											<tr>
-												<th>Title</th>
-												<th>Link</th>
-												<th>Area</th>
-												
-												<th>Status</th>
-											</tr>
-										</thead>
-										<tbody>
-												@foreach($totalData as $data)
-													<tr class="row1">
-														<td>
-															<input type="hidden" name="poistion[]" value="{{$data->id}}">
-															{{$data->title}}
-														</td>
-														<td class="tdLinkScroll">{{$data->link}}</td>
-														<td>{{$data->area}}</td>
+								<form action="{{URL::to('/ustaad/apileftorder')}}" method="post">
+										<table class="table nowrap" id="user-list-table">
+											<thead>
+												<tr>
+													<th>ID</th>
+													<th>Title</th>
+													<th>Link</th>
+													<th>Area</th>
 													
-														<td>
-															<span class="badge badge-light-success">Active</span>
-															<div class="overlay-edit editlink" value="{{$data->id}}">
-																<button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button>
-																<a type="button" href="{{URL::to('/ustaad/api/api-left/trash')}}/{{$data->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"><i class="feather icon-trash-2"></i></a>
-															</div>
-														</td>
-													</tr>
-												@endforeach
+													<th>Status</th>
+												</tr>
+											</thead>
+											<tbody>
+													@foreach($totalData as $data)
+														<tr class="row1">
+															<td>{{$data->poistion}}</td>
+															<td>
+																<input type="hidden" name="poistion[]" value="{{$data->id}}">
+																{{$data->title}}
+															</td>
+															<td class="tdLinkScroll">{{$data->link}}</td>
+															<td>{{$data->area}}</td>
+														
+															<td>
+																<span class="badge badge-light-success">Active</span>
+																<div class="overlay-edit editlink" value="{{$data->id}}">
+																	<button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button>
+																	<a type="button" href="{{URL::to('/ustaad/api/api-left/trash')}}/{{$data->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"><i class="feather icon-trash-2"></i></a>
+																</div>
+															</td>
+														</tr>
+													@endforeach
 
-										</tbody>
-										
-									</table>
-												<!-- <input type="submit" value="Submit"> -->
-											</form>
+											</tbody>
+											
+										</table>
+										<input type="submit" value="Submit">
+									</form>
 								</div>
 							</div>
 						</div>
@@ -107,78 +109,6 @@
 		<!-- [ Main Content ] end -->
 
 @include('admin.include.footer')
-        <!-- Data Table -->
-		<script src="{{URL::to('public/AdminAssets/assets/js/plugins/jquery.dataTables.min.js')}}"></script>
-		<script src="{{URL::to('public/AdminAssets/assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
-
-<script>
-
-(function() {
-  var id_ = 'table';
-  var cols_ = document.querySelectorAll('.' + id_ + ' .row1');
-  var dragSrcEl_ = null;
-
-  this.handleDragStart = function(e) {
-    e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/html', this.innerHTML);
-
-    dragSrcEl_ = this;
-
-    this.style.opacity = '0.4';
-
-  };
-
-  this.handleDragOver = function(e) {
-    if (e.preventDefault) {
-      e.preventDefault(); // Allows us to drop.
-    }
-
-    e.dataTransfer.dropEffect = 'move';
-
-    return false;
-  };
-
-  this.handleDragEnter = function(e) {
-  };
-
-  this.handleDragLeave = function(e) {
-  };
-
-  this.handleDrop = function(e) {
-    // this/e.target is current target element.
-
-    if (e.stopPropagation) {
-      e.stopPropagation(); // stops the browser from redirecting.
-    }
-
-    // Don't do anything if we're dropping on the same column we're dragging.
-    if (dragSrcEl_ != this) {
-      dragSrcEl_.innerHTML = this.innerHTML;
-      this.innerHTML = e.dataTransfer.getData('text/html');
-    }
-
-    return false;
-  };
-
-  this.handleDragEnd = function(e) {
-    // this/e.target is the source node.
-    this.style.opacity = '1';
-
-    [].forEach.call(cols_, function (col) {
-    });
-  };
-
-  [].forEach.call(cols_, function (col) {
-    col.setAttribute('draggable', 'true');  // Enable columns to be draggable.
-    col.addEventListener('dragstart', this.handleDragStart, false);
-    col.addEventListener('dragenter', this.handleDragEnter, false);
-    col.addEventListener('dragover', this.handleDragOver, false);
-    col.addEventListener('dragleave', this.handleDragLeave, false);
-    col.addEventListener('drop', this.handleDrop, false);
-    col.addEventListener('dragend', this.handleDragEnd, false);
-  });
-})();
-</script>
 	<!-- edit Content -->
 <script>
 	$(".editlink").on("click",function(){

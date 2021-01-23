@@ -44,7 +44,7 @@
 												$memberType = $member->GetMember();
 												$memberDetail = $member->GetMemberDetail();
 												if($memberDetail->userImage == null ){
-													$memberDetail->userImage = "MemberImages/avatar-5.jpg";
+													$memberDetail->userImage = "WebImages/avatar-5.jpg";
 												}
 											@endphp
 											<tr>

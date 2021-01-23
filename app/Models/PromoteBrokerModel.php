@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class PromoteBrokerModel extends Model
 {
     protected $table="broker_promotion";
-    protected $fillable = ["image","brokerId","description","videoCode","link"];
+    protected $fillable = ["image","brokerId","description","videoCode","link","userId"];
 }

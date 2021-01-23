@@ -43,7 +43,7 @@
 									}
 								@endphp
 						 		<p class="h5 p-3">
-						 			Lecture {{$lecture->id}}: {{$lecture->title}}
+						 			Lecture {{$lecture->poistion}}: {{$lecture->title}}
 						 		</p>
 						 	</div>
 						 	<div>
@@ -78,7 +78,7 @@
 				@php
 					$title = str_replace(' ','-',$data->title);
 				@endphp
-				<li><a class="dropdown-item" href="{{URL::to('/vipTraining/advance'). '/' . $title}}">{{$data->id . '. ' . $data->title}}  </a></li>
+				<li><a class="dropdown-item" href="{{URL::to('/vipTraining/advance'). '/' . $title}}">{{$data->poistion . '. ' . $data->title}}  </a></li>
 			@endforeach
 	    </ul>
 	</li>
@@ -117,7 +117,7 @@
 					@if($date4 <= $date5)
 						@php echo $lecture->embed @endphp
 					@else
-						<p>Please submit your previous home work first.</p>
+						<p>Please! wait for 24 Hours.</p>
 					@endif
 				@else
 					<p>Please submit your previous home work first.</p>
@@ -134,10 +134,30 @@
   	<div class="pt-3">
 		  <h4>Links or text related to video</h1><br>
 		@if($lecture->status == 0)
-            @php 
-                $Description = html_entity_decode($data->description);
-                echo $Description;
-            @endphp
+			@if($category == "Advance"  && $lecture->id != $Lecture1Done->id)
+				@if($commentAllow != null)
+					@php
+						$date3 = $commentAllow->created_at;
+						$date4 = date('Y-m-d H:i:s', strtotime($date3 . ' +24 hours '));
+						$date5 = date('Y-m-d H:i:s');
+					@endphp	
+					@if($date4 <= $date5)
+						@php 
+							$Description = html_entity_decode($lecture->description);
+							echo $Description;
+						@endphp
+					@else
+						<p>Please! wait for 24 Hours.</p>
+					@endif
+				@else
+					<p>Please submit your previous home work first.</p>
+				@endif
+			@else
+				@php 
+					$Description = html_entity_decode($lecture->description);
+					echo $Description;
+				@endphp
+			@endif
 		@else
 			<p>This lecture has been delete contact to administrator.</p>
 		@endif

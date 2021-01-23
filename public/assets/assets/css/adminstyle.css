@@ -32190,3 +32190,7 @@ new-task label input[type=checkbox] {
     max-width: 350px;
     overflow:auto;
 }
+#user-list-table tbody tr td{
+    max-width: 350px;
+    overflow:auto;
+}

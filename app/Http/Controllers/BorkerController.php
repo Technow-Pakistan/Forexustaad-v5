@@ -20,13 +20,18 @@ use App\Models\TrashModel;
 
 class BorkerController extends Controller
 {
-    public function Index(Request $request){
-        $broker = BrokerCompanyInformationModel::orderBy('id','desc')->where('Trash',0)->get();
+    public function Index(Request $request,$id){
+        if ($id == 6) {
+            $userID = $request->session()->get('admin');
+            $broker = BrokerCompanyInformationModel::orderBy('id','asc')->where('Trash',0)->where('userId',$userID->id)->get();
+            return view('admin.all-broker',compact('broker'));
+        }
+        $broker = BrokerCompanyInformationModel::orderBy('id','asc')->where('Trash',0)->get();
         return view('admin.all-broker',compact('broker'));
     }
     public function delete(Request $request, $id){
         $Trash = TrashModel::where('deleteId',$id)->where('category',"Broker")->first();
-        $data->delete();
+        $Trash->delete();
         $broker = BrokerCompanyInformationModel::find($id);
         $broker->delete();
         $broker = BrokerCommissionsFeesModel::where('brokerId',$id)->first();

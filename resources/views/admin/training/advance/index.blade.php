@@ -69,48 +69,67 @@
 							<div class="card-header">All Training</div>
 							<div class="card-body">
 								<div class="dt-responsive table-responsive">
-									<table id="user-list-table" class="table nowrap">
-										<thead>
-											<tr>
-												<th>Title</th>
-												<th>Date</th>
-												<th>Status</th>
-											</tr>
-										</thead>
-										<tbody>
-											@foreach($Lectures as $data)
+									<form action="{{URL::to('/ustaad/lecture/order')}}" method="post">
+										<table id="user-list-table" class="table nowrap">
+											<thead>
 												<tr>
-													<td>{{$data->title}}</td>
-													<td>{{$data->created_at->format("M d, Y")}}</td>
-													<td>
-														<span class="badge {{$data->status == 0 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 0 ? 'Active' : 'Deactive'}}</span>
-														<div class="overlay-edit">
-															<a href="{{URL::to('/ustaad/lecture')}}/{{$category}}/edit/{{$data->id}}">
-																<button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button>
-															</a>
-															<!-- <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button> -->
-															@if($data->status == 0)
-																<a href="{{URL::to('/ustaad/lecture')}}/{{$category}}/delete/{{$data->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal">
-																	<i class="feather icon-trash-2"></i>
-																</a>
-															@elseif($data->status == 1)
-																<a href="{{URL::to('/ustaad/lecture')}}/{{$category}}/active/{{$data->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal">
-																	<i class="feather icon-unlock"></i>
-																</a>
-															@endif
-														</div>
-													</td>
+													<th>ID</th>
+													<th>Title</th>
+													@if($category == "advance")
+														<th>Member</th>
+													@endif
+													<th>Date</th>
+													<th>Status</th>
 												</tr>
-											@endforeach
-										</tbody>
-										<tfoot>
-											<tr>
-												<th>Title</th>
-												<th>Date</th>
-												<th>Status</th>
-											</tr>
-										</tfoot>
-									</table>
+											</thead>
+											<tbody>
+												@foreach($Lectures as $data)
+													<tr class="row1">
+														<td>{{$data->poistion}}</td>
+														<td>
+															{{$data->title}}
+															<input type="hidden" name="poistion[]" value="{{$data->id}}">
+														</td>
+														@if($category == "advance")
+															<td>{{$data->vipMember == 0 ? 'Free' : 'Vip'}}</td>
+														@endif
+														<td>{{$data->created_at->format("M d, Y")}}</td>
+														<td>
+															<span class="badge {{$data->status == 0 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 0 ? 'Active' : 'Deactive'}}</span>
+															<div class="overlay-edit">
+																<a href="{{URL::to('/ustaad/lecture')}}/{{$category}}/edit/{{$data->id}}">
+																	<button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button>
+																</a>
+																<!-- <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button> -->
+																@if($data->status == 0)
+																	<a href="{{URL::to('/ustaad/lecture')}}/{{$category}}/delete/{{$data->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal">
+																		<i class="feather icon-trash-2"></i>
+																	</a>
+																@elseif($data->status == 1)
+																	<a href="{{URL::to('/ustaad/lecture')}}/{{$category}}/active/{{$data->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal">
+																		<i class="feather icon-unlock"></i>
+																	</a>
+																@endif
+															</div>
+														</td>
+													</tr>
+												@endforeach
+											</tbody>
+											<tfoot>
+												<tr>
+													<th>ID</th>
+													<th>Title</th>
+													@if($category == "advance")
+														<th>Member</th>
+													@endif
+													<th>Date</th>
+													<th>Status</th>
+												</tr>
+											</tfoot>
+										</table>
+										<input type="hidden" name="category" value="{{$category}}">
+										<input type="submit" class="btn btn-primary" value="Submit">
+									</form>
 								</div>
 							</div>
 						</div>
@@ -122,13 +141,4 @@
 		<!-- [ Main Content ] end -->
 
 @include('admin.include.footer')
-		<!-- Data Table -->
-		<script src="assets/js/plugins/jquery.dataTables.min.js"></script>
-		<script src="assets/js/plugins/dataTables.bootstrap4.min.js"></script>
-
-<script>
-	$('#user-list-table').DataTable();
-
-</script>
-
 
