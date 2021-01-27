@@ -22,6 +22,9 @@ use App\Models\BlogPostModel;
 use App\Models\MainWebinarModel;
 use App\Models\ClientAccountDetailModel;
 use App\Models\BrokerCompanyInformationModel;
+use App\Models\SignalsModel;
+use App\Models\UserContactModel;
+use App\Models\NotificationModel;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -63,6 +66,10 @@ class AppServiceProvider extends ServiceProvider
         view()->share("latestWebinars", MainWebinarModel::orderBy('id','desc')->take(5)->get());
         view()->share("LatestBlogsData",BlogPostModel::orderBy('id','desc')->where('status',1)->where('pending',1)->where('stickToTop',1)->whereDate('publishDate', '<=', date("Y-m-d"))->take(5)->get());
         view()->share("StarBrokerHome",BrokerCompanyInformationModel::orderBy('id','asc')->where('star',1)->where('pending',0)->where('trash',0)->skip(0)->take(10)->get());
+        view()->share("StarSignalsHome",SignalsModel::orderBy('id','asc')->where('star',1)->where('expired',0)->skip(0)->take(6)->get());
         view()->share("ClientAccountDetailInfo",ClientAccountDetailModel::all());
+        /** Admin Panel Function  */
+        view()->share("HeaderUnReadMessage",UserContactModel::orderBy('id','desc')->where('read',0)->where('trashMail',0)->get());
+        view()->share("NotificationMessage",NotificationModel::orderBy('id','desc')->get());
     }
 }

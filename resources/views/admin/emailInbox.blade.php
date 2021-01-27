@@ -138,7 +138,7 @@
                                                                     @endphp
                                                                     @foreach($totalData as $data)
                                                                         @if($data->trashMail == 0)
-                                                                            <tr class="{{$data->read == 1 ? 'read' : 'unread'}}">
+                                                                            <tr class="{{$data->read == 1 ? 'read' : 'unread'}}" link="{{$data->read == 1 ? '' : $data->id}}">
                                                                                 <td>
                                                                                     <div class="check-star">
                                                                                         <div class="form-group d-inline">
@@ -152,12 +152,22 @@
                                                                                 </td>
                                                                                 <td data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor">{{$data->email}}</td>
                                                                                 <td data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor">{{$data->name}}</td>
-                                                                                <td class="email-time" data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor">{{$data->created_at->format("dM,Y h:i a")}}</td>
-                                                                                <td><a href="{{URL::to('ustaad/contact/reply')}}/{{$data->id}}"  class="text-primary">Reply</a></td>
+                                                                                <td class="email-time Cursor" data-toggle="collapse" data-target="#demo{{$countCheck}}">{{$data->created_at->format("dM,Y h:i a")}}</td>
                                                                             </tr>
                                                                             <tr  id="demo{{$countCheck}}" class="collapse viewMessageInfo">
-                                                                                <td colspan="5">
-                                                                                    <p class="ml-5"><strong class="mr-3">Message: </strong>{{$data->message}}</p>
+                                                                                <td colspan="4">
+                                                                                    <div class="d-flex justify-content-between">
+                                                                                        <div class="ml-2"><strong class="mr-3">Message: </strong>{{$data->message}}</div>
+                                                                                        <div>
+                                                                                            <a class="text-primary Cursor" data-toggle="collapse" data-target="#demo1{{$countCheck}}">Reply</a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div id="demo1{{$countCheck}}" class="collapse">
+                                                                                            <textarea name="" class="form-control ReplyMessage"></textarea>
+                                                                                            <p class=" text-right mb-0 mt-2">
+                                                                                                <button class="btn btn-primary btn-sm ReplySend" linkReply="{{URL::to('ustaad/contact/SendMailDirect')}}" email="{{$data->email}}">Submit</button>
+                                                                                            </p>
+                                                                                    </div>
                                                                                 </td>
                                                                             </tr>
                                                                             @php $countCheck++ @endphp
@@ -192,11 +202,21 @@
                                                                                 <td  data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor">{{$data->email}}</td>
                                                                                 <td  data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor">{{$data->name}}</td>
                                                                                 <td class="email-time Cursor"  data-toggle="collapse" data-target="#demo{{$countCheck}}">{{$data->created_at->format("dM,Y h:i a")}}</td>
-                                                                                <td><a href="{{URL::to('ustaad/contact/reply')}}/{{$data->id}}" class="text-primary">Reply</a></td>
                                                                             </tr>
                                                                             <tr  id="demo{{$countCheck}}" class="collapse viewMessageInfo">
-                                                                                <td colspan="5">
-                                                                                    <p class="ml-5"><strong class="mr-3">Message: </strong>{{$data->message}}</p>
+                                                                                <td colspan="4">
+                                                                                    <div class="d-flex justify-content-between">
+                                                                                        <div class="ml-2"><strong class="mr-3">Message: </strong>{{$data->message}}</div>
+                                                                                        <div>
+                                                                                            <a class="text-primary Cursor" data-toggle="collapse" data-target="#demo1{{$countCheck}}">Reply</a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div id="demo1{{$countCheck}}" class="collapse">
+                                                                                            <textarea name="" class="form-control ReplyMessage"></textarea>
+                                                                                            <p class=" text-right mb-0 mt-2">
+                                                                                                <button class="btn btn-primary btn-sm ReplySend" linkReply="{{URL::to('ustaad/contact/SendMailDirect')}}" email="{{$data->email}}">Submit</button>
+                                                                                            </p>
+                                                                                    </div>
                                                                                 </td>
                                                                             </tr>
                                                                             @php $countCheck++ @endphp
@@ -375,5 +395,45 @@
         $('input[type="checkbox"]').each(function() {
 			this.checked = false;
 		});
+    })
+</script>
+<script>
+    $(".unread").on('click',function() {
+        var link = $(this).attr('link');
+        var url = "{{URL::to('ustaad/contact/emailRead')}}"+"/"+link;
+        console.log(url);
+        $(this).attr('class','read');
+        $.ajax({
+            type: "Get",
+            url: url,
+            success: function(data) {
+                console.log(data);
+            },
+            error: function(data){
+                console.log("fail");
+            }
+        });
+    })
+    $(".ReplySend").on("click",function() {
+        var linkReply = $(this).attr('linkReply');
+        var EmailReply = $(this).attr('email');
+        var message = $(this).parent().parent().children()[0];
+        var finalMessage = $(message).val();
+
+        console.log(linkReply);
+        console.log(EmailReply);
+        console.log(finalMessage);
+                $(message).val("");
+        $.ajax({
+            type: "Post",
+            url: linkReply,
+            data: {emailTo: EmailReply,message: finalMessage},
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(data){
+                console.log("fail");
+            }
+        });
     })
 </script>

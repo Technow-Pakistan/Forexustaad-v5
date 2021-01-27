@@ -2645,7 +2645,8 @@ padding-bottom: 12px;
 }
 .force-overflow{
     overflow-y: scroll;
-    height: 600px;
+	height: 600px;
+    width: 100%;
 }
 .box{
     width: 337px;
@@ -2655,4 +2656,10 @@ padding-bottom: 12px;
 }
 .box h5{
     color: #0d5fe9;
+}
+.fts_18{
+	font-size: 18px;
+}
+.activeVideo{
+  background-color:lightgray;
 }

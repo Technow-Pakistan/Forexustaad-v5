@@ -68,12 +68,18 @@
                                           $timeDate2 = strtotime($data->created_at->format("Y-m-d H:i:s"));
                                           $minsDate = ($timeDate1 - $timeDate2) / 60;
 													   $pair = $data->getPair();
+                                          $flags = explode("/",$pair->pair);
                                        @endphp
                                     @if($go3 == 3)
                                        <tr class="text-center">
                                           <td>
-                                             <p class="mb-2"><span class="flag-icon flag-icon-ad">&nbsp;</span>
-                                                <span class="flag-icon flag-icon-us">&nbsp;</span>
+                                             <p class="mb-2">
+                                                @foreach($flags as $flag)
+                                                   @php $flag4 = str_replace(' ', '', $flag) @endphp
+                                                   <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="50" alt=""> &nbsp;&nbsp;
+                                                @endforeach
+                                                <!-- <span class="flag-icon flag-icon-ad">&nbsp;</span>
+                                                <span class="flag-icon flag-icon-us">&nbsp;</span> -->
                                              </p>
                                              <h6 class="m-0 font-weight-bold"><strong>{{$pair->pair}}</strong></h6>
                                              <h6 class="m-0 text-danger">{{intval($minsDate)}} min ago</h6>
@@ -99,11 +105,15 @@
                                                       <div id="demo{{$data->id}}" class="collapse">
                                                          <p>Please! <br> Login First</p>
                                                       </div>
-                                                   @elseif(isset($loginClientData->memberType) && $loginClientData->memberType == 1)
-                                                      <a href="#!" data-toggle="collapse" data-target="#demo{{$data->id}}">View Signal</a>
-                                                      <div id="demo{{$data->id}}" class="collapse">
-                                                         <p>Get <br> Premium First</p>
-                                                      </div>
+                                                   @elseif(isset($loginClientData->memberType))
+                                                      @if($loginClientData->memberType == 1)
+                                                         <a href="#!" data-toggle="collapse" data-target="#demo{{$data->id}}">View Signal</a>
+                                                         <div id="demo{{$data->id}}" class="collapse">
+                                                            <p>Get <br> Premium First</p>
+                                                         </div>
+                                                      @else
+                                                         <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
+                                                      @endif
                                                    @endif
                                                 @else
                                                    <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
@@ -154,14 +164,21 @@
                                           $timeDate1 = strtotime(date("Y-m-d H:i:s"));
                                           $timeDate2 = strtotime($data->created_at->format("Y-m-d H:i:s"));
                                           $minsDate = ($timeDate1 - $timeDate2) / 60;
+													   $pair = $data->getPair();
+                                          $flags = explode("/",$pair->pair);
                                        @endphp
                                     @if($go3 != 3)
                                  <tr class="text-center">
                                     <td>
-                                       <p class="mb-2"><span class="flag-icon flag-icon-ad">&nbsp;</span>
-                                          <span class="flag-icon flag-icon-us">&nbsp;</span>
+                                       <p class="mb-2">
+                                          @foreach($flags as $flag)
+                                             @php $flag4 = str_replace(' ', '', $flag) @endphp
+                                             <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" class="thumbnail" width="50" height="50" alt=""> &nbsp;&nbsp;
+                                          @endforeach
+                                          <!-- <span class="flag-icon flag-icon-ad">&nbsp;</span>
+                                          <span class="flag-icon flag-icon-us">&nbsp;</span> -->
                                        </p>
-                                       <h6 class="m-0 font-weight-bold"><strong></strong></h6>
+                                       <h6 class="m-0 font-weight-bold"><strong>{{$pair->pair}}</strong></h6>
                                        <h6 class="m-0 text-danger">Expired</h6>
                                     </td>
                                     <td>
