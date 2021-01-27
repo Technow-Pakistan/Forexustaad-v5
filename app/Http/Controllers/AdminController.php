@@ -15,9 +15,16 @@ use App\Models\TrashModel;
 use App\Models\TrashGalleryModel;
 use App\Models\BlogPostModel;
 use App\Models\BrokerCompanyInformationModel;
+use App\Models\NotificationModel;
 
 class AdminController extends Controller
 {
+    public function NotificationView(Request $request, $id){
+        $notification = NotificationModel::find($id);
+        $link = $notification->link;
+        $notification->delete();
+        return redirect($link);
+    }
     public function ViewClientProfile(Request $request, $id){
         $totalClientInfo = ClientRegistrationModel::where('id',$id)->first();
         $clientAccount = ClientAccountDetailModel::where('clientId',$id)->get();

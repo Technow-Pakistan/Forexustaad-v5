@@ -23,25 +23,22 @@
                 <div class="col-lg-6 col-md-12 order-1 order-lg-2">
                     <div class="">
                         <div class="">
-
-
-
+											@php
+												$pair = $signalData->getPair();
+                                            	$flags = explode("/",$pair->pair);
+											@endphp
                               <div class="row gutters-sm">
                                 <div class="col-md-4 mb-3">
                                   <div class="card">
                                     <div class="card-body">
                                       <div class="d-flex flex-column align-items-center text-center">
-                                        @if($signalData== null)
-                                          <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
-                                        @else
-                                            <p class="mb-2"><span class="flag-icon flag-icon-ad">&nbsp;</span>
-                                                <span class="flag-icon flag-icon-us">&nbsp;</span>
-                                             </p>
-                                        @endif
+									  		<div>
+												@foreach($flags as $flag)
+												@php $flag4 = str_replace(' ', '', $flag) @endphp
+												<img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="50" alt=""> &nbsp;&nbsp;
+												@endforeach
+											</div>
                                         <div class="mt-3">
-												@php 
-													$pair = $signalData->getPair();
-												@endphp
                                           <h4>{{$pair->pair}}</h4>
                                           <p class="text-secondary mb-1">{{$signalData->selectUser}}</p>
                                         </div>

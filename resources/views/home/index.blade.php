@@ -455,39 +455,82 @@ $opinion_analysis = '';
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-xl-4 col-lg-6 col-md-7 col-sm-8 col-12 h-100">
-                                    <div class="features_inner text-center wow animated fadeInLeft">
-                                        <div class="services_wrapper">
-                                            <div class="services_icon_wrapper">
-                                                <div class="spin_hexagon">
-                                                    <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="" viewBox="0 0 177.4 197.4">
-                                                        <path
-                                                            d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
-                                                        </path>
-                                                    </svg>
-                                                </div>
-                                                <div class="spin_hexagon">
-                                                    <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="" viewBox="0 0 177.4 197.4">
-                                                        <path
-                                                            d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
-                                                        </path>
-                                                    </svg>
-                                                </div>
-                                                <div class="services_icon">
-
-                                                    <img src="{{URL::to('/public/assets/assets/img/customer-service.png')}}" alt="">
+                              @foreach($StarSignalsHome as $data)
+                                        @php
+                                            $url = $data->id;
+                                            $loginClientData = Session::get('client');
+                                            $go = 1;
+                                            $go3 = 1;
+                                            $profits = explode('@',$data->takeProfit);
+                                            $time1 = strtotime($data->time);
+                                            $time = date('h:i A', $time1);
+                                            $date1 = strtotime($data->date);
+                                            $date = date('d M Y', $date1);
+                                            if($data->date == date("Y-m-d")){
+                                                if($data->time >= date("H:i:s")){
+                                                    $go = 0;
+                                                    $go3 = 3;
+                                                }
+                                            }
+                                            if($data->date > date("Y-m-d")){
+                                                $go = 0;
+                                                $go3 = 3;
+                                            }
+                                            $timeDate1 = strtotime(date("Y-m-d H:i:s"));
+                                            $timeDate2 = strtotime($data->created_at->format("Y-m-d H:i:s"));
+                                            $minsDate = ($timeDate1 - $timeDate2) / 60;
+                                                        $pair = $data->getPair();
+                                            $flags = explode("/",$pair->pair);
+                                        @endphp
+                                        @if($go == 0)
+                                            <div class="col-xl-4 col-lg-6 col-md-7 col-sm-8 col-12 h-100">
+                                                <div class="features_inner text-center wow animated fadeInLeft">
+                                                    <div class="services_wrapper">
+                                                        <div class="">
+                                                            <div class="services_icon">
+                                                                @foreach($flags as $flag)
+                                                                    @php $flag4 = str_replace(' ', '', $flag) @endphp
+                                                                    <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="50" alt=""> &nbsp;&nbsp;
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+                                                        <div class="feature_content">
+                                                            <h3 class="content_title">
+                                                                {{$pair->pair}} <br>
+                                                                {{$data->selectUser}} <br>
+                                                                @if($go == 0)
+                                                                    @if($data->selectUser == "Register User" && !Session::has('client'))
+                                                                    <a href="#!" data-toggle="collapse" data-target="#demo{{$data->id}}">View Signal</a>
+                                                                        <div id="demo{{$data->id}}" class="collapse">
+                                                                            <p>Please! <br> Login First</p>
+                                                                        </div>
+                                                                    @elseif($data->selectUser == "Premium User")
+                                                                    @if(!Session::has('client'))
+                                                                        <a href="#!" data-toggle="collapse" data-target="#demo{{$data->id}}">View Signal</a>
+                                                                        <div id="demo{{$data->id}}" class="collapse">
+                                                                            <p>Please! <br> Login First</p>
+                                                                        </div>
+                                                                    @elseif(isset($loginClientData->memberType))
+                                                                        @if($loginClientData->memberType == 1)
+                                                                            <a href="#!" data-toggle="collapse" data-target="#demo{{$data->id}}">View Signal</a>
+                                                                            <div id="demo{{$data->id}}" class="collapse">
+                                                                                <p>Get <br> Premium First</p>
+                                                                            </div>
+                                                                        @else
+                                                                            <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
+                                                                        @endif
+                                                                    @endif
+                                                                    @else
+                                                                    <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
+                                                                    @endif
+                                                                @endif
+                                                            </h3>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="feature_content">
-                                                <h3 class="content_title">
-                                                    Data Protection
-                                                </h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                        @endif
+                                @endforeach
                                 <div class="col-xl-4 col-lg-6 col-md-7 col-sm-8 col-12 h-100">
                                     <div class="features_inner text-center wow animated fadeInUp">
                                         <div class="services_wrapper">

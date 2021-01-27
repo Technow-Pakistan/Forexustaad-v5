@@ -66,7 +66,7 @@
                                         </p>
                                     </div>
                                     <div>
-                                        <div class="d-flex">
+                                        <!-- <div class="d-flex">
                                             <span class="pt-3 pr-2">
                                                 <a href="{{isset($lastTitle) ? URL::to('/training'). '/' . $category . '/' . $lastTitle : '#!'}}" class="text-white">
                                                     <i class="fa fa-chevron-left" aria-hidden="true"></i>
@@ -103,11 +103,10 @@
                                                         </li>
                                                         </ul>
 
-                                                    </div> <!-- navbar-collapse.// -->
-
+                                                    </div>
                                                 </nav>
                                             </span>
-                                        </div>
+                                        </div> -->
 
                                     </div>
                                 </div>
@@ -187,287 +186,244 @@
                         </div>
                       </div>
                       <div class="col-md-4">
-
-
-                            <div class="row analysis" style="margin-top: 0; margin-bottom:0;">
-                                <div class="box">
-                                    <div class="p-4">
-                                        <h5>Title Of The Video</h5>
-                                    </div>
+                        <div class="row analysis" style="margin-top: 0; margin-bottom:0;">
+                            <div class="box">
+                                <div class="p-4">
+                                    <h5 class="fts_18"> Lecture {{$lecture->poistion}}: {{$lecture->title}}</h5>
                                 </div>
-                                <div class="force-overflow">
-
-                                <div class="col-sm-12">
-                                        <div class="media">
-                                      <img class="mr-3" src="https://forexustaad.com/public/assets/assets/img/latest_news/1.jpg" alt="Generic placeholder image">
-                                      <div class="media-body">
-                                        <p class="date m-0">Jan 16, 2020</p>
-                                        <h6 class="m-0"><a href="">Cras sit amet nibh libero, in gravida nulla</a></h6>
-                                        <p class="m-0 nameby">By Ellen WAld, PHD.</p>
+                            </div>
+                            <div class="force-overflow" id="force-overflow">
+                              @foreach($Lectures as $data)
+                                @php
+                                  $title = str_replace(' ','-',$data->title);
+                                  $img12 = $data->embed;
+                                  $img123 = explode ("/",$img12);
+                                  if(isset($img123[4])){
+                                    $img1234 = explode (" ",$img123[4]);
+                                    $img12345 = strlen($img1234[0]);
+                                    $img123456 = substr($img1234[0],0,--$img12345);
+                                  }else{
+                                    $img123456 = null;
+                                  }
+                                @endphp
+                                <a href="{{URL::to('/training'). '/' .  $category . '/' . $title}}">
+                                  <div class="col-sm-12 pl-3 {{$lecture->id == $data->id ? 'activeVideo' : ''}}" id="{{$lecture->id == $data->id ? 'activeVideo' : ''}}">
+                                      <div class="media">
+                                          <p class="mt-4 mr-2">{{$data->poistion}}. </p>
+                                        <img class="mr-3" src="http://i.ytimg.com/vi/{{$img123456}}/hqdefault.jpg" alt="Generic placeholder image">
+                                        <div class="media-body">
+                                          <h6 class="m-0 text-primary">{{$data->title}}</h6>
+                                        </div>
                                       </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-12">
-                                        <div class="media">
-                                      <img class="mr-3" src="https://forexustaad.com/public/assets/assets/img/latest_news/2.jpg" alt="Generic placeholder image">
-                                      <div class="media-body">
-                                        <p class="date m-0">Jan 16, 2020</p>
-                                        <h6 class="m-0"><a href="">Cras sit amet nibh libero, in gravida</a></h6>
-                                        <p class="m-0 nameby">By Ellen WAld, PHD.</p>
-                                      </div>
-                                    </div>
-                                    </div>
-
-                                <div class="col-sm-12">
-                                        <div class="media">
-                                      <img class="mr-3" src="https://forexustaad.com/public/assets/assets/img/latest_news/3.jpg" alt="Generic placeholder image">
-                                      <div class="media-body">
-                                        <p class="date m-0">Jan 16, 2020</p>
-                                        <h6 class="m-0"><a href="">Cras sit amet nibh libero</a></h6>
-                                        <p class="m-0 nameby">By Ellen WAld, PHD.</p>
-                                      </div>
-                                    </div>
-                                    </div>
-
-                                <div class="col-sm-12">
-
-                                        <div class="media">
-                                      <img class="mr-3" src="https://forexustaad.com/public/assets/assets/img/latest_news/4.png" alt="Generic placeholder image">
-                                      <div class="media-body">
-                                        <p class="date m-0">Jan 16, 2020</p>
-                                        <h6 class="m-0"><a href="">Cras sit amet nibh libero, in gravida nulla nibh libero</a></h6>
-                                        <p class="m-0 nameby">By Ellen WAld, PHD.</p>
-                                      </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-
-                                    <div class="media">
-                                  <img class="mr-3" src="https://forexustaad.com/public/assets/assets/img/latest_news/4.png" alt="Generic placeholder image">
-                                  <div class="media-body">
-                                    <p class="date m-0">Jan 16, 2020</p>
-                                    <h6 class="m-0"><a href="">Cras sit amet nibh libero, in gravida nulla nibh libero</a></h6>
-                                    <p class="m-0 nameby">By Ellen WAld, PHD.</p>
                                   </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-
-                                <div class="media">
-                              <img class="mr-3" src="https://forexustaad.com/public/assets/assets/img/latest_news/4.png" alt="Generic placeholder image">
-                              <div class="media-body">
-                                <p class="date m-0">Jan 16, 2020</p>
-                                <h6 class="m-0"><a href="">Cras sit amet nibh libero, in gravida nulla nibh libero</a></h6>
-                                <p class="m-0 nameby">By Ellen WAld, PHD.</p>
-                              </div>
+                                </a>
+                              @endforeach
                             </div>
                         </div>
-                        <div class="col-sm-12">
-
-                            <div class="media">
-                          <img class="mr-3" src="https://forexustaad.com/public/assets/assets/img/latest_news/4.png" alt="Generic placeholder image">
-                          <div class="media-body">
-                            <p class="date m-0">Jan 16, 2020</p>
-                            <h6 class="m-0"><a href="">Cras sit amet nibh libero, in gravida nulla nibh libero</a></h6>
-                            <p class="m-0 nameby">By Ellen WAld, PHD.</p>
-                          </div>
-                        </div>
-                    </div>
-
-
-                            </div>
-                        </div>
-
                       </div>
                   </div>
-
                   <div class="row mt-5">
                       <div class="col-md-8">
-                        @if(Session::has('client'))
-					<div class="container p-0 mt-4">
-							<div class="col-md-12" id="fbcomment">
-								<div class="header_comment">
-									<div class="row">
-										<div class="col-md-12 text-left">
-										<span class="count_comment">{{count($comments)}} Comments</span>
-										</div>
-									</div>
-								</div>
+                        @php $go23 = 0; @endphp
+                        @if($category == "Advance"  && $lecture->poistion != 1)
+                          @if($commentAllow != null)
+                            @php
+                                $go23 = 1;
+                                $date3 = $commentAllow->created_at;
+                                $date4 = date('Y-m-d H:i:s', strtotime($date3 . ' +24 hours '));
+                                $date5 = date('Y-m-d H:i:s');
+                            @endphp
+                            @if($date4 <= $date5)
+                              @php $go23 = 0; @endphp
+                            @endif
+                          @else
+                            @php $go23 = 1; @endphp 
+                          @endif
+                        @endif
+                        @if(Session::has('client') && $go23 == 0)
+                          <div class="container p-0 mt-4">
+                              <div class="col-md-12" id="fbcomment">
+                                <div class="header_comment">
+                                  <div class="row">
+                                    <div class="col-md-12 text-left">
+                                    <span class="count_comment">{{count($comments)}} Comments</span>
+                                    </div>
+                                  </div>
+                                </div>
 
-								<div class="body_comment">
-									<div class="row">
-										<div class="avatar_comment col-md-2">
-										<img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
-										</div>
-										<div class="box_comment col-md-10">
-											<form action="{{URL::to('/advance/comment/add')}}" method="post">
-												<textarea class="commentar" name="comment" placeholder="Add a comment..."></textarea>
-												<div class="box_post">
-													<div class="pull-right">
-													<span>
-														<img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar" />
-														<i class="fa fa-caret-down"></i>
-													</span>
-													@php
-														$value =Session::get('client');
-													@endphp
-													<input type="hidden" name="memberId" value="{{$value['id']}}">
-													<input type="hidden" name="userType" value="client">
-													<input type="hidden" name="lectureId" value="{{$lecture->id}}">
-													<input type="hidden" name="Category" value="{{$category}}">
-													<button type="submit" >Post</button>
-													</div>
-												</div>
-											</form>
-										</div>
-									</div>
-									<div class="row">
-										<ul id="list_comment" class="col-md-12">
-											@foreach($comments as $comment)
-												@if($comment->reply == 0)
-													@php
-														$client = $comment->getMemberInformation();
-													@endphp
-													<li class="box_result row">
-														<div class="avatar_comment col-md-2">
-															<img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
-														</div>
-														<div class="result_comment col-md-10">
-															<h4>{{$client->name}}</h4>
-															<p>{{$comment->comment}}</p>
-															<div class="tools_comment">
-																<!-- <a class="like" href="#">Like</a>
-																<span aria-hidden="true"> · </span> -->
-																<a class="replay" commentId="{{$comment->id}}">Reply</a>
-																<!-- <span aria-hidden="true"> · </span>
-																<i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
-																<span aria-hidden="true"> · </span>
-																<span>26m</span> -->
-															</div>
-															@php
-																$replys = $comment->getReply();
-															@endphp
-															@foreach($replys as $reply)
-																	@php
-																		$client = $reply->getMemberInformation();
-																	@endphp
-																	<ul class="child_replay">
-																		<li class="box_reply row">
-																			<div class="avatar_comment col-md-2">
-																				<img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
-																			</div>
-																			<div class="result_comment col-md-10">
-																				<h4>{{$client->name}}</h4>
-																				<p>{{$reply->comment}}</p>
-																				<div class="tools_comment">
-																					<!-- <a class="like" href="#">Like</a>
-																					<span aria-hidden="true"> · </span> -->
-																					<a class="replay" commentId="{{$reply->id}}">Reply</a>
-																					<!-- <span aria-hidden="true"> · </span>
-																					<i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
-																					<span aria-hidden="true"> · </span>
-																					<span>26m</span> -->
-																				</div>
-																				@php
-																					$replys1 = $reply->getReply();
-																				@endphp
-																				@foreach($replys1 as $reply1)
-																					@php
-																						$client = $reply1->getMemberInformation();
-																					@endphp
-																					<ul class="child_replay">
-																						<li class="box_reply row">
-																							<div class="avatar_comment col-md-2">
-																								<img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
-																							</div>
-																							<div class="result_comment col-md-10">
-																								<h4>{{$client->name}}</h4>
-																								<p>{{$reply1->comment}}</p>
-																								<div class="tools_comment">
-																									<!-- <a class="like" href="#">Like</a>
-																									<span aria-hidden="true"> · </span> -->
-																									<a class="replay" commentId="{{$reply1->id}}">Reply</a>
-																									<!-- <span aria-hidden="true"> · </span>
-																									<i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
-																									<span aria-hidden="true"> · </span>
-																									<span>26m</span> -->
-																								</div>
-																								@php
-																									$replys2 = $reply1->getReply();
-																								@endphp
-																								@foreach($replys2 as $reply2)
-																									@php
-																										$client = $reply2->getMemberInformation();
-																									@endphp
-																									<ul class="child_replay">
-																										<li class="box_reply row">
-																											<div class="avatar_comment col-md-2">
-																												<img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
-																											</div>
-																											<div class="result_comment col-md-10">
-																												<h4>{{$client->name}}</h4>
-																												<p>{{$reply2->comment}}</p>
-																												<div class="tools_comment">
-																													<!-- <a class="like" href="#">Like</a>
-																													<span aria-hidden="true"> · </span> -->
-																													<a class="replay" commentId="{{$reply2->id}}">Reply</a>
-																													<!-- <span aria-hidden="true"> · </span>
-																													<i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
-																													<span aria-hidden="true"> · </span>
-																													<span>26m</span> -->
-																												</div>
-																												@php
-																													$replys3 = $reply2->getReply();
-																												@endphp
-																												@foreach($replys3 as $reply3)
-																													@php
-																														$client = $reply3->getMemberInformation();
-																													@endphp
-																													<ul class="child_replay">
-																														<li class="box_reply row">
-																															<div class="avatar_comment col-md-2">
-																																<img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
-																															</div>
-																															<div class="result_comment col-md-10">
-																																<h4>{{$client->name}}</h4>
-																																<p>{{$reply3->comment}}</p>
-																																<div class="tools_comment">
-																																	<!-- <a class="like" href="#">Like</a>
-																																	<span aria-hidden="true"> · </span> -->
-																																	<a class="replay" commentId="{{$reply3->id}}">Reply</a>
-																																	<!-- <span aria-hidden="true"> · </span>
-																																	<i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
-																																	<span aria-hidden="true"> · </span>
-																																	<span>26m</span> -->
-																																</div>
+                                <div class="body_comment">
+                                  <div class="row">
+                                    <div class="avatar_comment col-md-2">
+                                    <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
+                                    </div>
+                                    <div class="box_comment col-md-10">
+                                      <form action="{{URL::to('/advance/comment/add')}}" method="post">
+                                        <textarea class="commentar" name="comment" placeholder="Add a comment..."></textarea>
+                                        <div class="box_post">
+                                          <div class="pull-right">
+                                          <span>
+                                            <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar" />
+                                            <i class="fa fa-caret-down"></i>
+                                          </span>
+                                          @php
+                                            $value =Session::get('client');
+                                          @endphp
+                                          <input type="hidden" name="memberId" value="{{$value['id']}}">
+                                          <input type="hidden" name="userType" value="client">
+                                          <input type="hidden" name="lectureId" value="{{$lecture->id}}">
+                                          <input type="hidden" name="Category" value="{{$category}}">
+                                          <button type="submit" >Post</button>
+                                          </div>
+                                        </div>
+                                      </form>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <ul id="list_comment" class="col-md-12">
+                                      @foreach($comments as $comment)
+                                        @if($comment->reply == 0)
+                                          @php
+                                            $client = $comment->getMemberInformation();
+                                          @endphp
+                                          <li class="box_result row">
+                                            <div class="avatar_comment col-md-2">
+                                              <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
+                                            </div>
+                                            <div class="result_comment col-md-10">
+                                              <h4>{{$client->name}}</h4>
+                                              <p>{{$comment->comment}}</p>
+                                              <div class="tools_comment">
+                                                <!-- <a class="like" href="#">Like</a>
+                                                <span aria-hidden="true"> · </span> -->
+                                                <a class="replay" commentId="{{$comment->id}}">Reply</a>
+                                                <!-- <span aria-hidden="true"> · </span>
+                                                <i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
+                                                <span aria-hidden="true"> · </span>
+                                                <span>26m</span> -->
+                                              </div>
+                                              @php
+                                                $replys = $comment->getReply();
+                                              @endphp
+                                              @foreach($replys as $reply)
+                                                  @php
+                                                    $client = $reply->getMemberInformation();
+                                                  @endphp
+                                                  <ul class="child_replay">
+                                                    <li class="box_reply row">
+                                                      <div class="avatar_comment col-md-2">
+                                                        <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
+                                                      </div>
+                                                      <div class="result_comment col-md-10">
+                                                        <h4>{{$client->name}}</h4>
+                                                        <p>{{$reply->comment}}</p>
+                                                        <div class="tools_comment">
+                                                          <!-- <a class="like" href="#">Like</a>
+                                                          <span aria-hidden="true"> · </span> -->
+                                                          <a class="replay" commentId="{{$reply->id}}">Reply</a>
+                                                          <!-- <span aria-hidden="true"> · </span>
+                                                          <i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
+                                                          <span aria-hidden="true"> · </span>
+                                                          <span>26m</span> -->
+                                                        </div>
+                                                        @php
+                                                          $replys1 = $reply->getReply();
+                                                        @endphp
+                                                        @foreach($replys1 as $reply1)
+                                                          @php
+                                                            $client = $reply1->getMemberInformation();
+                                                          @endphp
+                                                          <ul class="child_replay">
+                                                            <li class="box_reply row">
+                                                              <div class="avatar_comment col-md-2">
+                                                                <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
+                                                              </div>
+                                                              <div class="result_comment col-md-10">
+                                                                <h4>{{$client->name}}</h4>
+                                                                <p>{{$reply1->comment}}</p>
+                                                                <div class="tools_comment">
+                                                                  <!-- <a class="like" href="#">Like</a>
+                                                                  <span aria-hidden="true"> · </span> -->
+                                                                  <a class="replay" commentId="{{$reply1->id}}">Reply</a>
+                                                                  <!-- <span aria-hidden="true"> · </span>
+                                                                  <i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
+                                                                  <span aria-hidden="true"> · </span>
+                                                                  <span>26m</span> -->
+                                                                </div>
+                                                                @php
+                                                                  $replys2 = $reply1->getReply();
+                                                                @endphp
+                                                                @foreach($replys2 as $reply2)
+                                                                  @php
+                                                                    $client = $reply2->getMemberInformation();
+                                                                  @endphp
+                                                                  <ul class="child_replay">
+                                                                    <li class="box_reply row">
+                                                                      <div class="avatar_comment col-md-2">
+                                                                        <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
+                                                                      </div>
+                                                                      <div class="result_comment col-md-10">
+                                                                        <h4>{{$client->name}}</h4>
+                                                                        <p>{{$reply2->comment}}</p>
+                                                                        <div class="tools_comment">
+                                                                          <!-- <a class="like" href="#">Like</a>
+                                                                          <span aria-hidden="true"> · </span> -->
+                                                                          <a class="replay" commentId="{{$reply2->id}}">Reply</a>
+                                                                          <!-- <span aria-hidden="true"> · </span>
+                                                                          <i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
+                                                                          <span aria-hidden="true"> · </span>
+                                                                          <span>26m</span> -->
+                                                                        </div>
+                                                                        @php
+                                                                          $replys3 = $reply2->getReply();
+                                                                        @endphp
+                                                                        @foreach($replys3 as $reply3)
+                                                                          @php
+                                                                            $client = $reply3->getMemberInformation();
+                                                                          @endphp
+                                                                          <ul class="child_replay">
+                                                                            <li class="box_reply row">
+                                                                              <div class="avatar_comment col-md-2">
+                                                                                <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
+                                                                              </div>
+                                                                              <div class="result_comment col-md-10">
+                                                                                <h4>{{$client->name}}</h4>
+                                                                                <p>{{$reply3->comment}}</p>
+                                                                                <div class="tools_comment">
+                                                                                  <!-- <a class="like" href="#">Like</a>
+                                                                                  <span aria-hidden="true"> · </span> -->
+                                                                                  <a class="replay" commentId="{{$reply3->id}}">Reply</a>
+                                                                                  <!-- <span aria-hidden="true"> · </span>
+                                                                                  <i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
+                                                                                  <span aria-hidden="true"> · </span>
+                                                                                  <span>26m</span> -->
+                                                                                </div>
 
-																															</div>
-																														</li>
-																													</ul>
-																												@endforeach
-																											</div>
-																										</li>
-																									</ul>
-																								@endforeach
-																							</div>
-																						</li>
-																					</ul>
-																				@endforeach
-																			</div>
-																		</li>
-																	</ul>
-															@endforeach
-														</div>
-													</li>
-												@endif
-											@endforeach
-										</ul>
-									</div>
-								</div>
-							</div>
-					</div>
-				        @endif
+                                                                              </div>
+                                                                            </li>
+                                                                          </ul>
+                                                                        @endforeach
+                                                                      </div>
+                                                                    </li>
+                                                                  </ul>
+                                                                @endforeach
+                                                              </div>
+                                                            </li>
+                                                          </ul>
+                                                        @endforeach
+                                                      </div>
+                                                    </li>
+                                                  </ul>
+                                              @endforeach
+                                            </div>
+                                          </li>
+                                        @endif
+                                      @endforeach
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+				                @endif
                       </div>
                       <div class="col-md-4">
                         @include('inc.home-right-sidebar')
@@ -485,6 +441,17 @@
 </div>
 @include('inc.footer')
 
+<script>
+  var elmnt = document.getElementById("activeVideo");
+  var elmnt1 = document.getElementById("force-overflow");
+  elmnt.scrollIntoView();
+  var der1 =  elmnt1.scrollTop;
+  var der2 =  elmnt1.scrollHeight;
+  var der = der2 - der1;
+  if(der >= 600){
+  	elmnt1.scrollBy(0, -170);
+  }
+</script>
 
 <style>
 		.pre-header {
@@ -516,194 +483,194 @@
 <style>
     .pull-right{
   float:right;
-}
-.pull-left{
-  float:left;
-}
-#fbcomment{
-  background:#fff;
-  border: 1px solid #dddfe2;
-  border-radius: 3px;
-  color: #4b4f56;
-  padding:50px;
-}
-.header_comment{
-    font-size: 14px;
-    overflow: hidden;
-    border-bottom: 1px solid #e9ebee;
-    line-height: 25px;
-    margin-bottom: 24px;
-    padding: 10px 0;
-}
-.sort_title{
-  color: #4b4f56;
-}
-.sort_by{
-  background-color: #f5f6f7;
-  color: #4b4f56;
-  line-height: 22px;
-  cursor: pointer;
-  vertical-align: top;
-  font-size: 12px;
-  font-weight: bold;
-  vertical-align: middle;
-  padding: 4px;
-  justify-content: center;
-  border-radius: 2px;
-  border: 1px solid #ccd0d5;
-}
-.count_comment{
-  font-weight: 600;
-}
-.body_comment{
-    padding: 0 8px;
-    font-size: 14px;
+  }
+  .pull-left{
+    float:left;
+  }
+  #fbcomment{
+    background:#fff;
+    border: 1px solid #dddfe2;
+    border-radius: 3px;
+    color: #4b4f56;
+    padding:50px;
+  }
+  .header_comment{
+      font-size: 14px;
+      overflow: hidden;
+      border-bottom: 1px solid #e9ebee;
+      line-height: 25px;
+      margin-bottom: 24px;
+      padding: 10px 0;
+  }
+  .sort_title{
+    color: #4b4f56;
+  }
+  .sort_by{
+    background-color: #f5f6f7;
+    color: #4b4f56;
+    line-height: 22px;
+    cursor: pointer;
+    vertical-align: top;
+    font-size: 12px;
+    font-weight: bold;
+    vertical-align: middle;
+    padding: 4px;
+    justify-content: center;
+    border-radius: 2px;
+    border: 1px solid #ccd0d5;
+  }
+  .count_comment{
+    font-weight: 600;
+  }
+  .body_comment{
+      padding: 0 8px;
+      font-size: 14px;
+      display: block;
+      line-height: 25px;
+      word-break: break-word;
+  }
+  .avatar_comment{
     display: block;
-    line-height: 25px;
-    word-break: break-word;
-}
-.avatar_comment{
-  display: block;
-}
-.avatar_comment img{
-  height: 48px;
-  width: 48px;
-}
-.box_comment{
-	display: block;
+  }
+  .avatar_comment img{
+    height: 48px;
+    width: 48px;
+  }
+  .box_comment{
+    display: block;
+      position: relative;
+      line-height: 1.358;
+      word-break: break-word;
+      border: 1px solid #d3d6db;
+      word-wrap: break-word;
+      background: #fff;
+      box-sizing: border-box;
+      cursor: text;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 16px;
+    padding: 0;
+  }
+  .box_comment textarea{
+    min-height: 40px;
+    padding: 12px 8px;
+    width: 100%;
+    border: none;
+    resize: none;
+  }
+  .box_comment textarea:focus{
+    outline: none !important;
+  }
+  .box_comment .box_post{
+    border-top: 1px solid #d3d6db;
+      background: #f5f6f7;
+      padding: 8px;
+      display: block;
+      overflow: hidden;
+  }
+  .box_comment label{
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 11px;
+    color: #90949c;
+    line-height: 22px;
+  }
+  .box_comment button{
+    margin-left:8px;
+    background-color: #4267b2;
+    border: 1px solid #4267b2;
+    color: #fff;
+    text-decoration: none;
+    line-height: 22px;
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: bold;
     position: relative;
+    text-align: center;
+  }
+  .box_comment button:hover{
+    background-color: #29487d;
+    border-color: #29487d;
+  }
+  .box_comment .cancel{
+    margin-left:8px;
+    background-color: #f5f6f7;
+    color: #4b4f56;
+    text-decoration: none;
+    line-height: 22px;
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: bold;
+    position: relative;
+    text-align: center;
+    border-color: #ccd0d5;
+  }
+  .box_comment .cancel:hover{
+    background-color: #d0d0d0;
+    border-color: #ccd0d5;
+  }
+  .box_comment img{
+    height:16px;
+    width:16px;
+  }
+  .box_result{
+    margin-top: 24px;
+  }
+  .box_result .result_comment h4{
+    font-weight: 600;
+    white-space: nowrap;
+    color: #365899;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
     line-height: 1.358;
-    word-break: break-word;
-    border: 1px solid #d3d6db;
-    word-wrap: break-word;
-    background: #fff;
+    margin:0;
+  }
+  .box_result .result_comment{
+    display:block;
+    overflow:hidden;
+    padding: 0;
+  }
+  .child_replay{
+    border-left: 1px dotted #d3d6db;
+    margin-top: 12px;
+    list-style: none;
+    padding:0 0 0 8px
+  }
+  .reply_comment{
+    margin:12px 0;
+  }
+  .box_result .result_comment p{
+    margin: 4px 0;
+    text-align:justify;
+  }
+  .box_result .result_comment .tools_comment{
+    font-size: 12px;
+    line-height: 1.358;
+  }
+  .box_result .result_comment .tools_comment a{
+    color: #4267b2;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .box_result .result_comment .tools_comment span{
+    color: #90949c;
+  }
+  .body_comment .show_more{
+    background: #3578e5;
+    border: none;
     box-sizing: border-box;
-    cursor: text;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 16px;
-	padding: 0;
-}
-.box_comment textarea{
-	min-height: 40px;
-	padding: 12px 8px;
-	width: 100%;
-	border: none;
-	resize: none;
-}
-.box_comment textarea:focus{
-  outline: none !important;
-}
-.box_comment .box_post{
-	border-top: 1px solid #d3d6db;
-    background: #f5f6f7;
-    padding: 8px;
-    display: block;
-    overflow: hidden;
-}
-.box_comment label{
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 11px;
-  color: #90949c;
-  line-height: 22px;
-}
-.box_comment button{
-  margin-left:8px;
-  background-color: #4267b2;
-  border: 1px solid #4267b2;
-  color: #fff;
-  text-decoration: none;
-  line-height: 22px;
-  border-radius: 2px;
-  font-size: 14px;
-  font-weight: bold;
-  position: relative;
-  text-align: center;
-}
-.box_comment button:hover{
-  background-color: #29487d;
-  border-color: #29487d;
-}
-.box_comment .cancel{
-	margin-left:8px;
-	background-color: #f5f6f7;
-	color: #4b4f56;
-	text-decoration: none;
-	line-height: 22px;
-	border-radius: 2px;
-	font-size: 14px;
-	font-weight: bold;
-	position: relative;
-	text-align: center;
-  border-color: #ccd0d5;
-}
-.box_comment .cancel:hover{
-	background-color: #d0d0d0;
-	border-color: #ccd0d5;
-}
-.box_comment img{
-  height:16px;
-  width:16px;
-}
-.box_result{
-  margin-top: 24px;
-}
-.box_result .result_comment h4{
-  font-weight: 600;
-  white-space: nowrap;
-  color: #365899;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 14px;
-  line-height: 1.358;
-  margin:0;
-}
-.box_result .result_comment{
-  display:block;
-  overflow:hidden;
-  padding: 0;
-}
-.child_replay{
-	border-left: 1px dotted #d3d6db;
-	margin-top: 12px;
-	list-style: none;
-	padding:0 0 0 8px
-}
-.reply_comment{
-	margin:12px 0;
-}
-.box_result .result_comment p{
-  margin: 4px 0;
-  text-align:justify;
-}
-.box_result .result_comment .tools_comment{
-  font-size: 12px;
-  line-height: 1.358;
-}
-.box_result .result_comment .tools_comment a{
-  color: #4267b2;
-  cursor: pointer;
-  text-decoration: none;
-}
-.box_result .result_comment .tools_comment span{
-  color: #90949c;
-}
-.body_comment .show_more{
-  background: #3578e5;
-  border: none;
-  box-sizing: border-box;
-  color: #fff;
-  font-size: 14px;
-  margin-top: 24px;
-  padding: 12px;
-  text-shadow: none;
-  width: 100%;
-  font-weight:bold;
-  position: relative;
-  text-align: center;
-  vertical-align: middle;
-  border-radius: 2px;
-}
+    color: #fff;
+    font-size: 14px;
+    margin-top: 24px;
+    padding: 12px;
+    text-shadow: none;
+    width: 100%;
+    font-weight:bold;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 2px;
+  }
 </style>
 @if(Session::has('client'))
 	@php

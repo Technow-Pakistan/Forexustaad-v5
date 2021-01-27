@@ -1,3 +1,7 @@
+
+@php
+	$value =Session::get('admin');
+@endphp
 @include('admin.include.header')
 		<!-- [ Main Content ] start -->
 		<section class="pcoded-main-container">
@@ -61,6 +65,14 @@
 													<td>
 														<span class="badge {{$data->status == 0 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 0 ? 'Active' : 'Deactive'}}</span>
 														<div class="overlay-edit">
+															@if($value['memberId'] == 1)
+																<form action="{{URL::to('ustaad/signals')}}/{{$data->star == 0 ? 'star' : 'unstar'}}/{{$data->id}}" method="post">
+																	<span>
+																		<input type="checkbox" class="AllowBroker hiddenCheckBox" name="pending" id="option{{$data->id}}" value="0">
+																		<label for="option{{$data->id}}" class="mt-2 mr-2"><i class="fa fa-star {{$data->star == 1 ? 'yellowStar' : ''}}"></i></label>
+																	</span>
+																</form>
+															@endif
 															<a href="{{URL::to('/ustaad/signals/edit')}}/{{$data->id}}">
 																<button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button>
 															</a>

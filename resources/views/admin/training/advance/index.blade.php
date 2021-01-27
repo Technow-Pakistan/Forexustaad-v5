@@ -84,7 +84,7 @@
 											</thead>
 											<tbody>
 												@foreach($Lectures as $data)
-													<tr class="row1">
+													<tr  draggable="true" ondragstart="dragit(event)" ondragover="dragover(event)">
 														<td>{{$data->poistion}}</td>
 														<td>
 															{{$data->title}}

@@ -42,8 +42,7 @@
 												<th>Broker</th>
 												<th>Broker Name</th>
 												<th>Category</th>
-												<!-- <th>Start Date</th>
-												<th>End Date</th> -->
+												<th>User</th>
 												<th>Broker Details</th>
 												<th>Broker Review</th>
 												<th style="width:100px">Status</th>
@@ -54,6 +53,7 @@
 											@foreach($broker as $data)
 											@php
 												$category = $data->getCategory();
+												$user = $data->getAdminUser();
 											@endphp
 											<tr  draggable="true">
 												<td>{{$id3}}</td>
@@ -64,6 +64,7 @@
 												</td>
 												<td>{{$data->title}}</td>
 												<td>{{$category->category}}</td>
+												<td>{{$user->username}}</td>
 												<!-- <td>{{$data->start}}</td>
 												<td>{{$data->end}}</td> -->
 												<td><a class="text-danger" href="{{URL::to('ustaad/brokersDetail')}}/{{$data->id}}"> Click For Details </a></td>
@@ -79,7 +80,7 @@
 													@if($data->pending == 0)
 														<span class="badge {{((($paymentDate >= $contractDateBegin) && ($paymentDate <= $contractDateEnd)) || $data->neverEnd == 1) ? 'badge-light-success' : 'badge-light-danger'}}">{{((($paymentDate >= $contractDateBegin) && ($paymentDate <= $contractDateEnd)) || $data->neverEnd == 1) ? 'Active' : 'Deactive'}}</span>
 														<div class="overlay-edit">
-															@if($value['memberId'] != 6)
+															@if($value['memberId'] == 1)
 																<form action="{{URL::to('ustaad/broker')}}/{{$data->star == 0 ? 'star' : 'unstar'}}/{{$data->id}}" method="post">
 																	<span>
 																		<input type="checkbox" class="AllowBroker hiddenCheckBox" name="pending" id="option{{$id3}}" value="0">
@@ -121,25 +122,7 @@
 			</div>
 		</section>
 		<!-- [ Main Content ] end -->
-<style>
-	.hiddenCheckBox{
-		display:none;
-	}
-	.yellowStar{
-		color:yellow;
-	}
-</style>
 @include('admin.include.footer')
-<script>
-	$(".AllowBroker").on('change',function() {
-		var data = $(this).parent().parent();
-		data.submit();
-	})
-</script>
-        <!-- Data Table -->
-		<script src="assets/js/plugins/jquery.dataTables.min.js"></script>
-		<script src="assets/js/plugins/dataTables.bootstrap4.min.js"></script>
-
 
 <script>
 	$('#user-list-table').DataTable();

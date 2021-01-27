@@ -26,8 +26,8 @@ class AdvanceTrainingController extends Controller
                 }
                 if($lecture){
                     $Lecture1Done = AdvanceTrainingModel::orderBy('poistion','asc')->where('vipMember',1)->first();
-                    $nextLecture = AdvanceTrainingModel::where('poistion', '>' , $lecture->poistion)->where('vipMember',1)->first();
-                    $lastLecture = AdvanceTrainingModel::where('poistion', '<' , $lecture->poistion)->where('vipMember',1)->first();
+                    $nextLecture = AdvanceTrainingModel::orderBy('id','asc')->where('poistion', '>' , $lecture->poistion)->where('vipMember',1)->first();
+                    $lastLecture = AdvanceTrainingModel::orderBy('id','desc')->where('poistion', '<' , $lecture->poistion)->where('vipMember',1)->first();
                     $Lectures = AdvanceTrainingModel::orderBy('poistion','asc')->where('vipMember',1)->get();
                     $comments = AdvanceCommentsModel::orderBy('id','desc')->where('lectureId', $lecture->id)->get();
                     $clientInformation = $request->session()->get('client');
@@ -64,8 +64,8 @@ class AdvanceTrainingController extends Controller
                     $lecture = AdvanceTrainingModel::where('title',$title)->where('vipMember',0)->first();
                 }
                 if($lecture){
-                    $nextLecture = AdvanceTrainingModel::where('poistion', '>' , $lecture->poistion)->where('vipMember',0)->first();
-                    $lastLecture = AdvanceTrainingModel::where('poistion', '<' , $lecture->poistion)->where('vipMember',0)->first();
+                    $nextLecture = AdvanceTrainingModel::orderBy('id','asc')->where('poistion', '>' , $lecture->poistion)->where('vipMember',0)->first();
+                    $lastLecture = AdvanceTrainingModel::orderBy('id','desc')->where('poistion', '<' , $lecture->poistion)->where('vipMember',0)->first();
                     $comments = AdvanceCommentsModel::orderBy('id','desc')->where('lectureId', $lecture->id)->get();
                     $clientInformation = $request->session()->get('client');
                     $userId = $clientInformation["id"];

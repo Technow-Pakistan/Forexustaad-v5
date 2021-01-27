@@ -31,7 +31,7 @@ class ComposeEmailController extends Controller
         Mail::send([],[], function($message) use($Email)
         {
             $message->to($Email->emailTo);
-            $message->from('rmomi786@gmail.com');
+            $message->from('mail@forexustaad.com');
             if ($Email->emailCc != null) {
                 $message->from($Email->emailCc);
             }
@@ -42,6 +42,21 @@ class ComposeEmailController extends Controller
             $message->setBody($Email->message);
         });
         return redirect("ustaad/contact/emailCompose");
+    }
+    public function SendMailDirect(Request $request){
+        $data = $request->all();
+        $data["draft"] = 0;
+        $Email = new ComposeEmailModel;
+        $Email->fill($data);
+        $Email->save();
+
+        Mail::send([],[], function($message) use($Email)
+        {
+            $message->to($Email->emailTo);
+            $message->from('mail@forexustaad.com');
+            $message->subject("");
+            $message->setBody($Email->message);
+        });
     }
     public function SendEmailRead(Request $request, $id){
         $data = ComposeEmailModel::where('id',$id)->first();

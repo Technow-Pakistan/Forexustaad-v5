@@ -8,13 +8,13 @@
 						<div class="row align-items-center">
 							<div class="col-md-12">
 								<div class="page-header-title">
-									<h5 class="m-b-10">Brokers Promotions List</h5>
+									<h5 class="m-b-10">All Broker Promotions</h5>
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
 										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
 									</li>
-									<li class="breadcrumb-item"><a href="#!">Brokers Promotions List</a></li>
+									<li class="breadcrumb-item"><a href="#!">All Broker Promotions</a></li>
 									
 								</ul>
 							</div>

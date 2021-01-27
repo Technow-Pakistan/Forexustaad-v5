@@ -40,209 +40,18 @@
 
 	<!-- style modal -->
 	<style>
-	
-
-.awd-ok{
-	background: #FF5370 !important;
-}
-.awd-cancel{
-	background: #2196F3 !important;
-	color: black !important;
-}
-
-.awd-cancel{
-	background: transparent;
-	color: #678994;
-}
-
-.awd-cancel:hover{
-	background: #ddd;
-	color: #0079ff;
-}
-
-.awsm-dialog{
-	display: none;
-	position: fixed;
-	top: calc(50% - 80px);
-	left: calc(50% - 200px);
-	width: 400px;
-	background: #eee;
-	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-	padding: 40px 0;
-}
-
-.awd-content{
-	width: 100%;
-	height: 100%;
-	text-align: center;
-}
-
-.awd-message{
-	font-size: 20px;
-	font-weight: 300;
-	margin: 0;
-	margin-bottom: 30px
-}
-	
+	 /* star Checkbox */
+	.hiddenCheckBox{
+		display:none;
+	}
+	.yellowStar{
+		color:yellow;
+	}
 	</style>
 		
 		
 
 
-	<!-- form -->
-
-	<div class="awsm-dialog animated bounceIn">
-			<div class="awd-content">
-				<p class="awd-message">Are you sure?</p>
-				<a href="#" class="btn awd-ok">Yes</a>
-				<button class="btn awd-cancel">No</button>
-			</div>
-		</div>
-
-<script>
-  $(document).ready( function () {
-      $('#user-list-table').DataTable();
-  } );
-
-  var awsmDialog = (function(){
-    function $(selector){
-      return document.querySelector(selector);
-    }
-
-    function create(tag, cl, txt){
-      var el = document.createElement('div');
-      el.className = cl;
-      if(txt){
-        var newContent = document.createTextNode(txt);
-        el.appendChild(newContent);
-      }
-      return el;
-    }
-    
-   var dialog = $('.awsm-dialog'),
-      okCallback = null,
-      cancelCallback = null;
-
-    function init(){
-      if(dialog) return;
-
-      dialog = create('div', 'awsm-dialog');
-
-      var divContent = create('div', 'awd-content');
-
-      dialog.appendChild(divContent);
-
-      var pMessage = create('p', 'awd-message', 'Are you sure?');
-
-      divContent.appendChild(pMessage);
-
-      var btnOk = create('button', 'btn awd-ok', 'Yes');
-
-      divContent.appendChild(btnOk);
-
-      var btnCancel = create('button', 'btn awd-cancel', 'No');
-
-      divContent.appendChild(btnCancel);
-
-      document.querySelector('body').append(dialog);
-    }
-    
-   function open(message){
-      init();
-      okCallback = null;
-      cancelCallback = null;
-     $('.awd-message').innerText = message;
-      show();
-      return this;
-    }
-    
-    function show(){
-     dialog.style.display = 'block';
-      ok();
-      cancel();
-    }
-    
-    function ok(callback){
-
-      okCallback = callback;
-
-     $('.awd-ok').onclick = function(ev){
-
-        hide();
-
-        if(okCallback){
-
-          okCallback();
-
-        }
-     };
-
-     return this;
-    }
-
-    function cancel(callback){
-
-      cancelCallback = callback;
-
-      $('.awd-cancel').onclick = function(ev){
-
-        hide();
-        
-        if(cancelCallback){
-
-          cancelCallback();
-
-        }
-      }
-    }
-    
-    function hide(){
-      dialog.className = 'awsm-dialog animated bounceOutDown';
-       
-      setTimeout(function(){
-        dialog.style.display = 'none';
-        dialog.className = 'awsm-dialog animated bounceIn';
-      }, 1000);
-    }
-    
-    return {
-      open,
-      ok,
-      cancel
-    };
-    
-  })();
-
-  var btn = document.querySelector('.btn-dialog');
-
-  btn.addEventListener('click', function(ev){
-    ev.preventDefault();
-    
-    awsmDialog.open('Are you sure you want to Delete this?');
-  })
-
-
-  // for creating preview screenshot
-
-  var btnOk = document.querySelector('.awd-ok');
-
-  function demo(){
-
-
-    setInterval(function(){
-      btn.click()
-    }, 1000);
-    
-    setInterval(function(){
-        btnOk.click();
-      }, 3000);
-  }
-
-  if (document.location.pathname.indexOf('fullcpgrid')>-1){
-    demo();
-  }
-
-</script>
 		<!-- Required Js -->
 		
 		<script>
@@ -274,8 +83,6 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css"/>
   
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-
-
         @php 
           $value =Session::get('admin');
         @endphp
@@ -308,72 +115,26 @@
 	</body>
 </html>
 
+<!-- drag & drop rows -->
 <script>
 
-(function() {
-  var id_ = 'table';
-  var cols_ = document.querySelectorAll('.' + id_ + ' .row1');
-  var dragSrcEl_ = null;
-
-  this.handleDragStart = function(e) {
-    e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/html', this.innerHTML);
-
-    dragSrcEl_ = this;
-
-    this.style.opacity = '0.4';
-
-  };
-
-  this.handleDragOver = function(e) {
-    if (e.preventDefault) {
-      e.preventDefault(); // Allows us to drop.
-    }
-
-    e.dataTransfer.dropEffect = 'move';
-
-    return false;
-  };
-
-  this.handleDragEnter = function(e) {
-  };
-
-  this.handleDragLeave = function(e) {
-  };
-
-  this.handleDrop = function(e) {
-    // this/e.target is current target element.
-
-    if (e.stopPropagation) {
-      e.stopPropagation(); // stops the browser from redirecting.
-    }
-
-    // Don't do anything if we're dropping on the same column we're dragging.
-    if (dragSrcEl_ != this) {
-      dragSrcEl_.innerHTML = this.innerHTML;
-      this.innerHTML = e.dataTransfer.getData('text/html');
-    }
-
-    return false;
-  };
-
-  this.handleDragEnd = function(e) {
-    // this/e.target is the source node.
-    this.style.opacity = '1';
-
-    [].forEach.call(cols_, function (col) {
-    });
-  };
-
-  [].forEach.call(cols_, function (col) {
-    col.setAttribute('draggable', 'true');  // Enable columns to be draggable.
-    col.addEventListener('dragstart', this.handleDragStart, false);
-    col.addEventListener('dragenter', this.handleDragEnter, false);
-    col.addEventListener('dragover', this.handleDragOver, false);
-    col.addEventListener('dragleave', this.handleDragLeave, false);
-    col.addEventListener('drop', this.handleDrop, false);
-    col.addEventListener('dragend', this.handleDragEnd, false);
-  });
-})();
+	let shadow
+	function dragit(event){
+	  shadow=event.target;
+	}
+	function dragover(e){
+    let children=Array.from(e.target.parentNode.parentNode.children);
+    if(children.indexOf(e.target.parentNode)>children.indexOf(shadow))
+    e.target.parentNode.after(shadow);
+    else e.target.parentNode.before(shadow);
+	}
+  
 </script>
-	
+
+<!-- star checkbox -->
+<script>
+	$(".AllowBroker").on('change',function() {
+		var data = $(this).parent().parent();
+		data.submit();
+	})
+</script>

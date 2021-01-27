@@ -17,6 +17,7 @@ use App\Models\BrokerReviewModel;
 use App\Models\BrokerNewsModel;
 use App\Models\BorkerPromotionsModel;
 use App\Models\TrashModel;
+use App\Models\NotificationModel;
 
 class BorkerController extends Controller
 {
@@ -140,6 +141,7 @@ class BorkerController extends Controller
     public function Trash(Request $request, $id){
         $user = $request->session()->get("admin");
         $data = BrokerCompanyInformationModel::find($id);
+        $brokerTitle = $data->title;
         $data->trash = 1;
         $data->save();
         $brokerNews = BrokerNewsModel::where('brokerId',$id)->get();
@@ -165,6 +167,13 @@ class BorkerController extends Controller
         $Trash->deleteId = $id;
         $Trash->deleteTitle = $data->title;
         $Trash->save();
+        if ($user['memberId'] == 6 ) {
+            $notification = new NotificationModel;
+            $notification->userId = $user->id;
+            $notification->text = "Delete a broker $brokerTitle";
+            $notification->link = "ustaad/trash";
+            $notification->save();
+        }
         return back();
     }
     public function TrashRestore(Request $request, $id){
