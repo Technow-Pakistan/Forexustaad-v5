@@ -39,38 +39,37 @@ class ContactController extends Controller
             $data->read = 1;
         }
         $data->save();
-        return view("admin.emailRead",compact("data"));
     }
     public function SelectedTrash(Request $request){
         if (isset($request->inbox)) {
             $data = $request->inbox;
             $count = count($data);
             for ($i=0; $i <$count ; $i++) { 
-                $data = UserContactModel::where('id',$data[$i])->first();
-                $data->trashMail = 1;
-                $data->save();
+                $data12 = UserContactModel::where('id',$data[$i])->first();
+                $data12->trashMail = 1;
+                $data12->save();
             }
         }elseif (isset($request->sent)){
             $data = $request->sent;
             $count = count($data);
             for ($i=0; $i <$count ; $i++) { 
-                $data = ComposeEmailModel::where('id',$data[$i])->first();
-                $data->trashMail = 1;
-                $data->save();
+                $data12 = ComposeEmailModel::where('id',$data[$i])->first();
+                $data12->trashMail = 1;
+                $data12->save();
             }
         }elseif (isset($request->inboxTrash)) {
             $data = $request->inboxTrash;
             $count = count($data);
             for ($i=0; $i <$count ; $i++) { 
-                $data = UserContactModel::where('id',$data[$i])->first();
-                $data->delete();
+                $data12 = UserContactModel::where('id',$data[$i])->first();
+                $data12->delete();
             }
         }elseif (isset($request->sentTrash)){
             $data = $request->sentTrash;
             $count = count($data);
             for ($i=0; $i <$count ; $i++) { 
-                $data = ComposeEmailModel::where('id',$data[$i])->first();
-                $data->delete();
+                $data12 = ComposeEmailModel::where('id',$data[$i])->first();
+                $data12->delete();
             }
         }
         return back();
@@ -80,17 +79,17 @@ class ContactController extends Controller
             $data = $request->inboxTrash;
             $count = count($data);
             for ($i=0; $i <$count ; $i++) { 
-                $data = UserContactModel::where('id',$data[$i])->first();
-                $data->trashMail = 0;
-                $data->save();
+                $data12 = UserContactModel::where('id',$data[$i])->first();
+                $data12->trashMail = 0;
+                $data12->save();
             }
         }elseif (isset($request->sentTrash)){
             $data = $request->sentTrash;
             $count = count($data);
             for ($i=0; $i <$count ; $i++) { 
-                $data = ComposeEmailModel::where('id',$data[$i])->first();
-                $data->trashMail = 0;
-                $data->save();
+                $data12 = ComposeEmailModel::where('id',$data[$i])->first();
+                $data12->trashMail = 0;
+                $data12->save();
             }
         }
         return back();

@@ -19,7 +19,7 @@ class SignalController extends Controller
         $url = $id;
         $signalData = SignalsModel::where('id',$url)->where('status',0)->first();
         $comments = SignalCommentsModel::orderBy('id','desc')->where('signalId', $signalData->id)->get();
-        $title = $url . " Signal";
+        $title = "Signal";
         if($signalData){
             return view('home.signal.viewSignal',compact('signalData','title','comments'));   
         }else{
@@ -89,6 +89,18 @@ class SignalController extends Controller
         $data = SignalsModel::where('id',$id)->first();
         $data->fill($signal);
         $data->save();
+        return back();
+    }
+    public function StarProcess(Request $request, $id){
+        $broker = SignalsModel::find($id);
+        $broker->star = 1;
+        $broker->save();
+        return back();
+    }
+    public function UnStarProcess(Request $request, $id){
+        $broker = SignalsModel::find($id);
+        $broker->star = 0;
+        $broker->save();
         return back();
     }
     // Signal Pair

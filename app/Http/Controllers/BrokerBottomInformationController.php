@@ -8,6 +8,8 @@ use App\Models\BrokerTradingFeaturesModel;
 use App\Models\BrokerCustomerServicesModel;
 use App\Models\BrokerReserchEducationModel;
 use App\Models\BrokerPromotionModel;
+use App\Models\BrokerCompanyInformationModel;
+use App\Models\NotificationModel;
 
 class BrokerBottomInformationController extends Controller
 {
@@ -20,6 +22,15 @@ class BrokerBottomInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
+        $userID = $request->session()->get('admin');
+        if ($userID['memberId'] == 6 ) {
+            $title = BrokerCompanyInformationModel::find($id);
+            $notification = new NotificationModel;
+            $notification->userId = $userID->id;
+            $notification->text = "add a Plat Form section in $title->title broker";
+            $notification->link = "ustaad/brokersDetail/$title->id";
+            $notification->save();
+        }
         return redirect("ustaad/editBroker/".$id)->with(['activeFormsBottomData'=>$request->activeForm]);
     }
     public function AddFeature(Request $request){
@@ -31,6 +42,15 @@ class BrokerBottomInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
+        $userID = $request->session()->get('admin');
+        if ($userID['memberId'] == 6 ) {
+            $title = BrokerCompanyInformationModel::find($id);
+            $notification = new NotificationModel;
+            $notification->userId = $userID->id;
+            $notification->text = "add a Feature in $title->title broker";
+            $notification->link = "ustaad/brokersDetail/$title->id";
+            $notification->save();
+        }
         return redirect("ustaad/editBroker/".$id)->with(['activeFormsBottomData'=>$request->activeForm]);
     }
     public function AddCustomerServices(Request $request){
@@ -42,6 +62,15 @@ class BrokerBottomInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
+        $userID = $request->session()->get('admin');
+        if ($userID['memberId'] == 6 ) {
+            $title = BrokerCompanyInformationModel::find($id);
+            $notification = new NotificationModel;
+            $notification->userId = $userID->id;
+            $notification->text = "add a Customer Services in $title->title broker";
+            $notification->link = "ustaad/brokersDetail/$title->id";
+            $notification->save();
+        }
         return redirect("ustaad/editBroker/".$id)->with(['activeFormsBottomData'=>$request->activeForm]);
     }
     public function AddReserchEducation(Request $request){
@@ -53,6 +82,15 @@ class BrokerBottomInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
+        $userID = $request->session()->get('admin');
+        if ($userID['memberId'] == 6 ) {
+            $title = BrokerCompanyInformationModel::find($id);
+            $notification = new NotificationModel;
+            $notification->userId = $userID->id;
+            $notification->text = "add a Reserch Education in $title->title broker";
+            $notification->link = "ustaad/brokersDetail/$title->id";
+            $notification->save();
+        }
         return redirect("ustaad/editBroker/".$id)->with(['activeFormsBottomData'=>$request->activeForm]);
     }
     public function AddPromotion(Request $request){
@@ -64,6 +102,15 @@ class BrokerBottomInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
+        $userID = $request->session()->get('admin');
+        if ($userID['memberId'] == 6 ) {
+            $title = BrokerCompanyInformationModel::find($id);
+            $notification = new NotificationModel;
+            $notification->userId = $userID->id;
+            $notification->text = "add a Promotion in $title->title broker";
+            $notification->link = "ustaad/brokersDetail/$title->id";
+            $notification->save();
+        }
         return redirect("ustaad/editBroker/".$id)->with(['activeFormsBottomData'=>$request->activeForm]);
     }
     

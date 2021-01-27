@@ -139,6 +139,7 @@ Route::post('/ustaad',[AdminController::class,'Index']);
 
 Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::post('/apileftorder',[ApiLeftController::class,'Order']);
+    Route::get('/notification/{id}',[AdminController::class,'NotificationView']);
     Route::get('/viewClientProfile/{id}',[AdminController::class,'ViewClientProfile']);
     Route::post('/changeMemberType/{id}',[AdminController::class,'ChangeMemberType']);
 
@@ -185,6 +186,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/emailCompose',[ComposeEmailController::class,'Index']);
         Route::post('/DraftMail',[ComposeEmailController::class,'DraftMail']);
         Route::post('/SendMail',[ComposeEmailController::class,'SendMail']);
+        Route::post('/SendMailDirect',[ComposeEmailController::class,'SendMailDirect']);
         Route::get('/sendEmailRead/{id}',[ComposeEmailController::class,'SendEmailRead']);
         Route::get('/draftEmailRead/{id}',[ComposeEmailController::class,'draftEmailRead']);
         Route::post('/draftEmailRead/{id}',[ComposeEmailController::class,'draftEmailSave']);
@@ -199,6 +201,8 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::post('/edit/{id}',[SignalController::class,'EditProcess']);
         Route::get('/delete/{id}',[SignalController::class,'Delete']);
         Route::get('/active/{id}',[SignalController::class,'Active']);
+        Route::post('/star/{id}',[SignalController::class,'StarProcess']);
+        Route::post('/unstar/{id}',[SignalController::class,'UnStarProcess']);
         Route::get('/addPair',[SignalController::class,'AddPair']);
         Route::post('/addPair',[SignalController::class,'AddPairProcess']);
         Route::post('pair/edit/{id}',[SignalController::class,'EditPairProcess']);

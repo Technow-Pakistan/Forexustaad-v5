@@ -13,6 +13,7 @@ use App\Models\BrokerTradingFeaturesModel;
 use App\Models\BrokerCustomerServicesModel;
 use App\Models\BrokerReserchEducationModel;
 use App\Models\BrokerPromotionModel;
+use App\Models\NotificationModel;
 
 class BrokerTopInformationController extends Controller
 {
@@ -24,7 +25,6 @@ class BrokerTopInformationController extends Controller
         $userID = $request->session()->get('admin');
         $data['userId'] = $userID->id;
         if ($userID['memberId'] == 6 ) {
-            $data['userId'] = $userID->id;
             $data['pending'] = 1;
         }
         if ($request->file("file_photo") != null) {
@@ -40,6 +40,7 @@ class BrokerTopInformationController extends Controller
         $broker->fill($data);
         $broker->save();
         $id = $broker->id;
+        $brokerTitle = $broker->title;
         $broker = new BrokerDepositModel;
         $broker->brokerId = $id;
         $broker->save();
@@ -67,6 +68,13 @@ class BrokerTopInformationController extends Controller
         $broker = new BrokerPromotionModel;
         $broker->brokerId = $id;
         $broker->save();
+        if ($userID['memberId'] == 6 ) {
+            $notification = new NotificationModel;
+            $notification->userId = $userID->id;
+            $notification->text = "add a new broker $brokerTitle";
+            $notification->link = "ustaad/brokersDetail/$id";
+            $notification->save();
+        }
         return redirect("ustaad/editBroker/".$id)->with(['activeFormsData'=>$request->activeForm]);
     }
     public function AddDeposit(Request $request){
@@ -78,6 +86,15 @@ class BrokerTopInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
+        $userID = $request->session()->get('admin');
+        if ($userID['memberId'] == 6 ) {
+            $title = BrokerCompanyInformationModel::find($id);
+            $notification = new NotificationModel;
+            $notification->userId = $userID->id;
+            $notification->text = "add a Deposit section in $title->title broker";
+            $notification->link = "ustaad/brokersDetail/$title->id";
+            $notification->save();
+        }
         return redirect("ustaad/editBroker/".$id)->with(['activeFormsData'=>$request->activeForm]);
     }
     public function AddCommission(Request $request){
@@ -89,6 +106,15 @@ class BrokerTopInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
+        $userID = $request->session()->get('admin');
+        if ($userID['memberId'] == 6 ) {
+            $title = BrokerCompanyInformationModel::find($id);
+            $notification = new NotificationModel;
+            $notification->userId = $userID->id;
+            $notification->text = "add a Commission section in $title->title broker";
+            $notification->link = "ustaad/brokersDetail/$title->id";
+            $notification->save();
+        }
         return redirect("ustaad/editBroker/".$id)->with(['activeFormsData'=>$request->activeForm]);
     }
     public function AddAccountInfo(Request $request){
@@ -100,6 +126,15 @@ class BrokerTopInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
+        $userID = $request->session()->get('admin');
+        if ($userID['memberId'] == 6 ) {
+            $title = BrokerCompanyInformationModel::find($id);
+            $notification = new NotificationModel;
+            $notification->userId = $userID->id;
+            $notification->text = "add a Account Info section in $title->title broker";
+            $notification->link = "ustaad/brokersDetail/$title->id";
+            $notification->save();
+        }
         return redirect("ustaad/editBroker/".$id)->with(['activeFormsData'=>$request->activeForm]);
     }
     public function AddTradableAssets(Request $request){
@@ -111,6 +146,15 @@ class BrokerTopInformationController extends Controller
         $broker->fill($request->all());
         $broker->save();
         $id = $broker->brokerId;
+        $userID = $request->session()->get('admin');
+        if ($userID['memberId'] == 6 ) {
+            $title = BrokerCompanyInformationModel::find($id);
+            $notification = new NotificationModel;
+            $notification->userId = $userID->id;
+            $notification->text = "add a Tradable Assets section in $title->title broker";
+            $notification->link = "ustaad/brokersDetail/$title->id";
+            $notification->save();
+        }
         return redirect("ustaad/editBroker/".$id)->with(['activeFormsData'=>$request->activeForm]);
     }
     public function AllowBrokerProcess(Request $request, $id){
