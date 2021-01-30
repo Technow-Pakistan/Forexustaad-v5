@@ -143,7 +143,7 @@
 
                                                                         <!-- Enter the estimate profit -->
                                                                         @for($i=0; $i < count($socails); $i++)
-                                                                            <div class="dynamic-field2" id="dynamic-field-3">
+                                                                            <div class="dynamic-field2" id="dynamic-field-150">
                                                                                 <label class="d-none"></label>
                                                                                 <div class="input-group">
                                                                                     <div class="input-group-prepend">
@@ -468,8 +468,8 @@
 
         function addNewField() {
             count = totalFields() + 1;
-            field = $("#dynamic-field-3").clone();
-            field.attr("id", "dynamic-field2-" + count);
+            field = $("#dynamic-field-150").clone();
+            field.attr("id", "dynamic-field-" + count);
             field.find("input").val("");
             $(className + ":last").after($(field));
         }

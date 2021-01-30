@@ -27,7 +27,7 @@ class BrokerBottomInformationController extends Controller
             $title = BrokerCompanyInformationModel::find($id);
             $notification = new NotificationModel;
             $notification->userId = $userID->id;
-            $notification->text = "add a Plat Form section in $title->title broker";
+            $notification->text = "Edit a Plat Form section in $title->title broker";
             $notification->link = "ustaad/brokersDetail/$title->id";
             $notification->save();
         }
@@ -47,7 +47,7 @@ class BrokerBottomInformationController extends Controller
             $title = BrokerCompanyInformationModel::find($id);
             $notification = new NotificationModel;
             $notification->userId = $userID->id;
-            $notification->text = "add a Feature in $title->title broker";
+            $notification->text = "Edit a Feature in $title->title broker";
             $notification->link = "ustaad/brokersDetail/$title->id";
             $notification->save();
         }
@@ -67,7 +67,7 @@ class BrokerBottomInformationController extends Controller
             $title = BrokerCompanyInformationModel::find($id);
             $notification = new NotificationModel;
             $notification->userId = $userID->id;
-            $notification->text = "add a Customer Services in $title->title broker";
+            $notification->text = "Edit a Customer Services in $title->title broker";
             $notification->link = "ustaad/brokersDetail/$title->id";
             $notification->save();
         }
@@ -87,7 +87,7 @@ class BrokerBottomInformationController extends Controller
             $title = BrokerCompanyInformationModel::find($id);
             $notification = new NotificationModel;
             $notification->userId = $userID->id;
-            $notification->text = "add a Reserch Education in $title->title broker";
+            $notification->text = "Edit a Reserch Education in $title->title broker";
             $notification->link = "ustaad/brokersDetail/$title->id";
             $notification->save();
         }
@@ -107,7 +107,7 @@ class BrokerBottomInformationController extends Controller
             $title = BrokerCompanyInformationModel::find($id);
             $notification = new NotificationModel;
             $notification->userId = $userID->id;
-            $notification->text = "add a Promotion in $title->title broker";
+            $notification->text = "Edit a Promotion in $title->title broker";
             $notification->link = "ustaad/brokersDetail/$title->id";
             $notification->save();
         }

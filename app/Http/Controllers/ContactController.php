@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\UserContactModel;
 use App\Models\ComposeEmailModel;
 
-
 class ContactController extends Controller
 {
     public function contact(Request $request){
@@ -39,6 +38,10 @@ class ContactController extends Controller
             $data->read = 1;
         }
         $data->save();
+        $data = UserContactModel::where('id',$id)->first();
+        $totalData = UserContactModel::orderBy("id","desc")->get();
+        $totalCompose = ComposeEmailModel::orderBy("id","desc")->get();
+        return view('admin.sendEmailRead',compact('data',"totalData","totalCompose"));
     }
     public function SelectedTrash(Request $request){
         if (isset($request->inbox)) {

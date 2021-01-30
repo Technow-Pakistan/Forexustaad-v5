@@ -35,7 +35,7 @@
 									  		<div>
 												@foreach($flags as $flag)
 												@php $flag4 = str_replace(' ', '', $flag) @endphp
-												<img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="50" alt=""> &nbsp;&nbsp;
+												<img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
 												@endforeach
 											</div>
                                         <div class="mt-3">

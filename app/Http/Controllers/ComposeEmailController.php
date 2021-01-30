@@ -59,8 +59,10 @@ class ComposeEmailController extends Controller
         });
     }
     public function SendEmailRead(Request $request, $id){
-        $data = ComposeEmailModel::where('id',$id)->first();
-        return view('admin.sendEmailRead',compact('data'));
+        $dataSend = ComposeEmailModel::where('id',$id)->first();
+        $totalData = UserContactModel::orderBy("id","desc")->get();
+        $totalCompose = ComposeEmailModel::orderBy("id","desc")->get();
+        return view('admin.sendEmailRead',compact('dataSend',"totalData","totalCompose"));
     }
     public function draftEmailRead(Request $request, $id){
         $data = ComposeEmailModel::where('id',$id)->first();
