@@ -448,7 +448,7 @@ $opinion_analysis = '';
                             <div class="content_area_heading large-heading text-center">
 
                                 <h1 class="heading_title wow animated fadeInUp">
-                                    Sponsers Adds
+                                    Latest Signals
                                 </h1>
                                 <div class="heading_border wow animated fadeInUp">
                                     <span class="one"></span><span class="two"></span><span class="three"></span>
@@ -490,7 +490,7 @@ $opinion_analysis = '';
                                                             <div class="services_icon">
                                                                 @foreach($flags as $flag)
                                                                     @php $flag4 = str_replace(' ', '', $flag) @endphp
-                                                                    <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="50" alt=""> &nbsp;&nbsp;
+                                                                    <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
                                                                 @endforeach
                                                             </div>
                                                         </div>
@@ -531,166 +531,6 @@ $opinion_analysis = '';
                                             </div>
                                         @endif
                                 @endforeach
-                                <div class="col-xl-4 col-lg-6 col-md-7 col-sm-8 col-12 h-100">
-                                    <div class="features_inner text-center wow animated fadeInUp">
-                                        <div class="services_wrapper">
-                                            <div class="services_icon_wrapper">
-                                                <div class="spin_hexagon">
-                                                    <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="" viewBox="0 0 177.4 197.4">
-                                                        <path
-                                                            d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
-                                                        </path>
-                                                    </svg>
-                                                </div>
-                                                <div class="spin_hexagon">
-                                                    <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="" viewBox="0 0 177.4 197.4">
-                                                        <path
-                                                            d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
-                                                        </path>
-                                                    </svg>
-                                                </div>
-                                                <div class="services_icon">
-                                                    <img src="{{URL::to('/public/assets/assets/img/stadistics.png')}}" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="feature_content">
-                                                <h3 class="content_title">
-                                                    Security Protected
-                                                </h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-6 col-md-7 col-sm-8 col-12 h-100">
-                                    <div class="features_inner text-center wow animated fadeInRight">
-                                        <div class="services_wrapper">
-                                            <div class="services_icon_wrapper">
-                                                <div class="spin_hexagon">
-                                                    <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="" viewBox="0 0 177.4 197.4">
-                                                        <path
-                                                            d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
-                                                        </path>
-                                                    </svg>
-                                                </div>
-                                                <div class="spin_hexagon">
-                                                    <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="" viewBox="0 0 177.4 197.4">
-                                                        <path
-                                                            d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
-                                                        </path>
-                                                    </svg>
-                                                </div>
-                                                <div class="services_icon">
-                                                    <img src="{{URL::to('/public/assets/assets/img/global.png')}}" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="feature_content">
-                                                <h3 class="content_title">
-                                                    Support 24/7
-                                                </h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-6 col-md-7 col-sm-8 col-12 h-100">
-                                    <div class="features_inner text-center wow animated fadeInLeft">
-                                        <div class="services_wrapper">
-                                            <div class="services_icon_wrapper">
-                                                <div class="spin_hexagon">
-                                                    <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="" viewBox="0 0 177.4 197.4">
-                                                        <path
-                                                            d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
-                                                        </path>
-                                                    </svg>
-                                                </div>
-                                                <div class="spin_hexagon">
-                                                    <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="" viewBox="0 0 177.4 197.4">
-                                                        <path
-                                                            d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
-                                                        </path>
-                                                    </svg>
-                                                </div>
-                                                <div class="services_icon">
-                                                    <img src="{{URL::to('/public/assets/assets/img/pay.png')}}" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="feature_content">
-                                                <h3 class="content_title">
-                                                    Payment Methods
-                                                </h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-6 col-md-7 col-sm-8 col-12 h-100">
-                                    <div class="features_inner text-center wow animated fadeInUp">
-                                        <div class="services_wrapper">
-                                            <div class="services_icon_wrapper">
-                                                <div class="spin_hexagon">
-                                                    <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="" viewBox="0 0 177.4 197.4">
-                                                        <path
-                                                            d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
-                                                        </path>
-                                                    </svg>
-                                                </div>
-                                                <div class="spin_hexagon">
-                                                    <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="" viewBox="0 0 177.4 197.4">
-                                                        <path
-                                                            d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
-                                                        </path>
-                                                    </svg>
-                                                </div>
-                                                <div class="services_icon">
-                                                    <img src="{{URL::to('/public/assets/assets/img/membership.png')}}" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="feature_content">
-                                                <h3 class="content_title">
-                                                    Registered Company
-                                                </h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-6 col-md-7 col-sm-8 col-12 h-100">
-                                    <div class="features_inner text-center wow animated fadeInRight">
-                                        <div class="services_wrapper">
-                                            <div class="services_icon_wrapper">
-                                                <div class="spin_hexagon">
-                                                    <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="" viewBox="0 0 177.4 197.4">
-                                                        <path
-                                                            d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
-                                                        </path>
-                                                    </svg>
-                                                </div>
-                                                <div class="spin_hexagon">
-                                                    <svg style="filter: drop-shadow(4px 5px 4px rgba(2,130,91,0.3)); fill: #0d5fe9;"
-                                                        xmlns="" viewBox="0 0 177.4 197.4">
-                                                        <path
-                                                            d="M0,58.4v79.9c0,6.5,3.5,12.6,9.2,15.8l70.5,40.2c5.6,3.2,12.4,3.2,18,0l70.5-40.2c5.7-3.2,9.2-9.3,9.2-15.8V58.4 c0-6.5-3.5-12.6-9.2-15.8L97.7,2.4c-5.6-3.2-12.4-3.2-18,0L9.2,42.5C3.5,45.8,0,51.8,0,58.4z">
-                                                        </path>
-                                                    </svg>
-                                                </div>
-                                                <div class="services_icon">
-                                                    <img src="{{URL::to('/public/assets/assets/img/business-and-finance.png')}}" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="feature_content">
-                                                <h3 class="content_title">
-                                                    Live Exchange Rates
-                                                </h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </section>

@@ -25,8 +25,8 @@ use App\Mail\SubscriberMail;
 use App\Mail\ForgetPasswordMail;
 use App\Models\ClientAccountDetailModel;
 use App\Models\BrokerCategoryModel;
-
 use App\Models\MainWebinarModel;
+use App\Models\NotificationModel;
 
 class HomeController extends Controller
 {
@@ -152,7 +152,6 @@ class HomeController extends Controller
         }
         return back();
     }
-
     public function ForgetProcess(Request $request){
         $email = ClientRegistrationModel::where('email',$request->username)->first();
 
@@ -180,7 +179,6 @@ class HomeController extends Controller
         }
         return back();
     }
-
     public function LoginProcess(Request $request){
         $password = md5($request->password);
         $login = ClientRegistrationModel::where('email',$request->username)->where('password',$password)->first();
@@ -266,13 +264,12 @@ class HomeController extends Controller
             return redirect('/');
         }
     }
-
     public function brokerReview(Request $request, $id){
         $title = str_replace("-"," ",$id);
         $broker1 = BrokerCompanyInformationModel::where('title',$title)->first();
         if ($broker1) {
         $id = $broker1->id;
-            $totalData = BrokerReviewModel::orderBy('id','desc')->where('brokerId',$id)->get();
+            $totalData = BrokerReviewModel::orderBy('id','desc')->where('brokerId',$id)->where('trash',0)->where('pending',0)->get();
 
             if(count($totalData) != 0){
                 $title = $broker1->title;
@@ -303,7 +300,7 @@ class HomeController extends Controller
         $broker1 = BrokerCompanyInformationModel::where('title',$title)->first();
         if ($broker1) {
             $id = $broker1->id;
-            $totalData = BrokerNewsModel::orderBy('id','desc')->where('brokerId',$id)->get();
+            $totalData = BrokerNewsModel::orderBy('id','desc')->where('brokerId',$id)->where('trash',0)->where('pending',0)->get();
 
             if(count($totalData) != 0){
                 $title = $broker1->title;
@@ -335,7 +332,7 @@ class HomeController extends Controller
         $broker1 = BrokerCompanyInformationModel::where('title',$title)->first();
         if ($broker1) {
             $id = $broker1->id;
-            $totalData = BorkerPromotionsModel::orderBy('id','desc')->where('brokerId',$id)->get();
+            $totalData = BorkerPromotionsModel::orderBy('id','desc')->where('brokerId',$id)->where('trash',0)->where('pending',0)->get();
 
             if(count($totalData) != 0){
                 $title = $broker1->title;
@@ -399,6 +396,13 @@ class HomeController extends Controller
         $clientUpdate->save();
         $request->session()->pull("client");
         $request->session()->put("client",$clientUpdate);
+        $userID = $request->session()->get('client');
+            $notification = new NotificationModel;
+            $notification->userId = $userID->id;
+            $notification->userType = 1;
+            $notification->text = "Update his profile.";
+            $notification->link = "ustaad/viewClientProfile/$userID->id";
+            $notification->save();
         return back();
 
     }
@@ -420,6 +424,13 @@ class HomeController extends Controller
             $ClientAccount->accountName = $request->accountName[$i];
             $ClientAccount->save();
         }
+        $userID = $request->session()->get('client');
+            $notification = new NotificationModel;
+            $notification->userId = $userID->id;
+            $notification->userType = 1;
+            $notification->text = "Update his broker Account.";
+            $notification->link = "ustaad/viewClientProfile/$userID->id";
+            $notification->save();
         return back();
     }
     public function userProfile(Request $request){

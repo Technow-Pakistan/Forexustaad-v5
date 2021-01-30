@@ -150,25 +150,9 @@
                                                                                         <a href="{{URL::to('/ustaad/contact/starMessage')}}/{{$data->id}}"><i class="feather {{$data->star == 1 ? 'icon-star-on text-c-yellow' : 'icon-star'}} ml-2"></i></a>
                                                                                     </div>
                                                                                 </td>
-                                                                                <td data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor">{{$data->email}}</td>
-                                                                                <td data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor">{{$data->name}}</td>
-                                                                                <td class="email-time Cursor" data-toggle="collapse" data-target="#demo{{$countCheck}}">{{$data->created_at->format("dM,Y h:i a")}}</td>
-                                                                            </tr>
-                                                                            <tr  id="demo{{$countCheck}}" class="collapse viewMessageInfo">
-                                                                                <td colspan="4">
-                                                                                    <div class="d-flex justify-content-between">
-                                                                                        <div class="ml-2"><strong class="mr-3">Message: </strong>{{$data->message}}</div>
-                                                                                        <div>
-                                                                                            <a class="text-primary Cursor" data-toggle="collapse" data-target="#demo1{{$countCheck}}">Reply</a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div id="demo1{{$countCheck}}" class="collapse">
-                                                                                            <textarea name="" class="form-control ReplyMessage"></textarea>
-                                                                                            <p class=" text-right mb-0 mt-2">
-                                                                                                <button class="btn btn-primary btn-sm ReplySend" linkReply="{{URL::to('ustaad/contact/SendMailDirect')}}" email="{{$data->email}}">Submit</button>
-                                                                                            </p>
-                                                                                    </div>
-                                                                                </td>
+                                                                                <td><a href="{{URL::to('ustaad/contact/emailRead')}}/{{$data->id}}">{{$data->email}}</a></td>
+                                                                                <td><a href="{{URL::to('ustaad/contact/emailRead')}}/{{$data->id}}">{{$data->name}}</a></td>
+                                                                                <td><a href="{{URL::to('ustaad/contact/emailRead')}}/{{$data->id}}">{{$data->created_at->format("dM,Y h:i a")}}</a></td>
                                                                             </tr>
                                                                             @php $countCheck++ @endphp
                                                                         @endif
@@ -199,25 +183,9 @@
                                                                                         <a href="{{URL::to('/ustaad/contact/starMessage')}}/{{$data->id}}"><i class="feather icon-star-on text-c-yellow ml-2"></i></a>
                                                                                     </div>
                                                                                 </td>
-                                                                                <td  data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor">{{$data->email}}</td>
-                                                                                <td  data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor">{{$data->name}}</td>
-                                                                                <td class="email-time Cursor"  data-toggle="collapse" data-target="#demo{{$countCheck}}">{{$data->created_at->format("dM,Y h:i a")}}</td>
-                                                                            </tr>
-                                                                            <tr  id="demo{{$countCheck}}" class="collapse viewMessageInfo">
-                                                                                <td colspan="4">
-                                                                                    <div class="d-flex justify-content-between">
-                                                                                        <div class="ml-2"><strong class="mr-3">Message: </strong>{{$data->message}}</div>
-                                                                                        <div>
-                                                                                            <a class="text-primary Cursor" data-toggle="collapse" data-target="#demo1{{$countCheck}}">Reply</a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div id="demo1{{$countCheck}}" class="collapse">
-                                                                                            <textarea name="" class="form-control ReplyMessage"></textarea>
-                                                                                            <p class=" text-right mb-0 mt-2">
-                                                                                                <button class="btn btn-primary btn-sm ReplySend" linkReply="{{URL::to('ustaad/contact/SendMailDirect')}}" email="{{$data->email}}">Submit</button>
-                                                                                            </p>
-                                                                                    </div>
-                                                                                </td>
+                                                                                <td><a href="{{URL::to('ustaad/contact/emailRead')}}/{{$data->id}}">{{$data->email}}</a></td>
+                                                                                <td><a href="{{URL::to('ustaad/contact/emailRead')}}/{{$data->id}}">{{$data->name}}</a></td>
+                                                                                <td><a href="{{URL::to('ustaad/contact/emailRead')}}/{{$data->id}}">{{$data->created_at->format("dM,Y h:i a")}}</a></td>
                                                                             </tr>
                                                                             @php $countCheck++ @endphp
                                                                         @endif
@@ -240,17 +208,12 @@
                                                                                     <div class="checkbox checkbox-primary checkbox-fill d-inline">
                                                                                         <input type="checkbox" name="sent[]" id="checkbox-s-infill-{{$countCheck}}" value="{{$data->id}}">
                                                                                         <label for="checkbox-s-infill-{{$countCheck}}" class="cr"></label>
-                                                                                        <a href="#!" data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor email-name waves-effect">{{$data->emailTo}}</a></td>
+                                                                                        <a href="{{URL::to('ustaad/contact/sendEmailRead')}}/{{$data->id}}">{{$data->emailTo}}</a></td>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                        <td  data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor"> {{$data->subject}} </td>
-                                                                        <td class="email-time Cursor"  data-toggle="collapse" data-target="#demo{{$countCheck}}">{{$data->created_at->format("dM,Y h:i a")}}</td>
-                                                                    </tr>
-                                                                    <tr  id="demo{{$countCheck}}" class="collapse viewMessageInfo">
-                                                                        <td colspan="4">
-                                                                            <p class="ml-5"><strong class="mr-3">Message: </strong>@php echo $data->message @endphp</p>
-                                                                        </td>
+                                                                        <td><a href="{{URL::to('ustaad/contact/sendEmailRead')}}/{{$data->id}}">{{$data->subject}}</a></td>
+                                                                        <td><a href="{{URL::to('ustaad/contact/sendEmailRead')}}/{{$data->id}}">{{$data->created_at->format("dM,Y h:i a")}}</a></td>
                                                                     </tr>
                                                                     @php $countCheck++ @endphp
                                                                 @endif
@@ -302,18 +265,13 @@
                                                                                     <div class="checkbox checkbox-primary checkbox-fill d-inline">
                                                                                         <input type="checkbox" name="sentTrash[]" id="checkbox-s-infill-{{$countCheck}}" value="{{$data->id}}"> 
                                                                                         <label for="checkbox-s-infill-{{$countCheck}}" class="cr"></label>
-                                                                                        <a href="#!"   data-toggle="collapse" data-target="#demo{{$countCheck}}" class="email-name waves-effect Cursor">{{$data->emailTo}}</a>
+                                                                                        <a href="{{URL::to('ustaad/contact')}}/{{$data->draft == 1 ? 'draftEmailRead' : 'sendEmailRead'}}/{{$data->id}}">{{$data->emailTo}}</a>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
-                                                                        <td   data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor"> {{$data->message}} </td>
-                                                                        <td class="email-time Cursor"   data-toggle="collapse" data-target="#demo{{$countCheck}}">{{$data->created_at->format("dM,Y h:i a")}}</td>
-                                                                    </tr>
-                                                                    <tr  id="demo{{$countCheck}}" class="collapse viewMessageInfo">
-                                                                        <td colspan="4">
-                                                                            <p class="ml-5"><strong class="mr-3">Message: </strong>{{$data->message}}</p>
-                                                                        </td>
+                                                                        <td><a href="{{URL::to('ustaad/contact')}}/{{$data->draft == 1 ? 'draftEmailRead' : 'sendEmailRead'}}/{{$data->id}}">{{$data->subject}}</a></td>
+                                                                        <td><a href="{{URL::to('ustaad/contact')}}/{{$data->draft == 1 ? 'draftEmailRead' : 'sendEmailRead'}}/{{$data->id}}">{{$data->created_at->format("dM,Y h:i a")}}</a></td>
                                                                     </tr>
                                                                     @php $countCheck++ @endphp
                                                                 @endif
@@ -327,18 +285,13 @@
                                                                                     <div class="checkbox checkbox-primary checkbox-fill d-inline">
                                                                                         <input type="checkbox"  name="inboxTrash[]" id="checkbox-s-infill-{{$countCheck}}" value="{{$data->id}}">
                                                                                         <label for="checkbox-s-infill-{{$countCheck}}" class="cr"></label>
-                                                                                        <a href="#!" data-toggle="collapse" data-target="#demo{{$countCheck}}" class="email-name waves-effect Cursor">{{$data->email}}</a>
+                                                                                        <a href="{{URL::to('ustaad/contact/emailRead')}}/{{$data->id}}">{{$data->email}}</a>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
-                                                                        <td data-toggle="collapse" data-target="#demo{{$countCheck}}" class="Cursor">{{$data->name}}</td>
-                                                                        <td class="email-time Cursor" data-toggle="collapse" data-target="#demo{{$countCheck}}">{{$data->created_at->format("dM,Y h:i a")}}</td>
-                                                                    </tr>
-                                                                    <tr  id="demo{{$countCheck}}" class="collapse viewMessageInfo">
-                                                                        <td colspan="4">
-                                                                            <p class="ml-5"><strong class="mr-3">Message: </strong>@php echo $data->message @endphp</p>
-                                                                        </td>
+                                                                        <td><a href="{{URL::to('ustaad/contact/emailRead')}}/{{$data->id}}">{{$data->name}}</a></td>
+                                                                        <td><a href="{{URL::to('ustaad/contact/emailRead')}}/{{$data->id}}">{{$data->created_at->format("dM,Y h:i a")}}</a></td>
                                                                     </tr>
                                                                     @php $countCheck++ @endphp
                                                                 @endif
@@ -367,9 +320,6 @@
     .Cursor{
        cursor: pointer;
     }
-    .viewMessageInfo{
-
-    }
 </style>
 <script>
     $("#UnTrashData").hide();
@@ -395,45 +345,5 @@
         $('input[type="checkbox"]').each(function() {
 			this.checked = false;
 		});
-    })
-</script>
-<script>
-    $(".unread").on('click',function() {
-        var link = $(this).attr('link');
-        var url = "{{URL::to('ustaad/contact/emailRead')}}"+"/"+link;
-        console.log(url);
-        $(this).attr('class','read');
-        $.ajax({
-            type: "Get",
-            url: url,
-            success: function(data) {
-                console.log(data);
-            },
-            error: function(data){
-                console.log("fail");
-            }
-        });
-    })
-    $(".ReplySend").on("click",function() {
-        var linkReply = $(this).attr('linkReply');
-        var EmailReply = $(this).attr('email');
-        var message = $(this).parent().parent().children()[0];
-        var finalMessage = $(message).val();
-
-        console.log(linkReply);
-        console.log(EmailReply);
-        console.log(finalMessage);
-                $(message).val("");
-        $.ajax({
-            type: "Post",
-            url: linkReply,
-            data: {emailTo: EmailReply,message: finalMessage},
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(data){
-                console.log("fail");
-            }
-        });
     })
 </script>

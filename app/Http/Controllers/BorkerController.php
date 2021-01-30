@@ -123,6 +123,14 @@ class BorkerController extends Controller
         $broker1 = BrokerCompanyInformationModel::find($id);
         $broker1->fill($data);
         $broker1->save();
+        $user = $request->session()->get("admin");
+        if ($user['memberId'] == 6 ) {
+            $notification = new NotificationModel;
+            $notification->userId = $user->id;
+            $notification->text = "Edit a broker $broker1->title";
+            $notification->link = "ustaad/brokersDetail/$broker1->id";
+            $notification->save();
+        }
         return back();
     }
     public function Detail(Request $request, $id){
@@ -146,7 +154,7 @@ class BorkerController extends Controller
         $data->save();
         $brokerNews = BrokerNewsModel::where('brokerId',$id)->get();
         for ($i=0; $i < count($brokerNews) ; $i++) { 
-            $news = BrokerNewsModel::where('brokerId',$id)->first();
+            $news = BrokerNewsModel::where('id',$brokerNews[$i]->id)->first();
             if ($news != null) {
                 $news->trash = 1;
                 $news->save();
@@ -154,10 +162,18 @@ class BorkerController extends Controller
         }
         $brokerPromotion = BorkerPromotionsModel::where('brokerId',$id)->get();
         for ($i=0; $i < count($brokerPromotion) ; $i++) { 
-            $promotion = BorkerPromotionsModel::where('brokerId',$id)->first();
+            $promotion = BorkerPromotionsModel::where('id',$brokerPromotion[$i]->id)->first();
             if ($promotion != null) {
                 $promotion->trash = 1;
                 $promotion->save();
+            }
+        }
+        $brokerReview = BrokerReviewModel::where('brokerId',$id)->get();
+        for ($i=0; $i < count($brokerReview) ; $i++) { 
+            $review = BrokerReviewModel::where('id',$brokerReview[$i]->id)->first();
+            if ($review != null) {
+                $review->trash = 1;
+                $review->save();
             }
         }
         $Trash = new TrashModel;
@@ -182,7 +198,7 @@ class BorkerController extends Controller
         $data->save();
         $brokerNews = BrokerNewsModel::where('brokerId',$id)->get();
         for ($i=0; $i < count($brokerNews) ; $i++) { 
-            $news = BrokerNewsModel::where('brokerId',$id)->first();
+            $news = BrokerNewsModel::where('id',$brokerNews[$i]->id)->first();
             if ($news != null) {
                 $news->trash = 0;
                 $news->save();
@@ -190,10 +206,18 @@ class BorkerController extends Controller
         }
         $brokerPromotion = BorkerPromotionsModel::where('brokerId',$id)->get();
         for ($i=0; $i < count($brokerPromotion) ; $i++) { 
-            $promotion = BorkerPromotionsModel::where('brokerId',$id)->first();
+            $promotion = BorkerPromotionsModel::where('id',$brokerPromotion[$i]->id)->first();
             if ($promotion != null) {
                 $promotion->trash = 0;
                 $promotion->save();
+            }
+        }
+        $brokerReview = BrokerReviewModel::where('brokerId',$id)->get();
+        for ($i=0; $i < count($brokerReview) ; $i++) { 
+            $review = BrokerReviewModel::where('id',$brokerReview[$i]->id)->first();
+            if ($review != null) {
+                $review->trash = 0;
+                $review->save();
             }
         }
         $Trash = TrashModel::where('deleteId',$id)->where('category',"Broker")->first();

@@ -8,12 +8,12 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">View Email</h5>
+                            <h5 class="m-b-10">Email Read</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
                             <li class="breadcrumb-item"><a href="{{URL::to('ustaad/contact')}}">Contact</a></li>
-                            <li class="breadcrumb-item"><a href="#!">View Send Mail</a></li>
+                            <li class="breadcrumb-item"><a href="#!">Email Read</a></li>
                         </ul>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                             <div class="row align-items-center">
                                 <!-- [ email-left section ] start -->
                                 <div class="col-xl-2 col-md-3">
-                                    <a href="{{URL::to('/ustaad/dashboard')}}" class="b-brand">
+                                    <a href="index.html" class="b-brand">
                                         <div class="b-bg">
                                             F
                                         </div>
@@ -37,40 +37,109 @@
                                     </a>
                                 </div>
                                 <!-- [ email-left section ] end -->
+                                <!-- [ email-right section ] start -->
+                                <div class="col-xl-10 col-md-9">
+                                    <div class="input-group mb-0">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text" for="inputGroupSelect01"><i class="feather icon-search"></i></label>
+                                        </div>
+                                        <select class="custom-select" id="inputGroupSelect01">
+                                            <option selected>Search ...</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- [ email-right section ] end -->
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="mail-body">
                             <div class="row">
+                                <!-- [ email-left section ] start -->
+                                    <div class="col-xl-2 col-md-3">
+                                        <div class="mb-3">
+                                            <a href="{{URL::to('/ustaad/contact/emailCompose')}}" class="btn waves-effect waves-light btn-rounded btn-outline-primary">+ Compose</a>
+                                        </div>
+                                        <ul class="mb-2 nav nav-tab flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                            <li class="nav-item mail-section inboxData">
+                                                <a class="nav-link text-left active" href="{{URL::to('ustaad/contact')}}" aria-controls="v-pills-home" aria-selected="false">
+                                                    <span><i class="feather icon-inbox"></i>Inbox</span>
+                                                    <span class="float-right">{{count($totalData)}}</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item mail-section inboxData">
+                                                <a class="nav-link text-left" href="{{URL::to('ustaad/contact')}}">
+                                                    <span><i class="feather icon-star-on"></i> Starred</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item mail-section inboxData">
+                                                <a class="nav-link text-left" href="{{URL::to('ustaad/contact')}}">
+                                                    <span><i class="feather icon-navigation"></i> Sent Mail</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item mail-section inboxData">
+                                                <a class="nav-link text-left" href="{{URL::to('ustaad/contact')}}">
+                                                    <span><i class="feather icon-file-text"></i> Drafts</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item mail-section inboxData UnTrashData">
+                                                <a class="nav-link text-left" href="{{URL::to('ustaad/contact')}}">
+                                                    <span><i class="feather icon-trash-2"></i> Trash</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <!-- <a class="email-more-link" data-toggle="collapse" href="#email-more-cont" role="button" aria-expanded="false" aria-controls="email-more-cont">
+                                            <span><i class="feather icon-chevron-down mr-2"></i>More</span>
+                                            <span style="display: none;"><i class="feather icon-chevron-up mr-2"></i>Less</span>
+                                        </a> -->
+                                    </div>
+                                <!-- [ email-left section ] end -->
                                 <!-- [ email-right section ] start -->
-                                <div class="col-xl-12 col-md-12">
+                                <div class="col-xl-10 col-md-9">
                                     <div class="card">
-                                        <!-- <div class="card-header">
-                                            <h6 class="d-inline-block m-0">{{$data->subject}}</h6>
-                                            <p class="float-right m-0"><strong>{{$data->created_at->format("h:i a")}}</strong></p>
-                                        </div> -->
                                         <div class="card-body">
                                             <div class="email-read">
                                                 <div class="photo-table m-r-10">
                                                     <a href="#">
-                                                        <img class="media-object img-radius" src="{{URL::to('public/assets/assets/img/user1.jpg')}}" alt="E-mail user" style="width:50px;">
+                                                        <img class="media-object img-radius" src="{{URL::to('storage/app/WebImages/avatar-5.jpg')}}" alt="E-mail user" style="width:50px;">
                                                     </a>
                                                 </div>
                                                 <div>
+                                                @php
+                                                    $ijk = 0;
+                                                    if(isset($data)){
+                                                        $ijk=1;
+                                                    }
+                                                @endphp
                                                     <a href="#">
-                                                        <p class="user-name text-dark mb-1"><strong>Subject: {{$data->subject}}</strong></p>
+                                                        <p class="user-name text-dark mb-1"><strong>{{$ijk == 1 ? $data->name : $dataSend->subject }}</strong></p>
                                                     </a>
                                                     <a class="user-mail txt-muted" href="#">
-                                                        <p class="user-name text-dark mb-1"><strong>To: {{$data->emailTo}}</strong></p>
+                                                        <p class="user-name text-dark mb-1"><strong>From:{{$ijk == 1 ? $data->email : $dataSend->emailTo }}</strong></p>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="m-b-20 m-l-50 p-l-10 email-contant">
                                                 <div class="photo-contant">
                                                     <div>
-                                                        {{$data->message}}
+                                                        <div class="email-content">{{$ijk == 1 ? $data->message : $dataSend->message}}</div>
                                                     </div>
+                                                    @if($ijk == 1)
+                                                    <div class="m-t-15 text-right">
+                                                        <div>
+                                                            <a class="text-primary Cursor" data-toggle="collapse" data-target="#demo1">Reply</a>
+                                                        </div>
+                                                        <div id="demo1" class="collapse">
+                                                            <textarea name="" class="form-control ReplyMessage"></textarea>
+                                                            <p class=" text-right mb-0 mt-2">
+                                                                <button class="btn btn-primary btn-sm ReplySend" linkReply="{{URL::to('ustaad/contact/SendMailDirect')}}" email="{{$data->email}}">Submit</button>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -87,10 +156,14 @@
     </div>
 </section>
 
+<style>
+    .Cursor{
+       cursor: pointer;
+    }
+</style>
 @include('admin.include.footer')
-<!-- ekko-lightbox Js -->
-<script src="{{URL::to('public/assets/assets/js/plugins/ekko-lightbox.min.js')}}"></script>
-<script src="{{URL::to('public/assets/assets/js/plugins/lightbox.min.js')}}"></script>
+<script src="assets/js/plugins/ekko-lightbox.min.js"></script>
+<script src="assets/js/plugins/lightbox.min.js"></script>
 <script>
     $(document).ready(function() {
         $(document).on('click', '[data-toggle="lightbox"]', function(event) {
@@ -98,5 +171,27 @@
             $(this).ekkoLightbox();
         });
     });
-</script>
+    
+    $(".ReplySend").on("click",function() {
+        var linkReply = $(this).attr('linkReply');
+        var EmailReply = $(this).attr('email');
+        var message = $(this).parent().parent().children()[0];
+        var finalMessage = $(message).val();
 
+        console.log(linkReply);
+        console.log(EmailReply);
+        console.log(finalMessage);
+                $(message).val("");
+        $.ajax({
+            type: "Post",
+            url: linkReply,
+            data: {emailTo: EmailReply,message: finalMessage},
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(data){
+                console.log("fail");
+            }
+        });
+    })
+</script>
