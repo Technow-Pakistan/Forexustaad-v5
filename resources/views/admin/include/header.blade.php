@@ -308,47 +308,56 @@
 					@if($value['memberId'] != 6)
 					<li>
 						<div class="dropdown">
-							<a class="dropdown-toggle" href="#" data-toggle="dropdown"
-								><i class="icon feather icon-bell"></i
-								><span class="badge bg-danger"
-									><span class="sr-only"></span></span
-							></a>
-							<div class="dropdown-menu dropdown-menu-right notification">
-								<div class="noti-head">
-									<h6 class="d-inline-block m-b-0">Notifications</h6>
-									<!-- <div class="float-right">
-										<a href="#!" class="m-r-10">mark as read</a>
-										<a href="#!">clear all</a>
-									</div> -->
-								</div>
-								<ul class="noti-body">
-									@php $ir=0 @endphp
-									@foreach($NotificationMessage as $messageNoti)
-										@php 
-											$user = $messageNoti->GetUser();
-											$userInfo = $messageNoti->GetUserInfo();
-											if($userInfo->userImage == null){
-												$userInfo->userImage = "WebImages/avatar-5.jpg";
-											}
-											$ir++
-										@endphp
-										<li class="notification">
-												<div class="media">
-											
-													
-													<span class="mt-2 mr-2">{{$ir}}. </span>
-													<img class="img-radius" src="{{URL::to('/storage/app/')}}/{{$userInfo->userImage}}" alt="Generic placeholder image" />
-													<div class="media-body">
-														<p><strong>{{$user->username}}</strong></p>
-														<p>{{$messageNoti->text}}</p>
+							<a class="dropdown-toggle" href="#" data-toggle="dropdown">
+								<i class="icon feather icon-bell"></i>
+								@if($NotificationMessage[0] != null)
+									<span class="badge bg-danger"><span class="sr-only"></span></span>
+								@endif
+							</a>
+							@if($NotificationMessage[0] != null)
+								<div class="dropdown-menu dropdown-menu-right notification">
+										<form action="{{URL::to('/ustaad/notification/checked/delete')}}" method="post">
+									<div class="noti-head">
+										<h6 class="d-inline-block m-b-0">Notifications</h6>
+										<div class="float-right">
+											<input type="submit" class="btn clearSelectedNotification text-white p-0" value="clear">
+										</div>
+									</div>
+									<ul class="noti-body">
+										@foreach($NotificationMessage as $messageNoti)
+											@php 
+												if($messageNoti->userType != 1){
+													$user = $messageNoti->GetUser();
+													$userInfo = $messageNoti->GetUserInfo();
+													if($userInfo->userImage == null){
+														$userInfo->userImage = "WebImages/avatar-5.jpg";
+													}
+												}else{
+													$userClient = $messageNoti->GetClientUser();
+													if($userClient->image == null){
+														$userClient->image = "WebImages/avatar-5.jpg";
+													}
+												}
+											@endphp
+											<li class="notification">
+													<div class="media">
+														<span class="mt-3 mr-2"><input type="checkbox" name="notification[]" id="checkedNotification" value="{{$messageNoti->id}}"> </span>
+														<img class="img-radius" src="{{URL::to('/storage/app/')}}/{{$messageNoti->userType != 1 ? $userInfo->userImage : $userClient->image}}" alt="Generic placeholder image" />
+														<div class="media-body">
+															<p><strong>{{$messageNoti->userType != 1 ? $user->username : $userClient->name}}</strong></p>
+															<p>{{$messageNoti->text}}</p>
+														</div>
+														<a href="{{URL::to('ustaad/notification')}}/{{$messageNoti->id}}" class="text-primary">View</a>
 													</div>
-													<a href="{{URL::to('ustaad/notification')}}/{{$messageNoti->id}}" class="text-primary">View</a>
-												</div>
-										</li>
-									@endforeach
-								</ul>
-								<div class="noti-footer"></div>
-							</div>
+											</li>
+										@endforeach
+									</ul>
+									</form>
+									<div class="noti-footer">
+										<input type="submit" class="btn selectedAllNotification" style="cursor:pointer" value="check all">
+									</div>
+								</div>
+							@endif
 						</div>
 					</li>
 					<li>
@@ -362,14 +371,14 @@
 					</li>
 					@endif
 					<li>
-									@php
-									 $memberData = App\Models\AdminMemberDetailModel::where('adminTableId',$value['id'])->first();
-									@endphp
-									@php
-										if($memberData->userImage == null ){
-											$memberData->userImage = "WebImages/avatar-5.jpg";
-										}
-									@endphp
+						@php
+						 	$memberData = App\Models\AdminMemberDetailModel::where('adminTableId',$value['id'])->first();
+						@endphp
+						@php
+							if($memberData->userImage == null ){
+								$memberData->userImage = "WebImages/avatar-5.jpg";
+							}
+						@endphp
 						<div class="dropdown drp-user">
 							<a href="#!" class="dropdown-toggle" data-toggle="dropdown">
 								<img

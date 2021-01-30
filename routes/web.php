@@ -138,8 +138,10 @@ Route::get('/ustaad',[AdminController::class,'Login']);
 Route::post('/ustaad',[AdminController::class,'Index']);
 
 Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
+    Route::get('/DeleteClientAccount/{id}',[AdminController::class,'DeleteClientAccount']);
     Route::post('/apileftorder',[ApiLeftController::class,'Order']);
     Route::get('/notification/{id}',[AdminController::class,'NotificationView']);
+    Route::post('/notification/checked/delete',[AdminController::class,'NotificationDelete']);
     Route::get('/viewClientProfile/{id}',[AdminController::class,'ViewClientProfile']);
     Route::post('/changeMemberType/{id}',[AdminController::class,'ChangeMemberType']);
 
@@ -348,6 +350,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::post('/all',[BlogPostController::class,'Add']);
     });
     Route::group(['prefix' => 'broker'],function(){
+        Route::get('/allow/{id}',[BrokerTopInformationController::class,'AllowBrokerProcess']);
         Route::post('/allow/{id}',[BrokerTopInformationController::class,'AllowBrokerProcess']);
         Route::post('/star/{id}',[BrokerTopInformationController::class,'StarBrokerProcess']);
         Route::post('/unstar/{id}',[BrokerTopInformationController::class,'UnStarBrokerProcess']);
@@ -385,6 +388,9 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/edit/{id}',[BorkerNewsController::class,'Edit']);
         Route::post('/edit/{id}',[BorkerNewsController::class,'EditNews']);
         Route::get('/delete/{id}',[BorkerNewsController::class,'Delete']);
+        Route::get('/trash/{id}',[BorkerNewsController::class,'Trash']);
+        Route::get('/trashRestore/{id}',[BorkerNewsController::class,'TrashRestore']);
+        Route::post('/allow/{id}',[BorkerNewsController::class,'AllowBrokerNewsProcess']);
     });
     Route::get('brokersPromotion/{id}',[BorkerPromotionsController::class,'Index']);
 
@@ -395,12 +401,14 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/edit/{id}',[BorkerPromotionsController::class,'Edit']);
         Route::post('/edit/{id}',[BorkerPromotionsController::class,'EditPromotions']);
         Route::get('/delete/{id}',[BorkerPromotionsController::class,'Delete']);
+        Route::post('/allow/{id}',[BorkerPromotionsController::class,'AllowBrokerPromotionProcess']);
     });
     Route::group(['prefix' => 'brokersReview'],function(){
         Route::get('/{id}',[BorkerReviewController::class,'Index']);
         Route::get('/edit/{id}',[BorkerReviewController::class,'Edit']);
         Route::post('/edit/{id}',[BorkerReviewController::class,'EditReview']);
         Route::get('/delete/{id}',[BorkerReviewController::class,'Delete']);
+        Route::post('/allow/{id}',[BorkerReviewController::class,'AllowBrokerReviewProcess']);
     });
     Route::get('/brokerReview/new',[BorkerReviewController::class,'Add']);
     Route::post('/brokersReview/new',[BorkerReviewController::class,'AddReview']);

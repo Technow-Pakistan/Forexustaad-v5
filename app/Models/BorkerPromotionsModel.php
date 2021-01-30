@@ -8,7 +8,7 @@ use App\Models\BrokerCompanyInformationModel;
 class BorkerPromotionsModel extends Model
 {
     protected $table="broker_promotion";
-    protected $fillable = ["image","brokerId","description","videoCode","link","PromotionTitle","shortDescription","trash"];
+    protected $fillable = ["image","brokerId","description","videoCode","link","PromotionTitle","shortDescription","trash","pending"];
 
     public function GetBrokerInfo(){
         $data = BrokerCompanyInformationModel::where('id',$this->brokerId)->first();

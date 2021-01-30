@@ -47,7 +47,7 @@
                                             <p class="text-secondary mb-1">{{$clientMember->member}}</p>
                                             <form action="{{URL::to('/ustaad/changeMemberType')}}/{{$totalClientInfo->id}}" method="post"> 
                                             
-                                              <a class="btn pl-0" href="#!" data-toggle="collapse" data-target="#demo123">Change Member Type</a>
+                                              <a class="btn pl-0 text-primary" href="#!" data-toggle="collapse" data-target="#demo123">Change Member Type</a>
                                               <div id="demo123" class="collapse">
                                                 <label for="">Select Member Type</label>
                                                 <select name="memberType" class="form-control" id="">
@@ -159,7 +159,10 @@
                                       <div class="col-sm-6 mb-3">
                                         <div class="card h-100">
                                           <div class="card-body">
-                                            <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">{{$brokerTitle->title}}</i></h6>
+                                            <h6 class="d-flex align-items-center mb-3">
+                                              <i class="material-icons text-info mr-2">{{$brokerTitle->title}}</i>
+                                              <a href="{{URL::to('ustaad/DeleteClientAccount')}}/{{$account->id}}" class="addAction trashBtnAccount" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash text-danger"></i></a>
+                                            </h6>
                                             <small>Account Number</small>
                                             <div class="progress mb-3">
                                               <p>{{$account->accountNumber}}</p>
@@ -196,7 +199,11 @@
 @include('admin.include.footer')
 
 <style>
-
+.trashBtnAccount{
+  position: absolute;
+  top: 15px;
+  right: 20px;
+}
 .main-body {
     padding: 15px;
 }

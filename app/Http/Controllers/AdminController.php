@@ -25,6 +25,20 @@ class AdminController extends Controller
         $notification->delete();
         return redirect($link);
     }
+    public function DeleteClientAccount(Request $request, $id){
+        $notification = ClientAccountDetailModel::find($id);
+        $notification->delete();
+        return back();
+    }
+    public function NotificationDelete(Request $request){
+        if (isset($request->notification)){
+            for ($i=0; $i < count($request->notification) ; $i++) { 
+                $notification = NotificationModel::find($request->notification[$i]);
+                $notification->delete();
+            }
+        }
+        return back();
+    }
     public function ViewClientProfile(Request $request, $id){
         $totalClientInfo = ClientRegistrationModel::where('id',$id)->first();
         $clientAccount = ClientAccountDetailModel::where('clientId',$id)->get();

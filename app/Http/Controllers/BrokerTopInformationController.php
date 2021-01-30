@@ -91,7 +91,7 @@ class BrokerTopInformationController extends Controller
             $title = BrokerCompanyInformationModel::find($id);
             $notification = new NotificationModel;
             $notification->userId = $userID->id;
-            $notification->text = "add a Deposit section in $title->title broker";
+            $notification->text = "Edit a Deposit section in $title->title broker";
             $notification->link = "ustaad/brokersDetail/$title->id";
             $notification->save();
         }
@@ -111,7 +111,7 @@ class BrokerTopInformationController extends Controller
             $title = BrokerCompanyInformationModel::find($id);
             $notification = new NotificationModel;
             $notification->userId = $userID->id;
-            $notification->text = "add a Commission section in $title->title broker";
+            $notification->text = "Edit a Commission section in $title->title broker";
             $notification->link = "ustaad/brokersDetail/$title->id";
             $notification->save();
         }
@@ -131,7 +131,7 @@ class BrokerTopInformationController extends Controller
             $title = BrokerCompanyInformationModel::find($id);
             $notification = new NotificationModel;
             $notification->userId = $userID->id;
-            $notification->text = "add a Account Info section in $title->title broker";
+            $notification->text = "Edit a Account Info section in $title->title broker";
             $notification->link = "ustaad/brokersDetail/$title->id";
             $notification->save();
         }
@@ -151,7 +151,7 @@ class BrokerTopInformationController extends Controller
             $title = BrokerCompanyInformationModel::find($id);
             $notification = new NotificationModel;
             $notification->userId = $userID->id;
-            $notification->text = "add a Tradable Assets section in $title->title broker";
+            $notification->text = "Edit a Tradable Assets section in $title->title broker";
             $notification->link = "ustaad/brokersDetail/$title->id";
             $notification->save();
         }

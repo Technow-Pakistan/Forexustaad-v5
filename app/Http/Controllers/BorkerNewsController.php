@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\BrokerCompanyInformationModel;
 use App\Models\BrokerNewsModel;
+use App\Models\NotificationModel;
+use App\Models\TrashModel;
 
 class BorkerNewsController extends Controller
 {
@@ -23,7 +25,7 @@ class BorkerNewsController extends Controller
         return view('admin.all-broker-news',compact('brokerNews'));
     }
     public function Add(Request $request){
-        $broker = BrokerCompanyInformationModel::all();
+        $broker = BrokerCompanyInformationModel::where('trash',0)->get();
         return view('admin.add-broker-news',compact('broker'));
     }
     public function AddNews(Request $request){
@@ -37,13 +39,25 @@ class BorkerNewsController extends Controller
         $description = htmlentities($request->editor1);
         $data['image'] = $NewsImage;
         $data['description'] = $description;
+        if ($userID['memberId'] == 6 ) {
+            $data['pending'] = 1;
+        }
         $news = new BrokerNewsModel;
         $news->fill($data);
         $news->save();
+        $userID = $request->session()->get('admin');
+        $broker1 = BrokerCompanyInformationModel::find($news->brokerId);
+        if ($userID['memberId'] == 6 ) {
+            $notification = new NotificationModel;
+            $notification->userId = $userID->id;
+            $notification->text = "Add a broker news in $broker1->title";
+            $notification->link = "ustaad/brokersNews/all/$broker1->id";
+            $notification->save();
+        }
         return back();
     }
     public function Edit(Request $request, $id){
-        $broker = BrokerCompanyInformationModel::all();
+        $broker = BrokerCompanyInformationModel::where('trash',0)->get();
         $brokerNews = BrokerNewsModel::find($id);
         return view('admin.add-broker-news',compact('broker',"brokerNews"));
     }
@@ -59,11 +73,58 @@ class BorkerNewsController extends Controller
         $news = BrokerNewsModel::find($id);
         $news->fill($data);
         $news->save();
+        $userID = $request->session()->get('admin');
+        $broker1 = BrokerCompanyInformationModel::find($news->brokerId);
+        if ($userID['memberId'] == 6 ) {
+            $notification = new NotificationModel;
+            $notification->userId = $userID->id;
+            $notification->text = "Edit a broker news in $broker1->title";
+            $notification->link = "ustaad/brokersNews/all/$broker1->id";
+            $notification->save();
+        }
         return back();
     }
     public function Delete(Request $request, $id){
         $brokerNews = BrokerNewsModel::find($id);
         $brokerNews->delete();
+        $Trash = TrashModel::where('deleteId',$id);
+        $Trash->delete();
+        return back();
+    }
+    public function AllowBrokerNewsProcess(Request $request, $id){
+        $broker = BrokerNewsModel::find($id);
+        $broker->pending = 0;
+        $broker->save();
+        return back();
+    }
+    public function Trash(Request $request, $id){
+        $broker = BrokerNewsModel::find($id);
+        $broker->trash = 1;
+        $broker->save();
+        $userID = $request->session()->get('admin');
+        $Trash = new TrashModel;
+        $Trash->adminTableId = $userID->id;
+        $Trash->trashItem = "brokersNews";
+        $Trash->category = "Broker News";
+        $Trash->deleteId = $id;
+        $Trash->deleteTitle = $broker->NewsTitle;
+        $Trash->save();
+        $broker1 = BrokerCompanyInformationModel::find($broker->brokerId);
+        if ($userID['memberId'] == 6 ) {
+            $notification = new NotificationModel;
+            $notification->userId = $userID->id;
+            $notification->text = "Delete a broker news in $broker1->title";
+            $notification->link = "ustaad/trash";
+            $notification->save();
+        }
+        return back();
+    }
+    public function TrashRestore(Request $request, $id){
+        $broker = BrokerNewsModel::find($id);
+        $broker->trash = 0;
+        $broker->save();
+        $Trash = TrashModel::where('deleteId',$id);
+        $Trash->delete();
         return back();
     }
 }

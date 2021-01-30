@@ -138,3 +138,9 @@
 		data.submit();
 	})
 </script>
+<script>
+	$(".selectedAllNotification").on('click',function() {
+    console.log("hello");
+		$('[id=checkedNotification]').prop('checked',true);
+	});
+</script>
