@@ -143,7 +143,7 @@
                                                     @php echo $lecture->embed @endphp
                                                 @endif
                                             @else
-                                                <p>This lecture has been delete contact to administrator.</p>
+                                             <p>This lecture has been delete contact to administrator.</p>
                                             @endif
                                         </div>
                                     </div>
@@ -187,9 +187,9 @@
                       </div>
                       <div class="col-md-4">
                         <div class="row analysis" style="margin-top: 0; margin-bottom:0;">
-                            <div class="box">
+                            <div class="pre-header mb-2 w-100">
                                 <div class="p-4">
-                                    <h5 class="fts_18"> Lecture {{$lecture->poistion}}: {{$lecture->title}}</h5>
+                                    <h5 class="text-white"> Lecture {{$lecture->poistion}}: {{$lecture->title}}</h5>
                                 </div>
                             </div>
                             <div class="force-overflow" id="force-overflow">
@@ -207,12 +207,12 @@
                                   }
                                 @endphp
                                 <a href="{{URL::to('/training'). '/' .  $category . '/' . $title}}">
-                                  <div class="col-sm-12 pl-3 {{$lecture->id == $data->id ? 'activeVideo' : ''}}" id="{{$lecture->id == $data->id ? 'activeVideo' : ''}}">
+                                  <div class="col-sm-12 pl-3 {{$lecture->id == $data->id ? 'activeVideo pre-header' : ''}}" id="{{$lecture->id == $data->id ? 'activeVideo' : ''}}">
                                       <div class="media">
                                           <p class="mt-4 mr-2">{{$data->poistion}}. </p>
-                                        <img class="mr-3" src="http://i.ytimg.com/vi/{{$img123456}}/hqdefault.jpg" alt="Generic placeholder image">
+                                        <img class="mr-3 BorderNone" src="http://i.ytimg.com/vi/{{$img123456}}/hqdefault.jpg" alt="Generic placeholder image">
                                         <div class="media-body">
-                                          <h6 class="m-0 text-primary">{{$data->title}}</h6>
+                                          <h6 class="m-0 text-{{$lecture->id == $data->id ? 'white' : 'primary'}}">{{$data->title}}</h6>
                                         </div>
                                       </div>
                                   </div>
@@ -250,11 +250,10 @@
                                     </div>
                                   </div>
                                 </div>
-
                                 <div class="body_comment">
                                   <div class="row">
                                     <div class="avatar_comment col-md-2">
-                                    <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
+                                    <img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="avatar"/>
                                     </div>
                                     <div class="box_comment col-md-10">
                                       <form action="{{URL::to('/advance/comment/add')}}" method="post">
@@ -283,137 +282,77 @@
                                       @foreach($comments as $comment)
                                         @if($comment->reply == 0)
                                           @php
-                                            $client = $comment->getMemberInformation();
+                                            if($comment->userType == "client"){
+                                              $client = $comment->getMemberInformation();
+                                              if($client->image == null){
+                                                $urlImageSrc = URL::to('/public/assets/assets/img/user1.jpg');
+                                              }else{
+                                                $urlImageSrc = URL::to('/storage/app') . '/' . $client->image;
+                                              }
+                                            }else{
+                                              $adminInfo = $comment->getAdminInformation();
+                                              $adminDetailInfo = $comment->getAdminDetailInformation();
+                                              $urlImageSrc = URL::to('/storage/app') . '/' . $adminDetailInfo1->userImage;
+                                            }
                                           @endphp
                                           <li class="box_result row">
                                             <div class="avatar_comment col-md-2">
-                                              <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
+                                              <img src="{{$urlImageSrc}}" alt="avatar"/>
                                             </div>
                                             <div class="result_comment col-md-10">
-                                              <h4>{{$client->name}}</h4>
+                                              <h4>{{ $comment->userType == "client" ? $client->name : $adminInfo->username}}</h4>
                                               <p>{{$comment->comment}}</p>
                                               <div class="tools_comment">
                                                 <!-- <a class="like" href="#">Like</a>
                                                 <span aria-hidden="true"> · </span> -->
-                                                <a class="replay" commentId="{{$comment->id}}">Reply</a>
+                                                <a class="replay" commentId="{{$comment->id}}" replyId="{{$comment->reply}}">Reply</a>
+                                                <a class="ml-3" data-toggle="collapse" data-target="#demo{{$comment->id}}">View Replies</a>
                                                 <!-- <span aria-hidden="true"> · </span>
                                                 <i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
                                                 <span aria-hidden="true"> · </span>
                                                 <span>26m</span> -->
                                               </div>
-                                              @php
-                                                $replys = $comment->getReply();
-                                              @endphp
-                                              @foreach($replys as $reply)
-                                                  @php
-                                                    $client = $reply->getMemberInformation();
-                                                  @endphp
-                                                  <ul class="child_replay">
-                                                    <li class="box_reply row">
-                                                      <div class="avatar_comment col-md-2">
-                                                        <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
-                                                      </div>
-                                                      <div class="result_comment col-md-10">
-                                                        <h4>{{$client->name}}</h4>
-                                                        <p>{{$reply->comment}}</p>
-                                                        <div class="tools_comment">
-                                                          <!-- <a class="like" href="#">Like</a>
-                                                          <span aria-hidden="true"> · </span> -->
-                                                          <a class="replay" commentId="{{$reply->id}}">Reply</a>
-                                                          <!-- <span aria-hidden="true"> · </span>
-                                                          <i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
-                                                          <span aria-hidden="true"> · </span>
-                                                          <span>26m</span> -->
+                                              <div id="demo{{$comment->id}}" class="collapse">
+                                                @php
+                                                  $replys = $comment->getReply();
+                                                @endphp
+                                                @foreach($replys as $reply)
+                                                    @php
+                                                      if($reply->userType == "client"){
+                                                        $client = $reply->getMemberInformation();
+                                                          if($client->image == null){
+                                                            $urlImageSrc1 = URL::to('/public/assets/assets/img/user1.jpg');
+                                                          }else{
+                                                            $urlImageSrc1 = URL::to('/storage/app') . '/' . $client->image;
+                                                          }
+                                                      }else{
+                                                        $adminInfo1 = $reply->getAdminInformation();
+                                                        $adminDetailInfo1 = $reply->getAdminDetailInformation();
+                                                        $urlImageSrc1 = URL::to('/storage/app') . '/' . $adminDetailInfo1->userImage;
+                                                      }
+                                                    @endphp
+                                                    <ul class="child_replay">
+                                                      <li class="box_reply row">
+                                                        <div class="avatar_comment col-md-2">
+                                                          <img src="{{$urlImageSrc1}}" alt="avatar"/>
                                                         </div>
-                                                        @php
-                                                          $replys1 = $reply->getReply();
-                                                        @endphp
-                                                        @foreach($replys1 as $reply1)
-                                                          @php
-                                                            $client = $reply1->getMemberInformation();
-                                                          @endphp
-                                                          <ul class="child_replay">
-                                                            <li class="box_reply row">
-                                                              <div class="avatar_comment col-md-2">
-                                                                <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
-                                                              </div>
-                                                              <div class="result_comment col-md-10">
-                                                                <h4>{{$client->name}}</h4>
-                                                                <p>{{$reply1->comment}}</p>
-                                                                <div class="tools_comment">
-                                                                  <!-- <a class="like" href="#">Like</a>
-                                                                  <span aria-hidden="true"> · </span> -->
-                                                                  <a class="replay" commentId="{{$reply1->id}}">Reply</a>
-                                                                  <!-- <span aria-hidden="true"> · </span>
-                                                                  <i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
-                                                                  <span aria-hidden="true"> · </span>
-                                                                  <span>26m</span> -->
-                                                                </div>
-                                                                @php
-                                                                  $replys2 = $reply1->getReply();
-                                                                @endphp
-                                                                @foreach($replys2 as $reply2)
-                                                                  @php
-                                                                    $client = $reply2->getMemberInformation();
-                                                                  @endphp
-                                                                  <ul class="child_replay">
-                                                                    <li class="box_reply row">
-                                                                      <div class="avatar_comment col-md-2">
-                                                                        <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
-                                                                      </div>
-                                                                      <div class="result_comment col-md-10">
-                                                                        <h4>{{$client->name}}</h4>
-                                                                        <p>{{$reply2->comment}}</p>
-                                                                        <div class="tools_comment">
-                                                                          <!-- <a class="like" href="#">Like</a>
-                                                                          <span aria-hidden="true"> · </span> -->
-                                                                          <a class="replay" commentId="{{$reply2->id}}">Reply</a>
-                                                                          <!-- <span aria-hidden="true"> · </span>
-                                                                          <i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
-                                                                          <span aria-hidden="true"> · </span>
-                                                                          <span>26m</span> -->
-                                                                        </div>
-                                                                        @php
-                                                                          $replys3 = $reply2->getReply();
-                                                                        @endphp
-                                                                        @foreach($replys3 as $reply3)
-                                                                          @php
-                                                                            $client = $reply3->getMemberInformation();
-                                                                          @endphp
-                                                                          <ul class="child_replay">
-                                                                            <li class="box_reply row">
-                                                                              <div class="avatar_comment col-md-2">
-                                                                                <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
-                                                                              </div>
-                                                                              <div class="result_comment col-md-10">
-                                                                                <h4>{{$client->name}}</h4>
-                                                                                <p>{{$reply3->comment}}</p>
-                                                                                <div class="tools_comment">
-                                                                                  <!-- <a class="like" href="#">Like</a>
-                                                                                  <span aria-hidden="true"> · </span> -->
-                                                                                  <a class="replay" commentId="{{$reply3->id}}">Reply</a>
-                                                                                  <!-- <span aria-hidden="true"> · </span>
-                                                                                  <i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
-                                                                                  <span aria-hidden="true"> · </span>
-                                                                                  <span>26m</span> -->
-                                                                                </div>
-
-                                                                              </div>
-                                                                            </li>
-                                                                          </ul>
-                                                                        @endforeach
-                                                                      </div>
-                                                                    </li>
-                                                                  </ul>
-                                                                @endforeach
-                                                              </div>
-                                                            </li>
-                                                          </ul>
-                                                        @endforeach
-                                                      </div>
-                                                    </li>
-                                                  </ul>
-                                              @endforeach
+                                                        <div class="result_comment col-md-10">
+                                                          <h4>{{ $reply->userType == "client" ? $client->name : $adminInfo1->username}}</h4>
+                                                          <p><span class="ml-3 text-primary">{{$reply->replyName}} </span> {{$reply->comment}}</p>
+                                                          <div class="tools_comment">
+                                                            <!-- <a class="like" href="#">Like</a>
+                                                            <span aria-hidden="true"> · </span> -->
+                                                            <a class="replay" commentId="{{$comment->id}}" replyId="{{$reply->reply}}">Reply</a>
+                                                            <!-- <span aria-hidden="true"> · </span>
+                                                            <i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
+                                                            <span aria-hidden="true"> · </span>
+                                                            <span>26m</span> -->
+                                                          </div>
+                                                        </div>
+                                                      </li>
+                                                    </ul>
+                                                @endforeach
+                                              </div>
                                             </div>
                                           </li>
                                         @endif
@@ -698,7 +637,13 @@
 			$('#list_comment').on('click', '.replay', function (e) {
 				cancel_reply();
 				$current = $(this);
+				var currentH4122 = $(this).parent().parent().children()[0].innerHTML;
+        var currentH4  = "@" + currentH4122;
 				var commentId =	$current.attr("commentId");
+				var replyId =	$current.attr("replyId");
+        if(replyId == 0){
+          currentH4 = "";
+        }
 				el = document.createElement('li');
 				el.className = "box_reply row";
 				el.innerHTML =
@@ -707,9 +652,9 @@
 							'<div class=\"avatar_comment col-md-2\">'+
 							'<img src=\"https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg\" alt=\"avatar\"/>'+
 							'</div>'+
-							'<div class=\"box_comment col-md-10\">'+
+							'<div class=\"box_comment col-md-9\">'+
 								'<form action=\"{{URL::to('/advance/comment/add')}}\" method="post">'+
-									'<textarea class=\"comment_replay\" name=\"comment\" placeholder=\"Add a comment...\"></textarea>'+
+									'<textarea class=\"comment_replay\" name=\"comment\" placeholder=\"Add a comment...\" required></textarea>'+
 									'<div class=\"box_post\">'+
 										'<div class=\"pull-right\">'+
 										'<span>'+
@@ -720,6 +665,7 @@
 										'<input type=\"hidden\" name=\"userType\" value=\"client\">'+
 										'<input type=\"hidden\" name=\"lectureId\" value=\"{{$lecture->id}}\"> '+
 										'<input type=\"hidden\" name=\"reply\" value=\"{{$lecture->id}}\"> '+
+										'<input type=\"hidden\" name=\"replyName\" value=\"'+currentH4+'\"> '+
 										'<input type=\"hidden\" name=\"Category\" value=\"{{$category}}\"> '+
 										'<input type=\"hidden\" name=\"commentId\" value=\"'+commentId+'\"> '+
 										'<button class=\"cancel\" onclick=\"cancel_reply()\" type=\"button\">Cancel</button>'+

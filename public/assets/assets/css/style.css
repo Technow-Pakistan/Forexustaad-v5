@@ -2663,3 +2663,9 @@ padding-bottom: 12px;
 .activeVideo{
   background-color:lightgray;
 }
+.BorderNone{
+	border:0px !important;
+}
+.avatar_comment img{
+  border-radius: 50%;
+}

@@ -235,4 +235,31 @@ class AdvanceTrainingController extends Controller
         $lecture->save();
         return back();
     }
+    public function ViewComment1(Request $request,$id){
+        $comments = BasicCommentsModel::where('lectureId',$id)->get();
+        $category = 1;
+        return view('admin.comment.ViewLectureComment',compact('comments','category'));
+    }
+    public function ViewComment2(Request $request,$id){
+        $comments = AdvanceCommentsModel::where('lectureId',$id)->get();
+        $category = 2;
+        return view('admin.comment.ViewLectureComment',compact('comments','category'));
+    }
+    public function ViewComment3(Request $request,$id){
+        $comments = HabbitCommentsModel::where('lectureId',$id)->get();
+        $category = 3;
+        return view('admin.comment.ViewLectureComment',compact('comments','category'));
+    }
+    public function SaveViewCommentReply(Request $request){
+        if($request->category == 1){
+            $reply = new BasicCommentsModel;
+        }elseif($request->category == 2){
+            $reply = new AdvanceCommentsModel;
+        }elseif($request->category == 3){
+            $reply = new HabbitCommentsModel;
+        }
+        $reply->fill($request->all());
+        $reply->save();
+        return back();
+    }
 }
