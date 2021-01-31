@@ -78,12 +78,22 @@
 													@if($category == "advance")
 														<th>Member</th>
 													@endif
+													<th>Comments</th>
 													<th>Date</th>
 													<th>Status</th>
 												</tr>
 											</thead>
 											<tbody>
 												@foreach($Lectures as $data)
+													@php
+														if($category == "advance"){
+															$CommentsCategory = "AdvanceCategory";
+														}elseif($category == "basic"){
+															$CommentsCategory = "BasicCategory";
+														}if($category == "habbit"){
+															$CommentsCategory = "HabbitCategory";
+														}
+													@endphp
 													<tr  draggable="true" ondragstart="dragit(event)" ondragover="dragover(event)">
 														<td>{{$data->poistion}}</td>
 														<td>
@@ -93,6 +103,7 @@
 														@if($category == "advance")
 															<td>{{$data->vipMember == 0 ? 'Free' : 'Vip'}}</td>
 														@endif
+														<td><a href="{{URL::to('ustaad/lecture')}}/{{$CommentsCategory}}/{{$data->id}}">View Comments</a></td>
 														<td>{{$data->created_at->format("M d, Y")}}</td>
 														<td>
 															<span class="badge {{$data->status == 0 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 0 ? 'Active' : 'Deactive'}}</span>
@@ -122,6 +133,7 @@
 													@if($category == "advance")
 														<th>Member</th>
 													@endif
+													<th>Comments</th>
 													<th>Date</th>
 													<th>Status</th>
 												</tr>

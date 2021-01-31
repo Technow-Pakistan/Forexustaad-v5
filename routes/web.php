@@ -160,6 +160,10 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::post('/{id1}/edit/{id}',[AdvanceTrainingController::class,'EditLecture']);
         Route::get('/{id1}/delete/{id}',[AdvanceTrainingController::class,'Delete']);
         Route::get('/{id1}/active/{id}',[AdvanceTrainingController::class,'Active']);
+        Route::get('/BasicCategory/{id}',[AdvanceTrainingController::class,'ViewComment1']);
+        Route::get('/AdvanceCategory/{id}',[AdvanceTrainingController::class,'ViewComment2']);
+        Route::get('/HabbitCategory/{id}',[AdvanceTrainingController::class,'ViewComment3']);
+        Route::post('/CommentViewReply/add/',[AdvanceTrainingController::class,'SaveViewCommentReply']);
     });
     Route::group(['prefix' => 'strategies'],function(){
         Route::get('/',[StrategiesController::class,'Index']);
@@ -413,6 +417,8 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::get('/brokerReview/new',[BorkerReviewController::class,'Add']);
     Route::post('/brokersReview/new',[BorkerReviewController::class,'AddReview']);
     Route::get('/brokersDetail/{id}',[BorkerController::class,'Detail']);
+    
+    Route::get('/clientMember/{id}',[ClientMemberController::class,'clientMemberView']);
     Route::group(['prefix' => 'member'],function(){
         Route::get('/profile/{id}',[AdminMemberController::class,'Index']);
         Route::get('/add',[AdminMemberController::class,'Add']);
@@ -434,6 +440,9 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/active/{id}',[ClientMemberController::class,'Active']);
     });
     Route::group(['prefix' => 'comment'],function(){
+        Route::get('/latest',[CommentController::class,'viewLatestComments']);
+        Route::post('/latest/add/{id}',[CommentController::class,'addLatestComments']);
+        Route::get('/latest/delete/{id}',[CommentController::class,'DeleteLatestComment']);
         Route::get('/',[CommentController::class,'Index']);
         Route::post('/',[CommentController::class,'Add']);
         Route::get('/delete/{id}',[CommentController::class,'Remove']);

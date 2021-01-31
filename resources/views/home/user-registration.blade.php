@@ -213,19 +213,19 @@
                                                                                         </div>
                                                                                         <div class="col-md-6">
                                                                                             <div class="form-group">
-                                                                                                <input type="text" class="form-control" name="accountNumber[]" value="{{$accountInfo->accountNumber}}" placeholder="Account Number *" value="" />
+                                                                                                <input type="text" class="form-control" name="accountNumber[]" value="{{$accountInfo->accountNumber}}" placeholder="Account Number *" required/>
                                                                                             </div>
                                                                                             <div class="form-group">
-                                                                                                <input type="text" class="form-control" name="accountName[]" value="{{$accountInfo->accountName}}" placeholder="Account Name *" value="" />
+                                                                                                <input type="text" class="form-control" name="accountName[]" value="{{$accountInfo->accountName}}" placeholder="Account Name *" required/>
                                                                                             </div>
 
                                                                                         </div>
                                                                                         <div class="col-md-6">
                                                                                             <div class="form-group">
-                                                                                                <input type="mail" class="form-control" name="accountemail[]" value="{{$accountInfo->accountemail}}" placeholder="Account Email *" value="" />
+                                                                                                <input type="mail" class="form-control" name="accountemail[]" value="{{$accountInfo->accountemail}}" placeholder="Account Email *" required/>
                                                                                             </div>
                                                                                             <div class="form-group">
-                                                                                                <input type="numbers" class="form-control" name="accountdeposit[]" value="{{$accountInfo->accountdeposit}}" placeholder="Deposit" value="" />
+                                                                                                <input type="numbers" class="form-control" name="accountdeposit[]" value="{{$accountInfo->accountdeposit}}" placeholder="Deposit" required/>
                                                                                             </div>
                                                                                         </div>
 

@@ -7,15 +7,11 @@ use App\Models\ClientRegistrationModel;
 use App\Models\AdminModel;
 use App\Models\AdminMemberDetailModel;
 
-class HabbitCommentsModel extends Model
+class LatestTrainingCommentsModel extends Model
 {
-    protected $table = "habbit_training_comments";
-    protected $fillable = ["comment","memberId","userType","commentId","status","reply","lectureId","replyName"];
+    protected $table = "latest_training_comments";
+    protected $fillable = ["comment","lectureId","userType","reply","commentId","memberId","lectureType","commentTableId"];
 
-    public function getReply(){
-        $replys = HabbitCommentsModel::where('commentId',$this->id)->get();
-        return $replys;
-    }
     public function getMemberInformation(){
         $member = ClientRegistrationModel::where('id',$this->memberId)->first();
         return $member;
@@ -28,5 +24,5 @@ class HabbitCommentsModel extends Model
         $member = AdminMemberDetailModel::where('adminTableId',$this->memberId)->first();
         return $member;
     }
-    
+
 }
