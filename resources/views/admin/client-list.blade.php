@@ -12,7 +12,7 @@
 						</div>
 						<ul class="breadcrumb">
 							<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a></li>
-							<li class="breadcrumb-item"><a href="#!">user</a></li>
+							<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/member/clientList')}}">Client Type</a></li>
 							<li class="breadcrumb-item"><a href="#!">Client list</a></li>
 						</ul>
 					</div>

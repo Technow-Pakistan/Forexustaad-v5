@@ -14,7 +14,7 @@
 									<li class="breadcrumb-item">
 										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
 									</li>
-									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/post/viewAll')}}">All Posts</a></li>
+									<li class="breadcrumb-item"><a href="#!">Post</a></li>
 									<li class="breadcrumb-item">
 										<a href="#!">New Post</a>
 									</li>

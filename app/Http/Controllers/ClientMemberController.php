@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ClientRegistrationModel;
+use App\Models\ClientMemberModel;
 
 class ClientMemberController extends Controller
 {
     public function ClientList(Request $request){
-        $memberData = ClientRegistrationModel::all(); 
+        $MemberType = ClientMemberModel::all();
+        return view('admin.client.viewAllTypeUsers',compact('MemberType'));
+    }
+    public function clientMemberView(Request $request, $id){
+        $memberData = ClientRegistrationModel::where('memberType',$id)->get(); 
         return view('admin.client-list',compact("memberData"));
     }
     public function Delete(Request $request, $id){

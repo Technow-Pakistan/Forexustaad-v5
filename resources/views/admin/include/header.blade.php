@@ -85,6 +85,7 @@
 								<ul class="pcoded-submenu">
 									<li><a href="{{URL::to('ustaad/lecture')}}">All Training</a></li>
 									<li><a href="{{URL::to('ustaad/lecture/new')}}">Add Lecture</a></li>
+									<li><a href="{{URL::to('ustaad/comment/latest')}}">Latest Comments</a></li>
 								</ul>
 							</li>
 							<!-- <li class="nav-item pcoded-menu-caption">
@@ -310,11 +311,11 @@
 						<div class="dropdown">
 							<a class="dropdown-toggle" href="#" data-toggle="dropdown">
 								<i class="icon feather icon-bell"></i>
-								@if($NotificationMessage[0] != null)
+								@if(count($NotificationMessage) != 0)
 									<span class="badge bg-danger"><span class="sr-only"></span></span>
 								@endif
 							</a>
-							@if($NotificationMessage[0] != null)
+							@if(count($NotificationMessage) != 0)
 								<div class="dropdown-menu dropdown-menu-right notification">
 										<form action="{{URL::to('/ustaad/notification/checked/delete')}}" method="post">
 									<div class="noti-head">
