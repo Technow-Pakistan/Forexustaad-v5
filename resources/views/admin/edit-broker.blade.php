@@ -988,24 +988,14 @@
 		}
 	@endphp
 
-<script>
-        var data = {{$prograssBar}};
-        var info = data + "%";
-        $('.progress').html("<span style='margin-left:50%;'></span>" + info);
-        $('.progress').css("width",info);
-        $('.progress').css("background-position",info);
+	<script>
+			var data = {{$prograssBar}};
+			var info = data + "%";
+			$('.progress').html("<span style='margin-left:50%;'></span>" + info);
+			$('.progress').css("width",info);
+			$('.progress').css("background-position",info);
 
-	if($("#neverEnd").prop('checked') == true){
-		$(".txtTime").hide();
-		$("#startDatetime").attr("required",false);
-		$("#endDatetime").prop("required",false);
-	}else{
-		$(".txtTime").show();
-		$("#startDatetime").attr("required",true);
-		$("#endDatetime").prop("required",true);
-	}
-	$("#neverEnd").click(function(){
-		if(this.checked){
+		if($("#neverEnd").prop('checked') == true){
 			$(".txtTime").hide();
 			$("#startDatetime").attr("required",false);
 			$("#endDatetime").prop("required",false);
@@ -1014,30 +1004,39 @@
 			$("#startDatetime").attr("required",true);
 			$("#endDatetime").prop("required",true);
 		}
-	})
-</script>
-<style>
-	.progress-bar {
-	height: 30px;
-	margin: 30px auto;
-	background: #d3d3d3;
-	padding: 2px;
-	border-radius: 4px;
-	border: 1px solid #bbb;
-	}
-
-	.progress {
-	/* transition: width 200ms ease-in */
-	height: 100%;
-	border-radius: 3px;
-	background-size: 12000px 1px;
-	background-image: url("http://monosnap.com/image/mp0hB7ZLP9c0967wBx6p4pDjujqzhP.png");
-	}
-	.nav-fill .nav-item .nav-link{
-		padding:15px;
-	}
-	.nav-fill .nav-item .active{
-		color:#4099ff;
-		background-color:white;
-	}
-</style>
+		$("#neverEnd").click(function(){
+			if(this.checked){
+				$(".txtTime").hide();
+				$("#startDatetime").attr("required",false);
+				$("#endDatetime").prop("required",false);
+			}else{
+				$(".txtTime").show();
+				$("#startDatetime").attr("required",true);
+				$("#endDatetime").prop("required",true);
+			}
+		})
+	</script>
+	<style>
+		.progress-bar{
+			height: 30px;
+			margin: 30px auto;
+			background: #d3d3d3;
+			padding: 2px;
+			border-radius: 4px;
+			border: 1px solid #bbb;
+		}
+		.progress{
+			/* transition: width 200ms ease-in */
+			height: 100%;
+			border-radius: 3px;
+			background-size: 12000px 1px;
+			background-image: url("http://monosnap.com/image/mp0hB7ZLP9c0967wBx6p4pDjujqzhP.png");
+		}
+		.nav-fill .nav-item .nav-link{
+			padding:15px;
+		}
+		.nav-fill .nav-item .active{
+			color:#4099ff;
+			background-color:white;
+		}
+	</style>

@@ -27,6 +27,9 @@ use App\Models\ClientAccountDetailModel;
 use App\Models\BrokerCategoryModel;
 use App\Models\MainWebinarModel;
 use App\Models\NotificationModel;
+use App\Models\AllCitiesModel;
+use App\Models\AllStatesModel;
+use App\Models\AllCountriesModel;
 
 class HomeController extends Controller
 {
@@ -364,7 +367,10 @@ class HomeController extends Controller
         $id = $value['id'];
         $clientAccount = ClientAccountDetailModel::where('clientId',$id)->get();
         $clientAccount1 = ClientAccountDetailModel::where('clientId',$id)->first();
-        return view('home/user-registration',compact('allBroker','clientAccount','clientAccount1'));
+        $AllCities = AllCitiesModel::all();
+        $AllStates = AllStatesModel::all();
+        $AllCountries = AllCountriesModel::all(); 
+        return view('home/user-registration',compact('allBroker','clientAccount','clientAccount1','AllCities','AllStates','AllCountries'));
     }
     public function userregistrationUpdate(Request $request){
         $id = $request->updateId;

@@ -45,6 +45,12 @@ class AdminController extends Controller
         $clientMember = ClientMemberModel::where('id',$totalClientInfo->memberType)->first();
         return view('admin.client.user-profile',compact('totalClientInfo','clientMember','clientAccount'));
     }
+    public function ClientProfileAccountVerified(Request $request, $id){
+        $clientAccount = ClientAccountDetailModel::find($id);
+        $clientAccount->verified = 1;
+        $clientAccount->save();
+        return back();
+    }
     public function ChangeMemberType(Request $request, $id){
         $totalClientInfo = ClientRegistrationModel::where('id',$id)->first();
         $totalClientInfo->memberType = $request->memberType;

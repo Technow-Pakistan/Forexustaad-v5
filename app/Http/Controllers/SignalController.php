@@ -35,6 +35,20 @@ class SignalController extends Controller
     
 
     //Admin Panel
+    
+    public function Comment(Request $request,$id){
+        $comments = SignalCommentsModel::where('signalId',$id)->get();
+        
+        return view('admin.comment.ViewSignalComment',compact('comments'));
+    }
+    
+    public function CommentAdd(Request $request){
+        $comments = new SignalCommentsModel;
+        $comments->fill($request->all());
+        $comments->save();
+        return back();
+    }
+    
     public function Index(){
         $signalData = SignalsModel::orderBy('id','desc')->get();
         return view('admin.signals.all-signal',compact('signalData'));
