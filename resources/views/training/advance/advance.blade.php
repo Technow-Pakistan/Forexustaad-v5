@@ -261,7 +261,7 @@
                                         <div class="box_post">
                                           <div class="pull-right">
                                           <span>
-                                            <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar" />
+                                            <img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="avatar" />
                                             <i class="fa fa-caret-down"></i>
                                           </span>
                                           @php
@@ -292,7 +292,11 @@
                                             }else{
                                               $adminInfo = $comment->getAdminInformation();
                                               $adminDetailInfo = $comment->getAdminDetailInformation();
-                                              $urlImageSrc = URL::to('/storage/app') . '/' . $adminDetailInfo1->userImage;
+                                              if($adminDetailInfo->userImage == null){
+                                                $urlImageSrc = URL::to('/storage/app/WebImages/avatar-5.jpg');
+                                              }else{
+                                                $urlImageSrc = URL::to('/storage/app') . '/' . $adminDetailInfo->userImage;
+                                              }
                                             }
                                           @endphp
                                           <li class="box_result row">
@@ -328,7 +332,11 @@
                                                       }else{
                                                         $adminInfo1 = $reply->getAdminInformation();
                                                         $adminDetailInfo1 = $reply->getAdminDetailInformation();
-                                                        $urlImageSrc1 = URL::to('/storage/app') . '/' . $adminDetailInfo1->userImage;
+                                                        if($adminDetailInfo1->userImage == null){
+                                                          $urlImageSrc = URL::to('/storage/app/WebImages/avatar-5.jpg');
+                                                        }else{
+                                                          $urlImageSrc = URL::to('/storage/app') . '/' . $adminDetailInfo1->userImage;
+                                                        }
                                                       }
                                                     @endphp
                                                     <ul class="child_replay">
@@ -650,7 +658,7 @@
 					'<div class=\"col-md-12 reply_comment\">'+
 						'<div class=\"row\">'+
 							'<div class=\"avatar_comment col-md-2\">'+
-							'<img src=\"https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg\" alt=\"avatar\"/>'+
+							'<img src=\"{{URL::to('/public/assets/assets/img/user1.jpg')}}\" alt=\"avatar\"/>'+
 							'</div>'+
 							'<div class=\"box_comment col-md-9\">'+
 								'<form action=\"{{URL::to('/advance/comment/add')}}\" method="post">'+
@@ -658,7 +666,7 @@
 									'<div class=\"box_post\">'+
 										'<div class=\"pull-right\">'+
 										'<span>'+
-											'<img src=\"https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg\" alt=\"avatar\" />'+
+											'<img src=\"{{URL::to('/public/assets/assets/img/user1.jpg')}}\" alt=\"avatar\" />'+
 											'<i class=\"fa fa-caret-down\"></i>'+
 										'</span>'+
 										'<input type=\"hidden\" name=\"memberId\" value=\"{{$value['id']}}\">'+

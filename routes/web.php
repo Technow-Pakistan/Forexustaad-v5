@@ -143,6 +143,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::get('/notification/{id}',[AdminController::class,'NotificationView']);
     Route::post('/notification/checked/delete',[AdminController::class,'NotificationDelete']);
     Route::get('/viewClientProfile/{id}',[AdminController::class,'ViewClientProfile']);
+    Route::post('/viewClientProfile/accountVerified/{id}',[AdminController::class,'ClientProfileAccountVerified']);
     Route::post('/changeMemberType/{id}',[AdminController::class,'ChangeMemberType']);
 
     Route::get('/dashboard',[AdminController::class,'Dashboard']);
@@ -200,6 +201,8 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/reply/{id}',[ComposeEmailController::class,'EmailReply']);
     });
     Route::group(['prefix' => 'signals'],function(){
+        Route::get('/comment/{id}',[SignalController::class,'Comment']);
+        Route::post('/CommentViewReply/add',[SignalController::class,'CommentAdd']);
         Route::get('/',[SignalController::class,'Index']);
         Route::get('/add',[SignalController::class,'Add']);
         Route::post('/add',[SignalController::class,'AddProcess']);
