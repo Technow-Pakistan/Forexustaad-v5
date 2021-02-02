@@ -32195,3 +32195,6 @@ new-task label input[type=checkbox] {
     max-width: 350px;
     overflow:auto;
 }
+.fts_18{
+    font-size:18px;
+}

@@ -72,6 +72,42 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
+                                                                        <!-- <input type="text" class="form-control" name="countries" placeholder="Countries *" value="" required/> -->
+                                                                        <select name="" id="sel1" class="form-control" onchange="giveSelection(this.value)">
+                                                                            @php 
+                                                                                $cityId = $clientValue['cityId'];
+                                                                                $citiesInfo = App\Models\AllCitiesModel::find($cityId);
+                                                                            @endphp
+                                                                            @foreach($AllCountries as $country)
+                                                                                <option value="{{$country->id}}" {{$country->id == $citiesInfo->country_id ? 'selected' : ''}}>{{$country->name}}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
+                                                                        <!-- <input type="text" class="form-control" name="states" placeholder="States *" value="" required/> -->
+                                                                        <select name="" id="sel2" class="form-control" onchange="giveSelection2(this.value)">
+                                                                            @foreach($AllStates as $state)
+                                                                                <option value="{{$state->id}}" data-option="{{$state->country_id}}" {{$state->id == $citiesInfo->state_id ? 'selected' : ''}}>{{$state->name}}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
+                                                                        <!-- <input type="text" class="form-control" name="cities" placeholder="Cities *" value="" required/> -->
+                                                                        <select name="cityId" id="sel3" class="form-control">
+                                                                            @foreach($AllCities as $city)
+                                                                                <option value="{{$city->id}}" data-option="{{$city->state_id}}" {{$city->id == $citiesInfo->id ? 'selected' : ''}}>{{$city->name}}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         @php
@@ -225,7 +261,7 @@
                                                                                                 <input type="mail" class="form-control" name="accountemail[]" value="{{$accountInfo->accountemail}}" placeholder="Account Email *" required/>
                                                                                             </div>
                                                                                             <div class="form-group">
-                                                                                                <input type="numbers" class="form-control" name="accountdeposit[]" value="{{$accountInfo->accountdeposit}}" placeholder="Deposit" required/>
+                                                                                                <input type="number" class="form-control" name="accountdeposit[]" value="{{$accountInfo->accountdeposit}}" placeholder="Deposit" required/>
                                                                                             </div>
                                                                                         </div>
 
@@ -257,7 +293,7 @@
                                                                                             <input type="mail" class="form-control" name="accountemail[]" placeholder="Account Email *" value="" required/>
                                                                                         </div>
                                                                                         <div class="form-group">
-                                                                                            <input type="numbers" class="form-control" name="accountdeposit[]" placeholder="Deposit" value="" required/>
+                                                                                            <input type="number" class="form-control" name="accountdeposit[]" placeholder="Deposit" value="" required/>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -313,6 +349,40 @@
 @include('inc.footer')
 
 <script>
+    var sel1 = document.querySelector('#sel1');
+    var sel2 = document.querySelector('#sel2');
+    var options2 = sel2.querySelectorAll('option');
+
+    var sel3 = document.querySelector('#sel3');
+    var options3 = sel3.querySelectorAll('option');
+    
+    function giveSelection(selValue) {
+        sel2.innerHTML = '';
+        for(var i = 0; i < options2.length; i++) {
+            if(options2[i].dataset.option === selValue) {
+            sel2.appendChild(options2[i]);
+            }
+        }
+        $("#sel3").html("");
+    }
+
+    giveSelection(sel1.value);
+
+
+    function giveSelection2(sel2Value) {
+        sel3.innerHTML = '';
+        for(var i = 0; i < options3.length; i++) {
+            console.log("hello1");
+            if(options3[i].dataset.option === sel2Value) {
+                console.log("hello2");
+                sel3.appendChild(options3[i]);
+            }
+        }
+        console.log("hello");
+    }
+
+    giveSelection2(sel2.value);
+
       $(document).ready(function() {
         var buttonAdd = $("#add-button");
         var buttonRemove = $("#remove-button");

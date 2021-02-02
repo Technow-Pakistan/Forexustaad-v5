@@ -268,7 +268,11 @@
 																}else{
 																	$adminInfo = $comment->getAdminInformation();
 																	$adminDetailInfo = $comment->getAdminDetailInformation();
-																	$urlImageSrc = URL::to('/storage/app') . '/' . $adminDetailInfo1->userImage;
+																	if($adminDetailInfo->userImage == null){
+																		$urlImageSrc = URL::to('/storage/app/WebImages/avatar-5.jpg');
+																	}else{
+																		$urlImageSrc = URL::to('/storage/app') . '/' . $adminDetailInfo->userImage;
+																	}
 																}
 															@endphp
 															<li class="box_result row">
@@ -304,7 +308,11 @@
 																					}else{
 																						$adminInfo1 = $reply->getAdminInformation();
 																						$adminDetailInfo1 = $reply->getAdminDetailInformation();
-																						$urlImageSrc1 = URL::to('/storage/app') . '/' . $adminDetailInfo1->userImage;
+																						if($adminDetailInfo1->userImage == null){
+																							$urlImageSrc = URL::to('/storage/app/WebImages/avatar-5.jpg');
+																						}else{
+																							$urlImageSrc = URL::to('/storage/app') . '/' . $adminDetailInfo1->userImage;
+																						}
 																					}
 																				@endphp
 																				<ul class="child_replay">

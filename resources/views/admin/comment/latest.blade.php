@@ -92,7 +92,7 @@
                                                         <ul class="d-flex pl-13 p-0">
                                                             <li class="cursor text-primary" data-toggle="collapse" data-target="#demo{{$idf}}">Reply</li>
                                                             <li class="cursor" data-toggle="collapse" data-target="#demo{{$idf1}}">{{count($lectureReplies)}} Replies <i class="fa fa-angle-down" aria-hidden="true"></i></li>
-                                                            <li><a href="{{URL::to('ustaad/comment/latest/delete')}}/{{$com->id}}"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a></li>
+                                                            <li><a href="{{URL::to('ustaad/comment/latest/delete')}}/{{$com->id}}" class="addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a></li>
                                                             <!-- <li><i class="fa fa-thumbs-up" aria-hidden="true"></i></li> 
                                                             <li><i class="fa fa-thumbs-down" aria-hidden="true"></i></li>
                                                             <li><i class="fa fa-heart" aria-hidden="true"></i></li>

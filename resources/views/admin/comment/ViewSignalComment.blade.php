@@ -18,7 +18,7 @@
                                 <li class="breadcrumb-item">
                                     <a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{URL::to('/ustaad/lecture')}}">All Training</a></li>
+                                <li class="breadcrumb-item"><a href="{{URL::to('/ustaad/signals')}}">All Signal</a></li>
                                 <li class="breadcrumb-item"><a href="#!" class="text-dark">Comments</a></li>
                             </ul>
                         </div>
@@ -52,7 +52,7 @@
                                 $adminDetailInfo = $com->getAdminDetailInformation();
                                 $urlImageSrc = URL::to('/storage/app') . '/' . $adminDetailInfo->userImage;
                             }
-                            $lectureReplies = $com->getReply();
+                            $SignalReplies = $com->getReply();
                         @endphp
                         <div class="container-fluid">
                             <div class="row">
@@ -66,33 +66,28 @@
                                                         </div>
                                                         <div class="card-body">
                                                             <div class="d-flex">
-                                                                <span><h4 class="card-title">{{ $com->userType == "client" ? $memberInfo->name : $adminInfo->username}}</h4></span>
+                                                                <span><h4 class="card-title">{{$com->userType == "client" ? $memberInfo->name : $adminInfo->username}}</h4></span>
                                                             </div>
                                                             <p class="card-text">{{$com->comment}}</p>
                                                             <div>
                                                                 <ul class="d-flex pl-13 p-0">
                                                                     <li class="cursor text-primary" data-toggle="collapse" data-target="#demo{{$idf}}">Reply</li>
-                                                                    <li class="cursor" data-toggle="collapse" data-target="#demo{{$idf1}}">{{count($lectureReplies)}} Replies <i class="fa fa-angle-down" aria-hidden="true"></i></li>
+                                                                    <li class="cursor" data-toggle="collapse" data-target="#demo{{$idf1}}">{{count($SignalReplies)}} Replies <i class="fa fa-angle-down" aria-hidden="true"></i></li>
                                                                     <li><a href="{{URL::to('ustaad/comment/latest/delete')}}/{{$com->id}}" class="addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a></li>
-                                                                    <!-- <li><i class="fa fa-thumbs-up" aria-hidden="true"></i></li> 
-                                                                    <li><i class="fa fa-thumbs-down" aria-hidden="true"></i></li>
-                                                                    <li><i class="fa fa-heart" aria-hidden="true"></i></li>
-                                                                    <li><i class="fa fa-ellipsis-v" aria-hidden="true"></i></li> -->
                                                                 </ul>
                                                                 <div id="demo{{$idf}}" class="collapse">
-                                                                    <form action="{{URL::to('/ustaad/lecture/CommentViewReply/add')}}" method="post">
+                                                                    <form action="{{URL::to('/ustaad/signals/CommentViewReply/add')}}" method="post">
                                                                         <textarea class="form-control" name="comment"></textarea>
                                                                         <input type="hidden" name="memberId" value="{{$value['id']}}">
                                                                         <input type="hidden" name="userType" value="admin">
-                                                                        <input type="hidden" name="category" value="{{$category}}">
-                                                                        <input type="hidden" name="lectureId" value="{{$com->lectureId}}">
+                                                                        <input type="hidden" name="signalId" value="{{$com->signalId}}">
                                                                         <input type="hidden" name="reply" value="1">
                                                                         <input type="hidden" name="commentId" value="{{$com->id}}">
                                                                         <p class="text-right"><input type="submit" class="btn btn-primary mt-2" value="submit"></p>
                                                                     </form>
                                                                 </div>
                                                                 <div id="demo{{$idf1}}" class="collapse">
-                                                                    @foreach($lectureReplies as $reply)
+                                                                    @foreach($SignalReplies as $reply)
                                                                         @php
                                                                             if($reply->userType == "client"){
                                                                                 $memberInfo1 = $reply->getMemberInformation();
