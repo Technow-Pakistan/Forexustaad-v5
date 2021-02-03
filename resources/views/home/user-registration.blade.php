@@ -74,34 +74,59 @@
                                                             <div class="row">
                                                                 <div class="col-md-4">
                                                                     <div class="form-group">
-                                                                        <!-- <input type="text" class="form-control" name="countries" placeholder="Countries *" value="" required/> -->
-                                                                        <select name="" id="sel1" class="form-control" onchange="giveSelection(this.value)">
+                                                                        <select name="" id="sel1" class="form-control">
                                                                             @php 
                                                                                 $cityId = $clientValue['cityId'];
-                                                                                $citiesInfo = App\Models\AllCitiesModel::find($cityId);
+                                                                                if($cityId != null){
+                                                                                    $citiesInfo = App\Models\AllCitiesModel::find($cityId);
+                                                                                    $stateData = App\Models\AllStatesModel::where('country_id',$citiesInfo->country_id)->get();
+                                                                                    $citiesData = App\Models\AllCitiesModel::where('state_id',$citiesInfo->state_id)->get();
+                                                                                }
                                                                             @endphp
                                                                             @foreach($AllCountries as $country)
-                                                                                <option value="{{$country->id}}" {{$country->id == $citiesInfo->country_id ? 'selected' : ''}}>{{$country->name}}</option>
+                                                                                @php
+                                                                                    $selected1 = 0;
+                                                                                    if($cityId != null){
+                                                                                        if($country->id == $citiesInfo->country_id){
+                                                                                            $selected1 = 1;
+                                                                                        }
+                                                                                    }  
+                                                                                @endphp
+                                                                                <option value="{{$country->id}}" {{$selected1 == 1 ? 'selected' : ''}}>{{$country->name}}</option>
                                                                             @endforeach
                                                                         </select>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <div class="form-group">
-                                                                        <!-- <input type="text" class="form-control" name="states" placeholder="States *" value="" required/> -->
-                                                                        <select name="" id="sel2" class="form-control" onchange="giveSelection2(this.value)">
-                                                                            @foreach($AllStates as $state)
-                                                                                <option value="{{$state->id}}" data-option="{{$state->country_id}}" {{$state->id == $citiesInfo->state_id ? 'selected' : ''}}>{{$state->name}}</option>
+                                                                        <select name="" id="sel2" class="form-control">
+                                                                            @foreach($stateData as $state)
+                                                                                @php
+                                                                                    $selected2 = 0;
+                                                                                    if($cityId != null){
+                                                                                        if($state->id == $citiesInfo->state_id){
+                                                                                            $selected2 = 1;
+                                                                                        }
+                                                                                    }  
+                                                                                @endphp
+                                                                                <option value="{{$state->id}}" {{$selected2 == 1 ? 'selected' : ''}}>{{$state->name}}</option>
                                                                             @endforeach
                                                                         </select>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <div class="form-group">
-                                                                        <!-- <input type="text" class="form-control" name="cities" placeholder="Cities *" value="" required/> -->
                                                                         <select name="cityId" id="sel3" class="form-control">
-                                                                            @foreach($AllCities as $city)
-                                                                                <option value="{{$city->id}}" data-option="{{$city->state_id}}" {{$city->id == $citiesInfo->id ? 'selected' : ''}}>{{$city->name}}</option>
+                                                                            @foreach($citiesData as $city)
+                                                                                @php
+                                                                                    $selected3 = 0;
+                                                                                    if($cityId != null){
+                                                                                        if($city->id == $citiesInfo->id){
+                                                                                            $selected3 = 1;
+                                                                                        }
+                                                                                    }  
+                                                                                @endphp
+                                                                                <option value="{{$city->id}}" {{$selected3 == 1 ? 'selected' : ''}}>{{$city->name}}</option>
                                                                             @endforeach
                                                                         </select>
                                                                     </div>
@@ -239,7 +264,7 @@
                                                                             @foreach($clientAccount as $accountInfo)
                                                                                 <div class="dynamic-field3" id="dynamic-field-4">
                                                                                     <label class="d-none"></label>
-                                                                                    <div class="row ">
+                                                                                    <div class="row">
                                                                                         <div class="col-sm-12 pb-3">
                                                                                             <select class="custom-select" name="brokerId[]">
                                                                                                 @foreach($allBroker as $broker)
@@ -349,40 +374,40 @@
 @include('inc.footer')
 
 <script>
-    var sel1 = document.querySelector('#sel1');
-    var sel2 = document.querySelector('#sel2');
-    var options2 = sel2.querySelectorAll('option');
-
-    var sel3 = document.querySelector('#sel3');
-    var options3 = sel3.querySelectorAll('option');
+    $("#sel1").on("change",function(){
+        var myusername = $("#sel1").val();
+        var url = "{{URL::to('user-registration/stateData')}}" + "/" + myusername;
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: myusername,
+            success: function(data){
+                $("#sel2").html('');
+                $("#sel3").html('');
+                console.log("hello");
+                for(var i = 0; i < data.length; i++) {
+                    console.log("hello2");
+                    $("#sel2").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>")
+                }
+            }
+        });
+    });
+    $("#sel2").on("change",function(){
+        var myusername1 = $("#sel2").val();
+        var url1 = "{{URL::to('user-registration/cityData')}}" + "/" + myusername1;
+        $.ajax({
+            type: "POST",
+            url: url1,
+            data: myusername1,
+            success: function(data){
+                $("#sel3").html('');
+                for(var i = 0; i < data.length; i++) {
+                    $("#sel3").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>")
+                }
+            }
+        });
+    });
     
-    function giveSelection(selValue) {
-        sel2.innerHTML = '';
-        for(var i = 0; i < options2.length; i++) {
-            if(options2[i].dataset.option === selValue) {
-            sel2.appendChild(options2[i]);
-            }
-        }
-        $("#sel3").html("");
-    }
-
-    giveSelection(sel1.value);
-
-
-    function giveSelection2(sel2Value) {
-        sel3.innerHTML = '';
-        for(var i = 0; i < options3.length; i++) {
-            console.log("hello1");
-            if(options3[i].dataset.option === sel2Value) {
-                console.log("hello2");
-                sel3.appendChild(options3[i]);
-            }
-        }
-        console.log("hello");
-    }
-
-    giveSelection2(sel2.value);
-
       $(document).ready(function() {
         var buttonAdd = $("#add-button");
         var buttonRemove = $("#remove-button");

@@ -322,69 +322,69 @@
 
 
 
+                    @if(count($LatestBlogsData) > 0)
+                        <section class="our_news">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="news_us">
+                                            <div class="content_area_heading large-heading text-center">
 
-                    <section class="our_news">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="news_us">
-                                        <div class="content_area_heading large-heading text-center">
-
-                                            <h1 class="heading_title wow animated fadeInUp">
-                                                Our Latest News
-                                            </h1>
-                                            <div class="heading_border wow animated fadeInUp">
-                                                <span class="one"></span><span class="two"></span><span
-                                                    class="three"></span>
+                                                <h1 class="heading_title wow animated fadeInUp">
+                                                    Our Latest News
+                                                </h1>
+                                                <div class="heading_border wow animated fadeInUp">
+                                                    <span class="one"></span><span class="two"></span><span
+                                                        class="three"></span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="news_responsive news_slider bullet_style wow animated fadeInUp">
-                                        @foreach ($LatestBlogsData as $value)
-                                            @php
-								                $category = $value->GetCategory();
-                                                $go = 1;
-                                                if($value->publishDate == date("Y-m-d")){
-                                                    if($value->publishTime >= date("H:i:s")){
-                                                        $go = 0;
+                                    <div class="col-sm-12">
+                                        <div class="news_responsive news_slider bullet_style wow animated fadeInUp">
+                                            @foreach ($LatestBlogsData as $value)
+                                                @php
+                                                    $category = $value->GetCategory();
+                                                    $go = 1;
+                                                    if($value->publishDate == date("Y-m-d")){
+                                                        if($value->publishTime >= date("H:i:s")){
+                                                            $go = 0;
+                                                        }
                                                     }
-                                                }
-                                                $paymentDate = date('Y-m-d');
-                                                $paymentDate=date('Y-m-d', strtotime($paymentDate));
-                                                //echo $paymentDate; // echos today!
-                                                $contractDateBegin = date('Y-m-d', strtotime($value->publishDate));
-                                            @endphp
-                                            @if($go == 1)
-                                                @if($paymentDate >= $contractDateBegin)
-                                                        <div class="slide position-relative news">
-                                                            <div class="new_img">
-                                                                <img src="{{URL::to('storage/app')}}/{{$value->image}}">
+                                                    $paymentDate = date('Y-m-d');
+                                                    $paymentDate=date('Y-m-d', strtotime($paymentDate));
+                                                    //echo $paymentDate; // echos today!
+                                                    $contractDateBegin = date('Y-m-d', strtotime($value->publishDate));
+                                                @endphp
+                                                @if($go == 1)
+                                                    @if($paymentDate >= $contractDateBegin)
+                                                            <div class="slide position-relative news">
+                                                                <div class="new_img">
+                                                                    <img src="{{URL::to('storage/app')}}/{{$value->image}}">
+                                                                </div>
+                                                                <div class="new_description-details">
+                                                                <h6>
+                                                                    <a href="{{URL::to('/Posts')}}/{{$category->mainCategory}}/{{$value->permalink}}">
+                                                                            {{$value->mainTitle}}
+                                                                        </a>
+                                                                </h6>
+                                                                <p>
+                                                                    {{$value->description}}
+                                                                </p>
+                                                                </div>
                                                             </div>
-                                                            <div class="new_description-details">
-                                                            <h6>
-                                                                <a href="{{URL::to('/Posts')}}/{{$category->mainCategory}}/{{$value->permalink}}">
-                                                                        {{$value->mainTitle}}
-                                                                    </a>
-                                                            </h6>
-                                                            <p>
-                                                                {{$value->description}}
-                                                            </p>
-                                                            </div>
-                                                        </div>
+                                                    @endif
                                                 @endif
-                                            @endif
-                                        @endforeach
-                                    </div>
-                                    <div class="new_btn text-right wow animated fadeInUp">
-                                        <a href="{{URL::to('/blog-post.html')}}">Show More News <i class="fa fa-chevron-right"></i></a>
+                                            @endforeach
+                                        </div>
+                                        <div class="new_btn text-right wow animated fadeInUp">
+                                            <a href="{{URL::to('/blog-post.html')}}">Show More News <i class="fa fa-chevron-right"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
-
+                        </section>
+                    @endif
                     <section class="analysis">
                         <div class="container">
                             <div class="content_area_heading large-heading text-center">

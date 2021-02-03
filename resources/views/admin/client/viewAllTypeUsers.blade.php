@@ -22,11 +22,23 @@
 				<!-- [ breadcrumb ] end -->
 				<!-- [ Main Content ] start -->
                 <div class="row">
-                    <!-- <div class="col-12 mt-4">
-                        <h4 class="mb-0">Text alignment</h4>
-                        <p class="text-muted mt-0 font-12">You can quickly change the text
-                            alignment<code>.text-center .text-right</code>.</p>
-					</div> -->
+					<div class="col-md-3">
+                        <div class="card bg-c-green order-card">
+                            <div class="card-body">
+                                @php
+                                    $url1 = URL::to('ustaad/clientMember/All');
+                                    $totalUsers = App\Models\ClientRegistrationModel::all();
+                                @endphp
+                                <a href="{{$url1}}">
+                                    <h6 class="text-white text-center">All Clients</h6>
+                                    <h2 class="text-right text-white">
+                                        <i class="feather icon-users float-left"></i
+                                        ><span>{{count($totalUsers)}}</span>
+                                    </h2>
+                                </a>
+                            </div>
+                        </div>
+					</div>
                     @foreach($MemberType as $member)
                         @php
                             if($member->id == 1){
@@ -47,7 +59,7 @@
                             }
                         @endphp
 
-						<div class="col-md-4">
+						<div class="col-md-3">
                             <div class="card bg-c-{{$color}} order-card">
                                 <div class="card-body">
                                     <a href="{{$url}}">

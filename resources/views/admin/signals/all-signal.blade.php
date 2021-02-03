@@ -76,7 +76,6 @@
 															<a href="{{URL::to('/ustaad/signals/edit')}}/{{$data->id}}">
 																<button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button>
 															</a>
-															<!-- <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button> -->
 															@if($data->status == 0)
 																<a href="{{URL::to('/ustaad/signals/delete')}}/{{$data->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal">
 																	<i class="feather icon-trash-2"></i>

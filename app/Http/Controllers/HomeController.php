@@ -447,4 +447,12 @@ class HomeController extends Controller
         $clientMember = ClientMemberModel::where('id',$totalClientInfo->memberType)->first();
         return view('home/user-profile',compact('totalClientInfo','clientMember','clientAccount'));
     }
+    public function userregistrationStateCode(Request $request,$id){
+        $AllStates = AllStatesModel::where('country_id',$id)->get();
+        return $AllStates;
+    }
+    public function userregistrationCityCode(Request $request,$id){
+        $AllCities = AllCitiesModel::where('state_id',$id)->get();
+        return $AllCities;
+    }
 }
