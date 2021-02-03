@@ -75,22 +75,6 @@
                                           @endif
                                         </div>
                                       </div>
-                                      <div class="row">
-                                        <div class="col-md-7 mt-3">
-                                        </div>
-                                        <!-- <div class="col-md-3 mt-3">
-                                          <div class="certificated-badge certificated-badge-style">
-                                            <i class="fas fa-certificate text-c-blue bg-icon fa-certificate-style"></i>
-                                            <i class="front-icon text-white front-broker-title-style text-center">FXTM</i>
-                                          </div>
-                                        </div>
-                                        <div class="col-md-3 mt-3">
-                                          <div class="certificated-badge certificated-badge-style">
-                                            <i class="fas fa-certificate text-c-blue bg-icon fa-certificate-style"></i>
-                                            <i class="front-icon text-white front-broker-title-style text-center">Cabana</i>
-                                          </div>
-                                        </div> -->
-                                      </div>
                                     </div>
                                   </div>
                                             @php
@@ -156,31 +140,32 @@
                                       </div>
                                       <hr>
                                       <div class="row">
-                                        <div class="col-sm-3">
-                                          <h6 class="mb-0">City</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                          @if($totalClientInfo->cityId == null)
+                                        @if($totalClientInfo->cityId == null)
+                                          <div class="col-sm-3">
+                                            <h6 class="mb-0">City</h6>
+                                          </div>
+                                          <div class="col-sm-9 text-secondary">
                                             {{$totalClientInfo->city}}
-                                          @else
+                                          </div>
+                                        @else
                                             @php
                                               $cityInfo = $totalClientInfo->GetCitysInfo(); 
                                               $statesInfo = $totalClientInfo->GetStateInfo(); 
                                               $CountryInfo = $totalClientInfo->GetCountryInfo(); 
                                             @endphp
-                                            {{$cityInfo->name}}, {{$statesInfo->name}}, {{$CountryInfo->name}}
-                                          @endif
-                                        </div>
+                                            <div class="col-sm-3">
+                                              <p class="mb-1 clr252525">City</p>
+                                              <p class="mb-1 clr252525">State</p>
+                                              <p class="mb-1 clr252525">Country</p>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                              <p class="mb-1">{{$cityInfo->name}}</p>
+                                              <p class="mb-1">{{$statesInfo->name}}</p>
+                                              <p class="mb-1">{{$CountryInfo->name}}</p>
+                                            </div>
+                                        @endif
                                       </div>
                                       <hr>
-                                      <!-- <div class="row">
-                                        <div class="col-sm-3">
-                                          <h6 class="mb-0">Address</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                          Bay Area, San Francisco, CA
-                                        </div>
-                                      </div> -->
                                     </div>
                                   </div>
                                   <div class="card">

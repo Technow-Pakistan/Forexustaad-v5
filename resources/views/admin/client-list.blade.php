@@ -31,7 +31,7 @@
 									<tr>
 										<th>Name</th>
 										<th>Position</th>
-										<th>Phone Number</th>
+										<th>City/State/Country</th>
 										<th>Profile</th>
 										<th>Start date</th>
 										<th>Confirm mailer</th>
@@ -40,9 +40,14 @@
 								</thead>
 								<tbody>
 									@foreach($memberData as $member)
-										@if($member->memberId != 1)
 											@php
 												$memberType = $member->GetMember();
+                                                $cityId = $member['cityId'];
+                                                if($cityId != null){
+                                                    $citiesInfo = App\Models\AllCitiesModel::find($cityId);
+                                                    $stateData = App\Models\AllStatesModel::find($citiesInfo->state_id);
+                                                    $CountryData = App\Models\AllCountriesModel::find($citiesInfo->country_id);
+                                                }
 											@endphp
 											<tr>
 												<td class="tdLinkScroll">
@@ -59,9 +64,21 @@
 													</div>
 												</td>
 												<td>{{$memberType->member}}</td>
-												<td>{{$member->mobile}}</td>
+												<td>
+                                                	@if($cityId != null)
+														<div>
+															<p><strong>City:</strong> {{$citiesInfo->name}} <i class="fa fa-chevron-circle-down fts_12  text-secondary" data-toggle="collapse" data-target="#demo{{$member->id}}"></i></p>
+															
+														</div>
+														<div id="demo{{$member->id}}" class="collapse">
+															<p><strong>State:</strong> {{$stateData->name}} </p>
+															<p><strong>Country:</strong> {{$CountryData->name}} </p>
+														</div>
+													@else
+														<p><strong>City:</strong> {{$member->city}} </p>
+													@endif
+												</td>
 												<td><a href="{{URL::to('/ustaad/viewClientProfile')}}/{{$member->id}}">Veiw Profile</a></td>
-												<!-- <td  class="veiwProfile"><a href="{{URL::to('ustaad/member/profile')}}/{{$member->id}}" class="veiwProfile">View Profile</a></td> -->
 												<td>{{$member->created_at->format(" d/m/y ")}}</td>
 												<td>
 													@if($member->confirmationEmail == 1)
@@ -85,14 +102,13 @@
 													</div>
 												</td>
 											</tr>
-										@endif
 									@endforeach
 								</tbody>
 								<tfoot>
 									<tr>
 										<th>Name</th>
 										<th>Position</th>
-										<th>Phone Number</th>
+										<th>City/State/Country</th>
 										<th>Profile</th>
 										<th>Start date</th>
 										<th>Confirm mailer</th>
