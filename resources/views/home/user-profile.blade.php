@@ -107,12 +107,30 @@
                                       </div>
                                       <hr>
                                       <div class="row">
-                                        <div class="col-sm-3">
-                                          <h6 class="mb-0">City</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                          {{$totalClientInfo->city}}
-                                        </div>
+                                        @if($totalClientInfo->cityId == null)
+                                          <div class="col-sm-3">
+                                            <h6 class="mb-0">City</h6>
+                                          </div>
+                                          <div class="col-sm-9 text-secondary">
+                                            {{$totalClientInfo->city}}
+                                          </div>
+                                        @else
+                                            @php
+                                              $cityInfo = $totalClientInfo->GetCitysInfo(); 
+                                              $statesInfo = $totalClientInfo->GetStateInfo(); 
+                                              $CountryInfo = $totalClientInfo->GetCountryInfo(); 
+                                            @endphp
+                                            <div class="col-sm-3">
+                                              <p class="mb-1 clr252525">City</p>
+                                              <p class="mb-1 clr252525">State</p>
+                                              <p class="mb-1 clr252525">Country</p>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                              <p class="mb-1">{{$cityInfo->name}}</p>
+                                              <p class="mb-1">{{$statesInfo->name}}</p>
+                                              <p class="mb-1">{{$CountryInfo->name}}</p>
+                                            </div>
+                                        @endif
                                       </div>
                                       <hr>
                                       <!-- <div class="row">

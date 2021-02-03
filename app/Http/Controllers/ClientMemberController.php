@@ -13,7 +13,11 @@ class ClientMemberController extends Controller
         return view('admin.client.viewAllTypeUsers',compact('MemberType'));
     }
     public function clientMemberView(Request $request, $id){
-        $memberData = ClientRegistrationModel::where('memberType',$id)->get(); 
+        if($id == "All"){
+            $memberData = ClientRegistrationModel::all();
+        }else{
+            $memberData = ClientRegistrationModel::where('memberType',$id)->get();
+        }
         return view('admin.client-list',compact("memberData"));
     }
     public function Delete(Request $request, $id){

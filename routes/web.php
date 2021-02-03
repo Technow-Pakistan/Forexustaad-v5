@@ -477,6 +477,8 @@ Route::group(['prefix' => '',"middleware" => "IsMemberLogin"],function(){
     Route::post('/signal/comment/add',[SignalController::class,'AddComment']);
     Route::get('/user-registration',[HomeController::class,'userregistration']);
     Route::post('/user-registration',[HomeController::class,'userregistrationUpdate']);
+    Route::post('user-registration/stateData/{id}',[HomeController::class,'userregistrationStateCode']);
+    Route::post('user-registration/cityData/{id}',[HomeController::class,'userregistrationCityCode']);
     Route::post('/user-registration/Account',[HomeController::class,'userregistrationAccountAdd']);
     Route::get('/user-profile',[HomeController::class,'userProfile']);
     // Route::get('/dashboard',[MemberController::class,'Dashboard']);
