@@ -9,6 +9,7 @@ use App\Models\BorkerPromotionsModel;
 use App\Models\BrokerCategoryModel;
 use App\Models\PromoteBrokerModel;
 use App\Models\AdminModel;
+use App\Models\BrokerTraningModel;
 
 class BrokerCompanyInformationModel extends Model
 {
@@ -37,6 +38,10 @@ class BrokerCompanyInformationModel extends Model
     }
     public function getAdminUser(){
         $get = AdminModel::where('id',$this->userId)->first();
+        return $get;
+    }
+    public function getTraningInfo(){
+        $get = BrokerTraningModel::where('brokerId',$this->id)->first();
         return $get;
     }
 }

@@ -1,6 +1,7 @@
 
 @php
 	$value =Session::get('admin');
+	$icount = 0;
 @endphp
 @include('admin.include.header')
 		<!-- [ Main Content ] start -->
@@ -40,8 +41,10 @@
 									<table id="user-list-table" class="table nowrap">
 										<thead>
 											<tr>
+												<th>ID</th>
 												<th>User</th>
 												<th>Forex Pairs</th>
+												<th>Comments</th>
 												<th>Date</th>
 												<th>Time</th>
 												<th>Status</th>
@@ -50,11 +53,14 @@
 										<tbody>
 											@foreach($signalData as $data)
 												@php 
+													$icount++;
 													$pair = $data->getPair();
 												@endphp
 												<tr>
+													<td>{{$icount}}</td>
 													<td>{{$data->selectUser}}</td>
 													<td>{{ isset($pair->pair) ? $pair->pair : $data->forexPairs}}</td>
+													<td><a href="{{URL::to('/ustaad/signals/comment')}}/{{$data->id}}">View Comments</a></td>
 													<td>{{$data->date}}</td>
 													<td>
                                                         @php 

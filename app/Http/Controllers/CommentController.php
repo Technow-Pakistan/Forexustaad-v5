@@ -20,6 +20,8 @@ class CommentController extends Controller
     public function DeleteLatestComment(Request $request, $id){
         $comments = LatestTrainingCommentsModel::find($id);
         $comments->delete();
+        $error = "Comment has been deleted successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function addLatestComments(Request $request, $id){

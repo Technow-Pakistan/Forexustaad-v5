@@ -27,6 +27,8 @@ class AdminMemberController extends Controller
         $memberDetail = new AdminMemberDetailModel;
         $memberDetail->fill($request->all());
         $memberDetail->save();
+        $success = "Member added successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function UserList(Request $request){
@@ -46,6 +48,8 @@ class AdminMemberController extends Controller
         $memberDetail = AdminMemberDetailModel::where('adminTableId',$id)->first();
         $memberDetail->fill($request->all());
         $memberDetail->save();
+        $success = "Member updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Delete(Request $request, $id){
@@ -53,6 +57,8 @@ class AdminMemberController extends Controller
         $memberData = AdminModel::where('id',$id)->first();
         $memberDetail->delete();
         $memberData->delete();
+        $error = "Member Deleted successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function AddBackImg(Request $request,$id){
@@ -63,6 +69,8 @@ class AdminMemberController extends Controller
             $memberData->backImage = $MemberImage;
             $memberData->save();
         }
+        $success = "Your profile cover image has been updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function AddUserImg(Request $request,$id){
@@ -73,18 +81,24 @@ class AdminMemberController extends Controller
             $memberData->userImage = $MemberImage;
             $memberData->save();
         }
+        $success = "Your profile image has been updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Deactive(Request $request, $id){
         $data = AdminModel::find($id);
         $data->status = 0;
         $data->save();
+        $error = "Member has been deactive successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function Active(Request $request, $id){
         $memberData = AdminModel::where('id',$id)->first();
         $memberData->status = 1 ;
         $memberData->save();
+        $success = "Member has been active successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function ChangePassword(Request $request){
@@ -94,6 +108,8 @@ class AdminMemberController extends Controller
         $user = AdminModel::where('username',$request->username)->first();
         $user->password = $request->password;
         $user->save();
+        $success = "Password has been changed successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
 }

@@ -16,6 +16,8 @@ class ApiLeftController extends Controller
         $api = new ApiLeftModel;
         $api->fill($request->all());
         $api->save();
+        $success = "This api has been save successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Order(Request $request){
@@ -27,6 +29,8 @@ class ApiLeftController extends Controller
             $Api->save();
             $num++;
         }
+        $success = "Order of apies has been updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function delete(Request $request, $id){
@@ -34,6 +38,8 @@ class ApiLeftController extends Controller
         $Trash->delete();
         $data = ApiLeftModel::find($id);
         $data->delete();
+        $error = "This api has been delete successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function EditProcess(Request $request, $id){
@@ -41,6 +47,8 @@ class ApiLeftController extends Controller
         $data = ApiLeftModel::find($id);
         $data->fill($request->all());
         $data->save();
+        $success = "This api has been updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Trash(Request $request, $id){
@@ -55,6 +63,8 @@ class ApiLeftController extends Controller
         $Trash->deleteId = $id;
         $Trash->deleteTitle = $data->title;
         $Trash->save();
+        $error = "This api has been delete successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function TrashRestore(Request $request, $id){
@@ -63,6 +73,8 @@ class ApiLeftController extends Controller
         $data->save();
         $Trash = TrashModel::where('deleteId',$id)->where('category',"Api Left")->first();
         $Trash->delete();
+        $success = "This api has been restore successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
 }

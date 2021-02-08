@@ -35,6 +35,8 @@ class LogoPanelController extends Controller
         $logo->logo = $logoImage;
         $logo->active = $active;
         $logo->save();
+        $success = "This logo has been added successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function delete(Request $request, $id){
@@ -43,6 +45,8 @@ class LogoPanelController extends Controller
         
         $data = LogoPanelModel::find($id);
         $data->delete();
+        $error = "This logo has been deleted successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function edit(Request $request, $id){
@@ -62,6 +66,8 @@ class LogoPanelController extends Controller
         }
         $data->active = $active;
         $data->save();
+        $success = "This logo has been updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function TrashLeft(Request $request, $id){
@@ -76,6 +82,8 @@ class LogoPanelController extends Controller
         $Trash->deleteId = $id;
         $Trash->deleteTitle = $data->title;
         $Trash->save();
+        $error = "This logo has been deleted successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function TrashLeftRestore(Request $request, $id){
@@ -84,6 +92,8 @@ class LogoPanelController extends Controller
         $data->save();
         $Trash = TrashModel::where('deleteId',$id)->where('category',"Logo")->first();
         $Trash->delete();
+        $success = "This logo has been restore successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
 
@@ -108,6 +118,8 @@ class LogoPanelController extends Controller
         $favicon->favicon = $faviconImage;
         $favicon->active = $active;
         $favicon->save();
+        $success = "This favicon has been added successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function deleteFavicon(Request $request, $id){
@@ -116,6 +128,8 @@ class LogoPanelController extends Controller
         
         $data = FaviconPanelModel::find($id);
         $data->delete();
+        $error = "This favicon has been deleted successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
 
@@ -137,6 +151,8 @@ class LogoPanelController extends Controller
         }
         $favicon->active = $active;
         $favicon->save();
+        $success = "This favicon has been updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function TrashRight(Request $request, $id){
@@ -151,6 +167,8 @@ class LogoPanelController extends Controller
         $Trash->deleteId = $id;
         $Trash->deleteTitle = $data->title;
         $Trash->save();
+        $error = "This favicon has been deleted successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function TrashRightRestore(Request $request, $id){
@@ -159,6 +177,8 @@ class LogoPanelController extends Controller
         $data->save();
         $Trash = TrashModel::where('deleteId',$id)->where('category',"Favicon")->first();
         $Trash->delete();
+        $success = "This favicon has been restore successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     

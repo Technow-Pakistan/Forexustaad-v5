@@ -25,6 +25,7 @@ use App\Models\BrokerCompanyInformationModel;
 use App\Models\SignalsModel;
 use App\Models\UserContactModel;
 use App\Models\NotificationModel;
+use App\Models\FundamentalModel;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -71,5 +72,6 @@ class AppServiceProvider extends ServiceProvider
         /** Admin Panel Function  */
         view()->share("HeaderUnReadMessage",UserContactModel::orderBy('id','desc')->where('read',0)->where('trashMail',0)->get());
         view()->share("NotificationMessage",NotificationModel::orderBy('id','desc')->get());
+        view()->share("LatestFundamental",FundamentalModel::orderBy('id','desc')->where('status',1)->skip(0)->take(4)->get());
     }
 }

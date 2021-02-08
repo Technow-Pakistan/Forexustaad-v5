@@ -20,6 +20,8 @@ class SlidingImagesController extends Controller
         $image = new SlidingImagesModel;
         $image->image = $SliderImage;
         $image->save();
+        $success = "This slider has been added successfully.";
+        $request->session()->put("success",$success);
         $images = SlidingImagesModel::all();
         return view('admin.sliding-images',compact("images"));
     }
@@ -41,6 +43,8 @@ class SlidingImagesController extends Controller
         $image->link = $request->link;
         $image->description = $request->description;
         $image->save();
+        $success = "This slider has been updated successfully.";
+        $request->session()->put("success",$success);
         return view('admin.edit-slide-img',compact("image"));
     }
     public function ProcessRemove(Request $request, $id){
@@ -49,6 +53,8 @@ class SlidingImagesController extends Controller
 
         $image = SlidingImagesModel::where('id',$id)->first();
         $image->delete();
+        $error = "This slider has been deleted successfully.";
+        $request->session()->put("error",$error);
         return redirect('ustaad/sliding-images');
     }
     public function Trash(Request $request, $id){
@@ -63,6 +69,8 @@ class SlidingImagesController extends Controller
         $Trash->deleteId = $id;
         $Trash->deleteTitle = $data->iconName;
         $Trash->save();
+        $error = "This slider has been deleted successfully.";
+        $request->session()->put("error",$error);
         return redirect('ustaad/sliding-images');
     }
     public function TrashRestore(Request $request, $id){
@@ -71,6 +79,8 @@ class SlidingImagesController extends Controller
         $data->save();
         $Trash = TrashModel::where('deleteId',$id)->where('category',"Sliding Images")->first();
         $Trash->delete();
+        $success = "This slider has been restore successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     

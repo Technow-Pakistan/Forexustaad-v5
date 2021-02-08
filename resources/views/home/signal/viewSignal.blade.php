@@ -35,7 +35,7 @@
 									  		<div>
 												@foreach($flags as $flag)
 												@php $flag4 = str_replace(' ', '', $flag) @endphp
-												<img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
+												  <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
 												@endforeach
 											</div>
                                         <div class="mt-3">
@@ -63,15 +63,6 @@
                                             {{$signalData->comments}}
                                         </div>
                                     </div>
-                                    <!-- <ul class="list-group list-group-flush">
-                                      @for($i = 0; $i < count($socials); $i++)
-                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                          <h6 class="mb-0">{{$socials[$i]}}</h6>
-                                          <span class="text-secondary">{{$socialLinks[$i]}}</span>
-                                        </li>
-                                      @endfor
-                                      
-                                    </ul> -->
                                   </div>
                                 </div>
                                 <div class="col-md-8">

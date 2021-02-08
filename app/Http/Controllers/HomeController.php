@@ -30,9 +30,16 @@ use App\Models\NotificationModel;
 use App\Models\AllCitiesModel;
 use App\Models\AllStatesModel;
 use App\Models\AllCountriesModel;
+use App\Models\OtherPagesContentModel;
+use App\Models\NonRegisterVisitorModel;
 
 class HomeController extends Controller
 {
+    public function unRegisterUserSave(){
+        $data = new NonRegisterVisitorModel;
+        $data->save();
+        return $data;
+    }
     public function ChangePassword(){
         return view('home/changePassword');
     }
@@ -70,7 +77,12 @@ class HomeController extends Controller
         return view('home.index');
     }
     public function privacyPolicy(){
-        return view('home/privacy-policy');
+        $data = OtherPagesContentModel::where('contentPage','privacyPolice')->first();
+        return view('home/other-pages-content',compact('data'));
+    }
+    public function AboutPage(){
+        $data = OtherPagesContentModel::where('contentPage','AboutPage')->first();
+        return view('home/other-pages-content',compact('data'));
     }
     public function ConfirmationEmail(Request $request, $id){
         $email = base64_decode($id);
@@ -106,7 +118,8 @@ class HomeController extends Controller
             return redirect('/');
     }
     public function termServices(){
-        return view('home/term-of-services');
+        $data = OtherPagesContentModel::where('contentPage','TOS')->first();
+        return view('home/other-pages-content',compact('data'));
     }
     public function RegistrationProcess(Request $request){
         $password = md5($request->password);
@@ -271,16 +284,20 @@ class HomeController extends Controller
         $title = str_replace("-"," ",$id);
         $broker1 = BrokerCompanyInformationModel::where('title',$title)->first();
         if ($broker1) {
-        $id = $broker1->id;
+            $id = $broker1->id;
             $totalData = BrokerReviewModel::orderBy('id','desc')->where('brokerId',$id)->where('trash',0)->where('pending',0)->get();
 
             if(count($totalData) != 0){
                 $title = $broker1->title;
                 return view('broker.ReviewList',compact('totalData','title'));
             }else{
+                $error = "This Broker Contains No Review.";
+                $request->session()->put("error",$error);
                 return back();
             }
         }else{
+            $error = "This Broker Is Not Exit.";
+            $request->session()->put("error",$error);
             return redirect('/');
         }
     }
@@ -292,9 +309,13 @@ class HomeController extends Controller
                 $title = $brokerReview->title;
                 return view('broker.brokerReview',compact('brokerReview','title'));
             }else{
+                $error = "This Broker Contains No Detail Review.";
+                $request->session()->put("error",$error);
                 return back();
             }
         }else{
+            $error = "This Broker Is Not Exit.";
+            $request->session()->put("error",$error);
             return redirect('/');
         }
     }
@@ -309,9 +330,13 @@ class HomeController extends Controller
                 $title = $broker1->title;
                 return view('broker.NewsList',compact('totalData','title'));
             }else{
+                $error = "This Broker Contains No News.";
+                $request->session()->put("error",$error);
                 return back();
             }
         }else{
+            $error = "This Broker Is Not Exit.";
+            $request->session()->put("error",$error);
             return redirect('/');
         }
     }
@@ -324,9 +349,13 @@ class HomeController extends Controller
                 $title = $brokerNews->title;
                 return view('broker.brokerNews',compact('brokerNews','title'));
             }else{
+                $error = "This Broker Contains No Detail News.";
+                $request->session()->put("error",$error);
                 return back();
             }
         }else{
+            $error = "This Broker Is Not Exit.";
+            $request->session()->put("error",$error);
             return redirect('/');
         }
     }
@@ -341,9 +370,13 @@ class HomeController extends Controller
                 $title = $broker1->title;
                 return view('broker.PromotionList',compact('totalData','title'));
             }else{
+                $error = "This Broker Contains No Promotion.";
+                $request->session()->put("error",$error);
                 return back();
             }
         }else{
+            $error = "This Broker Is Not Exit.";
+            $request->session()->put("error",$error);
             return redirect('/');
         }
     }
@@ -355,9 +388,13 @@ class HomeController extends Controller
                 $title = $brokerPromotion->title;
                 return view('broker.brokerPromotion',compact('brokerPromotion','title'));
             }else{
+                $error = "This Broker Contains No Detail Promotion.";
+                $request->session()->put("error",$error);
                 return back();
             }
         }else{
+            $error = "This Broker Is Not Exit.";
+            $request->session()->put("error",$error);
             return redirect('/');
         }
     }

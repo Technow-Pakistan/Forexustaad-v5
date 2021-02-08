@@ -25,6 +25,8 @@ class MainWebinarController extends Controller
         $Review = new MainWebinarModel;
         $Review->fill($data);
         $Review->save();
+        $success = "This webinar has been added successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Edit(Request $request, $id){
@@ -41,18 +43,24 @@ class MainWebinarController extends Controller
         $Review = MainWebinarModel::find($id);
         $Review->fill($data);
         $Review->save();
+        $success = "This webinar has been updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Deactive(Request $request, $id){
         $data = MainWebinarModel::find($id);
         $data->status = 0;
         $data->save();
+        $error = "This webinar has been deactived successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function Active(Request $request, $id){
         $memberData = MainWebinarModel::where('id',$id)->first();
         $memberData->status = 1 ;
         $memberData->save();
+        $success = "This webinar has been actived successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
 }

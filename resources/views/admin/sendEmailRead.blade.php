@@ -1,3 +1,6 @@
+@php
+	$value =Session::get('admin');
+@endphp
 @include('admin.include.header')
 <!-- [ Main Content ] start -->
 <section class="pcoded-main-container">
@@ -113,6 +116,11 @@
                                                     if(isset($data)){
                                                         $ijk=1;
                                                     }
+                                                    if($ijk==1){
+                                                            $replyMessage = $data->getMessages();
+                                                            $countReplies = count($replyMessage);
+                                                       
+                                                    }
                                                 @endphp
                                                     <a href="#">
                                                         <p class="user-name text-dark mb-1"><strong>{{$ijk == 1 ? $data->name : $dataSend->subject }}</strong></p>
@@ -130,14 +138,52 @@
                                                     @if($ijk == 1)
                                                     <div class="m-t-15 text-right">
                                                         <div>
-                                                            <a class="text-primary Cursor" data-toggle="collapse" data-target="#demo1">Reply</a>
+                                                            <a class="text-primary Cursor" data-toggle="collapse" data-target="#demo2">View Replies({{$countReplies}})</a>
+                                                            <a class="text-primary Cursor ml-3" data-toggle="collapse" data-target="#demo1">Reply</a>
                                                         </div>
                                                         <div id="demo1" class="collapse">
-                                                            <textarea name="" class="form-control ReplyMessage"></textarea>
-                                                            <p class=" text-right mb-0 mt-2">
-                                                                <button class="btn btn-primary btn-sm ReplySend" linkReply="{{URL::to('ustaad/contact/SendMailDirect')}}" email="{{$data->email}}">Submit</button>
-                                                            </p>
+                                                            <form action="{{URL::to('ustaad/contact/SendMailDirect')}}" method="post">
+                                                                <textarea name="message" class="form-control ReplyMessage" required></textarea>
+                                                                <p class=" text-right mb-0 mt-2">
+                                                                    <input type="hidden" name="emailTo" value="{{$data->email}}">
+                                                                    <input type="hidden" name="mailId" value="{{$data->id}}">
+                                                                    <input type="hidden" name="userId" value="{{$value['id']}}">
+                                                                    <button class="btn btn-primary btn-sm ReplySend">Submit</button>
+                                                                </p>
+                                                            </form>
                                                         </div>
+                                                        @if($countReplies > 0)
+                                                        <div id="demo2" class="collapse text-left">
+                                                            <h2>Replies</h2>
+                                                            @foreach($replyMessage as $message)
+                                                                    @php 
+                                                                        $admin = $message->GetAdminMember();
+                                                                        $adminDetail = $admin->GetMemberDetail();
+                                                                        if($adminDetail->userImage == null){
+                                                                            $image = URL::to('storage/app/WebImages/avatar-5.jpg');
+                                                                        }else{
+                                                                            $image = URL::to('storage/app') . '/' . $adminDetail->userImage;
+                                                                        }
+                                                                    @endphp
+                                                                    <div class="d-flex">
+                                                                        <div>
+                                                                            <div class="photo-table m-r-10">
+                                                                                <a href="#">
+                                                                                    <img class="media-object img-radius" src="{{$image}}" alt="E-mail user" style="width:50px;">
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div>
+                                                                            <div>
+                                                                                <p class="user-name text-dark mb-1"><strong>{{$admin->username}}</strong></p>
+                                                                                <p class="user-name text-dark mb-1"><strong>From:mail@forexustaad.com</strong></p>
+                                                                                <div class="email-content">{{$message->message}}</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                            @endforeach
+                                                        </div>
+                                                        @endif
                                                     </div>
                                                     @endif
                                                 </div>
@@ -171,27 +217,5 @@
             $(this).ekkoLightbox();
         });
     });
-    
-    $(".ReplySend").on("click",function() {
-        var linkReply = $(this).attr('linkReply');
-        var EmailReply = $(this).attr('email');
-        var message = $(this).parent().parent().children()[0];
-        var finalMessage = $(message).val();
-
-        console.log(linkReply);
-        console.log(EmailReply);
-        console.log(finalMessage);
-                $(message).val("");
-        $.ajax({
-            type: "Post",
-            url: linkReply,
-            data: {emailTo: EmailReply,message: finalMessage},
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(data){
-                console.log("fail");
-            }
-        });
-    })
+ 
 </script>

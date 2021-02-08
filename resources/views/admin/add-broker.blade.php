@@ -40,13 +40,35 @@
 											@endisset
 								<!-- Tab panes -->
 								<div class="row">
-                                    <div class="col-md-12">
-                                        <div class="wrapper">
-                                            <div class="progress-bar text-center">
-                                              <div class="progress" style="width:0%; background-position:0%;"><span style="poistion:absolute;"></span></div>
-                                            </div>
-                                        </div>
-                                    </div>
+									<div class="col-md-12">	
+										<div class="progress-group">
+											<div class="wrapper">
+												<div class="step step01 complete"><progress class="progress progress1" value="0" max="100" aria-describedby="Step 01"></progress>
+													<div class="progress-circle"></div>
+												</div>
+												<div class="step step02 complete"><progress class="progress progress2" value="0" max="100" aria-describedby="Step 02"></progress>
+													<div class="progress-circle"></div>
+												</div>
+												<div class="step step03 complete"><progress class="progress progress3" value="0" max="100" aria-describedby="Step 03"></progress>
+													<div class="progress-circle"></div>
+												</div>
+												<div class="step step04"><progress class="progress progress4" value="0" max="100" aria-describedby="Step 04"></progress>
+													<div class="progress-circle"></div>
+												</div>
+												<div class="step step05"><progress class="progress progress5" value="0" max="100" aria-describedby="Step 05"></progress>
+													<div class="progress-circle"></div>
+												</div>
+												
+											</div>
+										</div>
+										<div class="progress-labels">
+											<div class="label">Step 01</div>
+											<div class="label">Step 02</div>
+											<div class="label">Step 03</div>
+											<div class="label">Step 04</div>
+											<div class="label">Step 05</div>
+										</div>
+									</div>
 									<div class="col-md-3 mt-4" style="border-right:1px solid lightgray">
 										<ul class="nav nav-pills nav-fill mb-3" role="tablist">
 											<li class="nav-item">
@@ -111,7 +133,7 @@
 														COMPANY INFORMATION
 													</div>
 													<div class="card-body">
-													<form action="{{URL::to('ustaad/broker/addBroker')}}" method="post" enctype="multipart/form-data">
+													<form action="{{URL::to('ustaad/broker/addBroker')}}" class="FormSubmit" method="post" enctype="multipart/form-data">
 														<div class="row">
 															<div class="col-sm-6">
 																<div class="form-group">
@@ -121,8 +143,9 @@
 															</div>
 															<div class="col-sm-6">
 																<div class="form-group">
-																	<label for="">Company Logo</label>
-																	<input type="file" name="file_photo" id="file_photo" class="form-control h-100" required>
+																	<label for="">Company Logo (size must in 50 Kbs)</label>
+																	<input type="file" name="file_photo" id="file_photo" onChange="return validate()" class="form-control h-100" required>
+																	<p id="file_error" class="text-danger text-right m-0"></p>
 																</div>
 															</div>
 															<div class="col-sm-6">
@@ -179,6 +202,7 @@
 															<input type="hidden" name="activeForm" class="form-control" value="COMPANY INFORMATION">
 															<input type="hidden" name="categoryId" class="form-control" value="{{$id}}">
 															<input type="submit" id="doaction" class="btn btn-outline-primary" value="Save">
+															<p id="form_error" class="text-danger text-right m-0"></p>
 														</div>
 													</form>
 													</div>
@@ -970,22 +994,6 @@
 	})
 </script>
 <style>
-	.progress-bar {
-	height: 30px;
-	margin: 30px auto;
-	background: #d3d3d3;
-	padding: 2px;
-	border-radius: 4px;
-	border: 1px solid #bbb;
-	}
-
-	.progress {
-	/* transition: width 200ms ease-in */
-	height: 100%;
-	border-radius: 3px;
-	background-size: 12000px 1px;
-	background-image: url("http://monosnap.com/image/mp0hB7ZLP9c0967wBx6p4pDjujqzhP.png");
-	}
 	.nav-fill .nav-item .nav-link{
 		padding:15px;
 	}
@@ -993,4 +1001,209 @@
 		color:#4099ff;
 		background-color:white;
 	}
+	/* Progress Bar */
+	.progress {
+		display: vertical;
+		width: 100%;
+		height: 12px;
+		position: relative;
+		z-index: 5;
+		padding-right: 8px;
+		padding-top: 2px;
+	}
+	@media all and (min--moz-device-pixel-ratio:0) and (min-resolution: 3e1dpcm) {
+		.progress {
+			height: 10px;
+		}
+	}
+	.progress[value] {
+		background-color: transparent;
+		border: 0;
+		appearance: none;
+		border-radius: 0;
+	}
+	.progress[value]::-ms-fill {
+		background-color: #0074d9;
+		border: 0;
+	}
+	.progress[value]::-moz-progress-bar {
+		background-color: #0074d9;
+		margin-right: 8px;
+	}
+	.progress[value]::-webkit-progress-inner-element {
+		background-color: #eee;
+	}
+	.progress[value]::-webkit-progress-value {
+		background-color: #0074d9;
+	}
+	.progress[value]::-webkit-progress-bar {
+		background-color: #eee;
+	}
+	.progress-circle {
+		width: 24px;
+		height: 24px;
+		position: absolute;
+		right: 3px;
+		top: -5px;
+		z-index: 5;
+		border-radius: 50%;
+	}
+	.progress-circle:before {
+		content: "";
+		width: 6px;
+		height: 6px;
+		background: white;
+		border-radius: 50%;
+		display: block;
+		transform: translate(-50%, -50%);
+		position: absolute;
+		left: 50%;
+		top: 50%;
+	}
+	.progress-group {
+		margin-top: 36px;
+	}
+	@media (max-width: 991px) {
+		.progress-group {
+			margin-left: -18px;
+			margin-right: -18px;
+			flex-basis: 100%;
+			padding: 18px;
+		}
+	}
+	@media (max-width: 768px) {
+		.progress-group {
+			padding: 18px 18px 0;
+			margin-bottom: 12px;
+		}
+	}
+	.progress-group .title {
+		margin-bottom: 18px;
+	}
+	.progress-group .wrapper {
+		background: white;
+		border: 1px solid #eee;
+		border-radius: 12px;
+		height: 14px;
+		display: flex;
+		filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.3));
+	}
+	.progress-group .step {
+		width: 20%;
+		position: relative;
+	}
+	.progress-group .step:after {
+		content: "";
+		height: 30px;
+		width: 30px;
+		background: white;
+		border-radius: 50%;
+		display: block;
+		position: absolute;
+		right: 0;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	.progress-group .step:first-of-type .progress {
+		padding-left: 4px;
+	}
+	.progress-group .step:first-of-type .progress[value]::-moz-progress-bar {
+		border-radius: 5px 0 0 5px;
+	}
+	.progress-group .step:first-of-type .progress[value]::-webkit-progress-value {
+		border-radius: 5px 0 0 5px;
+	}
+	.progress-group .step:not(:first-of-type) .progress[value]::-moz-progress-bar {
+		border-radius: 0;
+	}
+	.progress-group .step:not(:first-of-type) .progress[value]::-webkit-progress-value {
+		border-radius: 0;
+	}
+	.progress-group .step .progress[value] + .progress-circle {
+		background: #eee;
+	}
+	.progress-group .step.step01 .progress[value]::-moz-progress-bar {
+		background-color: #010c4e;
+	}
+	.progress-group .step.step01 .progress[value]::-webkit-progress-value {
+		background-color: #010c4e;
+	}
+	.progress-group .step.step01 .progress[value="100"] + .progress-circle {
+		background-color: #010c4e;
+	}
+	.progress-group .step.step02 .progress[value]::-moz-progress-bar {
+		background-color: #002d88;
+	}
+	.progress-group .step.step02 .progress[value]::-webkit-progress-value {
+		background-color: #002d88;
+	}
+	.progress-group .step.step02 .progress[value="100"] + .progress-circle {
+		background-color: #002d88;
+	}
+	.progress-group .step.step03 .progress[value]::-moz-progress-bar {
+		background-color: #017aa9;
+	}
+	.progress-group .step.step03 .progress[value]::-webkit-progress-value {
+		background-color: #017aa9;
+	}
+	.progress-group .step.step03 .progress[value="100"] + .progress-circle {
+		background-color: #017aa9;
+	}
+	.progress-group .step.step04 .progress[value]::-moz-progress-bar {
+		background-color: #03c2b2;
+	}
+	.progress-group .step.step04 .progress[value]::-webkit-progress-value {
+		background-color: #03c2b2;
+	}
+	.progress-group .step.step04 .progress[value="100"] + .progress-circle {
+		background-color: #03c2b2;
+	}
+	.progress-group .step.step05 .progress[value]::-moz-progress-bar {
+		background-color: #05e8b0;
+	}
+	.progress-group .step.step05 .progress[value]::-webkit-progress-value {
+		background-color: #05e8b0;
+	}
+	.progress-group .step.step05 .progress[value="100"] + .progress-circle {
+		background-color: #05e8b0;
+	}
+	.progress-labels {
+		display: flex;
+		justify-content: space-between;
+	}
+	.progress-labels .label {
+		text-align: center;
+		text-transform: uppercase;
+		margin: 12px 0;
+		width: 20%;
+		font-size: 11px;
+		padding-right: 24px;
+		font-weight: 600;
+		opacity: 0.7;
+	}
+	.page-title {
+		letter-spacing: -0.05rem;
+	}
 </style>
+		<script>
+			let submitInner = 0;
+			function validate() {
+				$("#file_error").html("");
+				console.log("dsa");
+				submitInner = 0;
+				var file_size = $('#file_photo')[0].files[0].size;
+				if(file_size>50000) {
+					submitInner = 1;
+					$("#file_error").html("File size is greater than 50KB");
+					return false;
+				} 
+				return true;
+			}
+			$(".FormSubmit").on("submit",function(e){
+				if (submitInner != 0) {
+					e.preventDefault();
+					$("#form_error").html("");
+					$("#form_error").html("File size is greater than 50KB");
+				}
+			})
+		</script>

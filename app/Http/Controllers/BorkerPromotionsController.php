@@ -54,6 +54,8 @@ class BorkerPromotionsController extends Controller
             $notification->link = "ustaad/brokersPromotions/all/$broker1->id";
             $notification->save();
         }
+        $success = "This broker promotion has been added successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Edit(Request $request, $id){
@@ -82,6 +84,8 @@ class BorkerPromotionsController extends Controller
             $notification->link = "ustaad/brokersPromotions/all/$broker1->id";
             $notification->save();
         }
+        $success = "This broker promotion has been updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Delete(Request $request, $id){
@@ -89,6 +93,8 @@ class BorkerPromotionsController extends Controller
         $brokerNews->delete();
         $Trash = TrashModel::where('deleteId',$id);
         $Trash->delete();
+        $error = "This broker promotion has been deleted successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function AllowBrokerPromotionProcess(Request $request, $id){
@@ -117,14 +123,18 @@ class BorkerPromotionsController extends Controller
             $notification->link = "ustaad/trash";
             $notification->save();
         }
+        $error = "This broker promotion has been deleted successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function TrashRestore(Request $request, $id){
         $broker = BorkerPromotionsModel::find($id);
         $broker->trash = 0;
         $broker->save();
-        $Trash = TrashModel::where('deleteId',$id);
+        $Trash = TrashModel::where('deleteId',$id)->first();
         $Trash->delete();
+        $success = "This broker promotion has been restore successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
 }

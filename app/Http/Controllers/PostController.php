@@ -53,6 +53,8 @@ class PostController extends Controller
         $post = BlogPostModel::where('id',$id)->first();
         $post->status = 0;
         $post->save();
+        $error = "This post has been deactived successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     
@@ -60,6 +62,8 @@ class PostController extends Controller
         $memberData = BlogPostModel::where('id',$id)->first();
         $memberData->status = 1 ;
         $memberData->save();
+        $success = "This post has been actived successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
 }

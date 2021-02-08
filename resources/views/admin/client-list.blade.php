@@ -29,6 +29,7 @@
 							<table id="user-list-table" class="table nowrap">
 								<thead>
 									<tr>
+										<th>ID</th>
 										<th>Name</th>
 										<th>Position</th>
 										<th>City/State/Country</th>
@@ -39,6 +40,7 @@
 									</tr>
 								</thead>
 								<tbody>
+									@php $iorder = 0; @endphp 
 									@foreach($memberData as $member)
 											@php
 												$memberType = $member->GetMember();
@@ -47,9 +49,11 @@
                                                     $citiesInfo = App\Models\AllCitiesModel::find($cityId);
                                                     $stateData = App\Models\AllStatesModel::find($citiesInfo->state_id);
                                                     $CountryData = App\Models\AllCountriesModel::find($citiesInfo->country_id);
-                                                }
+												}
+												$iorder++;
 											@endphp
 											<tr>
+												<td>{{$iorder}}</td>
 												<td class="tdLinkScroll">
 													<div class="d-inline-block align-middle">
 														@if($member->image == null)
@@ -106,6 +110,7 @@
 								</tbody>
 								<tfoot>
 									<tr>
+										<th>ID</th>
 										<th>Name</th>
 										<th>Position</th>
 										<th>City/State/Country</th>

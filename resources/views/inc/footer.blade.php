@@ -1,8 +1,63 @@
 
 		<!--==============================-->
+		<!--=        	Toast         	 =-->
+    <!--==============================-->
+    
+    <div id="snackbar"><i class="fa  fa-exclamation-triangle"></i> &nbsp; Please LogIn First</div>
+    <div id="snackbar1"><i class="fa fa-exclamation-triangle"></i> &nbsp; Get Premium First</div>
+    <div id="snackbar2"></div>
+    <div id="snackbar3"></div>
+    <script>
+        function snackbar() {
+          var x = document.getElementById("snackbar");
+          x.className = "show";
+          setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        }
+        function snackbar1() {
+          var x = document.getElementById("snackbar1");
+          x.className = "show";
+          setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        }
+        function snackbar2() {
+          var x = document.getElementById("snackbar2");
+          x.className = "show";
+          setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        }
+        function snackbar3() {
+          var x = document.getElementById("snackbar3");
+          x.className = "show bg-success";
+          setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        }
+    </script>
+                    @if(Session::has('error'))
+                      @php
+                        $error =Session::get('error');
+                      @endphp
+                      <script>
+                        var data = "{{$error}}";
+                        var x = document.getElementById("snackbar2");
+                          x.innerHTML = "<i class='fa fa-exclamation-triangle'></i> &nbsp; " + data;
+                          snackbar2();
+                      </script>
+                      @php Session::pull('error') @endphp
+                    @endif
+
+                    @if(Session::has('success'))
+                      @php
+                        $success =Session::get('success');
+                      @endphp
+                      <script>
+                          var data1 = "{{$success}}";
+                          var x = document.getElementById("snackbar3");
+                            x.innerHTML = "<i class='fa fa-check-square-o'></i> &nbsp; " + data1;
+                            snackbar3();
+                      </script>
+                        @php Session::pull('success') @endphp
+                    @endif
+    <!--==============================-->
 		<!--=        	Footer         	 =-->
 		<!--==============================-->
-
+  
 		<footer class="footer-bg">
 			<div class="container">
 				<div class="row footer-widget">
@@ -225,80 +280,7 @@
   }
 });
 </script> -->
-     <script src="{{URL::to('/public/assets/assets/js/jquery-3.2.1.min.js')}}"></script>
-     <!-- <script src="assets/js/isotope.pkgd.min.js"></script> -->
-     <script src="{{URL::to('/public/assets/assets/js/wow.js')}}"></script>
-     <script defer src="{{URL::to('/public/assets/assets/js/slick.js')}}"></script>
-     <script src="{{URL::to('/public/assets/assets/js/jquery.marquee.min.js')}}"></script>
-     <script defer src="{{URL::to('/public/assets/node_modules/bootstrap/dist/js/bootstrap.js')}}"></script>
-     <script src="{{URL::to('/public/assets/assets/js/popper.min.js')}}"></script>
-     <script src="{{URL::to('/public/assets/assets/js/jquery.dataTables.min.js')}}"></script>
-     <script src="{{URL::to('/public/assets/assets/js/dataTables.bootstrap.min.js')}}"></script>
-     <script src="{{URL::to('/public/assets/assets/js/dataTables.responsive.min.js')}}"></script>
-     <script src="{{URL::to('/public/assets/assets/js/bootstrap-toggle.min.js')}}"></script>
-     <!-- charts -->
-      <!--news slide script  -->
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.js"></script>
-     <!-- Splide Slider -->
-
-     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/js/swiper.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.js"></script>
-
-     <!-- charts ends -->
-     <script src="{{URL::to('/public/assets/assets/js/custom.js')}}"></script>
-
-
-      <script>
-     	$(document).ready(function(){
-     		$("#open_popup").click(function(){
-			    $("#open_popup").hide();
-			    $("#search_top_bar").show();
-			    $("#close_popup").show();
-			});
-		    $("#close_popup").click(function(){
-		      $("#open_popup").show();
-		       $("#search_top_bar").hide();
-		       $("#close_popup").hide();
-		    });
-
-
-
-        // $('#to-top').hide();
-        $(window).scroll(function(){
-            if ($(this).scrollTop() > 100) {
-                $('.to-top').addClass('show-top-btn');
-            } else {
-                $('.to-top').removeClass('show-top-btn');
-            }
-        });
-       });
-
-$(".RegistrationButton").on("click",function(){
-  $(".heading_title-change4").html("Registration");
-  $(".LoginForm").hide();
-  $(".RegistrationForm").show();
-});
-
-$(".LoginButton").on("click",function(){
-  $(".heading_title-change4").html("Login");
-  $(".RegistrationForm").hide();
-  $(".LoginForm").show();
-    $(".passwordHide").show();
-    $(".passwordHide").attr("required",true);
-    $(".ForgetButton").html("Login");
-    $(".ForgetPassword").show();
-    $(".LoginForm").attr("action","{{URL::to('/clientLogin')}}");
-    $(".LoginEmail").attr("placeholder","Enter Email or Phone number");
-});
-     </script>
-
-     <script>
-         new WOW().init();
-     </script>
-
+  
 
 
 
@@ -320,8 +302,8 @@ $(".LoginButton").on("click",function(){
               <p class="h1 heading_title fadeInUp wow secondary-text-color heading_title-change4">
                Register
               </p>
-              <p class="heading-description fadeInUp wow w-100" data-wow-delay="0.2s">
-               Lorem Ipsum has been the industrys standard dummy text ever since the 1500s
+              <p class="heading-description fadeInUp wow w-100 heading_description-change4" data-wow-delay="0.2s">
+               Fill this form to register your self.
               </p>
             </div>
 
@@ -363,6 +345,7 @@ $(".LoginButton").on("click",function(){
                         <input type="hidden" name="token" id="token" value="">
                       <div class="form-group text-left">
                         <button type="submit" class="btn btn-primary text-uppercase quote_send_msg" data-type="quote">Register</button>
+                        <span class="btn btn-primary text-uppercase quote_send_msg LoginButton">Login</span>
                         <span class="text-danger RegistrationError" id="RegistrationErrorChecker"></span>
                       </div>
                   </div>
@@ -380,7 +363,8 @@ $(".LoginButton").on("click",function(){
                       <input type="password" class="form-control text-gray explore_form name abc_into passwordHide" placeholder="Enter Password" name="password" id="quote_name" required>
                     </div>
                     <div class="form-group text-left">
-                      <button type="submit" class="btn btn-primary text-uppercase quote_send_msg ForgetButton" data-type="quote">Login</button><br>
+                      <button type="submit" class="btn btn-primary text-uppercase quote_send_msg ForgetButton" data-type="quote">Login</button>
+                      <span class="btn btn-primary text-uppercase quote_send_msg RegistrationButton">Registration</span><br>
                       <a href="#" class="text-danger ForgetPassword">Forget Password</a>
                       <span class="text-danger LoginError"></span>
                     </div>
@@ -397,17 +381,92 @@ $(".LoginButton").on("click",function(){
   </div>
 </div>
 <!-- Request Quote Modal ends -->
+<script src="{{URL::to('/public/assets/assets/js/jquery-3.2.1.min.js')}}"></script>
+     <!-- <script src="assets/js/isotope.pkgd.min.js"></script> -->
+     <script src="{{URL::to('/public/assets/assets/js/wow.js')}}"></script>
+     <script defer src="{{URL::to('/public/assets/assets/js/slick.js')}}"></script>
+     <script src="{{URL::to('/public/assets/assets/js/jquery.marquee.min.js')}}"></script>
+     <script defer src="{{URL::to('/public/assets/node_modules/bootstrap/dist/js/bootstrap.js')}}"></script>
+     <script src="{{URL::to('/public/assets/assets/js/popper.min.js')}}"></script>
+     <script src="{{URL::to('/public/assets/assets/js/jquery.dataTables.min.js')}}"></script>
+     <script src="{{URL::to('/public/assets/assets/js/dataTables.bootstrap.min.js')}}"></script>
+     <script src="{{URL::to('/public/assets/assets/js/dataTables.responsive.min.js')}}"></script>
+     <script src="{{URL::to('/public/assets/assets/js/bootstrap-toggle.min.js')}}"></script>
+     <!-- charts -->
+      <!--news slide script  -->
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.js"></script>
+     <!-- Splide Slider -->
+
+     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/js/swiper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.js"></script>
+
+     <!-- charts ends -->
+     <script src="{{URL::to('/public/assets/assets/js/custom.js')}}"></script>
+
+
+<script>
+  $(document).ready(function(){
+    $("#open_popup").click(function(){
+      $("#open_popup").hide();
+      $("#search_top_bar").show();
+      $("#close_popup").show();
+  });
+    $("#close_popup").click(function(){
+      $("#open_popup").show();
+        $("#search_top_bar").hide();
+        $("#close_popup").hide();
+    });
+
+
+
+    // $('#to-top').hide();
+    $(window).scroll(function(){
+        if ($(this).scrollTop() > 100) {
+            $('.to-top').addClass('show-top-btn');
+        } else {
+            $('.to-top').removeClass('show-top-btn');
+        }
+    });
+    });
+
+  $(".RegistrationButton").on("click",function(){
+    $(".heading_title-change4").html("Registration");
+    $(".heading_description-change4").html("Fill this form to register your self.");
+    $(".LoginForm").hide();
+    $(".RegistrationForm").show();
+  });
+
+  $(".LoginButton").on("click",function(){
+    $(".heading_title-change4").html("Login");
+    $(".heading_description-change4").html("Enter your email or phone number & password.");
+    $(".RegistrationForm").hide();
+    $(".LoginForm").show();
+      $(".passwordHide").show();
+      $(".passwordHide").attr("required",true);
+      $(".ForgetButton").html("Login");
+      $(".ForgetPassword").show();
+      $(".LoginForm").attr("action","{{URL::to('/clientLogin')}}");
+      $(".LoginEmail").attr("placeholder","Enter Email or Phone number");
+  });
+</script>
+
+<script>
+    new WOW().init();
+</script>
 
 
 <!-- back to top -->
 <!-- <a href="#top" class="to-top"><i class="fa fa-angle-up"></i></a> -->
 <script type="text/javascript">
 
-// Select all links with hashes
-$('a[href="#top"]')
-  // Remove links that don't actually link to anything
-  .not('[href="#0"]')
-  .click(function(event) {
+  // Select all links with hashes
+  $('a[href="#top"]')
+    // Remove links that don't actually link to anything
+    .not('[href="#0"]')
+    .click(function(event) {
     // On-page links
     if (
       location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
@@ -441,6 +500,7 @@ $('a[href="#top"]')
 
 
 </script>
+
 <script>function initVideo() {
           var vidDefer = document.getElementsByTagName('iframe');
           for (var i=0; i<vidDefer.length; i++) {
@@ -465,92 +525,92 @@ $('a[href="#top"]')
   });
 </script>
 
-
-
 <!-- news slide script -->
 
 <script>
-/* webflow only this section swiper pagination */
-$(document).ready(function() {
-  /* add html by js (no way to add this HTML by webflow UI beacuse this is CMS list*/
-  var part1 = "<div class=swiper-pagination></div>";
-  //  var part2 = '<div class="swiper-button-prev"></div>';
-  //var part3 = '<div class="swiper-button-next"></div>';
-  // var swiperString = part1.concat(part2, part3);
-  $("#swiper-press").append(part1);
-});
+  /* webflow only this section swiper pagination */
+  $(document).ready(function() {
+    /* add html by js (no way to add this HTML by webflow UI beacuse this is CMS list*/
+    var part1 = "<div class=swiper-pagination></div>";
+    //  var part2 = '<div class="swiper-button-prev"></div>';
+    //var part3 = '<div class="swiper-button-next"></div>';
+    // var swiperString = part1.concat(part2, part3);
+    $("#swiper-press").append(part1);
+  });
 
-/* change active class when click */
-$(".swiper-container-videos .swiper-wrapper .swiper-slide a").click(function() {
-  $(this)
-    .closest(".swiper-slide")
-    .addClass("selected")
-    .siblings()
-    .removeClass("selected");
-  mySwiper1.slideTo(mySwiper1.clickedIndex);
-});
+  /* change active class when click */
+  $(".swiper-container-videos .swiper-wrapper .swiper-slide a").click(function() {
+    $(this)
+      .closest(".swiper-slide")
+      .addClass("selected")
+      .siblings()
+      .removeClass("selected");
+    mySwiper1.slideTo(mySwiper1.clickedIndex);
+  });
 
-$(".swiper-container-videos .swiper-slide")
+  $(".swiper-container-videos .swiper-slide")
   .first()
   .addClass("selected");
 
-/* 1 of 2 : SWIPER */
-var mySwiper1 = new Swiper(".swiper-container-videos", {
-  // If loop true set photoswipe - counterEl: false
-  loop: false,
-  /* slidesPerView || auto - if you want to set width by css like flickity.js layout - in this case width:80% by CSS */
-  slidesPerView: "auto",
-  spaceBetween: 15,
-  centeredSlides: false,
+  /* 1 of 2 : SWIPER */
+  var mySwiper1 = new Swiper(".swiper-container-videos", {
+    // If loop true set photoswipe - counterEl: false
+    loop: false,
+    /* slidesPerView || auto - if you want to set width by css like flickity.js layout - in this case width:80% by CSS */
+    slidesPerView: "auto",
+    spaceBetween: 15,
+    centeredSlides: false,
 
-  // If we need pagination
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true
-  },
-  navigation: {
-    nextEl: ".swiper-custom-next",
-    prevEl: ".swiper-custom-prev"
-  },
+    // If we need pagination
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true
+    },
+    navigation: {
+      nextEl: ".swiper-custom-next",
+      prevEl: ".swiper-custom-prev"
+    },
 
-  keyboard: {
-    enabled: true,
-    onlyInViewport: true
-  }
-});
-
-/* This is what makes the videos responsive. You can either include this in a <script> tag in the markup, or better yet, include it in a separata JavaScript file.*/
-$(function() {
-  //Look for all the videos inside this element and make them responsive
-  $(".vid-container").fitVids();
-});
-
-/*JS FOR SCROLLING THE ROW OF THUMBNAILS*/
-
-$(document).ready(function() {
-  $(".vid-item").each(function(index) {
-    $(this).on("click", function() {
-      var current_index = index + 1;
-      $(".vid-item .thumb").removeClass("active");
-      $(".vid-item:nth-child(" + current_index + ") .thumb").addClass("active");
-    });
+    keyboard: {
+      enabled: true,
+      onlyInViewport: true
+    }
   });
-});
+
+  /* This is what makes the videos responsive. You can either include this in a <script> tag in the markup, or better yet, include it in a separata JavaScript file.*/
+  $(function() {
+    //Look for all the videos inside this element and make them responsive
+    $(".vid-container").fitVids();
+  });
+
+  /*JS FOR SCROLLING THE ROW OF THUMBNAILS*/
+
+  $(document).ready(function() {
+    $(".vid-item").each(function(index) {
+      $(this).on("click", function() {
+        var current_index = index + 1;
+        $(".vid-item .thumb").removeClass("active");
+        $(".vid-item:nth-child(" + current_index + ") .thumb").addClass("active");
+      });
+    });
+    $("#siteWrapper").find(". siteWrapper")
+  });
 
 
 </script>
+
 <script>
 
     // Show hide popover
 
     var toggleIdCount = 0;
-$(document).on("click", function(event){
-    var $trigger = $("#toggler12345");
-    if($trigger != event.target && !$trigger.has(event.target).length){
-        $("#navbarSupportedContent1").slideUp(800,"swing");
-        toggleIdCount = 0;
-    }
-});
+  $(document).on("click", function(event){
+      var $trigger = $("#toggler12345");
+      if($trigger != event.target && !$trigger.has(event.target).length){
+          $("#navbarSupportedContent1").slideUp(800,"swing");
+          toggleIdCount = 0;
+      }
+  });
   $(document).ready(function(){
     $("#toggler12").click(function(){
         console.log(toggleIdCount);
@@ -564,7 +624,6 @@ $(document).on("click", function(event){
     });
   });
 </script>
-
 
 <script>
     grecaptcha.ready(function() {
@@ -606,5 +665,27 @@ $(document).on("click", function(event){
         blink.style.opacity = (blink.style.opacity == 0 ? 1 : 0);
       }, 500);
     </script>
+   
+  @if(!Session::has('client'))
+    @if(!Session::has('unRegisterUser')) 
+      @php
+        $data = ["unRegisterUser","das"];
+        Session::put('unRegisterUser',$data);
+      @endphp
+      <script>
+        $.ajax({
+          type: "Post",
+          url: "{{URL::to('unRegisterUser/Save')}}",
+          
+          success: function(response) {
+              console.log("success");
+          },
+          error: function(data) {
+              console.log("fail");
+          }
+          });
+      </script>
+    @endif
+  @endif
 </body>
 </html>
