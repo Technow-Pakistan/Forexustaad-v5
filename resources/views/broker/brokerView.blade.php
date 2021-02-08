@@ -3,17 +3,6 @@
     <section class="after_banner_content_area">
         <div class="container">
             <div class="row justify-content-center">
-                @php
-                    if(Session::has('error')){
-                        $error =Session::get('error');
-                    }
-                    @endphp
-                @isset($error)
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="alert alert-danger">{{$error}}</div>
-                        @php Session::pull('error') @endphp
-                    </div>
-                @endisset
                 <div class="col-lg-3 col-md-6 col-sm-12 order-2 order-lg-1">
                     @include ('inc/home-left-sidebar')
                 </div>
@@ -119,7 +108,7 @@
                                                             <div class="link">
                                                                 <a href="{{URL::to('/brokerList/brokerNews')}}/{{$title}}"  class="text-danger mr-3">{{$data->title}} News</a>
                                                                 <a href="{{URL::to('brokerList/brokerPromotion')}}/{{$title}}"  class="text-danger mr-3">{{$data->title}} Promotions</a>
-                                                                <a href="#"  class="text-danger">{{$data->title}} Training</a>
+                                                                <a href="{{URL::to('brokerList/training/')}}/{{$title}}"  class="text-danger">{{$data->title}} Training</a>
                                                             </div>
                                                         </div>
                                                     </div>

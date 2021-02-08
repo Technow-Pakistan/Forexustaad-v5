@@ -19,6 +19,8 @@ class ComposeEmailController extends Controller
         $Email = new ComposeEmailModel;
         $Email->fill($data);
         $Email->save();
+        $success = "Your mail has been saved in draft folder.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function SendMail(Request $request){
@@ -41,6 +43,8 @@ class ComposeEmailController extends Controller
             $message->subject($Email->subject);
             $message->setBody($Email->message);
         });
+        $success = "Your mail has been sent successfully.";
+        $request->session()->put("success",$success);
         return redirect("ustaad/contact/emailCompose");
     }
     public function SendMailDirect(Request $request){
@@ -95,6 +99,8 @@ class ComposeEmailController extends Controller
             $message->subject($Email->subject);
             $message->setBody($Email->message);
         });
+        $success = "Your mail has been sent successfully.";
+        $request->session()->put("success",$success);
         return redirect("ustaad/contact/emailCompose");
     }
     public function EmailReply(Request $request, $id){

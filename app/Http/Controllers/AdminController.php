@@ -28,6 +28,8 @@ class AdminController extends Controller
     public function DeleteClientAccount(Request $request, $id){
         $notification = ClientAccountDetailModel::find($id);
         $notification->delete();
+        $error = "Data has been deleted successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function NotificationDelete(Request $request){
@@ -37,6 +39,8 @@ class AdminController extends Controller
                 $notification->delete();
             }
         }
+        $error = "Data has been deleted successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function ViewClientProfile(Request $request, $id){
@@ -49,12 +53,16 @@ class AdminController extends Controller
         $clientAccount = ClientAccountDetailModel::find($id);
         $clientAccount->verified = 1;
         $clientAccount->save();
+        $success = "Data has been verified successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function ChangeMemberType(Request $request, $id){
         $totalClientInfo = ClientRegistrationModel::where('id',$id)->first();
         $totalClientInfo->memberType = $request->memberType;
         $totalClientInfo->save();
+        $success = "Member Type has been changed successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Index(Request $request){
@@ -128,6 +136,8 @@ class AdminController extends Controller
             $data = TrashGalleryModel::where('image',$title)->first();
             $data->delete();
         }
+        $error = "Image has been deleted successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function TrashGalleryImageRestore(Request $request, $id){
@@ -143,6 +153,8 @@ class AdminController extends Controller
             rename($path,$changePath);
             $data->delete();
         }
+        $success = "Image has been restore successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     

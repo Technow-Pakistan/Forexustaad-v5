@@ -147,6 +147,8 @@ class AdvanceTrainingController extends Controller
             $lecture->save();
             $num++;
         }
+        $success = "Order of Training has been updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Index(Request $request){
@@ -183,6 +185,8 @@ class AdvanceTrainingController extends Controller
         $data['poistion'] = ++$poistion->poistion;
         $lecture->fill($data);
         $lecture->save();
+        $success = "Lecture has been save successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Edit(Request $request, $id1 , $id){
@@ -209,6 +213,8 @@ class AdvanceTrainingController extends Controller
         }
         $lecture->fill($data);
         $lecture->save();
+        $success = "Lecture has been Updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Delete(Request $request, $id1, $id){
@@ -221,6 +227,8 @@ class AdvanceTrainingController extends Controller
         }
         $lecture->status = 1;
         $lecture->save();
+        $error = "Lecture has been deactive successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function Active(Request $request, $id1, $id){
@@ -233,6 +241,8 @@ class AdvanceTrainingController extends Controller
         }
         $lecture->status = 0;
         $lecture->save();
+        $success = "Lecture has been active successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function ViewComment1(Request $request,$id){
@@ -260,6 +270,8 @@ class AdvanceTrainingController extends Controller
         }
         $reply->fill($request->all());
         $reply->save();
+        $success = "Your reply has been saved successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
 }

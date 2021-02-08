@@ -78,14 +78,14 @@
                         <div class="col-12 mt-3">
                             <div class="card">
                                 <div class="row">
-                                        <div class="col-md-8" style="border-right: 1px solid grey">
+                                        <div class="col-md-9" style="border-right: 1px solid grey">
                                             <div class="card-horizontal">
                                                 <div class="img-square-wrapper">
                                                     <img class="" src="{{$urlImageSrc}}" alt="Card image cap">
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="d-flex">
-                                                        <span><h4 class="card-title">{{ $com->userType == "client" ? $memberInfo->name : $adminInfo->username}}</h4></span>
+                                                        <span><h4 class="card-title mb-2">{{ $com->userType == "client" ? $memberInfo->name : $adminInfo->username}}</h4></span>
                                                     </div>
                                                     <p class="card-text">{{$com->comment}}</p>
                                                     <div>
@@ -139,14 +139,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
 
-                                            <div class="card-body">
-                                                <div class="card-title">
+                                            <div class="card-body pt-2 pb-2 text-center">
+                                                <div class="card-title mb-2">
                                                    {{$lectureInfo->title}}
                                                 </div>
-                                                <div class="">
-                                                    <img class=""src="http://i.ytimg.com/vi/{{$img123456}}/hqdefault.jpg" class="img-thumbnail" alt="Card image cap" style="width: 200px;">
+                                                <div>
+                                                    <img class=""src="http://i.ytimg.com/vi/{{$img123456}}/hqdefault.jpg" class="img-thumbnail" alt="Card image cap" width="150px" height="100px">
                                                 </div>
                                             </div>
                                         </div>

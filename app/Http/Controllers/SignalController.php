@@ -70,18 +70,24 @@ class SignalController extends Controller
         $signal = new SignalsModel;
         $signal->fill($data);
         $signal->save();
+        $success = "This signal has been added successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Delete(Request $request, $id){
         $signal = SignalsModel::where('id',$id)->first();
         $signal->status = 1;
         $signal->save();
+        $error = "This signal has been deleted successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function Active(Request $request, $id){
         $signal = SignalsModel::where('id',$id)->first();
         $signal->status = 0;
         $signal->save();
+        $success = "This signal has been actived successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Edit(Request $request, $id){
@@ -103,6 +109,8 @@ class SignalController extends Controller
         $data = SignalsModel::where('id',$id)->first();
         $data->fill($signal);
         $data->save();
+        $success = "This signal has been updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function StarProcess(Request $request, $id){

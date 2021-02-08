@@ -130,8 +130,12 @@
 									<li><a href="{{URL::to('ustaad/allbrokers')}}/{{$value['memberId']}}">All Brokers</a></li>
 									<li><a href="{{URL::to('/ustaad/brokersPromotion')}}/{{$value['memberId']}}">All Broker Promotion</a></li>
 									<li><a href="{{URL::to('/ustaad/brokersNew')}}/{{$value['memberId']}}">All Broker News</a></li>
+									@if($value['memberId'] != 6)
+										<li><a href="{{URL::to('/ustaad/brokersTraining')}}/{{$value['memberId']}}">All Broker Trainings</a></li>
+										<li><a href="{{URL::to('/ustaad/brokerReview/new')}}">Add Broker Review</a></li>
+										<li><a href="{{URL::to('ustaad/brokersTrainings/new')}}">Add New Training</a></li>
+									@endif
 									<li><a href="{{URL::to('ustaad/broker/category')}}">Add New Broker</a></li>
-									<li><a href="{{URL::to('/ustaad/brokerReview/new')}}">Add Broker Review</a></li>
 									<li><a href="{{URL::to('/ustaad/brokersPromotions/new')}}">Add Promotion</a></li>
 									<li><a href="{{URL::to('/ustaad/brokersNews/new')}}">Add Broker News</a></li>
 								</ul>
@@ -139,6 +143,18 @@
 						@if($value['memberId'] != 6)
 							<li class="nav-item pcoded-menu-caption">
 								<label>Navigation</label>
+							</li>
+							<li class="nav-item pcoded-hasmenu">
+								<a href="#!" class="nav-link"
+									><span class="pcoded-micon"
+										><i class="feather icon-box"></i></span
+									><span class="pcoded-mtext">Static Pages</span></a
+								>
+								<ul class="pcoded-submenu">
+									<li><a href="{{URL::to('ustaad/staticpages?content=privacyPolice')}}">Privacy Policy Page</a></li>
+									<li><a href="{{URL::to('ustaad/staticpages?content=TOS')}}">TOS Page</a></li>
+									<li><a href="{{URL::to('ustaad/staticpages?content=AboutPage')}}">About Page</a></li>
+								</ul>
 							</li>
 							<li class="nav-item pcoded-hasmenu">
 								<a href="#!" class="nav-link"
@@ -230,16 +246,6 @@
 									@endforeach
 								</ul>
 							</li>
-							<!-- <li class="nav-item pcoded-menu-caption">
-								<label>Contact</label>
-							</li>
-							<li class="nav-item">
-								<a href="{{URL::to('ustaad/contact')}}" class="nav-link"
-									><span class="pcoded-micon"
-										><i class="feather icon-image"></i></span
-									><span class="pcoded-mtext">Contact</span></a
-								>
-							</li> -->
 							@if($value["memberId"] == 1)
 								<li class="nav-item pcoded-menu-caption">
 									<label>Trash area</label>

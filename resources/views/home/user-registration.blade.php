@@ -100,34 +100,38 @@
                                                                 <div class="col-md-4">
                                                                     <div class="form-group">
                                                                         <select name="" id="sel2" class="form-control">
-                                                                            @foreach($stateData as $state)
-                                                                                @php
-                                                                                    $selected2 = 0;
-                                                                                    if($cityId != null){
-                                                                                        if($state->id == $citiesInfo->state_id){
-                                                                                            $selected2 = 1;
-                                                                                        }
-                                                                                    }  
-                                                                                @endphp
-                                                                                <option value="{{$state->id}}" {{$selected2 == 1 ? 'selected' : ''}}>{{$state->name}}</option>
-                                                                            @endforeach
+                                                                            @if($cityId != null)
+                                                                                @foreach($stateData as $state)
+                                                                                    @php
+                                                                                        $selected2 = 0;
+                                                                                        if($cityId != null){
+                                                                                            if($state->id == $citiesInfo->state_id){
+                                                                                                $selected2 = 1;
+                                                                                            }
+                                                                                        }  
+                                                                                    @endphp
+                                                                                    <option value="{{$state->id}}" {{$selected2 == 1 ? 'selected' : ''}}>{{$state->name}}</option>
+                                                                                @endforeach
+                                                                            @endif
                                                                         </select>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <div class="form-group">
                                                                         <select name="cityId" id="sel3" class="form-control">
-                                                                            @foreach($citiesData as $city)
-                                                                                @php
-                                                                                    $selected3 = 0;
-                                                                                    if($cityId != null){
-                                                                                        if($city->id == $citiesInfo->id){
-                                                                                            $selected3 = 1;
-                                                                                        }
-                                                                                    }  
-                                                                                @endphp
-                                                                                <option value="{{$city->id}}" {{$selected3 == 1 ? 'selected' : ''}}>{{$city->name}}</option>
-                                                                            @endforeach
+                                                                            @if($cityId != null)
+                                                                                @foreach($citiesData as $city)
+                                                                                    @php
+                                                                                        $selected3 = 0;
+                                                                                        if($cityId != null){
+                                                                                            if($city->id == $citiesInfo->id){
+                                                                                                $selected3 = 1;
+                                                                                            }
+                                                                                        }  
+                                                                                    @endphp
+                                                                                    <option value="{{$city->id}}" {{$selected3 == 1 ? 'selected' : ''}}>{{$city->name}}</option>
+                                                                                @endforeach
+                                                                            @endif
                                                                         </select>
                                                                     </div>
                                                                 </div>

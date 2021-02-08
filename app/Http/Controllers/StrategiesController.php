@@ -42,6 +42,8 @@ class StrategiesController extends Controller
         $news = new StrategiesModel;
         $news->fill($data);
         $news->save();
+        $success = "This strategy has been added successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Edit(Request $request, $id){
@@ -60,18 +62,24 @@ class StrategiesController extends Controller
         $news = StrategiesModel::find($id);
         $news->fill($data);
         $news->save();
+        $success = "This strategy has been updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Delete(Request $request, $id){
         $brokerNews = StrategiesModel::find($id);
         $brokerNews->status = 1;
         $brokerNews->save();
+        $error = "This strategy has been deactived successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function Active(Request $request, $id){
         $brokerNews = StrategiesModel::find($id);
         $brokerNews->status = 0;
         $brokerNews->save();
+        $success = "This strategy has been active successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
 }

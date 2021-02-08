@@ -54,10 +54,6 @@
 												<td><a class="text-danger" href="{{URL::to('ustaad/brokersPromotions/all')}}/{{$data->id}}"> Click For Promotions </a></td>
 												<td>
 													<span class="badge badge-light-success">Active</span>
-													<div class="overlay-edit">
-														<a href="{{URL::to('ustaad/editBroker')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
-														<a href="{{URL::to('ustaad/deleteBroker')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
-													</div>
 												</td>
 											</tr>
                                             @endif

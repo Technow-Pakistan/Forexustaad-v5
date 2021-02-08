@@ -42,6 +42,8 @@ class BorkerReviewController extends Controller
             $notification->link = "ustaad/brokersReview/$broker1->id";
             $notification->save();
         }
+        $success = "This broker review has been added successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Edit(Request $request, $id){
@@ -70,6 +72,8 @@ class BorkerReviewController extends Controller
             $notification->link = "ustaad/brokersReview/$broker1->id";
             $notification->save();
         }
+        $success = "This broker review has been updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Delete(Request $request, $id){
@@ -77,6 +81,8 @@ class BorkerReviewController extends Controller
         $brokerReview->delete();
         $Trash = TrashModel::where('deleteId',$id);
         $Trash->delete();
+        $error = "This broker review has been deleted successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function AllowBrokerReviewProcess(Request $request, $id){
@@ -105,14 +111,18 @@ class BorkerReviewController extends Controller
             $notification->link = "ustaad/trash";
             $notification->save();
         }
+        $error = "This broker review has been deleted successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function TrashRestore(Request $request, $id){
         $broker = BrokerReviewModel::find($id);
         $broker->trash = 0;
         $broker->save();
-        $Trash = TrashModel::where('deleteId',$id);
+        $Trash = TrashModel::where('deleteId',$id)->first();
         $Trash->delete();
+        $success = "This broker review has been restore successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
 }

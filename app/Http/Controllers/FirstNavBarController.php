@@ -17,6 +17,8 @@ class FirstNavBarController extends Controller
         $data->iconName = $request->iconName;
         $data->link = $request->link;
         $data->save();
+        $success = "Your data has been saved successfully.";
+        $request->session()->put("success",$success);
         $totalData = FirstNavBarModel::all();
         return view('admin.firstNav',compact('totalData'));
     }
@@ -26,12 +28,16 @@ class FirstNavBarController extends Controller
         
         $data = FirstNavBarModel::find($id);
         $data->delete();
+        $error = "Your data has been deleted successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function edit(Request $request, $id){
         $data = FirstNavBarModel::find($id);
         $data->fill($request->all());
         $data->save();
+        $success = "Your data has been updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Trash(Request $request, $id){
@@ -46,6 +52,8 @@ class FirstNavBarController extends Controller
         $Trash->deleteId = $id;
         $Trash->deleteTitle = $data->iconName;
         $Trash->save();
+        $error = "Your data has been deleted successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function TrashRestore(Request $request, $id){
@@ -54,6 +62,8 @@ class FirstNavBarController extends Controller
         $data->save();
         $Trash = TrashModel::where('deleteId',$id)->where('category',"Navbar Icons")->first();
         $Trash->delete();
+        $success = "Your data has been restore successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
 }

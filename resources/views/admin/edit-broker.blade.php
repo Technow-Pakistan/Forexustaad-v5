@@ -37,15 +37,38 @@
 												<div class="alert alert-danger">
 													{{$error}}
 												</div>
-											@endisset
-                                <div class="col-md-12">
-                                    <div class="wrapper">
-                                        <div class="progress-bar text-center">
-                                          <div class="progress" style="width:0%; background-position:0%;"><span style="poistion:absolute;"></span></div>
-                                        </div>
-                                    </div>
-                                </div>
+											@endisset<div class="container-fluid">
+  
 								<div class="row">
+									<div class="col-md-12">	
+										<div class="progress-group">
+											<div class="wrapper">
+												<div class="step step01 complete"><progress class="progress progress1" value="0" max="100" aria-describedby="Step 01"></progress>
+													<div class="progress-circle"></div>
+												</div>
+												<div class="step step02 complete"><progress class="progress progress2" value="0" max="100" aria-describedby="Step 02"></progress>
+													<div class="progress-circle"></div>
+												</div>
+												<div class="step step03 complete"><progress class="progress progress3" value="0" max="100" aria-describedby="Step 03"></progress>
+													<div class="progress-circle"></div>
+												</div>
+												<div class="step step04"><progress class="progress progress4" value="0" max="100" aria-describedby="Step 04"></progress>
+													<div class="progress-circle"></div>
+												</div>
+												<div class="step step05"><progress class="progress progress5" value="0" max="100" aria-describedby="Step 05"></progress>
+													<div class="progress-circle"></div>
+												</div>
+												
+											</div>
+										</div>
+										<div class="progress-labels">
+											<div class="label">Step 01</div>
+											<div class="label">Step 02</div>
+											<div class="label">Step 03</div>
+											<div class="label">Step 04</div>
+											<div class="label">Step 05</div>
+										</div>
+									</div>
 									<div class="col-md-3 mt-4" style="border-right:1px solid lightgray">
 										<ul class="nav nav-pills nav-fill mb-3" role="tablist">
 											<li class="nav-item">
@@ -957,44 +980,70 @@
 	@php
 		$prograssBar = 0;
 		if($broker1->title != null){
-			$prograssBar += 10;
+			$prograssBar += 50;
 		}
 		if($broker2->deposit != null){
-			$prograssBar += 10;
+			$prograssBar += 50;
 		}
 		if($broker3->commission != null){
-			$prograssBar += 10;
+			$prograssBar += 50;
 		}
 		if($broker4->trade != null){
-			$prograssBar += 10;
+			$prograssBar += 50;
 		}
 		if($broker5->currency != null){
-			$prograssBar += 10;
+			$prograssBar += 50;
 		}
 		if($broker6->platform != null){
-			$prograssBar += 10;
+			$prograssBar += 50;
 		}
 		if($broker7->educationServices != null){
-			$prograssBar += 10;
+			$prograssBar += 50;
 		}
 		if($broker8->supports != null){
-			$prograssBar += 10;
+			$prograssBar += 50;
 		}
 		if($broker9->commentary != null){
-			$prograssBar += 10;
+			$prograssBar += 50;
 		}
 		if($broker->promotions != null){
-			$prograssBar += 10;
+			$prograssBar += 50;
 		}
 	@endphp
-
+		<script>
+			var i = {{$prograssBar}};
+			if(i > 0 && i<= 100){
+				console.log("dsa");
+				$(".progress1").attr("value",i);
+			}else if(i > 100 && i <= 200){
+				console.log("dsa");
+				$(".progress1").attr("value",100);
+				let r = i - 100;
+				$(".progress2").attr("value",r);
+			}else if(i > 200 && i <= 300){
+				console.log("dsa");
+				$(".progress1").attr("value",100);
+				$(".progress2").attr("value",100);
+				let r = i - 200;
+				$(".progress3").attr("value",r);
+			}else if(i > 300 && i <= 400){
+				console.log("dsa");
+				$(".progress1").attr("value",100);
+				$(".progress2").attr("value",100);
+				$(".progress3").attr("value",100);
+				let r = i - 300;
+				$(".progress4").attr("value",r);
+			}else if(i > 400 && i <= 500){
+				console.log("dsa");
+				$(".progress1").attr("value",100);
+				$(".progress2").attr("value",100);
+				$(".progress3").attr("value",100);
+				$(".progress4").attr("value",100);
+				let r = i - 400;
+				$(".progress5").attr("vlaue",r);
+			}
+		</script>
 	<script>
-			var data = {{$prograssBar}};
-			var info = data + "%";
-			$('.progress').html("<span style='margin-left:50%;'></span>" + info);
-			$('.progress').css("width",info);
-			$('.progress').css("background-position",info);
-
 		if($("#neverEnd").prop('checked') == true){
 			$(".txtTime").hide();
 			$("#startDatetime").attr("required",false);
@@ -1017,21 +1066,6 @@
 		})
 	</script>
 	<style>
-		.progress-bar{
-			height: 30px;
-			margin: 30px auto;
-			background: #d3d3d3;
-			padding: 2px;
-			border-radius: 4px;
-			border: 1px solid #bbb;
-		}
-		.progress{
-			/* transition: width 200ms ease-in */
-			height: 100%;
-			border-radius: 3px;
-			background-size: 12000px 1px;
-			background-image: url("http://monosnap.com/image/mp0hB7ZLP9c0967wBx6p4pDjujqzhP.png");
-		}
 		.nav-fill .nav-item .nav-link{
 			padding:15px;
 		}
@@ -1039,4 +1073,188 @@
 			color:#4099ff;
 			background-color:white;
 		}
+
+		/* progress */
+		.progress {
+			display: vertical;
+			width: 100%;
+			height: 12px;
+			position: relative;
+			z-index: 5;
+			padding-right: 8px;
+			padding-top: 2px;
+		}
+	@media all and (min--moz-device-pixel-ratio:0) and (min-resolution: 3e1dpcm) {
+		.progress {
+			height: 10px;
+		}
+	}
+	.progress[value] {
+		background-color: transparent;
+		border: 0;
+		appearance: none;
+		border-radius: 0;
+	}
+	.progress[value]::-ms-fill {
+		background-color: #0074d9;
+		border: 0;
+	}
+	.progress[value]::-moz-progress-bar {
+		background-color: #0074d9;
+		margin-right: 8px;
+	}
+	.progress[value]::-webkit-progress-inner-element {
+		background-color: #eee;
+	}
+	.progress[value]::-webkit-progress-value {
+		background-color: #0074d9;
+	}
+	.progress[value]::-webkit-progress-bar {
+		background-color: #eee;
+	}
+	.progress-circle {
+		width: 24px;
+		height: 24px;
+		position: absolute;
+		right: 3px;
+		top: -5px;
+		z-index: 5;
+		border-radius: 50%;
+	}
+	.progress-circle:before {
+		content: "";
+		width: 6px;
+		height: 6px;
+		background: white;
+		border-radius: 50%;
+		display: block;
+		transform: translate(-50%, -50%);
+		position: absolute;
+		left: 50%;
+		top: 50%;
+	}
+	.progress-group {
+		margin-top: 36px;
+	}
+	@media (max-width: 991px) {
+		.progress-group {
+			margin-left: -18px;
+			margin-right: -18px;
+			flex-basis: 100%;
+			padding: 18px;
+		}
+	}
+	@media (max-width: 768px) {
+		.progress-group {
+			padding: 18px 18px 0;
+			margin-bottom: 12px;
+		}
+	}
+	.progress-group .title {
+		margin-bottom: 18px;
+	}
+	.progress-group .wrapper {
+		background: white;
+		border: 1px solid #eee;
+		border-radius: 12px;
+		height: 14px;
+		display: flex;
+		filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.3));
+	}
+	.progress-group .step {
+		width: 20%;
+		position: relative;
+	}
+	.progress-group .step:after {
+		content: "";
+		height: 30px;
+		width: 30px;
+		background: white;
+		border-radius: 50%;
+		display: block;
+		position: absolute;
+		right: 0;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	.progress-group .step:first-of-type .progress {
+		padding-left: 4px;
+	}
+	.progress-group .step:first-of-type .progress[value]::-moz-progress-bar {
+		border-radius: 5px 0 0 5px;
+	}
+	.progress-group .step:first-of-type .progress[value]::-webkit-progress-value {
+		border-radius: 5px 0 0 5px;
+	}
+	.progress-group .step:not(:first-of-type) .progress[value]::-moz-progress-bar {
+		border-radius: 0;
+	}
+	.progress-group .step:not(:first-of-type) .progress[value]::-webkit-progress-value {
+		border-radius: 0;
+	}
+	.progress-group .step .progress[value] + .progress-circle {
+		background: #eee;
+	}
+	.progress-group .step.step01 .progress[value]::-moz-progress-bar {
+		background-color: #010c4e;
+	}
+	.progress-group .step.step01 .progress[value]::-webkit-progress-value {
+		background-color: #010c4e;
+	}
+	.progress-group .step.step01 .progress[value="100"] + .progress-circle {
+		background-color: #010c4e;
+	}
+	.progress-group .step.step02 .progress[value]::-moz-progress-bar {
+		background-color: #002d88;
+	}
+	.progress-group .step.step02 .progress[value]::-webkit-progress-value {
+		background-color: #002d88;
+	}
+	.progress-group .step.step02 .progress[value="100"] + .progress-circle {
+		background-color: #002d88;
+	}
+	.progress-group .step.step03 .progress[value]::-moz-progress-bar {
+		background-color: #017aa9;
+	}
+	.progress-group .step.step03 .progress[value]::-webkit-progress-value {
+		background-color: #017aa9;
+	}
+	.progress-group .step.step03 .progress[value="100"] + .progress-circle {
+		background-color: #017aa9;
+	}
+	.progress-group .step.step04 .progress[value]::-moz-progress-bar {
+		background-color: #03c2b2;
+	}
+	.progress-group .step.step04 .progress[value]::-webkit-progress-value {
+		background-color: #03c2b2;
+	}
+	.progress-group .step.step04 .progress[value="100"] + .progress-circle {
+		background-color: #03c2b2;
+	}
+	.progress-group .step.step05 .progress[value]::-moz-progress-bar {
+		background-color: #05e8b0;
+	}
+	.progress-group .step.step05 .progress[value]::-webkit-progress-value {
+		background-color: #05e8b0;
+	}
+	.progress-group .step.step05 .progress[value="100"] + .progress-circle {
+		background-color: #05e8b0;
+	}
+	.progress-labels {
+		display: flex;
+		justify-content: space-between;
+	}
+	.progress-labels .label {
+		text-align: center;
+		text-transform: uppercase;
+		margin: 12px 0;
+		width: 20%;
+		font-size: 11px;
+		padding-right: 24px;
+		font-weight: 600;
+		opacity: 0.7;
+	}
+	.page-title {
+		letter-spacing: -0.05rem;
+	}
 	</style>

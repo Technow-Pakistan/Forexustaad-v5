@@ -36,8 +36,10 @@
 						<div class="col-md-4">
 							<div class="card text-center">
 								@php
-									if($i == 1){
-										$url = URL::to('ustaad/analysis/add');
+									if($i == 0){
+										$url = URL::to('ustaad/fundamental');
+									}elseif($i == 1){
+										$url = URL::to('ustaad/analysis');
 									}elseif($i == 2){
 										$url = URL::to('/ustaad/post/viewAll');
 									}elseif($i == 3){

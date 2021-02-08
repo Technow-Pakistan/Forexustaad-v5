@@ -75,6 +75,8 @@ class BrokerTopInformationController extends Controller
             $notification->link = "ustaad/brokersDetail/$id";
             $notification->save();
         }
+        $success = "New broker has been added successfully.";
+        $request->session()->put("success",$success);
         return redirect("ustaad/editBroker/".$id)->with(['activeFormsData'=>$request->activeForm]);
     }
     public function AddDeposit(Request $request){
@@ -95,6 +97,8 @@ class BrokerTopInformationController extends Controller
             $notification->link = "ustaad/brokersDetail/$title->id";
             $notification->save();
         }
+        $success = "This broker information has been added successfully.";
+        $request->session()->put("success",$success);
         return redirect("ustaad/editBroker/".$id)->with(['activeFormsData'=>$request->activeForm]);
     }
     public function AddCommission(Request $request){
@@ -115,6 +119,8 @@ class BrokerTopInformationController extends Controller
             $notification->link = "ustaad/brokersDetail/$title->id";
             $notification->save();
         }
+        $success = "This broker information has been added successfully.";
+        $request->session()->put("success",$success);
         return redirect("ustaad/editBroker/".$id)->with(['activeFormsData'=>$request->activeForm]);
     }
     public function AddAccountInfo(Request $request){
@@ -135,6 +141,8 @@ class BrokerTopInformationController extends Controller
             $notification->link = "ustaad/brokersDetail/$title->id";
             $notification->save();
         }
+        $success = "This broker information has been added successfully.";
+        $request->session()->put("success",$success);
         return redirect("ustaad/editBroker/".$id)->with(['activeFormsData'=>$request->activeForm]);
     }
     public function AddTradableAssets(Request $request){
@@ -155,24 +163,32 @@ class BrokerTopInformationController extends Controller
             $notification->link = "ustaad/brokersDetail/$title->id";
             $notification->save();
         }
+        $success = "This broker information has been added successfully.";
+        $request->session()->put("success",$success);
         return redirect("ustaad/editBroker/".$id)->with(['activeFormsData'=>$request->activeForm]);
     }
     public function AllowBrokerProcess(Request $request, $id){
         $broker = BrokerCompanyInformationModel::find($id);
         $broker->pending = 0;
         $broker->save();
+        $success = "This broker information has been added successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function StarBrokerProcess(Request $request, $id){
         $broker = BrokerCompanyInformationModel::find($id);
         $broker->star = 1;
         $broker->save();
+        $success = "This broker information has been added successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function UnStarBrokerProcess(Request $request, $id){
         $broker = BrokerCompanyInformationModel::find($id);
         $broker->star = 0;
         $broker->save();
+        $success = "This broker information has been added successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     

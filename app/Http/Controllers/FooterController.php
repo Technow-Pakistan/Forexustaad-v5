@@ -7,15 +7,17 @@ use App\Models\FooterDescriptionModel;
 use App\Models\FooterContactModel;
 use App\Models\FooterWebinarModel;
 use App\Models\FooterCopyRightModel;
+use App\Models\OtherPagesContentModel;
 
 class FooterController extends Controller
 {
     public function Index(Request $request){
+        $otherPagesContent = OtherPagesContentModel::all();
         $Description = FooterDescriptionModel::all();
         $Contact = FooterContactModel::all();
         $Webinar = FooterWebinarModel::all();
         $copyRight = FooterCopyRightModel::where('id',1)->first();
-        return view('admin.edit-footer',compact('Description','Contact','Webinar','copyRight'));
+        return view('admin.edit-footer',compact('Description','Contact','Webinar','copyRight','otherPagesContent'));
     }
     public function Webinar(Request $request){
         for ($i=1; $i <=5 ; $i++) { 
@@ -25,6 +27,8 @@ class FooterController extends Controller
             $newWebinar->area = $request->area;
             $newWebinar->save();
         }
+        $success = "This information has been updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Contact(Request $request){
@@ -35,6 +39,8 @@ class FooterController extends Controller
             $newContact->area = $request->area;
             $newContact->save();
         }
+        $success = "This information has been updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Description(Request $request){
@@ -45,6 +51,8 @@ class FooterController extends Controller
             $newDescription->area = $request->area;
             $newDescription->save();
         }
+        $success = "This information has been updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function CopyRight(Request $request){
@@ -58,6 +66,8 @@ class FooterController extends Controller
             $copyRight->description2 = $description2;
         }
         $copyRight->save();
+        $success = "This information has been updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
 }

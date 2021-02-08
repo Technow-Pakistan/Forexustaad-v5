@@ -1,5 +1,47 @@
-<!-- The Modal -->
+<!-- Toast Start -->
 
+<div id="snackbar"></div>
+    <div id="snackbar1"></div>
+<script>
+  function snackbar() {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  }
+  function snackbar1() {
+    var x = document.getElementById("snackbar1");
+    x.className = "show bg-success";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  }
+</script>
+                    @if(Session::has('error'))
+                      @php
+                        $error =Session::get('error');
+                      @endphp
+                      <script>
+                        var data = "{{$error}}";
+                        var x = document.getElementById("snackbar");
+                          x.innerHTML = "<i class='fa fa-exclamation-triangle'></i> &nbsp; " + data;
+                          snackbar();
+                      </script>
+                      @php Session::pull('error') @endphp
+                    @endif
+
+                    @if(Session::has('success'))
+                      @php
+                        $success =Session::get('success');
+                      @endphp
+                      <script>
+                          var data1 = "{{$success}}";
+                          var x = document.getElementById("snackbar1");
+                            x.innerHTML = "<i class='fa fa-check'></i> &nbsp; " + data1;
+                            snackbar1();
+                      </script>
+                        @php Session::pull('success') @endphp
+                    @endif
+<!-- Toast End -->
+
+    <!-- The Modal -->
  <div class="modal fade" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -61,6 +103,8 @@
             });
 			CKEDITOR.replace('editor2');
 			CKEDITOR.replace('editor3');
+			CKEDITOR.replace('editor4');
+			CKEDITOR.replace('editor5');
 			
 		</script>
 		<script src="{{URL::to('/public/assets/assets/js/vendor-all.min.js')}}"></script>

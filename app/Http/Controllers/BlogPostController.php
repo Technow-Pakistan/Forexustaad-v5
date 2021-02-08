@@ -121,6 +121,8 @@ class BlogPostController extends Controller
             }
         }
 
+        $success = "This post has been saved successfully.";
+        $request->session()->put("success",$success);
         return back();
 
     }
@@ -269,6 +271,9 @@ class BlogPostController extends Controller
             }
         }
 
+        $success = "This post has been updated successfully.";
+        $request->session()->put("success",$success);
+        
         return back();
 
     }

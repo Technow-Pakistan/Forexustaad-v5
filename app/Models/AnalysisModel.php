@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class AnalysisModel extends Model
 {
     protected $table="analysis";
-    protected $fillable = ["title","description","goldImage","gbpusdImage","crudeOilImage","audushImage","usdcadImage","optionalImage"];
+    protected $fillable = ["title","description","detailDescription","image","status"];
 }
