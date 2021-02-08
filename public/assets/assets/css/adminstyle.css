@@ -32206,3 +32206,44 @@ new-task label input[type=checkbox] {
     font-weight: 600;
     font-size: 14px;
 }
+
+     /* Toast Style */
+  #snackbar, #snackbar1 {
+	visibility: hidden;
+	background-color: red;
+	color: #fff;
+	text-align: center;
+	border-radius: 2px;
+	padding: 16px;
+	position: fixed;
+	bottom:25px;
+	z-index: 1;
+	right: 50px;
+	font-size: 17px;
+  }
+
+#snackbar.show, #snackbar1.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {right: 0; opacity: 0;} 
+  to {right: 50px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {right: 0; opacity: 0;}
+  to {right: 50px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {right: 50px; opacity: 1;} 
+  to {right: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {right: 50px; opacity: 1;}
+  to {right: 0; opacity: 0;}
+}

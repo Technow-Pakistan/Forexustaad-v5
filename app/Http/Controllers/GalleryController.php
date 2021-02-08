@@ -24,6 +24,8 @@ class GalleryController extends Controller
         }
         $totalData = Storage::files($id);
         array_unshift($totalData,$path);
+        $success = "This image has been added successfully.";
+        $request->session()->put("success",$success);
         return view('admin.galleryImages',compact('totalData','id'));
     }
     public function Trash(Request $request, $id){
@@ -43,6 +45,8 @@ class GalleryController extends Controller
         if(File::exists($path)) {
             rename($path,$changePath);
         }
+        $error = "This image has been deleted successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function Edit(Request $request, $id){

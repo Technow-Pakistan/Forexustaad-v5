@@ -24,7 +24,7 @@
 									<li class="breadcrumb-item">
 										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
 									</li>
-									<li class="breadcrumb-item"><a href="#!">All Posts</a></li>
+									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/analysis')}}">All Analysis</a></li>
 									<li class="breadcrumb-item">
 										<a href="#!">{{($count != 0 ? 'Edit' : 'Add' )}} Analysis</a>
 									</li>
@@ -46,113 +46,37 @@
                                             <input name="title" class="form-control " id="analysis-name" type="text" value="{{($count != 0 ? $analysis->title : '' )}}" size="40" aria-required="true" required="">
                                             <small>The title is how it appears on your site.</small>
                                         </div>
+										<div class="form-group">
+											@isset($analysis->image)
+												<div>
+													<img src="{{URL::to('storage/app')}}/{{$analysis->image}}" alt="Your Image" />
+												</div>
+											@endisset
+											@if($count == 0)
+												<label for='analysis-name' class='form-control-label'>Image</label>
+											@endif
+											<input type="file" class="form-control h-100" name="file_photo" id="customFile" {{($count == 0 ? 'required' : '' )}}>
+										</div>
                                         <div class="form-group">
-                                            <label for="analysis-description" class="form-control-label">Description</label>
-                                            <textarea name="description" class="form-control" id="description" rows="5" cols="40" placeholder="Enter your Description here ...">{{($count != 0 ? $analysis->description : '' )}}</textarea>
+                                            <label for="analysis-description" class="form-control-label">Description (Max-character 200)</label>
+											<p class="text-right text-danger m-0 descriptionCount"></p>
+                                            <textarea name="description" class="form-control description" maxlength="200" id="description" rows="3" placeholder="Enter your Description here ...">{{($count != 0 ? $analysis->description : '' )}}</textarea>
                                         </div><br>
-                                        <hr>
-                                        <p class="text-danger">Please Upload Images According To Given Order Below</p>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class=" form-group">
-                                                    <h4> Gold</h4>
-                                                    @isset($analysis->goldImage)
-                                                        <div>
-                                                            <img src="{{URL::to('storage/app')}}/{{$analysis->goldImage}}" height="150px" alt="Your Image" />
-                                                        </div><br>
-                                                    @endisset
-                                                    <div class="form-group">
-                                                        <div class="custom-file h-100">
-                                                            <input type="file" class="form-control h-100" name="file_photo[]" id="customFile" {{($count == 0 ? 'required' : '' )}}>
-                                                        </div>
-                                                    </div>
-                                                    <small>Upload the Analysis images</small>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class=" form-group">
-                                                    <h4>GBPUSD</h4>
-                                                    @isset($analysis->gbpusdImage)
-                                                        <div>
-                                                            <img src="{{URL::to('storage/app')}}/{{$analysis->gbpusdImage}}" height="150px" alt="Your Image" />
-                                                        </div><br>
-                                                    @endisset
-                                                    <div class="form-group">
-                                                        <div class="custom-file h-100">
-                                                            <input type="file" class="form-control h-100" name="file_photo[]" id="customFile" {{($count == 0 ? 'required' : '' )}}>
-                                                        </div>
-                                                    </div>
-                                                    <small>Upload the Analysis images</small>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class=" form-group">
-                                                    <h4>Crude Oil</h4>
-                                                    @isset($analysis->crudeOilImage)
-                                                        <div>
-                                                            <img src="{{URL::to('storage/app')}}/{{$analysis->crudeOilImage}}" height="150px" alt="Your Image" />
-                                                        </div><br>
-                                                    @endisset
-                                                    <div class="form-group">
-                                                        <div class="custom-file h-100">
-                                                            <input type="file" class="form-control h-100" name="file_photo[]" id="customFile" {{($count == 0 ? 'required' : '' )}}>
-                                                        </div>
-                                                    </div>
-                                                    <small>Upload the Analysis images</small>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class=" form-group">
-                                                    <h4>AUDUSD</h4>
-                                                    @isset($analysis->audushImage)
-                                                        <div>
-                                                            <img src="{{URL::to('storage/app')}}/{{$analysis->audushImage}}" height="150px" alt="Your Image" />
-                                                        </div><br>
-                                                    @endisset
-                                                    <div class="form-group">
-                                                        <div class="custom-file h-100">
-                                                            <input type="file" class="form-control h-100" name="file_photo[]" id="customFile" {{($count == 0 ? 'required' : '' )}}>
-                                                        </div>
-                                                    </div>
-                                                    <small>Upload the Analysis images</small>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class=" form-group">
-                                                    <h4>USDCAD</h4>
-                                                    @isset($analysis->usdcadImage)
-                                                        <div>
-                                                            <img src="{{URL::to('storage/app')}}/{{$analysis->usdcadImage}}" height="150px" alt="Your Image" />
-                                                        </div><br>
-                                                    @endisset
-                                                    <div class="form-group">
-                                                        <div class="custom-file h-100">
-                                                            <input type="file" class="form-control h-100" name="file_photo[]" id="customFile" {{($count == 0 ? 'required' : '' )}}>
-                                                        </div>
-                                                    </div>
-                                                    <small>Upload the Analysis images</small>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class=" form-group">
-                                                    <h4>Optional </h4>
-                                                    @isset($analysis->optionalImage)
-                                                        <div>
-                                                            <img src="{{URL::to('storage/app')}}/{{$analysis->optionalImage}}" height="150px" alt="Your Image" />
-                                                        </div><br>
-                                                    @endisset
-                                                    <div class="form-group">
-                                                        <div class="custom-file h-100">
-                                                            <input type="file" class="form-control h-100" name="file_photo[]" id="customFile" {{($count == 0 ? 'required' : '' )}}>
-                                                        </div>
-                                                    </div>
-                                                    <small>Upload the Analysis images</small>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <div class="form-group">
+                                            <label for="analysis-description" class="form-control-label">Detail Description</label>
+                                            <textarea name="editor1" class="form-control" id="description" rows="5" cols="40" placeholder="Enter your Description here ...">
+												@if($count != 0) 
+													@php
+														$detailDescription = html_entity_decode($analysis->detailDescription);
+														echo $detailDescription;
+													@endphp
+												@endif
+											</textarea>
+                                        </div><br>
+                                        
                                         <p class="submit">
-                                            <input type="submit" name="submit" id="submit" class="btn btn-outline-primary" value="Post"> <span class="spinner"></span>
-                                            <input type="reset" name="reset" id="reset" class="btn btn-outline-danger" value="reset"> <span class="spinner"></span>
+                                            <input type="submit" id="submit" class="btn btn-outline-primary" value="Post"> <span class="spinner"></span>
+                                            <input type="reset" id="reset" class="btn btn-outline-danger" value="reset"> <span class="spinner"></span>
                                         </p>
                                     </form>
                                 </div>
@@ -165,3 +89,19 @@
 		</section>
 		<!-- [ Main Content ] end -->
 @include('admin.include.footer')
+        <script>
+			// description Limit
+			$(".descriptionCount").hide();
+			$(".description").on("keyup",function(){
+			var count = $(".description").val();
+			var len = count.length;
+
+			if(len == 0){
+				$(".descriptionCount").hide();
+			}else{
+				$(".descriptionCount").show();
+			}
+				len = 200 - len;
+				$(".descriptionCount").html("remaining: " + len);
+			});
+		</script>

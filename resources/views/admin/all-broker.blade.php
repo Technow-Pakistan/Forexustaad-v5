@@ -44,7 +44,9 @@
 												<th>Category</th>
 												<th>User</th>
 												<th>Broker Details</th>
-												<th>Broker Review</th>
+												@if($value['memberId'] != 6)
+													<th>Broker Review</th>
+												@endif
 												<th style="width:100px">Status</th>
 											</tr>
 										</thead>
@@ -68,7 +70,9 @@
 												<!-- <td>{{$data->start}}</td>
 												<td>{{$data->end}}</td> -->
 												<td><a class="text-danger" href="{{URL::to('ustaad/brokersDetail')}}/{{$data->id}}"> Click For Details </a></td>
-												<td><a class="text-danger" href="{{URL::to('ustaad/brokersReview')}}/{{$data->id}}"> Click For Review </a></td>
+												@if($value['memberId'] != 6)
+													<td><a class="text-danger" href="{{URL::to('ustaad/brokersReview')}}/{{$data->id}}"> Click For Review </a></td>
+												@endif
 												<td>
 													@php
 														$paymentDate = date('Y-m-d');

@@ -40,6 +40,9 @@ use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\AdvanceTrainingController;
 use App\Http\Controllers\AdvanceCommentsController;
 use App\Http\Controllers\BrokerCategoryController;
+use App\Http\Controllers\BrokerTrainingController;
+use App\Http\Controllers\OtherPagesContentController;
+use App\Http\Controllers\FundamentalController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,9 +54,16 @@ use App\Http\Controllers\BrokerCategoryController;
 |
 */
 
+Route::get('/unRegisterUser/Save',[HomeController::class,'unRegisterUserSave']);
 
 Route::get('/training/{id1}/{id}',[AdvanceTrainingController::class,'ViewAll']);
+Route::get('/analysis',[AnalysisController::class,'ViewAll']);
+Route::get('/analysis/{id}',[AnalysisController::class,'ViewDetail']);
+Route::get('/fundamental',[FundamentalController::class,'ViewAll']);
+Route::get('/fundamental/{id}',[FundamentalController::class,'ViewDetail']);
 
+Route::get('/brokerList/training/{id}',[BrokerTrainingController::class,'BrokerTraining']);
+Route::get('/broker/training/{id}',[BrokerTrainingController::class,'ChangeTraining']);
 Route::get('/brokerList',[HomeController::class,'BrokerView']);
 Route::get('/brokerList/brokerDetail/{id}',[HomeController::class,'brokerDetail']);
 Route::get('/brokerList/brokerReview/{id}',[HomeController::class,'brokerReview']);
@@ -124,7 +134,8 @@ Route::post('/clientForget',[HomeController::class,'ForgetProcess']);
 Route::get('/clientLogout',[HomeController::class,'LogoutProcess']);
 Route::get('/blog-post.html',[BlogController::class,'Index']);
 Route::get('/Posts/{id}/{id2}',[BlogController::class,'DetailBlog']);
-Route::get('/privacy-policy.html/de',[HomeController::class,'privacyPolicy']);
+Route::get('/privacy-policy.html',[HomeController::class,'privacyPolicy']);
+Route::get('/about-page',[HomeController::class,'AboutPage']);
 Route::get('/term-of-services.html',[HomeController::class,'termServices']);
 Route::get('/contact-us',[ContactController::class,'contact']);
 Route::get('/signal',[SignalController::class,'signal']);
@@ -166,6 +177,12 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/HabbitCategory/{id}',[AdvanceTrainingController::class,'ViewComment3']);
         Route::post('/CommentViewReply/add/',[AdvanceTrainingController::class,'SaveViewCommentReply']);
     });
+
+    Route::group(['prefix' => 'staticpages'],function(){
+        Route::get('/',[OtherPagesContentController::class,'Index']);
+        Route::post('/',[OtherPagesContentController::class,'SaveChanges']);
+    });
+
     Route::group(['prefix' => 'strategies'],function(){
         Route::get('/',[StrategiesController::class,'Index']);
         Route::get('/new',[StrategiesController::class,'Add']);
@@ -179,10 +196,19 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/',[AnalysisController::class,'Index']);
         Route::get('/add',[AnalysisController::class,'Add']);
         Route::post('/add',[AnalysisController::class,'AddProcess']);
-        Route::get('/edit/{id}',[SignalController::class,'Edit']);
-        Route::post('/edit/{id}',[SignalController::class,'EditProcess']);
-        Route::get('/delete/{id}',[SignalController::class,'Delete']);
-        Route::get('/active/{id}',[SignalController::class,'Active']);
+        Route::get('/edit/{id}',[AnalysisController::class,'Edit']);
+        Route::post('/edit/{id}',[AnalysisController::class,'EditProcess']);
+        Route::get('/deactive/{id}',[AnalysisController::class,'Deactive']);
+        Route::get('/active/{id}',[AnalysisController::class,'Active']);
+    });
+    Route::group(['prefix' => 'fundamental'],function(){
+        Route::get('/',[FundamentalController::class,'Index']);
+        Route::get('/add',[FundamentalController::class,'Add']);
+        Route::post('/add',[FundamentalController::class,'AddProcess']);
+        Route::get('/edit/{id}',[FundamentalController::class,'Edit']);
+        Route::post('/edit/{id}',[FundamentalController::class,'EditProcess']);
+        Route::get('/deactive/{id}',[FundamentalController::class,'Deactive']);
+        Route::get('/active/{id}',[FundamentalController::class,'Active']);
     });
     Route::group(['prefix' => 'contact'],function(){
         Route::get('/',[ContactController::class,'Index']);
@@ -398,6 +424,20 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/trash/{id}',[BorkerNewsController::class,'Trash']);
         Route::get('/trashRestore/{id}',[BorkerNewsController::class,'TrashRestore']);
         Route::post('/allow/{id}',[BorkerNewsController::class,'AllowBrokerNewsProcess']);
+    });
+
+    Route::get('brokersTraining/{id}',[BrokerTrainingController::class,'Index']);
+
+    Route::group(['prefix' => 'brokersTrainings'],function(){
+        Route::get('/all/{id}',[BrokerTrainingController::class,'All']);
+        Route::get('/new',[BrokerTrainingController::class,'Add']);
+        Route::post('/new',[BrokerTrainingController::class,'AddNews']);
+        Route::get('/edit/{id}',[BrokerTrainingController::class,'Edit']);
+        Route::post('/edit/{id}',[BrokerTrainingController::class,'EditNews']);
+        Route::get('/delete/{id}',[BrokerTrainingController::class,'Delete']);
+        Route::get('/trash/{id}',[BrokerTrainingController::class,'Trash']);
+        Route::get('/trashRestore/{id}',[BrokerTrainingController::class,'TrashRestore']);
+        Route::post('/allow/{id}',[BrokerTrainingController::class,'AllowBrokerNewsProcess']);
     });
     Route::get('brokersPromotion/{id}',[BorkerPromotionsController::class,'Index']);
 

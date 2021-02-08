@@ -3,28 +3,6 @@
     <div class="banner_area">
         <div class="container">
             <div class="row">
-                @php
-                    if(Session::has('error')){
-                        $error =Session::get('error');
-                    }
-                    @endphp
-                @isset($error)
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="alert alert-danger">{{$error}}</div>
-                        @php Session::pull('error') @endphp
-                    </div>
-                @endisset
-                @php
-                    if(Session::has('success')){
-                        $success =Session::get('success');
-                    }
-                    @endphp
-                @isset($success)
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="alert alert-danger">{{$success}}</div>
-                        @php Session::pull('success') @endphp
-                    </div>
-                @endisset
                 <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6 col-6 order-2 order-lg-1">
                     <div class="text-center">
                         @isset($MainLeftBanner)
@@ -400,29 +378,22 @@
 
                             <div class="row">
 
-                                <?php
-$analysis = [
-    ['src' => '1.jpg', 'url' => '', 'anchor_text' => 'Cras sit amet nibh libero, in gravida nulla'],
-    ['src' => '2.jpg', 'url' => '', 'anchor_text' => 'Cras sit amet nibh libero, in gravida'],
-    ['src' => '3.jpg', 'url' => '', 'anchor_text' => 'Cras sit amet nibh libero'],
-    ['src' => '4.png', 'url' => '', 'anchor_text' => 'Cras sit amet nibh libero, in gravida nulla nibh libero']
-];
-
-$opinion_analysis = '';
-?>
-@foreach ($analysis as $analysiss_val => $value)
-
-        <div class="col-md-6">
-                <div class="media">
-              <img class="mr-3" src="{{URL::to('public/assets/assets/img/latest_news')}}/{{$value['src']}}" alt="Generic placeholder image">
-              <div class="media-body">
-                <p class="date m-0">Jan 16, 2020</p>
-                <h6 class="m-0"><a href="{{$value['url']}}">{{$value['anchor_text']}}</a></h6>
-                <p class="m-0 nameby">By Ellen WAld, PHD.</p>
-              </div>
-            </div>
-            </div>
-@endforeach
+                                @foreach ($LatestFundamental as $fundamental)
+                                    @php
+                                        $url = str_replace(" ","-",$fundamental->title);
+                                        $admin = $fundamental->GetAdminMember();
+                                    @endphp
+                                    <div class="col-md-6">
+                                        <div class="media">
+                                            <img class="mr-3" src="{{URL::to('storage/app')}}/{{$fundamental->image}}" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <p class="date m-0">{{$fundamental->created_at->format('M d, Y')}}</p>
+                                                <h6 class="m-0"><a href="{{URL::to('/fundamental')}}/{{$url}}">{{$fundamental->title}}</a></h6>
+                                                <p class="m-0 nameby">{{$admin->username}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
 
                             </div>
                         </div>
@@ -500,28 +471,19 @@ $opinion_analysis = '';
                                                                 {{$data->selectUser}} <br>
                                                                 @if($go == 0)
                                                                     @if($data->selectUser == "Register User" && !Session::has('client'))
-                                                                    <a href="#!" data-toggle="collapse" data-target="#demo{{$data->id}}">View Signal</a>
-                                                                        <div id="demo{{$data->id}}" class="collapse">
-                                                                            <p>Please! <br> Login First</p>
-                                                                        </div>
+                                                                        <a href="#!" onclick="snackbar()">View Signal</a>
                                                                     @elseif($data->selectUser == "Premium User")
                                                                     @if(!Session::has('client'))
-                                                                        <a href="#!" data-toggle="collapse" data-target="#demo{{$data->id}}">View Signal</a>
-                                                                        <div id="demo{{$data->id}}" class="collapse">
-                                                                            <p>Please! <br> Login First</p>
-                                                                        </div>
+                                                                        <a href="#!" onclick="snackbar()">View Signal</a>
                                                                     @elseif(isset($loginClientData->memberType))
                                                                         @if($loginClientData->memberType == 1)
-                                                                            <a href="#!" data-toggle="collapse" data-target="#demo{{$data->id}}">View Signal</a>
-                                                                            <div id="demo{{$data->id}}" class="collapse">
-                                                                                <p>Get <br> Premium First</p>
-                                                                            </div>
+                                                                            <a href="#!" onclick="snackbar1()">View Signal</a>
                                                                         @else
                                                                             <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
                                                                         @endif
                                                                     @endif
                                                                     @else
-                                                                    <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
+                                                                        <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
                                                                     @endif
                                                                 @endif
                                                             </h3>
@@ -1413,113 +1375,6 @@ $opinion_analysis = '';
                                         </td>
                                     </tr>
                                 @endforeach
-                                    <!-- <tr>
-                                        <td>
-                                            <img src="{{URL::to('/public/assets/assets/img/exness.png')}}" width="200" height="33">
-                                        </td>
-                                        <td>Cyprus Securities and Exchange Commission (Cyprus)</td>
-                                        <td>$1</td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <a href="http://www.exness.com/a/405883"
-                                                        class="btn btn-mine radial">Trade</a>
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img src="{{URL::to('/public/assets/assets/img/liquidity.png')}}" width="200" height="33">
-                                        </td>
-                                        <td>Financial Services a
-                                            Authority (St. Vincent & the Grenadines)</td>
-                                        <td>$5</td>
-                                        <td>
-
-                                            <div class="checkbox">
-
-                                                <label>
-
-
-                                                    <a href="https://promo.theliquidity.com/afl-forexustaad "
-                                                        class="btn btn-mine radial">Trade</a>
-
-                                                </label>
-
-                                            </div>
-
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img src="{{URL::to('/public/assets/assets/img/ic.png')}}" width="200" height="33">
-                                        </td>
-                                        <td>Cyprus Securities and Exchange Commission (Cyprus)</td>
-                                        <td>$10</td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <a href="http://www.icmarkets.com/?camp=14589 "
-                                                        class="btn btn-mine radial">Trade</a>
-
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img src="{{URL::to('/public/assets/assets/img/cabana.png')}}" width="200" height="33">
-                                        </td>
-                                        <td>Financial Services Commission (British Virgin Islands)</td>
-                                        <td>$50</td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <a href="https://secure.cabanacapitals.com/ib/links/go/334"
-                                                        class="btn btn-mine radial">Trade</a>
-
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img src="{{URL::to('/public/assets/assets/img/tb_36461062.png')}}" width="200" height="33">
-                                        </td>
-                                        <td>Cyprus Securities and Exchange Commission (Cyprus), Australian Securities
-                                            and Investments Commission (Australia), International Financial Services
-                                            Commission (Belize)</td>
-                                        <td>$100</td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <a href="https://clicks.pipaffiliates.com/c?c=75456&l=en&p=1"
-                                                        class="btn btn-mine radial">Trade</a>
-
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img src="{{URL::to('/public/assets/assets/img/fxtm.png')}}" width="200" height="33">
-                                        </td>
-                                        <td>Cyprus Securities and Exchange Commission (Cyprus), Australian Securities
-                                            and Investments Commission (Australia), International Financial Services
-                                            Commission (Belize)</td>
-                                        <td>$100</td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <a href="https://www.forextime.com/?partner_id=4907100"
-                                                        class="btn btn-mine radial">Trade</a>
-
-                                                </label>
-
-                                            </div>
-                                        </td>
-                                    </tr> -->
                                 </tbody>
                             </table>
                         </div>

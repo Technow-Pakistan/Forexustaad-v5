@@ -27,6 +27,8 @@ class RightSideBannerController extends Controller
         $banner->end = $request->end;
         $banner->area = $request->area;
         $banner->save();
+        $success = "This banner has been added successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function delete(Request $request, $id){
@@ -34,6 +36,8 @@ class RightSideBannerController extends Controller
         $Trash->delete();
         $data = RightSideBannerModel::find($id);
         $data->delete();
+        $error = "This banner has been deleted successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function ProcessEdit(Request $request, $id){
@@ -45,6 +49,8 @@ class RightSideBannerController extends Controller
         $data = RightSideBannerModel::find($id);
         $data->fill($banner);
         $data->save();
+        $success = "This banner has been updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Trash(Request $request, $id){
@@ -59,6 +65,8 @@ class RightSideBannerController extends Controller
         $Trash->deleteId = $id;
         $Trash->deleteTitle = $data->title;
         $Trash->save();
+        $error = "This banner has been deleted successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function TrashRestore(Request $request, $id){
@@ -67,6 +75,8 @@ class RightSideBannerController extends Controller
         $data->save();
         $Trash = TrashModel::where('deleteId',$id)->where('category',"Right Side Banner")->first();
         $Trash->delete();
+        $success = "This banner has been restore successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
 }

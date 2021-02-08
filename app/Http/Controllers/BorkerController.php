@@ -92,6 +92,8 @@ class BorkerController extends Controller
                 $promotion->delete();
             }
         }
+        $error = "This broker has been delete successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function edit(Request $request, $id){
@@ -131,6 +133,8 @@ class BorkerController extends Controller
             $notification->link = "ustaad/brokersDetail/$broker1->id";
             $notification->save();
         }
+        $success = "This broker has been updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Detail(Request $request, $id){
@@ -190,6 +194,8 @@ class BorkerController extends Controller
             $notification->link = "ustaad/trash";
             $notification->save();
         }
+        $error = "This broker has been delete successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function TrashRestore(Request $request, $id){
@@ -222,6 +228,8 @@ class BorkerController extends Controller
         }
         $Trash = TrashModel::where('deleteId',$id)->where('category',"Broker")->first();
         $Trash->delete();
+        $success = "This broker has been restore successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
 }

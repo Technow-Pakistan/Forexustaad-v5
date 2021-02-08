@@ -18,6 +18,8 @@ class MainMenuController extends Controller
         $data->link = $request->link;
         $data->save();
         $totalData = MainMenuModel::all();
+        $success = "This menu has been added successfully.";
+        $request->session()->put("success",$success);
         return view('admin.mainMenus',compact('totalData'));
     }
     public function delete(Request $request, $id){
@@ -26,6 +28,8 @@ class MainMenuController extends Controller
         
         $data = MainMenuModel::find($id);
         $data->delete();
+        $error = "This menu has been deleted successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function edit(Request $request, $id){
@@ -33,6 +37,8 @@ class MainMenuController extends Controller
         $data = MainMenuModel::find($id);
         $data->fill($request->all());
         $data->save();
+        $success = "This menu has been updated successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Trash(Request $request, $id){
@@ -47,6 +53,8 @@ class MainMenuController extends Controller
         $Trash->deleteId = $id;
         $Trash->deleteTitle = $data->menu;
         $Trash->save();
+        $error = "This menu has been deleted successfully.";
+        $request->session()->put("error",$error);
         return back();
     }
     public function TrashRestore(Request $request, $id){
@@ -55,6 +63,8 @@ class MainMenuController extends Controller
         $data->save();
         $Trash = TrashModel::where('deleteId',$id)->where('category',"Navbar Menus")->first();
         $Trash->delete();
+        $success = "This menu has been restore successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     

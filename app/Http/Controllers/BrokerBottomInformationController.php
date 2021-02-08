@@ -31,6 +31,8 @@ class BrokerBottomInformationController extends Controller
             $notification->link = "ustaad/brokersDetail/$title->id";
             $notification->save();
         }
+        $success = "This broker information has been added successfully.";
+        $request->session()->put("success",$success);
         return redirect("ustaad/editBroker/".$id)->with(['activeFormsBottomData'=>$request->activeForm]);
     }
     public function AddFeature(Request $request){
@@ -51,6 +53,8 @@ class BrokerBottomInformationController extends Controller
             $notification->link = "ustaad/brokersDetail/$title->id";
             $notification->save();
         }
+        $success = "This broker information has been added successfully.";
+        $request->session()->put("success",$success);
         return redirect("ustaad/editBroker/".$id)->with(['activeFormsBottomData'=>$request->activeForm]);
     }
     public function AddCustomerServices(Request $request){
@@ -71,6 +75,8 @@ class BrokerBottomInformationController extends Controller
             $notification->link = "ustaad/brokersDetail/$title->id";
             $notification->save();
         }
+        $success = "This broker information has been added successfully.";
+        $request->session()->put("success",$success);
         return redirect("ustaad/editBroker/".$id)->with(['activeFormsBottomData'=>$request->activeForm]);
     }
     public function AddReserchEducation(Request $request){
@@ -91,6 +97,8 @@ class BrokerBottomInformationController extends Controller
             $notification->link = "ustaad/brokersDetail/$title->id";
             $notification->save();
         }
+        $success = "This broker information has been added successfully.";
+        $request->session()->put("success",$success);
         return redirect("ustaad/editBroker/".$id)->with(['activeFormsBottomData'=>$request->activeForm]);
     }
     public function AddPromotion(Request $request){
@@ -111,6 +119,8 @@ class BrokerBottomInformationController extends Controller
             $notification->link = "ustaad/brokersDetail/$title->id";
             $notification->save();
         }
+        $success = "This broker information has been added successfully.";
+        $request->session()->put("success",$success);
         return redirect("ustaad/editBroker/".$id)->with(['activeFormsBottomData'=>$request->activeForm]);
     }
     

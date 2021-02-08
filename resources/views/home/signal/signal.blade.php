@@ -67,6 +67,29 @@
                                           $timeDate1 = strtotime(date("Y-m-d H:i:s"));
                                           $timeDate2 = strtotime($data->created_at->format("Y-m-d H:i:s"));
                                           $minsDate = ($timeDate1 - $timeDate2) / 60;
+                                          $formatEng = "min";
+                                          $finelmin = intval($minsDate);
+                                          if($finelmin > 60){
+                                             $finelmin /= 60;
+                                             $formatEng = "hours";
+                                             if($finelmin > 24){
+                                                $finelmin /= 24;
+                                                $formatEng = "days";
+                                                if($finelmin > 7){
+                                                   $finelmin /= 7;
+                                                   $formatEng = "weeks";
+                                                   if($finelmin > 4){
+                                                      $finelmin /= 4;
+                                                      $formatEng = "moths";
+                                                      if($finelmin > 12){
+                                                         $finelmin /= 12;
+                                                         $formatEng = "years";
+                                                      }
+                                                   }
+                                                }
+                                             }
+                                          }
+                                          $finelmin = intval($finelmin);
 													   $pair = $data->getPair();
                                           $flags = explode("/",$pair->pair);
                                        @endphp
@@ -82,7 +105,7 @@
                                                 <span class="flag-icon flag-icon-us">&nbsp;</span> -->
                                              </p>
                                              <h6 class="m-0 font-weight-bold"><strong>{{$pair->pair}}</strong></h6>
-                                             <h6 class="m-0 text-danger">{{intval($minsDate)}} min ago</h6>
+                                             <h6 class="m-0 text-danger">{{$finelmin}} {{$formatEng}} ago</h6>
                                           </td>
                                           <td>
                                              <button class="btn btn-success btn-sm buttonBlinking">Active</button>
@@ -95,22 +118,13 @@
                                           <td colspan="2" class="pl-0">
                                              @if($go == 0)
                                                 @if($data->selectUser == "Register User" && !Session::has('client'))
-                                                   <a href="#!" data-toggle="collapse" data-target="#demo{{$data->id}}">View Signal</a>
-                                                      <div id="demo{{$data->id}}" class="collapse">
-                                                         <p>Please! <br> Login First</p>
-                                                      </div>
+                                                   <a href="#!" onclick="snackbar()">View Signal</a>
                                                 @elseif($data->selectUser == "Premium User")
                                                    @if(!Session::has('client'))
-                                                      <a href="#!" data-toggle="collapse" data-target="#demo{{$data->id}}">View Signal</a>
-                                                      <div id="demo{{$data->id}}" class="collapse">
-                                                         <p>Please! <br> Login First</p>
-                                                      </div>
+                                                      <a href="#!" onclick="snackbar()">View Signal</a>
                                                    @elseif(isset($loginClientData->memberType))
                                                       @if($loginClientData->memberType == 1)
-                                                         <a href="#!" data-toggle="collapse" data-target="#demo{{$data->id}}">View Signal</a>
-                                                         <div id="demo{{$data->id}}" class="collapse">
-                                                            <p>Get <br> Premium First</p>
-                                                         </div>
+                                                         <a href="#!" onclick="snackbar1()">View Signal</a>
                                                       @else
                                                          <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
                                                       @endif

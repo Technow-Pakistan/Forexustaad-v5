@@ -7,7 +7,7 @@
                     </div>
                 </div>
                 
-              <!--   <div class="col-sm-12">
+             <div class="col-sm-12">
                     <div class="service_us">
                         <div class="content_area_heading large-heading ">
                             
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div> 
                 
             </div>
         </div>

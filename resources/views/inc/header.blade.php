@@ -24,9 +24,6 @@
     <link href="{{URL::to('/public/assets/assets/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{URL::to('/public/assets/assets/css/bootstrap-toggle.min.css')}}" rel="stylesheet">
 
-
-
-
 <!-- news Slider -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/css/swiper.min.css">
 
@@ -101,7 +98,6 @@
                                             <a class="nav-link btn btn-outline-primary LoginButton" href="#" data-toggle="modal" data-target="#requestQuoteModal" href="javascript_void(0)">Login</a>
                                             &nbsp;|&nbsp;
                                             <a class="nav-link btn btn-outline-primary RegistrationButton" href="#" data-toggle="modal" data-target="#requestQuoteModal" href="javascript_void(0)">Register</a>
-
                                         </div>
                                     @endif
 
@@ -362,7 +358,6 @@
         <header>
             <div class="container">
                 <nav class="navbar navbar-expand-lg pl-0 pr-0 position-relative sticky-top" style="z-index: 10;">
-
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon cs-menu"></span>
                     </button>
@@ -383,21 +378,27 @@
                                 </a>
                                 <ul class="dropdown-menu fade-up">
                                     <li><a class="dropdown-item" href="{{URL::to('/training/Basic/all')}}">Basic Training</a></li>
-                                    <li><a class="dropdown-item" href="{{URL::to('/training/Advance/all')}}">Advance Training</a></li>
+                                    <li><a class="dropdown-item" href="{{URL::to('/training/Advance/all')}}">Advance Training @if(!Session::has('unRegisterUser')) dsa @endif</a></li>
                                     <li><a class="dropdown-item" href="{{URL::to('/training/Habbit/all')}}">50 Habbit Training</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{URL::to('/construction')}}"><span>Trading Tools </span></a>
+                                <a class="nav-link  dropdown-toggle text-light" href="#" data-toggle="dropdown">
+                                    Trading Tools
+                                </a>
+                                <ul class="dropdown-menu fade-up">
+                                    <li><a class="dropdown-item" href="{{URL::to('/analysis/')}}">Analysis</a></li>
+                                    <li><a class="dropdown-item" href="{{URL::to('/fundamental/')}}">Fundamental History</a></li>
+                                </ul>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{URL::to('/signal')}}"><span>Signals <sup id="blink">new</sup></span></a>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link" href="{{URL::to('blog-post.html')}}"><span>blog</span></a>
-                            </li>
+                            </li> -->
                             <li class="nav-item">
-                                <a class="nav-link" href="{{URL::to('/construction')}}"><span>ABOUT</span></a>
+                                <a class="nav-link" href="{{URL::to('/about-page')}}"><span>ABOUT</span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{URL::to('/construction')}}" data-toggle="modal" data-target=".bd-example-modal-lg"><span>contact us</span></a>
@@ -485,6 +486,9 @@
                         </div>
                         <div class="col-md-4 py-5 bg-darkpurple">
                             <div class="basic-info about-p text-center">
+                                <button type="button" class="close bg-light text-dark" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
                                 <h3 class="fontpop py-3 text-white">Contact Information</h3>
                                 <div class=" p-3">
                                     <div class="row">
