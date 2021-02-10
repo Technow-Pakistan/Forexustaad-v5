@@ -18,11 +18,22 @@ class BrokerBottomInformationController extends Controller
             $error = "Please Enter Broker Company Information First";
             return view('admin.add-broker',compact('error'));
         }
-        $broker = BrokerTradingPlatformModel::where('brokerId',$request->brokerId)->first();
-        $broker->fill($request->all());
-        $broker->save();
-        $id = $broker->brokerId;
+        $data = $request->all();
         $userID = $request->session()->get('admin');
+        $broker = BrokerTradingPlatformModel::where('id',$request->brokerId)->first();
+        if ($userID['memberId'] == 6 && $broker->editId == null) {
+            $editData = new BrokerTradingPlatformModel;
+            $data['editId'] = $broker->id;
+            $data['pending'] = 1;
+            $data['brokerId'] = $broker->brokerId;
+            $editData->fill($data);
+            $editData->save();
+        }else{
+            $data['brokerId'] = $broker->brokerId;
+            $broker->fill($data);
+            $broker->save();
+        }
+        $id = $broker->brokerId;
         if ($userID['memberId'] == 6 ) {
             $title = BrokerCompanyInformationModel::find($id);
             $notification = new NotificationModel;
@@ -33,18 +44,29 @@ class BrokerBottomInformationController extends Controller
         }
         $success = "This broker information has been added successfully.";
         $request->session()->put("success",$success);
-        return redirect("ustaad/editBroker/".$id)->with(['activeFormsBottomData'=>$request->activeForm]);
+        return redirect("ustaad/editBroker/".$id)->with(['activeFormsData'=>$request->activeForm]);
     }
     public function AddFeature(Request $request){
         if (!isset($request->brokerId)) {
             $error = "Please Enter Broker Company Information First";
             return view('admin.add-broker',compact('error'));
         }
-        $broker = BrokerTradingFeaturesModel::where('brokerId',$request->brokerId)->first();
-        $broker->fill($request->all());
-        $broker->save();
-        $id = $broker->brokerId;
+        $data = $request->all();
         $userID = $request->session()->get('admin');
+        $broker = BrokerTradingFeaturesModel::where('id',$request->brokerId)->first();
+        if ($userID['memberId'] == 6 && $broker->editId == null) {
+            $editData = new BrokerTradingFeaturesModel;
+            $data['editId'] = $broker->id;
+            $data['pending'] = 1;
+            $data['brokerId'] = $broker->brokerId;
+            $editData->fill($data);
+            $editData->save();
+        }else{
+            $data['brokerId'] = $broker->brokerId;
+            $broker->fill($data);
+            $broker->save();
+        }
+        $id = $broker->brokerId;
         if ($userID['memberId'] == 6 ) {
             $title = BrokerCompanyInformationModel::find($id);
             $notification = new NotificationModel;
@@ -55,16 +77,28 @@ class BrokerBottomInformationController extends Controller
         }
         $success = "This broker information has been added successfully.";
         $request->session()->put("success",$success);
-        return redirect("ustaad/editBroker/".$id)->with(['activeFormsBottomData'=>$request->activeForm]);
+        return redirect("ustaad/editBroker/".$id)->with(['activeFormsData'=>$request->activeForm]);
     }
     public function AddCustomerServices(Request $request){
         if (!isset($request->brokerId)) {
             $error = "Please Enter Broker Company Information First";
             return view('admin.add-broker',compact('error'));
         }
-        $broker = BrokerCustomerServicesModel::where('brokerId',$request->brokerId)->first();
-        $broker->fill($request->all());
-        $broker->save();
+        $data = $request->all();
+        $userID = $request->session()->get('admin');
+        $broker = BrokerCustomerServicesModel::where('id',$request->brokerId)->first();
+        if ($userID['memberId'] == 6 && $broker->editId == null) {
+            $editData = new BrokerCustomerServicesModel;
+            $data['editId'] = $broker->id;
+            $data['pending'] = 1;
+            $data['brokerId'] = $broker->brokerId;
+            $editData->fill($data);
+            $editData->save();
+        }else{
+            $data['brokerId'] = $broker->brokerId;
+            $broker->fill($data);
+            $broker->save();
+        }
         $id = $broker->brokerId;
         $userID = $request->session()->get('admin');
         if ($userID['memberId'] == 6 ) {
@@ -77,18 +111,29 @@ class BrokerBottomInformationController extends Controller
         }
         $success = "This broker information has been added successfully.";
         $request->session()->put("success",$success);
-        return redirect("ustaad/editBroker/".$id)->with(['activeFormsBottomData'=>$request->activeForm]);
+        return redirect("ustaad/editBroker/".$id)->with(['activeFormsData'=>$request->activeForm]);
     }
     public function AddReserchEducation(Request $request){
         if (!isset($request->brokerId)) {
             $error = "Please Enter Broker Company Information First";
             return view('admin.add-broker',compact('error'));
         }
-        $broker = BrokerReserchEducationModel::where('brokerId',$request->brokerId)->first();
-        $broker->fill($request->all());
-        $broker->save();
-        $id = $broker->brokerId;
+        $data = $request->all();
         $userID = $request->session()->get('admin');
+        $broker = BrokerReserchEducationModel::where('id',$request->brokerId)->first();
+        if ($userID['memberId'] == 6 && $broker->editId == null) {
+            $editData = new BrokerReserchEducationModel;
+            $data['editId'] = $broker->id;
+            $data['pending'] = 1;
+            $data['brokerId'] = $broker->brokerId;
+            $editData->fill($data);
+            $editData->save();
+        }else{
+            $data['brokerId'] = $broker->brokerId;
+            $broker->fill($data);
+            $broker->save();
+        }
+        $id = $broker->brokerId;
         if ($userID['memberId'] == 6 ) {
             $title = BrokerCompanyInformationModel::find($id);
             $notification = new NotificationModel;
@@ -99,16 +144,28 @@ class BrokerBottomInformationController extends Controller
         }
         $success = "This broker information has been added successfully.";
         $request->session()->put("success",$success);
-        return redirect("ustaad/editBroker/".$id)->with(['activeFormsBottomData'=>$request->activeForm]);
+        return redirect("ustaad/editBroker/".$id)->with(['activeFormsData'=>$request->activeForm]);
     }
     public function AddPromotion(Request $request){
         if (!isset($request->brokerId)) {
             $error = "Please Enter Broker Company Information First";
             return view('admin.add-broker',compact('error'));
         }
-        $broker = BrokerPromotionModel::where('brokerId',$request->brokerId)->first();
-        $broker->fill($request->all());
-        $broker->save();
+        $data = $request->all();
+        $userID = $request->session()->get('admin');
+        $broker = BrokerPromotionModel::where('id',$request->brokerId)->first();
+        if ($userID['memberId'] == 6 && $broker->editId == null) {
+            $editData = new BrokerPromotionModel;
+            $data['editId'] = $broker->id;
+            $data['pending'] = 1;
+            $data['brokerId'] = $broker->brokerId;
+            $editData->fill($data);
+            $editData->save();
+        }else{
+            $data['brokerId'] = $broker->brokerId;
+            $broker->fill($data);
+            $broker->save();
+        }
         $id = $broker->brokerId;
         $userID = $request->session()->get('admin');
         if ($userID['memberId'] == 6 ) {
@@ -121,7 +178,89 @@ class BrokerBottomInformationController extends Controller
         }
         $success = "This broker information has been added successfully.";
         $request->session()->put("success",$success);
-        return redirect("ustaad/editBroker/".$id)->with(['activeFormsBottomData'=>$request->activeForm]);
+        return redirect("ustaad/editBroker/".$id)->with(['activeFormsData'=>$request->activeForm]);
     }
     
+    
+    // Broker Detail Allow functions
+    public function BrokerPlatformAllow(Request $request, $id){
+        $broker = BrokerTradingPlatformModel::find($id);
+        if ($broker->editId != null) {
+            $data =  BrokerTradingPlatformModel::where('id',$broker->editId)->first();
+            $changeId = $data->id;
+            $data->delete();
+            $broker->pending  = 0;
+            $broker->editId = null;
+            $broker->id = $changeId;
+            $broker->save();
+        }else{
+            $broker->pending = 0;
+            $broker->save();
+        }
+        return back();
+    }
+    public function BrokerFeatureAllow(Request $request, $id){
+        $broker = BrokerTradingFeaturesModel::find($id);
+        if ($broker->editId != null) {
+            $data =  BrokerTradingFeaturesModel::where('id',$broker->editId)->first();
+            $changeId = $data->id;
+            $data->delete();
+            $broker->pending  = 0;
+            $broker->editId = null;
+            $broker->id = $changeId;
+            $broker->save();
+        }else{
+            $broker->pending = 0;
+            $broker->save();
+        }
+        return back();
+    }
+    public function BrokerCustomerServicesAllow(Request $request, $id){
+        $broker = BrokerCustomerServicesModel::find($id);
+        if ($broker->editId != null) {
+            $data =  BrokerCustomerServicesModel::where('id',$broker->editId)->first();
+            $changeId = $data->id;
+            $data->delete();
+            $broker->pending  = 0;
+            $broker->editId = null;
+            $broker->id = $changeId;
+            $broker->save();
+        }else{
+            $broker->pending = 0;
+            $broker->save();
+        }
+        return back();
+    }
+    public function BrokerformPromotionAllow(Request $request, $id){
+        $broker = BrokerPromotionModel::find($id);
+        if ($broker->editId != null) {
+            $data =  BrokerPromotionModel::where('id',$broker->editId)->first();
+            $changeId = $data->id;
+            $data->delete();
+            $broker->pending  = 0;
+            $broker->editId = null;
+            $broker->id = $changeId;
+            $broker->save();
+        }else{
+            $broker->pending = 0;
+            $broker->save();
+        }
+        return back();
+    }
+    public function BrokerReserchEducationAllow(Request $request, $id){
+        $broker = BrokerReserchEducationModel::find($id);
+        if ($broker->editId != null) {
+            $data =  BrokerReserchEducationModel::where('id',$broker->editId)->first();
+            $changeId = $data->id;
+            $data->delete();
+            $broker->pending  = 0;
+            $broker->editId = null;
+            $broker->id = $changeId;
+            $broker->save();
+        }else{
+            $broker->pending = 0;
+            $broker->save();
+        }
+        return back();
+    }
 }

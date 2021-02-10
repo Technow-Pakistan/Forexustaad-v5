@@ -265,15 +265,15 @@ class HomeController extends Controller
         $broker1 = BrokerCompanyInformationModel::where('title',$title)->first();
         if ($broker1) {
             $id = $broker1->id;
-            $broker2 = BrokerDepositModel::where('brokerId',$id)->first();
-            $broker3 = BrokerCommissionsFeesModel::where('brokerId',$id)->first();
-            $broker4 = BrokerAccountInfoModel::where('brokerId',$id)->first();
-            $broker5 = BrokerTradableAssetsModel::where('brokerId',$id)->first();
-            $broker6 = BrokerTradingPlatformModel::where('brokerId',$id)->first();
-            $broker7 = BrokerTradingFeaturesModel::where('brokerId',$id)->first();
-            $broker8 = BrokerCustomerServicesModel::where('brokerId',$id)->first();
-            $broker9 = BrokerReserchEducationModel::where('brokerId',$id)->first();
-            $broker = BrokerPromotionModel::where('brokerId',$id)->first();
+            $broker2 = BrokerDepositModel::where('brokerId',$id)->where('pending',0)->where('editId',null)->first();
+            $broker3 = BrokerCommissionsFeesModel::where('brokerId',$id)->where('pending',0)->where('editId',null)->first();
+            $broker4 = BrokerAccountInfoModel::where('brokerId',$id)->where('pending',0)->where('editId',null)->first();
+            $broker5 = BrokerTradableAssetsModel::where('brokerId',$id)->where('pending',0)->where('editId',null)->first();
+            $broker6 = BrokerTradingPlatformModel::where('brokerId',$id)->where('pending',0)->where('editId',null)->first();
+            $broker7 = BrokerTradingFeaturesModel::where('brokerId',$id)->where('pending',0)->where('editId',null)->first();
+            $broker8 = BrokerCustomerServicesModel::where('brokerId',$id)->where('pending',0)->where('editId',null)->first();
+            $broker9 = BrokerReserchEducationModel::where('brokerId',$id)->where('pending',0)->where('editId',null)->first();
+            $broker = BrokerPromotionModel::where('brokerId',$id)->where('pending',0)->where('editId',null)->first();
             $title = $broker1->title;
             return view('broker/broker-detail',compact('broker1','title','broker2','broker3','broker4','broker5','broker6','broker7','broker8','broker9','broker','id'));
         }else{
@@ -465,6 +465,7 @@ class HomeController extends Controller
             $ClientAccount->accountemail = $request->accountemail[$i];
             $ClientAccount->accountdeposit = $request->accountdeposit[$i];
             $ClientAccount->accountName = $request->accountName[$i];
+            $ClientAccount->verified = $request->verified[$i];
             $ClientAccount->save();
         }
         $userID = $request->session()->get('client');

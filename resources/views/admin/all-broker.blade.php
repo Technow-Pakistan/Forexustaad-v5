@@ -92,16 +92,22 @@
 																	</span>
 																</form>
 															@endif
-															<a href="{{URL::to('ustaad/editBroker')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
+															@if($value['memberId'] == 6)
+																<a href="{{URL::to('ustaad/editBroker')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
+															@endif
 															<a href="{{URL::to('ustaad/broker/trash')}}/{{$data->id}}"  class="addAction" data-toggle="modal" data-target="#myModal"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
 														</div>
 													@elseif($value['memberId'] != 6)
-														<form action="{{URL::to('ustaad/broker/allow')}}/{{$data->id}}" method="post">
-															<span class="badge badge-light-warning">
-																Allow
-																<input type="checkbox" class="AllowBroker" name="pending" id="" value="0">
-															</span>
-														</form>
+														<span class="badge badge-light-warning">Pending</span>
+														<div class="overlay-edit">
+															<form action="{{URL::to('ustaad/broker/allow')}}/{{$data->id}}" method="post">
+																<span class="badge badge-light-warning">
+																	Allow
+																	<input type="checkbox" class="AllowBroker" name="pending" id="" value="0">
+																</span>
+															</form>
+															<a href="{{URL::to('ustaad/broker/trash')}}/{{$data->id}}"  class="addAction" data-toggle="modal" data-target="#myModal"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
+														</div>
 													@elseif($value['memberId'] == 6)
 														<span class="badge badge-light-warning">Pending</span>
 														<div class="overlay-edit">
