@@ -502,6 +502,18 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('edit/{id}',[GalleryController::class,'Edit']);
         Route::post('edit/{id}',[GalleryController::class,'EditProcess']);
     });
+
+    // Broker Detail Allow Routes
+    Route::get("/brokerCompanyInformation/allow/{id}",[BrokerTopInformationController::class,'BrokerCompanyInformationAllow']);
+    Route::get("/brokerDeposit/allow/{id}",[BrokerTopInformationController::class,'BrokerDepositAllow']);
+    Route::get("/brokerCommission/allow/{id}",[BrokerTopInformationController::class,'BrokerCommissionAllow']);
+    Route::get("/brokerAccountInfo/allow/{id}",[BrokerTopInformationController::class,'BrokerAccountInfoAllow']);
+    Route::get("/brokerTradableAssets/allow/{id}",[BrokerTopInformationController::class,'BrokerTradableAssetsAllow']);
+    Route::get("/brokerPlatform/allow/{id}",[BrokerBottomInformationController::class,'BrokerPlatformAllow']);
+    Route::get("/brokerFeature/allow/{id}",[BrokerBottomInformationController::class,'BrokerFeatureAllow']);
+    Route::get("/brokerCustomerServices/allow/{id}",[BrokerBottomInformationController::class,'BrokerCustomerServicesAllow']);
+    Route::get("/brokerReserchEducation/allow/{id}",[BrokerBottomInformationController::class,'BrokerReserchEducationAllow']);
+    Route::get("/brokerformPromotion/allow/{id}",[BrokerBottomInformationController::class,'BrokerformPromotionAllow']);
 });
 
 // Users Panel Views

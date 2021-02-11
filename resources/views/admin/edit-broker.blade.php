@@ -97,28 +97,28 @@
 												<div class="slide bg-c-yellow"></div>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link @if(Session::has('activeFormsBottomData')){{Session::get('activeFormsBottomData') == 'TRADING PLATFORMS' ? 'active' : ''}}@endif" data-toggle="tab" href="#TRADINGPLATFORMS" role="tab">TRADING PLATFORMS
+												<a class="nav-link @if(Session::has('activeFormsData')){{Session::get('activeFormsData') == 'TRADING PLATFORMS' ? 'active' : ''}}@endif" data-toggle="tab" href="#TRADINGPLATFORMS" role="tab">TRADING PLATFORMS
 												</a>
 												<div class="slide bg-c-blue"></div>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link @if(Session::has('activeFormsBottomData')){{Session::get('activeFormsBottomData') == 'TRADING FEATURES' ? 'active' : ''}}@endif" data-toggle="tab" href="#TRADINGFEATURES
+												<a class="nav-link @if(Session::has('activeFormsData')){{Session::get('activeFormsData') == 'TRADING FEATURES' ? 'active' : ''}}@endif" data-toggle="tab" href="#TRADINGFEATURES
 												" role="tab">TRADING FEATURES
 												</a>
 												<div class="slide bg-c-green"></div>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link @if(Session::has('activeFormsBottomData')){{Session::get('activeFormsBottomData') == 'CUSTOMER SERVICE' ? 'active' : ''}}@endif" data-toggle="tab" href="#CUSTOMER" role="tab">CUSTOMER SERVICE
+												<a class="nav-link @if(Session::has('activeFormsData')){{Session::get('activeFormsData') == 'CUSTOMER SERVICE' ? 'active' : ''}}@endif" data-toggle="tab" href="#CUSTOMER" role="tab">CUSTOMER SERVICE
 												</a>
 												<div class="slide bg-c-red"></div>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link @if(Session::has('activeFormsBottomData')){{Session::get('activeFormsBottomData') == 'RESEARCH & EDUCATION' ? 'active' : ''}}@endif" data-toggle="tab" href="#RESEARCH" role="tab">RESEARCH & EDUCATION
+												<a class="nav-link @if(Session::has('activeFormsData')){{Session::get('activeFormsData') == 'RESEARCH & EDUCATION' ? 'active' : ''}}@endif" data-toggle="tab" href="#RESEARCH" role="tab">RESEARCH & EDUCATION
 												</a>
 												<div class="slide bg-c-yellow"></div>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link @if(Session::has('activeFormsBottomData')){{Session::get('activeFormsBottomData') == 'PROMOTIONS' ? 'active' : ''}}@endif" data-toggle="tab" href="#PROMOTIONS" role="tab">PROMOTIONS</a>
+												<a class="nav-link @if(Session::has('activeFormsData')){{Session::get('activeFormsData') == 'PROMOTIONS' ? 'active' : ''}}@endif" data-toggle="tab" href="#PROMOTIONS" role="tab">PROMOTIONS</a>
 												<div class="slide bg-c-yellow"></div>
 											</li>
 											
@@ -222,7 +222,7 @@
 																<input type="text" name="withdrawal" value="{{$broker2->withdrawal}}" class="form-control">
 															</div>
 															@isset($id)
-																<input type="hidden" name="brokerId" value="{{$id}}">
+																<input type="hidden" name="brokerId" value="{{$broker2->id}}">
 															@endisset
 															<div>
 																<input type="hidden" name="activeForm" class="form-control" value="DEPOSIT & WITHDRAWAL">
@@ -251,7 +251,7 @@
 																</div>
 															</div>
 															@isset($id)
-																<input type="hidden" name="brokerId" value="{{$id}}">
+																<input type="hidden" name="brokerId" value="{{$broker3->id}}">
 															@endisset
 
 															<div>
@@ -405,7 +405,7 @@
 																</div>
 															</div>
 															@isset($id)
-																<input type="hidden" name="brokerId" value="{{$id}}">
+																<input type="hidden" name="brokerId" value="{{$broker4->id}}">
 															@endisset
 															<div>
 																<input type="hidden" name="activeForm" class="form-control" value="ACCOUNT INFORMATION">
@@ -594,7 +594,7 @@
 																</div>
 															</div>
 															@isset($id)
-																<input type="hidden" name="brokerId" value="{{$id}}">
+																<input type="hidden" name="brokerId" value="{{$broker5->id}}">
 															@endisset
 															<div>
 																<input type="hidden" name="activeForm" class="form-control" value="TRADABLE ASSETS">
@@ -604,7 +604,7 @@
 													</div>
 												</div>
 											</div>
-											<div class="tab-pane @if(Session::has('activeFormsBottomData')){{Session::get('activeFormsBottomData') == 'TRADING PLATFORMS' ? 'active' : ''}}@endif" id="TRADINGPLATFORMS" role="tabpanel">
+											<div class="tab-pane @if(Session::has('activeFormsData')){{Session::get('activeFormsData') == 'TRADING PLATFORMS' ? 'active' : ''}}@endif" id="TRADINGPLATFORMS" role="tabpanel">
 												<div class="">
 													<div class="card-header text-danger f-26">
 													TRADING PLATFORMS
@@ -628,7 +628,7 @@
 															<textarea name="language" id="language" class="form-control" cols="30" rows="10" required>{{$broker6->language}}</textarea>
 														</div>
 														@isset($id)
-															<input type="hidden" name="brokerId" value="{{$id}}">
+															<input type="hidden" name="brokerId" value="{{$broker6->id}}">
 														@endisset
 														<div>
 															<input type="hidden" name="activeForm" class="form-control" value="TRADING PLATFORMS">
@@ -638,7 +638,7 @@
 												</div>
 												</div>
 											</div>
-											<div class="tab-pane @if(Session::has('activeFormsBottomData')){{Session::get('activeFormsBottomData') == 'TRADING FEATURES' ? 'active' : ''}}@endif" id="TRADINGFEATURES" role="tabpanel">
+											<div class="tab-pane @if(Session::has('activeFormsData')){{Session::get('activeFormsData') == 'TRADING FEATURES' ? 'active' : ''}}@endif" id="TRADINGFEATURES" role="tabpanel">
 												<div class="">
 													<div class="card-header text-danger f-26">
 														TRADING FEATURES
@@ -813,7 +813,7 @@
 																</div>
 															</div>
 															@isset($id)
-																<input type="hidden" name="brokerId" value="{{$id}}">
+																<input type="hidden" name="brokerId" value="{{$broker7->id}}">
 															@endisset
 															<div>
 																<input type="hidden" name="activeForm" class="form-control" value="TRADING FEATURES">
@@ -823,7 +823,7 @@
 													</div>
 												</div>
 											</div>
-											<div class="tab-pane @if(Session::has('activeFormsBottomData')){{Session::get('activeFormsBottomData') == 'CUSTOMER SERVICE' ? 'active' : ''}}@endif" id="CUSTOMER" role="tabpanel">
+											<div class="tab-pane @if(Session::has('activeFormsData')){{Session::get('activeFormsData') == 'CUSTOMER SERVICE' ? 'active' : ''}}@endif" id="CUSTOMER" role="tabpanel">
 												<div class="">
 													<div class="card-header text-danger f-26">
 														CUSTOMER SERVICE
@@ -847,7 +847,7 @@
 																<input type="text" name="chat" value="{{$broker8->chat}}" class="form-control" id="" required>
 															</div>
 															@isset($id)
-																<input type="hidden" name="brokerId" value="{{$id}}">
+																<input type="hidden" name="brokerId" value="{{$broker8->id}}">
 															@endisset
 															<div>
 																<input type="hidden" name="activeForm" class="form-control" value="CUSTOMER SERVICE">
@@ -857,7 +857,7 @@
 													</div>
 												</div>
 											</div>
-											<div class="tab-pane @if(Session::has('activeFormsBottomData')){{Session::get('activeFormsBottomData') == 'RESEARCH & EDUCATION' ? 'active' : ''}}@endif" id="RESEARCH" role="tabpanel">
+											<div class="tab-pane @if(Session::has('activeFormsData')){{Session::get('activeFormsData') == 'RESEARCH & EDUCATION' ? 'active' : ''}}@endif" id="RESEARCH" role="tabpanel">
 												<div class="">
 													<div class="card-header text-danger f-26">
 														RESEARCH & EDUCATION
@@ -921,7 +921,7 @@
 																</div>
 															</div>
 															@isset($id)
-																<input type="hidden" name="brokerId" value="{{$id}}">
+																<input type="hidden" name="brokerId" value="{{$broker9->id}}">
 															@endisset
 															<div>
 																<input type="hidden" name="activeForm" class="form-control" value="RESEARCH & EDUCATION">
@@ -931,7 +931,7 @@
 													</div>
 												</div>
 											</div>
-											<div class="tab-pane @if(Session::has('activeFormsBottomData')){{Session::get('activeFormsBottomData') == 'PROMOTIONS' ? 'active' : ''}}@endif" id="PROMOTIONS" role="tabpanel">
+											<div class="tab-pane @if(Session::has('activeFormsData')){{Session::get('activeFormsData') == 'PROMOTIONS' ? 'active' : ''}}@endif" id="PROMOTIONS" role="tabpanel">
 												<div class="">
 													<div class="card-header text-danger f-26">
 														PROMOTIONS
@@ -952,7 +952,7 @@
 															</div>
 															
 															@isset($id)
-																<input type="hidden" name="brokerId" value="{{$id}}">
+																<input type="hidden" name="brokerId" value="{{$broker->id}}">
 															@endisset
 															<div>
 																<input type="hidden" name="activeForm" class="form-control" value="PROMOTIONS">
@@ -1040,7 +1040,7 @@
 				$(".progress3").attr("value",100);
 				$(".progress4").attr("value",100);
 				let r = i - 400;
-				$(".progress5").attr("vlaue",r);
+				$(".progress5").attr("value",r);
 			}
 		</script>
 	<script>
