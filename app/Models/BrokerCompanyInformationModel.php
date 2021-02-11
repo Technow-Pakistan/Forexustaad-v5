@@ -14,8 +14,16 @@ use App\Models\BrokerTraningModel;
 class BrokerCompanyInformationModel extends Model
 {
     protected $table="broker_company_information";
-    protected $fillable = ["image","title","regulations","headquaters","foundation","traded","employees","start","end","neverEnd","trash","categoryId","userId","pending","star"];
+    protected $fillable = ["image","title","regulations","headquaters","foundation","traded","employees","start","end","neverEnd","trash","categoryId","userId","pending","star","editId"];
 
+    public function GetPendingCompanyInformation(){
+        $data = BrokerCompanyInformationModel::where('id',$this->editId)->first();
+        return $data;
+    }
+    public function GetAllowCompanyInformation(){
+        $data = BrokerCompanyInformationModel::where('editId',$this->id)->first();
+        return $data;
+    }
     public function GetAccountInfo(){
         $get = BrokerAccountInfoModel::where('brokerId',$this->id)->first();
         return $get;

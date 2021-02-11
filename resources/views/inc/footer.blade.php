@@ -408,12 +408,15 @@
 
 
 <script>
-  $(document).ready(function(){
-    $("#open_popup").click(function(){
-      $("#open_popup").hide();
-      $("#search_top_bar").show();
-      $("#close_popup").show();
-  });
+    $(document).ready(function(){
+      setTimeout(function () {
+              window.scrollTo(0, 0);
+          }, 300);
+      $("#open_popup").click(function(){
+        $("#open_popup").hide();
+        $("#search_top_bar").show();
+        $("#close_popup").show();
+    });
     $("#close_popup").click(function(){
       $("#open_popup").show();
         $("#search_top_bar").hide();

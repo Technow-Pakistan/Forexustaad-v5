@@ -84,11 +84,22 @@ class BrokerTopInformationController extends Controller
             $error = "Please Enter Broker Company Information First";
             return view('admin.add-broker',compact('error'));
         }
-        $broker = BrokerDepositModel::where('brokerId',$request->brokerId)->first();
-        $broker->fill($request->all());
-        $broker->save();
-        $id = $broker->brokerId;
+        $data = $request->all();
         $userID = $request->session()->get('admin');
+        $broker = BrokerDepositModel::where('id',$request->brokerId)->first();
+        if ($userID['memberId'] == 6 && $broker->editId == null) {
+            $editData = new BrokerDepositModel;
+            $data['editId'] = $broker->id;
+            $data['pending'] = 1;
+            $data['brokerId'] = $broker->brokerId;
+            $editData->fill($data);
+            $editData->save();
+        }else{
+            $data['brokerId'] = $broker->brokerId;
+            $broker->fill($data);
+            $broker->save();
+        }
+        $id = $broker->brokerId;
         if ($userID['memberId'] == 6 ) {
             $title = BrokerCompanyInformationModel::find($id);
             $notification = new NotificationModel;
@@ -106,11 +117,22 @@ class BrokerTopInformationController extends Controller
             $error = "Please Enter Broker Company Information First";
             return view('admin.add-broker',compact('error'));
         }
-        $broker = BrokerCommissionsFeesModel::where('brokerId',$request->brokerId)->first();
-        $broker->fill($request->all());
-        $broker->save();
-        $id = $broker->brokerId;
+        $data = $request->all();
         $userID = $request->session()->get('admin');
+        $broker = BrokerCommissionsFeesModel::where('id',$request->brokerId)->first();
+        if ($userID['memberId'] == 6 && $broker->editId == null) {
+            $editData = new BrokerCommissionsFeesModel;
+            $data['editId'] = $broker->id;
+            $data['pending'] = 1;
+            $data['brokerId'] = $broker->brokerId;
+            $editData->fill($data);
+            $editData->save();
+        }else{
+            $data['brokerId'] = $broker->brokerId;
+            $broker->fill($data);
+            $broker->save();
+        }
+        $id = $broker->brokerId;
         if ($userID['memberId'] == 6 ) {
             $title = BrokerCompanyInformationModel::find($id);
             $notification = new NotificationModel;
@@ -128,11 +150,22 @@ class BrokerTopInformationController extends Controller
             $error = "Please Enter Broker Company Information First";
             return view('admin.add-broker',compact('error'));
         }
-        $broker = BrokerAccountInfoModel::where('brokerId',$request->brokerId)->first();
-        $broker->fill($request->all());
-        $broker->save();
-        $id = $broker->brokerId;
+        $data = $request->all();
         $userID = $request->session()->get('admin');
+        $broker = BrokerAccountInfoModel::where('id',$request->brokerId)->first();
+        if ($userID['memberId'] == 6 && $broker->editId == null) {
+            $editData = new BrokerAccountInfoModel;
+            $data['editId'] = $broker->id;
+            $data['pending'] = 1;
+            $data['brokerId'] = $broker->brokerId;
+            $editData->fill($data);
+            $editData->save();
+        }else{
+            $data['brokerId'] = $broker->brokerId;
+            $broker->fill($data);
+            $broker->save();
+        }
+        $id = $broker->brokerId;
         if ($userID['memberId'] == 6 ) {
             $title = BrokerCompanyInformationModel::find($id);
             $notification = new NotificationModel;
@@ -150,11 +183,22 @@ class BrokerTopInformationController extends Controller
             $error = "Please Enter Broker Company Information First";
             return view('admin.add-broker',compact('error'));
         }
-        $broker = BrokerTradableAssetsModel::where('brokerId',$request->brokerId)->first();
-        $broker->fill($request->all());
-        $broker->save();
-        $id = $broker->brokerId;
+        $data = $request->all();
         $userID = $request->session()->get('admin');
+        $broker = BrokerTradableAssetsModel::where('id',$request->brokerId)->first();
+        if ($userID['memberId'] == 6 && $broker->editId == null) {
+            $editData = new BrokerTradableAssetsModel;
+            $data['editId'] = $broker->id;
+            $data['pending'] = 1;
+            $data['brokerId'] = $broker->brokerId;
+            $editData->fill($data);
+            $editData->save();
+        }else{
+            $data['brokerId'] = $broker->brokerId;
+            $broker->fill($data);
+            $broker->save();
+        }
+        $id = $broker->brokerId;
         if ($userID['memberId'] == 6 ) {
             $title = BrokerCompanyInformationModel::find($id);
             $notification = new NotificationModel;
@@ -192,4 +236,87 @@ class BrokerTopInformationController extends Controller
         return back();
     }
     
+
+    
+    // Broker Detail Allow functions
+    public function BrokerCompanyInformationAllow(Request $request, $id){
+        $broker = BrokerCompanyInformationModel::find($id);
+        if ($broker->editId == null) {
+            $data =  BrokerCompanyInformationModel::where('editId',$broker->id)->first();
+            $changeId = $data->id;
+            $data->delete();
+            $broker->pending  = 0;
+            $broker->editId = null;
+            $broker->id = $changeId;
+            $broker->save();
+        }else{
+            $broker->pending = 0;
+            $broker->save();
+        }
+        return back();
+    }
+    public function BrokerDepositAllow(Request $request, $id){
+        $broker = BrokerDepositModel::find($id);
+        if ($broker->editId != null) {
+            $data =  BrokerDepositModel::where('id',$broker->editId)->first();
+            $changeId = $data->id;
+            $data->delete();
+            $broker->pending  = 0;
+            $broker->editId = null;
+            $broker->id = $changeId;
+            $broker->save();
+        }else{
+            $broker->pending = 0;
+            $broker->save();
+        }
+        return back();
+    }
+    public function BrokerCommissionAllow(Request $request, $id){
+        $broker = BrokerCommissionsFeesModel::find($id);
+        if ($broker->editId != null) {
+            $data =  BrokerCommissionsFeesModel::where('id',$broker->editId)->first();
+            $changeId = $data->id;
+            $data->delete();
+            $broker->pending  = 0;
+            $broker->editId = null;
+            $broker->id = $changeId;
+            $broker->save();
+        }else{
+            $broker->pending = 0;
+            $broker->save();
+        }
+        return back();
+    }
+    public function BrokerAccountInfoAllow(Request $request, $id){
+        $broker = BrokerAccountInfoModel::find($id);
+        if ($broker->editId != null) {
+            $data =  BrokerAccountInfoModel::where('id',$broker->editId)->first();
+            $changeId = $data->id;
+            $data->delete();
+            $broker->pending  = 0;
+            $broker->editId = null;
+            $broker->id = $changeId;
+            $broker->save();
+        }else{
+            $broker->pending = 0;
+            $broker->save();
+        }
+        return back();
+    }
+    public function BrokerTradableAssetsAllow(Request $request, $id){
+        $broker = BrokerTradableAssetsModel::find($id);
+        if ($broker->editId != null) {
+            $data =  BrokerTradableAssetsModel::where('id',$broker->editId)->first();
+            $changeId = $data->id;
+            $data->delete();
+            $broker->pending  = 0;
+            $broker->editId = null;
+            $broker->id = $changeId;
+            $broker->save();
+        }else{
+            $broker->pending = 0;
+            $broker->save();
+        }
+        return back();
+    }
 }

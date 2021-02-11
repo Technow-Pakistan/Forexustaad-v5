@@ -258,44 +258,68 @@
                                                 <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                                     <h3  class="register-heading">Account Details</h3>
                                                     <div class="m-125">
-                                                        <form action="{{URL::to('/user-registration/Account')}}" method="post">
+                                                        <form action="{{URL::to('/user-registration/Account')}}" class="AddDepositFullForm" method="post">
                                                             <div class="col-md-12 ">
                                                                 <div class="">
                                                                     <div2 class="form-group">
 
                                                                         <!-- Enter the estimate profit -->
+                                                                            @php $addAccount = 0 @endphp
                                                                         @if($clientAccount1 != null)
                                                                             @foreach($clientAccount as $accountInfo)
                                                                                 <div class="dynamic-field3" id="dynamic-field-4">
                                                                                     <label class="d-none"></label>
                                                                                     <div class="row">
                                                                                         <div class="col-sm-12 pb-3">
-                                                                                            <select class="custom-select" name="brokerId[]">
+                                                                                            <input type="hidden" class="form-control" name="verified[]" value="{{$accountInfo->verified}}"/> 
+                                                                                            <select class="custom-select" name="brokerId[]"{{$accountInfo->verified == 1 ? 'disabled' : ''}}>
                                                                                                 @foreach($allBroker as $broker)
                                                                                                     <option value="{{$broker->id}}" {{$broker->id == $accountInfo->brokerId ? 'selected' : ''}}>{{$broker->title}}</option>
                                                                                                 @endforeach
                                                                                             </select>
+                                                                                            @if($accountInfo->verified == 1)
+                                                                                                <input type="hidden" class="form-control" name="brokerId[]" value="{{$accountInfo->brokerId}}"/>
+                                                                                            @endif
                                                                                         </div>
                                                                                         <div class="col-md-6">
                                                                                             <div class="form-group">
-                                                                                                <input type="text" class="form-control" name="accountNumber[]" value="{{$accountInfo->accountNumber}}" placeholder="Account Number *" required/>
+                                                                                                <input type="text" class="form-control" name="accountNumber[]" value="{{$accountInfo->accountNumber}}" placeholder="Account Number *" required {{$accountInfo->verified == 1 ? 'disabled' : ''}}/>
+                                                                                                @if($accountInfo->verified == 1)
+                                                                                                    <input type="hidden" class="form-control" name="accountNumber[]" value="{{$accountInfo->accountNumber}}" placeholder="Account Number *"/>
+                                                                                                @endif
                                                                                             </div>
                                                                                             <div class="form-group">
-                                                                                                <input type="text" class="form-control" name="accountName[]" value="{{$accountInfo->accountName}}" placeholder="Account Name *" required/>
+                                                                                                <input type="text" class="form-control" name="accountName[]" value="{{$accountInfo->accountName}}" placeholder="Account Name *" required {{$accountInfo->verified == 1 ? 'disabled' : ''}}/>
+                                                                                                @if($accountInfo->verified == 1)
+                                                                                                    <input type="hidden" class="form-control" name="accountName[]" value="{{$accountInfo->accountName}}" placeholder="Account Name *"}/>
+                                                                                                @endif
                                                                                             </div>
 
                                                                                         </div>
                                                                                         <div class="col-md-6">
                                                                                             <div class="form-group">
-                                                                                                <input type="mail" class="form-control" name="accountemail[]" value="{{$accountInfo->accountemail}}" placeholder="Account Email *" required/>
+                                                                                                <input type="mail" class="form-control" name="accountemail[]" value="{{$accountInfo->accountemail}}" placeholder="Account Email *" required {{$accountInfo->verified == 1 ? 'disabled' : ''}}/>
+                                                                                                @if($accountInfo->verified == 1)
+                                                                                                    <input type="hidden" class="form-control" name="accountemail[]" value="{{$accountInfo->accountemail}}" placeholder="Account Email *"/>
+                                                                                                @endif
                                                                                             </div>
                                                                                             <div class="form-group">
-                                                                                                <input type="number" class="form-control" name="accountdeposit[]" value="{{$accountInfo->accountdeposit}}" placeholder="Deposit" required/>
+                                                                                                @if($accountInfo->verified == 0)
+                                                                                                    <input type="number" class="form-control" name="accountdeposit[]" value="{{$accountInfo->accountdeposit}}" placeholder="Deposit" required/>
+                                                                                                @else
+                                                                                                    <div class="d-flex justifly-content-end">
+                                                                                                        <input type="hidden" class="form-control alreadyDeposit{{$addAccount}}" name="accountdeposit[]" value="{{$accountInfo->accountdeposit}}" placeholder="Deposit"/> 
+                                                                                                        <input type="number" class="form-control" name="" value="{{$accountInfo->accountdeposit}}" placeholder="Deposit" disabled/> 
+                                                                                                        <span class="m-2">+</span>
+                                                                                                        <input type="number" class="form-control newDeposit{{$addAccount}}">
+                                                                                                    </div>
+                                                                                                @endif
                                                                                             </div>
                                                                                         </div>
 
                                                                                     </div>
                                                                                 </div>
+                                                                                @php $addAccount++ @endphp
                                                                             @endforeach
                                                                         @else
                                                                             <div class="dynamic-field3" id="dynamic-field-4">
@@ -378,6 +402,19 @@
 @include('inc.footer')
 
 <script>
+    $(".AddDepositFullForm").on("submit",function(e) {
+           console.log("asd");
+        for (let i = 0; i < {{$addAccount}}; i++) {
+           let newDeposit = ".newDeposit" + i;
+           let data = $(newDeposit).val();
+           if(data != "" && data != null){
+               let alreadyDeposit = ".alreadyDeposit" + i;
+               let addData = $(alreadyDeposit).val();
+               let finelData = parseInt(data) + parseInt(addData);
+               $(alreadyDeposit).val(finelData);
+           }
+        }
+    });
     $("#sel1").on("change",function(){
         var myusername = $("#sel1").val();
         var url = "{{URL::to('user-registration/stateData')}}" + "/" + myusername;

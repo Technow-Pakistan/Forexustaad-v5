@@ -72,10 +72,22 @@ class BorkerNewsController extends Controller
         }
         $description = htmlentities($request->editor1);
         $data['description'] = $description;
-        $news = BrokerNewsModel::find($id);
-        $news->fill($data);
-        $news->save();
         $userID = $request->session()->get('admin');
+        $news = BrokerNewsModel::find($id);
+        if ($userID['memberId'] == 6 && $news->editId == null) {
+            if(!isset($data['image'])){
+                $data['image'] = $news->image; 
+            }
+            $editData = new BrokerNewsModel;
+            $data['editId'] = $news->id;
+            $data['pending'] = 1;
+            $data['userId'] = $news->userId;
+            $editData->fill($data);
+            $editData->save();
+        }else{
+            $news->fill($data);
+            $news->save();
+        }
         $broker1 = BrokerCompanyInformationModel::find($news->brokerId);
         if ($userID['memberId'] == 6 ) {
             $notification = new NotificationModel;
@@ -86,7 +98,12 @@ class BorkerNewsController extends Controller
         }
         $success = "This broker news has been updated successfully.";
         $request->session()->put("success",$success);
-        return back();
+        if ($userID['memberId'] == 6 && $news->editId == null) {
+            $url = '/ustaad/brokersNews/edit' . '/' . $editData->id;
+            return redirect($url);
+        }else {
+            return back();
+        }
     }
     public function Delete(Request $request, $id){
         $brokerNews = BrokerNewsModel::find($id);
@@ -99,8 +116,18 @@ class BorkerNewsController extends Controller
     }
     public function AllowBrokerNewsProcess(Request $request, $id){
         $broker = BrokerNewsModel::find($id);
-        $broker->pending = 0;
-        $broker->save();
+        if ($broker->editId != null) {
+            $data =  BrokerNewsModel::where('id',$broker->editId)->first();
+            $changeId = $data->id;
+            $data->delete();
+            $broker->pending  = 0;
+            $broker->editId = null;
+            $broker->id = $changeId;
+            $broker->save();
+        }else{
+            $broker->pending = 0;
+            $broker->save();
+        }
         return back();
     }
     public function Trash(Request $request, $id){
