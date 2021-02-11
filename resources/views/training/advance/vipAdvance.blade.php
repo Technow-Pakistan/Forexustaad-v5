@@ -190,6 +190,30 @@
 				</div>
                 <div class="row mt-5">
                     <div class="col-md-8">
+                        @if(count($SponoserAddActive) > 0)
+                          <section class="features">
+                            <div class="container">
+                              <div class="content_area_heading large-heading text-center">
+
+                                <h1 class="heading_title wow animated fadeInUp">
+                                  Sponsers Adds
+                                </h1>
+                                <div class="heading_border wow animated fadeInUp">
+                                  <span class="one"></span><span class="two"></span><span class="three"></span>
+                                </div>
+                              </div>
+                              <div class="row justify-content-center">
+                                  @foreach($SponoserAddActive as $sponoserAdd)
+                                    <div class="col-xl-4 col-lg-6 col-md-7 col-sm-8 col-12 h-100 mb-3">
+                                      <a href="{{$sponoserAdd->link}}" target="_blank">
+                                        <img src="{{URL::to('storage/app')}}/{{$sponoserAdd->image}}" width="300" height="100">
+                                      </a>
+                                    </div>
+                                  @endforeach
+                              </div>
+                            </div>
+                          </section>
+                        @endif
                         @if($commentAllow != null)
 							@php
                                 $go23 = 1;
@@ -222,7 +246,7 @@
 												</div>
 												<div class="box_comment col-md-10">
 													<form action="{{URL::to('/advance/comment/add')}}" method="post">
-														<textarea class="commentar" name="comment" placeholder="Add a comment..."></textarea>
+														<textarea class="commentar" name="comment" placeholder="Add a comment..." required></textarea>
 														<div class="box_post">
 															<div class="pull-right">
 															<span>
@@ -272,19 +296,13 @@
 																	<h4>{{ $comment->userType == "client" ? $client->name : $adminInfo->username}}</h4>
 																	<p>{{$comment->comment}}</p>
 																	<div class="tools_comment">
-																		<!-- <a class="like" href="#">Like</a>
-																		<span aria-hidden="true"> · </span> -->
-																		<a class="replay" commentId="{{$comment->id}}" replyId="{{$comment->reply}}">Reply</a>
-                                                						<a class="ml-3" data-toggle="collapse" data-target="#demo{{$comment->id}}">View Replies</a>
-																		<!-- <span aria-hidden="true"> · </span>
-																		<i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
-																		<span aria-hidden="true"> · </span>
-																		<span>26m</span> -->
-																	</div>
-                                              						<div id="demo{{$comment->id}}" class="collapse">
 																		@php
 																			$replys = $comment->getReply();
 																		@endphp
+																		<a class="replay" commentId="{{$comment->id}}" replyId="{{$comment->reply}}">Reply</a>
+                                                						<a class="ml-3" data-toggle="collapse" data-target="#demo{{$comment->id}}">View Replies <span class="text-dark">({{count($replys)}})</span></a>
+																	</div>
+                                              						<div id="demo{{$comment->id}}" class="collapse">
 																		@foreach($replys as $reply)
 																				@php
 																					if($reply->userType == "client"){
@@ -298,9 +316,9 @@
 																						$adminInfo1 = $reply->getAdminInformation();
 																						$adminDetailInfo1 = $reply->getAdminDetailInformation();
 																						if($adminDetailInfo1->userImage == null){
-																							$urlImageSrc = URL::to('/storage/app/WebImages/avatar-5.jpg');
+																							$urlImageSrc1 = URL::to('/storage/app/WebImages/avatar-5.jpg');
 																						}else{
-																							$urlImageSrc = URL::to('/storage/app') . '/' . $adminDetailInfo1->userImage;
+																							$urlImageSrc1 = URL::to('/storage/app') . '/' . $adminDetailInfo1->userImage;
 																						}
 																					}
 																				@endphp

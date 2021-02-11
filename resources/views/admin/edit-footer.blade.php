@@ -214,4 +214,9 @@
 		<!-- [ Main Content ] end -->
 @include('admin.include.footer')
 
+<script>
+    CKEDITOR.replace('editor2');
+    CKEDITOR.replace('editor3');
+</script>
+
 

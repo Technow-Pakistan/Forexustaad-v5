@@ -43,6 +43,8 @@ use App\Http\Controllers\BrokerCategoryController;
 use App\Http\Controllers\BrokerTrainingController;
 use App\Http\Controllers\OtherPagesContentController;
 use App\Http\Controllers\FundamentalController;
+use App\Http\Controllers\SponoserAddController;
+use App\Http\Controllers\MidBannerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -149,6 +151,7 @@ Route::get('/ustaad',[AdminController::class,'Login']);
 Route::post('/ustaad',[AdminController::class,'Index']);
 
 Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
+
     Route::get('/DeleteClientAccount/{id}',[AdminController::class,'DeleteClientAccount']);
     Route::post('/apileftorder',[ApiLeftController::class,'Order']);
     Route::get('/notification/{id}',[AdminController::class,'NotificationView']);
@@ -225,6 +228,15 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::post('/draftEmailRead/{id}',[ComposeEmailController::class,'draftEmailSave']);
         Route::post('/SendDraftMail/{id}',[ComposeEmailController::class,'draftEmailSend']);
         Route::get('/reply/{id}',[ComposeEmailController::class,'EmailReply']);
+    });
+    Route::group(['prefix' => 'sponsor'],function(){
+        Route::get('/',[SponoserAddController::class,'Index']);
+        Route::get('/add',[SponoserAddController::class,'Add']);
+        Route::post('/add',[SponoserAddController::class,'AddProcess']);
+        Route::get('/edit/{id}',[SponoserAddController::class,'Edit']);
+        Route::post('/edit/{id}',[SponoserAddController::class,'EditProcess']);
+        Route::get('/delete/{id}',[SponoserAddController::class,'Delete']);
+        Route::get('/active/{id}',[SponoserAddController::class,'Active']);
     });
     Route::group(['prefix' => 'signals'],function(){
         Route::get('/comment/{id}',[SignalController::class,'Comment']);
@@ -319,6 +331,15 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
             Route::get('/right/deleteright/{id}',[HeaderBannerController::class,'deleteRight']);
             Route::post('/edit-right/{id}',[HeaderBannerController::class,'EditRight']);
         });
+        Route::group(['prefix' => 'mid-banner'],function(){
+            Route::get('/',[MidBannerController::class,'Index']);
+            Route::get('/add',[MidBannerController::class,'Add']);
+            Route::post('/add',[MidBannerController::class,'AddProcess']);
+            Route::get('/edit/{id}',[MidBannerController::class,'Edit']);
+            Route::post('/edit/{id}',[MidBannerController::class,'EditProcess']);
+            Route::get('/delete/{id}',[MidBannerController::class,'Delete']);
+            Route::get('/active/{id}',[MidBannerController::class,'Active']);
+        });
         Route::group(['prefix' => 'left-side-banner'],function(){
             Route::get('/',[LeftSideBannerController::class,'Index']);
             Route::post('/',[LeftSideBannerController::class,'Add']);
@@ -374,6 +395,8 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     });
     Route::get('/allCategories',[CategoryController::class,'All']);
     Route::group(['prefix' => 'post'],function(){
+        Route::get('/comment/{id}',[BlogController::class,'Comment']);
+        Route::post('/CommentViewReply/add',[BlogController::class,'CommentAdd']);
         Route::get('/viewAll',[PostController::class,'Index']);
         Route::get('/delete/{id}',[PostController::class,'draft']);
         Route::get('/active/{id}',[PostController::class,'Active']);
@@ -486,14 +509,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/latest',[CommentController::class,'viewLatestComments']);
         Route::post('/latest/add/{id}',[CommentController::class,'addLatestComments']);
         Route::get('/latest/delete/{id}',[CommentController::class,'DeleteLatestComment']);
-        Route::get('/',[CommentController::class,'Index']);
-        Route::post('/',[CommentController::class,'Add']);
-        Route::get('/delete/{id}',[CommentController::class,'Remove']);
-        Route::group(['prefix' => 'reply'],function(){
-            Route::get('/{id}',[CommentController::class,'ReplyList']);
-            Route::post('/{id}',[CommentController::class,'AddReply']);
-            Route::get('/delete/{id}',[CommentController::class,'RemoveReply']);
-        });
+       
     });
     Route::group(['prefix' => 'gallery'],function(){
         Route::get('/{id}',[GalleryController::class,'Index']);
@@ -527,6 +543,7 @@ Route::group(['prefix' => '',"middleware" => "IsMemberLogin"],function(){
     Route::post('/changePassword',[HomeController::class,'ChangePasswordAdd']);
     Route::post('/advance/comment/add',[AdvanceCommentsController::class,'Add']);
     Route::post('/signal/comment/add',[SignalController::class,'AddComment']);
+    Route::post('/blog/comment/add',[BlogController::class,'AddComment']);
     Route::get('/user-registration',[HomeController::class,'userregistration']);
     Route::post('/user-registration',[HomeController::class,'userregistrationUpdate']);
     Route::post('user-registration/stateData/{id}',[HomeController::class,'userregistrationStateCode']);
