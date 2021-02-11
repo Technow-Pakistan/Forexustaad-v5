@@ -9,304 +9,157 @@
                 </div>
                 <div class="col-lg-6 col-md-12 order-1 order-lg-2">
                     <div class="family">
-                                        <div>
-                                            <h4>{{$BlogDetail->mainTitle}}</h4>
-                                        </div>
-                                        <div class="post_representor">
-                                            <ul class="">
-                                                <li><i class="fa fa-user"></i> Raheel Nawaz</li>
-                                                <li><i class="fa fa-clock-o"></i> {{$BlogDetail->publishDate}}</li>
-                                                <li><i class="fa fa-folder"></i> Forex Education</li>
-                                                <!-- <li><i class="fa fa-comments"></i> 8 Comments </li>
-                                                <li><i class="fa fa-eye"></i> 4,106 Views</li> -->
-                                            </ul>
-                                        </div>
+                        <div>
+                            <h4>{{$BlogDetail->mainTitle}}</h4>
+                        </div>
+                        <div class="post_representor">
+                            <ul class="">
+                                <li><i class="fa fa-user"></i> Raheel Nawaz</li>
+                                <li><i class="fa fa-clock-o"></i> {{$BlogDetail->publishDate}}</li>
+                                <li><i class="fa fa-folder"></i> Forex Education</li>
+                                <!-- <li><i class="fa fa-comments"></i> 8 Comments </li>
+                                <li><i class="fa fa-eye"></i> 4,106 Views</li> -->
+                            </ul>
+                        </div>
+                        
+                        <div class="pt-3">
+                            @php 
+                                $Description = html_entity_decode($BlogDetail->detailDescription);
+                                echo $Description;
+                            @endphp
+                        </div>
                                         
-                                        <!-- <div>
-                                            <img src="{{URL::to('storage/app')}}/{{$BlogDetail->image}}" class="img-fluid pt-3">
-                                        </div> -->
-                                        <div class="pt-3">
-                                            @php 
-                                                $Description = html_entity_decode($BlogDetail->detailDescription);
-                                                echo $Description;
-                                            @endphp
+                        <div class="container p-0 mt-4">
+                            <div class="col-md-12" id="fbcomment">
+                                <div class="header_comment">
+                                    <div class="row">
+                                        <div class="col-md-12 text-left">
+                                            <span class="count_comment">{{count($comments)}} Comments</span>
                                         </div>
-                                        <!-- <div class="pt-3">
-                                            <p>
-                                                Mr Raheel Nawaz “The CEO of Forexustaad.com” organized an event about opening of his dream and milestone software house name as TECHNOW the technology hub.
-                                            </p>
-                                            
-                                           <p>
-                                                This event was organized in “ The city of Eagles” Gujranwala (Pakistan).
-                                            In this event Raheel Nawaz explained about TECHNOW what the TECHNOW basic is what services TECHNOW is going to offer to people. These services are
-                                           </p>
-                                            
-                                            <div>
-                                                <ul>
-                                                <li>
-                                                    <h4>
-                                                        Website development
-                                                    </h4>
-                                                </li>
-                                                <ol>
-                                                    <li> E-commerce</li>
-                                                    <li> Customer Relationship Management solutions</li>
-                                                    <li> Web Design</li>
-                                                    <li> Web App</li>
-                                                </ol>
-                                                <li>
-                                                    <h4>
-                                                        Software development
-                                                    </h4>
-                                                </li>
-                                                <ol>
-                                                    <li> Application development and integration</li>
-                                                    <li> Data Modelling and Data Migrations</li>
-                                                    <li> Mobile Application development</li>
-                                                    <li> Cloud base SAAS Applications</li>
-                                                </ol>
-                                                <li>
-                                                    <h4>
-                                                        Web hosting
-                                                    </h4>
-                                                </li>
-                                                <li>
-                                                    <h4>
-                                                        E-Marketing Solutions
-                                                    </h4>
-                                                </li>
-                                                <li>
-                                                    <h4>
-                                                        Career & Business Consulting
-                                                    </h4>
-                                                </li>
-                                                <li>
-                                                    <h4>
-                                                        Professional Trainings
-                                                    </h4>
-                                                </li>
-                                                <ol>
-                                                    <li> Earn From Internet</li>
-                                                    <li> Forex Training</li>
-                                                    <li> Website Development</li>
-                                                    <li> Software Development</li>
-                                                    <li> Andrid Application Development</li>
-                                                </ol>
-                                            </ul>
-                                            </div>
-                                            
-                                            <p>
-                                                He explained need of all these services like why a business Website, Software, Web hosting, E Marketing and Professional training one by one. In Professional training session he has explained “what is Forex Trading ?” “How can they do Forex Trading?” The source person Mr Raheel Nawaz told the audience about the advantages of Forex trading. The beginning procedure was told them in such a way that most of the people who were not knew “Forex” before it, learnt it and understood it very easily.
-                                            </p>
-                                            
-                                            <p>
-                                                It was a detailed sessions about Forex by comparing it with real market business. There was a light atmosphere ,where there every one was in a passion to learn. After the completion of presentation there was been given an opportunity to open a bonus account. With the opening of this account people got $30 as a gift from Raheel Nawaz. Also he had given discounts on his all services. There were a lot of gifts such as T-Shirts, notepads, pens etc. and a he also launch a 1 month free course “How to earn money through Internet” After this learning full session people take a delicious lunch, with many kinds of food. And in this way, Mr Raheel Nawaz made the day of audience. It was not only a Learning session but a get-together , a gift day and a Bonus Party.
-                                            </p>
-                                            
-                                            <p>
-                                                But He has not forget his ONLINE followers in his this pleasure he does not gave hard form bonuses to you but you can get $30 Bonus in a week after registration.
-                                            </p>
-                                           
-                                            <div class="border">
-                                                <iframe width="100%" height="315" src="https://www.youtube.com/embed/wImaWcqB1GM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                            </div>
-                                            
-                                        </div> -->
-                                        @if($BlogDetail->comment == 1)
-                                            <div class="pt-5">
-                                                <div class="totalcom">
-                                                    <h6>{{count($totalComments)}} Comments</h6>
-                                                </div>
-                                                <div class="pt-3 border">
-                                                    <ol class="commentsection p-0">
-                                                        @php $ij = 1 @endphp
-                                                        @foreach($totalComments as $comment)
+                                    </div>
+                                </div>
+                                <div class="body_comment">
+                                    <div class="row">
+                                        <div class="avatar_comment col-md-2">
+                                            <img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="avatar"/>
+                                        </div>
+                                        <div class="box_comment col-md-10">
+                                            <form action="{{URL::to('/blog/comment/add')}}" method="post">
+                                                <textarea class="commentar" name="comment" placeholder="Add a comment..." required></textarea>
+                                                <div class="box_post">
+                                                    <div class="pull-right">
+                                                        <span>
+                                                            <img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="avatar" />
+                                                            <i class="fa fa-caret-down"></i>
+                                                        </span>
+                                                        @if(Session::has('client'))
                                                             @php
-                                                                $replies = $comment->GetReplies();
+                                                                $value =Session::get('client');
                                                             @endphp
-                                                            @if($ij != 1) 
-                                                                <hr> 
-                                                            @endif
-                                                            <li>
-                                                                <div class="comentmain container-fluid">
-                                                                    <div class=" row">
-                                                                        <div class="col-md-2">
-                                                                            <div>
-                                                                                <div class="comment_avatar">
-                                                                                    @if($comment->image != null)
-                                                                                        <img src="{{URL::to('storage/app')}}/{{$comment->image}}" class="img-fluid borderRadius80">
+                                                            <input type="hidden" name="memberId" value="{{$value['id']}}"> 
+                                                            <input type="hidden" name="userType" value="client"> 
+                                                            <input type="hidden" name="blogId" value="{{$BlogDetail->id}}"> 
+                                                            <button type="submit" >Post</button>
+                                                        @else
+                                                            <span class="commentDisableButton LoginButton" href="#" data-toggle="modal" data-target="#requestQuoteModal">Post</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <ul id="list_comment" class="col-md-12">
+                                            @foreach($comments as $comment)
+                                                @if($comment->reply == 0)
+                                                    @php
+                                                        if($comment->userType == "client"){
+                                                            $client = $comment->getMemberInformation();
+                                                            if($client->image == null){
+                                                                $urlImageSrc = URL::to('/public/assets/assets/img/user1.jpg');
+                                                            }else{
+                                                                $urlImageSrc = URL::to('/storage/app') . '/' . $client->image;
+                                                            }
+                                                        }else{
+                                                            $adminInfo = $comment->getAdminInformation();
+                                                            $adminDetailInfo = $comment->getAdminDetailInformation();
+                                                            if($adminDetailInfo->userImage == null){
+                                                                $urlImageSrc = URL::to('/storage/app/WebImages/avatar-5.jpg');
+                                                            }else{
+                                                                $urlImageSrc = URL::to('/storage/app') . '/' . $adminDetailInfo->userImage;
+                                                            }
+                                                        }
+                                                    @endphp
+                                                    <li class="box_result row">
+                                                        <div class="avatar_comment col-md-2">
+                                                            <img src="{{$urlImageSrc}}" alt="avatar"/>
+                                                        </div>
+                                                        <div class="result_comment col-md-10">
+                                                            <h4>{{ $comment->userType == "client" ? $client->name : $adminInfo->username}}</h4>
+                                                            <p>{{$comment->comment}}</p>
+                                                            <div class="tools_comment">
+                                                                @php
+                                                                    $replys = $comment->getReply();
+                                                                @endphp
+                                                                <!-- <a class="like" href="#">Like</a>
+                                                                <span aria-hidden="true"> · </span> -->
+                                                                @if(Session::has('client'))
+                                                                    <a class="replay" commentId="{{$comment->id}}" replyId="{{$comment->reply}}">Reply</a>
+                                                                @else
+                                                                    <a class="replay LoginButton" href="#" data-toggle="modal" data-target="#requestQuoteModal">Reply</a>
+                                                                @endif
+                                                                <a class="ml-3" data-toggle="collapse" data-target="#demo{{$comment->id}}">View Replies <span class="text-dark">({{count($replys)}})</span></a>
+                                                            </div>
+                                                            <div id="demo{{$comment->id}}" class="collapse">
+                                                                @foreach($replys as $reply)
+                                                                    @php
+                                                                        if($reply->userType == "client"){
+                                                                            $client = $reply->getMemberInformation();
+                                                                            if($client->image == null){
+                                                                                $urlImageSrc1 = URL::to('/public/assets/assets/img/user1.jpg');
+                                                                            }else{
+                                                                                $urlImageSrc1 = URL::to('/storage/app') . '/' . $client->image;
+                                                                            }
+                                                                        }else{
+                                                                            $adminInfo1 = $reply->getAdminInformation();
+                                                                            $adminDetailInfo1 = $reply->getAdminDetailInformation();
+                                                                            if($adminDetailInfo1->userImage == null){
+                                                                                $urlImageSrc1 = URL::to('/storage/app/WebImages/avatar-5.jpg');
+                                                                            }else{
+                                                                                $urlImageSrc1 = URL::to('/storage/app') . '/' . $adminDetailInfo1->userImage;
+                                                                            }
+                                                                        }
+                                                                    @endphp
+                                                                    <ul class="child_replay">
+                                                                        <li class="box_reply row">
+                                                                            <div class="avatar_comment col-md-2">
+                                                                                <img src="{{$urlImageSrc1}}" alt="avatar"/>
+                                                                            </div>
+                                                                            <div class="result_comment col-md-10">
+                                                                                <h4>{{ $reply->userType == "client" ? $client->name : $adminInfo1->username}}</h4>
+                                                                                <p><span class="ml-3 text-primary">{{$reply->replyName}} </span> {{$reply->comment}}</p>
+                                                                                <div class="tools_comment">
+                                                                                    @if(Session::has('client'))
+                                                                                        <a class="replay" commentId="{{$comment->id}}" replyId="{{$reply->reply}}">Reply</a>
                                                                                     @else
-                                                                                        <img src="https://icon-library.net/images/avatar-icon-png/avatar-icon-png-8.jpg" class="img-fluid ">
+                                                                                        <a class="replay LoginButton" href="#" data-toggle="modal" data-target="#requestQuoteModal" href="javascript_void(0)">Reply</a>
                                                                                     @endif
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="col-md-10">
-                                                                            <div>
-                                                                                <div class="comment_author clearfix">
-                                                                                    <h5 class="float-left">{{$comment->name}}</h5>
-                                                                                    <p class="float-right commenttime">
-                                                                                        {{$comment->created_at->format("M d, Y")}} at {{$comment->created_at->format("h:i a")}}
-                                                                                    </p>
-                                                                                </div>
-                                                                                <div class="comment_details">
-                                                                                    <p>{{$comment->message}}</p>
-                                                                                </div>
-                                                                                <!-- <div class="d-flex justify-content-end">
-                                                                                    <i class="fa fa-heart-o mr-3"></i>
-                                                                                    <i class="fa fa-reply replybox"></i>
-                                                                                </div> -->
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    @foreach($replies as $reply)
-                                                                        <hr>
-                                                                        <ul class="child-comment">
-                                                                            <li class="p-3 ">
-                                                                                <div class=" row">
-                                                                                    <div class="col-md-2">
-                                                                                        <div>
-                                                                                            <div class="comment_avatar">
-                                                                                                <img src="https://icon-library.net/images/avatar-icon-png/avatar-icon-png-8.jpg" class="img-fluid ">
-                                                                                                
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-10">
-                                                                                        <div>
-                                                                                            <div class="comment_author clearfix">
-                                                                                                <h5 class="float-left">Forexustaad </h5>
-                                                                                                <p class="float-right commenttime">
-                                                                                                    {{$reply->created_at->format("M d, Y")}} at {{$reply->created_at->format("H:i a")}}
-                                                                                                </p>
-                                                                                            </div>
-                                                                                            <div class="comment_details">
-                                                                                                <p>{{$reply->message}}</p>
-                                                                                            </div>
-                                                                                            <!-- <div class="d-flex justify-content-end">
-                                                                                                <i class="fa fa-heart-o mr-3"></i>
-                                                                                                <i class="fa fa-reply replybox"></i>
-                                                                                            </div> -->
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </li>
-                                                                        </ul>
-                                                                    @endforeach
-                                                                </div>
-                                                            </li>
-                                                            @php $ij++ @endphp
-                                                        @endforeach
-                                                        <!-- <hr>
-                                                        <li>
-                                                            <div class="comentmain container-fluid">
-                                                                <div class=" row">
-                                                                    <div class="col-md-2">
-                                                                        <div>
-                                                                            <div class="comment_avatar">
-                                                                                <img src="https://icon-library.net/images/avatar-icon-png/avatar-icon-png-8.jpg" class="img-fluid ">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-10">
-                                                                        <div>
-                                                                            <div class="comment_author clearfix">
-                                                                                <h5 class="float-left">Raheel Nawaz</h5>
-                                                                                <p class="float-right commenttime">
-                                                                                    September 2, 2015 at 1:04 pm
-                                                                                </p>
-                                                                            </div>
-                                                                            <div class="comment_details">
-                                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                                                    conseq.</p>
-                                                                            </div>
-                                                                            <div class="d-flex justify-content-end">
-                                                                                <i class="fa fa-heart-o mr-3"></i>
-                                                                                <i class="fa fa-reply replybox"></i>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <hr>
-                                                                <ul class="child-comment">
-                                                                    <li class="p-3 ">
-                                                                        <div class=" row">
-                                                                            <div class="col-md-2">
-                                                                                <div>
-                                                                                    <div class="comment_avatar">
-                                                                                        <img src="https://icon-library.net/images/avatar-icon-png/avatar-icon-png-8.jpg" class="img-fluid ">
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-10">
-                                                                                <div>
-                                                                                    <div class="comment_author clearfix">
-                                                                                        <h5 class="float-left">Raheel Nawaz</h5>
-                                                                                        <p class="float-right commenttime">
-                                                                                            September 2, 2015 at 1:04 pm
-                                                                                        </p>
-                                                                                    </div>
-                                                                                    <div class="comment_details">
-                                                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
-                                                                                    </div>
-                                                                                    <div class="d-flex justify-content-end">
-                                                                                        <i class="fa fa-heart-o mr-3"></i>
-                                                                                        <i class="fa fa-reply replybox"></i>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </li>
-                                                                </ul>
+                                                                        </li>
+                                                                    </ul>
+                                                                @endforeach
                                                             </div>
-                                                        </li> -->
-                                                    
-                                                    </ol>
-                                                </div>
-                                            </div>
-                                            @if(Session::has('client'))
-                                            @php
-                                                $client =Session::get('client');
-                                            @endphp
-                                            <div class=" pt-5">
-                                                <div class="shadow p-5">
-                                                    <div class="text-center">
-                                                        <h4>Leave A Reply</h4>
-                                                        <p>Your email address will not be published. Required fields are marked *</p>
-                                                    </div>
-                                                    <div class="pt-3  container-fluid">
-                                                        <form action="{{URL::to('/comment1')}}" method="post" enctype="multipart/form-data">
-                                                            <!-- <div class="row">
-                                                                <div class="col-md-6 ">
-                                                                    <div class="form-group">
-                                                                        <label for="exampleInputEmail1"></label>
-                                                                        <input type="mail" name="name" class="form-control form-input" id="exampleInputPassword1" placeholder="Name" required>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6 ">
-                                                                    <div class="form-group">
-                                                                        <label for="exampleInputPassword1"></label>
-                                                                        <input type="mail" name="email" class="form-control form-input" id="exampleInputPassword1" placeholder="Enter email" required>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <input type="file" name="file_photo" id="" class="form-control h-100"> -->
-                                                            <textarea class="form-control mt-2" name="message" placeholder="Messeage" rows="5" required></textarea>
-                                                            <input type="hidden" name="name" value="{{$client->name}}">
-                                                            <input type="hidden" name="email" value="{{$client->email}}">
-                                                            <input type="hidden" name="blogPostId" value="{{$BlogDetail->id}}">
-                                                            <input type="hidden" name="userId" value="{{$client->id}}">
-                                                            <button type="submit" class="btn btn-primary mb-4 mt-3">Submit</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            @endif
-                                        @endif
+                                                        </div>
+                                                    </li>
+                                                @endif
+                                            @endforeach
+                                        </ul>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-lg-3 col-md-6 col-sm-12 order-3 order-lg-3">
@@ -325,4 +178,270 @@
     }
 </style>
 
+<style>
+  .pull-right{
+    float:right;
+  }
+  .pull-left{
+    float:left;
+  }
+  #fbcomment{
+    background:#fff;
+    border: 1px solid #dddfe2;
+    border-radius: 3px;
+    color: #4b4f56;
+    padding:50px;
+  }
+  .header_comment{
+      font-size: 14px;
+      overflow: hidden;
+      border-bottom: 1px solid #e9ebee;
+      line-height: 25px;
+      margin-bottom: 24px;
+      padding: 10px 0;
+  }
+  .sort_title{
+    color: #4b4f56;
+  }
+  .sort_by{
+    background-color: #f5f6f7;
+    color: #4b4f56;
+    line-height: 22px;
+    cursor: pointer;
+    vertical-align: top;
+    font-size: 12px;
+    font-weight: bold;
+    vertical-align: middle;
+    padding: 4px;
+    justify-content: center;
+    border-radius: 2px;
+    border: 1px solid #ccd0d5;
+  }
+  .count_comment{
+    font-weight: 600;
+  }
+  .body_comment{
+      padding: 0 8px;
+      font-size: 14px;
+      display: block;
+      line-height: 25px;
+      word-break: break-word;
+  }
+  .avatar_comment{
+    display: block;
+  }
+  .avatar_comment img{
+    height: 48px;
+    width: 48px;
+  }
+  .box_comment{
+    display: block;
+      position: relative;
+      line-height: 1.358;
+      word-break: break-word;
+      border: 1px solid #d3d6db;
+      word-wrap: break-word;
+      background: #fff;
+      box-sizing: border-box;
+      cursor: text;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 16px;
+    padding: 0;
+  }
+  .box_comment textarea{
+    min-height: 40px;
+    padding: 12px 8px;
+    width: 100%;
+    border: none;
+    resize: none;
+  }
+  .box_comment textarea:focus{
+    outline: none !important;
+  }
+  .box_comment .box_post{
+    border-top: 1px solid #d3d6db;
+      background: #f5f6f7;
+      padding: 8px;
+      display: block;
+      overflow: hidden;
+  }
+  .box_comment label{
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 11px;
+    color: #90949c;
+    line-height: 22px;
+  }
+  .box_comment button{
+    margin-left:8px;
+    background-color: #4267b2;
+    border: 1px solid #4267b2;
+    color: #fff;
+    text-decoration: none;
+    line-height: 22px;
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: bold;
+    position: relative;
+    text-align: center;
+  }
+  .box_comment button:hover{
+    background-color: #29487d;
+    border-color: #29487d;
+  }
+  .box_comment .cancel{
+    margin-left:8px;
+    background-color: #f5f6f7;
+    color: #4b4f56;
+    text-decoration: none;
+    line-height: 22px;
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: bold;
+    position: relative;
+    text-align: center;
+    border-color: #ccd0d5;
+  }
+  .box_comment .cancel:hover{
+    background-color: #d0d0d0;
+    border-color: #ccd0d5;
+  }
+  .box_comment img{
+    height:16px;
+    width:16px;
+  }
+  .box_result{
+    margin-top: 24px;
+  }
+  .box_result .result_comment h4{
+    font-weight: 600;
+    white-space: nowrap;
+    color: #365899;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 1.358;
+    margin:0;
+  }
+  .box_result .result_comment{
+    display:block;
+    overflow:hidden;
+    padding: 0;
+  }
+  .child_replay{
+    border-left: 1px dotted #d3d6db;
+    margin-top: 12px;
+    list-style: none;
+    padding:0 0 0 8px
+  }
+  .reply_comment{
+    margin:12px 0;
+  }
+  .box_result .result_comment p{
+    margin: 4px 0;
+    text-align:justify;
+  }
+  .box_result .result_comment .tools_comment{
+    font-size: 12px;
+    line-height: 1.358;
+  }
+  .box_result .result_comment .tools_comment a{
+    color: #4267b2;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .box_result .result_comment .tools_comment span{
+    color: #90949c;
+  }
+  .body_comment .show_more{
+    background: #3578e5;
+    border: none;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 14px;
+    margin-top: 24px;
+    padding: 12px;
+    text-shadow: none;
+    width: 100%;
+    font-weight:bold;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 2px;
+  }
+</style>
+
 @include('inc.footer')
+@if(Session::has('client'))
+	@php
+		$value =Session::get('client');
+	@endphp
+	<script>
+		$(document).ready(function() {
+			$('#list_comment').on('click', '.like', function (e) {
+				$current = $(this);
+				var x = $current.closest('div').find('.like').text().trim();
+				var y = parseInt($current.closest('div').find('.count').text().trim());
+
+				if (x === "Like") {
+					$current.closest('div').find('.like').text('Unlike');
+					$current.closest('div').find('.count').text(y + 1);
+				} else if (x === "Unlike"){
+					$current.closest('div').find('.like').text('Like');
+					$current.closest('div').find('.count').text(y - 1);
+				} else {
+					var replay = $current.closest('div').find('.like').text('Like');
+					$current.closest('div').find('.count').text(y - 1);
+				}
+			});
+
+			$('#list_comment').on('click', '.replay', function (e) {
+				cancel_reply();
+				$current = $(this);
+				var currentH4122 = $(this).parent().parent().children()[0].innerHTML;
+        		var currentH4  = "@" + currentH4122;
+				var commentId =	$current.attr("commentId");
+				var replyId =	$current.attr("replyId");
+				if(replyId == 0){
+					currentH4 = "";
+				}
+				el = document.createElement('li');
+				el.className = "box_reply row";
+				el.innerHTML =
+					'<div class=\"col-md-12 reply_comment\">'+
+						'<div class=\"row\">'+
+							'<div class=\"avatar_comment col-md-2\">'+
+							'<img src=\"{{URL::to('/public/assets/assets/img/user1.jpg')}}\" alt=\"avatar\"/>'+
+							'</div>'+
+							'<div class=\"box_comment col-md-9\">'+
+								'<form action=\"{{URL::to('/blog/comment/add')}}\" method="post">'+
+									'<textarea class=\"comment_replay\" name=\"comment\" placeholder=\"Add a comment...\"></textarea>'+
+									'<div class=\"box_post\">'+
+										'<div class=\"pull-right\">'+
+										'<span>'+
+											'<img src=\"{{URL::to('/public/assets/assets/img/user1.jpg')}}\" alt=\"avatar\" />'+
+											'<i class=\"fa fa-caret-down\"></i>'+
+										'</span>'+
+										'<input type=\"hidden\" name=\"memberId\" value=\"{{$value['id']}}\">'+ 
+										'<input type=\"hidden\" name=\"userType\" value=\"client\">'+
+										'<input type=\"hidden\" name=\"blogId\" value=\"{{$BlogDetail->id}}\"> '+
+										'<input type=\"hidden\" name=\"reply\" value=\"{{$BlogDetail->id}}\"> '+
+										'<input type=\"hidden\" name=\"replyName\" value=\"'+currentH4+'\"> '+
+										'<input type=\"hidden\" name=\"commentId\" value=\"'+commentId+'\"> '+
+										'<button class=\"cancel\" onclick=\"cancel_reply()\" type=\"button\">Cancel</button>'+
+										'<button type=\"submit\">Reply</button>'+
+										'</div>'+
+									'</div>'+
+								'</form>'+
+							'</div>'+
+						'</div>'+
+					'</div>';
+				$current.parent().append(el);
+			});
+		});
+
+		function cancel_reply(){
+			$('.reply_comment').remove();
+		}
+	</script>
+@endif

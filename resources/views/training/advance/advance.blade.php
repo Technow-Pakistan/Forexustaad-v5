@@ -55,48 +55,6 @@
                                         </p>
                                     </div>
                                     <div>
-                                        <!-- <div class="d-flex">
-                                            <span class="pt-3 pr-2">
-                                                <a href="{{isset($lastTitle) ? URL::to('/training'). '/' . $category . '/' . $lastTitle : '#!'}}" class="text-white">
-                                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                                                </a>
-                                            </span>
-                                            <span class="pt-3">
-                                                <a href="{{isset($nextTitle) ? URL::to('/training'). '/' . $category . '/' . $nextTitle : '#!'}}" class="text-white">
-                                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                                </a>
-                                            </span>
-                                            <span>
-
-                                                <nav class="navbar navbar-expand-lg">
-
-                                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav" aria-expanded="false" aria-label="Toggle navigation">
-                                                        <span class="navbar-toggler-icon"></span>
-                                                    </button>
-                                                    <div class="collapse navbar-collapse" id="main_nav">
-
-                                                        <ul class="navbar-nav">
-
-                                                        <li class="nav-item dropdown">
-                                                            <a class="nav-link  dropdown-toggle text-light" href="#" data-toggle="dropdown">
-                                                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                                                            </a>
-                                                            <ul class="dropdown-menu fade-up">
-                                                                @foreach($Lectures as $data)
-                                                                    @php
-                                                                        $title = str_replace(' ','-',$data->title);
-                                                                    @endphp
-                                                                    <li><a class="dropdown-item" href="{{URL::to('/training'). '/' .  $category . '/' . $title}}">{{$data->poistion . '. ' . $data->title}}  </a></li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </li>
-                                                        </ul>
-
-                                                    </div>
-                                                </nav>
-                                            </span>
-                                        </div> -->
-
                                     </div>
                                 </div>
                             </div>
@@ -213,6 +171,30 @@
                   </div>
                   <div class="row mt-5">
                       <div class="col-md-8">
+                        @if(count($SponoserAddActive) > 0)
+                          <section class="features">
+                            <div class="container">
+                              <div class="content_area_heading large-heading text-center">
+
+                                <h1 class="heading_title wow animated fadeInUp">
+                                  Sponsers Adds
+                                </h1>
+                                <div class="heading_border wow animated fadeInUp">
+                                  <span class="one"></span><span class="two"></span><span class="three"></span>
+                                </div>
+                              </div>
+                              <div class="row justify-content-center">
+                                  @foreach($SponoserAddActive as $sponoserAdd)
+                                    <div class="col-xl-4 col-lg-6 col-md-7 col-sm-8 col-12 h-100 mb-3">
+                                      <a href="{{$sponoserAdd->link}}" target="_blank">
+                                        <img src="{{URL::to('storage/app')}}/{{$sponoserAdd->image}}" width="300" height="100">
+                                      </a>
+                                    </div>
+                                  @endforeach
+                              </div>
+                            </div>
+                          </section>
+                        @endif
                         @php $go23 = 0; @endphp
                         @if($category == "Advance"  && $lecture->poistion != 1)
                           @if($commentAllow != null)
@@ -229,7 +211,7 @@
                             @php $go23 = 1; @endphp 
                           @endif
                         @endif
-                        @if(Session::has('client') && $go23 == 0)
+                        @if($go23 == 0)
                           <div class="container p-0 mt-4">
                               <div class="col-md-12" id="fbcomment">
                                 <div class="header_comment">
@@ -246,21 +228,25 @@
                                     </div>
                                     <div class="box_comment col-md-10">
                                       <form action="{{URL::to('/advance/comment/add')}}" method="post">
-                                        <textarea class="commentar" name="comment" placeholder="Add a comment..."></textarea>
+                                        <textarea class="commentar" name="comment" placeholder="Add a comment..." required></textarea>
                                         <div class="box_post">
                                           <div class="pull-right">
                                           <span>
                                             <img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="avatar" />
                                             <i class="fa fa-caret-down"></i>
                                           </span>
-                                          @php
-                                            $value =Session::get('client');
-                                          @endphp
-                                          <input type="hidden" name="memberId" value="{{$value['id']}}">
-                                          <input type="hidden" name="userType" value="client">
-                                          <input type="hidden" name="lectureId" value="{{$lecture->id}}">
-                                          <input type="hidden" name="Category" value="{{$category}}">
-                                          <button type="submit" >Post</button>
+                                          @if(Session::has('client'))
+                                            @php
+                                              $value =Session::get('client');
+                                            @endphp
+                                            <input type="hidden" name="memberId" value="{{$value['id']}}">
+                                            <input type="hidden" name="userType" value="client">
+                                            <input type="hidden" name="lectureId" value="{{$lecture->id}}">
+                                            <input type="hidden" name="Category" value="{{$category}}">
+                                            <button type="submit">Post</button>
+                                          @else
+                                            <a class="commentDisableButton LoginButton" href="#" data-toggle="modal" data-target="#requestQuoteModal">Post</a>
+                                          @endif
                                           </div>
                                         </div>
                                       </form>
@@ -298,17 +284,21 @@
                                               <div class="tools_comment">
                                                 <!-- <a class="like" href="#">Like</a>
                                                 <span aria-hidden="true"> · </span> -->
-                                                <a class="replay" commentId="{{$comment->id}}" replyId="{{$comment->reply}}">Reply</a>
-                                                <a class="ml-3" data-toggle="collapse" data-target="#demo{{$comment->id}}">View Replies</a>
+                                                @php
+                                                  $replys = $comment->getReply();
+                                                @endphp
+                                                @if(Session::has('client'))
+                                                  <a class="replay" commentId="{{$comment->id}}" replyId="{{$comment->reply}}">Reply</a>
+                                                @else
+                                                  <a class="replay LoginButton" href="#" data-toggle="modal" data-target="#requestQuoteModal">Reply</a>
+                                                @endif
+                                                <a class="ml-3" data-toggle="collapse" data-target="#demo{{$comment->id}}">View Replies <span class="text-dark">({{count($replys)}})</span></a>
                                                 <!-- <span aria-hidden="true"> · </span>
                                                 <i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
                                                 <span aria-hidden="true"> · </span>
                                                 <span>26m</span> -->
                                               </div>
                                               <div id="demo{{$comment->id}}" class="collapse">
-                                                @php
-                                                  $replys = $comment->getReply();
-                                                @endphp
                                                 @foreach($replys as $reply)
                                                     @php
                                                       if($reply->userType == "client"){
@@ -322,9 +312,9 @@
                                                         $adminInfo1 = $reply->getAdminInformation();
                                                         $adminDetailInfo1 = $reply->getAdminDetailInformation();
                                                         if($adminDetailInfo1->userImage == null){
-                                                          $urlImageSrc = URL::to('/storage/app/WebImages/avatar-5.jpg');
+                                                          $urlImageSrc1 = URL::to('/storage/app/WebImages/avatar-5.jpg');
                                                         }else{
-                                                          $urlImageSrc = URL::to('/storage/app') . '/' . $adminDetailInfo1->userImage;
+                                                          $urlImageSrc1 = URL::to('/storage/app') . '/' . $adminDetailInfo1->userImage;
                                                         }
                                                       }
                                                     @endphp
@@ -337,13 +327,11 @@
                                                           <h4>{{ $reply->userType == "client" ? $client->name : $adminInfo1->username}}</h4>
                                                           <p><span class="ml-3 text-primary">{{$reply->replyName}} </span> {{$reply->comment}}</p>
                                                           <div class="tools_comment">
-                                                            <!-- <a class="like" href="#">Like</a>
-                                                            <span aria-hidden="true"> · </span> -->
-                                                            <a class="replay" commentId="{{$comment->id}}" replyId="{{$reply->reply}}">Reply</a>
-                                                            <!-- <span aria-hidden="true"> · </span>
-                                                            <i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
-                                                            <span aria-hidden="true"> · </span>
-                                                            <span>26m</span> -->
+                                                            @if(Session::has('client'))
+                                                              <a class="replay" commentId="{{$comment->id}}" replyId="{{$reply->reply}}">Reply</a>
+                                                            @else
+                                                              <a class="replay LoginButton" href="#" data-toggle="modal" data-target="#requestQuoteModal">Reply</a>
+                                                            @endif
                                                           </div>
                                                         </div>
                                                       </li>

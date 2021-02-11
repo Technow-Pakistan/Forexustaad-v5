@@ -121,6 +121,7 @@
 											<tr>
 												<th>Title</th>
 												<th>Category</th>
+												<th>Comments</th>
 												<th>Tsgs</th>
 												<th>Date</th>
 												<th>Status</th>
@@ -138,6 +139,7 @@
 														{{$post->mainTitle}}
 													</td>
 													<td>{{$category->mainCategory}}</td>
+													<td><a href="{{URL::to('ustaad/post/comment')}}/{{$post->id}}">View Comments</a></td>
 													<td>{{$c}}</td>
 													<td>{{$post->publishDate}}</td>
 													<td>
@@ -185,11 +187,4 @@
 
 @include('admin.include.footer')
 
-		<!-- Data Table -->
-		<script src="assets/js/plugins/jquery.dataTables.min.js"></script>
-		<script src="assets/js/plugins/dataTables.bootstrap4.min.js"></script>
-
-<script>
-	$('#user-list-table').DataTable();
-</script>
 

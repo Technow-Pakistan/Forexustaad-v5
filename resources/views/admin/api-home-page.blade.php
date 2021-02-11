@@ -103,12 +103,8 @@
 
 
 @include('admin.include.footer')
-        <!-- Data Table -->
-		<script src="{{URL::to('public/AdminAssets/assets/js/plugins/jquery.dataTables.min.js')}}"></script>
-		<script src="{{URL::to('public/AdminAssets/assets/js/plugins/dataTables.bootstrap4.min.js')}}"></script>
 
 <script>
-	$('#user-list-table').DataTable();
 
 	// Almost final example
 	// tr mai class row add krna h bs

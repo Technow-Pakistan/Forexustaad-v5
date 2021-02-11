@@ -1,4 +1,4 @@
-<section class="explore_services">
+<section class="explore_services mb-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -14,7 +14,7 @@
                             <p class="h1 heading_title wow animated fadeInUp">
                                 Our Process
                             </p>
-                            <div class="heading_border wow animated fadeInUp">
+                            <div class="heading_border wow animated fadeInUp p-0">
                                 <span class="two"></span><span class="three"></span>
                             </div>
                         </div>

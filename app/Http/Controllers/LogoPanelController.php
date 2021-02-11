@@ -58,9 +58,12 @@ class LogoPanelController extends Controller
         }
         if($request->active == 1){
             $activeLogo = LogoPanelModel::where('active',1)->first();
-            $activeLogo->active = 0;
-            $activeLogo->save();
+            if ($activeLogo->id != $id) {
+                $activeLogo->active = 0;
+                $activeLogo->save();
+            }
             $active = $request->active;
+            print_r($active);
         }else{
             $active = 0;
         }
@@ -143,8 +146,10 @@ class LogoPanelController extends Controller
         }
         if($request->active == 1){
             $activeLogo = FaviconPanelModel::where('active',1)->first();
-            $activeLogo->active = 0;
-            $activeLogo->save();
+            if ($activeLogo->id != $id) {
+                $activeLogo->active = 0;
+                $activeLogo->save();
+            }
             $active = $request->active;
         }else{
             $active = 0;
