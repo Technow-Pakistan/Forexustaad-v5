@@ -26,6 +26,8 @@ use App\Models\SignalsModel;
 use App\Models\UserContactModel;
 use App\Models\NotificationModel;
 use App\Models\FundamentalModel;
+use App\Models\SponoserAddModel;
+use App\Models\MidBannerModel;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -69,6 +71,8 @@ class AppServiceProvider extends ServiceProvider
         view()->share("StarBrokerHome",BrokerCompanyInformationModel::orderBy('id','asc')->where('star',1)->where('pending',0)->where('trash',0)->skip(0)->take(10)->get());
         view()->share("StarSignalsHome",SignalsModel::orderBy('id','asc')->where('star',1)->where('expired',0)->skip(0)->take(6)->get());
         view()->share("ClientAccountDetailInfo",ClientAccountDetailModel::all());
+        view()->share("SponoserAddActive",SponoserAddModel::orderBy('id','desc')->where('status',0)->skip(0)->take(9)->get());
+        view()->share("MidBannerHomeActive",MidBannerModel::where('status',0)->where('active',1)->first());
         /** Admin Panel Function  */
         view()->share("HeaderUnReadMessage",UserContactModel::orderBy('id','desc')->where('read',0)->where('trashMail',0)->get());
         view()->share("NotificationMessage",NotificationModel::orderBy('id','desc')->get());

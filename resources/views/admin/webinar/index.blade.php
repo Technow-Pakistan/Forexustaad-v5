@@ -83,13 +83,9 @@
 		<!-- [ Main Content ] end -->
 
 @include('admin.include.footer')
-        <!-- Data Table -->
-		<script src="assets/js/plugins/jquery.dataTables.min.js"></script>
-		<script src="assets/js/plugins/dataTables.bootstrap4.min.js"></script>
 
 
 <script>
-	$('#user-list-table').DataTable();
 
 	// Almost final example
 	// tr mai class row add krna h bs

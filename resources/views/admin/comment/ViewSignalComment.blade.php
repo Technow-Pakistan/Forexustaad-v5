@@ -73,7 +73,7 @@
                                                                 <ul class="d-flex pl-13 p-0">
                                                                     <li class="cursor text-primary" data-toggle="collapse" data-target="#demo{{$idf}}">Reply</li>
                                                                     <li class="cursor" data-toggle="collapse" data-target="#demo{{$idf1}}">{{count($SignalReplies)}} Replies <i class="fa fa-angle-down" aria-hidden="true"></i></li>
-                                                                    <li><a href="{{URL::to('ustaad/comment/latest/delete')}}/{{$com->id}}" class="addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a></li>
+                                                                    <!-- <li><a href="{{URL::to('ustaad/comment/latest/delete')}}/{{$com->id}}" class="addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a></li> -->
                                                                 </ul>
                                                                 <div id="demo{{$idf}}" class="collapse">
                                                                     <form action="{{URL::to('/ustaad/signals/CommentViewReply/add')}}" method="post">

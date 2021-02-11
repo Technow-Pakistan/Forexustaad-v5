@@ -96,17 +96,6 @@
 
 		<!-- Required Js -->
 		
-		<script>
-			CKEDITOR.replace('editor1',{
-                height: 300,
-                filebrowserUploadUrl:'{{URL::to('/uploader/upload.php')}}',
-            });
-			CKEDITOR.replace('editor2');
-			CKEDITOR.replace('editor3');
-			CKEDITOR.replace('editor4');
-			CKEDITOR.replace('editor5');
-			
-		</script>
 		<script src="{{URL::to('/public/assets/assets/js/vendor-all.min.js')}}"></script>
 		<script defer src="{{URL::to('/public/assets/node_modules/bootstrap/dist/js/bootstrap.js')}}"></script> 
 		<script src="{{URL::to('/public/assets/assets/js/pcoded.min.js')}}"></script>
@@ -124,9 +113,15 @@
 		
 <!-- datatable Js -->
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css"/>
   
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+
+		<script>
+			CKEDITOR.replace('editor1',{
+                height: 300,
+                filebrowserUploadUrl:'{{URL::to('/uploader/upload.php')}}',
+            });
+		</script>
         @php 
           $value =Session::get('admin');
         @endphp
@@ -148,13 +143,11 @@
 		</script>
 
 <script>
-	$('#user-list-table').DataTable({
-        responsive: true
-    });
-	$('#user-list-table1').DataTable({
-        responsive: true
-    });
-	new $.fn.dataTable.FixedHeader( table );
+	$('#user-list-table').DataTable();
+	// $('#user-list-table1').DataTable({
+  //       responsive: true
+  //   });
+	// new $.fn.dataTable.FixedHeader( table );
 </script>
 	</body>
 </html>
@@ -184,7 +177,6 @@
 </script>
 <script>
 	$(".selectedAllNotification").on('click',function() {
-    console.log("hello");
 		$('[id=checkedNotification]').prop('checked',true);
 	});
 </script>

@@ -76,33 +76,33 @@
                             @endif
                         @endforeach
                 			<div class="col-sm-12 col-md-6 bg-light">
-                			<div class="wow animated fadeInUp mt-1">
-                			     <div class="re_img w-100 p-4 ">
-                                    <a href="forexustaad-weekly-lucky-draw.html">
-                                        <img src="{{URL::to('/public/assets/assets/img/blog-post/raheel-nawaz-lucky-.jpg')}}">
-                                    </a>
-                                </div>
-                                <div class="container-fluid ">
-                                    <div class="row">
-                                        <div class="col-sm-12 ">
-                                            
-                                            <div class="new_description-details">
-                                            <h6>
-                                                <a href="forexustaad-weekly-lucky-draw.html">
-                                                    
-                                                    ForexUstaad Weekly Lucky Draw
-                                                </a>
-                                            </h6>
-                                            <p>
-                                               Forexustaad Lucky Draws promotion is going to be promoted by Mr Raheel Nawaz on 21/11/2016 as an incentive to encourage the local Forex
-                                            </p>
-                                            
-                                        </div>
-                                            </div>
-
-                                        </div>
+                                <div class="wow animated fadeInUp mt-1">
+                                    <div class="re_img w-100 p-4 ">
+                                        <a href="forexustaad-weekly-lucky-draw.html">
+                                            <img src="{{URL::to('/public/assets/assets/img/blog-post/raheel-nawaz-lucky-.jpg')}}">
+                                        </a>
                                     </div>
-                			</div>
+                                    <div class="container-fluid ">
+                                        <div class="row">
+                                            <div class="col-sm-12 ">
+                                                
+                                                <div class="new_description-details">
+                                                <h6>
+                                                    <a href="forexustaad-weekly-lucky-draw.html">
+                                                        
+                                                        ForexUstaad Weekly Lucky Draw
+                                                    </a>
+                                                </h6>
+                                                <p>
+                                                Forexustaad Lucky Draws promotion is going to be promoted by Mr Raheel Nawaz on 21/11/2016 as an incentive to encourage the local Forex
+                                                </p>
+                                                
+                                            </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                </div>
                 			</div>
                             <div class="col-sm-12 col-md-6 bg-light">
                             <div class="wow animated fadeInUp mt-1">

@@ -26,9 +26,8 @@
 		<!-- animate -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
 		<!-- data Tables -->
-		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css"/>
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css"/>
   
-		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 
 	</head>
 	<body class="">
@@ -65,12 +64,9 @@
 									><span class="pcoded-mtext">Posts</span></a
 								>
 								<ul class="pcoded-submenu">
-									<!-- <li><a href="{{URL::to('ustaad/post/viewAll')}}">All Posts</a></li>
-									<li><a href="{{URL::to('ustaad/signals')}}">All Signals</a></li> -->
 									<li><a href="{{URL::to('ustaad/allCategories')}}">Add New</a></li>
 									<li><a href="{{URL::to('ustaad/category')}}">Categories</a></li>
 									<li><a href="{{URL::to('ustaad/tag')}}">Tags</a></li>
-									<li><a href="{{URL::to('ustaad/comment')}}">Comments</a></li>
 								</ul>
 							</li>
 							<li class="nav-item pcoded-menu-caption">
@@ -88,20 +84,6 @@
 									<li><a href="{{URL::to('ustaad/comment/latest')}}">Latest Comments</a></li>
 								</ul>
 							</li>
-							<!-- <li class="nav-item pcoded-menu-caption">
-								<label>Strategies Area</label>
-							</li>
-							<li class="nav-item pcoded-hasmenu">
-								<a href="#!" class="nav-link"
-									><span class="pcoded-micon"
-										><i class="fab fa-blogger"></i></span
-									><span class="pcoded-mtext">Strategies</span></a
-								>
-								<ul class="pcoded-submenu">
-									<li><a href="{{URL::to('ustaad/strategies')}}">All Strategies</a></li>
-									<li><a href="{{URL::to('ustaad/strategies/new')}}">Add Strategy</a></li>
-								</ul>
-							</li> -->
 							<li class="nav-item pcoded-menu-caption">
 								<label>Webinar Area</label>
 							</li>
@@ -189,8 +171,10 @@
 								>
 								<ul class="pcoded-submenu">
 									<li><a href="{{URL::to('ustaad/banner/header-banner')}}">Header Banner</a></li>
+									<li><a href="{{URL::to('ustaad/banner/mid-banner')}}">Mid Banner</a></li>
 									<li><a href="{{URL::to('ustaad/banner/left-side-banner')}}">Left Side Bar Banner</a></li>
 									<li><a href="{{URL::to('ustaad/banner/right-side-banner')}}">Right Side Bar</a></li>
+									<li><a href="{{URL::to('ustaad/sponsor')}}">Sponsors</a></li>
 								</ul>
 							</li>
 							<li class="nav-item pcoded-menu-caption">
@@ -279,7 +263,7 @@
 				<a href="#!" class="b-brand">
 					<!-- ========   change your logo hear   ============ -->
 					<img src="{{URL::to('/public/assets/assets/img/logo.png')}}" alt="" class="logo" />
-					<img src="{{URL::to('/public/assets/assets/img/logo-icon.png')}}" alt="" class="logo-thumb" />
+					<!-- <img src="{{URL::to('/public/assets/assets/img/logo-icon.png')}}" alt="" class="logo-thumb" /> -->
 				</a>
 				<a href="#!" class="mob-toggler">
 					<i class="feather icon-more-vertical"></i>
@@ -1000,7 +984,7 @@
 		<!-- [ chat user list ] end -->
 
 		<!-- [ chat message ] start -->
-		<section class="header-chat">
+		<!-- <section class="header-chat">
 			<div class="h-list-header">
 				<h6>Josephin Doe</h6>
 				<a href="#!" class="h-back-user-list"
@@ -1076,5 +1060,5 @@
 					</button>
 				</div>
 			</div>
-		</section>
+		</section> -->
 		<!-- [ chat message ] end -->

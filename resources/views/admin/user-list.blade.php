@@ -105,12 +105,3 @@
 </style>
 
 @include('admin.include.footer')
-
-<!-- datatable Js -->
-<script src="assets/js/plugins/jquery.dataTables.min.js"></script>
-<script src="assets/js/plugins/dataTables.bootstrap4.min.js"></script>
-
-
-<script>
-	$('#user-list-table').DataTable();
-</script>

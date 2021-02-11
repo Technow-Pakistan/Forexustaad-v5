@@ -7,7 +7,7 @@ File: style.css
 =========================================================================
 =================================================================================== */
 /* devanagari */
-@import url(plugins/animate.min.css);
+/* @import url(plugins/animate.min.css); */
 
 @font-face {
     font-family: 'Poppins';

@@ -27,8 +27,8 @@
                                 $url = str_replace(" ","-",$data->title);
                                 $admin = $data->GetAdminMember();
                             @endphp
-                                <div class=" col-sm-12 col-md-6 bg-light">
-                                    <div class="wow animated fadeInUp mt-1">
+                                <div class=" col-sm-12 col-md-6">
+                                    <div class="wow animated fadeInUp mt-1 bg-light">
                                         <div class="container-fluid ">
                                             <div class="row">
                                                 <div class="col-sm-12 ">

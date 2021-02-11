@@ -169,6 +169,26 @@
 
 	</div>
   <style>
+    .commentDisableButton{
+      cursor:pointer;
+      margin-left: 8px;
+      background-color: #4267b2;
+      border: 1px solid #4267b2;
+      color: #fff;
+      text-decoration: none;
+      line-height: 22px;
+      border-radius: 2px;
+      font-size: 14px;
+      font-weight: bold;
+      position: relative;
+      text-align: center;
+      padding: 1px 6px;
+    }
+    .commentDisableButton:hover{
+      background-color: #29487d;
+      border-color: #29487d;
+      color: #ffffff;
+    }
 		.pre-header {
     		background-image: linear-gradient(45deg, #ff0024, #0d5fe9);
     		color: white;
@@ -668,7 +688,8 @@
         blink.style.opacity = (blink.style.opacity == 0 ? 1 : 0);
       }, 500);
     </script>
-   
+
+    
   @if(!Session::has('client'))
     @if(!Session::has('unRegisterUser')) 
       @php

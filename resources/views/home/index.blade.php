@@ -111,6 +111,13 @@
                     @include ('inc/home-left-sidebar')
                 </div>
                 <div class="col-lg-6 col-md-12 order-1 order-lg-2">
+                            @if($MidBannerHomeActive)
+                                <div class="mb-5">
+                                    <a href="{{$MidBannerHomeActive->link}}" target="_blank">
+                                        <img src="{{URL::to('storage/app')}}/{{$MidBannerHomeActive->image}}" width="100%">
+                                      </a>
+                                </div>
+                            @endif
                     <section class="what-is">
                         <div class="container">
                             <div class="row justify-content-center">
