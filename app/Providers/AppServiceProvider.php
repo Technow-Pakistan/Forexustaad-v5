@@ -60,22 +60,22 @@ class AppServiceProvider extends ServiceProvider
         view()->share("MainRightBanner",RightSideBannerModel::where('area','Top')->whereDate('start', '<=', date("Y-m-d"))->whereDate('end', '>=', date("Y-m-d"))->first());
         view()->share("AllLeftBanner",LeftSideBannerModel::orderBy('id','desc')->whereDate('start', '<=', date("Y-m-d"))->whereDate('end', '>=', date("Y-m-d"))->get());
         view()->share("AllRightBanner",RightSideBannerModel::orderBy('id','desc')->whereDate('start', '<=', date("Y-m-d"))->whereDate('end', '>=', date("Y-m-d"))->get());
-        view()->share("MainHomeApi",ApiHomeModel::where('area','Top')->first());
-        view()->share("AllHomeApi",ApiHomeModel::orderBy('id','desc')->get());
-        view()->share("AllLeftApi",ApiLeftModel::orderBy('id','desc')->get());
-        view()->share("AllRightApi",ApiRightModel::orderBy('id','desc')->get());
+        view()->share("MainHomeApi",ApiHomeModel::where('area','Top')->where('trash',0)->first());
+        view()->share("AllHomeApi",ApiHomeModel::orderBy('id','desc')->where('trash',0)->get());
+        view()->share("AllLeftApi",ApiLeftModel::orderBy('id','desc')->where('trash',0)->get());
+        view()->share("AllRightApi",ApiRightModel::orderBy('id','desc')->where('trash',0)->get());
         view()->share("SocialMediaLink",FirstNavBarModel::all());
         view()->share("copyRight",FooterCopyRightModel::where('id',1)->first());
-        view()->share("latestWebinars", MainWebinarModel::orderBy('id','desc')->take(5)->get());
+        view()->share("latestWebinars", MainWebinarModel::orderBy('id','desc')->where('status',1)->take(5)->get());
         view()->share("LatestBlogsData",BlogPostModel::orderBy('id','desc')->where('status',1)->where('pending',1)->where('stickToTop',1)->whereDate('publishDate', '<=', date("Y-m-d"))->take(5)->get());
-        view()->share("StarBrokerHome",BrokerCompanyInformationModel::orderBy('id','asc')->where('star',1)->where('pending',0)->where('trash',0)->skip(0)->take(10)->get());
-        view()->share("StarSignalsHome",SignalsModel::orderBy('id','asc')->where('star',1)->where('expired',0)->skip(0)->take(6)->get());
+        view()->share("StarBrokerHome",BrokerCompanyInformationModel::orderBy('id','asc')->where('star',1)->where('pending',0)->where('status',0)->skip(0)->take(10)->get());
+        view()->share("StarSignalsHome",SignalsModel::orderBy('id','asc')->where('star',1)->where('expired',0)->where('status',0)->skip(0)->take(6)->get());
         view()->share("ClientAccountDetailInfo",ClientAccountDetailModel::all());
+        view()->share("LatestFundamental",FundamentalModel::orderBy('id','desc')->where('status',1)->skip(0)->take(4)->get());
         view()->share("SponoserAddActive",SponoserAddModel::orderBy('id','desc')->where('status',0)->skip(0)->take(9)->get());
         view()->share("MidBannerHomeActive",MidBannerModel::where('status',0)->where('active',1)->first());
         /** Admin Panel Function  */
         view()->share("HeaderUnReadMessage",UserContactModel::orderBy('id','desc')->where('read',0)->where('trashMail',0)->get());
         view()->share("NotificationMessage",NotificationModel::orderBy('id','desc')->get());
-        view()->share("LatestFundamental",FundamentalModel::orderBy('id','desc')->where('status',1)->skip(0)->take(4)->get());
     }
 }

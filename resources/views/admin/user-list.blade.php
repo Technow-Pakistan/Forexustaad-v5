@@ -50,7 +50,7 @@
 											<tr>
 												<td>
 													<div class="d-inline-block align-middle">
-														<img src="{{URL::to('storage/app')}}/{{$memberDetail->userImage}}" alt="user image" class="img-radius align-top m-r-15" style="width:40px;">
+														<img src="{{URL::to('storage/app')}}/{{$memberDetail->userImage}}" alt="user image" class="img-radius align-top m-r-15 hei-40 wid-40">
 														<div class="d-inline-block">
 															<h6 class="m-b-0">{{$memberDetail->firstName}}</h6>
 															<p class="m-b-0">{{$member->email}}</p>

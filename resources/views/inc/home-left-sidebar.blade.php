@@ -27,8 +27,8 @@
                 
                     <?php
  $services = [
-    ['id' => '1', 'left_margin' => '53.7283%', 'top_margin' => '2.00887%', 'icon_1' => 'services_icon-grad1 flaticon-search-4', 'icon_2' => 'services_icon-grad2 flaticon-search-4', 'tagline_title' => 'Choose Your Wallet'],
-    ['id' => '2', 'left_margin' => '82.0896%', 'top_margin' => '41.0448%', 'icon_1' => 'services_icon-grad1 fa fa-line-chart', 'icon_2' => 'services_icon-grad2 fa fa-line-chart', 'tagline_title' => 'Make Payment'],
+    ['id' => '1', 'left_margin' => '53.7283%', 'top_margin' => '2.00887%', 'icon_1' => 'services_icon-grad1 fa fa-search', 'icon_2' => 'services_icon-grad2 fa fa-search', 'tagline_title' => 'Choose Your Wallet'],
+    ['id' => '2', 'left_margin' => '82.0896%', 'top_margin' => '41.0448%', 'icon_1' => 'services_icon-grad1 fa fa-chart-line', 'icon_2' => 'services_icon-grad2 fa fa-chart-line', 'tagline_title' => 'Make Payment'],
     ['id' => '3', 'left_margin' => '53.7283%', 'top_margin' => '80.0807%', 'icon_1' => 'services_icon-grad1 fa fa-code', 'icon_2' => 'services_icon-grad2 fa fa-code', 'tagline_title' => 'Buy Or Sell'],
     ['id' => '4', 'left_margin' => '7.83885%', 'top_margin' => '65.1703%', 'icon_1' => 'services_icon-grad1 fa fa-registered', 'icon_2' => 'services_icon-grad2 fa fa-registered', 'tagline_title' => 'Investment in Trade'],
     ['id' => '5', 'left_margin' => '7.83885%', 'top_margin' => '16.9193%', 'icon_1' => 'services_icon-grad1 fa fa-lock', 'icon_2' => 'services_icon-grad2 fa fa-lock', 'tagline_title' => 'Gain profit'],
@@ -205,116 +205,3 @@ foreach ($analysis as $analysiss_val => $value) {
         </div>
     </div>
 </div>
-
-
-
-<section class="currency-rates">
-    <div class="content_area_heading large-heading ">
-                            
-                            <p class="h1 heading_title wow animated fadeInUp">
-                                Central Bank Rates
-                            </p>
-                            <div class="heading_border wow animated fadeInUp">
-                                <span class="two"></span><span class="three"></span>
-                            </div>
-                        </div>
-    <div class="scroll-tbl" id="side_central_banks">
-    
-    <table class="curr_list table table-striped">
-        <thead class="thead-dark">
-            <tr>            </th>
-                <th colspan="2" class="name left">Central Banks
-                </th>
-                <th class="second">Interest Rates
-                </th>
-                <th class="last">Next Meeting
-                </th>            </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="first">
-                <td class="icon"><span class="cbFlags USA">&nbsp;</span></td>
-                <td class="font-weight-bold"><a href="">FED</a></td>
-                <td>1.75%</td>
-                <td class="last">Mar 18, 2020</td>
-            </tr>
-            <tr>
-                <td class="icon"><span class="cbFlags Europe">&nbsp;</span></td>
-                <td class="font-weight-bold"><a href="">ECB</a></td>
-                <td>0.00%</td>
-                <td class="last">Mar 12, 2020</td>
-            </tr>
-            <tr>
-                <td class="icon"><span class="cbFlags UK">&nbsp;</span></td>
-                <td class="font-weight-bold"><a href="">BOE</a></td>
-                <td>0.75%</td>
-                <td class="last">May 07, 2020</td>
-            </tr>
-            <tr>
-                <td class="icon"><span class="cbFlags Switzerland">&nbsp;</span></td>
-                <td class="font-weight-bold"><a href="">SNB</a></td>
-                <td>-0.75%</td>
-                <td class="last">Mar 19, 2020</td>
-            </tr>
-            <tr>
-                <td class="icon"><span class="cbFlags Australia">&nbsp;</span></td>
-                <td class="font-weight-bold"><a href="">RBA</a></td>
-                <td>0.75%</td>
-                <td class="last">Mar 03, 2020</td>
-            </tr>
-            <tr>
-                <td class="icon"><span class="cbFlags Canada">&nbsp;</span></td>
-                <td class="font-weight-bold"><a href="">BOC</a></td>
-                <td>1.75%</td>
-                <td class="last">Mar 04, 2020</td>
-            </tr>
-            <tr>
-                <td class="icon"><span class="cbFlags New_Zealand">&nbsp;</span></td>
-                <td class="font-weight-bold"><a href="">RBNZ</a></td>
-                <td>1.00%</td>
-                <td class="last">Mar 25, 2020</td>
-            </tr>
-            <tr>
-                <td class="icon"><span class="cbFlags Japan">&nbsp;</span></td>
-                <td class="font-weight-bold"><a href="">BOJ</a></td>
-                <td>-0.10%</td>
-                <td class="last">Mar 19, 2020</td>
-            </tr>
-            <tr>
-                <td class="icon"><span class="cbFlags Russian_Federation">&nbsp;</span></td>
-                <td class="font-weight-bold"><a href="">CBR</a></td>
-                <td>6.00%</td>
-                <td class="last">Mar 20, 2020</td>
-            </tr>
-            <tr>
-                <td class="icon"><span class="cbFlags India">&nbsp;</span></td>
-                <td class="font-weight-bold"><a href="">RBI</a></td>
-                <td>5.15%</td>
-                <td class="last">Apr 03, 2020</td>
-            </tr>
-            <tr>
-                <td class="icon"><span class="cbFlags China">&nbsp;</span></td>
-                <td class="font-weight-bold"><a href="">PBOC</a></td>
-                <td>4.35%</td>
-                <td class="last"></td>
-            </tr>
-            <tr class="last">
-                <td class="icon"><span class="cbFlags Brazil">&nbsp;</span></td>
-                <td class="font-weight-bold"><a href="">BCB</a></td>
-                <td>4.25%</td>
-                <td class="last">Mar 18, 2020</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-</section>
-
-
-
-<!--<div class="col-lg-12">-->
-<!--                <div class="ver-a-img mb-5 text-center">-->
-<!--                        <a href="https://secure.cabanacapitals.com/ib/links/go/334">-->
-<!--                            <img src="{{URL::to('/public/assets/assets/img/ss.jpg')}}">-->
-<!--                        </a>-->
-<!--                </div>-->
-<!--                    </div>-->

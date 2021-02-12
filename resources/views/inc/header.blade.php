@@ -18,9 +18,6 @@
     <link rel="stylesheet" href="{{URL::to('/public/assets/assets/css/style.css')}}" type="text/css">
     <link rel="stylesheet" href="{{URL::to('/public/assets/assets/css/responsive.css')}}" type="text/css">
     <link rel="stylesheet" href="{{URL::to('/public/assets/assets/css/animate.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{URL::to('/public/assets/assets/fonts/font-awesome4/css/font-awesome.css')}}">
-    <link rel="stylesheet" href="{{URL::to('/public/assets/assets/fonts/flaticon/flaticon.css')}}">
-    <link rel="stylesheet" href="{{URL::to('/public/assets/assets/flag-icons/css/flag-icon.min.css')}}">
     <link href="{{URL::to('/public/assets/assets/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{URL::to('/public/assets/assets/css/bootstrap-toggle.min.css')}}" rel="stylesheet">
 
@@ -38,6 +35,17 @@
 
 <!-- Google recaptch -->
 <script src="https://www.google.com/recaptcha/api.js?render=6LfoWyEaAAAAAC-Bs8wiRSMTBSLB3AR8Nq8eS3kH"></script>
+        <!-- font-awesome -->
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+            <style>
+                .fa{
+                    font-family: "Font Awesome 5 Free", Open Sans;
+                    font-weight:501;
+                }
+                .fa{
+                    font-family: 'Font Awesome 5 Pro', 'Font Awesome 5 Free','Font Awesome 5 Solids', 'Font Awesome 5 Brands' !important;
+                }
+            </style>
 
 </head>
 
@@ -77,9 +85,9 @@
                                             @elseif($link->iconName == "GooglePlus")
                                                 <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
                                             @elseif($link->iconName == "Youtube")
-                                                <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+                                                <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-youtube"></i></a></li>
                                             @elseif($link->iconName == "LinkedIn")
-                                                <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-linkedin-square"></i></a></li>
+                                                <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
                                             @elseif($link->iconName == "Instagram")
                                                 <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-instagram"></i></a></li>
                                             @elseif($link->iconName == "Snapchat")bell
@@ -160,9 +168,9 @@
                                         @elseif($link->iconName == "GooglePlus")
                                             <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
                                         @elseif($link->iconName == "Youtube")
-                                            <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+                                            <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-youtube"></i></a></li>
                                         @elseif($link->iconName == "LinkedIn")
-                                            <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-linkedin-square"></i></a></li>
+                                            <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
                                         @elseif($link->iconName == "Instagram")
                                             <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-instagram"></i></a></li>
                                         @elseif($link->iconName == "Snapchat")bell
@@ -253,9 +261,9 @@
                                     @elseif($link->iconName == "GooglePlus")
                                         <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
                                     @elseif($link->iconName == "Youtube")
-                                        <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+                                        <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-youtube"></i></a></li>
                                     @elseif($link->iconName == "LinkedIn")
-                                        <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-linkedin-square"></i></a></li>
+                                        <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
                                     @elseif($link->iconName == "Instagram")
                                         <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-instagram"></i></a></li>
                                     @elseif($link->iconName == "Snapchat")
@@ -283,7 +291,7 @@
                                 @endif
 
                                 <div class="lang-button">
-                                    <a href="#">English</a>
+                                    <a href="#">English <i class="fa fa-caret-down"></i></a>
                                     <ul class="dropdown-list">
                                         <li><a href="#">English</a></li>
                                         <li><a href="#">German</a></li>

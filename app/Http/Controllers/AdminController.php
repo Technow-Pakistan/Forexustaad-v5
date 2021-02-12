@@ -73,8 +73,14 @@ class AdminController extends Controller
             $request->session()->put("admin",$info);
             return redirect("ustaad/dashboard");
         }else{
-            $message = "Username or Password wrong";
-            return view('admin.login',compact('message'));
+            $info2 = AdminModel::where('email',$username)->where('password',$password)->first();
+            if($info2){
+                $request->session()->put("admin",$info2);
+                return redirect("ustaad/dashboard");
+            }else{
+                $message = "Username or Password wrong";
+                return view('admin.login',compact('message'));
+            }
         }
     }
     public function Login(Request $request){

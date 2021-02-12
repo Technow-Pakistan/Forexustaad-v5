@@ -216,6 +216,8 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::group(['prefix' => 'contact'],function(){
         Route::get('/',[ContactController::class,'Index']);
         Route::post('/',[ContactController::class,'SelectedTrash']);
+        Route::get('/sendEmailRead/delete/{id}',[ContactController::class,'sendEmailReadDelete']);
+        Route::get('/emailRead/delete/{id}',[ContactController::class,'emailReadDelete']);
         Route::post('/unTrash',[ContactController::class,'UnTrash']);
         Route::get('/starMessage/{id}',[ContactController::class,'StarMessage']);
         Route::get('/emailRead/{id}',[ContactController::class,'EmailRead']);

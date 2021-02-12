@@ -55,9 +55,33 @@
                                   <div class="card mt-3">
                                     <ul class="list-group list-group-flush">
                                       @for($i = 0; $i < count($socials); $i++)
-                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                          <h6 class="mb-0">{{$socials[$i]}}</h6>
-                                          <span class="text-secondary">{{$socialLinks[$i]}}</span>
+                                        <li class="list-group-item d-flex justify-content-start align-items-center flex-wrap">
+                                            <a href="{{$socialLinks[$i]}}" target="_blank">
+                                              <span class="mb-0 mr-2">
+                                                @if($socials[$i] == "Facebook")
+                                                  <i class="fab fa-facebook text-primary"></i>
+                                                @elseif($socials[$i] == "Pinterest")
+                                                  <i class="fab fa-pinterest text-primary"></i>
+                                                @elseif($socials[$i] == "Twitter")
+                                                  <i class="fab fa-twitter text-primary"></i>
+                                                @elseif($socials[$i] == "Instagram")
+                                                  <i class="fab fa-instagram-square text-primary"></i>
+                                                @elseif($socials[$i] == "Snapchat")
+                                                  <i class="fab fa-snapchat-square text-primary"></i>
+                                                @elseif($socials[$i] == "Tiktok")
+                                                  <i class="fab fa-tiktok text-primary"></i>
+                                                @elseif($socials[$i] == "Telegam")
+                                                  <i class="fab fa-telegram text-primary"></i>
+                                                @elseif($socials[$i] == "GooglePlus")
+                                                  <i class="fab fa-google-plus text-primary"></i>
+                                                @elseif($socials[$i] == "LinkedIn")
+                                                  <i class="fab fa-linkedin text-primary"></i>
+                                                @else
+                                                  {{$socials[$i]}}
+                                                @endif
+                                              </span>
+                                              <span class="text-secondary" style="word-break: break-all;">{{$socialLinks[$i]}}</span>
+                                            </a>
                                         </li>
                                       @endfor
                                       
@@ -133,14 +157,6 @@
                                         @endif
                                       </div>
                                       <hr>
-                                      <!-- <div class="row">
-                                        <div class="col-sm-3">
-                                          <h6 class="mb-0">Address</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                          Bay Area, San Francisco, CA
-                                        </div>
-                                      </div> -->
                                     </div>
                                   </div>
                                   <div class="card">
