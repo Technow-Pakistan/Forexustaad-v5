@@ -370,42 +370,43 @@
                             </div>
                         </section>
                     @endif
-                    <section class="analysis">
-                        <div class="container">
-                            <div class="content_area_heading large-heading text-center">
+                    @if(count($LatestFundamental) > 0)
+                        <section class="analysis">
+                            <div class="container">
+                                <div class="content_area_heading large-heading text-center">
 
-                                <h1 class="heading_title wow animated fadeInUp">
-                                    Analysis & Opinion
-                                </h1>
-                                <div class="heading_border wow animated fadeInUp">
-                                    <span class="one"></span><span class="two"></span><span class="three"></span>
+                                    <h1 class="heading_title wow animated fadeInUp">
+                                        Fundamental History
+                                    </h1>
+                                    <div class="heading_border wow animated fadeInUp">
+                                        <span class="one"></span><span class="two"></span><span class="three"></span>
+                                    </div>
                                 </div>
-                            </div>
 
 
-                            <div class="row">
+                                <div class="row">
 
-                                @foreach ($LatestFundamental as $fundamental)
-                                    @php
-                                        $url = str_replace(" ","-",$fundamental->title);
-                                        $admin = $fundamental->GetAdminMember();
-                                    @endphp
-                                    <div class="col-md-6">
-                                        <div class="media">
-                                            <img class="mr-3" src="{{URL::to('storage/app')}}/{{$fundamental->image}}" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <p class="date m-0">{{$fundamental->created_at->format('M d, Y')}}</p>
-                                                <h6 class="m-0"><a href="{{URL::to('/fundamental')}}/{{$url}}">{{$fundamental->title}}</a></h6>
-                                                <p class="m-0 nameby">{{$admin->username}}</p>
+                                    @foreach ($LatestFundamental as $fundamental)
+                                        @php
+                                            $url = str_replace(" ","-",$fundamental->title);
+                                            $admin = $fundamental->GetAdminMember();
+                                        @endphp
+                                        <div class="col-md-6">
+                                            <div class="media">
+                                                <img class="mr-3" src="{{URL::to('storage/app')}}/{{$fundamental->image}}" alt="Generic placeholder image">
+                                                <div class="media-body">
+                                                    <p class="date m-0">{{$fundamental->created_at->format('M d, Y')}}</p>
+                                                    <h6 class="m-0"><a href="{{URL::to('/fundamental')}}/{{$url}}">{{$fundamental->title}}</a></h6>
+                                                    <p class="m-0 nameby">{{$admin->username}}</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
 
+                                </div>
                             </div>
-                        </div>
-                    </section>
-
+                        </section>
+                    @endif
                     <section>
                         <div class="row">
                             <div class="col-sm-12">
@@ -420,157 +421,153 @@
                         </div>
                     </section>
 
+                            <section class="features">
+                                <div class="container">
+                                    <div class="content_area_heading large-heading text-center">
 
-                    <section class="features">
-                        <div class="container">
-                            <div class="content_area_heading large-heading text-center">
-
-                                <h1 class="heading_title wow animated fadeInUp">
-                                    Latest Signals
-                                </h1>
-                                <div class="heading_border wow animated fadeInUp">
-                                    <span class="one"></span><span class="two"></span><span class="three"></span>
-                                </div>
-                            </div>
-                            <div class="row justify-content-center">
-                              @foreach($StarSignalsHome as $data)
-                                        @php
-                                            $url = $data->id;
-                                            $loginClientData = Session::get('client');
-                                            $go = 1;
-                                            $go3 = 1;
-                                            $profits = explode('@',$data->takeProfit);
-                                            $time1 = strtotime($data->time);
-                                            $time = date('h:i A', $time1);
-                                            $date1 = strtotime($data->date);
-                                            $date = date('d M Y', $date1);
-                                            if($data->date == date("Y-m-d")){
-                                                if($data->time >= date("H:i:s")){
+                                        <h1 class="heading_title wow animated fadeInUp">
+                                            Latest Signals
+                                        </h1>
+                                        <div class="heading_border wow animated fadeInUp">
+                                            <span class="one"></span><span class="two"></span><span class="three"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center">
+                    @foreach($StarSignalsHome as $data)
+                                            @php
+                                                $url = $data->id;
+                                                $loginClientData = Session::get('client');
+                                                $go = 1;
+                                                $go3 = 1;
+                                                $profits = explode('@',$data->takeProfit);
+                                                $time1 = strtotime($data->time);
+                                                $time = date('h:i A', $time1);
+                                                $date1 = strtotime($data->date);
+                                                $date = date('d M Y', $date1);
+                                                if($data->date == date("Y-m-d")){
+                                                    if($data->time >= date("H:i:s")){
+                                                        $go = 0;
+                                                        $go3 = 3;
+                                                    }
+                                                }
+                                                if($data->date > date("Y-m-d")){
                                                     $go = 0;
                                                     $go3 = 3;
                                                 }
-                                            }
-                                            if($data->date > date("Y-m-d")){
-                                                $go = 0;
-                                                $go3 = 3;
-                                            }
-                                            $timeDate1 = strtotime(date("Y-m-d H:i:s"));
-                                            $timeDate2 = strtotime($data->created_at->format("Y-m-d H:i:s"));
-                                            $minsDate = ($timeDate1 - $timeDate2) / 60;
-                                                        $pair = $data->getPair();
-                                            $flags = explode("/",$pair->pair);
-                                        @endphp
-                                        @if($go == 0)
-                                            <div class="col-xl-4 col-lg-6 col-md-7 col-sm-8 col-12 h-100">
-                                                <div class="features_inner text-center wow animated fadeInLeft">
-                                                    <div class="services_wrapper">
-                                                        <div class="">
-                                                            <div class="services_icon">
-                                                                @foreach($flags as $flag)
-                                                                    @php $flag4 = str_replace(' ', '', $flag) @endphp
-                                                                    <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
-                                                                @endforeach
+                                                $timeDate1 = strtotime(date("Y-m-d H:i:s"));
+                                                $timeDate2 = strtotime($data->created_at->format("Y-m-d H:i:s"));
+                                                $minsDate = ($timeDate1 - $timeDate2) / 60;
+                                                            $pair = $data->getPair();
+                                                $flags = explode("/",$pair->pair);
+                                            @endphp
+                                            @if($go == 0)
+                                                <div class="col-xl-4 col-lg-6 col-md-7 col-sm-8 col-12 h-100">
+                                                    <div class="features_inner text-center wow animated fadeInLeft">
+                                                        <div class="services_wrapper">
+                                                            <div class="">
+                                                                <div class="services_icon">
+                                                                    @foreach($flags as $flag)
+                                                                        @php $flag4 = str_replace(' ', '', $flag) @endphp
+                                                                        <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
+                                                                    @endforeach
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="feature_content">
-                                                            <h3 class="content_title">
-                                                                {{$pair->pair}} <br>
-                                                                {{$data->selectUser}} <br>
-                                                                @if($go == 0)
-                                                                    @if($data->selectUser == "Register User" && !Session::has('client'))
-                                                                        <a href="#!" onclick="snackbar()">View Signal</a>
-                                                                    @elseif($data->selectUser == "Premium User")
-                                                                    @if(!Session::has('client'))
-                                                                        <a href="#!" onclick="snackbar()">View Signal</a>
-                                                                    @elseif(isset($loginClientData->memberType))
-                                                                        @if($loginClientData->memberType == 1)
-                                                                            <a href="#!" onclick="snackbar1()">View Signal</a>
+                                                            <div class="feature_content">
+                                                                <h3 class="content_title">
+                                                                    {{$pair->pair}} <br>
+                                                                    {{$data->selectUser}} <br>
+                                                                    @if($go == 0)
+                                                                        @if($data->selectUser == "Register User" && !Session::has('client'))
+                                                                            <a href="#!" onclick="snackbar()">View Signal</a>
+                                                                        @elseif($data->selectUser == "Premium User")
+                                                                        @if(!Session::has('client'))
+                                                                            <a href="#!" onclick="snackbar()">View Signal</a>
+                                                                        @elseif(isset($loginClientData->memberType))
+                                                                            @if($loginClientData->memberType == 1)
+                                                                                <a href="#!" onclick="snackbar1()">View Signal</a>
+                                                                            @else
+                                                                                <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
+                                                                            @endif
+                                                                        @endif
                                                                         @else
                                                                             <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
                                                                         @endif
                                                                     @endif
-                                                                    @else
-                                                                        <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
-                                                                    @endif
-                                                                @endif
-                                                            </h3>
+                                                                </h3>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        @endif
-                                @endforeach
-                            </div>
-                        </div>
-                    </section>
+                                            @endif
+                    @endforeach
+                                    </div>
+                                </div>
+                            </section>
 
 
+                    @if(count($latestWebinars) > 0)
 
+                        <section class="our_news">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="news_us">
+                                            <div class="content_area_heading large-heading text-center">
 
-                    <section class="our_news">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="news_us">
-                                        <div class="content_area_heading large-heading text-center">
-
-                                            <h1 class="heading_title wow animated fadeInUp">
-                                                Upcomming Live Webinars
-                                            </h1>
-                                            <div class="heading_border wow animated fadeInUp">
-                                                <span class="one"></span><span class="two"></span><span
-                                                    class="three"></span>
+                                                <h1 class="heading_title wow animated fadeInUp">
+                                                    Upcomming Live Webinars
+                                                </h1>
+                                                <div class="heading_border wow animated fadeInUp">
+                                                    <span class="one"></span><span class="two"></span><span class="three"></span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="news_responsive webinar_responsive bullet_style wow animated fadeInUp">
+                                    <div class="col-sm-12">
+                                        <div class="news_responsive webinar_responsive bullet_style wow animated fadeInUp">
+                                            @foreach ($latestWebinars as $data)
+                                                <div class="slide position-relative news">
 
-@foreach ($latestWebinars as $data)
-                <div class="slide position-relative news">
-
-                    <div class="new_img">
-                        <img src="{{URL::to('storage/app')}}/{{$data->image}}" width="100%"></video>
-                    </div>
-                    <div class="new_description-details">
+                                                    <div class="new_img">
+                                                        <img src="{{URL::to('storage/app')}}/{{$data->image}}" width="100%"></video>
+                                                    </div>
+                                                    <div class="new_description-details">
 
 
-                    <h6>
-                        <a href="{{$data->link}}" target="_blank">
-                                {{$data->title}}
-                            </a>
-                    </h6>
-                    <p>
-                        {{$data->description}}
-                    </p>
-                    <div class="webinar-info">
-                     <p class="m-0 date">
-                                                @php
-                                                    $dateData = date_create($data->date);
-                                                    $date  = date_format($dateData,"d M");
-                                                    $timeData = date_create($data->time);
-                                                    $time  = date_format($timeData,"H:i A");
-                                                @endphp
-                        {{$date}} - {{$time}}
-                     </p>
-                     <p class="m-0 go-icon">
-                        <a href="{{$data->link}}" target="_blank"><i class="fa fa-arrow-right text-light"></i></a>
-                     </p>
-                     </div>
-                    </div>
-                </div>
-@endforeach
-
-                                    </div>
-                                    <div class="new_btn text-right wow animated fadeInUp">
-                                        <a href="{{URL::to('/webinar')}}">Show More Webinars <i class="fa fa-chevron-right"></i></a>
+                                                        <h6>
+                                                            <a href="{{$data->link}}" target="_blank">
+                                                                    {{$data->title}}
+                                                                </a>
+                                                        </h6>
+                                                        <p class="webinarParaStyle">
+                                                            {{$data->description}}
+                                                        </p>
+                                                        <div class="webinar-info">
+                                                            <p class="m-0 date">
+                                                                @php
+                                                                    $dateData = date_create($data->date);
+                                                                    $date  = date_format($dateData,"d M");
+                                                                    $timeData = date_create($data->time);
+                                                                    $time  = date_format($timeData,"H:i A");
+                                                                @endphp
+                                                                {{$date}} - {{$time}}
+                                                            </p>
+                                                            <p class="m-0 go-icon">
+                                                                <a href="{{$data->link}}" target="_blank"><i class="fa fa-arrow-right text-light"></i></a>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        <div class="new_btn text-right wow animated fadeInUp">
+                                            <a href="{{URL::to('/webinar')}}">Show More Webinars <i class="fa fa-chevron-right"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
-
+                        </section>
+                    @endif
 
 
                     <section class="currency-table-list">
@@ -1336,60 +1333,58 @@
                         </div>
                     </section>
 
+                    @if(count($StarBrokerHome) > 0)
+                        <section class="top-brokers ">
 
-                    <section class="top-brokers ">
 
+                            <div class="content_area_heading large-heading text-center">
 
-                        <div class="content_area_heading large-heading text-center">
-
-                            <h1 class="heading_title wow animated fadeInUp">
-                                Start Trading With Top Industry Brokers
-                            </h1>
-                            <div class="heading_border wow animated fadeInUp">
-                                <span class="one"></span><span class="two"></span><span class="three"></span>
+                                <h1 class="heading_title wow animated fadeInUp">
+                                    Start Trading With Top Industry Brokers
+                                </h1>
+                                <div class="heading_border wow animated fadeInUp">
+                                    <span class="one"></span><span class="two"></span><span class="three"></span>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="scroll-tbl">
-                            <table id="topbroker-list" class="table table-striped">
-                                <thead class=" bannner-info">
-                                    <tr>
-                                        <th>Brokers</th>
-                                        <th>Regulation</th>
-                                        <th>Minimum Deposit</th>
-                                        <th>&nbsp;</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($StarBrokerHome as $starBroker)
-                                    @php
-                                        $deposit = $starBroker->GetAccountInfo();
-                                        $promotion = $starBroker->GetPromotionLinkInfo();
-                                    @endphp
-                                    <tr>
-                                        <td>
-                                            <img src="{{URL::to('storage/app')}}/{{$starBroker->image}}" width="200" height="33">
-                                        </td>
-                                        <td>{{$starBroker->regulations}}</td>
-                                        <td>{{$deposit->min}}</td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <a href="{{$promotion->link}}"
-                                                        class="btn btn-mine radial">Trade</a>
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                            <div class="scroll-tbl">
+                                <table id="topbroker-list" class="table table-striped">
+                                    <thead class=" bannner-info">
+                                        <tr>
+                                            <th>Brokers</th>
+                                            <th>Regulation</th>
+                                            <th>Minimum Deposit</th>
+                                            <th>&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($StarBrokerHome as $starBroker)
+                                        @php
+                                            $deposit = $starBroker->GetAccountInfo();
+                                            $promotion = $starBroker->GetPromotionLinkInfo();
+                                        @endphp
+                                        <tr>
+                                            <td>
+                                                <img src="{{URL::to('storage/app')}}/{{$starBroker->image}}" width="200" height="33">
+                                            </td>
+                                            <td class="brokerRegulationStyle">{{$starBroker->regulations}}</td>
+                                            <td>{{$deposit->min}}</td>
+                                            <td>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <a href="{{$promotion->link}}"
+                                                            class="btn btn-mine radial">Trade</a>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
 
-                    </section>
-
-
-
+                        </section>
+                    @endif
 
 
                 </div>

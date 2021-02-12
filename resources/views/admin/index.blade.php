@@ -9,55 +9,66 @@
 					<div class="col-md-6 col-xl-3">
 						<div class="card bg-c-blue order-card">
 							<div class="card-body">
-								<h6 class="text-white">Total Clients</h6>
-								<h2 class="text-right text-white">
-									<i class="feather icon-users float-left"></i
-									><span>{{$TotalClientNumber}}</span>
-								</h2>
-								<p class="m-b-0">
-									This Month<span class="float-right">{{$MonthlyClientNumber}}</span>
-								</p>
+								<a href="{{URL::to('ustaad/member/clientList')}}">
+									<h6 class="text-white">Total Clients</h6>
+									<h2 class="text-right text-white">
+										<i class="fa fa-users float-left"></i
+										><span>{{$TotalClientNumber}}</span>
+									</h2>
+									<p class="m-b-0 text-light">
+										This Month<span class="float-right">{{$MonthlyClientNumber}}</span>
+									</p>
+								</a>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-6 col-xl-3">
 						<div class="card bg-c-green order-card">
 							<div class="card-body">
-								<h6 class="text-white">Total Admin Members</h6>
-								<h2 class="text-right text-white">
-									<i class="feather icon-tag float-left"></i><span>{{$TotalAdminUsersNumber}}</span>
-								</h2>
-								<p class="m-b-0">
-									This Month<span class="float-right">{{$MonthlyAdminUsersNumber}}</span>
-								</p>
+								<a href="{{URL::to('ustaad/member/userList')}}">
+									<h6 class="text-white">Total Admin Members</h6>
+									<h2 class="text-right text-white">
+										<i class="fa fa-tag float-left"></i><span>{{$TotalAdminUsersNumber}}</span>
+									</h2>
+									<p class="m-b-0 text-light">
+										This Month<span class="float-right">{{$MonthlyAdminUsersNumber}}</span>
+									</p>
+								</a>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-6 col-xl-3">
 						<div class="card bg-c-yellow order-card">
 							<div class="card-body">
-								<h6 class="text-white">Total Posts</h6>
-								<h2 class="text-right text-white">
-									<i class="feather icon-repeat float-left"></i
-									><span>{{$TotalPostNumber}}</span>
-								</h2>
-								<p class="m-b-0">
-									Active<span class="float-right">{{$MonthlyPostNumber}}</span>
-								</p>
+								<a href="{{URL::to('ustaad/post/viewAll')}}">
+									<h6 class="text-white">Total Posts</h6>
+									<h2 class="text-right text-white">
+										<i class="fa fa-portrait float-left"></i
+										><span>{{$TotalPostNumber}}</span>
+									</h2>
+									<p class="m-b-0 text-light">
+										Active<span class="float-right">{{$MonthlyPostNumber}}</span>
+									</p>
+								</a>
 							</div>
 						</div>
 					</div>
+					@php
+						$value =Session::get('admin');
+					@endphp
 					<div class="col-md-6 col-xl-3">
 						<div class="card bg-c-red order-card">
 							<div class="card-body">
-								<h6 class="text-white">Total Brokers</h6>
-								<h2 class="text-right text-white">
-									<i class="feather icon-award float-left"></i
-									><span>{{$TotalBrokerNumber}}</span>
-								</h2>
-								<p class="m-b-0">
-									Active<span class="float-right">{{$MonthlyBrokerNumber}}</span>
-								</p>
+								<a href="{{URL::to('/ustaad/allbrokers')}}/{{$value['memberId']}}">
+									<h6 class="text-white">Total Brokers</h6>
+									<h2 class="text-right text-white">
+										<i class="fa fa-award float-left"></i
+										><span>{{$TotalBrokerNumber}}</span>
+									</h2>
+									<p class="m-b-0 text-light">
+										Active<span class="float-right">{{$MonthlyBrokerNumber}}</span>
+									</p>
+								</a>
 							</div>
 						</div>
 					</div>

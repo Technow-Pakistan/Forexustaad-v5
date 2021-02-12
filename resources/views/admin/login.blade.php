@@ -16,7 +16,18 @@
 
 	<!-- vendor css -->
 	<link rel="stylesheet" href="{{URL::to('/public/assets/assets/css/adminstyle.css')}}">
-
+	
+  		<!-- font-awesome -->
+		  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+		<style>
+			.fa{
+				font-family: "Font Awesome 5 Free", Open Sans;
+				font-weight:501;
+			}
+			.fa{
+				font-family: 'Font Awesome 5 Pro', 'Font Awesome 5 Free','Font Awesome 5 Solids', 'Font Awesome 5 Brands' !important;
+			}
+		</style>
 </head>
 
 <!-- [ auth-signin ] start -->
@@ -34,26 +45,18 @@
 						<form action="" method="post">
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="feather icon-mail"></i></span>
+									<span class="input-group-text"><i class="far fa-envelope"></i></span>
 								</div>
-								<input type="text" name="username" class="form-control" placeholder="Username">
+								<input type="text" name="username" class="form-control" placeholder="Username or Email">
 							</div>
 							<div class="input-group mb-4">
 								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="feather icon-lock"></i></span>
+									<span class="input-group-text"><i class="fa fa-lock"></i></span>
 								</div>
 								<input type="password" name="password" class="form-control" placeholder="Password">
 							</div>
-							<!-- <div class="form-group text-left mt-2">
-								<div class="checkbox checkbox-primary d-inline">
-									<input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" checked="">
-									<label for="checkbox-fill-a1" class="cr"> Save credentials</label>
-								</div>
-							</div> -->
 							<button type="submit" class="btn btn-block btn-primary mb-4">Signin</button>
 						</form>
-						<!-- <p class="mb-2 text-muted">Forgot password? <a href="auth-reset-password.html" class="f-w-400">Reset</a></p>
-						<p class="mb-0 text-muted">Don’t have an account? <a href="auth-signup.html" class="f-w-400">Signup</a></p> -->
 					</div>
 				</div>
 			</div>
@@ -63,9 +66,8 @@
 <!-- [ auth-signin ] end -->
 
 <!-- Required Js -->
-<script src="{{URL::to('/public/assets/assets/js/vendor-all.min.js')}}"></script>
+		<script src="{{URL::to('/public/assets/assets/js/vendor-all.min.js')}}"></script>
 		<script defer src="{{URL::to('/public/assets/node_modules/bootstrap/dist/js/bootstrap.js')}}"></script> 
-<!-- <script src="{{URL::to('/public/AdminAssets/assets/js/waves.min.js')}}"></script> -->
 
 </body>
 </html>

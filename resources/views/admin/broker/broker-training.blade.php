@@ -16,7 +16,7 @@
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
+										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a>
 									</li>
 									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/brokersTraining')}}/{{$value['memberId']}}">All Broker Trainings</a></li>
 									<li class="breadcrumb-item"><a href="#!">Broker Training</a></li>
@@ -64,8 +64,8 @@
                                                         @if($training->pending == 0)
                                                             <span class="badge badge-light-success">Active</span>
                                                             <div class="overlay-edit">
-                                                                <a href="{{URL::to('/ustaad/brokersTrainings/edit')}}/{{$training->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
-                                                                <a href="{{URL::to('/ustaad/brokersTrainings/trash')}}/{{$training->id}}" data-toggle="modal" data-target="#myModal" class="addAction"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
+                                                                <a href="{{URL::to('/ustaad/brokersTrainings/edit')}}/{{$training->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button></a>
+                                                                <a href="{{URL::to('/ustaad/brokersTrainings/trash')}}/{{$training->id}}" data-toggle="modal" data-target="#myModal" class="addAction"><button type="button" class="btn btn-icon btn-danger"><i class="fa fa-trash-alt"></i></button></a>
                                                             </div>
                                                         @elseif($value['memberId'] != 6)
                                                             <form action="{{URL::to('ustaad/brokersTrainings/allow')}}/{{$training->id}}" method="post">
@@ -77,8 +77,8 @@
                                                         @elseif($value['memberId'] == 6)
                                                             <span class="badge badge-light-warning">Pending</span>
                                                             <div class="overlay-edit">
-                                                                <a href="{{URL::to('/ustaad/brokersTrainings/edit')}}/{{$training->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
-                                                                <a href="{{URL::to('/ustaad/brokersTrainings/trash')}}/{{$training->id}}" data-toggle="modal" data-target="#myModal" class="addAction"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
+                                                                <a href="{{URL::to('/ustaad/brokersTrainings/edit')}}/{{$training->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button></a>
+                                                                <a href="{{URL::to('/ustaad/brokersTrainings/trash')}}/{{$training->id}}" data-toggle="modal" data-target="#myModal" class="addAction"><button type="button" class="btn btn-icon btn-danger"><i class="fa fa-trash-alt"></i></button></a>
                                                             </div>
                                                         @endif
 													</td>

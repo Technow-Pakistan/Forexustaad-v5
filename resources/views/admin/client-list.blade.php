@@ -57,9 +57,9 @@
 												<td class="tdLinkScroll">
 													<div class="d-inline-block align-middle">
 														@if($member->image == null)
-															<img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="user" class="img-radius align-top m-r-15" style="width:40px;">
+															<img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="user" class="img-radius align-top m-r-15 hei-40 wid-40">
 														@else
-															<img src="{{URL::to('/storage/app')}}/{{$member->image}}" alt="user" class="img-radius align-top m-r-15" style="width:40px;">
+															<img src="{{URL::to('/storage/app')}}/{{$member->image}}" alt="user" class="img-radius align-top m-r-15 hei-40 wid-40">
 														@endif
 														<div class="d-inline-block">
 															<h6 class="m-b-0">{{$member->name}}</h6>

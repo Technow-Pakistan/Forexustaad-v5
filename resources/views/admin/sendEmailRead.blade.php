@@ -94,16 +94,27 @@
                                                 </a>
                                             </li>
                                         </ul>
-                                        <!-- <a class="email-more-link" data-toggle="collapse" href="#email-more-cont" role="button" aria-expanded="false" aria-controls="email-more-cont">
-                                            <span><i class="feather icon-chevron-down mr-2"></i>More</span>
-                                            <span style="display: none;"><i class="feather icon-chevron-up mr-2"></i>Less</span>
-                                        </a> -->
                                     </div>
                                 <!-- [ email-left section ] end -->
                                 <!-- [ email-right section ] start -->
+                                                    @php
+                                                        $ijk = 0;
+                                                        if(isset($data)){
+                                                            $ijk=1;
+                                                        }
+                                                        if($ijk==1){
+                                                            $replyMessage = $data->getMessages();
+                                                            $countReplies = count($replyMessage);
+                                                        }
+                                                    @endphp
                                 <div class="col-xl-10 col-md-9">
                                     <div class="card">
                                         <div class="card-body">
+                                                <div>
+                                                    <p class="text-right">
+                                                        <a href="{{URL::To('ustaad/contact')}}/{{$urlDelete}}/{{$ijk == 1 ? $data->id : $dataSend->id }}" class="text-secondary"><i class="feather icon-trash-2"></i></a>
+                                                    </p>
+                                                </div>
                                             <div class="email-read">
                                                 <div class="photo-table m-r-10">
                                                     <a href="#">
@@ -111,17 +122,6 @@
                                                     </a>
                                                 </div>
                                                 <div>
-                                                @php
-                                                    $ijk = 0;
-                                                    if(isset($data)){
-                                                        $ijk=1;
-                                                    }
-                                                    if($ijk==1){
-                                                            $replyMessage = $data->getMessages();
-                                                            $countReplies = count($replyMessage);
-                                                       
-                                                    }
-                                                @endphp
                                                     <a href="#">
                                                         <p class="user-name text-dark mb-1"><strong>{{$ijk == 1 ? $data->name : $dataSend->subject }}</strong></p>
                                                     </a>

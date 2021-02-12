@@ -12,7 +12,7 @@
 					}
 				@endphp
 				<div class="cover-img-block">
-					<img src="{{URL::to('storage/app')}}/{{$memberDetail->backImage}}" alt="" class="img-fluid">
+					<img src="{{URL::to('storage/app')}}/{{$memberDetail->backImage}}" alt="" class="img-fluid" style="width: 1280px;height: 340px;">
 					<div class="overlay"></div>
 					<div class="change-cover">
 						<div class="dropdown">
@@ -21,9 +21,9 @@
 								<form action="{{URL::to('ustaad/member/addBackImg')}}/{{$memberDetail->adminTableId}}" name="form1" method="post" enctype="multipart/form-data">
 									<input type="file" name="file_photo" class="submit1" id="file" class="inputfile">
 									<!-- <label for="file"><a class="dropdown-item" href="#"><i class="feather icon-upload-cloud mr-2"></i>upload new</a></label> -->
-									<a class="dropdown-item" href="#"><i class="feather icon-image mr-2"></i>from photos</a>
+									<!-- <a class="dropdown-item" href="#"><i class="feather icon-image mr-2"></i>from photos</a>
 									<a class="dropdown-item" href="#"><i class="feather icon-film mr-2"></i> upload video</a>
-									<a class="dropdown-item" href="#"><i class="feather icon-trash-2 mr-2"></i>remove</a>
+									<a class="dropdown-item" href="#"><i class="feather icon-trash-2 mr-2"></i>remove</a> -->
 								</form>
 							</div>
 						</div>
@@ -59,9 +59,9 @@
 										<form action="{{URL::to('ustaad/member/addUserImg')}}/{{$memberDetail->adminTableId}}" name="form2" method="post" enctype="multipart/form-data">
 											<input type="file" name="user_photo" class="submit2" id="file" class="inputfile">
 											<!-- <label for="file"><a class="dropdown-item" href="#"><i class="feather icon-upload-cloud mr-2"></i>upload new</a></label> -->
-											<a class="dropdown-item" href="#"><i class="feather icon-image mr-2"></i>from photos</a>
+											<!-- <a class="dropdown-item" href="#"><i class="feather icon-image mr-2"></i>from photos</a>
 											<a class="dropdown-item" href="#"><i class="feather icon-film mr-2"></i> upload video</a>
-											<a class="dropdown-item" href="#"><i class="feather icon-trash-2 mr-2"></i>remove</a>
+											<a class="dropdown-item" href="#"><i class="feather icon-trash-2 mr-2"></i>remove</a> -->
 										</form>
 									</div>
 								</div>
