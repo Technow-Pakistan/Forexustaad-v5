@@ -62,7 +62,7 @@ class BrokerTrainingController extends Controller
         }
     }
     public function All(Request $request, $id){
-        $brokerTraining = BrokerTraningModel::where('brokerId',$id)->get();
+        $brokerTraining = BrokerTraningModel::where('brokerId',$id)->where('trash',0)->get();
         return view('admin.broker.broker-training',compact('brokerTraining'));
     }
     public function Add(Request $request){

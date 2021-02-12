@@ -11,7 +11,7 @@
                                     <h5>Client Type</h5>
                                 </div>
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a></li>
                                     <li class="breadcrumb-item"><a href="#!">User</a></li>
                                     <li class="breadcrumb-item"><a href="#!">Client Type</a></li>
                                 </ul>
@@ -32,7 +32,7 @@
                                 <a href="{{$url1}}">
                                     <h6 class="text-white text-center">All Clients</h6>
                                     <h2 class="text-right text-white">
-                                        <i class="feather icon-users float-left"></i
+                                        <i class="fa fa-users float-left"></i
                                         ><span>{{count($totalUsers)}}</span>
                                     </h2>
                                 </a>
@@ -65,7 +65,7 @@
                                     <a href="{{$url}}">
                                         <h6 class="text-white text-center">{{$member->member}} Clients</h6>
                                         <h2 class="text-right text-white">
-                                            <i class="feather icon-users float-left"></i
+                                            <i class="fa fa-users float-left"></i
                                             ><span>{{$numberUsers}}</span>
                                         </h2>
                                     </a>

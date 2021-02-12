@@ -67,7 +67,7 @@ class HomeController extends Controller
     }
     public function webinar(){
         $title = "Webinar";
-        $totalData = MainWebinarModel::orderBy('id','desc')->where('vipMember',0)->get();
+        $totalData = MainWebinarModel::orderBy('id','desc')->where('vipMember',0)->where('status',1)->get();
         return view('home/webinar',compact('totalData','title'));
     }
     public function Construction(){

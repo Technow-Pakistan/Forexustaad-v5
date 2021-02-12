@@ -11,7 +11,7 @@
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
+										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a>
 									</li>
 									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/member/clientList')}}">All Client Users</a></li>
 									<li class="breadcrumb-item">
@@ -77,20 +77,44 @@
                                       </div>
                                     </div>
                                   </div>
-                                            @php
-                                              $emails = explode('@#',$totalClientInfo->addEmail);
-                                              array_shift($emails);
-                                              $mobiles = explode('@#',$totalClientInfo->addMobile);
-                                              array_shift($mobiles);
-                                              $socials = explode('@#',$totalClientInfo->social);
-                                              $socialLinks = explode('@#',$totalClientInfo->socialLink);
-                                            @endphp
+                                  @php
+                                    $emails = explode('@#',$totalClientInfo->addEmail);
+                                    array_shift($emails);
+                                    $mobiles = explode('@#',$totalClientInfo->addMobile);
+                                    array_shift($mobiles);
+                                    $socials = explode('@#',$totalClientInfo->social);
+                                    $socialLinks = explode('@#',$totalClientInfo->socialLink);
+                                  @endphp
                                   <div class="card mt-3">
                                     <ul class="list-group list-group-flush">
                                       @for($i = 0; $i < count($socials); $i++)
-                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                          <h6 class="mb-0">{{$socials[$i]}}</h6>
-                                          <span class="text-secondary">{{$socialLinks[$i]}}</span>
+                                        <li class="list-group-item d-flex justify-content-start align-items-center flex-wrap">
+                                            <a href="{{$socialLinks[$i]}}" target="_blank">
+                                              <span class="mb-0 mr-2" style="font-size:18px">
+                                                @if($socials[$i] == "Facebook")
+                                                  <i class="fab fa-facebook text-primary"></i>
+                                                @elseif($socials[$i] == "Pinterest")
+                                                  <i class="fab fa-pinterest text-primary"></i>
+                                                @elseif($socials[$i] == "Twitter")
+                                                  <i class="fab fa-twitter text-primary"></i>
+                                                @elseif($socials[$i] == "Instagram")
+                                                  <i class="fab fa-instagram-square text-primary"></i>
+                                                @elseif($socials[$i] == "Snapchat")
+                                                  <i class="fab fa-snapchat-square text-primary"></i>
+                                                @elseif($socials[$i] == "Tiktok")
+                                                  <i class="fab fa-tiktok text-primary"></i>
+                                                @elseif($socials[$i] == "Telegam")
+                                                  <i class="fab fa-telegram text-primary"></i>
+                                                @elseif($socials[$i] == "GooglePlus")
+                                                  <i class="fab fa-google-plus text-primary"></i>
+                                                @elseif($socials[$i] == "LinkedIn")
+                                                  <i class="fab fa-linkedin text-primary"></i>
+                                                @else
+                                                  {{$socials[$i]}}
+                                                @endif
+                                              </span>
+                                              <span class="text-secondary" style="word-break: break-all;">{{$socialLinks[$i]}}</span>
+                                            </a>
                                         </li>
                                       @endfor
                                       
