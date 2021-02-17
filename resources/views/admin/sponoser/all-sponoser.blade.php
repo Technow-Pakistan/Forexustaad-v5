@@ -18,7 +18,7 @@
 								<div class="d-flex justify-content-between">
 									<ul class="breadcrumb p-0 m-0 bg-white">
 										<li class="breadcrumb-item">
-											<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
+											<a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a>
 										</li>
 										<li class="breadcrumb-item"><a href="#!">All Sponsors</a></li>
 									</ul>
@@ -61,16 +61,12 @@
 														<span class="badge {{$data->status == 0 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 0 ? 'Active' : 'Deactive'}}</span>
 														<div class="overlay-edit">
 															<a href="{{URL::to('/ustaad/sponsor/edit')}}/{{$data->id}}">
-																<button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button>
+																<button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button>
 															</a>
 															@if($data->status == 0)
-																<a href="{{URL::to('/ustaad/sponsor/delete')}}/{{$data->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal">
-																	<i class="feather icon-trash-2"></i>
-																</a>
+																<button type="button" href="{{URL::to('/ustaad/sponsor/delete')}}/{{$data->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-lock"></i></button>
 															@elseif($data->status == 1)
-																<a href="{{URL::to('/ustaad/sponsor/active')}}/{{$data->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal">
-																	<i class="feather icon-unlock"></i>
-																</a>
+																<button type="button" href="{{URL::to('/ustaad/sponsor/active')}}/{{$data->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock"></i></button>
 															@endif
 														</div>
 													</td>

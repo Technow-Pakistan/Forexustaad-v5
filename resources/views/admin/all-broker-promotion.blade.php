@@ -16,11 +16,10 @@
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
+										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a>
 									</li>
 									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/brokersPromotion')}}/{{$value['memberId']}}">All Broker Promotions</a></li>
 									<li class="breadcrumb-item"><a href="#!">Broker Promotions</a></li>
-									
 								</ul>
 							</div>
 						</div>
@@ -70,8 +69,8 @@
 														@if($news->pending == 0)
 															<span class="badge badge-light-success">Active</span>
 															<div class="overlay-edit">
-																<a href="{{URL::to('/ustaad/brokersPromotions/edit')}}/{{$news->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
-																<a href="{{URL::to('/ustaad/brokersPromotions/trash')}}/{{$news->id}}" class="addAction" data-toggle="modal" data-target="#myModal"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
+																<a href="{{URL::to('/ustaad/brokersPromotions/edit')}}/{{$news->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button></a>
+																<button href="{{URL::to('/ustaad/brokersPromotions/trash')}}/{{$news->id}}" data-toggle="modal" data-target="#myModal" type="button" class="btn btn-icon btn-danger addAction"><i class="fa fa-trash"></i></button>
 															</div>
 														@elseif($value['memberId'] != 6)
 															<span class="badge badge-light-warning">Pending</span>
@@ -82,14 +81,14 @@
 																		<input type="checkbox" class="AllowBroker" name="pending" id="" value="0">
 																	</span>
 																</form>
-																<a href="{{URL::to('/ustaad/brokersPromotions/edit')}}/{{$news->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
-																<a href="{{URL::to('/ustaad/brokersPromotions/trash')}}/{{$news->id}}" data-toggle="modal" data-target="#myModal" class="addAction"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
+																<a href="{{URL::to('/ustaad/brokersPromotions/edit')}}/{{$news->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button></a>
+																<a><button href="{{URL::to('/ustaad/brokersPromotions/trash')}}/{{$news->id}}" data-toggle="modal" data-target="#myModal" type="button" class="btn btn-icon btn-danger addAction"><i class="fa fa-trash"></i></button>
 															</div>
 														@elseif($value['memberId'] == 6)
 															<span class="badge badge-light-warning">Pending</span>
 															<div class="overlay-edit">
-																<a href="{{URL::to('/ustaad/brokersPromotions/edit')}}/{{$news->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
-																<a href="{{URL::to('/ustaad/brokersPromotions/trash')}}/{{$news->id}}" data-toggle="modal" data-target="#myModal" class="addAction"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
+																<a href="{{URL::to('/ustaad/brokersPromotions/edit')}}/{{$news->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button></a>
+																<a><button href="{{URL::to('/ustaad/brokersPromotions/trash')}}/{{$news->id}}" data-toggle="modal" data-target="#myModal" type="button" class="btn btn-icon btn-danger addAction"><i class="fa fa-trash"></i></button>
 															</div>
 														@endif
 														</td>

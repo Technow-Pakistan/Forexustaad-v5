@@ -13,16 +13,20 @@
 								<div class="d-flex justify-content-between">
 									<ul class="breadcrumb p-0 m-0 bg-white">
 										<li class="breadcrumb-item">
-											<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
+											<a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a>
 										</li>
 										<li class="breadcrumb-item"><a href="#!">Brokers List</a></li>
 									</ul>
-									@php
-										$value =Session::get('admin');
-									@endphp
-									@if($value['memberId'] != 6)
-										<a href="{{URL::to('ustaad/broker/addCategory')}}">Add New Category</a>
-									@endif
+									<div>
+										@php
+											$value =Session::get('admin');
+										@endphp
+										@if($value['memberId'] != 6)
+											<a href="{{URL::to('ustaad/broker/addCategory')}}">Add New Category</a> /
+											<a href="{{URL::to('ustaad/brokerReview/new')}}">Add Broker Review</a> /
+										@endif
+											<a href="{{URL::to('ustaad/broker/category')}}">Add New Broker</a>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -53,71 +57,75 @@
 										<tbody>
 											@php $id3=1 @endphp
 											@foreach($broker as $data)
-											@php
-												$category = $data->getCategory();
-												$user = $data->getAdminUser();
-											@endphp
-											<tr  draggable="true">
-												<td>{{$id3}}</td>
-												<td>
-													<div>
-														<img src="{{URL::to('storage/app')}}/{{$data->image}}" alt="" class="img-fluid" width="150">
-													</div>
-												</td>
-												<td>{{$data->title}}</td>
-												<td>{{$category->category}}</td>
-												<td>{{$user->username}}</td>
-												<!-- <td>{{$data->start}}</td>
-												<td>{{$data->end}}</td> -->
-												<td><a class="text-danger" href="{{URL::to('ustaad/brokersDetail')}}/{{$data->id}}"> Click For Details </a></td>
-												@if($value['memberId'] != 6)
-													<td><a class="text-danger" href="{{URL::to('ustaad/brokersReview')}}/{{$data->id}}"> Click For Review </a></td>
+												@php
+													$editData = $data->GetAllowCompanyInformation();
+													$pendingData = $data->GetPendingCompanyInformation();
+													$category = $data->getCategory();
+													$user = $data->getAdminUser();
+												@endphp
+												@if($editData == null)
+													<tr>
+														<td>{{$id3}}</td>
+														<td>
+															<div>
+																<img src="{{URL::to('storage/app')}}/{{$data->image}}" alt="" class="img-fluid" width="150">
+															</div>
+														</td>
+														<td>{{$pendingData == null ? $data->title : $pendingData->title}}</td>
+														<td>{{$category->category}}</td>
+														<td>{{$user->username}}</td>
+														<!-- <td>{{$data->start}}</td>
+														<td>{{$data->end}}</td> -->
+														<td><a class="text-danger" href="{{URL::to('ustaad/brokersDetail')}}/{{$data->id}}"> Click For Details </a></td>
+														@if($value['memberId'] != 6)
+															<td><a class="text-danger" href="{{URL::to('ustaad/brokersReview')}}/{{$data->id}}"> Click For Review </a></td>
+														@endif
+														<td>
+															@php
+																$paymentDate = date('Y-m-d');
+																$paymentDate=date('Y-m-d', strtotime($paymentDate));
+																//echo $paymentDate; // echos today! 
+																$contractDateBegin = date('Y-m-d', strtotime($data->start));
+																$contractDateEnd = date('Y-m-d', strtotime($data->end));
+															@endphp
+															@if($data->pending == 0)
+																<span class="badge {{((($paymentDate >= $contractDateBegin) && ($paymentDate <= $contractDateEnd)) || $data->neverEnd == 1) ? 'badge-light-success' : 'badge-light-danger'}}">{{((($paymentDate >= $contractDateBegin) && ($paymentDate <= $contractDateEnd)) || $data->neverEnd == 1) ? 'Active' : 'Deactive'}}</span>
+																<div class="overlay-edit">
+																	@if($value['memberId'] == 1)
+																		<form action="{{URL::to('ustaad/broker')}}/{{$data->star == 0 ? 'star' : 'unstar'}}/{{$data->id}}" method="post">
+																			<span>
+																				<input type="checkbox" class="AllowBroker hiddenCheckBox" name="pending" id="option{{$id3}}" value="0">
+																				<label for="option{{$id3}}" class="mt-2 mr-2"><i class="fa fa-star {{$data->star == 1 ? 'yellowStar' : ''}}"></i></label>
+																			</span>
+																		</form>
+																	@endif
+																	@if($value['memberId'] == 6)
+																		<a href="{{URL::to('ustaad/editBroker')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button></a>
+																	@endif
+																	<button href="{{URL::to('ustaad/broker/trash')}}/{{$data->id}}"  data-toggle="modal" data-target="#myModal" type="button" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button>
+																</div>
+															@elseif($value['memberId'] != 6)
+																<span class="badge badge-light-warning">Pending</span>
+																<div class="overlay-edit">
+																	<form action="{{URL::to('ustaad/broker/allow')}}/{{$data->id}}" method="post">
+																		<span class="badge badge-light-warning">
+																			Allow
+																			<input type="checkbox" class="AllowBroker" name="pending" id="" value="0">
+																		</span>
+																	</form>
+																	<button href="{{URL::to('ustaad/broker/trash')}}/{{$data->id}}"  data-toggle="modal" data-target="#myModal" type="button" class="btn btn-icon btn-danger addAction"><i class="fa fa-trash"></i></button>
+																</div>
+															@elseif($value['memberId'] == 6)
+																<span class="badge badge-light-warning">Pending</span>
+																<div class="overlay-edit">
+																	<a href="{{URL::to('ustaad/editBroker')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button></a>
+																	<button href="{{URL::to('ustaad/broker/trash')}}/{{$data->id}}"  data-toggle="modal" data-target="#myModal" type="button" class="btn btn-icon btn-danger addAction"><i class="fa fa-trash"></i></button>
+																</div>
+															@endif
+														</td>
+													</tr>
+													@php $id3++ @endphp
 												@endif
-												<td>
-													@php
-														$paymentDate = date('Y-m-d');
-														$paymentDate=date('Y-m-d', strtotime($paymentDate));
-														//echo $paymentDate; // echos today! 
-														$contractDateBegin = date('Y-m-d', strtotime($data->start));
-														$contractDateEnd = date('Y-m-d', strtotime($data->end));
-													@endphp
-													@if($data->pending == 0)
-														<span class="badge {{((($paymentDate >= $contractDateBegin) && ($paymentDate <= $contractDateEnd)) || $data->neverEnd == 1) ? 'badge-light-success' : 'badge-light-danger'}}">{{((($paymentDate >= $contractDateBegin) && ($paymentDate <= $contractDateEnd)) || $data->neverEnd == 1) ? 'Active' : 'Deactive'}}</span>
-														<div class="overlay-edit">
-															@if($value['memberId'] == 1)
-																<form action="{{URL::to('ustaad/broker')}}/{{$data->star == 0 ? 'star' : 'unstar'}}/{{$data->id}}" method="post">
-																	<span>
-																		<input type="checkbox" class="AllowBroker hiddenCheckBox" name="pending" id="option{{$id3}}" value="0">
-																		<label for="option{{$id3}}" class="mt-2 mr-2"><i class="fa fa-star {{$data->star == 1 ? 'yellowStar' : ''}}"></i></label>
-																	</span>
-																</form>
-															@endif
-															@if($value['memberId'] == 6)
-																<a href="{{URL::to('ustaad/editBroker')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
-															@endif
-															<a href="{{URL::to('ustaad/broker/trash')}}/{{$data->id}}"  class="addAction" data-toggle="modal" data-target="#myModal"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
-														</div>
-													@elseif($value['memberId'] != 6)
-														<span class="badge badge-light-warning">Pending</span>
-														<div class="overlay-edit">
-															<form action="{{URL::to('ustaad/broker/allow')}}/{{$data->id}}" method="post">
-																<span class="badge badge-light-warning">
-																	Allow
-																	<input type="checkbox" class="AllowBroker" name="pending" id="" value="0">
-																</span>
-															</form>
-															<a href="{{URL::to('ustaad/broker/trash')}}/{{$data->id}}"  class="addAction" data-toggle="modal" data-target="#myModal"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
-														</div>
-													@elseif($value['memberId'] == 6)
-														<span class="badge badge-light-warning">Pending</span>
-														<div class="overlay-edit">
-															<a href="{{URL::to('ustaad/editBroker')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
-															<a href="{{URL::to('ustaad/broker/trash')}}/{{$data->id}}"  class="addAction" data-toggle="modal" data-target="#myModal"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
-														</div>
-													@endif
-												</td>
-											</tr>
-											@php $id3++ @endphp
 											@endforeach
 										</tbody>
 										

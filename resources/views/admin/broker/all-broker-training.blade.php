@@ -10,13 +10,17 @@
 								<div class="page-header-title">
 									<h5 class="m-b-10">All Broker Traning</h5>
 								</div>
-								<ul class="breadcrumb">
-									<li class="breadcrumb-item">
-										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a>
-									</li>
-									<li class="breadcrumb-item"><a href="#!">All Broker Traning</a></li>
-									
-								</ul>
+								<div class="d-flex justify-content-between">
+									<ul class="breadcrumb p-0 m-0 bg-white">
+										<li class="breadcrumb-item">
+											<a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a>
+										</li>
+										<li class="breadcrumb-item"><a href="#!">All Broker Traning</a></li>
+									</ul>
+									<div>
+										<a href="{{URL::to('ustaad/brokersTrainings/new')}}">Add Broker Traning</a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

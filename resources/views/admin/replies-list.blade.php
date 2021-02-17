@@ -11,7 +11,7 @@
 							<h5>Replies</h5>
 						</div>
 						<ul class="breadcrumb">
-							<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a></li>
+							<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a></li>
 							<li class="breadcrumb-item"><a href="#!">Comment</a></li>
 							<li class="breadcrumb-item"><a href="#!">Replies</a></li>
 						</ul>
@@ -74,8 +74,7 @@
 												<td>
 													<span class="badge badge-light-success">Active</span>
 													<div class="overlay-edit">
-														<!-- <a href="{{URL::to('admin/comment/reply/edit')}}/{{$data->id}}"><button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a> -->
-														<a href="{{URL::to('ustaad/comment/reply/delete')}}/{{$data->id}}"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
+														<a href="{{URL::to('ustaad/comment/reply/delete')}}/{{$data->id}}"><button type="button" class="btn btn-icon btn-danger"><i class="fa fa-trash-2"></i></button></a>
 													</div>
 												</td>
 											</tr>

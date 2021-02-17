@@ -14,7 +14,7 @@
                             <h5 class="m-b-10">Email Read</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
                             <li class="breadcrumb-item"><a href="{{URL::to('ustaad/contact')}}">Contact</a></li>
                             <li class="breadcrumb-item"><a href="#!">Email Read</a></li>
                         </ul>
@@ -44,7 +44,7 @@
                                 <div class="col-xl-10 col-md-9">
                                     <div class="input-group mb-0">
                                         <div class="input-group-prepend">
-                                            <label class="input-group-text" for="inputGroupSelect01"><i class="feather icon-search"></i></label>
+                                            <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-search"></i></label>
                                         </div>
                                         <select class="custom-select" id="inputGroupSelect01">
                                             <option selected>Search ...</option>
@@ -69,28 +69,28 @@
                                         <ul class="mb-2 nav nav-tab flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                             <li class="nav-item mail-section inboxData">
                                                 <a class="nav-link text-left active" href="{{URL::to('ustaad/contact')}}" aria-controls="v-pills-home" aria-selected="false">
-                                                    <span><i class="feather icon-inbox"></i>Inbox</span>
+                                                    <span><i class="fa fa-inbox"></i>Inbox</span>
                                                     <span class="float-right">{{count($totalData)}}</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item mail-section inboxData">
                                                 <a class="nav-link text-left" href="{{URL::to('ustaad/contact')}}">
-                                                    <span><i class="feather icon-star-on"></i> Starred</span>
+                                                    <span><i class="fa fa-star"></i> Starred</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item mail-section inboxData">
                                                 <a class="nav-link text-left" href="{{URL::to('ustaad/contact')}}">
-                                                    <span><i class="feather icon-navigation"></i> Sent Mail</span>
+                                                    <span><i class="fa fa-paper-plane"></i> Sent Mail</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item mail-section inboxData">
                                                 <a class="nav-link text-left" href="{{URL::to('ustaad/contact')}}">
-                                                    <span><i class="feather icon-file-text"></i> Drafts</span>
+                                                    <span><i class="fa fa-file-alt"></i> Drafts</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item mail-section inboxData UnTrashData">
                                                 <a class="nav-link text-left" href="{{URL::to('ustaad/contact')}}">
-                                                    <span><i class="feather icon-trash-2"></i> Trash</span>
+                                                    <span><i class="fa fa-trash"></i> Trash</span>
                                                 </a>
                                             </li>
                                         </ul>
@@ -112,7 +112,7 @@
                                         <div class="card-body">
                                                 <div>
                                                     <p class="text-right">
-                                                        <a href="{{URL::To('ustaad/contact')}}/{{$urlDelete}}/{{$ijk == 1 ? $data->id : $dataSend->id }}" class="text-secondary"><i class="feather icon-trash-2"></i></a>
+                                                        <a href="{{URL::To('ustaad/contact')}}/{{$urlDelete}}/{{$ijk == 1 ? $data->id : $dataSend->id }}" class="text-secondary"><i class="fa fa-trash"></i></a>
                                                     </p>
                                                 </div>
                                             <div class="email-read">

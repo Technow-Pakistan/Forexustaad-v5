@@ -11,7 +11,7 @@
                             <h5 class="m-b-10">Header</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a></li>
                             <li class="breadcrumb-item"><a href="#!">Header</a></li>
                             <li class="breadcrumb-item"><a href="#!">Nav Menus</a></li>
                         </ul>

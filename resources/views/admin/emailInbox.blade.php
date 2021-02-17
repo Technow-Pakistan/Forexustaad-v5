@@ -11,7 +11,7 @@
                             <h5 class="m-b-10">Inbox</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a></li>
                             <li class="breadcrumb-item"><a href="#!">Contact</a></li>
                             <li class="breadcrumb-item"><a href="#!">Inbox</a></li>
                         </ul>
@@ -42,7 +42,7 @@
                                     <div class="col-xl-10 col-md-9">
                                         <div class="input-group mb-0">
                                             <div class="input-group-prepend">
-                                                <label class="input-group-text" for="inputGroupSelect01"><i class="feather icon-search"></i></label>
+                                                <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-search"></i></label>
                                             </div>
                                             <select class="custom-select" id="inputGroupSelect01">
                                                 <option selected>Search ...</option>
@@ -67,64 +67,38 @@
                                         <ul class="mb-2 nav nav-tab flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                             <li class="nav-item mail-section inboxData">
                                                 <a class="nav-link text-left active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="false">
-                                                    <span><i class="feather icon-inbox"></i>Inbox</span>
+                                                    <span><i class="fa fa-envelope"></i>Inbox</span>
                                                     <span class="float-right">{{count($totalData)}}</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item mail-section inboxData">
                                                 <a class="nav-link text-left" id="v-pills-starred-tab" data-toggle="pill" href="#v-pills-starred" role="tab">
-                                                    <span><i class="feather icon-star-on"></i> Starred</span>
+                                                    <span><i class="fa fa-star"></i> Starred</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item mail-section inboxData">
                                                 <a class="nav-link text-left" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-mail" role="tab">
-                                                    <span><i class="feather icon-navigation"></i> Sent Mail</span>
+                                                    <span><i class="fa fa-paper-plane"></i> Sent Mail</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item mail-section inboxData">
                                                 <a class="nav-link text-left" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-draft" role="tab">
-                                                    <span><i class="feather icon-file-text"></i> Drafts</span>
+                                                    <span><i class="fa fa-file-alt"></i> Drafts</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item mail-section inboxData UnTrashData">
                                                 <a class="nav-link text-left" id="v-pills-Trash-tab" data-toggle="pill" href="#v-pills-Trash" role="tab">
-                                                    <span><i class="feather icon-trash-2"></i> Trash</span>
+                                                    <span><i class="fa fa-trash"></i> Trash</span>
                                                 </a>
                                             </li>
                                         </ul>
-                                        <!-- <a class="email-more-link" data-toggle="collapse" href="#email-more-cont" role="button" aria-expanded="false" aria-controls="email-more-cont">
-                                            <span><i class="feather icon-chevron-down mr-2"></i>More</span>
-                                            <span style="display: none;"><i class="feather icon-chevron-up mr-2"></i>Less</span>
-                                        </a> -->
-                                        <div class="collapse" id="email-more-cont">
-                                            <ul class="nav nav-tab flex-column nav-pills">
-                                                <li class="nav-item mail-section">
-                                                    <a class="nav-link text-left">
-                                                        <span><i class="feather icon-zap"></i> Important</span>
-                                                        <span class="float-right">6</span>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item mail-section">
-                                                    <a class="nav-link text-left">
-                                                        <span><i class="feather icon-message-circle"></i> Chats</span>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item mail-section">
-                                                    <a class="nav-link text-left">
-                                                        <span><i class="feather icon-alert-triangle"></i> Spam</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
                                     </div>
                                     <!-- [ inbox-left section ] end -->
                                     <!-- [ inbox-right section ] start -->
                                     <div class="col-xl-10 col-md-9 inbox-right">
                                         <div class="email-btn">
-                                            <!-- <button type="button" class="btn waves-effect waves-light btn-icon btn-rounded btn-outline-secondary mb-2"><i class="feather icon-alert-circle"></i></button> -->
-                                            <!-- <button type="button" class="btn waves-effect waves-light btn-icon btn-rounded btn-outline-secondary mb-2"><i class="feather icon-inbox"></i></button> -->
-                                            <button type="submit" class="btn waves-effect waves-light btn-icon btn-rounded btn-outline-secondary mb-2 "><i class="feather icon-trash-2"></i></button>
-                                            <button type="submit" class="btn waves-effect waves-light btn-icon btn-rounded btn-outline-secondary mb-2" id="UnTrashData"><i class="feather icon-refresh-ccw"></i></button>
+                                            <button type="submit" class="btn waves-effect waves-light btn-icon btn-rounded btn-outline-secondary mb-2 "><i class="fa fa-trash"></i></button>
+                                            <button type="submit" class="btn waves-effect waves-light btn-icon btn-rounded btn-outline-secondary mb-2" id="UnTrashData"><i class="fa fa-trash-restore"></i></button>
                                         </div>
                                         <div class="tab-content p-0" id="v-pills-tabContent">
                                             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
@@ -147,7 +121,7 @@
                                                                                                 <label for="checkbox-s-infill-{{$countCheck}}" class="cr"></label>
                                                                                             </div>
                                                                                         </div>
-                                                                                        <a href="{{URL::to('/ustaad/contact/starMessage')}}/{{$data->id}}"><i class="feather {{$data->star == 1 ? 'icon-star-on text-c-yellow' : 'icon-star'}} ml-2"></i></a>
+                                                                                        <a href="{{URL::to('/ustaad/contact/starMessage')}}/{{$data->id}}"><i class="{{$data->star == 1 ? 'fa fa-star text-c-yellow' : 'far fa-star'}} ml-2"></i></a>
                                                                                     </div>
                                                                                 </td>
                                                                                 <td><a href="{{URL::to('ustaad/contact/emailRead')}}/{{$data->id}}">{{$data->email}}</a></td>
@@ -180,7 +154,7 @@
                                                                                                 <label for="checkbox-s-infill-{{$countCheck}}" class="cr"></label>
                                                                                             </div>
                                                                                         </div>
-                                                                                        <a href="{{URL::to('/ustaad/contact/starMessage')}}/{{$data->id}}"><i class="feather icon-star-on text-c-yellow ml-2"></i></a>
+                                                                                        <a href="{{URL::to('/ustaad/contact/starMessage')}}/{{$data->id}}"><i class="fa fa-star text-c-yellow ml-2"></i></a>
                                                                                     </div>
                                                                                 </td>
                                                                                 <td><a href="{{URL::to('ustaad/contact/emailRead')}}/{{$data->id}}">{{$data->email}}</a></td>

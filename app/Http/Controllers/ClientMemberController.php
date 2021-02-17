@@ -18,7 +18,7 @@ class ClientMemberController extends Controller
         }else{
             $memberData = ClientRegistrationModel::orderBy('id','desc')->where('memberType',$id)->get();
         }
-        return view('admin.client-list',compact("memberData"));
+        return view('admin.client-list',compact("memberData",'id'));
     }
     public function Delete(Request $request, $id){
         $memberData = ClientRegistrationModel::where('id',$id)->first();

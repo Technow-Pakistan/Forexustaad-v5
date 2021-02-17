@@ -11,7 +11,7 @@
 							<h5>User List</h5>
 						</div>
 						<ul class="breadcrumb">
-							<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a></li>
+							<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a></li>
 							<li class="breadcrumb-item"><a href="#!">user</a></li>
 							<li class="breadcrumb-item"><a href="#!">User list</a></li>
 						</ul>
@@ -64,13 +64,13 @@
 												<td>
 													<span class="badge {{$member->status == 1 ? 'badge-light-success' : 'badge-light-danger'}}">{{$member->status == 1 ? 'Active' : 'Deactive'}}</span>
 													<div class="overlay-edit">
-														<a href="{{URL::to('ustaad/member/edit')}}/{{$member->id}}"><button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
+														<a href="{{URL::to('ustaad/member/edit')}}/{{$member->id}}"><button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button></a>
 														@if($member->status == 1)
-															<a href="{{URL::to('/ustaad/member/deactive')}}/{{$member->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"><i class="feather icon-trash-2"></i></a>
+															<button type="button" href="{{URL::to('/ustaad/member/deactive')}}/{{$member->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash"></i></button>
 														@elseif($member->status == 0)
-															<a href="{{URL::to('/ustaad/member/active')}}/{{$member->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal">
-																	<i class="feather icon-unlock"></i>
-																</a>
+															<button type="button" href="{{URL::to('/ustaad/member/active')}}/{{$member->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal">
+																<i class="fa fa-unlock"></i>
+															</button>
 														@endif
 													</div>
 												</td>
