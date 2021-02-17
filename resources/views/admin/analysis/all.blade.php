@@ -63,11 +63,9 @@
 														<div class="overlay-edit">
 															<a href="{{URL::to('/ustaad/analysis/edit')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button></a>
 															@if($data->status == 1)
-																<a href="{{URL::to('/ustaad/analysis/deactive')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-lock"></i></button></a>
+																<button href="{{URL::to('/ustaad/analysis/deactive')}}/{{$data->id}}" type="button" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-lock"></i></button>
 															@elseif($data->status == 0)
-																<a href="{{URL::to('/ustaad/analysis/active')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal">
-																	<i class="fa fa-unlock"></i></button>
-																</a>
+																<button href="{{URL::to('/ustaad/analysis/active')}}/{{$data->id}}" type="button" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock"></i></button>
 															@endif
 														</div>
 													</td>

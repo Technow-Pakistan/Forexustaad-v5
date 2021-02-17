@@ -20,7 +20,6 @@
 									</li>
 									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/brokersTraining')}}/{{$value['memberId']}}">All Broker Trainings</a></li>
 									<li class="breadcrumb-item"><a href="#!">Broker Training</a></li>
-									
 								</ul>
 							</div>
 						</div>

@@ -15,7 +15,7 @@
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
+										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a>
 									</li>
 									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/allbrokers')}}/{{$value['memberId']}}">All Brokers</a></li>
 									<li class="breadcrumb-item">
@@ -1046,13 +1046,13 @@
 												<a href="{{URL::to('ustaad/editBroker')}}/{{$id}}">
 													<input type="submit" id="doaction" class="btn btn-outline-danger" value="Edit">
 												</a>
-												<!-- @if($value['memberId'] == 1)
+												@if($value['memberId'] == 1)
 													@if($broker1->pending == 1)
 														<a href="{{URL::to('ustaad/broker/allow')}}/{{$id}}" class="btn btn-outline-primary">
 															Allow
 														</a>
 													@endif
-												@endif -->
+												@endif
 											</div>
 										</div>
 									</div>

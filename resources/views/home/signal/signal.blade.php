@@ -4,17 +4,7 @@
    <section class="after_banner_content_area">
       <div class="container">
          <div class="row justify-content-center">
-            @php
-            if(Session::has('error')){
-            $error =Session::get('error');
-            }
-            @endphp
-            @isset($error)
-            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-               <div class="alert alert-danger">{{$error}}</div>
-               @php Session::pull('error') @endphp
-            </div>
-            @endisset
+            
             <div class="col-lg-3 col-md-6 col-sm-12 order-2 order-lg-1">
                @include('inc.home-left-sidebar')
             </div>
@@ -118,10 +108,10 @@
                                           <td colspan="2" class="pl-0">
                                              @if($go == 0)
                                                 @if($data->selectUser == "Register User" && !Session::has('client'))
-                                                   <a href="#!" onclick="snackbar()">View Signal</a>
+                                                   <a href="#!"  class="LoginButton" data-toggle="modal" data-target="#requestQuoteModal">View Signal</a>
                                                 @elseif($data->selectUser == "Premium User")
                                                    @if(!Session::has('client'))
-                                                      <a href="#!" onclick="snackbar()">View Signal</a>
+                                                      <a href="#!"  class="LoginButton" data-toggle="modal" data-target="#requestQuoteModal">View Signal</a>
                                                    @elseif(isset($loginClientData->memberType))
                                                       @if($loginClientData->memberType == 1)
                                                          <a href="#!" onclick="snackbar1()">View Signal</a>

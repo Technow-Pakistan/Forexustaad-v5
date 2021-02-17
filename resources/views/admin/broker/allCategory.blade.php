@@ -79,7 +79,7 @@
 														@if($data->active == 0)
                                                             <i class="fa fa-lock text-danger addAction" ></i>
                                                         @else
-                                                            <i class="fa fa-unlock text-success"></i>
+                                                            <i class="fa fa-unlock text-success addAction"></i>
                                                         @endif
 													</a>
 												</td>

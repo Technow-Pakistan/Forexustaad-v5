@@ -12,7 +12,7 @@
                             <h5 class="m-b-10">Compose Email</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a></li>
                             <li class="breadcrumb-item"><a href="{{URL::to('ustaad/contact')}}">Contact</a></li>
                             <li class="breadcrumb-item"><a href="#!">Compose Email</a></li>
                         </ul>

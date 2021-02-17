@@ -1,6 +1,5 @@
 @php
 	$value =Session::get('admin');
-	$icount = 0;
 @endphp
 @include('admin.include.header')
 
@@ -18,7 +17,7 @@
 								<div class="d-flex justify-content-between">
 									<ul class="breadcrumb p-0 m-0 bg-white">
 										<li class="breadcrumb-item">
-											<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
+											<a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a>
 										</li>
 										<li class="breadcrumb-item"><a href="#!">All Fundamental</a></li>
 									</ul>
@@ -36,46 +35,47 @@
 						<div class="card user-profile-list">
 							<div class="card-body">
 								<div class="dt-responsive table-responsive">
-									<table id="user-list-table" class="table nowrap">
-										<thead>
-											<tr>
-												<th>Id</th>
-												<th>Image</th>
-												<th>Title</th>
-												<th>Date</th>
-												<th>Status</th>
-											</tr>
-										</thead>
-										<tbody>
-											@foreach($Fundamental as $data)
-												@php $icount++; @endphp
-												<tr >
-                                                    <td>{{$icount}}</td>
-													<td>
-														<div>
-															<img src="{{URL::to('storage/app')}}/{{$data->image}}" alt="" class="img-fluid" width="150">
-														</div>
-													</td>
-													<td>{{$data->title}}</td>
-													<td>{{$data->created_at->format('Md, Y')}}</td>
-													<td>
-                                                        <span class="badge {{$data->status == 1 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 1 ? 'Active' : 'Deactive'}}</span>
-														<div class="overlay-edit">
-															<a href="{{URL::to('/ustaad/fundamental/edit')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a>
-															@if($data->status == 1)
-																<a href="{{URL::to('/ustaad/fundamental/deactive')}}/{{$data->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"><i class="feather icon-trash-2"></i></a>
-															@elseif($data->status == 0)
-																<a href="{{URL::to('/ustaad/fundamental/active')}}/{{$data->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal">
-																	<i class="feather icon-unlock"></i>
-																</a>
-															@endif
-														</div>
-													</td>
+									<form action="{{URL::to('/ustaad/fundamental/order')}}" method="post">
+										<table id="user-list-table" class="table nowrap">
+											<thead>
+												<tr>
+													<th>Id</th>
+													<th>Image</th>
+													<th>Title</th>
+													<th>Date</th>
+													<th>Status</th>
 												</tr>
-											@endforeach
-										</tbody>
-										
-									</table>
+											</thead>
+											<tbody>
+												@foreach($Fundamental as $data)
+													<tr draggable="true" ondragstart="dragit(event)" ondragover="dragover(event)">
+														<td>
+															{{$data->position}}
+															<input type="hidden" name="position[]" value="{{$data->id}}">
+														</td>
+														<td>
+																<img src="{{URL::to('storage/app')}}/{{$data->image}}" alt="" class="img-fluid" width="150">
+													
+														</td>
+														<td>{{$data->title}}</td>
+														<td>{{$data->created_at->format('Md, Y')}}</td>
+														<td>
+															<span class="badge {{$data->status == 1 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 1 ? 'Active' : 'Deactive'}}</span>
+															<div class="overlay-edit">
+																<a href="{{URL::to('/ustaad/fundamental/edit')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button></a>
+																@if($data->status == 1)
+																	<button href="{{URL::to('/ustaad/fundamental/deactive')}}/{{$data->id}}" type="button"  class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-lock"></i></button>
+																@elseif($data->status == 0)
+																	<button type="button" href="{{URL::to('/ustaad/fundamental/active')}}/{{$data->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock"></i></button>
+																@endif
+															</div>
+														</td>
+													</tr>
+												@endforeach
+											</tbody>
+										</table>
+										<input type="submit" class="btn btn-primary" value="Submit">
+									</form>
 								</div>
 							</div>
 						</div>

@@ -16,7 +16,7 @@
 					<div class="overlay"></div>
 					<div class="change-cover">
 						<div class="dropdown">
-							<a class="drp-icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon feather icon-camera"></i></a>
+							<a class="drp-icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon fa fa-camera"></i></a>
 							<div class="dropdown-menu">
 								<form action="{{URL::to('ustaad/member/addBackImg')}}/{{$memberDetail->adminTableId}}" name="form1" method="post" enctype="multipart/form-data">
 									<input type="file" name="file_photo" class="submit1" id="file" class="inputfile">
@@ -72,15 +72,15 @@
 						<div class="col-md-8 mt-md-4">
 							<div class="row">
 								<div class="col-md-6">
-									<a href="#!" class="mb-1 text-muted d-flex align-items-end text-h-primary"><i class="feather icon-globe mr-2 f-18"></i>{{$memberDetail->website}}</a>
+									<a href="#!" class="mb-1 text-muted d-flex align-items-end text-h-primary"><i class="fa fa-globe mr-2 f-18"></i>{{$memberDetail->website}}</a>
 									<div class="clearfix"></div>
-									<a href="mailto:demo@domain.com" class="mb-1 text-muted d-flex align-items-end text-h-primary"><i class="feather icon-mail mr-2 f-18"></i>{{$member->email}}</a>
+									<a href="mailto:demo@domain.com" class="mb-1 text-muted d-flex align-items-end text-h-primary"><i class="far fa-envelope mr-2 f-18"></i>{{$member->email}}</a>
 									<div class="clearfix"></div>
-									<a href="#!" class="mb-1 text-muted d-flex align-items-end text-h-primary"><i class="feather icon-phone mr-2 f-18"></i>{{$memberDetail->mobile}}</a>
+									<a href="#!" class="mb-1 text-muted d-flex align-items-end text-h-primary"><i class="fa fa-phone-alt mr-2 f-18"></i>{{$memberDetail->mobile}}</a>
 								</div>
 								<div class="col-md-6">
 									<div class="media">
-										<i class="feather icon-map-pin mr-2 mt-1 f-18"></i>
+										<i class="fa fa-map-marker-alt mr-2 mt-1 f-18"></i>
 										<div class="media-body">
 											<p class="mb-0 text-muted">{{$memberDetail->address}}</p>
 											<!-- <p class="mb-0 text-muted">Baltimore, near MD Tower Maryland,</p>

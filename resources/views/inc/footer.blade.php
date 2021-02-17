@@ -363,8 +363,8 @@
                       </div>
                     </div>
                         <input type="hidden" name="token" id="token" value="">
-                      <div class="form-group text-left">
-                        <button type="submit" class="btn btn-primary text-uppercase quote_send_msg" data-type="quote">Register</button>
+                      <div class="form-group text-left ml-3">
+                        <button type="submit" class="btn btn-primary text-uppercase quote_send_msg mr-4" data-type="quote">Register</button>
                         <span class="btn btn-primary text-uppercase quote_send_msg LoginButton">Login</span>
                         <span class="text-danger RegistrationError" id="RegistrationErrorChecker"></span>
                       </div>
@@ -382,8 +382,8 @@
                     <div class="form-group">
                       <input type="password" class="form-control text-gray explore_form name abc_into passwordHide" placeholder="Enter Password" name="password" id="quote_name" required>
                     </div>
-                    <div class="form-group text-left">
-                      <button type="submit" class="btn btn-primary text-uppercase quote_send_msg ForgetButton" data-type="quote">Login</button>
+                    <div class="form-group text-left ml-3">
+                      <button type="submit" class="btn btn-primary text-uppercase quote_send_msg ForgetButton mr-4" data-type="quote">Login</button>
                       <span class="btn btn-primary text-uppercase quote_send_msg RegistrationButton">Registration</span><br>
                       <a href="#" class="text-danger ForgetPassword">Forget Password</a>
                       <span class="text-danger LoginError"></span>
@@ -711,5 +711,8 @@
       </script>
     @endif
   @endif
+  <script>
+    $(".addthis_button_expanded").attr("class","addthis_button_expanded1");
+  </script>
 </body>
 </html>

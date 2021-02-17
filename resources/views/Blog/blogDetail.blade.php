@@ -16,12 +16,15 @@
                             <ul class="">
                                 <li><i class="fa fa-user"></i> Raheel Nawaz</li>
                                 <li><i class="fa fa-clock-o"></i> {{$BlogDetail->publishDate}}</li>
-                                <li><i class="fa fa-folder"></i> Forex Education</li>
+                                <li>
+                <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                <div class="addthis_inline_share_toolbox_sv9g"></div>
+                <!-- <i class="fa fa-folder"></i> Forex Education -->
+                </li>
                                 <!-- <li><i class="fa fa-comments"></i> 8 Comments </li>
                                 <li><i class="fa fa-eye"></i> 4,106 Views</li> -->
                             </ul>
                         </div>
-                        
                         <div class="pt-3">
                             @php 
                                 $Description = html_entity_decode($BlogDetail->detailDescription);
@@ -41,11 +44,26 @@
                                 <div class="body_comment">
                                     <div class="row">
                                         <div class="avatar_comment col-md-2">
-                                            <img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="avatar"/>
+                                                @php
+                                                $img = URL::to('/public/assets/assets/img/user1.jpg');
+                                                if(Session::has('client')){
+                                                    $value = Session::get('client');
+                                                    if($value['image'] != null){
+                                                    $img = URL::to('/storage/app') . "/" . $value['image'];
+                                                    }
+                                                }
+                                                @endphp
+                                            <img src="{{$img}}" alt="avatar"/>
                                         </div>
                                         <div class="box_comment col-md-10">
                                             <form action="{{URL::to('/blog/comment/add')}}" method="post">
+                                                @if(!Session::has('client'))
+                                                <a href="#" class="LoginButton" data-toggle="modal" data-target="#requestQuoteModal">
+                                                    <textarea class="commentar" placeholder="Add a comment..."></textarea>
+                                                </a>
+                                                @else
                                                 <textarea class="commentar" name="comment" placeholder="Add a comment..." required></textarea>
+                                                @endif
                                                 <div class="box_post">
                                                     <div class="pull-right">
                                                         <span>

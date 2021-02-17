@@ -10,31 +10,39 @@
 			<div class="col-lg-9 col-md-12 order-1 order-lg-2">
                   <div class="row">
                       <div class="col-md-8">
-                        <div class="news_us">
-                            <div class="content_area_heading large-heading text-center">
+                          @if($category == "Basic")
+                            <div class="row">
+                              <div class="col-sm-6">
+                          @endif
+                                <div class="news_us">
+                                    <div class="content_area_heading large-heading text-center">
 
-                                <h1 class="heading_title wow animated fadeInUp">
-                                    {{$category == "Habbit" ? '50 ' . $category : $category}} Trainning
-                                </h1>
-                                <div class="heading_border wow animated fadeInUp">
-                                    <span class="one"></span><span class="two"></span><span class="three"></span>
-                                </div>
-                            </div>
-                        </div>
-                        @if($category == "Basic")
-                            <div class="news_us">
-                                <div class="content_area_heading large-heading text-right">
-                                    <a href="{{URL::to('blog-post.html')}}">
                                         <h1 class="heading_title wow animated fadeInUp">
-                                            {{$category == "Basic" ? 'Blog View' : ''}}
+                                            {{$category == "Habbit" ? '50 ' . $category : $category}} Trainning
                                         </h1>
                                         <div class="heading_border wow animated fadeInUp">
                                             <span class="one"></span><span class="two"></span><span class="three"></span>
                                         </div>
-                                    </a>
+                                    </div>
                                 </div>
+                          @if($category == "Basic")
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="news_us">
+                                    <div class="content_area_heading large-heading text-center">
+                                        <a href="{{URL::to('blog-post.html')}}">
+                                            <h1 class="heading_title wow animated fadeInUp">
+                                              {{$category == "Basic" ? 'Blog View' : ''}}
+                                            </h1>
+                                            <div class="heading_border wow animated fadeInUp">
+                                              <span class="one"></span><span class="two"></span><span class="three"></span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                              </div>
                             </div>
-                        @endif
+                          @endif
                         <!-- <h4 class="text-center mt-5">
                             Advance Trainning
                         </h4> -->
@@ -224,11 +232,26 @@
                                 <div class="body_comment">
                                   <div class="row">
                                     <div class="avatar_comment col-md-2">
-                                    <img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="avatar"/>
+                                        @php
+                                          $img = URL::to('/public/assets/assets/img/user1.jpg');
+                                          if(Session::has('client')){
+                                            $value = Session::get('client');
+                                            if($value['image'] != null){
+                                              $img = URL::to('/storage/app') . "/" . $value['image'];
+                                            }
+                                          }
+                                        @endphp
+                                        <img src="{{$img}}" alt="avatar"/>
                                     </div>
                                     <div class="box_comment col-md-10">
                                       <form action="{{URL::to('/advance/comment/add')}}" method="post">
-                                        <textarea class="commentar" name="comment" placeholder="Add a comment..." required></textarea>
+                                        @if(!Session::has('client'))
+                                          <a href="#" class="LoginButton" data-toggle="modal" data-target="#requestQuoteModal">
+                                            <textarea class="commentar" placeholder="Add a comment..."></textarea>
+                                          </a>
+                                        @else
+                                          <textarea class="commentar" name="comment" placeholder="Add a comment..." required></textarea>
+                                        @endif
                                         <div class="box_post">
                                           <div class="pull-right">
                                           <span>

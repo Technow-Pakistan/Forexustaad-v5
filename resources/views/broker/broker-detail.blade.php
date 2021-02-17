@@ -22,7 +22,7 @@
                         <table cellpadding="0" cellspacing="0" class="tbl-accordion-nested">
                            <thead>
                               <tr>
-                                 <td colspan="4" class="tbl-accordion-section">COMPANY INFORMATION</td>
+                                 <td colspan="4" class="tbl-accordion-section">COMPANY INFORMATION <span class="BrokerDetailIconAdjust" check="open"><i class="fa fa-chevron-right"></i></span></td>
                               </tr>
                            <thead>
                            <tbody>
@@ -77,7 +77,7 @@
                         <table cellpadding="0" cellspacing="0" class="tbl-accordion-nested">
                            <thead>
                               <tr>
-                                 <td colspan="4" class="tbl-accordion-section">DEPOSIT & WITHDRAWAL</td>
+                                 <td colspan="4" class="tbl-accordion-section">DEPOSIT & WITHDRAWAL <span class="BrokerDetailIconAdjust" check="open"><i class="fa fa-chevron-right"></i></span></td>
                               </tr>
                            <thead>
                            <tbody>
@@ -102,7 +102,7 @@
                         <table cellpadding="0" cellspacing="0" class="tbl-accordion-nested">
                            <thead>
                               <tr>
-                                 <td colspan="4" class="tbl-accordion-section">COMMISSIONS & FEES</td>
+                                 <td colspan="4" class="tbl-accordion-section">COMMISSIONS & FEES <span class="BrokerDetailIconAdjust" check="open"><i class="fa fa-chevron-right"></i></span></td>
                               </tr>
                            <thead>
                            <tbody>
@@ -127,7 +127,7 @@
                         <table cellpadding="0" cellspacing="0" class="tbl-accordion-nested">
                            <thead>
                               <tr>
-                                 <td colspan="4" class="tbl-accordion-section">ACCOUNT INFORMATION</td>
+                                 <td colspan="4" class="tbl-accordion-section">ACCOUNT INFORMATION <span class="BrokerDetailIconAdjust" check="open"><i class="fa fa-chevron-right"></i></span></td>
                               </tr>
                            <thead>
                            <tbody>
@@ -230,7 +230,7 @@
                         <table cellpadding="0" cellspacing="0" class="tbl-accordion-nested">
                            <thead>
                               <tr>
-                                 <td colspan="4" class="tbl-accordion-section">TRADABLE ASSETS</td>
+                                 <td colspan="4" class="tbl-accordion-section">TRADABLE ASSETS <span class="BrokerDetailIconAdjust" check="open"><i class="fa fa-chevron-right"></i></span></td>
                               </tr>
                            <thead>
                            <tbody>
@@ -357,7 +357,7 @@
                         <table cellpadding="0" cellspacing="0" class="tbl-accordion-nested">
                            <thead>
                               <tr>
-                                 <td colspan="4" class="tbl-accordion-section">TRADING PLATFORMS</td>
+                                 <td colspan="4" class="tbl-accordion-section">TRADING PLATFORMS <span class="BrokerDetailIconAdjust" check="open"><i class="fa fa-chevron-right"></i></span></td>
                               </tr>
                            <thead>
                            <tbody>
@@ -522,7 +522,7 @@
                         <table cellpadding="0" cellspacing="0" class="tbl-accordion-nested">
                            <thead>
                               <tr>
-                                 <td colspan="4" class="tbl-accordion-section">CUSTOMER SERVICE</td>
+                                 <td colspan="4" class="tbl-accordion-section">CUSTOMER SERVICE <span class="BrokerDetailIconAdjust" check="open"><i class="fa fa-chevron-right"></i></span></td>
                               </tr>
                            <thead>
                            <tbody>
@@ -559,7 +559,7 @@
                         <table cellpadding="0" cellspacing="0" class="tbl-accordion-nested">
                            <thead>
                               <tr>
-                                 <td colspan="4" class="tbl-accordion-section">RESEARCH & EDUCATION</td>
+                                 <td colspan="4" class="tbl-accordion-section">RESEARCH & EDUCATION <span class="BrokerDetailIconAdjust" check="open"><i class="fa fa-chevron-right"></i></span></td>
                               </tr>
                            <thead>
                            <tbody>
@@ -626,7 +626,7 @@
                         <table cellpadding="0" cellspacing="0" class="tbl-accordion-nested">
                            <thead>
                               <tr>
-                                 <td colspan="4" class="tbl-accordion-section">PROMOTIONS</td>
+                                 <td colspan="4" class="tbl-accordion-section">PROMOTIONS <span class="BrokerDetailIconAdjust" check="open"><i class="fa fa-chevron-right"></i></span></td>
                               </tr>
                            <thead>
                            <tbody>
@@ -693,6 +693,20 @@
    }
 </style>
 <script>
+   $('.tbl-accordion-nested').on("click",function(){
+      var BrokerDetailIconAdjust = $(this).find('.BrokerDetailIconAdjust');
+      var data3w = $(BrokerDetailIconAdjust).attr("check");
+      console.log(data3w);
+      if(data3w == "open"){
+         $(BrokerDetailIconAdjust).css("transform","rotate(0deg)");
+         $(BrokerDetailIconAdjust).attr("check","close");
+         console.log("end");
+      }else{
+         $(BrokerDetailIconAdjust).css("transform","rotate(90deg)");
+         $(BrokerDetailIconAdjust).attr("check","open");
+         console.log("hello");
+      }
+   });
    $('.tbl-accordion-nested').each(function(){
    var thead = $(this).find('thead');
    var tbody = $(this).find('tbody');

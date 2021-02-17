@@ -161,7 +161,7 @@
 					<div class="col-md-6 col-lg-4">
 						<div class="card seo-card overflow-hidden">
 							<div class="card-body seo-statustic">
-								<i class="feather icon-save f-20 text-c-red"></i>
+								<i class="fa fa-save f-20 text-c-red"></i>
 								<h5 class="mb-1">65%</h5>
 								<p>Memory</p>
 							</div>

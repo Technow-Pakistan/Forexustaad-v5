@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-lg-6 col-md-12 order-1 order-lg-2">
                   	<div class="row ">
-                  		<div class="col-sm-12">
+                  		<div class="col-sm-6">
                     		<div class="news_us">
                         		<div class="content_area_heading large-heading text-center">
                             
@@ -21,8 +21,10 @@
                             		</div>
                         		</div>
                     		</div>
+                    	</div>
+                    	<div class="col-sm-6">
                     		<div class="news_us">
-                        		<div class="content_area_heading large-heading text-right">
+                        		<div class="content_area_heading large-heading text-center">
 									<a href="{{URL::to('training/Basic/all')}}">
 										<h1 class="heading_title wow animated fadeInUp">
 											Basic Training

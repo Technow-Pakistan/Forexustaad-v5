@@ -11,7 +11,7 @@
                             <h5 class="m-b-10">{{$id}}</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a></li>
                             <li class="breadcrumb-item"><a href="#!">Gallery</a></li>
                             <li class="breadcrumb-item"><a href="#!">{{$id}}</a></li>
                         </ul>
@@ -60,8 +60,8 @@
                         @endphp
                         <div class="card">
                             <img class="img-fluid card-img-top mainImageButton popupOpenDetail" id="popup-open" src="{{URL::to('storage/app')}}/{{$data}}" alt="Card image" title="Image Detail" popupData="{{$extension[$num]}}@/{{$fileImageSize}} Kb@/{{$dimensions[0]}} pixels@/{{$dimensions[1]}} pixels@/{{URL::to('storage/app')}}/{{$data}}">
-                            <a href="{{URL::to('/ustaad/gallery/trash')}}/{{$title}}" class="deleteImageButton addAction" data-toggle="modal" data-target="#myModal"><i class="feather icon-trash text-danger"></i></a>
-                            <a href="{{URL::to('/ustaad/gallery/edit')}}/{{$title}}" class="editImageButton"><i class="feather icon-edit text-primary"></i></a>
+                            <a href="{{URL::to('/ustaad/gallery/trash')}}/{{$title}}" class="deleteImageButton addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash text-danger"></i></a>
+                            <a href="{{URL::to('/ustaad/gallery/edit')}}/{{$title}}" class="editImageButton"><i class="fa fa-edit text-primary"></i></a>
                         </div>
                     @endforeach
                 </div>

@@ -12,7 +12,7 @@
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
+										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a>
 									</li>
 									<li class="breadcrumb-item"><a href="#!">Trash Gallery</a></li>
 									<!-- <li class="breadcrumb-item">
@@ -139,10 +139,10 @@
 													<td>{{$user->username}}</td>
 													<td>
 														<a href="{{URL::to('/ustaad/trashGallery/restore')}}/{{$title}}">
-															<button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button>
+															<button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button>
 														</a>
 														<a href="{{URL::to('/ustaad/trashGallery/delete')}}/{{$title}}" class="addAction" data-toggle="modal" data-target="#myModal">
-															<button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button>
+															<button type="button" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button>
 														</a>
 														</div>
 													</td>

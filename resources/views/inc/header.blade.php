@@ -47,10 +47,20 @@
                 }
             </style>
 
+<!-- Go to www.addthis.com/dashboard to customize your tools --> 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-602bc30f9629ba67"></script>
+<style>
+  .atm-f{
+    display:none!important;
+  }
+  .addthis_button_expanded1{
+    display:none!important;
+  }
+</style>
 </head>
 
 <body>
-
+    @include('cookieConsent::index')
     <!-- Preloader starts -->
     <!-- <div id="loading">
   <img id="loading-image" src="assets/img/preloader.gif" alt="Loading..." />
@@ -386,7 +396,11 @@
                                 </a>
                                 <ul class="dropdown-menu fade-up">
                                     <li><a class="dropdown-item" href="{{URL::to('/training/Basic/all')}}">Basic Training</a></li>
-                                    <li><a class="dropdown-item" href="{{URL::to('/training/Advance/all')}}">Advance Training @if(!Session::has('unRegisterUser')) dsa @endif</a></li>
+                                    @if(!Session::has('client'))
+                                        <li><a class="dropdown-item LoginButton" C>Advance Training</a></li>
+                                    @else
+                                        <li><a class="dropdown-item" href="{{URL::to('/training/Advance/all')}}">Advance Training</a></li>
+                                    @endif
                                     <li><a class="dropdown-item" href="{{URL::to('/training/Habbit/all')}}">50 Habbit Training</a></li>
                                 </ul>
                             </li>

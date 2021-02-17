@@ -28,6 +28,19 @@ class FundamentalController extends Controller
 
     // Admin Panel
     
+    public function Order(Request $request){
+        $count = count($request->position);
+        $num = 1;
+        for ($i=0; $i <$count ; $i++) {
+            $lecture = FundamentalModel::where('id',$request->position[$i])->first();
+            $lecture->position = $num;
+            $lecture->save();
+            $num++;
+        }
+        $success = "Order of Fundamental has been updated successfully.";
+        $request->session()->put("success",$success);
+        return back();
+    }
     public function Index(Request $request){
         $Fundamental = FundamentalModel::orderBy('id','desc')->get();
         return view('admin.fundamental.all',compact('Fundamental'));
