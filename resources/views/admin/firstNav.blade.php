@@ -11,7 +11,7 @@
                             <h5 class="m-b-10">Header</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a></li>
                             <li class="breadcrumb-item"><a href="#!">Header</a></li>
                             <li class="breadcrumb-item"><a href="#!">First Nav Bar</a></li>
                         </ul>
@@ -89,7 +89,7 @@
 													<a href="#">
 														<i class="far fa-edit text-success mr-2 editlink" value="{{$data->id}}"></i>
 													</a>
-													<a href="{{URL::to('/ustaad/firstNav/trash')}}/{{$data->id}}">
+													<a href="{{URL::to('/ustaad/firstNav/trash')}}/{{$data->id}}" class="addAction">
 														<i class="fa fa-times text-danger"></i>
 													</a>
 												</td>

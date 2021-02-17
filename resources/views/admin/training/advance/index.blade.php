@@ -12,7 +12,7 @@
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
+										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a>
 									</li>
 									<li class="breadcrumb-item"><a href="#!">All Training</a></li>
 								</ul>
@@ -94,7 +94,7 @@
 															$CommentsCategory = "HabbitCategory";
 														}
 													@endphp
-													<tr  draggable="true" ondragstart="dragit(event)" ondragover="dragover(event)">
+													<tr draggable="true" ondragstart="dragit(event)" ondragover="dragover(event)">
 														<td>{{$data->poistion}}</td>
 														<td>
 															{{$data->title}}
@@ -109,17 +109,16 @@
 															<span class="badge {{$data->status == 0 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 0 ? 'Active' : 'Deactive'}}</span>
 															<div class="overlay-edit">
 																<a href="{{URL::to('/ustaad/lecture')}}/{{$category}}/edit/{{$data->id}}">
-																	<button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button>
+																	<button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button>
 																</a>
-																<!-- <button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button> -->
 																@if($data->status == 0)
-																	<a href="{{URL::to('/ustaad/lecture')}}/{{$category}}/delete/{{$data->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal">
-																		<i class="feather icon-trash-2"></i>
-																	</a>
+																	<button type="button" href="{{URL::to('/ustaad/lecture')}}/{{$category}}/delete/{{$data->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal">
+																		<i class="fa fa-lock"></i>
+																	</button>
 																@elseif($data->status == 1)
-																	<a href="{{URL::to('/ustaad/lecture')}}/{{$category}}/active/{{$data->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal">
-																		<i class="feather icon-unlock"></i>
-																	</a>
+																	<button type="button" href="{{URL::to('/ustaad/lecture')}}/{{$category}}/active/{{$data->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal">
+																		<i class="fa fa-unlock"></i>
+																	</button>
 																@endif
 															</div>
 														</td>

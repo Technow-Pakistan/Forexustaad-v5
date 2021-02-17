@@ -11,7 +11,7 @@
 							<h5>Client List</h5>
 						</div>
 						<ul class="breadcrumb">
-							<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a></li>
+							<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a></li>
 							<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/member/clientList')}}">Client Type</a></li>
 							<li class="breadcrumb-item"><a href="#!">Client list</a></li>
 						</ul>
@@ -31,9 +31,10 @@
 									<tr>
 										<th>ID</th>
 										<th>Name</th>
-										<th>Position</th>
+										@if($id == "All")
+											<th>Position</th>
+										@endif
 										<th>City/State/Country</th>
-										<th>Profile</th>
 										<th>Start date</th>
 										<th>Confirm mailer</th>
 										<th>Status</th>
@@ -55,19 +56,23 @@
 											<tr>
 												<td>{{$iorder}}</td>
 												<td class="tdLinkScroll">
-													<div class="d-inline-block align-middle">
-														@if($member->image == null)
-															<img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="user" class="img-radius align-top m-r-15 hei-40 wid-40">
-														@else
-															<img src="{{URL::to('/storage/app')}}/{{$member->image}}" alt="user" class="img-radius align-top m-r-15 hei-40 wid-40">
-														@endif
-														<div class="d-inline-block">
-															<h6 class="m-b-0">{{$member->name}}</h6>
-															<p class="m-b-0">{{$member->email}}</p>
+													<a href="{{URL::to('/ustaad/viewClientProfile')}}/{{$member->id}}">
+														<div class="d-inline-block align-middle">
+															@if($member->image == null)
+																<img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="user" class="img-radius align-top m-r-15 hei-40 wid-40">
+															@else
+																<img src="{{URL::to('/storage/app')}}/{{$member->image}}" alt="user" class="img-radius align-top m-r-15 hei-40 wid-40">
+															@endif
+															<div class="d-inline-block">
+																<h6 class="m-b-0">{{$member->name}}</h6>
+																<p class="m-b-0 text-secondary">{{$member->email}}</p>
+															</div>
 														</div>
-													</div>
+													</a>
 												</td>
-												<td>{{$memberType->member}}</td>
+												@if($id == "All")
+													<td>{{$memberType->member}}</td>
+												@endif
 												<td>
                                                 	@if($cityId != null)
 														<div>
@@ -81,27 +86,25 @@
 													@else
 														<p><strong>City:</strong> {{$member->city}} </p>
 													@endif
-												</td>
-												<td><a href="{{URL::to('/ustaad/viewClientProfile')}}/{{$member->id}}">Veiw Profile</a></td>
-												<td>{{$member->created_at->format(" d/m/y ")}}</td>
+												</td><td>{{$member->created_at->format(" d/m/y ")}}</td>
 												<td>
 													@if($member->confirmationEmail == 1)
 														<span class="badge badge-light-success">Comfirm</span>
 													@else
 														<form action="{{URL::to('ustaad/client/confirmEmail')}}/{{$member->id}}" method="post">
-															<span class="badge badge-light-danger">UnComfirm</span>
 															<input type="checkbox" name="confirmationEmail" class="AdminConfirmationEmail" id="" value="1">
+															<span class="badge badge-light-danger">UnComfirm</span>
 														</form>
+														<a href="{{URL::to('ustaad/ReconformationMail')}}/{{$member->id}}" class="badge badge-light-warning">Refirmation Mail</a>
 													@endif
 												</td>
 												<td>
 													<span class="badge {{($member->status == 1 && $member->confirmationEmail == 1) ? 'badge-light-success' : 'badge-light-danger'}}">{{($member->status == 1 && $member->confirmationEmail == 1) ? 'Active' : 'Deactive'}}</span>
 													<div class="overlay-edit">
-														<!-- <a href="{{URL::to('ustaad/member/edit')}}/{{$member->id}}"><button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button></a> -->
 														@if($member->status == 1)
-															<a href="{{URL::to('ustaad/client/delete')}}/{{$member->id}}" class="addAction" data-toggle="modal" data-target="#myModal"><button type="button" class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button></a>
+															<button href="{{URL::to('ustaad/client/delete')}}/{{$member->id}}" data-toggle="modal" data-target="#myModal" type="button" class="btn btn-icon btn-danger addAction"><i class="fa fa-lock"></i></button>
 														@elseif($member->status == 0)
-															<a href="{{URL::to('ustaad/client/active')}}/{{$member->id}}" class="addAction" data-toggle="modal" data-target="#myModal"><button type="button" class="btn btn-icon btn-success"><i class="feather icon-unlock"></i></button></a>
+															<button href="{{URL::to('ustaad/client/active')}}/{{$member->id}}" data-toggle="modal" data-target="#myModal" type="button" class="btn btn-icon btn-success addAction"><i class="fa fa-unlock"></i></button>
 														@endif
 													</div>
 												</td>
@@ -112,9 +115,10 @@
 									<tr>
 										<th>ID</th>
 										<th>Name</th>
-										<th>Position</th>
+										@if($id == "All")
+											<th>Position</th>
+										@endif
 										<th>City/State/Country</th>
-										<th>Profile</th>
 										<th>Start date</th>
 										<th>Confirm mailer</th>
 										<th>Status</th>

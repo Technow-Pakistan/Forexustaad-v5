@@ -12,7 +12,7 @@
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="{{URL::to('/ustaad')}}"><i class="feather icon-home"></i></a>
+										<a href="{{URL::to('/ustaad')}}"><i class="fa fa-home"></i></a>
 									</li>
 									<li class="breadcrumb-item"><a href="#!">Navigation</a></li>
 									<li class="breadcrumb-item">

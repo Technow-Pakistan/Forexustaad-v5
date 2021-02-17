@@ -18077,7 +18077,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .checkbox input[type=checkbox] + .cr:before {
-    content: "\e83f";
+    content: "\f058";
     width: 22px;
     height: 22px;
     display: inline-block;
@@ -18085,7 +18085,7 @@ a.text-dark:hover, a.text-dark:focus {
     border: 2px solid #e9eaec;
     border-radius: 3px;
     font-size: 15px;
-    font-family: 'feather';
+    font-family: 'Font Awesome 5 Free';
     font-weight: 400;
     line-height: 19px;
     vertical-align: bottom;
@@ -18134,7 +18134,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 .checkbox.checkbox-fill input[type=checkbox] + .cr:before {
     opacity: 0;
-    content: "\e840";
+    content: "\f058";
     font-size: 27px;
     background: transparent;
 }
@@ -21477,13 +21477,15 @@ pre[class*=language-]:before {
 }
 
 .pcoded-navbar .pcoded-inner-navbar li.pcoded-hasmenu > a:after {
-    content: "\e844";
-    font-family: 'feather';
+    content: "\f054";
+    font-family: "Font Awesome 5 Free";
     font-size: 13px;
     border: none;
     position: absolute;
     top: 13px;
     right: 20px;
+    display: inline-block;  
+    font-weight:900;
     -webkit-transition: 0.15s ease-in-out;
     transition: 0.15s ease-in-out;
 }
@@ -22727,12 +22729,14 @@ pre[class*=language-]:before {
 }
 
 .menu-styler .style-toggler > a:after {
-    content: "\e849";
+    content: "\f100";
+    font-family: "Font Awesome 5 Free";
+    display: inline-block;  
+    font-weight:900;
     top: 12px;
     font-size: 21px;
     position: absolute;
     right: 11px;
-    font-family: "feather";
     z-index: 1029;
     line-height: 1;
     color: #fff;
@@ -22754,7 +22758,7 @@ pre[class*=language-]:before {
 }
 
 .menu-styler.open .style-toggler > a:after, .menu-styler.prebuild-open .style-toggler > a:after {
-    content: "\e847";
+    content: "\f101";
     -webkit-animation: anim-rotate 0s linear infinite;
     animation: anim-rotate 0s linear infinite;
 }
@@ -22955,22 +22959,22 @@ pre[class*=language-]:before {
 
 .lay-customizer .theme-color > a.active:before,
     .theme-color > a.active:before {
-    content: "\e83e";
-    top: 1px;
-    font-size: 20px;
-    position: absolute;
-    left: 12px;
-    font-family: "feather";
-    z-index: 1001;
-    color: #4099ff;
-    -webkit-transition: 0.15s ease-in-out;
-    transition: 0.15s ease-in-out;
-    text-shadow: 0 1px 3px rgba(64, 153, 255, 0.9), 0 3px 8px rgba(0, 0, 0, 0.1);
+        font-family: "Font Awesome 5 Free";
+        content: "\f058";
+        top: 1px;
+        font-size: 20px;
+        position: absolute;
+        left: 12px;
+        z-index: 1001;
+        color: #4099ff;
+        -webkit-transition: 0.15s ease-in-out;
+        transition: 0.15s ease-in-out;
+        text-shadow: 0 1px 3px rgb(64 153 255 / 90%), 0 3px 8px rgb(0 0 0 / 10%);
 }
 
 .lay-customizer .theme-color > a.active:after,
     .theme-color > a.active:after {
-    content: "";
+        content: "";
     position: absolute;
     top: 0;
     left: 0;

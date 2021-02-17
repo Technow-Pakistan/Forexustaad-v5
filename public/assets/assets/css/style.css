@@ -2716,4 +2716,15 @@ padding-bottom: 12px;
     }
     .webinarParaStyle{
         height: 65px;
-    }
+	}
+	           
+	.tbl-accordion .tbl-accordion-nested .BrokerDetailIconAdjust{
+		font-size: 15px;
+		border: none;
+		position: absolute;
+		right: 40px;
+      font-weight:900;
+		-webkit-transition: 0.15s ease-in-out;
+      transition: 0.15s ease-in-out;
+      transform:rotate(90deg);
+	}

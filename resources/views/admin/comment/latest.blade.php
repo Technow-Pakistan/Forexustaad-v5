@@ -16,7 +16,7 @@
                         <div class="d-flex justify-content-between">
                             <ul class="breadcrumb p-0 m-0 bg-white">
                                 <li class="breadcrumb-item">
-                                    <a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
+                                    <a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a>
                                 </li>
                                 <li class="breadcrumb-item"><a href="#!">Latest Comments</a></li>
                             </ul>

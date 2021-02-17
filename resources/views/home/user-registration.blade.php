@@ -267,7 +267,7 @@
                                                                             @php $addAccount = 0 @endphp
                                                                         @if($clientAccount1 != null)
                                                                             @foreach($clientAccount as $accountInfo)
-                                                                                <div class="dynamic-field3" id="dynamic-field-4">
+                                                                                <div class="dynamic-field233" id="dynamic-field-3424">
                                                                                     <label class="d-none"></label>
                                                                                     <div class="row">
                                                                                         <div class="col-sm-12 pb-3">
@@ -321,11 +321,12 @@
                                                                                 </div>
                                                                                 @php $addAccount++ @endphp
                                                                             @endforeach
-                                                                        @else
+                                                                        @endif
                                                                             <div class="dynamic-field3" id="dynamic-field-4">
                                                                                 <label class="d-none"></label>
                                                                                 <div class="row ">
                                                                                     <div class="col-sm-12 pb-3">
+                                                                                            <input type="hidden" class="form-control" name="verified[]" value="0"/> 
                                                                                         <select class="custom-select" name="brokerId[]">
                                                                                             @foreach($allBroker as $broker)
                                                                                                 <option value="{{$broker->id}}">{{$broker->title}}</option>
@@ -351,7 +352,6 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                        @endif
                                                                         <!-- when user click on add new please on append of id aff show a new Take profit text field we can add multiple profit  -->
                                                                         <div class="text-right clearfix" id="aff">
                                                                             <span class="float-left"><small>Add Your More Accounts</small></span>
@@ -375,7 +375,7 @@
                                                                 </div>
                                                             </div>
                                                         </form>
-                                                </div>
+                                                    </div>
                                                 </div>
                                                 </div>
                                             </div>

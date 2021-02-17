@@ -16,9 +16,18 @@ use App\Models\TrashGalleryModel;
 use App\Models\BlogPostModel;
 use App\Models\BrokerCompanyInformationModel;
 use App\Models\NotificationModel;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SubscriberMail;
 
 class AdminController extends Controller
 {
+    public function ReconformationMail(Request $request, $id){
+        $registration = ClientRegistrationModel::where('id',$id)->first();
+        Mail::to($registration->email)->send(new SubscriberMail($registration));
+        $success = "Confirmation mail send again successfully.";
+        $request->session()->put("success",$success);
+        return back();
+    }
     public function NotificationView(Request $request, $id){
         $notification = NotificationModel::find($id);
         $link = $notification->link;

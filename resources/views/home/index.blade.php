@@ -420,7 +420,10 @@
                             </div>
                         </div>
                     </section>
-
+                    @php $dataSignalsCount = 0; @endphp
+                    @foreach($StarSignalsHome as $data)
+                        @php $dataSignalsCount++ @endphp
+                        @if(count($StarSignalsHome) == 1)
                             <section class="features">
                                 <div class="container">
                                     <div class="content_area_heading large-heading text-center">
@@ -433,7 +436,7 @@
                                         </div>
                                     </div>
                                     <div class="row justify-content-center">
-                    @foreach($StarSignalsHome as $data)
+                        @endif
                                             @php
                                                 $url = $data->id;
                                                 $loginClientData = Session::get('client');
@@ -478,10 +481,10 @@
                                                                     {{$data->selectUser}} <br>
                                                                     @if($go == 0)
                                                                         @if($data->selectUser == "Register User" && !Session::has('client'))
-                                                                            <a href="#!" onclick="snackbar()">View Signal</a>
+                                                                            <a href="#!" class="LoginButton" data-toggle="modal" data-target="#requestQuoteModal">View Signal</a>
                                                                         @elseif($data->selectUser == "Premium User")
                                                                         @if(!Session::has('client'))
-                                                                            <a href="#!" onclick="snackbar()">View Signal</a>
+                                                                            <a href="#!" class="LoginButton" data-toggle="modal" data-target="#requestQuoteModal">View Signal</a>
                                                                         @elseif(isset($loginClientData->memberType))
                                                                             @if($loginClientData->memberType == 1)
                                                                                 <a href="#!" onclick="snackbar1()">View Signal</a>
@@ -499,10 +502,12 @@
                                                     </div>
                                                 </div>
                                             @endif
-                    @endforeach
+                                        @if(count($StarSignalsHome) == $dataSignalsCount )
                                     </div>
                                 </div>
                             </section>
+                                        @endif
+                    @endforeach
 
 
                     @if(count($latestWebinars) > 0)

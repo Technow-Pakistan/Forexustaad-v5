@@ -12,7 +12,7 @@
 								</div> 
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="feather icon-home"></i></a>
+										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a>
 									</li>
 									<li class="breadcrumb-item"><a href="#!">API Left Side</a></li>
 									
@@ -85,8 +85,8 @@
 															<td>
 																<span class="badge badge-light-success">Active</span>
 																<div class="overlay-edit editlink" value="{{$data->id}}">
-																	<button type="button" class="btn btn-icon btn-success"><i class="feather icon-check-circle"></i></button>
-																	<a type="button" href="{{URL::to('/ustaad/api/api-left/trash')}}/{{$data->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"><i class="feather icon-trash-2"></i></a>
+																	<button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button>
+																	<button type="button" href="{{URL::to('/ustaad/api/api-left/trash')}}/{{$data->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash"></i></button>
 																</div>
 															</td>
 														</tr>
