@@ -33,9 +33,7 @@ class IsVisitor
             $user_decice = "desktop";
         }
         $arr_browsers = ["Opera", "Edg", "Chrome", "Safari", "Firefox", "MSIE", "Trident"];
- 
         $agent = $_SERVER['HTTP_USER_AGENT'];
-         
         $user_browser = '';
         foreach ($arr_browsers as $browser) {
             if (strpos($agent, $browser) !== false) {
@@ -43,7 +41,6 @@ class IsVisitor
                 break;
             }   
         }
-          
         switch ($user_browser) {
             case 'MSIE':
                 $user_browser = 'Internet Explorer';
@@ -57,7 +54,6 @@ class IsVisitor
                 $user_browser = 'Microsoft Edge';
                 break;
         }
-          
         $exist = $_SERVER['REMOTE_ADDR'];
         $data123 =  NonRegisterVisitorModel::where('ip_address',$exist)->first();
         if($data123 == null){

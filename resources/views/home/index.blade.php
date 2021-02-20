@@ -423,7 +423,7 @@
                     @php $dataSignalsCount = 0; @endphp
                     @foreach($StarSignalsHome as $data)
                         @php $dataSignalsCount++ @endphp
-                        @if(count($StarSignalsHome) == 1)
+                        @if($dataSignalsCount == 1)
                             <section class="features">
                                 <div class="container">
                                     <div class="content_area_heading large-heading text-center">

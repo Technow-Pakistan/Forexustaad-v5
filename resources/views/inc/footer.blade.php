@@ -305,11 +305,11 @@
 
 
 <!-- Request Quote Modal -->
-<div class="modal fade" id="requestQuoteModal" tabindex="-1" role="dialog" aria-labelledby="requestQuoteModalLabel" aria-hidden="true">
+<div class="modal fade {{Session::has('success1') ? 'show' : ''}}" id="requestQuoteModal" tabindex="-1" role="dialog" aria-labelledby="requestQuoteModalLabel" aria-{{Session::has('success1') ? 'model' : 'hidden'}}="true">
   <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-body py-5 px-3">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close modelClosemodel" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
         <div class="row justify-content-center">
@@ -325,6 +325,14 @@
               <p class="heading-description fadeInUp wow w-100 heading_description-change4" data-wow-delay="0.2s">
                Fill this form to register your self.
               </p>
+              
+              @if(Session::has('success1'))
+                  @php
+                    $success = Session::get('success1');
+                    $reSendMailId =  Session::get('reSendMailId');
+                  @endphp
+                  <p class="alert alert-success">{{$success}} <a href="{{URL::to('ReconformationMail')}}/{{$reSendMailId}}">Re send mail</a></p>
+              @endif
             </div>
 
               <form action="{{URL::to('/clientRegistration')}}" method="post" class="RegistrationForm" id="RegistrationFormPassword">
@@ -333,7 +341,39 @@
                     <div class="row">
                       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="form-group">
-                          <input type="text" class="form-control text-gray explore_form name abc_into" placeholder="Your Name *" name="name" id="quote_name" required>
+                          <input type="text" class="form-control text-gray explore_form name abc_into" placeholder="First Name *" name="name" id="quote_name" required>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-group">
+                          <input type="text" class="form-control text-gray explore_form name abc_into" placeholder="Last Name *" name="lastName" id="quote_name" required>
+                        </div>
+                      </div>
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <select name="" id="sel1" class="form-control text-gray explore_form phone" required>
+                                        @foreach($AllCountries as $country)
+                                            <option value="{{$country->id}}">{{$country->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <select name="" id="sel2" class="form-control text-gray explore_form phone" required>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <select name="cityId" id="sel3" class="form-control text-gray explore_form phone" required>
+                                      
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
@@ -344,11 +384,6 @@
                       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="form-group">
                             <input type="email" class="form-control text-gray explore_form email emailRegistration" placeholder="Your Email *" name="email" id="quote_email" required>
-                        </div>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="form-group">
-                          <input type="text" class="form-control text-gray explore_form email" placeholder="Your City/Country *" name="city" id="quote_email" required>
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
@@ -385,8 +420,20 @@
                     <div class="form-group text-left ml-3">
                       <button type="submit" class="btn btn-primary text-uppercase quote_send_msg ForgetButton mr-4" data-type="quote">Login</button>
                       <span class="btn btn-primary text-uppercase quote_send_msg RegistrationButton">Registration</span><br>
+                      <a href="#" class="text-primary ReSendMail mr-5">Re Send Mail</a>
                       <a href="#" class="text-danger ForgetPassword">Forget Password</a>
                       <span class="text-danger LoginError"></span>
+                    </div>
+                  </div>
+              </form>
+              <form action="{{URL::to('/ReSendMailSend')}}" class="ReSendMailForm" method="post">
+
+                  <div class="contact_us_form wow animated fadeInUp">
+                    <div class="form-group">
+                      <input type="text" class="form-control text-gray explore_form name abc_into" placeholder="Enter Email or Phone number" name="username" id="quote_name" required>
+                    </div>
+                    <div class="form-group text-left ml-3">
+                      <button type="submit" class="btn btn-primary text-uppercase quote_send_msg mr-4" data-type="quote">Re Send Mail</button>
                     </div>
                   </div>
               </form>
@@ -459,6 +506,7 @@
     $(".heading_title-change4").html("Registration");
     $(".heading_description-change4").html("Fill this form to register your self.");
     $(".LoginForm").hide();
+    $(".ReSendMailForm").hide();
     $(".RegistrationForm").show();
   });
 
@@ -466,6 +514,7 @@
     $(".heading_title-change4").html("Login");
     $(".heading_description-change4").html("Enter your email or phone number & password.");
     $(".RegistrationForm").hide();
+    $(".ReSendMailForm").hide();
     $(".LoginForm").show();
       $(".passwordHide").show();
       $(".passwordHide").attr("required",true);
@@ -473,6 +522,13 @@
       $(".ForgetPassword").show();
       $(".LoginForm").attr("action","{{URL::to('/clientLogin')}}");
       $(".LoginEmail").attr("placeholder","Enter Email or Phone number");
+  });
+  $(".ReSendMail").on("click",function(){
+    $(".heading_title-change4").html("Re Send Mail");
+    $(".heading_description-change4").html("Enter your email & press Enter");
+    $(".RegistrationForm").hide();
+    $(".LoginForm").hide();
+    $(".ReSendMailForm").show();
   });
 </script>
 
@@ -687,17 +743,75 @@
       setInterval(function() {
         blink.style.opacity = (blink.style.opacity == 0 ? 1 : 0);
       }, 500);
+
+      
+          // city & State Error
+                
+          $("#sel1").on("change",function(){
+              var myusername = $("#sel1").val();
+              var url = "{{URL::to('user-registration/stateData')}}" + "/" + myusername;
+                          console.log(url);
+              $.ajax({
+                  type: "POST",
+                  url: url,
+                  data: myusername,
+                  success: function(data){
+                      $("#sel2").html('');
+                      $("#sel3").html('');
+                      console.log("hello");
+                      for(var i = 0; i < data.length; i++) {
+                          console.log("hello2");
+                          $("#sel2").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>")
+                      }
+                  }
+              });
+          });
+          $("#sel2").on("change",function(){
+              var myusername1 = $("#sel2").val();
+              var url1 = "{{URL::to('user-registration/cityData')}}" + "/" + myusername1;
+              $.ajax({
+                  type: "POST",
+                  url: url1,
+                  data: myusername1,
+                  success: function(data){
+                      $("#sel3").html('');
+                      for(var i = 0; i < data.length; i++) {
+                          $("#sel3").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>")
+                      }
+                  }
+              });
+          });
     </script>
 
     
-  @if(!Session::has('client'))
-    @if(!Session::has('unRegisterUser')) 
-      @php
-        $data = ["unRegisterUser","das"];
-        Session::put('unRegisterUser',$data);
-      @endphp
-      <script>
-        $.ajax({
+  <script>
+  // location
+    // navigator.geolocation.getCurrentPosition(console.log,console.log)
+  
+  // Tab Count
+
+    // var session = localStorage.getItem('tabs');
+    // if (session == null) {
+    //   var ies = 1;
+    //   console.log(ies);
+    //   localStorage.setItem('tabs',ies);
+    //   alert(localStorage.getItem('tabs'));
+    // }else{
+    //   ies = localStorage.getItem('tabs');
+    //   ies++;
+    //   localStorage.setItem('tabs',ies);
+    //   alert(localStorage.getItem('tabs'));
+    // }
+    // window.addEventListener("beforeunload", function (e) {
+    //   ies = localStorage.getItem('tabs');
+    //   ies--;
+    //   localStorage.setItem('tabs',ies);
+    // });
+    console.log("successewqewq");
+    $(window).focus(function() {
+    console.log("focus");
+      
+      $.ajax({
           type: "Post",
           url: "{{URL::to('unRegisterUser/Save')}}",
           
@@ -707,12 +821,33 @@
           error: function(data) {
               console.log("fail");
           }
-          });
-      </script>
-    @endif
-  @endif
-  <script>
-    $(".addthis_button_expanded").attr("class","addthis_button_expanded1");
+      });
+    });
+    $(window).blur(function() {
+    console.log("blur");
+      $.ajax({
+          type: "Post",
+          url: "{{URL::to('unRegisterUser/Delete')}}",
+          
+          success: function(response) {
+              console.log("success");
+          },
+          error: function(data) {
+              console.log("fail");
+          }
+      });
+    });
   </script>
+  
+              @if(Session::has('success1'))
+                <script>
+                  $("#requestQuoteModal").css('display','block');
+                  $(".LoginForm").hide();
+                  $(".modelClosemodel").on("click",function() {
+                    $("#requestQuoteModal").css('display','none');
+                  })
+                </script>
+                @php Session::pull('success1') @endphp
+              @endif
 </body>
 </html>
