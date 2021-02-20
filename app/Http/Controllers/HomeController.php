@@ -32,13 +32,32 @@ use App\Models\AllStatesModel;
 use App\Models\AllCountriesModel;
 use App\Models\OtherPagesContentModel;
 use App\Models\NonRegisterVisitorModel;
+use App\Models\ActiveOnSiteModel;
 
 class HomeController extends Controller
 {
+    public function ReconformationMail(Request $request){
+        $registration = ClientRegistrationModel::where('email',$request->username)->first();
+        if($registration){
+            Mail::to($registration->email)->send(new SubscriberMail($registration));
+            $success = "Confirmation mail send again successfully.";
+            $request->session()->put("success",$success);
+        }else {
+            $error = "Your email does not exist.";
+            $request->session()->put("error",$error);
+        }
+        return back();
+    }
     public function unRegisterUserSave(){
-        $data = new NonRegisterVisitorModel;
+        $data = new ActiveOnSiteModel;
+        $data->active = 1;
         $data->save();
-        return $data;
+    }
+    public function unRegisterUserDelete(){
+        $data = ActiveOnSiteModel::orderBy('id','asc')->first();
+        if ($data) {
+            $data->delete();
+        }
     }
     public function ChangePassword(){
         return view('home/changePassword');
@@ -156,7 +175,8 @@ class HomeController extends Controller
                 $registration->save();
                 Mail::to($request->email)->send(new SubscriberMail($registration));
                 $success = "Please check mail in spam for confirmation Subscription.";
-                $request->session()->put("success",$success);
+                $request->session()->put("success1",$success);
+                $request->session()->put("reSendMailId",$registration->id);
             }else {
                 $error = "Your email does not pass captcha test. Please! try again";
                 $request->session()->put("error",$error);

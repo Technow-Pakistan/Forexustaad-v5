@@ -138,7 +138,8 @@
                                  <th>Symbols/Pairs</th>
                                  <th>Status</th>
                                  <th>Users</th>
-                                 <th>Valid Till</th>
+                                 <th>Result</th>
+                                 <th>Pips</th>
                                  <th>Signal</th>
                                  <th>&nbsp;</th>
                               </tr>
@@ -189,9 +190,13 @@
                                        <button class="btn btn-secondary btn-sm">Expired</button>
                                     </td>
                                     <td><strong class="font-weight-bold">{{$data->selectUser}}</strong></td>
-                                    <td class="text-center d-initial-flex">
-                                       <p class="m-0 pr-2"><strong> {{$date}} </strong></p>
-                                       <p class="m-0"><strong> {{$time}} </strong></p>
+                                    <td class="text-center">
+                                       <p class="m-0 {{$data->result == 'TP Hit' ? 'text-success' : ''}}{{$data->result == 'SL Hit' ? 'text-danger' : ''}}"><strong> {{$data->result == null ? 'none' : $data->result}}</strong></p>
+                                    </td>
+                                    <td class="text-center">
+                                       @if($data->pips != null)
+                                       <p class="m-0 {{str_contains($data->pips,'+') != null ? 'text-success' : ''}}{{str_contains($data->pips,'-') ? 'text-danger' : ''}}"><strong> {{$data->pips == null ? 'none' : $data->pips}}</strong></p>
+                                       @endif
                                     </td>
                                     <td colspan="2" class="pl-0">
                                        <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>

@@ -45,6 +45,9 @@ use App\Http\Controllers\OtherPagesContentController;
 use App\Http\Controllers\FundamentalController;
 use App\Http\Controllers\SponoserAddController;
 use App\Http\Controllers\MidBannerController;
+use Stevebauman\Location\Facades\Location;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,14 +58,74 @@ use App\Http\Controllers\MidBannerController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-        // $ip = $_SERVER['REMOTE_ADDR'];
-//     echo $ip;
-//     die;
-Route::get('get-ip-details', function () {
-	$ip = '182.186.255.8';
-    $data = Location::get($ip);
-    dd($data);
-});
+    // 
+    // var screen_width = screen.width;
+    // var screen_height = screen.height;
+
+    // $ip = $_SERVER['REMOTE_ADDR'];
+    // echo $ip;
+    // die;
+    Route::get('get-ip-details', function () {
+        // $ip = '182.186.255.8';
+        // $data = Location::get($ip);
+        // dd($data);
+        return substr(exec('getmac'), 0, 17); 
+
+    });
+    Route::get('device',function(){
+        $useragent = $_SERVER['HTTP_USER_AGENT'];
+        // echo $useragent;
+        if(stripos($useragent, "iPod")){
+            echo "iPod";
+        }elseif (stripos($useragent, "iPad")){
+            echo "iPad";
+        }elseif (stripos($useragent, "iPad")){
+            echo "iPad";
+        }elseif (stripos($useragent, "iPhone")){
+            echo "iPhone";
+        }elseif (stripos($useragent, "Android")){
+            echo "Android";
+        }elseif (stripos($useragent, "iOS")){
+            echo "iOS";
+        }else{
+            echo "Desktop";
+        }
+
+    });
+    Route::get('url',function(){
+        // echo URL::current() . "\n";
+        // if (URL::current() != url()->previous()) {
+        //     echo url()->previous();
+        // }
+        $url = (isset($_SERVER['HTTPS'])) ? 'https' : 'http';
+        $url.="://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $ref = "";
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            $ref = $_SERVER['HTTP_REFERER'];
+        }
+        echo $ref;
+    });
+    Route::get('broswer',function(){
+        // $browser = get_browser(null, true);
+        // print_r($browser);
+        $useragent = $_SERVER['HTTP_USER_AGENT'] . "\n\n";
+        // echo $useragent;
+        if(stripos($useragent, "Chrome")){
+            echo "Chrome";
+        }elseif (stripos($useragent, "Firefox")){
+            echo "Firefox";
+        }elseif (stripos($useragent, "Opera")){
+            echo "Opera";
+        }elseif (stripos($useragent, "Edg")){
+            echo "Microsoft Edge";
+        }elseif (stripos($useragent, "Trident")){
+            echo "Internet Explorer";
+        }elseif (stripos($useragent, "iOS")){
+            echo "Internet Explorer";
+        }else{
+            echo "Desktop";
+        }
+    });
     Route::get('macEmail',function(){
         return view("home.email");
     });
@@ -78,9 +141,11 @@ Route::get('get-ip-details', function () {
         $result = json_decode(file_get_contents('http://ip-api.io/json/' . $exist));
         dd($result);
 
-      });
+    });
 Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
-    Route::get('/unRegisterUser/Save',[HomeController::class,'unRegisterUserSave']);
+    Route::post('/unRegisterUser/Save',[HomeController::class,'unRegisterUserSave']);
+    Route::post('/unRegisterUser/Delete',[HomeController::class,'unRegisterUserDelete']);
+    // Route::get('/unRegisterUser/Save',[HomeController::class,'unRegisterUserSave']);
 
     Route::get('/training/{id1}/{id}',[AdvanceTrainingController::class,'ViewAll']);
     Route::get('/analysis',[AnalysisController::class,'ViewAll']);
@@ -171,6 +236,9 @@ Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
 });
     // Users Panel Views
 
+    Route::post('user-registration/stateData/{id}',[HomeController::class,'userregistrationStateCode']);
+    Route::post('user-registration/cityData/{id}',[HomeController::class,'userregistrationCityCode']);
+    
     Route::group(['prefix' => '',"middleware" => "IsMemberLogin"],function(){
         Route::get('/strategies',[StrategiesController::class,'ViewAll']);
         Route::get('/strategies/{id}',[StrategiesController::class,'StrategyDetail']);
@@ -183,14 +251,14 @@ Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
         Route::post('/blog/comment/add',[BlogController::class,'AddComment']);
         Route::get('/user-registration',[HomeController::class,'userregistration']);
         Route::post('/user-registration',[HomeController::class,'userregistrationUpdate']);
-        Route::post('user-registration/stateData/{id}',[HomeController::class,'userregistrationStateCode']);
-        Route::post('user-registration/cityData/{id}',[HomeController::class,'userregistrationCityCode']);
         Route::post('/user-registration/Account',[HomeController::class,'userregistrationAccountAdd']);
         Route::get('/user-profile',[HomeController::class,'userProfile']);
         // Route::get('/dashboard',[MemberController::class,'Dashboard']);
         // Route::get('/logout',[MemberController::class,'Logout']);
     });
 
+    Route::get('/ReconformationMail/{id}',[AdminController::class,'ReconformationMail']);
+    Route::post('/ReSendMailSend',[HomeController::class,'ReconformationMail']);
 
 // Admin views
 
@@ -199,6 +267,9 @@ Route::post('/ustaad',[AdminController::class,'Index']);
 
 Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
 
+    Route::get('/widgets',function(){
+        return view('admin.widget-chart');
+    });
     Route::get('/ReconformationMail/{id}',[AdminController::class,'ReconformationMail']);
     Route::get('/DeleteClientAccount/{id}',[AdminController::class,'DeleteClientAccount']);
     Route::post('/apileftorder',[ApiLeftController::class,'Order']);

@@ -25,7 +25,7 @@
                         <div class="">
                           @php
                             $pair = $signalData->getPair();
-                                                  $flags = explode("/",$pair->pair);
+                            $flags = explode("/",$pair->pair);
                           @endphp
                               <div class="row gutters-sm">
                                 <div class="col-md-4 mb-3">
@@ -110,15 +110,28 @@
                                         </div>
                                       </div>
                                       <hr>
-                                      <div class="row">
-                                        <div class="col-sm-3">
-                                          <h6 class="mb-0">Result</h6>
+                                      @if($signalData->result != null && $signalData->result != 'none')
+                                        <div class="row">
+                                          <div class="col-sm-3">
+                                            <h6 class="mb-0">Result</h6>
+                                          </div>
+                                          <div class="col-sm-9 {{$signalData->result == 'TP Hit' ? 'text-success' : ''}}{{$signalData->result == 'SL Hit' ? 'text-danger' : ''}}">
+                                            {{$signalData->result == null ? 'none' : $signalData->result}}
+                                          </div>
                                         </div>
-                                        <div class="col-sm-9 text-secondary">
-                                          {{$signalData->result == null ? 'Pending' : $signalData->result}}
+                                        <hr>
+                                      @endif
+                                      @if($signalData->pips != null)
+                                        <div class="row">
+                                          <div class="col-sm-3">
+                                            <h6 class="mb-0">Pips</h6>
+                                          </div>
+                                          <div class="col-sm-9 {{str_contains($signalData->pips,'+') != null ? 'text-success' : ''}}{{str_contains($signalData->pips,'-') ? 'text-danger' : ''}}">
+                                            {{$signalData->pips == null ? 'none' : $signalData->pips}}
+                                          </div>
                                         </div>
-                                      </div>
-                                      <hr>
+                                        <hr>
+                                      @endif
                                       <!-- <div class="row">
                                         <div class="col-sm-3">
                                           <h6 class="mb-0">Address</h6>

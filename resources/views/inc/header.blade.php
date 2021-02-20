@@ -56,11 +56,16 @@
   .addthis_button_expanded1{
     display:none!important;
   }
+
 </style>
 </head>
 
 <body>
-    @include('cookieConsent::index')
+    <!-- @include('cookieConsent::index') -->
+
+
+
+    
     <!-- Preloader starts -->
     <!-- <div id="loading">
   <img id="loading-image" src="assets/img/preloader.gif" alt="Loading..." />
@@ -352,7 +357,7 @@
                     <div class="col">
                         <!-- logo -->
                         <div class="logo-wrap">
-                            <a href="{{URL::to('/')}}" class="logo"> <img src="{{URL::to('/storage/app')}}/{{$MainLogo->logo}}" alt="Logo"></a>
+                            <a href="{{URL::to('/url')}}" class="logo"> <img src="{{URL::to('/storage/app')}}/{{$MainLogo->logo}}" alt="Logo"></a>
                         </div>
                     </div>
                     <div class="col text-right">
@@ -397,7 +402,7 @@
                                 <ul class="dropdown-menu fade-up">
                                     <li><a class="dropdown-item" href="{{URL::to('/training/Basic/all')}}">Basic Training</a></li>
                                     @if(!Session::has('client'))
-                                        <li><a class="dropdown-item LoginButton" C>Advance Training</a></li>
+                                        <li><a class="dropdown-item LoginButton">Advance Training</a></li>
                                     @else
                                         <li><a class="dropdown-item" href="{{URL::to('/training/Advance/all')}}">Advance Training</a></li>
                                     @endif
