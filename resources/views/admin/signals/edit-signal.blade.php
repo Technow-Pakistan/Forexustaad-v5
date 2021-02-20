@@ -76,119 +76,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label> Forex Pairs</label>
-                                        <div class="" id="textbos">
-                                            <select class="form-control" name="forexPairs" required="">
-                                                <option value="EUR/USD" {{$data->forexPairs == "EUR/USD" ? 'selected' : ''}}>EUR/USD</option>
-                                                <option value="GBP/USD" {{$data->forexPairs == "GBP/USD" ? 'selected' : ''}}>GBP/USD</option>
-                                                <option value="USD/JPY" {{$data->forexPairs == "USD/JPY" ? 'selected' : ''}}>USD/JPY</option>
-                                                <option value="USD/CHF" {{$data->forexPairs == "USD/CHF" ? 'selected' : ''}}>USD/CHF</option>
-                                                <option value="USD/CAD" {{$data->forexPairs == "USD/CAD" ? 'selected' : ''}}>USD/CAD</option>
-                                                <option value="AUD/USD" {{$data->forexPairs == "AUD/USD" ? 'selected' : ''}}>AUD/USD</option>
-                                                <option value="NZD/USD" {{$data->forexPairs == "NZD/USD" ? 'selected' : ''}}>NZD/USD</option>
-                                                <option value="EUR/JPY" {{$data->forexPairs == "EUR/JPY" ? 'selected' : ''}}>EUR/JPY</option>
-                                                <option value="EUR/CHF" {{$data->forexPairs == "EUR/CHF" ? 'selected' : ''}}>EUR/CHF</option>
-                                                <option value="EUR/GBP" {{$data->forexPairs == "EUR/GBP" ? 'selected' : ''}}>EUR/GBP</option>
-                                                <option value="AUD/CAD" {{$data->forexPairs == "AUD/CAD" ? 'selected' : ''}}>AUD/CAD</option>
-                                                <option value="AUD/CHF" {{$data->forexPairs == "AUD/CHF" ? 'selected' : ''}}>AUD/CHF</option>
-                                                <option value="AUD/JPY" {{$data->forexPairs == "AUD/JPY" ? 'selected' : ''}}>AUD/JPY</option>
-                                                <option value="CAD/CHF" {{$data->forexPairs == "CAD/CHF" ? 'selected' : ''}}>CAD/CHF</option>
-                                                <option value="CAD/JPY" {{$data->forexPairs == "CAD/JPY" ? 'selected' : ''}}>CAD/JPY</option>
-                                                <option value="CHF/JPY" {{$data->forexPairs == "CHF/JPY" ? 'selected' : ''}}>CHF/JPY</option>
-                                                <option value="NZD/CAD" {{$data->forexPairs == "NZD/CAD" ? 'selected' : ''}}>NZD/CAD</option>
-                                                <option value="NZD/CHF" {{$data->forexPairs == "NZD/CHF" ? 'selected' : ''}}>NZD/CHF</option>
-                                                <option value="NZD/JPY" {{$data->forexPairs == "NZD/JPY" ? 'selected' : ''}}>NZD/JPY</option>
-                                                <option value="EUR/AUD" {{$data->forexPairs == "EUR/AUD" ? 'selected' : ''}}>EUR/AUD</option>
-                                                <option value="GBP/CHF" {{$data->forexPairs == "GBP/CHF" ? 'selected' : ''}}>GBP/CHF</option>
-                                                <option value="GBP/JPY" {{$data->forexPairs == "GBP/JPY" ? 'selected' : ''}}>GBP/JPY</option>
-                                                <option value="AUD/NZD" {{$data->forexPairs == "AUD/NZD" ? 'selected' : ''}}>AUD/NZD</option>
-                                                <option value="EUR/NZD" {{$data->forexPairs == "EUR/NZD" ? 'selected' : ''}}>EUR/NZD</option>
-                                                <option value="GBP/AUD" {{$data->forexPairs == "GBP/AUD" ? 'selected' : ''}}>GBP/AUD</option>
-                                                <option value="GBP/CAD" {{$data->forexPairs == "GBP/CAD" ? 'selected' : ''}}>GBP/CAD</option>
-                                                <option value="GBP/NZD" {{$data->forexPairs == "GBP/NZD" ? 'selected' : ''}}>GBP/NZD</option>
-                                                <option value="USD/DKK" {{$data->forexPairs == "USD/DKK" ? 'selected' : ''}}>USD/DKK</option>
-                                                <option value="USD/SEK" {{$data->forexPairs == "USD/SEK" ? 'selected' : ''}}>USD/SEK</option>
-                                                <option value="USD/NOK" {{$data->forexPairs == "USD/NOK" ? 'selected' : ''}}>USD/NOK</option>
-                                                <option value="USD/ZAR" {{$data->forexPairs == "USD/ZAR" ? 'selected' : ''}}>USD/ZAR</option>
-                                                <option value="USD/RUR" {{$data->forexPairs == "USD/RUR" ? 'selected' : ''}}>USD/RUR</option>
-                                                <option value="EUR/RUR" {{$data->forexPairs == "EUR/RUR" ? 'selected' : ''}}>EUR/RUR</option>
-                                                <option value="AUD/CZK" {{$data->forexPairs == "AUD/CZK" ? 'selected' : ''}}>AUD/CZK</option>
-                                                <option value="AUD/DKK" {{$data->forexPairs == "AUD/DKK" ? 'selected' : ''}}>AUD/DKK</option>
-                                                <option value="AUD/HKD" {{$data->forexPairs == "AUD/HKD" ? 'selected' : ''}}>AUD/HKD</option>
-                                                <option value="AUD/HUF" {{$data->forexPairs == "AUD/HUF" ? 'selected' : ''}}>AUD/HUF</option>
-                                                <option value="AUD/MXN" {{$data->forexPairs == "AUD/MXN" ? 'selected' : ''}}>AUD/MXN</option>
-                                                <option value="AUD/NOK" {{$data->forexPairs == "AUD/NOK" ? 'selected' : ''}}>AUD/NOK</option>
-                                                <option value="AUD/PLN" {{$data->forexPairs == "AUD/PLN" ? 'selected' : ''}}>AUD/PLN</option>
-                                                <option value="AUD/SEK" {{$data->forexPairs == "AUD/SEK" ? 'selected' : ''}}>AUD/SEK</option>
-                                                <option value="AUD/SGD" {{$data->forexPairs == "AUD/SGD" ? 'selected' : ''}}>AUD/SGD</option>
-                                                <option value="AUD/ZAR" {{$data->forexPairs == "AUD/ZAR" ? 'selected' : ''}}>AUD/ZAR</option>
-                                                <option value="CAD/CZK" {{$data->forexPairs == "CAD/CZK" ? 'selected' : ''}}>CAD/CZK</option>
-                                                <option value="CAD/DKK" {{$data->forexPairs == "CAD/DKK" ? 'selected' : ''}}>CAD/DKK</option>
-                                                <option value="CAD/HKD" {{$data->forexPairs == "CAD/HKD" ? 'selected' : ''}}>CAD/HKD</option>
-                                                <option value="CAD/HUF" {{$data->forexPairs == "CAD/HUF" ? 'selected' : ''}}>CAD/HUF</option>
-                                                <option value="CAD/MXN" {{$data->forexPairs == "CAD/MXN" ? 'selected' : ''}}>CAD/MXN</option>
-                                                <option value="CAD/NOK" {{$data->forexPairs == "CAD/NOK" ? 'selected' : ''}}>CAD/NOK</option>
-                                                <option value="CAD/PLN" {{$data->forexPairs == "CAD/PLN" ? 'selected' : ''}}>CAD/PLN</option>
-                                                <option value="CAD/SEK" {{$data->forexPairs == "CAD/SEK" ? 'selected' : ''}}>CAD/SEK</option>
-                                                <option value="CAD/ZAR" {{$data->forexPairs == "CAD/ZAR" ? 'selected' : ''}}>CAD/ZAR</option>
-                                                <option value="CHF/CZK" {{$data->forexPairs == "CHF/CZK" ? 'selected' : ''}}>CHF/CZK</option>
-                                                <option value="CHF/DKK" {{$data->forexPairs == "CHF/DKK" ? 'selected' : ''}}>CHF/DKK</option>
-                                                <option value="CHF/HKD" {{$data->forexPairs == "CHF/HKD" ? 'selected' : ''}}>CHF/HKD</option>
-                                                <option value="CHF/HUF" {{$data->forexPairs == "CHF/HUF" ? 'selected' : ''}}>CHF/HUF</option>
-                                                <option value="CHF/MXN" {{$data->forexPairs == "CHF/MXN" ? 'selected' : ''}}>CHF/MXN</option>
-                                                <option value="CHF/NOK" {{$data->forexPairs == "CHF/NOK" ? 'selected' : ''}}>CHF/NOK</option>
-                                                <option value="CHF/PLN" {{$data->forexPairs == "CHF/PLN" ? 'selected' : ''}}>CHF/PLN</option>
-                                                <option value="CHF/SEK" {{$data->forexPairs == "CHF/SEK" ? 'selected' : ''}}>CHF/SEK</option>
-                                                <option value="CHF/SGD" {{$data->forexPairs == "CHF/SGD" ? 'selected' : ''}}>CHF/SGD</option>
-                                                <option value="CHF/ZAR" {{$data->forexPairs == "CHF/ZAR" ? 'selected' : ''}}>CHF/ZAR</option>
-                                                <option value="EUR/CZK" {{$data->forexPairs == "EUR/CZK" ? 'selected' : ''}}>EUR/CZK</option>
-                                                <option value="EUR/DKK" {{$data->forexPairs == "EUR/DKK" ? 'selected' : ''}}>EUR/DKK</option>
-                                                <option value="EUR/HKD" {{$data->forexPairs == "EUR/HKD" ? 'selected' : ''}}>EUR/HKD</option>
-                                                <option value="EUR/HUF" {{$data->forexPairs == "EUR/HUF" ? 'selected' : ''}}>EUR/HUF</option>
-                                                <option value="EUR/MXN" {{$data->forexPairs == "EUR/MXN" ? 'selected' : ''}}>EUR/MXN</option>
-                                                <option value="EUR/NOK" {{$data->forexPairs == "EUR/NOK" ? 'selected' : ''}}>EUR/NOK</option>
-                                                <option value="EUR/PLN" {{$data->forexPairs == "EUR/PLN" ? 'selected' : ''}}>EUR/PLN</option>
-                                                <option value="EUR/SEK" {{$data->forexPairs == "EUR/SEK" ? 'selected' : ''}}>EUR/SEK</option>
-                                                <option value="EUR/ZAR" {{$data->forexPairs == "EUR/ZAR" ? 'selected' : ''}}>EUR/ZAR</option>
-                                                <option value="GBP/CZK" {{$data->forexPairs == "GBP/CZK" ? 'selected' : ''}}>GBP/CZK</option>
-                                                <option value="GBP/DKK" {{$data->forexPairs == "GBP/DKK" ? 'selected' : ''}}>GBP/DKK</option>
-                                                <option value="GBP/HKD" {{$data->forexPairs == "GBP/HKD" ? 'selected' : ''}}>GBP/HKD</option>
-                                                <option value="GBP/HUF" {{$data->forexPairs == "GBP/HUF" ? 'selected' : ''}}>GBP/HUF</option>
-                                                <option value="GBP/MXN" {{$data->forexPairs == "GBP/MXN" ? 'selected' : ''}}>GBP/MXN</option>
-                                                <option value="GBP/NOK" {{$data->forexPairs == "GBP/NOK" ? 'selected' : ''}}>GBP/NOK</option>
-                                                <option value="GBP/PLN" {{$data->forexPairs == "GBP/PLN" ? 'selected' : ''}}>GBP/PLN</option>
-                                                <option value="GBP/SEK" {{$data->forexPairs == "GBP/SEK" ? 'selected' : ''}}>GBP/SEK</option>
-                                                <option value="GBP/SGD" {{$data->forexPairs == "GBP/SGD" ? 'selected' : ''}}>GBP/SGD</option>
-                                                <option value="GBP/ZAR" {{$data->forexPairs == "GBP/ZAR" ? 'selected' : ''}}>GBP/ZAR</option>
-                                                <option value="NZD/DKK" {{$data->forexPairs == "NZD/DKK" ? 'selected' : ''}}>NZD/DKK</option>
-                                                <option value="NZD/HKD" {{$data->forexPairs == "NZD/HKD" ? 'selected' : ''}}>NZD/HKD</option>
-                                                <option value="NZD/HUF" {{$data->forexPairs == "NZD/HUF" ? 'selected' : ''}}>NZD/HUF</option>
-                                                <option value="NZD/MXN" {{$data->forexPairs == "NZD/MXN" ? 'selected' : ''}}>NZD/MXN</option>
-                                                <option value="NZD/NOK" {{$data->forexPairs == "NZD/NOK" ? 'selected' : ''}}>NZD/NOK</option>
-                                                <option value="NZD/PLN" {{$data->forexPairs == "NZD/PLN" ? 'selected' : ''}}>NZD/PLN</option>
-                                                <option value="NZD/SEK" {{$data->forexPairs == "NZD/SEK" ? 'selected' : ''}}>NZD/SEK</option>
-                                                <option value="NZD/SGD" {{$data->forexPairs == "NZD/SGD" ? 'selected' : ''}}>NZD/SGD</option>
-                                                <option value="NZD/ZAR" {{$data->forexPairs == "NZD/ZAR" ? 'selected' : ''}}>NZD/ZAR</option>
-                                                <option value="USD/CZK" {{$data->forexPairs == "USD/CZK" ? 'selected' : ''}}>USD/CZK</option>
-                                                <option value="USD/HUF" {{$data->forexPairs == "USD/HUF" ? 'selected' : ''}}>USD/HUF</option>
-                                                <option value="USD/MXN" {{$data->forexPairs == "USD/MXN" ? 'selected' : ''}}>USD/MXN</option>
-                                                <option value="USD/PLN" {{$data->forexPairs == "USD/PLN" ? 'selected' : ''}}>USD/PLN</option>
-                                                <option value="USD/SGD" {{$data->forexPairs == "USD/SGD" ? 'selected' : ''}}>USD/SGD</option>
-                                                <option value="CZK/JPY" {{$data->forexPairs == "CZK/JPY" ? 'selected' : ''}}>CZK/JPY</option>
-                                                <option value="DKK/JPY" {{$data->forexPairs == "DKK/JPY" ? 'selected' : ''}}>DKK/JPY</option>
-                                                <option value="HKD/JPY" {{$data->forexPairs == "HKD/JPY" ? 'selected' : ''}}>HKD/JPY</option>
-                                                <option value="HUF/JPY" {{$data->forexPairs == "HUF/JPY" ? 'selected' : ''}}>HUF/JPY</option>
-                                                <option value="MXN/JPY" {{$data->forexPairs == "MXN/JPY" ? 'selected' : ''}}>MXN/JPY</option>
-                                                <option value="NOK/JPY" {{$data->forexPairs == "NOK/JPY" ? 'selected' : ''}}>NOK/JPY</option>
-                                                <option value="SEK/JPY" {{$data->forexPairs == "SEK/JPY" ? 'selected' : ''}}>SEK/JPY</option>
-                                                <option value="ZAR/JPY" {{$data->forexPairs == "ZAR/JPY" ? 'selected' : ''}}>ZAR/JPY</option>
-                                                <option value="USD/INR" {{$data->forexPairs == "USD/INR" ? 'selected' : ''}}>USD/INR</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div> -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <!-- Enter Stop lose for Signal -->
@@ -248,10 +135,20 @@
                                     </div>
                                 </div>
                                 <!-- this field is not required -->
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Result</label>
-                                        <input type="text" name="result" value="{{$data->result}}" class="form-control">
+                                        <select name="result" class="form-control">
+                                            <option value="none">None</option>
+                                            <option value="TP Hit" {{$data->result == "TP Hit" ? 'selected' : ''}}>TP Hit</option>
+                                            <option value="SL Hit" {{$data->result =="SL Hit"  ? 'selected' : ''}}>SL Hit</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>PIPs</label>
+                                        <input type="text" class="form-control" name="pips" value="{{$data->pips}}">
                                     </div>
                                 </div>
                                 <div class="col-md-8">

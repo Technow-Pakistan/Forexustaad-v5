@@ -28,6 +28,10 @@ use App\Models\NotificationModel;
 use App\Models\FundamentalModel;
 use App\Models\SponoserAddModel;
 use App\Models\MidBannerModel;
+use App\Models\NonRegisterVisitorModel;
+use App\Models\AllCitiesModel;
+use App\Models\AllStatesModel;
+use App\Models\AllCountriesModel;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -68,14 +72,19 @@ class AppServiceProvider extends ServiceProvider
         view()->share("copyRight",FooterCopyRightModel::where('id',1)->first());
         view()->share("latestWebinars", MainWebinarModel::orderBy('id','desc')->where('status',1)->take(5)->get());
         view()->share("LatestBlogsData",BlogPostModel::orderBy('id','desc')->where('status',1)->where('pending',1)->where('stickToTop',1)->whereDate('publishDate', '<=', date("Y-m-d"))->take(5)->get());
-        view()->share("StarBrokerHome",BrokerCompanyInformationModel::orderBy('id','asc')->where('star',1)->where('pending',0)->where('status',0)->skip(0)->take(10)->get());
-        view()->share("StarSignalsHome",SignalsModel::orderBy('id','asc')->where('star',1)->where('expired',0)->where('status',0)->skip(0)->take(6)->get());
+        view()->share("StarBrokerHome",BrokerCompanyInformationModel::orderBy('id','desc')->where('star',1)->where('pending',0)->where('status',0)->skip(0)->take(10)->get());
+        view()->share("StarSignalsHome",SignalsModel::orderBy('id','desc')->where('star',1)->where('expired',0)->where('status',0)->skip(0)->take(6)->get());
         view()->share("ClientAccountDetailInfo",ClientAccountDetailModel::all());
         view()->share("LatestFundamental",FundamentalModel::orderBy('id','desc')->where('status',1)->skip(0)->take(4)->get());
         view()->share("SponoserAddActive",SponoserAddModel::orderBy('id','desc')->where('status',0)->skip(0)->take(9)->get());
         view()->share("MidBannerHomeActive",MidBannerModel::where('status',0)->where('active',1)->first());
+        view()->share("AllCities",AllCitiesModel::all());
+        view()->share("AllStates",AllStatesModel::all());
+        view()->share("AllCountries",AllCountriesModel::all());
         /** Admin Panel Function  */
         view()->share("HeaderUnReadMessage",UserContactModel::orderBy('id','desc')->where('read',0)->where('trashMail',0)->get());
         view()->share("NotificationMessage",NotificationModel::orderBy('id','desc')->get());
+        view()->share("NonRegisterUser",NonRegisterVisitorModel::orderBy('id','desc')->get());
+
     }
 }
