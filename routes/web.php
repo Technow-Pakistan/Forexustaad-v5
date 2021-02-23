@@ -79,8 +79,8 @@ use Stevebauman\Location\Facades\Location;
             echo "iPod";
         }elseif (stripos($useragent, "iPad")){
             echo "iPad";
-        }elseif (stripos($useragent, "iPad")){
-            echo "iPad";
+        }elseif (stripos($useragent, "Android")){
+            echo "Android";
         }elseif (stripos($useragent, "iPhone")){
             echo "iPhone";
         }elseif (stripos($useragent, "Android")){
@@ -142,6 +142,7 @@ use Stevebauman\Location\Facades\Location;
         dd($result);
 
     });
+    
 Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
     Route::post('/unRegisterUser/Save',[HomeController::class,'unRegisterUserSave']);
     Route::post('/unRegisterUser/Delete',[HomeController::class,'unRegisterUserDelete']);
@@ -266,7 +267,7 @@ Route::get('/ustaad',[AdminController::class,'Login']);
 Route::post('/ustaad',[AdminController::class,'Index']);
 
 Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
-
+    Route::post('/GetRealTimeData/Get',[AdminController::class,'GetRealTimeData']);
     Route::get('/widgets',function(){
         return view('admin.widget-chart');
     });

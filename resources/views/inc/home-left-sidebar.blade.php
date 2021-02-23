@@ -7,7 +7,7 @@
                     </div>
                 </div>
                 
-             <div class="col-sm-12">
+                <!-- <div class="col-sm-12">
                     <div class="service_us">
                         <div class="content_area_heading large-heading ">
                             
@@ -25,36 +25,36 @@
                         <div class="circle_module_circuit_services fadeInUp wow animated circle_services">
                             <div class="services_wrapper">
                 
-                    <?php
- $services = [
-    ['id' => '1', 'left_margin' => '53.7283%', 'top_margin' => '2.00887%', 'icon_1' => 'services_icon-grad1 fa fa-search', 'icon_2' => 'services_icon-grad2 fa fa-search', 'tagline_title' => 'Choose Your Wallet'],
-    ['id' => '2', 'left_margin' => '82.0896%', 'top_margin' => '41.0448%', 'icon_1' => 'services_icon-grad1 fa fa-chart-line', 'icon_2' => 'services_icon-grad2 fa fa-chart-line', 'tagline_title' => 'Make Payment'],
-    ['id' => '3', 'left_margin' => '53.7283%', 'top_margin' => '80.0807%', 'icon_1' => 'services_icon-grad1 fa fa-code', 'icon_2' => 'services_icon-grad2 fa fa-code', 'tagline_title' => 'Buy Or Sell'],
-    ['id' => '4', 'left_margin' => '7.83885%', 'top_margin' => '65.1703%', 'icon_1' => 'services_icon-grad1 fa fa-registered', 'icon_2' => 'services_icon-grad2 fa fa-registered', 'tagline_title' => 'Investment in Trade'],
-    ['id' => '5', 'left_margin' => '7.83885%', 'top_margin' => '16.9193%', 'icon_1' => 'services_icon-grad1 fa fa-lock', 'icon_2' => 'services_icon-grad2 fa fa-lock', 'tagline_title' => 'Gain profit'],
- ];
- $services_grid = '';
- foreach ($services as $services_val => $value) {
-    $active_val = $value['id'] === '1' ? 'active' : '';
+                                <?php
+                                    $services = [
+                                        ['id' => '1', 'left_margin' => '53.7283%', 'top_margin' => '2.00887%', 'icon_1' => 'services_icon-grad1 fa fa-search', 'icon_2' => 'services_icon-grad2 fa fa-search', 'tagline_title' => 'Choose Your Wallet'],
+                                        ['id' => '2', 'left_margin' => '82.0896%', 'top_margin' => '41.0448%', 'icon_1' => 'services_icon-grad1 fa fa-chart-line', 'icon_2' => 'services_icon-grad2 fa fa-chart-line', 'tagline_title' => 'Make Payment'],
+                                        ['id' => '3', 'left_margin' => '53.7283%', 'top_margin' => '80.0807%', 'icon_1' => 'services_icon-grad1 fa fa-code', 'icon_2' => 'services_icon-grad2 fa fa-code', 'tagline_title' => 'Buy Or Sell'],
+                                        ['id' => '4', 'left_margin' => '7.83885%', 'top_margin' => '65.1703%', 'icon_1' => 'services_icon-grad1 fa fa-registered', 'icon_2' => 'services_icon-grad2 fa fa-registered', 'tagline_title' => 'Investment in Trade'],
+                                        ['id' => '5', 'left_margin' => '7.83885%', 'top_margin' => '16.9193%', 'icon_1' => 'services_icon-grad1 fa fa-lock', 'icon_2' => 'services_icon-grad2 fa fa-lock', 'tagline_title' => 'Gain profit'],
+                                    ];
+                                    $services_grid = '';
+                                    foreach ($services as $services_val => $value) {
+                                        $active_val = $value['id'] === '1' ? 'active' : '';
 
-    $services_grid .= '<div class="services_item-wrap '.$active_val.'">';
+                                        $services_grid .= '<div class="services_item-wrap '.$active_val.'">';
 
- $services_grid .='
-                        <div class="services_item-icon" style="left: '.$value['left_margin'].'; top: '.$value['top_margin'].';"><i class="services_icon '.$value['icon_1'].'"></i><i class="services_icon '.$value['icon_2'].'"></i></div>
-                        <div class="services_item-content">
-                            <div class="services_subtitle"></div>
-                            <h3 class="services_title">'.$value['tagline_title'].'</h3>
-                            
-                        </div>
-                    </div>
-                                ';
- }
-?>
+                                    $services_grid .='
+                                                            <div class="services_item-icon" style="left: '.$value['left_margin'].'; top: '.$value['top_margin'].';"><i class="services_icon '.$value['icon_1'].'"></i><i class="services_icon '.$value['icon_2'].'"></i></div>
+                                                            <div class="services_item-content">
+                                                                <div class="services_subtitle"></div>
+                                                                <h3 class="services_title">'.$value['tagline_title'].'</h3>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                                    ';
+                                    }
+                                ?>
                                 <?php echo ($services_grid); ?>
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>  -->
                 
             </div>
         </div>
