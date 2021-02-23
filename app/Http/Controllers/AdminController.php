@@ -171,13 +171,17 @@ class AdminController extends Controller
         }
 
         // Get browser Data one by one & Whole
-        
+
         $VistorDailyBrowserGraphALLDataGet = NonRegisterVisitorModel::all();
         $browserDataUniqueArray = array();
         $AllBroswer = ["Chrome", "Firefox", "Safari", "Internet Explorer", "Opera", "Microsoft Edge"];
         for ($i=0; $i < 6 ; $i++) { 
             $VistorDailyUniqueBrowserGraphALLDataGet = NonRegisterVisitorModel::where('browser',$AllBroswer[$i])->get();
-            $persontage = round(((count($VistorDailyUniqueBrowserGraphALLDataGet)/count($VistorDailyBrowserGraphALLDataGet))*100));
+            if($VistorDailyUniqueBrowserGraphALLDataGet){
+                $persontage = round(((count($VistorDailyUniqueBrowserGraphALLDataGet)/count($VistorDailyBrowserGraphALLDataGet))*100));
+            }else{
+                $persontage = 0;
+            }
             array_push($browserDataUniqueArray,$persontage);
         } 
         return view('admin.index',compact('browserDataUniqueArray','activeUserGraphAllDataArray','TotalClientNumber','MonthlyClientNumber','TotalAdminUsersNumber','MonthlyAdminUsersNumber','TotalBrokerNumber','MonthlyBrokerNumber','TotalPostNumber','MonthlyPostNumber'));
