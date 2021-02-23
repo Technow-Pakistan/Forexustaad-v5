@@ -17,8 +17,10 @@ class IsVisitor
      */
     public function handle(Request $request, Closure $next)
     {       
-        $useragent = $_SERVER['HTTP_USER_AGENT']; 
-       
+        $useragent = $_SERVER['HTTP_USER_AGENT'];
+        if(!$request->session()->has("mathRander")){
+            $request->session()->put('mathRander',rand());
+        }
         //-- You can add billion devices 
 
         $arr_devices = ["iPod", "iPad", "iPhone", "Android", "iOS"];
@@ -32,15 +34,16 @@ class IsVisitor
         if($user_decice == ""){
             $user_decice = "desktop";
         }
-        $arr_browsers = ["Opera", "Edg", "Chrome", "Safari", "Firefox", "MSIE", "Trident"];
+        $arr_browsers = ["OPR", "Edg", "Chrome", "Safari", "Firefox", "MSIE", "Trident"];
         $agent = $_SERVER['HTTP_USER_AGENT'];
+     
         $user_browser = '';
         foreach ($arr_browsers as $browser) {
             if (strpos($agent, $browser) !== false) {
                 $user_browser = $browser;
                 break;
             }   
-        }
+        } 
         switch ($user_browser) {
             case 'MSIE':
                 $user_browser = 'Internet Explorer';
@@ -53,20 +56,25 @@ class IsVisitor
             case 'Edg':
                 $user_browser = 'Microsoft Edge';
                 break;
+            case 'OPR':
+                $user_browser = 'Opera';
+                break;
         }
         $exist = $_SERVER['REMOTE_ADDR'];
-        $data123 =  NonRegisterVisitorModel::where('ip_address',$exist)->first();
+        $strtotimeDate = strtotime(date("d M Y"));
+        $data123 =  NonRegisterVisitorModel::where('ip_address',$exist)->where('strtotime',$strtotimeDate)->first();
         if($data123 == null){
             $data = new NonRegisterVisitorModel;
             $data->ip_address = $_SERVER['REMOTE_ADDR'];
             $data->device = $user_decice;
             $data->browser = $user_browser;
+            $data->strtotime = $strtotimeDate;
             $data->save();
         }else{
             if($request->session()->has("client")){
                 $exist = $_SERVER['REMOTE_ADDR'];
                 $value = $request->session()->get("client");
-                $data =  NonRegisterVisitorModel::where('ip_address',$exist)->first();
+                $data =  NonRegisterVisitorModel::where('ip_address',$exist)->where('strtotime',$strtotimeDate)->first();
                 if($data){
                     $data->type = $value['id'];
                     $data->save();

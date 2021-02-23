@@ -785,7 +785,14 @@
 
     
   <script>
+  // screen Width and Height
+
+    // var screen_width = screen.width;
+    // var screen_height = screen.height;
+    // alert("width: " + screen_width + " height: " + screen_height);
+
   // location
+
     // navigator.geolocation.getCurrentPosition(console.log,console.log)
   
   // Tab Count
@@ -807,10 +814,10 @@
     //   ies--;
     //   localStorage.setItem('tabs',ies);
     // });
+    
     console.log("successewqewq");
-    $(window).focus(function() {
-    console.log("focus");
-      
+    var timer = setInterval(() => {
+      console.log("dsadas");
       $.ajax({
           type: "Post",
           url: "{{URL::to('unRegisterUser/Save')}}",
@@ -822,21 +829,42 @@
               console.log("fail");
           }
       });
-    });
+      
+    }, 5000);
+      
     $(window).blur(function() {
-    console.log("blur");
-      $.ajax({
-          type: "Post",
-          url: "{{URL::to('unRegisterUser/Delete')}}",
+      console.log("blur");
+      clearInterval(timer)
+      // $.ajax({
+      //     type: "Post",
+      //     url: "{{URL::to('unRegisterUser/Delete')}}",
           
-          success: function(response) {
-              console.log("success");
-          },
-          error: function(data) {
-              console.log("fail");
-          }
-      });
+      //     success: function(response) {
+      //         console.log("success");
+      //     },
+      //     error: function(data) {
+      //         console.log("fail");
+      //     }
+      // });
     });
+    // $(window).focus(function() {
+    //   console.log("focus");
+    //   var timer = setInterval(() => {
+    //     console.log("dsadas");
+    //     $.ajax({
+    //         type: "Post",
+    //         url: "{{URL::to('unRegisterUser/Save')}}",
+            
+    //         success: function(response) {
+    //             console.log("success");
+    //         },
+    //         error: function(data) {
+    //             console.log("fail");
+    //         }
+    //     });
+        
+    //   }, 5000);
+    // });
   </script>
   
               @if(Session::has('success1'))

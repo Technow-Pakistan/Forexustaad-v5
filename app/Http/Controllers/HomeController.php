@@ -48,15 +48,33 @@ class HomeController extends Controller
         }
         return back();
     }
-    public function unRegisterUserSave(){
-        $data = new ActiveOnSiteModel;
-        $data->active = 1;
-        $data->save();
-    }
-    public function unRegisterUserDelete(){
-        $data = ActiveOnSiteModel::orderBy('id','asc')->first();
-        if ($data) {
-            $data->delete();
+    public function unRegisterUserSave(Request $request){
+        $selectedTime = date("Y-m-d H:i:s");
+        $endTime = strtotime("-8 seconds", strtotime($selectedTime));
+        $formatted_date =  date('Y-m-d H:i:s', $endTime);
+        $result = ActiveOnSiteModel::where('created_at','<=',$formatted_date)->get();
+        foreach($result as $ret){
+            $ret->delete();
+        }
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $exitData = ActiveOnSiteModel::where('userId',$ip)->first();
+        if(!isset($exitData)){
+            $data = new ActiveOnSiteModel;
+            $useragent = $_SERVER['HTTP_USER_AGENT'];
+            if(stripos($useragent, "Android") || stripos($useragent, "iPhone") || stripos($useragent, "Android") || stripos($useragent, "iOS")){
+                $data->device = "Mobile" ;
+            }elseif(stripos($useragent, "iPod") || stripos($useragent, "iPad")){
+                $data->device = "Tab";
+            }else{
+                $data->device = "Desktop";
+            }
+            $ip = $_SERVER['REMOTE_ADDR'];
+            $data->userId = $ip; 
+            if ($request->session()->has('mathRander')) {
+                $mathRandor = $request->session()->get('mathRander');
+                $data->active = $mathRandor;
+            }
+                $data->save();
         }
     }
     public function ChangePassword(){
