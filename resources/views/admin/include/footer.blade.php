@@ -106,6 +106,7 @@
 				<script src="{{URL::to('/public/assets/assets/js/form-select-custom.js')}}"></script>
 		<!-- Apex Chart -->
 		<script src="{{URL::to('/public/assets/assets/js/apexcharts.min.js')}}"></script>
+		<script src="{{URL::to('/public/assets/assets/js/jquery.peity.min.js')}}"></script>
 
 		<!-- custom-chart js -->
 		<script src="{{URL::to('/public/assets/assets/js/dashboard-main.js')}}"></script>
@@ -179,4 +180,18 @@
 	$(".selectedAllNotification").on('click',function() {
 		$('[id=checkedNotification]').prop('checked',true);
 	});
+</script>
+<script>
+  $(function() {
+        $("span.pie_1").peity("pie", {
+            fill: ["#4099ff", "#eff3f6"]
+        });
+        $("span.pie_2").peity("pie", {
+            fill: ["#eff3f6", "#4099ff"]
+        });
+        $("span.pie_3").peity("pie", {
+            fill: ["#eff3f6", "#4099ff"]
+        });
+        $(".data-attributes").peity("donut");
+    });
 </script>

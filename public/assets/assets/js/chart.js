@@ -2022,7 +2022,7 @@ function floatchart() {
             plotOptions: {
                 pie: {
                     donut: {
-                        size: '65%'
+                        size: '30%'
                     }
                 }
             },

@@ -15,12 +15,32 @@ use App\Models\TrashModel;
 use App\Models\TrashGalleryModel;
 use App\Models\BlogPostModel;
 use App\Models\BrokerCompanyInformationModel;
+use App\Models\NonRegisterVisitorModel;
+use App\Models\ActiveOnSiteModel;
 use App\Models\NotificationModel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SubscriberMail;
 
 class AdminController extends Controller
 {
+
+    public function GetRealTimeData(Request $request){
+        $selectedTime = date("Y-m-d H:i:s");
+        $endTime = strtotime("-10 seconds", strtotime($selectedTime));
+        $formatted_date =  date('Y-m-d H:i:s', $endTime);
+        $result = ActiveOnSiteModel::where('created_at','<=',$formatted_date)->get();
+        foreach($result as $ret){
+            $ret->delete();
+        }
+        $a=array();
+        $activeUserAll = ActiveOnSiteModel::all();
+        $activeMobileUser = ActiveOnSiteModel::where('device','Mobile')->get();
+        $activeDesktopUser = ActiveOnSiteModel::where('device','Desktop')->get();
+        $activeTabUser = ActiveOnSiteModel::where('device','Tab')->get();
+        array_push($a,$activeUserAll,$activeMobileUser,$activeDesktopUser,$activeTabUser);
+        $data = json_encode($a);
+        return $data;
+    }
     public function ReconformationMail(Request $request, $id){
         $registration = ClientRegistrationModel::where('id',$id)->first();
         Mail::to($registration->email)->send(new SubscriberMail($registration));
@@ -129,7 +149,38 @@ class AdminController extends Controller
         $TotalBrokerNumber = count($TotalBroker);
         $MonthlyBroker = BrokerCompanyInformationModel::where("trash",0)->get();
         $MonthlyBrokerNumber = count($MonthlyBroker);
-        return view('admin.index',compact('TotalClientNumber','MonthlyClientNumber','TotalAdminUsersNumber','MonthlyAdminUsersNumber','TotalBrokerNumber','MonthlyBrokerNumber','TotalPostNumber','MonthlyPostNumber'));
+
+        // Active Visitors Graph Data
+        
+        $activeUserGraphAllDataArray = array();
+        $activeUserGraphFirstData = NonRegisterVisitorModel::orderBy('id','asc')->first();
+        $firstDate = $activeUserGraphFirstData->created_at->format("Y-m-d");
+        $loopCount = abs(strtotime(date("Y-m-d")) - strtotime($firstDate));
+        $years = floor($loopCount / (365*60*60*24));
+        $months = floor(($loopCount - $years * 365*60*60*24) / (30*60*60*24));   
+        $days = floor(($loopCount - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+
+        for ($i=0; $i < $days ; $i++) {
+            $endTime = strtotime("$i days", strtotime($firstDate));
+            $activeUserGraphData = NonRegisterVisitorModel::where('strtotime',$endTime)->get();
+            $temporaryData = array();
+            $endstrtotime = $endTime . "000";
+            $countofStrtotitme = count($activeUserGraphData);
+            array_push($temporaryData,$endstrtotime,$countofStrtotitme);
+            array_push($activeUserGraphAllDataArray,$temporaryData);
+        }
+
+        // Get browser Data one by one & Whole
+        
+        $VistorDailyBrowserGraphALLDataGet = NonRegisterVisitorModel::all();
+        $browserDataUniqueArray = array();
+        $AllBroswer = ["Chrome", "Firefox", "Safari", "Internet Explorer", "Opera", "Microsoft Edge"];
+        for ($i=0; $i < 6 ; $i++) { 
+            $VistorDailyUniqueBrowserGraphALLDataGet = NonRegisterVisitorModel::where('browser',$AllBroswer[$i])->get();
+            $persontage = round(((count($VistorDailyUniqueBrowserGraphALLDataGet)/count($VistorDailyBrowserGraphALLDataGet))*100));
+            array_push($browserDataUniqueArray,$persontage);
+        } 
+        return view('admin.index',compact('browserDataUniqueArray','activeUserGraphAllDataArray','TotalClientNumber','MonthlyClientNumber','TotalAdminUsersNumber','MonthlyAdminUsersNumber','TotalBrokerNumber','MonthlyBrokerNumber','TotalPostNumber','MonthlyPostNumber'));
     }
     public function Logout(Request $request){
         $request->session()->pull("admin");
