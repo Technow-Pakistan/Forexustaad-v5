@@ -395,7 +395,7 @@
                         <table cellpadding="0" cellspacing="0" class="tbl-accordion-nested">
                            <thead>
                               <tr>
-                                 <td colspan="4" class="tbl-accordion-section">TRADING FEATURES</td>
+                                 <td colspan="4" class="tbl-accordion-section">TRADING FEATURES<span class="BrokerDetailIconAdjust" check="open"><i class="fa fa-chevron-right"></i></span></td>
                               </tr>
                            <thead>
                            <tbody>

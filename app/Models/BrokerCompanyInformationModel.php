@@ -10,6 +10,7 @@ use App\Models\BrokerCategoryModel;
 use App\Models\PromoteBrokerModel;
 use App\Models\AdminModel;
 use App\Models\BrokerTraningModel;
+use App\Models\ClientAccountDetailModel;
 
 class BrokerCompanyInformationModel extends Model
 {
@@ -50,6 +51,12 @@ class BrokerCompanyInformationModel extends Model
     }
     public function getTraningInfo(){
         $get = BrokerTraningModel::where('brokerId',$this->id)->first();
+        return $get;
+    }
+
+    // Client Account Detail
+    public function GetNumberClientAccouontsNumber(){
+        $get = ClientAccountDetailModel::where('brokerId',$this->id)->get();
         return $get;
     }
 }

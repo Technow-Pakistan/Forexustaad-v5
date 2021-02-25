@@ -759,6 +759,7 @@
                       $("#sel2").html('');
                       $("#sel3").html('');
                       console.log("hello");
+                          $("#sel2").append("<option value=''>none</option>");
                       for(var i = 0; i < data.length; i++) {
                           console.log("hello2");
                           $("#sel2").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>")
@@ -785,6 +786,21 @@
 
     
   <script>
+    var adBlockEnabled = false;
+    var testAd = document.createElement('div');
+    testAd.innerHTML = '&nbsp;';
+    testAd.className = 'adsbox';
+    document.body.appendChild(testAd);
+    window.setTimeout(function() {
+      if (testAd.offsetHeight === 0) {
+        $(".adblock-wrapper").show();
+      }else{
+        $(".adblock-wrapper").hide();
+      }
+      testAd.remove();
+      console.log('AdBlock Enabled? ', adBlockEnabled)
+    }, 100);
+
   // screen Width and Height
 
     // var screen_width = screen.width;

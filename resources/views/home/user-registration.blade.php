@@ -270,7 +270,7 @@
                                                                                 <div class="dynamic-field233" id="dynamic-field-3424">
                                                                                     <label class="d-none"></label>
                                                                                     <div class="row">
-                                                                                        <div class="col-sm-12 pb-3">
+                                                                                        <div class="col-sm-6 pb-3">
                                                                                             <input type="hidden" class="form-control" name="verified[]" value="{{$accountInfo->verified}}"/> 
                                                                                             <select class="custom-select" name="brokerId[]"{{$accountInfo->verified == 1 ? 'disabled' : ''}}>
                                                                                                 @foreach($allBroker as $broker)
@@ -280,6 +280,14 @@
                                                                                             @if($accountInfo->verified == 1)
                                                                                                 <input type="hidden" class="form-control" name="brokerId[]" value="{{$accountInfo->brokerId}}"/>
                                                                                             @endif
+                                                                                        </div>
+                                                                                        <div class="col-md-6">
+                                                                                            <div class="form-group">
+                                                                                                <input type="text" class="form-control" name="clientAccountId[]" value="{{$accountInfo->clientAccountId}}" placeholder="Client Id " {{$accountInfo->verified == 1 ? 'disabled' : ''}}/>
+                                                                                                @if($accountInfo->verified == 1)
+                                                                                                    <input type="hidden" class="form-control" name="clientAccountId[]" value="{{$accountInfo->clientAccountId}}" placeholder="Client Id "/>
+                                                                                                @endif
+                                                                                            </div>
                                                                                         </div>
                                                                                         <div class="col-md-6">
                                                                                             <div class="form-group">
@@ -294,7 +302,6 @@
                                                                                                     <input type="hidden" class="form-control" name="accountName[]" value="{{$accountInfo->accountName}}" placeholder="Account Name *"}/>
                                                                                                 @endif
                                                                                             </div>
-
                                                                                         </div>
                                                                                         <div class="col-md-6">
                                                                                             <div class="form-group">
@@ -325,13 +332,18 @@
                                                                             <div class="dynamic-field3" id="dynamic-field-4">
                                                                                 <label class="d-none"></label>
                                                                                 <div class="row ">
-                                                                                    <div class="col-sm-12 pb-3">
+                                                                                    <div class="col-sm-6 pb-3">
                                                                                             <input type="hidden" class="form-control" name="verified[]" value="0"/> 
                                                                                         <select class="custom-select" name="brokerId[]">
                                                                                             @foreach($allBroker as $broker)
                                                                                                 <option value="{{$broker->id}}">{{$broker->title}}</option>
                                                                                             @endforeach
                                                                                         </select>
+                                                                                    </div>
+                                                                                    <div class="col-sm-6">
+                                                                                        <div class="form-group">
+                                                                                            <input type="text" class="form-control" name="clientAccountId[]" value="" placeholder="Client Id "/>
+                                                                                        </div>
                                                                                     </div>
                                                                                     <div class="col-md-6">
                                                                                         <div class="form-group">
@@ -369,7 +381,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-md-12 justify-content-end d-flex pt-2">
+                                                                <div class="col-md-12 justify-content-end d-flex p-2">
                                                                     <input type="hidden" name="clientId" value="{{$clientValue['id']}}">
                                                                     <input type="submit" class="btn btn-primary btn-radial"  value="Save"/>
                                                                 </div>

@@ -38,7 +38,7 @@
                                           @endphp
                                           @foreach($clientAccount as $account1)
                                             @php
-                                              if($account1->verified == 1){
+                                              if($account1->verified == 1 && $account1->depositConfirm == 1){
                                                 $vipTypeNumber += $account1->accountdeposit;
                                               }
                                             @endphp
@@ -210,13 +210,18 @@
                                           <div class="card-body">
                                             <h6 class="d-flex align-items-center mb-3">
                                               <i class="material-icons text-info mr-2">{{$brokerTitle->title}}</i>
-                                              <div class="verifiedBtnAccount">
+                                              <div class="verifiedBtnAccount d-flex justify-content-end">
                                                 @if($account->verified == 0)
-                                                  <form action="{{URL::to('ustaad/viewClientProfile/accountVerified')}}/{{$account->id}}" method="post">
+                                                  <form action="{{URL::to('ustaad/viewClientProfile/accountVerified')}}/{{$account->id}}" method="post" class="mr-2">
                                                     Verified <input type="checkbox" name="verified" id="" class="AdminConfirmationEmail" value="1">
                                                   </form>
-                                                @else
-                                                  <span class="badge badge-light-success">Verified</span>
+                                                  <form action="{{URL::to('ustaad/viewClientProfile/accountVerified')}}/{{$account->id}}" method="post" class="mr-2">
+                                                    Rejected <input type="checkbox" name="verified" id="" class="AdminConfirmationEmail" value="2">
+                                                  </form>
+                                                @elseif($account->verified == 1)
+                                                  <span class="badge badge-light-success mr-2">Verified</span>
+                                                @elseif($account->verified == 2)
+                                                  <span class="badge badge-light-danger mr-2">Rejected</span>
                                                 @endif
                                               </div>
                                               <a href="{{URL::to('ustaad/DeleteClientAccount')}}/{{$account->id}}" class="addAction trashBtnAccount" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash text-danger"></i></a>
@@ -233,8 +238,30 @@
                                             <div class="progress mb-3">
                                               <p>{{$account->accountemail}}</p>
                                             </div>
-                                            <small>Deposit</small>
-                                            <div class="progress mb-3">
+                                            <small class="d-flex justify-content-between">
+                                              Deposit
+                                                <div class="d-flex">
+                                                @if($account->depositConfirm == 0)
+                                                  <form action="{{URL::to('ustaad/viewClientProfile/accountdepositConfirm')}}/{{$account->id}}" method="post" class="mr-2">
+                                                    Yes <input type="checkbox" name="depositConfirm" id="" class="AdminConfirmationEmail heig_10px" value="1">
+                                                  </form>
+                                                  <form action="{{URL::to('ustaad/viewClientProfile/accountdepositConfirm')}}/{{$account->id}}" method="post" class="mr-2">
+                                                  No <input type="checkbox" name="depositConfirm" id="" class="AdminConfirmationEmail heig_10px" value="2">
+                                                  </form>
+                                                @elseif($account->depositConfirm == 1)
+                                                  <form action="{{URL::to('ustaad/viewClientProfile/accountdepositConfirm')}}/{{$account->id}}" method="post" class="mr-2">
+                                                    No <input type="checkbox" name="depositConfirm" id="" class="AdminConfirmationEmail heig_10px" value="2">
+                                                  </form>
+                                                  <span class="badge badge-light-success mr-2">Yes</span>
+                                                @elseif($account->depositConfirm == 2)
+                                                  <form action="{{URL::to('ustaad/viewClientProfile/accountdepositConfirm')}}/{{$account->id}}" method="post" class="mr-2">
+                                                  Yes <input type="checkbox" name="depositConfirm" id="" class="AdminConfirmationEmail heig_10px" value="1">
+                                                  </form>
+                                                  <span class="badge badge-light-danger mr-2">No</span>
+                                                @endif
+                                                </div>
+                                            </small>
+                                            <div class="progress {{$account->depositConfirm == 2 ? 'text-danger' : ''}} {{$account->depositConfirm == 1 ? 'text-success' : ''}} mb-3">
                                               <p>{{$account->accountdeposit}}</p>
                                             </div>
                                           </div>
@@ -257,6 +284,9 @@
 @include('admin.include.footer')
 
 <style>
+  .heig_10px{
+    height:10px;
+  }
   .verifiedBtnAccount{
     position: absolute;
     top: 15px;

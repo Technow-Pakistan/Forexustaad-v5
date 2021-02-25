@@ -2,6 +2,16 @@
 <html lang="en">
 
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-53883159-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-53883159-1');
+        </script>
+
     <!-- Meta Data -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -61,8 +71,35 @@
 </head>
 
 <body>
-    <!-- @include('cookieConsent::index') -->
-
+    <div class='adblock-wrapper center hidden' id='ads-blocked'>
+        <div class='adblock-content-wrapper'>
+            <div class='adblock-content'>
+            <div class='center'>
+                <div class='image-container'>
+                <div class='image'>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <h3>
+                    Ads
+                    </h3>
+                </div>
+                </div>
+            </div><br>
+            <div class='adblock-text'>
+                <h3>
+                Please disable your ad blocker!
+                </h3>
+                <p>
+                We know ads are annoying but please bear with us here & disable your ad blocker!
+                </p>
+            </div>
+            <div class='adblock-button'>
+                <a href="" class='btn'>
+                    I've disabled my ad blocker!
+                </a>
+            </div>
+            </div>
+        </div>
+    </div>
 
 
     

@@ -16,6 +16,13 @@ class IsLogin
      */
     public function handle(Request $request, Closure $next)
     {
+        // convert http: to https:
+            // $url = url()->current();
+            // if (strpos($url, 'http:') !== false) {
+            //     $url2 = str_ireplace("http:","https:",$url);
+            //     return redirect($url2);
+            // }
+
         if($request->session()->has("admin")){
             return $next($request);
         }else{

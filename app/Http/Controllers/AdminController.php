@@ -80,10 +80,28 @@ class AdminController extends Controller
     }
     public function ClientProfileAccountVerified(Request $request, $id){
         $clientAccount = ClientAccountDetailModel::find($id);
-        $clientAccount->verified = 1;
+        $clientAccount->verified = $request->verified;
         $clientAccount->save();
-        $success = "Data has been verified successfully.";
-        $request->session()->put("success",$success);
+        if($request->verified == 1){
+            $success = "Account has been verified successfully.";
+            $request->session()->put("success",$success);
+        }else {
+            $error = "Account has been rejected successfully.";
+            $request->session()->put("error",$error);
+        }
+        return back();
+    }
+    public function ClientProfileaccountdepositConfirm(Request $request, $id){
+        $clientAccount = ClientAccountDetailModel::find($id);
+        $clientAccount->depositConfirm = $request->depositConfirm;
+        $clientAccount->save();
+        if($request->depositConfirm == 1){
+            $success = "Account Depostit is right.";
+            $request->session()->put("success",$success);
+        }else {
+            $error = "Account Depostit is wrong.";
+            $request->session()->put("error",$error);
+        }
         return back();
     }
     public function ChangeMemberType(Request $request, $id){
@@ -154,13 +172,17 @@ class AdminController extends Controller
         
         $activeUserGraphAllDataArray = array();
         $activeUserGraphFirstData = NonRegisterVisitorModel::orderBy('id','asc')->first();
-        $firstDate = $activeUserGraphFirstData->created_at->format("Y-m-d");
+        if($activeUserGraphFirstData){
+            $firstDate = $activeUserGraphFirstData->created_at->format("Y-m-d");
+        }else {
+            $firstDate = date("Y-m-d");
+        }
         $loopCount = abs(strtotime(date("Y-m-d")) - strtotime($firstDate));
         $years = floor($loopCount / (365*60*60*24));
         $months = floor(($loopCount - $years * 365*60*60*24) / (30*60*60*24));   
         $days = floor(($loopCount - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
 
-        for ($i=0; $i < $days ; $i++) {
+        for ($i=0; $i <= $days ; $i++) {
             $endTime = strtotime("$i days", strtotime($firstDate));
             $activeUserGraphData = NonRegisterVisitorModel::where('strtotime',$endTime)->get();
             $temporaryData = array();
@@ -177,7 +199,7 @@ class AdminController extends Controller
         $AllBroswer = ["Chrome", "Firefox", "Safari", "Internet Explorer", "Opera", "Microsoft Edge"];
         for ($i=0; $i < 6 ; $i++) { 
             $VistorDailyUniqueBrowserGraphALLDataGet = NonRegisterVisitorModel::where('browser',$AllBroswer[$i])->get();
-            if($VistorDailyUniqueBrowserGraphALLDataGet){
+            if(count($VistorDailyUniqueBrowserGraphALLDataGet) != 0){
                 $persontage = round(((count($VistorDailyUniqueBrowserGraphALLDataGet)/count($VistorDailyBrowserGraphALLDataGet))*100));
             }else{
                 $persontage = 0;
