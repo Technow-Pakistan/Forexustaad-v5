@@ -74,7 +74,7 @@
 					</div>
 				<!-- order-card end -->
 				<!-- active-user start -->
-					<div class="col-sm-3">	
+					<div class="col-sm-4">	
 						<div class="card bg-patern" style="height:430px;">
 							<div class="card-header d-flex justify-content-between">
 								<h4>Active User</h2> <strong class="activeUserAll"></strong>
@@ -94,21 +94,21 @@
 											<i class="fas fa-circle f-10 m-r-5 text-success"></i
 											><span class="activeMobileUser"></span>
 										</h3>
-										<span class="ml-3">Mobile</span>
+										<span>Mobile</span>
 									</div>
 									<div class="col">
 										<h3 class="m-0">
 											<i class="fas fa-circle text-primary f-10 m-r-5"></i
 											><span class="activeDesktopUser"></span>
 										</h3>
-										<span class="ml-3">Desktop</span>
+										<span>Desktop</span>
 									</div>
 									<div class="col">
 										<h3 class="m-0">
 											<i class="fas fa-circle text-warning f-10 m-r-5"></i
 											><span class="activeTabUser"></span>
 										</h3>
-										<span class="ml-3">Tab</span>
+										<span>Tab</span>
 									</div>
 								</div>
 							</div>
@@ -117,7 +117,7 @@
 					</div>
 				<!-- active-user start -->
 				<!-- browser-% end -->
-					<div class="col-sm-3">	
+					<div class="col-sm-4">	
 						<div class="card table-card" style="height:430px;">
 							<div class="card-header borderless">
 								<h5>Browser States</h5>
@@ -358,7 +358,7 @@
                     }
                 }],
                 xaxis: [{
-                    x: new Date('23 Feb 2021').getTime(),
+                    x: new Date('24 Feb 2021').getTime(),
                     borderColor: '#999',
                     yAxisIndex: 0,
                     label: {
@@ -433,8 +433,8 @@
             resetCssClasses(e)
             chart.updateOptions({
                 xaxis: {
-                    min: new Date('28 Jan 2013').getTime(),
-                    max: new Date('27 Feb 2013').getTime(),
+                    min: new Date('23 Feb 2021').getTime(),
+                    max: new Date('23 Mar 2021').getTime(),
                 }
             })
         })
@@ -442,8 +442,8 @@
             resetCssClasses(e)
             chart.updateOptions({
                 xaxis: {
-                    min: new Date('27 Sep 2012').getTime(),
-                    max: new Date('27 Feb 2013').getTime(),
+                    min: new Date('23 Feb 2021').getTime(),
+                    max: new Date('23 Sep 2021').getTime(),
                 }
             })
         })
@@ -451,8 +451,8 @@
             resetCssClasses(e)
             chart.updateOptions({
                 xaxis: {
-                    min: new Date('27 Feb 2012').getTime(),
-                    max: new Date('27 Feb 2013').getTime(),
+                    min: new Date('23 Feb 2021').getTime(),
+                    max: new Date('23 Feb 2022').getTime(),
                 }
             })
         })
@@ -460,8 +460,8 @@
             resetCssClasses(e)
             chart.updateOptions({
                 xaxis: {
-                    min: new Date('20 Feb 2021').getTime(),
-                    max: new Date('27 Feb 2021').getTime(),
+                    min: new Date('23 Feb 2021').getTime(),
+                    max: new Date('28 Feb 2021').getTime(),
                 }
             })
         })
@@ -484,6 +484,7 @@
 </script>
 <script>
     $(document).ready(function() {
+		var ctx = $("#chart-line");
 		var timer = setInterval(() => {
 			console.log("dsadas");
 			$.ajax({
@@ -499,7 +500,6 @@
 					$(".activeTabUser").text(json[3].length);
 					if (json[1].length != 0 || json[2].length != 0 || json[3].length != 0) {
 						$("#chart-line").css('display','block');
-						var ctx = $("#chart-line");
 						var myLineChart = new Chart(ctx, {
 							type: 'doughnut',
 							data: {

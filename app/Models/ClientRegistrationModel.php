@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ClientMemberModel;
+use App\Models\ClientAccountDetailModel;
 use App\Models\AllCitiesModel;
 use App\Models\AllStatesModel;
 use App\Models\AllCountriesModel;
@@ -13,6 +14,10 @@ class ClientRegistrationModel extends Model
     protected $table = "clients_registration";
     protected $fillable = ["email","password","cityId","name","lastName","userName","nickName","image","mobile","city","status","confirmationEmail","description","addMobile","addEmail","social","socialLink"];
 
+    public function GetAccountData(){
+        $member = ClientAccountDetailModel::where('clientId',$this->id)->get();
+        return $member;
+    }
     public function GetMember(){
         $member = ClientMemberModel::where('id',$this->memberType)->first();
         return $member;
