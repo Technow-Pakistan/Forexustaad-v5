@@ -16,7 +16,14 @@ class IsVisitor
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
-    {       
+    {   
+        // convert http: to https:
+            // $url = url()->current();
+            // if (strpos($url, 'http:') !== false) {
+            //     $url2 = str_ireplace("http:","https:",$url);
+            //     return redirect($url2);
+            // }  
+
         $useragent = $_SERVER['HTTP_USER_AGENT'];
         if(!$request->session()->has("mathRander")){
             $request->session()->put('mathRander',rand());

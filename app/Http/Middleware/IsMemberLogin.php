@@ -16,6 +16,13 @@ class IsMemberLogin
      */
     public function handle(Request $request, Closure $next)
     {
+        // convert http: to https:
+            // $url = url()->current();
+            // if (strpos($url, 'http:') !== false) {
+            //     $url2 = str_ireplace("http:","https:",$url);
+            //     return redirect($url2);
+            // }
+
         if($request->session()->has("client")){
             return $next($request);
         }else{

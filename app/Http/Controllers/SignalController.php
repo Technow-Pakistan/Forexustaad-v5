@@ -7,6 +7,7 @@ use App\Models\SignalsModel;
 use App\Models\SignalCommentsModel;
 use App\Models\SignalPairModel;
 use App\Models\SignalPairCategoryModel;
+use App\Models\NotificationModel;
 
 class SignalController extends Controller
 {
@@ -30,6 +31,20 @@ class SignalController extends Controller
             $data = new SignalCommentsModel;
             $data->fill($request->all());
             $data->save();
+            $signalData = SignalsModel::where('id',$data->signalId)->first();
+            $signalPair = SignalPairModel::where('id',$signalData->forexPairs)->first();
+            if ($data->reply == 0 ) {
+                $comment = "comment";
+            }else{
+                $comment = "reply";
+            }
+            $userID = $request->session()->get('client');
+                $notification = new NotificationModel;
+                $notification->userId = $userID->id;
+                $notification->userType = 1;
+                $notification->text = "Add $comment in $signalPair->pair singnal.";
+                $notification->link = "ustaad/signals/comment/$data->signalId";
+                $notification->save();
             return back();
     }
     

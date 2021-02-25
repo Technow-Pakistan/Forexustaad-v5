@@ -18,7 +18,7 @@
                                 <li><i class="fa fa-clock-o"></i> {{$BlogDetail->publishDate}}</li>
                                 <li>
                 <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                <div class="addthis_inline_share_toolbox_sv9g"></div>
+                <!-- <div class="addthis_inline_share_toolbox_sv9g"></div> -->
                 <!-- <i class="fa fa-folder"></i> Forex Education -->
                 </li>
                                 <!-- <li><i class="fa fa-comments"></i> 8 Comments </li>

@@ -278,6 +278,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::post('/notification/checked/delete',[AdminController::class,'NotificationDelete']);
     Route::get('/viewClientProfile/{id}',[AdminController::class,'ViewClientProfile']);
     Route::post('/viewClientProfile/accountVerified/{id}',[AdminController::class,'ClientProfileAccountVerified']);
+    Route::post('/viewClientProfile/accountdepositConfirm/{id}',[AdminController::class,'ClientProfileaccountdepositConfirm']);
     Route::post('/changeMemberType/{id}',[AdminController::class,'ChangeMemberType']);
 
     Route::get('/dashboard',[AdminController::class,'Dashboard']);
@@ -611,6 +612,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::get('/brokersDetail/{id}',[BorkerController::class,'Detail']);
     
     Route::get('/clientMember/{id}',[ClientMemberController::class,'clientMemberView']);
+    Route::get('/clientMemberAccounts/{id}',[ClientMemberController::class,'clientMemberAccountsView']);
     Route::group(['prefix' => 'member'],function(){
         Route::get('/profile/{id}',[AdminMemberController::class,'Index']);
         Route::get('/add',[AdminMemberController::class,'Add']);

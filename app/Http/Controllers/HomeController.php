@@ -440,8 +440,8 @@ class HomeController extends Controller
         $allBroker = BrokerCompanyInformationModel::where('trash',0)->get();
         $value = $request->session()->get("client");
         $id = $value['id'];
-        $clientAccount = ClientAccountDetailModel::where('clientId',$id)->get();
-        $clientAccount1 = ClientAccountDetailModel::where('clientId',$id)->first();
+        $clientAccount = ClientAccountDetailModel::where('clientId',$id)->where('verified','!=',2)->get();
+        $clientAccount1 = ClientAccountDetailModel::where('clientId',$id)->where('verified','!=',2)->first();
         $AllCities = AllCitiesModel::all();
         $AllStates = AllStatesModel::all();
         $AllCountries = AllCountriesModel::all(); 
@@ -488,7 +488,7 @@ class HomeController extends Controller
 
     }
     public function userregistrationAccountAdd(Request $request){
-        $deleteData =  ClientAccountDetailModel::where('clientId',$request->clientId)->get();
+        $deleteData =  ClientAccountDetailModel::where('clientId',$request->clientId)->where('verified','!=',2)->get();
         
         for ($i=0; $i < count($deleteData) ; $i++) {
             $deleteData[$i]->delete();
@@ -504,6 +504,7 @@ class HomeController extends Controller
             $ClientAccount->accountdeposit = $request->accountdeposit[$i];
             $ClientAccount->accountName = $request->accountName[$i];
             $ClientAccount->verified = $request->verified[$i];
+            $ClientAccount->clientAccountId = $request->clientAccountId[$i];
             $ClientAccount->save();
         }
         $userID = $request->session()->get('client');
@@ -519,7 +520,7 @@ class HomeController extends Controller
         $value = $request->session()->get("client");
         $id = $value['id'];
         $totalClientInfo = ClientRegistrationModel::where('id',$id)->first();
-        $clientAccount = ClientAccountDetailModel::where('clientId',$id)->get();
+        $clientAccount = ClientAccountDetailModel::where('clientId',$id)->where('verified','!=',2)->get();
         $clientMember = ClientMemberModel::where('id',$totalClientInfo->memberType)->first();
         return view('home/user-profile',compact('totalClientInfo','clientMember','clientAccount'));
     }
