@@ -58,6 +58,11 @@ use Stevebauman\Location\Facades\Location;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/channel/{message}',[AdminController::class,'GetPusherName']);
+Route::get('/tv1', function () {
+    return view("pusherMessage",["channel" => "firstChannel", "event" => "firstEvent"]); 
+});
     // 
     // var screen_width = screen.width;
     // var screen_height = screen.height;
