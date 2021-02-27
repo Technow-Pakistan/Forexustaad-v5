@@ -18,12 +18,16 @@ use App\Models\BrokerCompanyInformationModel;
 use App\Models\NonRegisterVisitorModel;
 use App\Models\ActiveOnSiteModel;
 use App\Models\NotificationModel;
+use App\Models\PusherModel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SubscriberMail;
 
 class AdminController extends Controller
 {
 
+    public function GetPusherName(Request $request,$message){
+        PusherModel::BoardCast("firstChannel","firstEvent",["message" => $message]);
+    }
     public function GetRealTimeData(Request $request){
         $selectedTime = date("Y-m-d H:i:s");
         $endTime = strtotime("-10 seconds", strtotime($selectedTime));
