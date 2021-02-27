@@ -2811,4 +2811,7 @@ padding-bottom: 12px;
         background: #fff;
         color: #fa3123;
         border: 2px solid #fa3123;
-    }
+	}
+	.hiddenAdblocker{
+		display: none;
+	}

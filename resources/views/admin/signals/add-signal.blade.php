@@ -35,7 +35,7 @@
                                         <label for="">Select User</label>
                                         <select class="form-control" name="selectUser" required="">
                                             <option value="Register User">Register User</option>
-                                            <option value="Premium User">Premium User</option>
+                                            <option value="VIP Member">VIP Member</option>
                                             <option value="Free User">Free User</option>
                                         </select>
                                         <small class="text-warning">Select for whom is this signal for ? </small>

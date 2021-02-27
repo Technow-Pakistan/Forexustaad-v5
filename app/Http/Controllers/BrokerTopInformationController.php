@@ -73,6 +73,10 @@ class BrokerTopInformationController extends Controller
             $notification->userId = $userID->id;
             $notification->text = "add a new broker $brokerTitle";
             $notification->link = "ustaad/brokersDetail/$id";
+            $previousData = NotificationModel::where('link',$notification->link)->first();
+            if ($previousData) {
+                $previousData->delete(); 
+            }
             $notification->save();
         }
         $success = "New broker has been added successfully.";
@@ -106,6 +110,10 @@ class BrokerTopInformationController extends Controller
             $notification->userId = $userID->id;
             $notification->text = "Edit a Deposit section in $title->title broker";
             $notification->link = "ustaad/brokersDetail/$title->id";
+            $previousData = NotificationModel::where('link',$notification->link)->first();
+            if ($previousData) {
+                $previousData->delete(); 
+            }
             $notification->save();
         }
         $success = "This broker information has been added successfully.";
@@ -139,6 +147,10 @@ class BrokerTopInformationController extends Controller
             $notification->userId = $userID->id;
             $notification->text = "Edit a Commission section in $title->title broker";
             $notification->link = "ustaad/brokersDetail/$title->id";
+            $previousData = NotificationModel::where('link',$notification->link)->first();
+            if ($previousData) {
+                $previousData->delete(); 
+            }
             $notification->save();
         }
         $success = "This broker information has been added successfully.";
@@ -172,6 +184,10 @@ class BrokerTopInformationController extends Controller
             $notification->userId = $userID->id;
             $notification->text = "Edit a Account Info section in $title->title broker";
             $notification->link = "ustaad/brokersDetail/$title->id";
+            $previousData = NotificationModel::where('link',$notification->link)->first();
+            if ($previousData) {
+                $previousData->delete(); 
+            }
             $notification->save();
         }
         $success = "This broker information has been added successfully.";
@@ -205,6 +221,10 @@ class BrokerTopInformationController extends Controller
             $notification->userId = $userID->id;
             $notification->text = "Edit a Tradable Assets section in $title->title broker";
             $notification->link = "ustaad/brokersDetail/$title->id";
+            $previousData = NotificationModel::where('link',$notification->link)->first();
+            if ($previousData) {
+                $previousData->delete(); 
+            }
             $notification->save();
         }
         $success = "This broker information has been added successfully.";

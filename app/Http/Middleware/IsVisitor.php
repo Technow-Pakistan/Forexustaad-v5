@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use App\Models\NonRegisterVisitorModel;
+use App\Models\ClientRegistrationModel;
 
 class IsVisitor
 {
@@ -16,7 +17,17 @@ class IsVisitor
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
-    {   
+    {    
+        if($request->session()->has("client")){
+            $value = $request->session()->get("client");
+            $dataOnline = ClientRegistrationModel::find($value['id']);
+            if($value['online'] != $dataOnline->online){
+                $request->session()->pull("client");
+                $error = "Your account has login to another device. If that not you contact to administrator. ";
+                $request->session()->put("error",$error);
+                return back();
+            }
+        }
         // convert http: to https:
             // $url = url()->current();
             // if (strpos($url, 'http:') !== false) {

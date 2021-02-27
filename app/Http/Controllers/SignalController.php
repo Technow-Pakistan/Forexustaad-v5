@@ -44,6 +44,10 @@ class SignalController extends Controller
                 $notification->userType = 1;
                 $notification->text = "Add $comment in $signalPair->pair singnal.";
                 $notification->link = "ustaad/signals/comment/$data->signalId";
+                $previousData = NotificationModel::where('link',$notification->link)->first();
+                if ($previousData) {
+                    $previousData->delete(); 
+                }
                 $notification->save();
             return back();
     }

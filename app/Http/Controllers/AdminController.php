@@ -149,9 +149,15 @@ class AdminController extends Controller
         $Clients = ClientRegistrationModel::all();
         $TotalClientNumber = count($Clients);
         $lastMonth = date("m",strtotime("0 months"));
+        $lastDay = date("d",strtotime("0 days"));
+        $lastWeek = date("d",strtotime("-7 days"));
         $lastYear = date("Y",strtotime("0 months"));
         $MonthlyClients = ClientRegistrationModel::whereMonth("created_at",$lastMonth)->whereYear("created_at",$lastYear)->get();
+        $ToDayClients = ClientRegistrationModel::whereDay("created_at",$lastDay)->whereMonth("created_at",$lastMonth)->whereYear("created_at",$lastYear)->get();
+        $WeeklyClients = ClientRegistrationModel::whereDay("created_at",'>=',$lastWeek)->whereMonth("created_at",$lastMonth)->whereYear("created_at",$lastYear)->get();
         $MonthlyClientNumber = count($MonthlyClients);
+        $ToDayClientNumber = count($ToDayClients);
+        $WeeklyClientNumber = count($WeeklyClients);
      
         $AdminUsers = AdminModel::all();
         $TotalAdminUsersNumber = count($AdminUsers);
@@ -165,7 +171,7 @@ class AdminController extends Controller
 
         $TotalBroker = BrokerCompanyInformationModel::all();
         $TotalBrokerNumber = count($TotalBroker);
-        $MonthlyBroker = BrokerCompanyInformationModel::where("trash",0)->get();
+        $MonthlyBroker = BrokerCompanyInformationModel::where("trash",0)->where("pending",0)->get();
         $MonthlyBrokerNumber = count($MonthlyBroker);
 
         // Active Visitors Graph Data
@@ -206,7 +212,7 @@ class AdminController extends Controller
             }
             array_push($browserDataUniqueArray,$persontage);
         } 
-        return view('admin.index',compact('browserDataUniqueArray','activeUserGraphAllDataArray','TotalClientNumber','MonthlyClientNumber','TotalAdminUsersNumber','MonthlyAdminUsersNumber','TotalBrokerNumber','MonthlyBrokerNumber','TotalPostNumber','MonthlyPostNumber'));
+        return view('admin.index',compact('browserDataUniqueArray','activeUserGraphAllDataArray','TotalClientNumber','MonthlyClientNumber','ToDayClientNumber','WeeklyClientNumber','TotalAdminUsersNumber','MonthlyAdminUsersNumber','TotalBrokerNumber','MonthlyBrokerNumber','TotalPostNumber','MonthlyPostNumber'));
     }
     public function Logout(Request $request){
         $request->session()->pull("admin");

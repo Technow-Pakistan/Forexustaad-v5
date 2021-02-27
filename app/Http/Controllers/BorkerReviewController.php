@@ -40,6 +40,10 @@ class BorkerReviewController extends Controller
             $notification->userId = $userID->id;
             $notification->text = "Add a broker review in $broker1->title";
             $notification->link = "ustaad/brokersReview/$broker1->id";
+            $previousData = NotificationModel::where('link',$notification->link)->first();
+            if ($previousData) {
+                $previousData->delete(); 
+            }
             $notification->save();
         }
         $success = "This broker review has been added successfully.";
@@ -70,6 +74,10 @@ class BorkerReviewController extends Controller
             $notification->userId = $userID->id;
             $notification->text = "Edit a broker review in $broker1->title";
             $notification->link = "ustaad/brokersReview/$broker1->id";
+            $previousData = NotificationModel::where('link',$notification->link)->first();
+            if ($previousData) {
+                $previousData->delete(); 
+            }
             $notification->save();
         }
         $success = "This broker review has been updated successfully.";

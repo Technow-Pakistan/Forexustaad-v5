@@ -52,6 +52,10 @@ class BorkerNewsController extends Controller
             $notification->userId = $userID->id;
             $notification->text = "Add a broker news in $broker1->title";
             $notification->link = "ustaad/brokersNews/all/$broker1->id";
+            $previousData = NotificationModel::where('link',$notification->link)->first();
+            if ($previousData) {
+                $previousData->delete(); 
+            }
             $notification->save();
         }
         $success = "This broker news has been added successfully.";
@@ -94,6 +98,10 @@ class BorkerNewsController extends Controller
             $notification->userId = $userID->id;
             $notification->text = "Edit a broker news in $broker1->title";
             $notification->link = "ustaad/brokersNews/all/$broker1->id";
+            $previousData = NotificationModel::where('link',$notification->link)->first();
+            if ($previousData) {
+                $previousData->delete(); 
+            }
             $notification->save();
         }
         $success = "This broker news has been updated successfully.";
