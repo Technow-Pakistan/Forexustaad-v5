@@ -6,17 +6,6 @@
     <section class="after_banner_content_area">
         <div class="container">
             <div class="row justify-content-center">
-                @php
-                    if(Session::has('error')){ 
-                        $error =Session::get('error');
-                    }
-                    @endphp
-                @isset($error)
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="alert alert-danger">{{$error}}</div>
-                        @php Session::pull('error') @endphp
-                    </div>
-                @endisset
                 <div class="col-lg-3 col-md-6 col-sm-12 order-2 order-lg-1">
                     @include('inc.home-left-sidebar')
                 </div>
@@ -228,7 +217,7 @@
                                           <img src="{{$urlImageSrc}}" alt="avatar"/>
                                         </div>
                                         <div class="result_comment col-md-10">
-                                          <h4>{{ $comment->userType == "client" ? $client->name : $adminInfo->username}}</h4>
+                                          <h4>{{ $comment->userType == "client" ? $client->name : $adminDetailInfo->firstName . ' ' . $adminDetailInfo->lastName}}</h4>
                                           <p>{{$comment->comment}}</p>
                                           <div class="tools_comment">
                                             @php
@@ -273,7 +262,7 @@
                                                       <img src="{{$urlImageSrc1}}" alt="avatar"/>
                                                     </div>
                                                     <div class="result_comment col-md-10">
-                                                      <h4>{{ $reply->userType == "client" ? $client->name : $adminInfo1->username}}</h4>
+                                                      <h4>{{ $reply->userType == "client" ? $client->name : $adminDetailInfo1->firstName . ' ' . $adminDetailInfo1->lastName}}</h4>
                                                       <p><span class="ml-3 text-primary">{{$reply->replyName}} </span> {{$reply->comment}}</p>
                                                       <div class="tools_comment">
                                                         <!-- <a class="like" href="#">Like</a>

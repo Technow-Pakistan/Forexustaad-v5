@@ -213,6 +213,10 @@ class BorkerController extends Controller
             $notification->userId = $user->id;
             $notification->text = "Edit a broker $broker->title";
             $notification->link = "ustaad/brokersDetail/$broker->id";
+            $previousData = NotificationModel::where('link',$notification->link)->first();
+            if ($previousData) {
+                $previousData->delete(); 
+            }
             $notification->save();
         }
         $success = "This broker has been updated successfully.";
@@ -333,6 +337,10 @@ class BorkerController extends Controller
             $notification->userId = $user->id;
             $notification->text = "Delete a broker $brokerTitle";
             $notification->link = "ustaad/trash";
+            $previousData = NotificationModel::where('link',$notification->link)->first();
+            if ($previousData) {
+                $previousData->delete(); 
+            }
             $notification->save();
         }
         $error = "This broker has been delete successfully.";

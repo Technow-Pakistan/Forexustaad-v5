@@ -109,7 +109,7 @@
                                              @if($go == 0)
                                                 @if($data->selectUser == "Register User" && !Session::has('client'))
                                                    <a href="#!"  class="LoginButton" data-toggle="modal" data-target="#requestQuoteModal">View Signal</a>
-                                                @elseif($data->selectUser == "Premium User")
+                                                @elseif($data->selectUser == "VIP Member")
                                                    @if(!Session::has('client'))
                                                       <a href="#!"  class="LoginButton" data-toggle="modal" data-target="#requestQuoteModal">View Signal</a>
                                                    @elseif(isset($loginClientData->memberType))
@@ -132,7 +132,7 @@
                      </div>
                      <div class="scroll-tbl">
                         <h4 class="ml-2 Colorff0024">Expired Signals</h4>
-                        <table id="free-signals-list" class="table table-striped">
+                        <table id="expiredSignal" class="table table-striped table-hover dt-responsive dataTable no-footer">
                            <thead>
                               <tr class="text-center">
                                  <th>Symbols/Pairs</th>
@@ -227,3 +227,10 @@
       color:#ff0024;
    }
 </style>
+<script>
+   
+//Expired Signal
+$('#expiredSignal').DataTable({
+    responsive: true
+});
+</script>   

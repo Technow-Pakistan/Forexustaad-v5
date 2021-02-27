@@ -61,6 +61,7 @@ class ComposeEmailController extends Controller
             $message->subject("");
             $message->setBody($Email->message);
         });
+        return back();
     }
     public function SendEmailRead(Request $request, $id){
         $urlDelete = "sendEmailRead/delete";

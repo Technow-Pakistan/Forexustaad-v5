@@ -71,7 +71,7 @@
 </head>
 
 <body>
-    <div class='adblock-wrapper center hidden' id='ads-blocked'>
+    <div class='adblock-wrapper center hiddenAdblocker' id='ads-blocked'>
         <div class='adblock-content-wrapper'>
             <div class='adblock-content'>
             <div class='center'>

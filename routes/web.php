@@ -92,19 +92,19 @@ use Stevebauman\Location\Facades\Location;
         }
 
     });
-    Route::get('url',function(){
         // echo URL::current() . "\n";
         // if (URL::current() != url()->previous()) {
         //     echo url()->previous();
         // }
-        $url = (isset($_SERVER['HTTPS'])) ? 'https' : 'http';
-        $url.="://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $ref = "";
-        if (isset($_SERVER['HTTP_REFERER'])) {
-            $ref = $_SERVER['HTTP_REFERER'];
-        }
-        echo $ref;
-    });
+    // Route::get('url',function(){
+    //     $url = (isset($_SERVER['HTTPS'])) ? 'https' : 'http';
+    //     $url.="://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    //     $ref = "";
+    //     if (isset($_SERVER['HTTP_REFERER'])) {
+    //         $ref = $_SERVER['HTTP_REFERER'];
+    //     }
+    //     echo $ref;
+    // });
     Route::get('broswer',function(){
         // $browser = get_browser(null, true);
         // print_r($browser);
@@ -234,7 +234,6 @@ Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
     Route::get('/signal',[SignalController::class,'signal']);
     Route::get('/signal/{id}',[SignalController::class,'signalView']);
     Route::post('/contact/add',[ContactController::class,'Add']);
-});
     // Users Panel Views
 
     Route::post('user-registration/stateData/{id}',[HomeController::class,'userregistrationStateCode']);
@@ -258,6 +257,7 @@ Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
         // Route::get('/logout',[MemberController::class,'Logout']);
     });
 
+});
     Route::get('/ReconformationMail/{id}',[AdminController::class,'ReconformationMail']);
     Route::post('/ReSendMailSend',[HomeController::class,'ReconformationMail']);
 

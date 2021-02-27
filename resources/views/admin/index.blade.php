@@ -10,12 +10,18 @@
 						<div class="card bg-c-blue order-card">
 							<div class="card-body">
 								<a href="{{URL::to('ustaad/member/clientList')}}">
-									<h6 class="text-white">Total Clients</h6>
-									<h2 class="text-right text-white">
-										<i class="fa fa-users float-left"></i
+									<h6 class="text-white" style="font-size: 15px">Total Clients</h6>
+									<h2 class="text-right text-white m-0" style="font-size: 20px">
+										<i class="fa fa-users float-left" style="font-size: 20px"></i
 										><span>{{$TotalClientNumber}}</span>
 									</h2>
-									<p class="m-b-0 text-light">
+									<p class="m-b-0 text-light" style="border-bottom:1px solid #f8f9fa;font-size: 12px">
+										This Day<span class="float-right">{{$ToDayClientNumber}}</span>
+									</p>
+									<p class="m-b-0 text-light" style="border-bottom:1px solid #f8f9fa;font-size: 12px">
+										This Week<span class="float-right">{{$WeeklyClientNumber}}</span>
+									</p>
+									<p class="m-b-0 text-light" style="font-size: 12px">
 										This Month<span class="float-right">{{$MonthlyClientNumber}}</span>
 									</p>
 								</a>
