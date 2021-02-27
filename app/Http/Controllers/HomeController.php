@@ -243,6 +243,8 @@ class HomeController extends Controller
                 return back();
             }
             if ($login->status != 0) {
+                $login->online = ++$login->online;
+                $login->save();
                 $request->session()->put("client",$login);
                 return back();
             }else {
@@ -259,6 +261,8 @@ class HomeController extends Controller
                 return back();
             }
             if ($mobile->status != 0) {
+                $login->online = ++$login->online;
+                $login->save();
                 $request->session()->put("client",$mobile);
                 return redirect('/');
             }else {
@@ -272,6 +276,10 @@ class HomeController extends Controller
         return back();
     }
     public function LogoutProcess(Request $request){
+        $value = $request->session()->get("client");
+        $dataOnline = ClientRegistrationModel::find($value['id']);
+        $dataOnline->online = 0;
+        $dataOnline->save();
         $request->session()->pull("client");
         return back();
     }
@@ -483,6 +491,10 @@ class HomeController extends Controller
             $notification->userType = 1;
             $notification->text = "Update his profile.";
             $notification->link = "ustaad/viewClientProfile/$userID->id";
+            $previousData = NotificationModel::where('link',$notification->link)->first();
+            if ($previousData) {
+                $previousData->delete(); 
+            }
             $notification->save();
         return back();
 
@@ -513,6 +525,10 @@ class HomeController extends Controller
             $notification->userType = 1;
             $notification->text = "Update his broker Account.";
             $notification->link = "ustaad/viewClientProfile/$userID->id";
+            $previousData = NotificationModel::where('link',$notification->link)->first();
+            if ($previousData) {
+                $previousData->delete(); 
+            }
             $notification->save();
         return back();
     }

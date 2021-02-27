@@ -14,7 +14,7 @@ class ClientMemberController extends Controller
         $MemberType = ClientMemberModel::all();
         $totalClientAccounts = ClientAccountDetailModel::all();
         $totalUsers = ClientRegistrationModel::all();
-        $totalBrokers = BrokerCompanyInformationModel::where('trash','0')->get();
+        $totalBrokers = BrokerCompanyInformationModel::where('trash','0')->where("pending",0)->get();
         return view('admin.client.viewAllTypeUsers',compact('MemberType','totalClientAccounts','totalUsers','totalBrokers'));
     }
     public function clientMemberView(Request $request, $id){

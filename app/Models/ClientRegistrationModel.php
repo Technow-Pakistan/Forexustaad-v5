@@ -12,7 +12,7 @@ use App\Models\AllCountriesModel;
 class ClientRegistrationModel extends Model
 {
     protected $table = "clients_registration";
-    protected $fillable = ["email","password","cityId","name","lastName","userName","nickName","image","mobile","city","status","confirmationEmail","description","addMobile","addEmail","social","socialLink"];
+    protected $fillable = ["email","password","cityId","name","lastName","userName","nickName","image","mobile","city","status","confirmationEmail","description","addMobile","addEmail","social","socialLink","online"];
 
     public function GetAccountData(){
         $member = ClientAccountDetailModel::where('clientId',$this->id)->get();

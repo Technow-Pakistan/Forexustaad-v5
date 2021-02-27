@@ -4,7 +4,7 @@
     <!--==============================-->
     
     <div id="snackbar"><i class="fa  fa-exclamation-triangle"></i> &nbsp; Please LogIn First</div>
-    <div id="snackbar1"><i class="fa fa-exclamation-triangle"></i> &nbsp; Get Premium First</div>
+    <div id="snackbar1"><i class="fa fa-exclamation-triangle"></i> &nbsp; Become VIP First</div>
     <div id="snackbar2"></div>
     <div id="snackbar3"></div>
     <script>
@@ -579,7 +579,28 @@
 
 
 </script>
-
+        <!-- Desktop Notification start -->
+<!-- <script>
+    console.log(Notification.permission);
+    if (Notification.permission === "granted") {
+        alert("we have permission");
+          showNotification();
+    } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then(permission => {
+          console.log(permission);
+        });
+          showNotification();
+    }
+    function showNotification() {
+    const notification = new Notification("New message incoming", {
+        body: "Hi there. How are you doing?"
+    })
+    notification.onclick = (e) => {
+        window.location.href = "https://google.com";
+    };
+  }
+</script> -->
+        <!-- Desktop Notification end -->
 <script>function initVideo() {
           var vidDefer = document.getElementsByTagName('iframe');
           for (var i=0; i<vidDefer.length; i++) {
@@ -784,7 +805,6 @@
           });
     </script>
 
-    
   <script>
     var adBlockEnabled = false;
     var testAd = document.createElement('div');
@@ -793,6 +813,7 @@
     document.body.appendChild(testAd);
     window.setTimeout(function() {
       if (testAd.offsetHeight === 0) {
+        $(".adblock-wrapper").css('display','flex');
         $(".adblock-wrapper").show();
       }else{
         $(".adblock-wrapper").hide();

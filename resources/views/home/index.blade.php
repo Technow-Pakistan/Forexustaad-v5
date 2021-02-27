@@ -285,6 +285,95 @@
                     </section>
                 @endif
 
+                @php $dataSignalsCount = 0; @endphp
+                    @foreach($StarSignalsHome as $data)
+                        @php $dataSignalsCount++ @endphp
+                        @if($dataSignalsCount == 1)
+                            <section class="features">
+                                <div class="container">
+                                    <div class="content_area_heading large-heading text-center">
+
+                                        <h1 class="heading_title wow animated fadeInUp">
+                                            Latest Signals
+                                        </h1>
+                                        <div class="heading_border wow animated fadeInUp">
+                                            <span class="one"></span><span class="two"></span><span class="three"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center">
+                        @endif
+                                            @php
+                                                $url = $data->id;
+                                                $loginClientData = Session::get('client');
+                                                $go = 1;
+                                                $go3 = 1;
+                                                $profits = explode('@',$data->takeProfit);
+                                                $time1 = strtotime($data->time);
+                                                $time = date('h:i A', $time1);
+                                                $date1 = strtotime($data->date);
+                                                $date = date('d M Y', $date1);
+                                                if($data->date == date("Y-m-d")){
+                                                    if($data->time >= date("H:i:s")){
+                                                        $go = 0;
+                                                        $go3 = 3;
+                                                    }
+                                                }
+                                                if($data->date > date("Y-m-d")){
+                                                    $go = 0;
+                                                    $go3 = 3;
+                                                }
+                                                $timeDate1 = strtotime(date("Y-m-d H:i:s"));
+                                                $timeDate2 = strtotime($data->created_at->format("Y-m-d H:i:s"));
+                                                $minsDate = ($timeDate1 - $timeDate2) / 60;
+                                                            $pair = $data->getPair();
+                                                $flags = explode("/",$pair->pair);
+                                            @endphp
+                                            @if($go == 0)
+                                                <div class="col-xl-4 col-lg-6 col-md-7 col-sm-8 col-12 h-100">
+                                                    <div class="features_inner text-center wow animated fadeInLeft">
+                                                        <div class="services_wrapper">
+                                                            <div class="">
+                                                                <div class="services_icon">
+                                                                    @foreach($flags as $flag)
+                                                                        @php $flag4 = str_replace(' ', '', $flag) @endphp
+                                                                        <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
+                                                                    @endforeach
+                                                                </div>
+                                                            </div>
+                                                            <div class="feature_content">
+                                                                <h3 class="content_title">
+                                                                    {{$pair->pair}} <br>
+                                                                    {{$data->selectUser}} <br>
+                                                                    @if($go == 0)
+                                                                        @if($data->selectUser == "Register User" && !Session::has('client'))
+                                                                            <a href="#!" class="LoginButton" data-toggle="modal" data-target="#requestQuoteModal">View Signal</a>
+                                                                        @elseif($data->selectUser == "VIP Member")
+                                                                        @if(!Session::has('client'))
+                                                                            <a href="#!" class="LoginButton" data-toggle="modal" data-target="#requestQuoteModal">View Signal</a>
+                                                                        @elseif(isset($loginClientData->memberType))
+                                                                            @if($loginClientData->memberType == 1)
+                                                                                <a href="#!" onclick="snackbar1()">View Signal</a>
+                                                                            @else
+                                                                                <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
+                                                                            @endif
+                                                                        @endif
+                                                                        @else
+                                                                            <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
+                                                                        @endif
+                                                                    @endif
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        @if(count($StarSignalsHome) == $dataSignalsCount )
+                                    </div>
+                                </div>
+                            </section>
+                                        @endif
+                    @endforeach
+
 
 
 
@@ -420,95 +509,6 @@
                             </div>
                         </div>
                     </section>
-                    @php $dataSignalsCount = 0; @endphp
-                    @foreach($StarSignalsHome as $data)
-                        @php $dataSignalsCount++ @endphp
-                        @if($dataSignalsCount == 1)
-                            <section class="features">
-                                <div class="container">
-                                    <div class="content_area_heading large-heading text-center">
-
-                                        <h1 class="heading_title wow animated fadeInUp">
-                                            Latest Signals
-                                        </h1>
-                                        <div class="heading_border wow animated fadeInUp">
-                                            <span class="one"></span><span class="two"></span><span class="three"></span>
-                                        </div>
-                                    </div>
-                                    <div class="row justify-content-center">
-                        @endif
-                                            @php
-                                                $url = $data->id;
-                                                $loginClientData = Session::get('client');
-                                                $go = 1;
-                                                $go3 = 1;
-                                                $profits = explode('@',$data->takeProfit);
-                                                $time1 = strtotime($data->time);
-                                                $time = date('h:i A', $time1);
-                                                $date1 = strtotime($data->date);
-                                                $date = date('d M Y', $date1);
-                                                if($data->date == date("Y-m-d")){
-                                                    if($data->time >= date("H:i:s")){
-                                                        $go = 0;
-                                                        $go3 = 3;
-                                                    }
-                                                }
-                                                if($data->date > date("Y-m-d")){
-                                                    $go = 0;
-                                                    $go3 = 3;
-                                                }
-                                                $timeDate1 = strtotime(date("Y-m-d H:i:s"));
-                                                $timeDate2 = strtotime($data->created_at->format("Y-m-d H:i:s"));
-                                                $minsDate = ($timeDate1 - $timeDate2) / 60;
-                                                            $pair = $data->getPair();
-                                                $flags = explode("/",$pair->pair);
-                                            @endphp
-                                            @if($go == 0)
-                                                <div class="col-xl-4 col-lg-6 col-md-7 col-sm-8 col-12 h-100">
-                                                    <div class="features_inner text-center wow animated fadeInLeft">
-                                                        <div class="services_wrapper">
-                                                            <div class="">
-                                                                <div class="services_icon">
-                                                                    @foreach($flags as $flag)
-                                                                        @php $flag4 = str_replace(' ', '', $flag) @endphp
-                                                                        <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
-                                                                    @endforeach
-                                                                </div>
-                                                            </div>
-                                                            <div class="feature_content">
-                                                                <h3 class="content_title">
-                                                                    {{$pair->pair}} <br>
-                                                                    {{$data->selectUser}} <br>
-                                                                    @if($go == 0)
-                                                                        @if($data->selectUser == "Register User" && !Session::has('client'))
-                                                                            <a href="#!" class="LoginButton" data-toggle="modal" data-target="#requestQuoteModal">View Signal</a>
-                                                                        @elseif($data->selectUser == "Premium User")
-                                                                        @if(!Session::has('client'))
-                                                                            <a href="#!" class="LoginButton" data-toggle="modal" data-target="#requestQuoteModal">View Signal</a>
-                                                                        @elseif(isset($loginClientData->memberType))
-                                                                            @if($loginClientData->memberType == 1)
-                                                                                <a href="#!" onclick="snackbar1()">View Signal</a>
-                                                                            @else
-                                                                                <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
-                                                                            @endif
-                                                                        @endif
-                                                                        @else
-                                                                            <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
-                                                                        @endif
-                                                                    @endif
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        @if(count($StarSignalsHome) == $dataSignalsCount )
-                                    </div>
-                                </div>
-                            </section>
-                                        @endif
-                    @endforeach
-
 
                     @if(count($latestWebinars) > 0)
 
