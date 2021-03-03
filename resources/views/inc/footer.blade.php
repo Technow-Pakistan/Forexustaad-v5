@@ -2,7 +2,7 @@
 		<!--==============================-->
 		<!--=        	Toast         	 =-->
     <!--==============================-->
-    
+
     <div id="snackbar"><i class="fa  fa-exclamation-triangle"></i> &nbsp; Please LogIn First</div>
     <div id="snackbar1"><i class="fa fa-exclamation-triangle"></i> &nbsp; Become VIP First</div>
     <div id="snackbar2"></div>
@@ -57,7 +57,7 @@
     <!--==============================-->
 		<!--=        	Footer         	 =-->
 		<!--==============================-->
-  
+
 		<footer class="footer-bg">
 			<div class="container">
 				<div class="row footer-widget">
@@ -206,7 +206,7 @@
 	.dropdown-menu{
 		right: 0!important;
 		left: auto;
-		
+
 	}
     .buttonBlinking21 {
       text-align: center;
@@ -300,7 +300,7 @@
   }
 });
 </script> -->
-  
+
 
 
 
@@ -325,7 +325,7 @@
               <p class="heading-description fadeInUp wow w-100 heading_description-change4" data-wow-delay="0.2s">
                Fill this form to register your self.
               </p>
-              
+
               @if(Session::has('success1'))
                   @php
                     $success = Session::get('success1');
@@ -363,14 +363,14 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <select name="" id="sel2" class="form-control text-gray explore_form phone" required>
-                                        
+
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <select name="cityId" id="sel3" class="form-control text-gray explore_form phone" required>
-                                      
+
                                     </select>
                                 </div>
                             </div>
@@ -579,35 +579,16 @@
 
 
 </script>
-        <!-- Desktop Notification start -->
-<!-- <script>
-    console.log(Notification.permission);
-    if (Notification.permission === "granted") {
-        alert("we have permission");
-          showNotification();
-    } else if (Notification.permission !== "denied") {
-        Notification.requestPermission().then(permission => {
-          console.log(permission);
-        });
-          showNotification();
-    }
-    function showNotification() {
-    const notification = new Notification("New message incoming", {
-        body: "Hi there. How are you doing?"
-    })
-    notification.onclick = (e) => {
-        window.location.href = "https://google.com";
-    };
-  }
-</script> -->
-        <!-- Desktop Notification end -->
-<script>function initVideo() {
-          var vidDefer = document.getElementsByTagName('iframe');
-          for (var i=0; i<vidDefer.length; i++) {
+<script>
+    function initVideo() {
+        var vidDefer = document.getElementsByTagName('iframe');
+        for (var i=0; i<vidDefer.length; i++) {
             if(vidDefer[i].getAttribute('data-src')) {
-              vidDefer[i].setAttribute('src',vidDefer[i].getAttribute('data-src'));
-        } } }
-        window.onload = initVideo;
+                vidDefer[i].setAttribute('src',vidDefer[i].getAttribute('data-src'));
+            }
+        }
+    }
+    window.onload = initVideo;
 </script>
 
 <script type="text/javascript">
@@ -765,9 +746,9 @@
         blink.style.opacity = (blink.style.opacity == 0 ? 1 : 0);
       }, 500);
 
-      
+
           // city & State Error
-                
+
           $("#sel1").on("change",function(){
               var myusername = $("#sel1").val();
               var url = "{{URL::to('user-registration/stateData')}}" + "/" + myusername;
@@ -831,7 +812,7 @@
   // location
 
     // navigator.geolocation.getCurrentPosition(console.log,console.log)
-  
+
   // Tab Count
 
     // var session = localStorage.getItem('tabs');
@@ -851,14 +832,14 @@
     //   ies--;
     //   localStorage.setItem('tabs',ies);
     // });
-    
+
     console.log("successewqewq");
     var timer = setInterval(() => {
       console.log("dsadas");
       $.ajax({
           type: "Post",
           url: "{{URL::to('unRegisterUser/Save')}}",
-          
+
           success: function(response) {
               console.log("success");
           },
@@ -866,16 +847,16 @@
               console.log("fail");
           }
       });
-      
+
     }, 5000);
-      
+
     $(window).blur(function() {
       console.log("blur");
       clearInterval(timer)
       // $.ajax({
       //     type: "Post",
       //     url: "{{URL::to('unRegisterUser/Delete')}}",
-          
+
       //     success: function(response) {
       //         console.log("success");
       //     },
@@ -891,7 +872,7 @@
     //     $.ajax({
     //         type: "Post",
     //         url: "{{URL::to('unRegisterUser/Save')}}",
-            
+
     //         success: function(response) {
     //             console.log("success");
     //         },
@@ -899,11 +880,10 @@
     //             console.log("fail");
     //         }
     //     });
-        
+
     //   }, 5000);
     // });
   </script>
-  
               @if(Session::has('success1'))
                 <script>
                   $("#requestQuoteModal").css('display','block');
@@ -914,5 +894,140 @@
                 </script>
                 @php Session::pull('success1') @endphp
               @endif
+
+@if(Session::has('client'))
+    @php
+        $value = Session::get('client');
+    @endphp
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script>
+
+      // Enable pusher logging - don't include this in production
+      Pusher.logToConsole = false;
+
+      var pusher = new Pusher("{{env('PUSHER_APP_KEY')}}", {
+        cluster: "{{env('PUSHER_APP_CLUSTER')}}"
+      });
+
+      var channel = pusher.subscribe("{{$value['email']}}");
+      channel.bind("firstEvent", function(data) {
+        console.log((data));
+      });
+
+      // push desktop notification code with pusher
+        <script src="{{URL::to('public/assets/assets/js/push/push.js')}}"></script>
+
+      var channel1 = pusher.subscribe("firstChannel1");
+      channel1.bind("firstEvent1", function(data) {
+        Push.create("Forexustaad.com!",{
+            body: "This is example of Push.js Tutorial",
+            icon: "{{URL::to('storage/app') . '/' . $MainFavicon->favicon}}",
+            timeout: 2000,
+            onClick: function () {
+                window.location.href="https://forexustaad.com";
+            }
+        });
+      });
+    </script>
+@endif
+
 </body>
 </html>
+
+
+{{-- This is Desktop Notification code1 --}}
+    {{-- Notification.requestPermission(function(status){
+        console.log('Notification permission status:' , status);
+    });
+
+    function displayNotification(){
+        if(Notification.permission === 'granted'){
+            navigator.serviceWorker.getRegistration().then(function(reg){
+                reg.showNotification('Hello world!');
+            });
+        }
+    }
+
+    var options = {
+        body: 'here is a notification body!',
+        //  icon: 'image/example.png',
+        vibrate: [100,50,100],
+        data: {primaryKey: 1}
+    };
+    reg.showNotification('Hello world!',options);
+
+    self.addEventListener('notificationclose',function(event){
+        var notification = event.notification;
+        var primaryKey = notification.data.primary;
+        consile.log("Closed notification: " + primaryKey);
+    });
+
+    self.addEventListener('notificationclick',function(event){
+        var notification = event.notification;
+        var action = event.action;
+        if(action === 'close'){
+            notification.close();
+        }else{
+            client.openWindow('http://example.com');
+        }
+    }); --}}
+
+    {{-- this is also a desktop notification code2 --}}
+
+    {{-- JS Nuggets: Notifications API
+    Notification.requestPermission();
+    new Notification("Subscribe to JS Nuggets!");
+
+    function notifyMe() {
+        if (!("Notification" in window)) {
+            alert("This browser does not support system notifications");
+        }
+        else if (Notification.permission === "granted") {
+            notify();
+        }
+        else if (Notification.permission !== 'denied') {
+            Notification.requestPermission(function (permission) {
+            if (permission === "granted") {
+                notify();
+            }
+            });
+        }
+
+        function notify() {
+            var notification = new Notification('TITLE OF NOTIFICATION', {
+            icon: 'http://carnes.cc/jsnuggets_avatar.jpg',
+            body: "Hey! You are on notice!",
+            });
+
+            notification.onclick = function () {
+            window.open("http://carnes.cc");
+            };
+            setTimeout(notification.close.bind(notification), 7000);
+        }
+
+    }setInterval(() => {
+        notifyMe();
+    }, 500); --}}
+
+        <!-- Desktop Notification start code3 -->
+{{-- <script>
+    console.log(Notification.permission);
+    if (Notification.permission === "granted") {
+        alert("we have permission");
+          showNotification();
+    } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then(permission => {
+          console.log(permission);
+        });
+          showNotification();
+    }
+    function showNotification() {
+    const notification = new Notification("New message incoming", {
+        body: "Hi there. How are you doing?"
+    })
+    notification.onclick = (e) => {
+        window.location.href = "https://google.com";
+    };
+  }
+</script> --}}
+        <!-- Desktop Notification end -->

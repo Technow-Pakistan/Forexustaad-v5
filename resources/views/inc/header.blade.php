@@ -57,7 +57,7 @@
                 }
             </style>
 
-<!-- Go to www.addthis.com/dashboard to customize your tools --> 
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-602bc30f9629ba67"></script>
 <style>
   .atm-f{
@@ -102,7 +102,7 @@
     </div>
 
 
-    
+
     <!-- Preloader starts -->
     <!-- <div id="loading">
   <img id="loading-image" src="assets/img/preloader.gif" alt="Loading..." />
@@ -120,15 +120,58 @@
             	<div class="pre-header-inner">
                 <div class="row justify-content-between">
                     @if(Session::has('client'))
+                        @php
+                            $value =Session::get('client');
+                            $TotalClientMessageNo = App\Models\ClientNotificationModel::where('email',$value['email'])->get();
+                        @endphp
                         <div class="col-sm-6 col-left">
                             <!-- Socials -->
                             <nav class="navbar navbar-expand-lg pl-0 pr-0 position-relative sticky-top" id="toggler12345">
-
                                 <button class="navbar-toggler" id="toggler12" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
                                     <span class="navbar-toggler-icon cs-menu"></span>
                                 </button>
                                 <div class="mainClass">
                                     <ul class="social-icons d-flex list-unstyled h-100 align-items-center mt-2 mb-0">
+                                        <li class="dropdown notification1">
+                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell"></i><sup>{{count($TotalClientMessageNo)}}</sup></a>
+                                            <div class="dropdown-menu notification left0px notification250px" aria-labelledby="navbarDropdown">
+                                                <div class="card">
+                                                    <div class="card-header"> inbox ({{count($TotalClientMessageNo)}}) <span> / Sent </span> <span><a class=""><i class="fas fa-edit"></i></a></span></div>
+                                                    <div class="card-body">
+                                                        <ul class="list-unstyled">
+                                                            @foreach($ClientNotificationMessage as $clientMessageNoti)
+                                                                @if($clientMessageNoti->email == $value['email'])
+                                                                    @php
+                                                                        if($clientMessageNoti->userType != 1){
+                                                                            $user = $clientMessageNoti->GetUser();
+                                                                            $userInfo = $clientMessageNoti->GetUserInfo();
+                                                                            if($userInfo->userImage == null){
+                                                                                $userInfo->userImage = "WebImages/avatar-5.jpg";
+                                                                            }
+                                                                        }else{
+                                                                            $userClient = $clientMessageNoti->GetClientUser();
+                                                                            if($userClient->image == null){
+                                                                                $userClient->image = "WebImages/avatar-5.jpg";
+                                                                            }
+                                                                        }
+                                                                    @endphp
+                                                                    <li class="media">
+                                                                        <div class="media">
+                                                                            <img class="img-radius ImageClientNotification" src="{{URL::to('/storage/app/')}}/{{$clientMessageNoti->userType != 1 ? $userInfo->userImage : $userClient->image}}" alt="Generic placeholder image" />
+                                                                            <div class="media-body">
+                                                                                <p class="m-0"><strong>{{$clientMessageNoti->userType != 1 ? $user->username : $userClient->name}}</strong></p>
+                                                                                <p class="m-0">{{$clientMessageNoti->message}}</p>
+                                                                            </div>
+                                                                            <a href="{{URL::to('')}}/{{$clientMessageNoti->link}}" class="text-primary linkClientNotification m-0">View</a>
+                                                                        </div>
+                                                                    </li>
+                                                                @endif
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
                                         @foreach($SocialMediaLink as $link)
                                             @if($link->iconName == "Facebook")
                                                 <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-facebook"></i></a></li>
@@ -160,9 +203,7 @@
                                             <a class="nav-link btn btn-outline-primary RegistrationButton" href="#" data-toggle="modal" data-target="#requestQuoteModal" href="javascript_void(0)">Register</a>
                                         </div>
                                     @endif
-
                                     @if(Session::has('client'))
-
                                         @php
                                             $clientAccountData =Session::get('client');
                                         @endphp
@@ -176,7 +217,7 @@
                                                 @php
                                                     $ikju = 0;
                                                     foreach($ClientAccountDetailInfo as $clientAccount){
-                                                        if($clientAccount->clientId == $clientAccountData->id){    
+                                                        if($clientAccount->clientId == $clientAccountData->id){
                                                             $ikju = 1;
                                                         }
                                                     }
@@ -212,6 +253,46 @@
                         <div class="col-sm-6 col-right mainHide">
                             <div class="d-flex justify-content-end align-items-center h-100">
                                 <ul class="social-icons d-flex list-unstyled h-100 align-items-center m-0">
+                                    <li class="dropdown notification1">
+                                        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell"></i><sup>{{count($TotalClientMessageNo)}}</sup></a>
+                                        <div class="dropdown-menu notification" aria-labelledby="navbarDropdown">
+                                            <div class="card">
+                                                <div class="card-header"> inbox ({{count($TotalClientMessageNo)}}) <span> / Sent </span> <span><a class=""><i class="fas fa-edit"></i></a></span></div>
+                                                <div class="card-body">
+                                                    <ul class="list-unstyled">
+                                                        @foreach($ClientNotificationMessage as $clientMessageNoti)
+                                                            @if($clientMessageNoti->email == $value['email'])
+                                                                @php
+                                                                    if($clientMessageNoti->userType != 1){
+                                                                        $user = $clientMessageNoti->GetUser();
+                                                                        $userInfo = $clientMessageNoti->GetUserInfo();
+                                                                        if($userInfo->userImage == null){
+                                                                            $userInfo->userImage = "WebImages/avatar-5.jpg";
+                                                                        }
+                                                                    }else{
+                                                                        $userClient = $clientMessageNoti->GetClientUser();
+                                                                        if($userClient->image == null){
+                                                                            $userClient->image = "WebImages/avatar-5.jpg";
+                                                                        }
+                                                                    }
+                                                                @endphp
+                                                                <li class="media">
+                                                                    <div class="media">
+                                                                        <img class="img-radius ImageClientNotification" src="{{URL::to('/storage/app/')}}/{{$clientMessageNoti->userType != 1 ? $userInfo->userImage : $userClient->image}}" alt="Generic placeholder image" />
+                                                                        <div class="media-body">
+                                                                            <p class="m-0"><strong>{{$clientMessageNoti->userType != 1 ? $user->username : $userClient->name}}</strong></p>
+                                                                            <p class="m-0">{{$clientMessageNoti->message}}</p>
+                                                                        </div>
+                                                                        <a href="{{URL::to('')}}/{{$clientMessageNoti->link}}" class="text-primary linkClientNotification m-0">View</a>
+                                                                    </div>
+                                                                </li>
+                                                            @endif
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
                                     @foreach($SocialMediaLink as $link)
                                         @if($link->iconName == "Facebook")
                                             <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-facebook"></i></a></li>

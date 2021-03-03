@@ -10,6 +10,26 @@
                     @include('inc.home-left-sidebar')
                 </div>
                 <div class="col-lg-6 col-md-12 order-1 order-lg-2">
+                    {{-- Counter Start --}}
+                    <div id="clockdiv" class="text-center mb-3">
+                        <div>
+                            <span class="days"></span>
+                            <div class="smalltext">Days</div>
+                        </div>
+                        <div>
+                            <span class="hours"></span>
+                            <div class="smalltext">Hours</div>
+                        </div>
+                        <div>
+                            <span class="minutes"></span>
+                            <div class="smalltext">Minutes</div>
+                        </div>
+                        <div>
+                            <span class="seconds"></span>
+                            <div class="smalltext">Seconds</div>
+                        </div>
+                    </div>
+                    {{-- Counter End --}}
                     <div class="">
                         <div class="">
                           @php
@@ -31,6 +51,22 @@
                                           <h4>{{$pair->pair}}</h4>
                                           <p class="text-secondary mb-1">{{$signalData->selectUser}}</p>
                                         </div>
+                                        <div>
+                                            @php
+                                                $clientLikeshow = 0;
+                                                if (Session::has('client')) {
+                                                    $value = Session::get('client');
+                                                    $clientLike = App\Models\SignalLikeModel::where('signalId',$signalData->id)->where('userId',$value['id'])->first();
+                                                    if ($clientLike) {
+                                                        $clientLikeshow = 1;
+                                                    }
+                                                }
+                                            @endphp
+                                            (<span class="totalLiked text-primary">{{count($TotalLikes)}}</span>)
+                                            <span class="likeForm likeForm1 {{!Session::has('client') ? "LoginButton" : ''}} {{$clientLikeshow == 1 ? ($clientLike->liked == 1 ? 'text-primary' :'') : '' }}" text="{{$clientLikeshow == 1 ? ($clientLike->liked == 1 ? 'text-primary' :'') : ''  }}" value="1" {{!Session::has('client') ? "data-toggle=modal data-target=#requestQuoteModal" : ''}}> <i class="fa fa-thumbs-up"></i> </span>
+                                            (<span class="totalDisliked text-danger">{{count($TotalDislikes)}}</span>)
+                                            <span class="likeForm disLikeForm1 {{!Session::has('client') ? "LoginButton" : ''}} {{$clientLikeshow == 1 ? ($clientLike->liked == 0 ? 'text-danger' :'') : ''  }}" text="{{$clientLikeshow == 1 ? ($clientLike->liked == 0 ? 'text-danger' :'') : ''  }}" value="0" {{!Session::has('client') ? "data-toggle=modal data-target=#requestQuoteModal" : ''}}><i class="fa fa-thumbs-down"></i></span>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
@@ -43,7 +79,7 @@
                                               $socialLinks = explode('@#',$signalData->socialLink);
                                             @endphp
                                   <div class="card mt-3">
-                                    
+
                                     <div class="card">
                                         <div class="card-header">
                                             Reviews
@@ -57,80 +93,99 @@
                                 <div class="col-md-8">
                                   <div class="card mb-3">
                                     <div class="card-body">
-                                      <div class="row">
-                                        <div class="col-sm-3">
-                                          <h6 class="mb-0">Price</h6>
+                                        @if($signalData->orderType != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <h6 class="mb-0">Order Type</h6>
+                                                </div>
+                                                <div class="col-sm-8 text-secondary fontBold">
+                                                    {{$signalData->orderType}}
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        @endif
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <h6 class="mb-0">Order</h6>
+                                            </div>
+                                            <div class="col-sm-8 text-{{stripos($signalData->buySale,'Sell') !== false ? 'danger' : 'primary'}} fontBold">
+                                                {{$signalData->buySale}}
+                                            </div>
                                         </div>
-                                        <div class="col-sm-9 text-secondary">
-                                          {{$signalData->price}}
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <h6 class="mb-0">Price</h6>
+                                            </div>
+                                            <div class="col-sm-8 text-secondary fontBold">
+                                                {{$signalData->price}}
+                                            </div>
                                         </div>
-                                      </div>
-                                      <hr>
-                                      <div class="row">
-                                        <div class="col-sm-3">
-                                          <h6 class="mb-0  pt-2">Take Profit</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                          {{$profit}}
-                                          <a class="btn pl-0" data-toggle="collapse" data-target="#demo"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                                          <div id="demo" class="collapse">
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <h6 class="mb-0  pt-2">Take Profit</h6>
+                                            </div>
+                                            <div class="col-sm-8 text-secondary fontBold">
+                                                <span class="text-primary">{{$profit}}</span>
+                                            </div>
                                             @for($i=0; $i < count($Profits); $i++)
-                                              <p>{{$Profits[$i]}}</p>
+                                                <div class="col-sm-4">
+                                                    <h6 class="mb-0  pt-2">Take Profit{{$i + 1}}</h6>
+                                                </div>
+                                                <div class="col-sm-8 text-secondary fontBold">
+                                                    <span class="text-primary">{{$Profits[$i]}}</span>
+                                                </div>
                                             @endfor
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <hr>
-                                      <div class="row">
-                                        <div class="col-sm-3">
-                                          <h6 class="mb-0">Stop Lose</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                          {{$signalData->stopLose}}
-                                        </div>
-                                      </div>
-                                      <hr>
-                                      <div class="row">
-                                        <div class="col-sm-3">
-                                          <h6 class="mb-0">Buy Or Sell</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                          {{$signalData->buySale}}
-                                        </div>
-                                      </div>
-                                      <hr>
-                                      @if($signalData->result != null && $signalData->result != 'none')
-                                        <div class="row">
-                                          <div class="col-sm-3">
-                                            <h6 class="mb-0">Result</h6>
-                                          </div>
-                                          <div class="col-sm-9 {{$signalData->result == 'TP Hit' ? 'text-success' : ''}}{{$signalData->result == 'SL Hit' ? 'text-danger' : ''}}">
-                                            {{$signalData->result == null ? 'none' : $signalData->result}}
-                                          </div>
                                         </div>
                                         <hr>
-                                      @endif
-                                      @if($signalData->pips != null)
                                         <div class="row">
-                                          <div class="col-sm-3">
-                                            <h6 class="mb-0">Pips</h6>
-                                          </div>
-                                          <div class="col-sm-9 {{str_contains($signalData->pips,'+') != null ? 'text-success' : ''}}{{str_contains($signalData->pips,'-') ? 'text-danger' : ''}}">
-                                            {{$signalData->pips == null ? 'none' : $signalData->pips}}
-                                          </div>
+                                            <div class="col-sm-4">
+                                                <h6 class="mb-0">Stop Lose</h6>
+                                            </div>
+                                            <div class="col-sm-8 text-secondary fontBold">
+                                                <span class="text-danger">{{$signalData->stopLose}}</span>
+                                            </div>
                                         </div>
                                         <hr>
-                                      @endif
-                                      <!-- <div class="row">
-                                        <div class="col-sm-3">
-                                          <h6 class="mb-0">Address</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                          Bay Area, San Francisco, CA
-                                        </div>
-                                      </div> -->
+                                        @if($signalData->result != null && $signalData->result != 'none')
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <h6 class="mb-0">Result</h6>
+                                                </div>
+                                                <div class="col-sm-8 {{$signalData->result == 'TP Hit' ? 'text-success' : ''}}{{$signalData->result == 'SL Hit' ? 'text-danger' : ''}} fontBold">
+                                                    {{$signalData->result == null ? 'none' : $signalData->result}}
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        @endif
+                                        @if($signalData->pips != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <h6 class="mb-0">Pips</h6>
+                                                </div>
+                                                <div class="col-sm-8 {{str_contains($signalData->pips,'+') != null ? 'text-success' : ''}}{{str_contains($signalData->pips,'-') ? 'text-danger' : ''}} fontBold">
+                                                    {{$signalData->pips == null ? 'none' : $signalData->pips}}
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        @endif
+                                        <!-- <div class="row">
+                                            <div class="col-sm-3">
+                                            <h6 class="mb-0">Address</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                            Bay Area, San Francisco, CA
+                                            </div>
+                                        </div> -->
                                     </div>
                                   </div>
+                                </div>
+                                <div class="col-md-12">
+                                    @php
+                                        $detailDescription = html_entity_decode($signalData->detailDescription);
+                                        echo $detailDescription;
+                                    @endphp
                                 </div>
                               </div>
                             </div>
@@ -178,9 +233,9 @@
                                         @php
                                           $value =Session::get('client');
                                         @endphp
-                                        <input type="hidden" name="memberId" value="{{$value['id']}}"> 
-                                        <input type="hidden" name="userType" value="client"> 
-                                        <input type="hidden" name="signalId" value="{{$signalData->id}}"> 
+                                        <input type="hidden" name="memberId" value="{{$value['id']}}">
+                                        <input type="hidden" name="userType" value="client">
+                                        <input type="hidden" name="signalId" value="{{$signalData->id}}">
                                         <button type="submit" >Post</button>
                                       @else
                                         <span class="commentDisableButton LoginButton" href="#" data-toggle="modal" data-target="#requestQuoteModal">Post</span>
@@ -223,8 +278,6 @@
                                             @php
                                               $replys = $comment->getReply();
                                             @endphp
-                                            <!-- <a class="like" href="#">Like</a>
-                                            <span aria-hidden="true"> · </span> -->
                                             @if(Session::has('client'))
                                               <a class="replay" commentId="{{$comment->id}}" replyId="{{$comment->reply}}">Reply</a>
                                             @else
@@ -292,8 +345,8 @@
                           </div>
                       </div>
                 </div>
-                               
-               
+
+
                 <div class="col-lg-3 col-md-6 col-sm-12 order-3 order-lg-3">
                     @include('inc.home-right-sidebar')
 
@@ -301,59 +354,96 @@
             </div>
         </div>
     </section>
-     
+
 <!--     <div id="particles-js" style="height: 0;"></div> -->
 </div>
 
 <style>
+    /* counter Styling start */
 
-.main-body {
-    padding: 15px;
-}
-.card {
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
-}
+    #clockdiv{
+        font-family: sans-serif;
+        color: #fff;
+        display: inline-block;
+        font-weight: 100;
+        text-align: center !important;
+        font-size: 30px;
+        display: block;
+    }
 
-.card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 0 solid rgba(0,0,0,.125);
-    border-radius: .25rem;
-}
+    #clockdiv > div{
+        padding: 10px;
+        border-radius: 3px;
+        background: linear-gradient(45deg, #ff0024, #0d5fe9);;
+        display: inline-block;
+    }
 
-.card-body {
-    flex: 1 1 auto;
-    min-height: 1px;
-    padding: 1rem;
-}
+    #clockdiv div > span{
+        padding: 15px;
+        border-radius: 3px;
+        background: #00816A;
+        display: inline-block;
+    }
 
-.gutters-sm {
-    margin-right: -8px;
-    margin-left: -8px;
-}
+    .smalltext{
+        padding-top: 5px;
+        font-size: 16px;
+    }
+    /* Counter Styling end */
 
-.gutters-sm>.col, .gutters-sm>[class*=col-] {
-    padding-right: 8px;
-    padding-left: 8px;
-}
-.mb-3, .my-3 {
-    margin-bottom: 1rem!important;
-}
+    .fontBold{
+        font-weight: 900;
+    }
+    .likeForm{
+        cursor: pointer;
+    }
+    .main-body {
+        padding: 15px;
+    }
+    .card {
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+    }
 
-.bg-gray-300 {
-    background-color: #e2e8f0;
-}
-.h-100 {
-    height: 100%!important;
-}
-.shadow-none {
-    box-shadow: none!important;
-}
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 0 solid rgba(0,0,0,.125);
+        border-radius: .25rem;
+    }
+
+    .card-body {
+        flex: 1 1 auto;
+        min-height: 1px;
+        padding: 1rem;
+    }
+
+    .gutters-sm {
+        margin-right: -8px;
+        margin-left: -8px;
+    }
+
+    .gutters-sm>.col, .gutters-sm>[class*=col-] {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+    .mb-3, .my-3 {
+        margin-bottom: 1rem!important;
+    }
+
+    .bg-gray-300 {
+        background-color: #e2e8f0;
+    }
+    .h-100 {
+        height: 100%!important;
+    }
+    .shadow-none {
+        box-shadow: none!important;
+    }
 </style>
 
 @include('inc.footer')
@@ -375,7 +465,7 @@
 	.dropdown-menu{
 		right: 0!important;
 		left: auto;
-		
+
 	}
 	.nav-tabs {
 		margin-bottom: 25px;
@@ -576,6 +666,69 @@
     border-radius: 2px;
   }
 </style>
+
+{{-- Counter Script Start --}}
+
+    @php
+        $start_date = $signalData->date . " " . $signalData->time;
+
+        // end date
+
+        $end_date = date("Y-m-d H:i:s");
+
+        $ss = strtotime($start_date) - strtotime($end_date);
+
+
+    @endphp
+
+<script>
+    @if($ss < 0)
+        $("#clockdiv").hide();
+    @endif
+    function getTimeRemaining(endtime) {
+        var t = Date.parse(endtime) - Date.parse(new Date());
+        var seconds = Math.floor((t / 1000) % 60);
+        var minutes = Math.floor((t / 1000 / 60) % 60);
+        var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+        var days = Math.floor(t / (1000 * 60 * 60 * 24));
+        return {
+            'total': t,
+            'days': days,
+            'hours': hours,
+            'minutes': minutes,
+            'seconds': seconds
+        };
+    }
+
+    function initializeClock(id, endtime) {
+        var clock = document.getElementById(id);
+        var daysSpan = clock.querySelector('.days');
+        var hoursSpan = clock.querySelector('.hours');
+        var minutesSpan = clock.querySelector('.minutes');
+        var secondsSpan = clock.querySelector('.seconds');
+
+        function updateClock() {
+            var t = getTimeRemaining(endtime);
+
+            daysSpan.innerHTML = t.days;
+            hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+            minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+            secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+            if (t.total <= 0) {
+                clearInterval(timeinterval);
+            }
+        }
+
+        updateClock();
+        var timeinterval = setInterval(updateClock, 1000);
+    }
+
+    var deadline = new Date(Date.parse(new Date()) + {{$ss}} * 1000);
+    initializeClock('clockdiv', deadline);
+
+</script>
+{{-- Counter Script End --}}
 @if(Session::has('client'))
 	@php
 		$value =Session::get('client');
@@ -626,7 +779,7 @@
 											'<img src=\"{{URL::to('/public/assets/assets/img/user1.jpg')}}\" alt=\"avatar\" />'+
 											'<i class=\"fa fa-caret-down\"></i>'+
 										'</span>'+
-										'<input type=\"hidden\" name=\"memberId\" value=\"{{$value['id']}}\">'+ 
+										'<input type=\"hidden\" name=\"memberId\" value=\"{{$value['id']}}\">'+
 										'<input type=\"hidden\" name=\"userType\" value=\"client\">'+
 										'<input type=\"hidden\" name=\"signalId\" value=\"{{$signalData->id}}\"> '+
 										'<input type=\"hidden\" name=\"reply\" value=\"{{$signalData->id}}\"> '+
@@ -648,4 +801,62 @@
 			$('.reply_comment').remove();
 		}
 	</script>
+    {{-- like form script --}}
+    <script>
+        $(".likeForm").on("click",function(){
+            var likeData = $(this).attr('value');
+            var previousClass = $(this).attr('text');
+            if (likeData == 0) {
+                if (previousClass == null || previousClass == "") {
+                    var ifd = $(".likeForm1").attr('text');
+                    console.log(ifd);
+                    if (ifd != null && ifd != "") {
+                        var like1 = $(".totalLiked").html();
+                        $(".totalLiked").html(--like1);
+                        $(".likeForm1").attr('class','likeForm likeForm1');
+                        $(".likeForm1").attr('text','');
+                    }
+                    $(this).attr('class','likeForm disLikeForm1 text-danger');
+                    $(this).attr('text','text-danger');
+                    var dislike = $(".totalDisliked").html();
+                    $(".totalDisliked").html(++dislike);
+                }else{
+                    $(this).attr('class','likeForm disLikeForm1');
+                    $(this).attr('text','');
+                    var dislike = $(".totalDisliked").html();
+                    $(".totalDisliked").html(--dislike);
+                }
+            }else{
+                if (previousClass == null || previousClass == "") {
+                    var ifd1 = $(".disLikeForm1").attr('text');
+                    console.log(ifd1);
+                    if (ifd1 != null && ifd1 != "") {
+                    console.log(ifd1);
+                        var dislike1 = $(".totalDisliked").html();
+                        $(".totalDisliked").html(--dislike1);
+                        $(".disLikeForm1").attr('class','likeForm disLikeForm1');
+                        $(".disLikeForm1").attr('text','');
+                    }
+                    $(this).attr('class','likeForm likeForm1 text-primary');
+                    $(this).attr('text','text-primary');
+                    var like = $(".totalLiked").html();
+                    $(".totalLiked").html(++like);
+                }else{
+                    $(this).attr('class','likeForm likeForm1');
+                    $(this).attr('text','');
+                    var like = $(".totalLiked").html();
+                    $(".totalLiked").html(--like);
+                }
+            }
+            var url = "{{URL::to('signal/like')}}" + "/" + "{{$signalData->id}}" + "/" + likeData;
+            $.ajax({
+                  type: "POST",
+                  url: url,
+                  data: likeData,
+                  success: function(data){
+                      console.log(data);
+                  }
+              });
+        })
+    </script>
 @endif

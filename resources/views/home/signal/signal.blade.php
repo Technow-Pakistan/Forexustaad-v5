@@ -4,7 +4,7 @@
    <section class="after_banner_content_area">
       <div class="container">
          <div class="row justify-content-center">
-            
+
             <div class="col-lg-3 col-md-6 col-sm-12 order-2 order-lg-1">
                @include('inc.home-left-sidebar')
             </div>
@@ -228,9 +228,9 @@
    }
 </style>
 <script>
-   
+
 //Expired Signal
 $('#expiredSignal').DataTable({
     responsive: true
 });
-</script>   
+</script>

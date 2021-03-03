@@ -32,6 +32,7 @@ use App\Models\NonRegisterVisitorModel;
 use App\Models\AllCitiesModel;
 use App\Models\AllStatesModel;
 use App\Models\AllCountriesModel;
+use App\Models\ClientNotificationModel;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -81,6 +82,7 @@ class AppServiceProvider extends ServiceProvider
         view()->share("AllCities",AllCitiesModel::all());
         view()->share("AllStates",AllStatesModel::all());
         view()->share("AllCountries",AllCountriesModel::all());
+        view()->share("ClientNotificationMessage",ClientNotificationModel::orderBy('id','desc')->get());
         /** Admin Panel Function  */
         view()->share("HeaderUnReadMessage",UserContactModel::orderBy('id','desc')->where('read',0)->where('trashMail',0)->get());
         view()->share("NotificationMessage",NotificationModel::orderBy('id','desc')->get());
