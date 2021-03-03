@@ -216,7 +216,7 @@
                               @php $go23 = 0; @endphp
                             @endif
                           @else
-                            @php $go23 = 1; @endphp 
+                            @php $go23 = 1; @endphp
                           @endif
                         @endif
                         @if($go23 == 0)

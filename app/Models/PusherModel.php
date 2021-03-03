@@ -20,7 +20,6 @@ class PusherModel
             $options
         );
 
-        $data['message'] = 'hello world';
         $pusher->trigger($channel, $event, $data);
     }
 }

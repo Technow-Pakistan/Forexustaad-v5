@@ -2679,28 +2679,28 @@ padding-bottom: 12px;
 	right: 50px;
 	font-size: 17px;
   }
-  
+
   #snackbar.show, #snackbar1.show, #snackbar2.show, #snackbar3.show {
 	visibility: visible;
 	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
 	animation: fadein 0.5s, fadeout 0.5s 2.5s;
   }
-  
+
   @-webkit-keyframes fadein {
-	from {right: 0; opacity: 0;} 
+	from {right: 0; opacity: 0;}
 	to {right: 50px; opacity: 1;}
   }
-  
+
   @keyframes fadein {
 	from {right: 0; opacity: 0;}
 	to {right: 50px; opacity: 1;}
   }
-  
+
   @-webkit-keyframes fadeout {
-	from {right: 50px; opacity: 1;} 
+	from {right: 50px; opacity: 1;}
 	to {right: 0; opacity: 0;}
   }
-  
+
   @keyframes fadeout {
 	from {right: 50px; opacity: 1;}
 	to {right: 0; opacity: 0;}
@@ -2717,7 +2717,7 @@ padding-bottom: 12px;
     .webinarParaStyle{
         height: 65px;
 	}
-	           
+
 	.tbl-accordion .tbl-accordion-nested .BrokerDetailIconAdjust{
 		font-size: 15px;
 		border: none;
@@ -2728,7 +2728,7 @@ padding-bottom: 12px;
       transition: 0.15s ease-in-out;
       transform:rotate(90deg);
 	}
-	
+
     .center {
         height: 100%;
         padding: 0;
@@ -2815,3 +2815,66 @@ padding-bottom: 12px;
 	.hiddenAdblocker{
 		display: none;
 	}
+
+    /* notification style start */
+
+    .notification1 a sup {
+        text-align: center;
+        top: -1.00em;
+        /* padding: 0px !important; */
+        color: #fff;
+        padding: 1px 3px;
+        display: inline-block;
+        background-color: orangered;
+        line-height: 25px;
+        display: initial;
+        height: 0px;
+        /* margin-left: 2px; */
+        width: 15px;
+        border-radius: 50%;
+    }
+    .left0px{
+        left: 0px !important;
+    }
+    .notification250px{
+        width:250px!important;
+    }
+    .notification1 .dropdown-toggle::after {
+        display: none;
+    }
+    .notification {
+        width: 350px;
+        padding: 0px;
+    }
+    .notification .card {
+        border: 0px;
+    }
+    .notification .card .card-header {
+        text-transform: uppercase;
+    }
+    .notification .card .card-body .media img {
+        border-radius: 50%;
+        width: 50px;
+    }
+    .notification .card .card-body .media .media-body {
+        font-size: 12px;
+        white-space: nowrap;
+        /* overflow: hidden; */
+        text-overflow: ellipsis;
+    }
+    .notification .card .card-body .media .media-body h5 {
+        font-size: 15px;
+    }
+    .linkClientNotification{
+        padding: 10px;
+        font-size: 14px;
+    }
+    .ImageClientNotification{
+        width: 40px;
+        margin-right: 20px;
+        height: 40px;
+        border-radius: 50%;
+    }
+
+
+    /* notification style end */
