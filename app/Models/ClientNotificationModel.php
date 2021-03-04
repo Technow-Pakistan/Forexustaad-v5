@@ -7,10 +7,10 @@ use App\Models\ClientRegistrationModel;
 
 use Illuminate\Database\Eloquent\Model;
 
-class NotificationModel extends Model
+class ClientNotificationModel extends Model
 {
-    protected $table="notification";
-    protected $fillable = ["text","link","userId","userType"];
+    protected $table = "client_notification";
+    protected $fillable = ["link","userType","userId","message","email"];
 
     public function GetUser(){
         $get = AdminModel::where('id',$this->userId)->first();

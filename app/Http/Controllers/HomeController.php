@@ -69,7 +69,7 @@ class HomeController extends Controller
                 $data->device = "Desktop";
             }
             $ip = $_SERVER['REMOTE_ADDR'];
-            $data->userId = $ip; 
+            $data->userId = $ip;
             if ($request->session()->has('mathRander')) {
                 $mathRandor = $request->session()->get('mathRander');
                 $data->active = $mathRandor;
@@ -90,11 +90,11 @@ class HomeController extends Controller
             $error = "Your Password has Changed.";
             $request->session()->put("error",$error);
             $request->session()->put("client",$data);
-            return redirect('/');  
+            return redirect('/');
         }else {
             $error = "Your old Password does not match with your previous password.";
             $request->session()->put("error",$error);
-            return back();   
+            return back();
         }
     }
     public function VipWebinar(){
@@ -301,7 +301,7 @@ class HomeController extends Controller
             $path = $request->file("upload")->store("PostImages");
         };
         $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-        $url = "http://localhost/forexustaad/storage/app/" . $path;
+        $url = "https://forexustaad.com/storage/app/" . $path;
         $msg = 'Image uploaded successfully';
         $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
         echo $response;
@@ -452,7 +452,7 @@ class HomeController extends Controller
         $clientAccount1 = ClientAccountDetailModel::where('clientId',$id)->where('verified','!=',2)->first();
         $AllCities = AllCitiesModel::all();
         $AllStates = AllStatesModel::all();
-        $AllCountries = AllCountriesModel::all(); 
+        $AllCountries = AllCountriesModel::all();
         return view('home/user-registration',compact('allBroker','clientAccount','clientAccount1','AllCities','AllStates','AllCountries'));
     }
     public function userregistrationUpdate(Request $request){
@@ -493,7 +493,7 @@ class HomeController extends Controller
             $notification->link = "ustaad/viewClientProfile/$userID->id";
             $previousData = NotificationModel::where('link',$notification->link)->first();
             if ($previousData) {
-                $previousData->delete(); 
+                $previousData->delete();
             }
             $notification->save();
         return back();
@@ -501,14 +501,14 @@ class HomeController extends Controller
     }
     public function userregistrationAccountAdd(Request $request){
         $deleteData =  ClientAccountDetailModel::where('clientId',$request->clientId)->where('verified','!=',2)->get();
-        
+
         for ($i=0; $i < count($deleteData) ; $i++) {
             $deleteData[$i]->delete();
         }
         $data = $request->all();
         $array = $request->brokerId;
         for ($i=0; $i < count($array) ; $i++) {
-            $ClientAccount = new ClientAccountDetailModel; 
+            $ClientAccount = new ClientAccountDetailModel;
             $ClientAccount->brokerId = $request->brokerId[$i];
             $ClientAccount->clientId = $request->clientId;
             $ClientAccount->accountNumber = $request->accountNumber[$i];
@@ -527,7 +527,7 @@ class HomeController extends Controller
             $notification->link = "ustaad/viewClientProfile/$userID->id";
             $previousData = NotificationModel::where('link',$notification->link)->first();
             if ($previousData) {
-                $previousData->delete(); 
+                $previousData->delete();
             }
             $notification->save();
         return back();

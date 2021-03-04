@@ -29,6 +29,16 @@
                     <div class="card-body">
                         <form action="" method="post">
                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <!-- User Selection for signal view -->
+                                        <label for="">Order Type</label>
+                                        <select class="form-control" name="orderType" required>
+                                            <option value="Market Execution" {{$data->orderType == "Market Execution" ? 'selected' : ''}}>Market Execution</option>
+                                            <option value="Pending Order" {{$data->orderType == "Pending Order"  ? 'selected' : ''}}>Pending Order</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <!-- User Selection for signal view -->
@@ -62,7 +72,7 @@
                                         <div class="d-flex justify-content-start">
                                             <select name="fieldtwo" id="fieldtwo" class="form-control leftSelectParir">
                                                 @foreach($totalCategory as $category)
-                                                    @if($category->id == $SelectedPair->categoryId) @php $data2345 = $category->id; @endphp @endif 
+                                                    @if($category->id == $SelectedPair->categoryId) @php $data2345 = $category->id; @endphp @endif
                                                         <option value="{{$category->id}}" {{$category->id == $SelectedPair->categoryId ? 'selected' : ''}}>{{$category->category}}</option>
                                                 @endforeach
                                             </select>
@@ -140,6 +150,7 @@
                                         <label>Result</label>
                                         <select name="result" class="form-control">
                                             <option value="none">None</option>
+                                            <option value="Manually Closed" {{$data->result == "Manually Closed" ? 'selected' : ''}}>Manually Closed</option>
                                             <option value="TP Hit" {{$data->result == "TP Hit" ? 'selected' : ''}}>TP Hit</option>
                                             <option value="SL Hit" {{$data->result =="SL Hit"  ? 'selected' : ''}}>SL Hit</option>
                                         </select>
@@ -156,6 +167,17 @@
                                         <label>Enter your Comments about Signal</label>
                                         <textarea class="form-control" name="comments" rows="5">{{$data->comments}}</textarea>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Enter Image and Article</label>
+                                    <textarea class="form-control" name="editor1">
+                                        @php
+                                            $detailDescription = html_entity_decode($data->detailDescription);
+                                            echo $detailDescription;
+                                        @endphp
+                                    </textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -184,7 +206,7 @@
     </style>
 
 @include('admin.include.footer')
-	
+
 <script type='text/javascript'>
 <?php
     $php_array1 = $totalCategory;
@@ -201,7 +223,7 @@
             if (javascript_array2[i].categoryId == selectedOption) {
                 $("#findtwo").prepend("<option value='"+javascript_array2[i].id+"'>"+javascript_array2[i].pair+"</option>");
             }
-            
+
         }
     })
 </script>

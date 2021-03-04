@@ -29,6 +29,16 @@
                     <div class="card-body">
                         <form action="" method="post">
                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <!-- User Selection for signal view -->
+                                        <label for="">Order Type</label>
+                                        <select class="form-control" name="orderType" required>
+                                            <option value="Market Execution">Market Execution</option>
+                                            <option value="Pending Order">Pending Order</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <!-- User Selection for signal view -->
@@ -63,7 +73,7 @@
                                             <select name="fieldtwo" id="fieldtwo" class="form-control leftSelectParir">
                                                 @php $ijk = 0; @endphp
                                                 @foreach($totalCategory as $category)
-                                                    @if($ijk == 0) @php $data2345 = $category->id; @endphp @endif 
+                                                    @if($ijk == 0) @php $data2345 = $category->id; @endphp @endif
                                                         <option value="{{$category->id}}">{{$category->category}}</option>
                                                     @php $ijk++ @endphp
                                                 @endforeach
@@ -137,6 +147,12 @@
                                         <textarea class="form-control" name="comments" rows="5"></textarea>
                                     </div>
                                 </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Enter Image and Article</label>
+                                        <textarea class="form-control" name="editor1"></textarea>
+                                    </div>
+                                </div>
                             </div>
                             <p class="submit text-right">
                                 <input type="submit" name="submit" id="submit" class="btn btn-outline-primary" value="Post"> <span class="spinner"></span>
@@ -159,7 +175,7 @@
         }
     </style>
 @include('admin.include.footer')
-	
+
 <script type='text/javascript'>
 <?php
     $php_array1 = $totalCategory;
@@ -176,7 +192,7 @@
             if (javascript_array2[i].categoryId == selectedOption) {
                 $("#findtwo").prepend("<option value='"+javascript_array2[i].id+"'>"+javascript_array2[i].pair+"</option>");
             }
-            
+
         }
     })
 </script>

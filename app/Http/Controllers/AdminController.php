@@ -25,8 +25,8 @@ use App\Mail\SubscriberMail;
 class AdminController extends Controller
 {
 
-    public function GetPusherName(Request $request,$message){
-        PusherModel::BoardCast("firstChannel","firstEvent",["message" => $message]);
+    public function GetPusherName(Request $request,$message,$message2){
+        PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $message,"message2" => $message2]);
     }
     public function GetRealTimeData(Request $request){
         $selectedTime = date("Y-m-d H:i:s");
@@ -67,7 +67,7 @@ class AdminController extends Controller
     }
     public function NotificationDelete(Request $request){
         if (isset($request->notification)){
-            for ($i=0; $i < count($request->notification) ; $i++) { 
+            for ($i=0; $i < count($request->notification) ; $i++) {
                 $notification = NotificationModel::find($request->notification[$i]);
                 $notification->delete();
             }
@@ -148,7 +148,7 @@ class AdminController extends Controller
             $admin = $request->session()->get("admin");
             if($admin['memberId'] == 6){
                 return  redirect("ustaad/broker/category");
-            } 
+            }
         };
         $Clients = ClientRegistrationModel::all();
         $TotalClientNumber = count($Clients);
@@ -162,7 +162,7 @@ class AdminController extends Controller
         $MonthlyClientNumber = count($MonthlyClients);
         $ToDayClientNumber = count($ToDayClients);
         $WeeklyClientNumber = count($WeeklyClients);
-     
+
         $AdminUsers = AdminModel::all();
         $TotalAdminUsersNumber = count($AdminUsers);
         $MonthlyAdminUsers = AdminModel::whereMonth("created_at",$lastMonth)->whereYear("created_at",$lastYear)->get();
@@ -179,7 +179,7 @@ class AdminController extends Controller
         $MonthlyBrokerNumber = count($MonthlyBroker);
 
         // Active Visitors Graph Data
-        
+
         $activeUserGraphAllDataArray = array();
         $activeUserGraphFirstData = NonRegisterVisitorModel::orderBy('id','asc')->first();
         if($activeUserGraphFirstData){
@@ -189,7 +189,7 @@ class AdminController extends Controller
         }
         $loopCount = abs(strtotime(date("Y-m-d")) - strtotime($firstDate));
         $years = floor($loopCount / (365*60*60*24));
-        $months = floor(($loopCount - $years * 365*60*60*24) / (30*60*60*24));   
+        $months = floor(($loopCount - $years * 365*60*60*24) / (30*60*60*24));
         $days = floor(($loopCount - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
 
         for ($i=0; $i <= $days ; $i++) {
@@ -207,7 +207,7 @@ class AdminController extends Controller
         $VistorDailyBrowserGraphALLDataGet = NonRegisterVisitorModel::all();
         $browserDataUniqueArray = array();
         $AllBroswer = ["Chrome", "Firefox", "Safari", "Internet Explorer", "Opera", "Microsoft Edge"];
-        for ($i=0; $i < 6 ; $i++) { 
+        for ($i=0; $i < 6 ; $i++) {
             $VistorDailyUniqueBrowserGraphALLDataGet = NonRegisterVisitorModel::where('browser',$AllBroswer[$i])->get();
             if(count($VistorDailyUniqueBrowserGraphALLDataGet) != 0){
                 $persontage = round(((count($VistorDailyUniqueBrowserGraphALLDataGet)/count($VistorDailyBrowserGraphALLDataGet))*100));
@@ -215,7 +215,7 @@ class AdminController extends Controller
                 $persontage = 0;
             }
             array_push($browserDataUniqueArray,$persontage);
-        } 
+        }
         return view('admin.index',compact('browserDataUniqueArray','activeUserGraphAllDataArray','TotalClientNumber','MonthlyClientNumber','ToDayClientNumber','WeeklyClientNumber','TotalAdminUsersNumber','MonthlyAdminUsersNumber','TotalBrokerNumber','MonthlyBrokerNumber','TotalPostNumber','MonthlyPostNumber'));
     }
     public function Logout(Request $request){
@@ -259,5 +259,5 @@ class AdminController extends Controller
         $request->session()->put("success",$success);
         return back();
     }
-    
+
 }

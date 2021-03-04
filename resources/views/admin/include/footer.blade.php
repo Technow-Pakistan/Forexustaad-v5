@@ -45,13 +45,13 @@
  <div class="modal fade" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
-      
+
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Are you sure you want to Delete?</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        
+
         <!-- Modal body -->
         <form action="" method="get" class="addActionForm">
           <div class="modal-body">
@@ -67,14 +67,14 @@
               </div>
             </div>
           </div>
-        
+
           <!-- Modal footer -->
           <div class="modal-footer">
             <input type="submit" class="btn btn-primary" value="Submit">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
           </div>
         </form>
-        
+
       </div>
     </div>
   </div>
@@ -90,14 +90,14 @@
 		color:yellow;
 	}
 	</style>
-		
-		
+
+
 
 
 		<!-- Required Js -->
-		
+
 		<script src="{{URL::to('/public/assets/assets/js/vendor-all.min.js')}}"></script>
-		<script defer src="{{URL::to('/public/assets/node_modules/bootstrap/dist/js/bootstrap.js')}}"></script> 
+		<script defer src="{{URL::to('/public/assets/node_modules/bootstrap/dist/js/bootstrap.js')}}"></script>
 		<script src="{{URL::to('/public/assets/assets/js/pcoded.min.js')}}"></script>
 		<script src="{{URL::to('/public/assets/assets/js/menu-setting.min.js')}}"></script>
 				<!-- Select2  -->
@@ -111,10 +111,10 @@
 		<!-- custom-chart js -->
 		<script src="{{URL::to('/public/assets/assets/js/dashboard-main.js')}}"></script>
 		<!-- <script src="https://cdn.tiny.cloud/1/hkemh60vfhq4w7kvvdv59h4ml0yn66nigaxbgv7xbj0ttyk8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
-		
+
 <!-- datatable Js -->
 
-  
+
   <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 
 		<script>
@@ -123,7 +123,7 @@
                 filebrowserUploadUrl:'{{URL::to('/uploader/upload.php')}}',
             });
 		</script>
-        @php 
+        @php
           $value =Session::get('admin');
         @endphp
     <script>
@@ -153,7 +153,7 @@
 	</body>
 </html>
 
-<!-- drag & drop rows -->
+<!-- drag & drop rows -->1
 <script>
 
 	let shadow
@@ -166,7 +166,7 @@
     e.target.parentNode.after(shadow);
     else e.target.parentNode.before(shadow);
 	}
-  
+
 </script>
 
 <!-- star checkbox -->

@@ -58,12 +58,20 @@ use Stevebauman\Location\Facades\Location;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/channel/{message}',[AdminController::class,'GetPusherName']);
-Route::get('/tv1', function () {
-    return view("pusherMessage",["channel" => "firstChannel", "event" => "firstEvent"]); 
+Route::get('like', function () {
+    event(new App\Events\PostLiked('Vitalis'));
+    return view('success');
 });
-    // 
+Route::get('/successData3', [MidBannerController::class, 'getPosts']);
+Route::match(['get', 'post'], '/publish',[MidBannerController::class, 'savePost']);
+Route::get('/channel/{message}/{message2}',[AdminController::class,'GetPusherName']);
+Route::get('/tv1', function () {
+    return view("home.index",["channel" => "firstChannel1", "event" => "firstEvent1"]);
+});
+Route::get('/Practice', function () {
+    return view("practic");
+});
+    //
     // var screen_width = screen.width;
     // var screen_height = screen.height;
 
@@ -74,7 +82,7 @@ Route::get('/tv1', function () {
         // $ip = '182.186.255.8';
         // $data = Location::get($ip);
         // dd($data);
-        return substr(exec('getmac'), 0, 17); 
+        return substr(exec('getmac'), 0, 17);
 
     });
     Route::get('device',function(){
@@ -135,7 +143,7 @@ Route::get('/tv1', function () {
         return view("home.email");
     });
     Route::get('macAddress',function(){
-        
+
         // $user_ip = getenv('REMOTE_ADDR');
         // $geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip=$user_ip"));
         // $country = $geo["geoplugin_countryName"];
@@ -147,7 +155,7 @@ Route::get('/tv1', function () {
         dd($result);
 
     });
-    
+
 Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
     Route::post('/unRegisterUser/Save',[HomeController::class,'unRegisterUserSave']);
     Route::post('/unRegisterUser/Delete',[HomeController::class,'unRegisterUserDelete']);
@@ -214,7 +222,7 @@ Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
     Route::get('/what-is-forex-trading-in-urdu-webinar.html',[HtmlPagesController::class,'Page40']);
 
     // Route::get('/', function () {
-    //     return view('welcome'); 
+    //     return view('welcome');
     // });
     Route::get('/subscriberConfirmation/{id}',[HomeController::class,'ConfirmationEmail']);
     Route::get('/forgetPassword/{id}',[HomeController::class,'ForgetPasswordChange']);
@@ -243,7 +251,7 @@ Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
 
     Route::post('user-registration/stateData/{id}',[HomeController::class,'userregistrationStateCode']);
     Route::post('user-registration/cityData/{id}',[HomeController::class,'userregistrationCityCode']);
-    
+
     Route::group(['prefix' => '',"middleware" => "IsMemberLogin"],function(){
         Route::get('/strategies',[StrategiesController::class,'ViewAll']);
         Route::get('/strategies/{id}',[StrategiesController::class,'StrategyDetail']);
@@ -253,6 +261,7 @@ Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
         Route::post('/changePassword',[HomeController::class,'ChangePasswordAdd']);
         Route::post('/advance/comment/add',[AdvanceCommentsController::class,'Add']);
         Route::post('/signal/comment/add',[SignalController::class,'AddComment']);
+        Route::post('/signal/like/{id}/{id2}',[SignalController::class,'AddLike']);
         Route::post('/blog/comment/add',[BlogController::class,'AddComment']);
         Route::get('/user-registration',[HomeController::class,'userregistration']);
         Route::post('/user-registration',[HomeController::class,'userregistrationUpdate']);
@@ -615,7 +624,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::get('/brokerReview/new',[BorkerReviewController::class,'Add']);
     Route::post('/brokersReview/new',[BorkerReviewController::class,'AddReview']);
     Route::get('/brokersDetail/{id}',[BorkerController::class,'Detail']);
-    
+
     Route::get('/clientMember/{id}',[ClientMemberController::class,'clientMemberView']);
     Route::get('/clientMemberAccounts/{id}',[ClientMemberController::class,'clientMemberAccountsView']);
     Route::group(['prefix' => 'member'],function(){
@@ -642,7 +651,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/latest',[CommentController::class,'viewLatestComments']);
         Route::post('/latest/add/{id}',[CommentController::class,'addLatestComments']);
         Route::get('/latest/delete/{id}',[CommentController::class,'DeleteLatestComment']);
-       
+
     });
     Route::group(['prefix' => 'gallery'],function(){
         Route::get('/{id}',[GalleryController::class,'Index']);
