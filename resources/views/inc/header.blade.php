@@ -71,6 +71,9 @@
 </head>
 
 <body>
+    @if(Session::has('desktopNotification'))
+		@include('send', $data)
+	@endif
     <div class='adblock-wrapper center hiddenAdblocker' id='ads-blocked'>
         <div class='adblock-content-wrapper'>
             <div class='adblock-content'>
@@ -475,7 +478,7 @@
                     <div class="col">
                         <!-- logo -->
                         <div class="logo-wrap">
-                            <a href="{{URL::to('/url')}}" class="logo"> <img src="{{URL::to('/storage/app')}}/{{$MainLogo->logo}}" alt="Logo"></a>
+                            <a href="{{URL::to('/')}}" class="logo"> <img src="{{URL::to('/storage/app')}}/{{$MainLogo->logo}}" alt="Logo"></a>
                         </div>
                     </div>
                     <div class="col text-right">

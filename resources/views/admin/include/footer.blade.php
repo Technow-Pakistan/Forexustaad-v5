@@ -153,7 +153,7 @@
 	</body>
 </html>
 
-<!-- drag & drop rows -->1
+<!-- drag & drop rows -->
 <script>
 
 	let shadow

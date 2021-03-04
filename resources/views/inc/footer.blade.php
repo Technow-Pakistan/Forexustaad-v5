@@ -895,6 +895,21 @@
                 @php Session::pull('success1') @endphp
               @endif
 
+        <script src="{{URL::to('public/assets/assets/js/push/push.js')}}"></script>
+
+        <script>
+            console.log(Notification.permission);
+                let i = 0;
+                if (Notification.permission === "granted") {
+                    i++;
+                }
+                if (i == 0) {
+                    Push.create("Forexustaad.com!",{
+                        body: "Thanks For Allowing Notification.",
+                        icon: "{{URL::to('storage/app') . '/' . $MainFavicon->favicon}}",
+                    });
+                }
+        </script>
 @if(Session::has('client'))
     @php
         $value = Session::get('client');
@@ -915,18 +930,19 @@
       });
 
       // push desktop notification code with pusher
-        <script src="{{URL::to('public/assets/assets/js/push/push.js')}}"></script>
 
       var channel1 = pusher.subscribe("firstChannel1");
       channel1.bind("firstEvent1", function(data) {
+          console.log(data.message);
         Push.create("Forexustaad.com!",{
-            body: "This is example of Push.js Tutorial",
+            body: data.message,
             icon: "{{URL::to('storage/app') . '/' . $MainFavicon->favicon}}",
             timeout: 2000,
             onClick: function () {
-                window.location.href="https://forexustaad.com";
+                window.location.href= data.link;
             }
         });
+          console.log(data.link);
       });
     </script>
 @endif
