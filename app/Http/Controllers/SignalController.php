@@ -18,7 +18,14 @@ class SignalController extends Controller
     public function signal(Request $request){
         $title = "Signals";
         $signalData = SignalsModel::orderBy('id','desc')->where('status',0)->get();
-        return view('home.signal.signal',compact('signalData','title'));
+        $data = [
+			'title' => "Momi1",
+			'message' => "Hello world1",
+			'url' => "https://forexustaad.com/",
+			'image' => "https://forexustaad.com/storage/app/WebImages/vvneHoZGW46YJGBlzq6eo4OKwnmDKuXcZ5P12IZy.png",
+		];
+		$request->session()->put('desktopNotification',$data);
+        return view('home.signal.signal',compact('signalData','title','data'));
     }
     public function signalView(Request $request, $id){
         // $data = "USD-STR1";
@@ -185,6 +192,9 @@ class SignalController extends Controller
         $signal->save();
         $success = "This signal has been added successfully.";
         $request->session()->put("success",$success);
+        $messageLink = "https://forexustaad.com/signal";
+        $messageData = "Raheel Nawaz add new signal";
+        PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData, "link" => $messageLink]);
         return back();
     }
     public function Delete(Request $request, $id){

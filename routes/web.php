@@ -71,6 +71,9 @@ Route::get('/tv1', function () {
 Route::get('/Practice', function () {
     return view("practic");
 });
+Route::get('/sendDesktopNotification', function () {
+    return view("send");
+});
     //
     // var screen_width = screen.width;
     // var screen_height = screen.height;
