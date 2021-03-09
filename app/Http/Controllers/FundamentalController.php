@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\FundamentalModel;
+use App\Models\ClientNotificationModel;
+use App\Models\PusherModel;
 
 class FundamentalController extends Controller
 {
@@ -27,7 +29,7 @@ class FundamentalController extends Controller
 
 
     // Admin Panel
-    
+
     public function Order(Request $request){
         $count = count($request->position);
         $num = 1;
@@ -60,9 +62,24 @@ class FundamentalController extends Controller
         $news = new FundamentalModel;
         $news->fill($data);
         $news->save();
-       
+
         $success = "This fundamental has been added successfully.";
         $request->session()->put("success",$success);
+
+        // Pusher Notification Start
+        $url = str_replace(" ", "-",$news->title);
+        $adminData = $request->session()->get("admin");
+        $messageData['userId'] = $adminData['id'];
+        $messageData['userType'] = 0;
+        $messageData['message'] = "Added a New Fundamental.";
+        $messageData['link'] = "fundamental" . "/" . $url;
+        $clientNotification = new ClientNotificationModel;
+        $clientNotification->fill($messageData);
+        $clientNotification->save();
+        $messageData['id'] = $clientNotification->id;
+        PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+        // Pusher Notification End
+
         return back();
     }
     public function EditProcess(Request $request, $id){
@@ -77,9 +94,24 @@ class FundamentalController extends Controller
         $news = FundamentalModel::find($id);
         $news->fill($data);
         $news->save();
-       
+
         $success = "This fundamental has been Updated successfully.";
         $request->session()->put("success",$success);
+
+        // Pusher Notification Start
+        $url = str_replace(" ", "-",$news->title);
+        $adminData = $request->session()->get("admin");
+        $messageData['userId'] = $adminData['id'];
+        $messageData['userType'] = 0;
+        $messageData['message'] = "Edit a Fundamental.";
+        $messageData['link'] = "fundamental" . "/" . $url;
+        $clientNotification = new ClientNotificationModel;
+        $clientNotification->fill($messageData);
+        $clientNotification->save();
+        $messageData['id'] = $clientNotification->id;
+        PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+        // Pusher Notification End
+
         return back();
     }
     public function Edit(Request $request, $id){

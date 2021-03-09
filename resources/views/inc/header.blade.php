@@ -18,6 +18,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Forexustaad is the best platforms for learning free forex trading in urdu/hindi. So, join our free forex training now and reshape your future with us.
 ">
+<!--Desktop Notification Script-->
+ <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script>
+    window.OneSignal = window.OneSignal || [];
+    OneSignal.push(function() {
+        OneSignal.init({
+            appId: "30d0d830-9a76-492b-9767",
+            safari_web_id: "web.onesignal.auto.313afc18-65a3-4cb5-bd8a-eabd69c6e4d8",
+            notifyButton: {
+                enable: true,
+            },
+        });
+    });
+</script>
+    <title>Forex Ustaad:Free Forex Training In Urdu/Hindi | Forexustaad</title>
+    <!-- Fav Icon -->
     <title>{{isset($title) ? "$title" : 'Forex Ustaad'}}:Free Forex Training In Urdu/Hindi | Forexustaad</title>
     <!-- Fav Icon -->
     <link rel="icon" type="image/png" href="{{URL::to('/storage/app')}}/{{$MainFavicon->favicon}}">
@@ -72,8 +88,8 @@
 
 <body>
     @if(Session::has('desktopNotification'))
-		@include('send', $data)
-	@endif
+        @include('send')
+    @endif
     <div class='adblock-wrapper center hiddenAdblocker' id='ads-blocked'>
         <div class='adblock-content-wrapper'>
             <div class='adblock-content'>
@@ -125,7 +141,9 @@
                     @if(Session::has('client'))
                         @php
                             $value =Session::get('client');
-                            $TotalClientMessageNo = App\Models\ClientNotificationModel::where('email',$value['email'])->get();
+                            $TotalClientMessageNo1 = App\Models\ClientNotificationModel::where('email',$value['email'])->get();
+                            $TotalClientMessageNo2 = App\Models\ClientNotificationModel::where('email',null)->get();
+                            $TotalClientMessageNo = count($TotalClientMessageNo1) + count($TotalClientMessageNo2);
                         @endphp
                         <div class="col-sm-6 col-left">
                             <!-- Socials -->
@@ -135,46 +153,6 @@
                                 </button>
                                 <div class="mainClass">
                                     <ul class="social-icons d-flex list-unstyled h-100 align-items-center mt-2 mb-0">
-                                        <li class="dropdown notification1">
-                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell"></i><sup>{{count($TotalClientMessageNo)}}</sup></a>
-                                            <div class="dropdown-menu notification left0px notification250px" aria-labelledby="navbarDropdown">
-                                                <div class="card">
-                                                    <div class="card-header"> inbox ({{count($TotalClientMessageNo)}}) <span> / Sent </span> <span><a class=""><i class="fas fa-edit"></i></a></span></div>
-                                                    <div class="card-body">
-                                                        <ul class="list-unstyled">
-                                                            @foreach($ClientNotificationMessage as $clientMessageNoti)
-                                                                @if($clientMessageNoti->email == $value['email'])
-                                                                    @php
-                                                                        if($clientMessageNoti->userType != 1){
-                                                                            $user = $clientMessageNoti->GetUser();
-                                                                            $userInfo = $clientMessageNoti->GetUserInfo();
-                                                                            if($userInfo->userImage == null){
-                                                                                $userInfo->userImage = "WebImages/avatar-5.jpg";
-                                                                            }
-                                                                        }else{
-                                                                            $userClient = $clientMessageNoti->GetClientUser();
-                                                                            if($userClient->image == null){
-                                                                                $userClient->image = "WebImages/avatar-5.jpg";
-                                                                            }
-                                                                        }
-                                                                    @endphp
-                                                                    <li class="media">
-                                                                        <div class="media">
-                                                                            <img class="img-radius ImageClientNotification" src="{{URL::to('/storage/app/')}}/{{$clientMessageNoti->userType != 1 ? $userInfo->userImage : $userClient->image}}" alt="Generic placeholder image" />
-                                                                            <div class="media-body">
-                                                                                <p class="m-0"><strong>{{$clientMessageNoti->userType != 1 ? $user->username : $userClient->name}}</strong></p>
-                                                                                <p class="m-0">{{$clientMessageNoti->message}}</p>
-                                                                            </div>
-                                                                            <a href="{{URL::to('')}}/{{$clientMessageNoti->link}}" class="text-primary linkClientNotification m-0">View</a>
-                                                                        </div>
-                                                                    </li>
-                                                                @endif
-                                                            @endforeach
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
                                         @foreach($SocialMediaLink as $link)
                                             @if($link->iconName == "Facebook")
                                                 <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-facebook"></i></a></li>
@@ -196,6 +174,48 @@
                                                 <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-pinterest-p"></i></a></li>
                                             @endif
                                         @endforeach
+                                        <li class="dropdown notification1">
+                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell"></i><sup class="ClientNotificationCount">{{$TotalClientMessageNo}}</sup></a>
+                                            <div class="dropdown-menu notification" id="notifictionRight" aria-labelledby="navbarDropdown">
+                                                <div class="card">
+                                                    <div class="card-header text-white"> inbox (<span class="ClientNotificationCount">{{$TotalClientMessageNo}}</span>)</span></div>
+                                                    <div class="card-body">
+                                                        <ul class="list-unstyled list-unstyled12">
+                                                            @foreach($ClientNotificationMessage as $clientMessageNoti)
+                                                                @if($clientMessageNoti->email == $value['email'] || $clientMessageNoti->email == null)
+                                                                    @php
+                                                                        if($clientMessageNoti->userType != 1){
+                                                                            $user = $clientMessageNoti->GetUser();
+                                                                            $userInfo = $clientMessageNoti->GetUserInfo();
+                                                                            $clientNotiImg = URL::to('public/assets/assets/img/favicon.png');
+                                                                            if($userInfo->userImage == null){
+                                                                                $userInfo->userImage = "WebImages/avatar-5.jpg";
+                                                                            }
+                                                                        }else{
+                                                                            $userClient = $clientMessageNoti->GetClientUser();
+                                                                            if($userClient->image == null){
+                                                                                $userClient->image = "WebImages/avatar-5.jpg";
+                                                                            }
+                                                                            $clientNotiImg = URL::to('/storage/app/'). "/" . $userClient->image;
+                                                                        }
+                                                                    @endphp
+                                                                    <li class="media">
+                                                                        <div class="media">
+                                                                            <img class="img-radius ImageClientNotification" src="{{$clientNotiImg}}" alt="Generic placeholder image"/>
+                                                                            <div class="media-body">
+                                                                                <p class="m-0"><strong>{{$clientMessageNoti->userType != 1 ? "Admin" : $userClient->name}}</strong></p>
+                                                                                <p class="m-0">{{$clientMessageNoti->message}}</p>
+                                                                            </div>
+                                                                            <a href="{{URL::to('clientNotification')}}/{{$clientMessageNoti->id}}" class="text-primary linkClientNotification m-0">View</a>
+                                                                        </div>
+                                                                    </li>
+                                                                @endif
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
                                             <!-- <li><a href="#"><i class="fa fa-briefcase"></i></a></li>
                                             <li><a href="#"><i class="fa fa-clock-o"></i></a></li> -->
                                     </ul>
@@ -256,46 +276,6 @@
                         <div class="col-sm-6 col-right mainHide">
                             <div class="d-flex justify-content-end align-items-center h-100">
                                 <ul class="social-icons d-flex list-unstyled h-100 align-items-center m-0">
-                                    <li class="dropdown notification1">
-                                        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell"></i><sup>{{count($TotalClientMessageNo)}}</sup></a>
-                                        <div class="dropdown-menu notification" aria-labelledby="navbarDropdown">
-                                            <div class="card">
-                                                <div class="card-header"> inbox ({{count($TotalClientMessageNo)}}) <span> / Sent </span> <span><a class=""><i class="fas fa-edit"></i></a></span></div>
-                                                <div class="card-body">
-                                                    <ul class="list-unstyled">
-                                                        @foreach($ClientNotificationMessage as $clientMessageNoti)
-                                                            @if($clientMessageNoti->email == $value['email'])
-                                                                @php
-                                                                    if($clientMessageNoti->userType != 1){
-                                                                        $user = $clientMessageNoti->GetUser();
-                                                                        $userInfo = $clientMessageNoti->GetUserInfo();
-                                                                        if($userInfo->userImage == null){
-                                                                            $userInfo->userImage = "WebImages/avatar-5.jpg";
-                                                                        }
-                                                                    }else{
-                                                                        $userClient = $clientMessageNoti->GetClientUser();
-                                                                        if($userClient->image == null){
-                                                                            $userClient->image = "WebImages/avatar-5.jpg";
-                                                                        }
-                                                                    }
-                                                                @endphp
-                                                                <li class="media">
-                                                                    <div class="media">
-                                                                        <img class="img-radius ImageClientNotification" src="{{URL::to('/storage/app/')}}/{{$clientMessageNoti->userType != 1 ? $userInfo->userImage : $userClient->image}}" alt="Generic placeholder image" />
-                                                                        <div class="media-body">
-                                                                            <p class="m-0"><strong>{{$clientMessageNoti->userType != 1 ? $user->username : $userClient->name}}</strong></p>
-                                                                            <p class="m-0">{{$clientMessageNoti->message}}</p>
-                                                                        </div>
-                                                                        <a href="{{URL::to('')}}/{{$clientMessageNoti->link}}" class="text-primary linkClientNotification m-0">View</a>
-                                                                    </div>
-                                                                </li>
-                                                            @endif
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
                                     @foreach($SocialMediaLink as $link)
                                         @if($link->iconName == "Facebook")
                                             <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-facebook"></i></a></li>
@@ -317,6 +297,45 @@
                                             <li><a href="{{$link->link}}" target="_blank"><i class="fa fa-pinterest-p"></i></a></li>
                                         @endif
                                     @endforeach
+                                    <li class="dropdown notification1">
+                                        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell"></i><sup class="ClientNotificationCount">{{$TotalClientMessageNo}}</sup></a>
+                                        <div class="dropdown-menu notification" aria-labelledby="navbarDropdown">
+                                            <div class="card">
+                                                <div class="card-header text-white"> inbox (<span class="ClientNotificationCount">{{$TotalClientMessageNo}}</span>)</span></div>
+                                                <div class="card-body">
+                                                    <ul class="list-unstyled list-unstyled12">
+                                                        @foreach($ClientNotificationMessage as $clientMessageNoti)
+                                                            @if($clientMessageNoti->email == $value['email'] || $clientMessageNoti->email == null)
+                                                                @php
+                                                                    if($clientMessageNoti->userType != 1){
+                                                                        $user = $clientMessageNoti->GetUser();
+                                                                        $userInfo = $clientMessageNoti->GetUserInfo();
+                                                                        $clientNotiImg = URL::to('public/assets/assets/img/favicon.png');
+                                                                    }else{
+                                                                        $userClient = $clientMessageNoti->GetClientUser();
+                                                                        if($userClient->image == null){
+                                                                            $userClient->image = "WebImages/avatar-5.jpg";
+                                                                        }
+                                                                        $clientNotiImg = URL::to('/storage/app/'). "/" . $userClient->image;
+                                                                    }
+                                                                @endphp
+                                                                <li class="media">
+                                                                    <div class="media">
+                                                                        <img class="img-radius ImageClientNotification" src="{{$clientNotiImg}}" alt="Generic placeholder image" />
+                                                                        <div class="media-body">
+                                                                            <p class="m-0"><strong>{{$clientMessageNoti->userType != 1 ? "Admin" : $userClient->name}}</strong></p>
+                                                                            <p class="m-0">{{$clientMessageNoti->message}}</p>
+                                                                        </div>
+                                                                        <a href="{{URL::to('clientNotification')}}/{{$clientMessageNoti->id}}" class="text-primary linkClientNotification m-0">View</a>
+                                                                    </div>
+                                                                </li>
+                                                            @endif
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
                                         <!-- <li><a href="#"><i class="fa fa-briefcase"></i></a></li>
                                         <li><a href="#"><i class="fa fa-clock-o"></i></a></li> -->
                                 </ul>
@@ -549,7 +568,7 @@
                                 <a class="nav-link" href="{{URL::to('/about-page')}}"><span>ABOUT</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{URL::to('/construction')}}" data-toggle="modal" data-target=".bd-example-modal-lg"><span>contact us</span></a>
+                                <a class="nav-link" href="#" data-toggle="modal" data-target=".bd-example-modal-lg"><span>contact us</span></a>
                             </li>
                         </ul>
                     </div>
@@ -678,16 +697,16 @@
                                         <!-- social media large section -->
                                         <div class=" bg-purplelight">
                                             <div class="text-center contactpage py-5">
-                                                <a href="https://www.facebook.com/RaheelNawaz007/" class="pr-3">
+                                                <a href="http://facebook.com/forexustaad/" class="pr-3">
                                                     <i class="fa fa-facebook"></i>
                                                 </a>
-                                                <a href="https://www.instagram.com/rnjutt/" class="pr-3">
+                                                <a href="https://www.instagram.com/forexustaadofficial/" class="pr-3">
                                                     <i class="fa fa-instagram"></i>
                                                 </a>
-                                                <a href="https://twitter.com/raheel_jutt?fbclid=IwAR3H3YPTg9FTKlY-U8uSkmg4hlel_naWNnBhAQAu60xINEipmDDIZ11FgSw" class="pr-3">
+                                                <a href="https://twitter.com/Forex_ustaad/" class="pr-3">
                                                     <i class="fa fa-twitter"></i>
                                                 </a>
-                                                <a href="https://www.youtube.com/channel/UC8qLDKC9Qj5rG52scIxSBEw" class="pr-3">
+                                                <a href="https://www.youtube.com/channel/UColKJfR46umR3KAnM0ggMKQ" class="pr-3">
                                                     <i class="fa fa-youtube"></i>
                                                 </a>
                                             </div>

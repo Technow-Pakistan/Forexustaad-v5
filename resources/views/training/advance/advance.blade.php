@@ -10,6 +10,13 @@
 			<div class="col-lg-9 col-md-12 order-1 order-lg-2">
                   <div class="row">
                       <div class="col-md-8">
+                        @if($MidBannerHomeActive)
+                            <div class="mb-5">
+                                <a href="{{$MidBannerHomeActive->link}}" target="_blank">
+                                    <img src="{{URL::to('storage/app')}}/{{$MidBannerHomeActive->image}}" width="100%">
+                                  </a>
+                            </div>
+                        @endif
                           @if($category == "Basic")
                             <div class="row">
                               <div class="col-sm-6">

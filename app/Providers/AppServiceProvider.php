@@ -32,7 +32,7 @@ use App\Models\NonRegisterVisitorModel;
 use App\Models\AllCitiesModel;
 use App\Models\AllStatesModel;
 use App\Models\AllCountriesModel;
-use App\Models\ClientNotificationModel;
+use App\Models\ClientNotificationModel; 
 
 class AppServiceProvider extends ServiceProvider
 {

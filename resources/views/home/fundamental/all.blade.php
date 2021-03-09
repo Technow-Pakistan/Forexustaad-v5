@@ -8,11 +8,18 @@
                     @include ('inc/home-left-sidebar')
                 </div>
                 <div class="col-lg-6 col-md-12 order-1 order-lg-2">
+                    @if($MidBannerHomeActive)
+                        <div class="mb-5">
+                            <a href="{{$MidBannerHomeActive->link}}" target="_blank">
+                                <img src="{{URL::to('storage/app')}}/{{$MidBannerHomeActive->image}}" width="100%">
+                              </a>
+                        </div>
+                    @endif
                   	<div class="row ">
                   		<div class="col-sm-12">
                     		<div class="news_us">
                         		<div class="content_area_heading large-heading text-center">
-                            
+
                             		<h1 class="heading_title wow animated fadeInUp">
                                			Fundamental History
                             		</h1>

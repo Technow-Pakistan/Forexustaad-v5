@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\AnalysisModel;
+use App\Models\ClientNotificationModel;
+use App\Models\PusherModel;
 
 class AnalysisController extends Controller
 {
@@ -27,7 +29,7 @@ class AnalysisController extends Controller
 
 
     // Admin Panel
-    
+
     public function Index(Request $request){
         $Analysis = AnalysisModel::orderBy('id','desc')->get();
         return view('admin.analysis.all',compact('Analysis'));
@@ -47,9 +49,23 @@ class AnalysisController extends Controller
         $news = new AnalysisModel;
         $news->fill($data);
         $news->save();
-       
+
         $success = "This analysis has been added successfully.";
         $request->session()->put("success",$success);
+        // Pusher Notification Start
+        $url = str_replace(" ", "-",$news->title);
+        $adminData = $request->session()->get("admin");
+        $messageData['userId'] = $adminData['id'];
+        $messageData['userType'] = 0;
+        $messageData['message'] = "Added a New Analysis.";
+        $messageData['link'] = "analysis" . "/" . $url;
+        $clientNotification = new ClientNotificationModel;
+        $clientNotification->fill($messageData);
+        $clientNotification->save();
+        $messageData['id'] = $clientNotification->id;
+        PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+        // Pusher Notification End
+
         return back();
     }
     public function EditProcess(Request $request, $id){
@@ -64,9 +80,24 @@ class AnalysisController extends Controller
         $news = AnalysisModel::find($id);
         $news->fill($data);
         $news->save();
-       
+
         $success = "This analysis has been Updated successfully.";
         $request->session()->put("success",$success);
+
+        // Pusher Notification Start
+        $url = str_replace(" ", "-",$news->title);
+        $adminData = $request->session()->get("admin");
+        $messageData['userId'] = $adminData['id'];
+        $messageData['userType'] = 0;
+        $messageData['message'] = "Edit a Analysis.";
+        $messageData['link'] = "analysis" . "/" . $url;
+        $clientNotification = new ClientNotificationModel;
+        $clientNotification->fill($messageData);
+        $clientNotification->save();
+        $messageData['id'] = $clientNotification->id;
+        PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+        // Pusher Notification End
+
         return back();
     }
     public function Edit(Request $request, $id){

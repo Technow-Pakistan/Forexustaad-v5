@@ -22,6 +22,8 @@ class BlogController extends Controller
             $comments = BlogCommentsModel::orderBy('id','desc')->where('blogId', $BlogDetail->id)->get();
             return view('blog.blogDetail',compact('title','BlogDetail','comments'));
         }else{
+            $error = "This url does not exit.";
+            $request->session()->put("error",$error);
             return redirect('/');
         }
     }
@@ -34,13 +36,13 @@ class BlogController extends Controller
 
 
     // Admin Panel View
-    
+
     public function Comment(Request $request,$id){
         $comments = BlogCommentsModel::where('blogId',$id)->get();
-        
+
         return view('admin.comment.ViewBlogComment',compact('comments'));
     }
-    
+
     public function CommentAdd(Request $request){
         $comments = new BlogCommentsModel;
         $comments->fill($request->all());

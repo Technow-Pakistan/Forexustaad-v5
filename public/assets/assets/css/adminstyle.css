@@ -21484,7 +21484,7 @@ pre[class*=language-]:before {
     position: absolute;
     top: 13px;
     right: 20px;
-    display: inline-block;  
+    display: inline-block;
     font-weight:900;
     -webkit-transition: 0.15s ease-in-out;
     transition: 0.15s ease-in-out;
@@ -22731,7 +22731,7 @@ pre[class*=language-]:before {
 .menu-styler .style-toggler > a:after {
     content: "\f100";
     font-family: "Font Awesome 5 Free";
-    display: inline-block;  
+    display: inline-block;
     font-weight:900;
     top: 12px;
     font-size: 21px;
@@ -32153,7 +32153,7 @@ new-task label input[type=checkbox] {
 }
 
 @-webkit-keyframes fadein {
-  from {right: 0; opacity: 0;} 
+  from {right: 0; opacity: 0;}
   to {right: 50px; opacity: 1;}
 }
 
@@ -32163,11 +32163,15 @@ new-task label input[type=checkbox] {
 }
 
 @-webkit-keyframes fadeout {
-  from {right: 50px; opacity: 1;} 
+  from {right: 50px; opacity: 1;}
   to {right: 0; opacity: 0;}
 }
 
 @keyframes fadeout {
   from {right: 50px; opacity: 1;}
   to {right: 0; opacity: 0;}
+}
+.bannerContactHtmlLink a img{
+    width:170px;
+    height:25px;
 }

@@ -45,8 +45,9 @@ use App\Http\Controllers\OtherPagesContentController;
 use App\Http\Controllers\FundamentalController;
 use App\Http\Controllers\SponoserAddController;
 use App\Http\Controllers\MidBannerController;
+use App\Models\AdminMemberDetailModel;
 use Stevebauman\Location\Facades\Location;
-
+use App\Models\ClientRegistrationModel;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,10 +59,6 @@ use Stevebauman\Location\Facades\Location;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('like', function () {
-    event(new App\Events\PostLiked('Vitalis'));
-    return view('success');
-});
 Route::get('/successData3', [MidBannerController::class, 'getPosts']);
 Route::match(['get', 'post'], '/publish',[MidBannerController::class, 'savePost']);
 Route::get('/channel/{message}/{message2}',[AdminController::class,'GetPusherName']);
@@ -256,6 +253,15 @@ Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
     Route::post('user-registration/cityData/{id}',[HomeController::class,'userregistrationCityCode']);
 
     Route::group(['prefix' => '',"middleware" => "IsMemberLogin"],function(){
+        Route::post('getAdminDetail/{id}',function($id){
+            $data = AdminMemberDetailModel::where('adminTableId',$id)->first();
+            return $data;
+        });
+        Route::post('getClientDetail/{id}',function($id){
+            $data = ClientRegistrationModel::where('id',$id)->first();
+            return $data;
+        });
+        Route::get('/clientNotification/{id}',[HomeController::class,'ClientNotificationView']);
         Route::get('/strategies',[StrategiesController::class,'ViewAll']);
         Route::get('/strategies/{id}',[StrategiesController::class,'StrategyDetail']);
         Route::get('/vipWebinar',[HomeController::class,'VipWebinar']);

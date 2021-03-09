@@ -33,9 +33,22 @@ use App\Models\AllCountriesModel;
 use App\Models\OtherPagesContentModel;
 use App\Models\NonRegisterVisitorModel;
 use App\Models\ActiveOnSiteModel;
+use App\Models\ClientNotificationModel;
 
 class HomeController extends Controller
 {
+    public function ClientNotificationView(Request $request,$id){
+        $ClientNotification = ClientNotificationModel::where('id',$id)->first();
+        if($ClientNotification){
+            $link = "https://forexustaad.com/" . $ClientNotification->link;
+            $ClientNotification->delete();
+            return redirect($link);
+        }else{
+            $error = "This notification is not exist.";
+            $request->session()->put("error",$error);
+        }
+        return redirect('/');
+    }
     public function ReconformationMail(Request $request){
         $registration = ClientRegistrationModel::where('email',$request->username)->first();
         if($registration){
