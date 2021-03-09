@@ -5,19 +5,18 @@
             $data = Session::get('desktopNotification');
 
             $content = array(
-                "en" => $data['title']
+                "en" => $data['message']
             );
             $headings = array(
-                "en" => $data['message']
+                "en" => $data['title']
             );
 
             $fields = array(
-                'app_id' => "2e2a8527-b671-4d10-bbe3-bca1064dc33b",
+                'app_id' => "30d0d830-9a76-492b-9767",
                 'included_segments' => array('All'),
                 'contents' => $content,
                 'headings' => $headings,
                 'url' => $data['url'],
-                'chrome_web_image' => $data['image'],
             );
 
             $fields = json_encode($fields);

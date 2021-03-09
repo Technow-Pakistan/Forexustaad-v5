@@ -8,6 +8,13 @@
                 @include('inc.home-left-sidebar')
                 </div>
                 <div class="col-lg-6 col-md-12 order-1 order-lg-2">
+                    @if($MidBannerHomeActive)
+                        <div class="mb-5">
+                            <a href="{{$MidBannerHomeActive->link}}" target="_blank">
+                                <img src="{{URL::to('storage/app')}}/{{$MidBannerHomeActive->image}}" width="100%">
+                              </a>
+                        </div>
+                    @endif
                     <div class="family">
                         <div>
                             <h4>{{$BlogDetail->mainTitle}}</h4>
@@ -26,12 +33,12 @@
                             </ul>
                         </div>
                         <div class="pt-3">
-                            @php 
+                            @php
                                 $Description = html_entity_decode($BlogDetail->detailDescription);
                                 echo $Description;
                             @endphp
                         </div>
-                                        
+
                         <div class="container p-0 mt-4">
                             <div class="col-md-12" id="fbcomment">
                                 <div class="header_comment">
@@ -74,9 +81,9 @@
                                                             @php
                                                                 $value =Session::get('client');
                                                             @endphp
-                                                            <input type="hidden" name="memberId" value="{{$value['id']}}"> 
-                                                            <input type="hidden" name="userType" value="client"> 
-                                                            <input type="hidden" name="blogId" value="{{$BlogDetail->id}}"> 
+                                                            <input type="hidden" name="memberId" value="{{$value['id']}}">
+                                                            <input type="hidden" name="userType" value="client">
+                                                            <input type="hidden" name="blogId" value="{{$BlogDetail->id}}">
                                                             <button type="submit" >Post</button>
                                                         @else
                                                             <span class="commentDisableButton LoginButton" href="#" data-toggle="modal" data-target="#requestQuoteModal">Post</span>
@@ -440,7 +447,7 @@
 											'<img src=\"{{URL::to('/public/assets/assets/img/user1.jpg')}}\" alt=\"avatar\" />'+
 											'<i class=\"fa fa-caret-down\"></i>'+
 										'</span>'+
-										'<input type=\"hidden\" name=\"memberId\" value=\"{{$value['id']}}\">'+ 
+										'<input type=\"hidden\" name=\"memberId\" value=\"{{$value['id']}}\">'+
 										'<input type=\"hidden\" name=\"userType\" value=\"client\">'+
 										'<input type=\"hidden\" name=\"blogId\" value=\"{{$BlogDetail->id}}\"> '+
 										'<input type=\"hidden\" name=\"reply\" value=\"{{$BlogDetail->id}}\"> '+

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\MainWebinarModel;
+use App\Models\ClientNotificationModel;
+use App\Models\PusherModel;
 
 class MainWebinarController extends Controller
 {
@@ -27,6 +29,20 @@ class MainWebinarController extends Controller
         $Review->save();
         $success = "This webinar has been added successfully.";
         $request->session()->put("success",$success);
+
+        // Pusher Notification Start
+        $adminData = $request->session()->get("admin");
+        $messageData['userId'] = $adminData['id'];
+        $messageData['userType'] = 0;
+        $messageData['message'] = "Added a New Webinar.";
+        $messageData['link'] = "webinar";
+        $clientNotification = new ClientNotificationModel;
+        $clientNotification->fill($messageData);
+        $clientNotification->save();
+        $messageData['id'] = $clientNotification->id;
+        PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+        // Pusher Notification End
+
         return back();
     }
     public function Edit(Request $request, $id){
@@ -45,6 +61,19 @@ class MainWebinarController extends Controller
         $Review->save();
         $success = "This webinar has been updated successfully.";
         $request->session()->put("success",$success);
+        // Pusher Notification Start
+        $adminData = $request->session()->get("admin");
+        $messageData['userId'] = $adminData['id'];
+        $messageData['userType'] = 0;
+        $messageData['message'] = "Edit a Webinar.";
+        $messageData['link'] = "webinar";
+        $clientNotification = new ClientNotificationModel;
+        $clientNotification->fill($messageData);
+        $clientNotification->save();
+        $messageData['id'] = $clientNotification->id;
+        PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+        // Pusher Notification End
+
         return back();
     }
     public function Deactive(Request $request, $id){

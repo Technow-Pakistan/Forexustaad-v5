@@ -10,6 +10,13 @@
                     @include('inc.home-left-sidebar')
                 </div>
                 <div class="col-lg-6 col-md-12 order-1 order-lg-2">
+                    @if($MidBannerHomeActive)
+                        <div class="mb-5">
+                            <a href="{{$MidBannerHomeActive->link}}" target="_blank">
+                                <img src="{{URL::to('storage/app')}}/{{$MidBannerHomeActive->image}}" width="100%">
+                              </a>
+                        </div>
+                    @endif
                     {{-- Counter Start --}}
                     <div id="clockdiv" class="text-center mb-3">
                         <div>
@@ -279,7 +286,7 @@
                                               $replys = $comment->getReply();
                                             @endphp
                                             @if(Session::has('client'))
-                                              <a class="replay" commentId="{{$comment->id}}" replyId="{{$comment->reply}}">Reply</a>
+                                              <a class="replay" commentId="{{$comment->id}}" replyId="{{$comment->reply}}" replyCommentMember="{{$comment->memberId}}">Reply</a>
                                             @else
                                               <a class="replay LoginButton" href="#" data-toggle="modal" data-target="#requestQuoteModal">Reply</a>
                                             @endif
@@ -321,7 +328,7 @@
                                                         <!-- <a class="like" href="#">Like</a>
                                                         <span aria-hidden="true"> · </span> -->
                                                         @if(Session::has('client'))
-                                                          <a class="replay" commentId="{{$comment->id}}" replyId="{{$reply->reply}}">Reply</a>
+                                                          <a class="replay" commentId="{{$comment->id}}" replyId="{{$reply->reply}}" replyCommentMember="{{$reply->memberId}}">Reply</a>
                                                         @else
                                                           <a class="replay LoginButton" href="#" data-toggle="modal" data-target="#requestQuoteModal" href="javascript_void(0)">Reply</a>
                                                         @endif
@@ -759,6 +766,7 @@
         		var currentH4  = "@" + currentH4122;
 				var commentId =	$current.attr("commentId");
 				var replyId =	$current.attr("replyId");
+				var replyCommentMember =	$current.attr("replyCommentMember");
 				if(replyId == 0){
 					currentH4 = "";
 				}
@@ -785,6 +793,7 @@
 										'<input type=\"hidden\" name=\"reply\" value=\"{{$signalData->id}}\"> '+
 										'<input type=\"hidden\" name=\"replyName\" value=\"'+currentH4+'\"> '+
 										'<input type=\"hidden\" name=\"commentId\" value=\"'+commentId+'\"> '+
+										'<input type=\"hidden\" name=\"replyCommentMember\" value=\"'+replyCommentMember+'\"> '+
 										'<button class=\"cancel\" onclick=\"cancel_reply()\" type=\"button\">Cancel</button>'+
 										'<button type=\"submit\">Reply</button>'+
 										'</div>'+

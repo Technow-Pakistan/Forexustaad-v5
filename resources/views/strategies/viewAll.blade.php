@@ -8,11 +8,18 @@
                     @include ('inc/home-left-sidebar')
                 </div>
                 <div class="col-lg-6 col-md-12 order-1 order-lg-2">
+                    @if($MidBannerHomeActive)
+                        <div class="mb-5">
+                            <a href="{{$MidBannerHomeActive->link}}" target="_blank">
+                                <img src="{{URL::to('storage/app')}}/{{$MidBannerHomeActive->image}}" width="100%">
+                              </a>
+                        </div>
+                    @endif
                   	<div class="row ">
                   		<div class="col-sm-12">
                     		<div class="news_us">
                         		<div class="content_area_heading large-heading text-center">
-                            
+
                             		<h1 class="heading_title wow animated fadeInUp">
                                			Our Strategies
                             		</h1>
@@ -30,13 +37,13 @@
                                     <div class="wow animated fadeInUp mt-1">
                                         <div class="re_img w-100 p-4">
                                             <a href="{{URL::to('strategies')}}/{{$url}}">
-                                                <img src="{{URL::to('/storage/app')}}/{{$data->image}}" >               
+                                                <img src="{{URL::to('/storage/app')}}/{{$data->image}}" >
                                             </a>
                                         </div>
                                         <div class="container-fluid ">
                                             <div class="row">
                                                 <div class="col-sm-12 ">
-                                                    
+
                                                     <div class="new_description-details">
                                                         <h6>
                                                             <a href="{{URL::to('strategies')}}/{{$url}}">
@@ -46,7 +53,7 @@
                                                         <p>
                                                             {{$data->shortDescription}}
                                                         </p>
-                                                    
+
                                                     </div>
                                                 </div>
 

@@ -7,6 +7,13 @@
             @include ('inc/home-left-sidebar')
          </div>
          <div class="col-lg-6 col-md-12 order-1 order-lg-2">
+            @if($MidBannerHomeActive)
+                <div class="mb-5">
+                    <a href="{{$MidBannerHomeActive->link}}" target="_blank">
+                        <img src="{{URL::to('storage/app')}}/{{$MidBannerHomeActive->image}}" width="100%">
+                      </a>
+                </div>
+            @endif
             <div class="content_area_heading text-center">
                <h1 class="heading_title wow animated fadeInUp">
                   Broker Detail
@@ -361,7 +368,7 @@
                               </tr>
                            <thead>
                            <tbody>
-                              
+
                               <tr>
                                  <td>TRADING PLATFORMS</td>
                                  <td></td>
@@ -648,7 +655,7 @@
                                  <td><a href="{{$broker->link}}">{{$broker->link}}</a></td>
                                  <td></td>
                               </tr>
-                              
+
                            </tbody>
                         </table>
                      </td>
@@ -710,12 +717,12 @@
    $('.tbl-accordion-nested').each(function(){
    var thead = $(this).find('thead');
    var tbody = $(this).find('tbody');
-   
+
    tbody.show();
    thead.click(function(){
    tbody. slideToggle();
    })
    });
-   
-   
+
+
 </script>

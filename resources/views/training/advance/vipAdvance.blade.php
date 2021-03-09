@@ -10,6 +10,13 @@
 			<div class="col-lg-9 col-md-12 order-1 order-lg-2">
                 <div class="row">
                   	<div class="col-md-8">
+                        @if($MidBannerHomeActive)
+                            <div class="mb-5">
+                                <a href="{{$MidBannerHomeActive->link}}" target="_blank">
+                                    <img src="{{URL::to('storage/app')}}/{{$MidBannerHomeActive->image}}" width="100%">
+                                  </a>
+                            </div>
+                        @endif
 						<div class="news_us">
 							<div class="content_area_heading large-heading text-center">
 								<h1 class="heading_title wow animated fadeInUp">
@@ -55,7 +62,7 @@
 													</button>
 													<div class="collapse navbar-collapse" id="main_nav">
 														<ul class="navbar-nav">
-															
+
 															<li class="nav-item dropdown">
 																<a class="nav-link  dropdown-toggle text-light" href="#" data-toggle="dropdown">
 																	<i class="fa fa-ellipsis-h" aria-hidden="true"></i>
@@ -96,7 +103,7 @@
 															$date3 = $commentAllow->created_at;
 															$date4 = date('Y-m-d H:i:s', strtotime($date3 . ' +24 hours '));
 															$date5 = date('Y-m-d H:i:s');
-														@endphp	
+														@endphp
 														@if($date4 <= $date5)
 															@php echo $lecture->embed @endphp
 														@else
@@ -123,9 +130,9 @@
 															$date3 = $commentAllow->created_at;
 															$date4 = date('Y-m-d H:i:s', strtotime($date3 . ' +24 hours '));
 															$date5 = date('Y-m-d H:i:s');
-														@endphp	
+														@endphp
 														@if($date4 <= $date5)
-															@php 
+															@php
 																$Description = html_entity_decode($lecture->description);
 																echo $Description;
 															@endphp
@@ -136,7 +143,7 @@
 														<p>Please submit your previous home work first.</p>
 													@endif
 												@else
-													@php 
+													@php
 														$Description = html_entity_decode($lecture->description);
 														echo $Description;
 													@endphp
@@ -144,7 +151,7 @@
 											@else
 												<p>This lecture has been delete contact to administrator.</p>
 											@endif
-											
+
 										</div>
 									</div>
 								</div>
@@ -271,10 +278,10 @@
 															@php
 																$value =Session::get('client');
 															@endphp
-															<input type="hidden" name="memberId" value="{{$value['id']}}"> 
-															<input type="hidden" name="userType" value="client"> 
-															<input type="hidden" name="lectureId" value="{{$lecture->id}}"> 
-															<input type="hidden" name="Category" value="{{$category}}"> 
+															<input type="hidden" name="memberId" value="{{$value['id']}}">
+															<input type="hidden" name="userType" value="client">
+															<input type="hidden" name="lectureId" value="{{$lecture->id}}">
+															<input type="hidden" name="Category" value="{{$category}}">
 															<button type="submit" >Post</button>
 															</div>
 														</div>
@@ -412,7 +419,7 @@
 	.dropdown-menu{
 		right: 0!important;
 		left: auto;
-		
+
 	}
 	.nav-tabs {
 		margin-bottom: 25px;

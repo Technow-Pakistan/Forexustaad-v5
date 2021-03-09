@@ -41,7 +41,7 @@
 								<form action="{{URL::to('/ustaad/webinar')}}/{{$url}}" method="post" enctype="multipart/form-data">
 									@isset($webinar->image)
 										<div>
-											<img src="{{URL::to('storage/app')}}/{{$webinar->image}}" alt="Your Image" />
+											<img src="{{URL::to('storage/app')}}/{{$webinar->image}}" width="200px" alt="Your Image" />
 										</div>
 										@php
 											$count++;

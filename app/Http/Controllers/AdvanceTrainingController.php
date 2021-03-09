@@ -9,6 +9,8 @@ use App\Models\HabbitTrainingModel;
 use App\Models\AdvanceCommentsModel;
 use App\Models\BasicCommentsModel;
 use App\Models\HabbitCommentsModel;
+use App\Models\ClientNotificationModel;
+use App\Models\PusherModel;
 
 
 class AdvanceTrainingController extends Controller
@@ -34,7 +36,7 @@ class AdvanceTrainingController extends Controller
                     $userId = $clientInformation["id"];
                     if ($lastLecture) {
                         $commentAllow = AdvanceCommentsModel::where('memberId', $userId)->where('lectureId',$lastLecture->id)->first();
-                      
+
                     }else {
                         $commentAllow = null;
                     }
@@ -175,18 +177,36 @@ class AdvanceTrainingController extends Controller
         if ($request->lectureCategory == "advance"){
             $lecture = new AdvanceTrainingModel;
             $poistion = AdvanceTrainingModel::orderBy('poistion','desc')->first();
+            $clientNotilectureCategory = "Advance";
         }elseif ($request->lectureCategory == "basic"){
             $lecture = new BasicTrainingModel;
             $poistion = BasicTrainingModel::orderBy('poistion','desc')->first();
+            $clientNotilectureCategory = "Basic";
         }else{
             $lecture = new HabbitTrainingModel;
             $poistion = HabbitTrainingModel::orderBy('poistion','desc')->first();
+            $clientNotilectureCategory = "Habbit";
         }
         $data['poistion'] = ++$poistion->poistion;
         $lecture->fill($data);
         $lecture->save();
         $success = "Lecture has been save successfully.";
         $request->session()->put("success",$success);
+
+        // Pusher Notification Start
+        $url = str_replace(" ", "-",$lecture->title);
+        $adminData = $request->session()->get("admin");
+        $messageData['userId'] = $adminData['id'];
+        $messageData['userType'] = 0;
+        $messageData['message'] = "Added a New $clientNotilectureCategory Training.";
+        $messageData['link'] = "training" . "/" . $clientNotilectureCategory . "/" . $url;
+        $clientNotification = new ClientNotificationModel;
+        $clientNotification->fill($messageData);
+        $clientNotification->save();
+        $messageData['id'] = $clientNotification->id;
+        PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+        // Pusher Notification End
+
         return back();
     }
     public function Edit(Request $request, $id1 , $id){
@@ -206,15 +226,32 @@ class AdvanceTrainingController extends Controller
         $data['description'] = $description;
         if ($id1 == "advance"){
             $lecture = AdvanceTrainingModel::find($id);
+            $clientNotilectureCategory = "Advance";
         }elseif ($id1 == "basic"){
             $lecture = BasicTrainingModel::find($id);
+            $clientNotilectureCategory = "Basic";
         }else{
             $lecture = HabbitTrainingModel::find($id);
+            $clientNotilectureCategory = "Habbit";
         }
         $lecture->fill($data);
         $lecture->save();
         $success = "Lecture has been Updated successfully.";
         $request->session()->put("success",$success);
+        // Pusher Notification Start
+        $url = str_replace(" ", "-",$lecture->title);
+        $adminData = $request->session()->get("admin");
+        $messageData['userId'] = $adminData['id'];
+        $messageData['userType'] = 0;
+        $messageData['message'] = "Edit a $clientNotilectureCategory Training.";
+        $messageData['link'] = "training" . "/" . $clientNotilectureCategory . "/" . $url;
+        $clientNotification = new ClientNotificationModel;
+        $clientNotification->fill($messageData);
+        $clientNotification->save();
+        $messageData['id'] = $clientNotification->id;
+        PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+        // Pusher Notification End
+
         return back();
     }
     public function Delete(Request $request, $id1, $id){

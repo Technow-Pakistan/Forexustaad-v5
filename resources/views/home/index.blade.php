@@ -165,11 +165,11 @@
                                         <section id="extra wrapper"
                                             style="position: relative; padding-right: 44px; padding-left: 48px; background: #f6f6f6; height:152px;">
                                             <!-- CUSTOM ARROWS -->
-                          <button title="Next" class="swiper-custom-next" style="position: absolute; padding: 10px 2px; right: 1px;top: 32%; z-index: 100;
+                          <button title="Next" class="swiper-custom-next" style="position: absolute; padding: 10px 2px; right: 1px;top: 32%;
                           display: inline-block;cursor: pointer;">
                       <svg style="position: relative; top: 1px;" xmlns="" width="16" height="16" viewBox="0 0 16 16"><g class="nc-icon-wrapper" fill="#111111"><polygon fill="#111111" points="4.9,15.7 3.4,14.3 9.7,8 3.4,1.7 4.9,0.3 12.6,8 "></polygon></g></svg>
                             </button>
-                          <button title="Prev" class="swiper-custom-prev" style="position: absolute; padding: 10px 2px; left: 2px; top: 35%; z-index: 100;
+                          <button title="Prev" class="swiper-custom-prev" style="position: absolute; padding: 10px 2px; left: 2px; top: 35%;
                           display: inline-block;cursor: pointer;font-size: 15px;">
                            <svg xmlns="" width="16" height="16" viewBox="0 0 16 16"><g class="nc-icon-wrapper" fill="#111111"><polygon fill="#111111" points="11.1,15.7 3.4,8 11.1,0.3 12.6,1.7 6.3,8 12.6,14.3 "></polygon></g></svg>
                           </button>
@@ -303,7 +303,7 @@
                                     <div class="row justify-content-center">
                         @endif
                                             @php
-                                                $url = $data->id;
+                                                $url = $data->GetURL();
                                                 $loginClientData = Session::get('client');
                                                 $go = 1;
                                                 $go3 = 1;

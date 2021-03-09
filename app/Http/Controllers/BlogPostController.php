@@ -12,6 +12,8 @@ use App\Models\BlogPostSubCategoryModel;
 use App\Models\BlogPostAllMainCategoryModel;
 use App\Models\BlogPostAllSubCategoryModel;
 use App\Models\ClientMemberModel;
+use App\Models\ClientNotificationModel;
+use App\Models\PusherModel;
 
 class BlogPostController extends Controller
 {
@@ -20,7 +22,7 @@ class BlogPostController extends Controller
         $allMainCategory = BlogPostAllMainCategoryModel::all();
         $allSubCategory = BlogPostAllSubCategoryModel::all();
         $ClientMember = ClientMemberModel::all();
-    
+
         return view('admin.add-post',compact('id','allTags','allSubCategory','allMainCategory','ClientMember'));
     }
     public function Add(Request $request){
@@ -29,20 +31,20 @@ class BlogPostController extends Controller
         if($data["newMainCategory"] != "null"){
             $newMainCategory = $data["newMainCategory"];
             $newMainCategory = explode("@",$newMainCategory);
-            for ($i=1; $i < count($newMainCategory) ; $i++) { 
+            for ($i=1; $i < count($newMainCategory) ; $i++) {
                 $CategoryExist = BlogPostAllMainCategoryModel::where('categoryName',$newMainCategory[$i])->first();
                 if ($CategoryExist == null ) {
                     $blogPostNewMainCategory = new BlogPostAllMainCategoryModel;
                     $blogPostNewMainCategory->categoryName = $newMainCategory[$i];
                     $blogPostNewMainCategory->save();
                 }
-            }   
+            }
         }
         // Add New Sub Category
         if($data["newSubCategory"] != "null"){
             $newSubCategory = $data["newSubCategory"];
             $newSubCategory = explode(",",$newSubCategory);
-            for ($i=1; $i < count($newSubCategory) ; $i++) { 
+            for ($i=1; $i < count($newSubCategory) ; $i++) {
                 $newSubParentCategory = explode("@",$newSubCategory[$i]);
                 $SubCategoryExist = BlogPostAllSubCategoryModel::where('categoryName',$newSubParentCategory[0])->where('parentCategory',$newSubParentCategory[1])->first();
                 if ($SubCategoryExist == null ) {
@@ -51,7 +53,7 @@ class BlogPostController extends Controller
                     $blogPostNewSubCategory->parentCategory = $newSubParentCategory[1];
                     $blogPostNewSubCategory->save();
                 }
-            }   
+            }
         }
         // Publish
         if ($request->publishNow == 1) {
@@ -79,7 +81,7 @@ class BlogPostController extends Controller
         $postId = $blogPost->id;
         // Add Post Visibility
         $visibility = $request->visibility;
-        for ($i=0; $i < count($visibility) ; $i++) { 
+        for ($i=0; $i < count($visibility) ; $i++) {
             $blogPostVisibility = new BlogPostVisibilityModel;
             $blogPostVisibility->visibility = $visibility[$i];
             $blogPostVisibility->postId = $postId;
@@ -87,7 +89,7 @@ class BlogPostController extends Controller
         }
         // Add Post Tags
         $tag = $request->tag;
-        for ($i=0; $i < sizeof($tag) ; $i++) { 
+        for ($i=0; $i < sizeof($tag) ; $i++) {
             $blogPostTag = new BlogPostTagsModel;
             $blogPostTag->tag = $tag[$i];
             $blogPostTag->postId = $postId;
@@ -102,7 +104,7 @@ class BlogPostController extends Controller
         // Add Post Main Category
         $mainCategory = $request->category;
         if($mainCategory != null){
-            for ($i=0; $i < count($mainCategory) ; $i++) { 
+            for ($i=0; $i < count($mainCategory) ; $i++) {
                 $blogPostmainCategory = new BlogPostMainCategoryModel;
                 $blogPostmainCategory->mainCategory = $mainCategory[$i];
                 $blogPostmainCategory->postId = $postId;
@@ -113,7 +115,7 @@ class BlogPostController extends Controller
 
         $subCategory = $request->subCategory;
         if($subCategory != null){
-            for ($i=0; $i < count($subCategory) ; $i++) { 
+            for ($i=0; $i < count($subCategory) ; $i++) {
                 $blogPostsubCategory = new BlogPostSubCategoryModel;
                 $blogPostsubCategory->subCategory = $subCategory[$i];
                 $blogPostsubCategory->postId = $postId;
@@ -123,10 +125,25 @@ class BlogPostController extends Controller
 
         $success = "This post has been saved successfully.";
         $request->session()->put("success",$success);
+        // Pusher Notification Start
+        $url = $blogPost->permalink;
+        $category = BlogPostMainCategoryModel::where('postId',$blogPost->id)->first();
+        $adminData = $request->session()->get("admin");
+        $messageData['userId'] = $adminData['id'];
+        $messageData['userType'] = 0;
+        $messageData['message'] = "Added a New Blog.";
+        $messageData['link'] = "Posts" . "/" . $category->mainCategory . "/" . $url ;
+        $clientNotification = new ClientNotificationModel;
+        $clientNotification->fill($messageData);
+        $clientNotification->save();
+        $messageData['id'] = $clientNotification->id;
+        PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+        // Pusher Notification End
+
         return back();
 
     }
-    
+
     public function Edit(Request $request, $id){
         $allTags = BlogPostAllTagsModel::all();
         $allMainCategory = BlogPostAllMainCategoryModel::all();
@@ -137,7 +154,7 @@ class BlogPostController extends Controller
         $tagsPostData = BlogPostTagsModel::where('postId',$id)->get();
         $mainCategoryPostData = BlogPostMainCategoryModel::where('postId',$id)->get();
         $subCategoryPostData = BlogPostSubCategoryModel::where('postId',$id)->get();
-    
+
         return view('admin.edit-post',compact('id','allTags','allSubCategory','allMainCategory','blogPostData','visibilityPostData','tagsPostData','mainCategoryPostData','subCategoryPostData','ClientMember','id'));
     }
     public function EditProcess(Request $request, $id){
@@ -146,20 +163,20 @@ class BlogPostController extends Controller
         if($data["newMainCategory"] != "null"){
             $newMainCategory = $data["newMainCategory"];
             $newMainCategory = explode("@",$newMainCategory);
-            for ($i=1; $i < count($newMainCategory) ; $i++) { 
+            for ($i=1; $i < count($newMainCategory) ; $i++) {
                 $CategoryExist = BlogPostAllMainCategoryModel::where('categoryName',$newMainCategory[$i])->first();
                 if ($CategoryExist == null ) {
                     $blogPostNewMainCategory = new BlogPostAllMainCategoryModel;
                     $blogPostNewMainCategory->categoryName = $newMainCategory[$i];
                     $blogPostNewMainCategory->save();
                 }
-            }   
+            }
         }
         // Add New Sub Category
         if($data["newSubCategory"] != "null"){
             $newSubCategory = $data["newSubCategory"];
             $newSubCategory = explode(",",$newSubCategory);
-            for ($i=1; $i < count($newSubCategory) ; $i++) { 
+            for ($i=1; $i < count($newSubCategory) ; $i++) {
                 $newSubParentCategory = explode("@",$newSubCategory[$i]);
                 $SubCategoryExist = BlogPostAllSubCategoryModel::where('categoryName',$newSubParentCategory[0])->where('parentCategory',$newSubParentCategory[1])->first();
                 if ($SubCategoryExist == null ) {
@@ -168,7 +185,7 @@ class BlogPostController extends Controller
                     $blogPostNewSubCategory->parentCategory = $newSubParentCategory[1];
                     $blogPostNewSubCategory->save();
                 }
-            }   
+            }
         }
         // Publish
         if ($request->publishNow == 1) {
@@ -210,12 +227,12 @@ class BlogPostController extends Controller
         $postId = $blogPost->id;
         // Delete Previous Visibility
         $blogPostPreviousVisibility = BlogPostVisibilityModel::where('postId',$postId)->get();
-        for ($i=0; $i < count($blogPostPreviousVisibility) ; $i++) { 
+        for ($i=0; $i < count($blogPostPreviousVisibility) ; $i++) {
             $blogPostPreviousVisibility[$i]->delete();
         }
         // Add Post Visibility
         $visibility = $request->visibility;
-        for ($i=0; $i < count($visibility) ; $i++) { 
+        for ($i=0; $i < count($visibility) ; $i++) {
             $blogPostVisibility = new BlogPostVisibilityModel;
             $blogPostVisibility->visibility = $visibility[$i];
             $blogPostVisibility->postId = $postId;
@@ -223,12 +240,12 @@ class BlogPostController extends Controller
         }
         // Delete Previous Tag
         $blogPostPreviousTag = BlogPostTagsModel::where('postId',$postId)->get();
-        for ($i=0; $i < count($blogPostPreviousTag) ; $i++) { 
+        for ($i=0; $i < count($blogPostPreviousTag) ; $i++) {
             $blogPostPreviousTag[$i]->delete();
         }
         // Add Post Tags
         $tag = $request->tag;
-        for ($i=0; $i < sizeof($tag) ; $i++) { 
+        for ($i=0; $i < sizeof($tag) ; $i++) {
             $blogPostTag = new BlogPostTagsModel;
             $blogPostTag->tag = $tag[$i];
             $blogPostTag->postId = $postId;
@@ -242,13 +259,13 @@ class BlogPostController extends Controller
         }
         // Delete Previous Main Category
         $blogPostPreviousMainCategory = BlogPostMainCategoryModel::where('postId',$postId)->get();
-        for ($i=0; $i < count($blogPostPreviousMainCategory) ; $i++) { 
+        for ($i=0; $i < count($blogPostPreviousMainCategory) ; $i++) {
             $blogPostPreviousMainCategory[$i]->delete();
         }
         // Add Post Main Category
         $mainCategory = $request->category;
         if($mainCategory != null){
-            for ($i=0; $i < count($mainCategory) ; $i++) { 
+            for ($i=0; $i < count($mainCategory) ; $i++) {
                 $blogPostmainCategory = new BlogPostMainCategoryModel;
                 $blogPostmainCategory->mainCategory = $mainCategory[$i];
                 $blogPostmainCategory->postId = $postId;
@@ -257,13 +274,13 @@ class BlogPostController extends Controller
         }
         // Delete Previous Sub Category
         $blogPostPreviousSubCategory = BlogPostSubCategoryModel::where('postId',$postId)->get();
-        for ($i=0; $i < count($blogPostPreviousSubCategory) ; $i++) { 
+        for ($i=0; $i < count($blogPostPreviousSubCategory) ; $i++) {
             $blogPostPreviousSubCategory[$i]->delete();
         }
         // Add Post Sub Category
         $subCategory = $request->subCategory;
         if($subCategory != null){
-            for ($i=0; $i < count($subCategory) ; $i++) { 
+            for ($i=0; $i < count($subCategory) ; $i++) {
                 $blogPostsubCategory = new BlogPostSubCategoryModel;
                 $blogPostsubCategory->subCategory = $subCategory[$i];
                 $blogPostsubCategory->postId = $postId;
@@ -273,7 +290,22 @@ class BlogPostController extends Controller
 
         $success = "This post has been updated successfully.";
         $request->session()->put("success",$success);
-        
+
+        // Pusher Notification Start
+        $url = $blogPost->permalink;
+        $category = BlogPostMainCategoryModel::where('postId',$blogPost->id)->first();
+        $adminData = $request->session()->get("admin");
+        $messageData['userId'] = $adminData['id'];
+        $messageData['userType'] = 0;
+        $messageData['message'] = "Edit a Blog.";
+        $messageData['link'] = "Posts" . "/" . $category->mainCategory . "/" . $url ;
+        $clientNotification = new ClientNotificationModel;
+        $clientNotification->fill($messageData);
+        $clientNotification->save();
+        $messageData['id'] = $clientNotification->id;
+        PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+        // Pusher Notification End
+
         return back();
 
     }

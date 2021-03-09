@@ -42,6 +42,9 @@
 
 	</head>
 	<body class="">
+        @if(Session::has('desktopNotification'))
+            @include('send')
+        @endif
 		<!-- [ Pre-loader ] start -->
 		<div class="loader-bg">
 			<div class="loader-track">
@@ -273,7 +276,7 @@
 					<!-- <img src="{{URL::to('/public/assets/assets/img/logo-icon.png')}}" alt="" class="logo-thumb" /> -->
 				</a>
 				<a href="#!" class="mob-toggler">
-					<i class="feather icon-more-vertical"></i>
+					<i class="fa fa-ellipsis-v"></i>
 				</a>
 			</div>
 			<div class="collapse navbar-collapse">
@@ -323,7 +326,7 @@
 									</div>
 									<ul class="noti-body">
 										@foreach($NotificationMessage as $messageNoti)
-											@php 
+											@php
 												if($messageNoti->userType != 1){
 													$user = $messageNoti->GetUser();
 													$userInfo = $messageNoti->GetUserInfo();
