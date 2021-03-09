@@ -159,6 +159,26 @@ class AdminController extends Controller
         $totalClientInfo->save();
         $success = "Member Type has been changed successfully.";
         $request->session()->put("success",$success);
+
+       // Pusher Notification Start
+        if($totalClientInfo->memberType == 1) {
+            $PusherMessage = "OOPS You Become Suscriber.";
+        }elseif($totalClientInfo->memberType == 2){
+            $PusherMessage = "Congrats You Become Our VIP Member.";
+        }
+        $messageData['email'] = $totalClientInfo->email;
+        $adminData = $request->session()->get("admin");
+        $messageData['userId'] = $adminData['id'];
+        $messageData['userType'] = 0;
+        $messageData['message'] = $PusherMessage;
+        $messageData['link'] = "user-profile";
+        $clientNotification = new ClientNotificationModel;
+        $clientNotification->fill($messageData);
+        $clientNotification->save();
+        $messageData['id'] = $clientNotification->id;
+        PusherModel::BoardCast($totalClientInfo->email,"firstEvent",["message" => $messageData]);
+        // Pusher Notification End
+
         return back();
     }
     public function Index(Request $request){

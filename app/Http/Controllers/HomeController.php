@@ -41,7 +41,14 @@ class HomeController extends Controller
         $ClientNotification = ClientNotificationModel::where('id',$id)->first();
         if($ClientNotification){
             $link = "https://forexustaad.com/" . $ClientNotification->link;
-            $ClientNotification->delete();
+            if ($ClientNotification->email != null) {
+                $ClientNotification->delete();
+            }else{
+                $value = $request->session()->get('client');
+                $viewClientsId = $ClientNotification->viewClientsId . "@" . $value["id"];
+                $ClientNotification->viewClientsId = $viewClientsId;
+                $ClientNotification->save();
+            }
             return redirect($link);
         }else{
             $error = "This notification is not exist.";
