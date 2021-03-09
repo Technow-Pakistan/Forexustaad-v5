@@ -35,7 +35,7 @@ class SignalController extends Controller
         }
         $pairId = SignalPairModel::where('pair',$pair)->first();
         if($pairId){
-            $pairData = SignalsModel::where('forexPairs',$pairId->id)->where('status',0)->get();
+            $pairData = SignalsModel::where('forexPairs',$pairId->id)->get();
         }
         if (isset($pairData) && count($pairData) >= $signalNumber) {
             $signalData = $pairData[$signalNumber];
