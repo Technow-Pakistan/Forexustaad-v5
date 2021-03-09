@@ -2843,24 +2843,41 @@ padding-bottom: 12px;
         display: none;
     }
     .notification {
-        width: 350px;
+        width: 300px;
         padding: 0px;
+    }
+    #notifictionRight{
+        right: -20px!important;
+        left: auto;
     }
     .notification .card {
         border: 0px;
     }
     .notification .card .card-header {
         text-transform: uppercase;
+        background-image: linear-gradient(
+45deg
+, #0d5fe9, #ff0024);
+    }
+    .notification .card .card-body{
+        height: 320px;
+        overflow-y: scroll;
+    }
+    .notification .card .card-body ul li{
+        border-bottom: 1px solid #c16161;
+        padding: 5px 0px;
     }
     .notification .card .card-body .media img {
-        border-radius: 50%;
-        width: 50px;
+        width: 35px;
+        border-radius: 100%;
+        height: 35px;
     }
     .notification .card .card-body .media .media-body {
         font-size: 12px;
-        white-space: nowrap;
+        /* white-space: nowrap; */
         /* overflow: hidden; */
         text-overflow: ellipsis;
+        width: 170px;
     }
     .notification .card .card-body .media .media-body h5 {
         font-size: 15px;

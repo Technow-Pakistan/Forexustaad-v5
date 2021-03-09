@@ -19,6 +19,7 @@ use App\Models\NonRegisterVisitorModel;
 use App\Models\ActiveOnSiteModel;
 use App\Models\NotificationModel;
 use App\Models\PusherModel;
+use App\Models\ClientNotificationModel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SubscriberMail;
 
@@ -54,9 +55,15 @@ class AdminController extends Controller
     }
     public function NotificationView(Request $request, $id){
         $notification = NotificationModel::find($id);
-        $link = $notification->link;
-        $notification->delete();
-        return redirect($link);
+        if ($notification) {
+            $link = $notification->link;
+            $notification->delete();
+            return redirect($link);
+        }else{
+            $error = "This notification is not exist any more.";
+            $request->session()->put("error",$error);
+        }
+        return redirect('/ustaad');
     }
     public function DeleteClientAccount(Request $request, $id){
         $notification = ClientAccountDetailModel::find($id);
@@ -86,26 +93,64 @@ class AdminController extends Controller
         $clientAccount = ClientAccountDetailModel::find($id);
         $clientAccount->verified = $request->verified;
         $clientAccount->save();
+        $brokerInfo = BrokerCompanyInformationModel::find($clientAccount->brokerId);
         if($request->verified == 1){
             $success = "Account has been verified successfully.";
             $request->session()->put("success",$success);
+            $PusherMessage = "Your $brokerInfo->title Account Verified.";
         }else {
             $error = "Account has been rejected successfully.";
             $request->session()->put("error",$error);
+            $PusherMessage = "Your $brokerInfo->title Account Rejected.";
         }
+        // Pusher Notification Start
+        $clientInfo = ClientRegistrationModel::find($clientAccount->clientId);
+
+        $messageData['email'] = $clientInfo->email;
+        $adminData = $request->session()->get("admin");
+        $messageData['userId'] = $adminData['id'];
+        $messageData['userType'] = 0;
+        $messageData['message'] = $PusherMessage;
+        $messageData['link'] = "user-profile";
+        $clientNotification = new ClientNotificationModel;
+        $clientNotification->fill($messageData);
+        $clientNotification->save();
+        $messageData['id'] = $clientNotification->id;
+        PusherModel::BoardCast($clientInfo->email,"firstEvent",["message" => $messageData]);
+        // Pusher Notification End
         return back();
     }
     public function ClientProfileaccountdepositConfirm(Request $request, $id){
         $clientAccount = ClientAccountDetailModel::find($id);
         $clientAccount->depositConfirm = $request->depositConfirm;
         $clientAccount->save();
+        $brokerInfo = BrokerCompanyInformationModel::find($clientAccount->brokerId);
         if($request->depositConfirm == 1){
             $success = "Account Depostit is right.";
             $request->session()->put("success",$success);
+            $PusherMessage = "Your $brokerInfo->title Account Deposite Verified.";
         }else {
             $error = "Account Depostit is wrong.";
             $request->session()->put("error",$error);
+            $PusherMessage = "Your $brokerInfo->title Account Deposite Rejected.";
         }
+
+        // Pusher Notification Start
+        $clientInfo = ClientRegistrationModel::find($clientAccount->clientId);
+
+        $messageData['email'] = $clientInfo->email;
+        $adminData = $request->session()->get("admin");
+        $messageData['userId'] = $adminData['id'];
+        $messageData['userType'] = 0;
+        $messageData['message'] = $PusherMessage;
+        $messageData['link'] = "user-profile";
+        $clientNotification = new ClientNotificationModel;
+        $clientNotification->fill($messageData);
+        $clientNotification->save();
+        $messageData['id'] = $clientNotification->id;
+        PusherModel::BoardCast($clientInfo->email,"firstEvent",["message" => $messageData]);
+        // Pusher Notification End
+
         return back();
     }
     public function ChangeMemberType(Request $request, $id){

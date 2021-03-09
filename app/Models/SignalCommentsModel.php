@@ -10,7 +10,7 @@ use App\Models\AdminMemberDetailModel;
 class SignalCommentsModel extends Model
 {
     protected $table = "signal_comments";
-    protected $fillable = ["comment","memberId","userType","commentId","status","reply","signalId","replyName"];
+    protected $fillable = ["comment","memberId","userType","commentId","status","reply","signalId","replyCommentMember","replyName"];
 
     public function getReply(){
         $replys = SignalCommentsModel::where('commentId',$this->id)->get();

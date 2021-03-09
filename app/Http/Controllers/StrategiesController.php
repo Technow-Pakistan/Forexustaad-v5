@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\StrategiesModel;
+use App\Models\ClientNotificationModel;
+use App\Models\PusherModel;
 
 class StrategiesController extends Controller
 {
@@ -16,9 +18,14 @@ class StrategiesController extends Controller
     public function StrategyDetail(Request $request, $id){
         $url = str_replace("-"," ",$id);
         $Strategy = StrategiesModel::where('title',$url)->first();
-
-        $title = $Strategy->title;
-        return view('strategies.viewDetail',compact('Strategy','title'));
+        if ($Strategy) {
+            $title = $Strategy->title;
+            return view('strategies.viewDetail',compact('Strategy','title'));
+        }else{
+            $error = "This strategies is not exist.";
+            $request->session()->put("error",$error);
+            return redirect('/');
+        }
     }
 
     // Admin Panel
@@ -44,6 +51,21 @@ class StrategiesController extends Controller
         $news->save();
         $success = "This strategy has been added successfully.";
         $request->session()->put("success",$success);
+
+        // Pusher Notification Start
+        $url = str_replace(" ", "-",$news->title);
+        $adminData = $request->session()->get("admin");
+        $messageData['userId'] = $adminData['id'];
+        $messageData['userType'] = 0;
+        $messageData['message'] = "Added a New Strategy.";
+        $messageData['link'] = "strategies" . "/" . $url;
+        $clientNotification = new ClientNotificationModel;
+        $clientNotification->fill($messageData);
+        $clientNotification->save();
+        $messageData['id'] = $clientNotification->id;
+        PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+        // Pusher Notification End
+
         return back();
     }
     public function Edit(Request $request, $id){
@@ -64,6 +86,21 @@ class StrategiesController extends Controller
         $news->save();
         $success = "This strategy has been updated successfully.";
         $request->session()->put("success",$success);
+
+        // Pusher Notification Start
+        $url = str_replace(" ", "-",$news->title);
+        $adminData = $request->session()->get("admin");
+        $messageData['userId'] = $adminData['id'];
+        $messageData['userType'] = 0;
+        $messageData['message'] = "Edit a Strategy.";
+        $messageData['link'] = "strategies" . "/" . $url;
+        $clientNotification = new ClientNotificationModel;
+        $clientNotification->fill($messageData);
+        $clientNotification->save();
+        $messageData['id'] = $clientNotification->id;
+        PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+        // Pusher Notification End
+
         return back();
     }
     public function Delete(Request $request, $id){

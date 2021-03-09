@@ -7,6 +7,13 @@
                     @include ('inc/home-left-sidebar')
                 </div>
                 <div class="col-lg-6 col-md-12 order-1 order-lg-2">
+                    @if($MidBannerHomeActive)
+                        <div class="mb-5">
+                            <a href="{{$MidBannerHomeActive->link}}" target="_blank">
+                                <img src="{{URL::to('storage/app')}}/{{$MidBannerHomeActive->image}}" width="100%">
+                              </a>
+                        </div>
+                    @endif
                     <div class="row">
                   		<div class="col-sm-12">
                     		<div class="news_us">
@@ -36,7 +43,7 @@
                                 @php $i=0 @endphp
                                 @foreach($totalBrokerCategories as $category)
                                     <div class="tab-pane fade show {{$i == 0 ? 'active' : ''}}" id="{{$category->category}}" role="tabpanel" aria-labelledby="{{$category->category}}-tab">
-                                        
+
                                         @foreach($totalData as $data)
                                             @php
                                                 $deposit = $data->GetAccountInfo();
@@ -44,7 +51,7 @@
 
                                                 $paymentDate = date('Y-m-d');
                                                 $paymentDate=date('Y-m-d', strtotime($paymentDate));
-                                                //echo $paymentDate; // echos today! 
+                                                //echo $paymentDate; // echos today!
                                                 $contractDateBegin = date('Y-m-d', strtotime($data->start));
                                                 $contractDateEnd = date('Y-m-d', strtotime($data->end));
                                             @endphp

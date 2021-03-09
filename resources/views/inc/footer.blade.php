@@ -3,6 +3,8 @@
 		<!--=        	Toast         	 =-->
     <!--==============================-->
 
+    <audio id ="NotificationSound" src="{{URL::to('public/assets/Sounds/notification.mp3')}}" loop="" style="display:none"></audio>
+
     <div id="snackbar"><i class="fa  fa-exclamation-triangle"></i> &nbsp; Please LogIn First</div>
     <div id="snackbar1"><i class="fa fa-exclamation-triangle"></i> &nbsp; Become VIP First</div>
     <div id="snackbar2"></div>
@@ -398,11 +400,12 @@
                       </div>
                     </div>
                         <input type="hidden" name="token" id="token" value="">
-                      <div class="form-group text-left ml-3">
+                    <div class="form-group text-left ml-3">
+                        <p> <input type="checkbox" value="1" class="RegistrationCheckBox" name="Terms&Conditions" required style="height: 12px;margin-bottom: 0px;"> Please Accept over <a href="https://forexustaad.com/p/Terms-And-Conditions" target="_blank">Term and Conditions</a></p>
                         <button type="submit" class="btn btn-primary text-uppercase quote_send_msg mr-4" data-type="quote">Register</button>
                         <span class="btn btn-primary text-uppercase quote_send_msg LoginButton">Login</span>
                         <span class="text-danger RegistrationError" id="RegistrationErrorChecker"></span>
-                      </div>
+                    </div>
                   </div>
               </form>
 
@@ -419,9 +422,9 @@
                     </div>
                     <div class="form-group text-left ml-3">
                       <button type="submit" class="btn btn-primary text-uppercase quote_send_msg ForgetButton mr-4" data-type="quote">Login</button>
-                      <span class="btn btn-primary text-uppercase quote_send_msg RegistrationButton">Registration</span><br>
+                      <span class="btn btn-primary text-uppercase quote_send_msg RegistrationButton">Register</span><br>
                       <a href="#" class="text-primary ReSendMail mr-5">Re Send Mail</a>
-                      <a href="#" class="text-danger ForgetPassword">Forget Password</a>
+                      <a href="#" class="text-danger ForgetPassword ml-2">Forget Password</a>
                       <span class="text-danger LoginError"></span>
                     </div>
                   </div>
@@ -895,21 +898,6 @@
                 @php Session::pull('success1') @endphp
               @endif
 
-        <script src="{{URL::to('public/assets/assets/js/push/push.js')}}"></script>
-
-        <script>
-            console.log(Notification.permission);
-                let i = 0;
-                if (Notification.permission === "granted") {
-                    i++;
-                }
-                if (i == 0) {
-                    Push.create("Forexustaad.com!",{
-                        body: "Thanks For Allowing Notification.",
-                        icon: "{{URL::to('storage/app') . '/' . $MainFavicon->favicon}}",
-                    });
-                }
-        </script>
 @if(Session::has('client'))
     @php
         $value = Session::get('client');
@@ -926,124 +914,83 @@
 
       var channel = pusher.subscribe("{{$value['email']}}");
       channel.bind("firstEvent", function(data) {
-        console.log((data));
-      });
-
-      // push desktop notification code with pusher
-
-      var channel1 = pusher.subscribe("firstChannel1");
-      channel1.bind("firstEvent1", function(data) {
-          console.log(data.message);
-        Push.create("Forexustaad.com!",{
-            body: data.message,
-            icon: "{{URL::to('storage/app') . '/' . $MainFavicon->favicon}}",
-            timeout: 2000,
-            onClick: function () {
-                window.location.href= data.link;
+        var emailNoti = "{{$value['email']}}";
+            if(data.message.email == emailNoti){
+                var url12 =  "";
+                var linkNoti = "{{URL::to('clientNotification')}}" + '/' + data.message.id;
+                if(data.message.userType == 0){
+                    url12 = "{{URL::to('getAdminDetail')}}" + '/' + data.message.userId;
+                }else{
+                    url12 = "{{URL::to('getClientDetail')}}" + '/' + data.message.userId;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: url12,
+                    success: function(data123){
+                        if (data.message.userType == 0) {
+                            if(data123.userImage == null){
+                                data123.userImage = "WebImages/avatar-5.jpg";
+                            }
+                            var imageSrc = "{{URL::to('public/assets/assets/img/favicon.png')}}";
+                            var ClientNotiName = "Admin";
+                        }else{
+                            if(data123.image == null){
+                                data123.image = "WebImages/avatar-5.jpg";
+                            }
+                            var imageSrc = "{{URL::to('storage/app')}}" + '/' + data123.image;
+                            var ClientNotiName = data123.name;
+                        }
+                        $(".list-unstyled12").prepend("<li class='media'><div class='media'><img class='img-radius ImageClientNotification' src='"+imageSrc+"' alt='Generic placeholder image' /><div class='media-body'><p class='m-0'><strong>"+ClientNotiName+"</strong></p><p class='m-0'>"+data.message.message+"</p></div><a href='"+linkNoti+"' class='text-primary linkClientNotification m-0'>View</a></div></li>");
+                        var ClientNotificationCount = $(".ClientNotificationCount").html();
+                        $(".ClientNotificationCount").html(++ClientNotificationCount);
+                        $("#NotificationSound")[0].play();
+                        setTimeout(function(){ $("#NotificationSound")[0].pause(); }, 4000);
+                    }
+                });
             }
-        });
-          console.log(data.link);
+        console.log((data.message));
       });
+
+    var channel = pusher.subscribe("firstChannel1");
+    channel.bind("firstEvent1", function(data) {
+
+        var url12 =  "";
+                var linkNoti = "{{URL::to('clientNotification')}}" + '/' + data.message.id;
+                if(data.message.userType == 0){
+                    url12 = "{{URL::to('getAdminDetail')}}" + '/' + data.message.userId;
+                }else{
+                    url12 = "{{URL::to('getClientDetail')}}" + '/' + data.message.userId;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: url12,
+                    success: function(data123){
+                        if (data.message.userType == 0) {
+                            if(data123.userImage == null){
+                                data123.userImage = "WebImages/avatar-5.jpg";
+                            }
+                            var imageSrc = "{{URL::to('public/assets/assets/img/favicon.png')}}";
+                            var ClientNotiName = "Admin";
+                        }else{
+                            if(data123.image == null){
+                                data123.image = "WebImages/avatar-5.jpg";
+                            }
+                            var imageSrc = "{{URL::to('storage/app')}}" + '/' + data123.image;
+                            var ClientNotiName = data123.name;
+                        }
+                        $(".list-unstyled12").prepend("<li class='media'><div class='media'><img class='img-radius ImageClientNotification' src='"+imageSrc+"' alt='Generic placeholder image' /><div class='media-body'><p class='m-0'><strong>"+ClientNotiName+"</strong></p><p class='m-0'>"+data.message.message+"</p></div><a href='"+linkNoti+"' class='text-primary linkClientNotification m-0'>View</a></div></li>");
+                        var ClientNotificationCount = $(".ClientNotificationCount").html();
+                        $(".ClientNotificationCount").html(++ClientNotificationCount);
+                        $("#NotificationSound")[0].play();
+                        setTimeout(function(){ $("#NotificationSound")[0].pause(); }, 4000);
+                    }
+                });
+
+        console.log((data.message));
+    });
+
     </script>
 @endif
 
 </body>
 </html>
-
-
-{{-- This is Desktop Notification code1 --}}
-    {{-- Notification.requestPermission(function(status){
-        console.log('Notification permission status:' , status);
-    });
-
-    function displayNotification(){
-        if(Notification.permission === 'granted'){
-            navigator.serviceWorker.getRegistration().then(function(reg){
-                reg.showNotification('Hello world!');
-            });
-        }
-    }
-
-    var options = {
-        body: 'here is a notification body!',
-        //  icon: 'image/example.png',
-        vibrate: [100,50,100],
-        data: {primaryKey: 1}
-    };
-    reg.showNotification('Hello world!',options);
-
-    self.addEventListener('notificationclose',function(event){
-        var notification = event.notification;
-        var primaryKey = notification.data.primary;
-        consile.log("Closed notification: " + primaryKey);
-    });
-
-    self.addEventListener('notificationclick',function(event){
-        var notification = event.notification;
-        var action = event.action;
-        if(action === 'close'){
-            notification.close();
-        }else{
-            client.openWindow('http://example.com');
-        }
-    }); --}}
-
-    {{-- this is also a desktop notification code2 --}}
-
-    {{-- JS Nuggets: Notifications API
-    Notification.requestPermission();
-    new Notification("Subscribe to JS Nuggets!");
-
-    function notifyMe() {
-        if (!("Notification" in window)) {
-            alert("This browser does not support system notifications");
-        }
-        else if (Notification.permission === "granted") {
-            notify();
-        }
-        else if (Notification.permission !== 'denied') {
-            Notification.requestPermission(function (permission) {
-            if (permission === "granted") {
-                notify();
-            }
-            });
-        }
-
-        function notify() {
-            var notification = new Notification('TITLE OF NOTIFICATION', {
-            icon: 'http://carnes.cc/jsnuggets_avatar.jpg',
-            body: "Hey! You are on notice!",
-            });
-
-            notification.onclick = function () {
-            window.open("http://carnes.cc");
-            };
-            setTimeout(notification.close.bind(notification), 7000);
-        }
-
-    }setInterval(() => {
-        notifyMe();
-    }, 500); --}}
-
-        <!-- Desktop Notification start code3 -->
-{{-- <script>
-    console.log(Notification.permission);
-    if (Notification.permission === "granted") {
-        alert("we have permission");
-          showNotification();
-    } else if (Notification.permission !== "denied") {
-        Notification.requestPermission().then(permission => {
-          console.log(permission);
-        });
-          showNotification();
-    }
-    function showNotification() {
-    const notification = new Notification("New message incoming", {
-        body: "Hi there. How are you doing?"
-    })
-    notification.onclick = (e) => {
-        window.location.href = "https://google.com";
-    };
-  }
-</script> --}}
-        <!-- Desktop Notification end -->

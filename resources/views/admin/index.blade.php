@@ -80,7 +80,7 @@
 					</div>
 				<!-- order-card end -->
 				<!-- active-user start -->
-					<div class="col-sm-4">	
+					<div class="col-sm-4">
 						<div class="card bg-patern" style="height:430px;">
 							<div class="card-header d-flex justify-content-between">
 								<h4>Active User</h2> <strong class="activeUserAll"></strong>
@@ -118,12 +118,12 @@
 									</div>
 								</div>
 							</div>
-							
+
 						</div>
 					</div>
 				<!-- active-user start -->
 				<!-- browser-% end -->
-					<div class="col-sm-4">	
+					<div class="col-sm-4">
 						<div class="card table-card" style="height:430px;">
 							<div class="card-header borderless">
 								<h5>Browser States</h5>
@@ -163,7 +163,7 @@
 						</div>
 					</div>
 				<!-- browser-% end -->
-				
+
 				<div class="col-md-6">
                 </div>
 <!-- crypto-section start -->
@@ -343,7 +343,7 @@
 
 <script>
 
-			@php 
+			@php
 				$dateGetToStart1 = strtotime("-1 days", strtotime(date("d M Y")));
 				$dateGetToStart = date('d M Y', $dateGetToStart1)
 			@endphp
@@ -496,7 +496,7 @@
 			$.ajax({
 				type: "Post",
 				url: "{{URL::to('ustaad/GetRealTimeData/Get')}}",
-				
+
 				success: function(response) {
 					var json = $.parseJSON(response);
 					console.log(json[3].length);
@@ -518,7 +518,7 @@
 							options: {
 							}
 						});
-						
+
 					}else{
 						$("#chart-line").css('display','none');
 					}
@@ -527,7 +527,7 @@
 					console.log("fail");
 				}
 			});
-			
+
 		}, 5000);
     });
 </script>
