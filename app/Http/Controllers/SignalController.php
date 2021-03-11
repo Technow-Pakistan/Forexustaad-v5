@@ -17,7 +17,7 @@ class SignalController extends Controller
 {
     public function signal(Request $request){
         $title = "Signals";
-        $signalData = SignalsModel::orderBy('id','desc')->where('status',0)->get();
+        $signalData = SignalsModel::orderBy('id','desc')->where('status',0)->where('pending',0)->get();
         return view('home.signal.signal',compact('signalData','title'));
     }
     public function signalView(Request $request, $id){
@@ -183,6 +183,48 @@ class SignalController extends Controller
 
     //Admin Panel
 
+    public function AllowSignalProcess(Request $request, $id){
+        $existingData = SignalsModel::where('editId',$id)->first();
+        if ($existingData) {
+            $oldId = $existingData->id;
+            $existingData->delete();
+            $signal = SignalsModel::where('id',$id)->first();
+            $signal->id = $oldId;
+            $signal->pending = 0;
+            $signal->save();
+
+        }else{
+            $signal = SignalsModel::where('id',$id)->first();
+            $signal->pending = 0;
+            $signal->save();
+        }
+        $success = "This signal has been verified successfully.";
+        $request->session()->put("success",$success);
+        //     // Pusher Notification Start
+        //     $getUrl = $signal->GetURL();
+        //     $adminData = $request->session()->get("admin");
+        //     $messageData['userId'] = $adminData['id'];
+        //     $messageData['userType'] = 0;
+        //     $messageData['message'] = "Added a New Signal.";
+        //     $messageData['link'] = "signal/" . $getUrl;
+        //     $clientNotification = new ClientNotificationModel;
+        //     $clientNotification->fill($messageData);
+        //     $clientNotification->save();
+        //     $messageData['id'] = $clientNotification->id;
+        //     PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+        //     // Pusher Notification End
+        //     $signalPair = SignalPairModel::where('id',$signal->forexPairs)->first();
+        //     $data44 = [
+        //         'title' => $signalPair->pair,
+        //         'message' => "Forexustaad Added A New Signal.",
+        //         'url' => "https://forexustaad.com/signal",
+        //     ];
+        //     $request->session()->put('desktopNotification',$data44);
+
+
+        return back();
+    }
+
     public function Comment(Request $request,$id){
         $comments = SignalCommentsModel::where('signalId',$id)->get();
         return view('admin.comment.ViewSignalComment',compact('comments'));
@@ -208,8 +250,13 @@ class SignalController extends Controller
         return back();
     }
 
-    public function Index(){
-        $signalData = SignalsModel::orderBy('id','desc')->get();
+    public function Index(Request $request){
+        $adminData = $request->session()->get("admin");
+        if ($adminData['memberId'] == 7) {
+            $signalData = SignalsModel::orderBy('id','desc')->where('userId',$adminData['id'])->where('editId',0)->get();
+        }else{
+            $signalData = SignalsModel::orderBy('id','desc')->where('editId',0)->get();
+        }
         return view('admin.signals.all-signal',compact('signalData'));
     }
     public function Add(Request $request){
@@ -218,10 +265,15 @@ class SignalController extends Controller
         return view('admin.signals.add-signal',compact('totalCategory','totalData'));
     }
     public function AddProcess(Request $request){
+        $adminData = $request->session()->get("admin");
         $data = $request->all();
         if($request->result != null){
             $data['date'] = date("Y-m-d");
             $data['time'] = date("H:i");
+        }
+        $data['userId'] = $adminData['id'];
+        if ($adminData['memberId'] == 7 && $adminData['verified'] != 1) {
+            $data['pending'] = 1;
         }
         $description = htmlentities($request->editor1);
         $data['detailDescription'] = $description;
@@ -233,26 +285,41 @@ class SignalController extends Controller
         $signal->save();
         $success = "This signal has been added successfully.";
         $request->session()->put("success",$success);
-        // Pusher Notification Start
-        $getUrl = $signal->GetURL();
-        $adminData = $request->session()->get("admin");
-        $messageData['userId'] = $adminData['id'];
-        $messageData['userType'] = 0;
-        $messageData['message'] = "Added a New Signal.";
-        $messageData['link'] = "signal/" . $getUrl;
-        $clientNotification = new ClientNotificationModel;
-        $clientNotification->fill($messageData);
-        $clientNotification->save();
-        $messageData['id'] = $clientNotification->id;
-        PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
-        // Pusher Notification End
+        // if ($signal->pending != 1) {
+        //     // Pusher Notification Start
+        //     $getUrl = $signal->GetURL();
+        //     $adminData = $request->session()->get("admin");
+        //     $messageData['userId'] = $adminData['id'];
+        //     $messageData['userType'] = 0;
+        //     $messageData['message'] = "Added a New Signal.";
+        //     $messageData['link'] = "signal/" . $getUrl;
+        //     $clientNotification = new ClientNotificationModel;
+        //     $clientNotification->fill($messageData);
+        //     $clientNotification->save();
+        //     $messageData['id'] = $clientNotification->id;
+        //     PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+        //     // Pusher Notification End
+        //     $signalPair = SignalPairModel::where('id',$signal->forexPairs)->first();
+        //     $data44 = [
+        //         'title' => $signalPair->pair,
+        //         'message' => "Forexustaad Added A New Signal.",
+        //         'url' => "https://forexustaad.com/signal",
+        //     ];
+        //     $request->session()->put('desktopNotification',$data44);
+        // }
         $signalPair = SignalPairModel::where('id',$signal->forexPairs)->first();
-        $data44 = [
-			'title' => $signalPair->pair,
-			'message' => "Forexustaad Added A New Signal.",
-			'url' => "https://forexustaad.com/signal",
-		];
-		$request->session()->put('desktopNotification',$data44);
+        $user = $request->session()->get("admin");
+        if ($user['memberId'] == 7) {
+            $notification = new NotificationModel;
+            $notification->userId = $user->id;
+            $notification->text = "Add a Signal $signalPair->pair";
+            $notification->link = "ustaad/signals";
+            $previousData = NotificationModel::where('link',$notification->link)->first();
+            if ($previousData){
+                $previousData->delete(); 
+            }
+            $notification->save();
+        }
         return back();
     }
     public function Delete(Request $request, $id){
@@ -261,6 +328,20 @@ class SignalController extends Controller
         $signal->save();
         $error = "This signal has been deleted successfully.";
         $request->session()->put("error",$error);
+        // admin Notification
+        $signalPair = SignalPairModel::where('id',$signal->forexPairs)->first();
+        $user = $request->session()->get("admin");
+        if ($user['memberId'] == 7 ) {
+            $notification = new NotificationModel;
+            $notification->userId = $user->id;
+            $notification->text = "Deactive a Signal $signalPair->pair";
+            $notification->link = "ustaad/signals";
+            $previousData = NotificationModel::where('link',$notification->link)->first();
+            if ($previousData) {
+                $previousData->delete(); 
+            }
+            $notification->save();
+        }
         return back();
     }
     public function Active(Request $request, $id){
@@ -269,6 +350,20 @@ class SignalController extends Controller
         $signal->save();
         $success = "This signal has been actived successfully.";
         $request->session()->put("success",$success);
+        // admin Notification
+        $signalPair = SignalPairModel::where('id',$signal->forexPairs)->first();
+        $user = $request->session()->get("admin");
+        if ($user['memberId'] == 7 ) {
+            $notification = new NotificationModel;
+            $notification->userId = $user->id;
+            $notification->text = "Active a Signal $signalPair->pair";
+            $notification->link = "ustaad/signals";
+            $previousData = NotificationModel::where('link',$notification->link)->first();
+            if ($previousData) {
+                $previousData->delete(); 
+            }
+            $notification->save();
+        }
         return back();
     }
     public function Edit(Request $request, $id){
@@ -293,34 +388,71 @@ class SignalController extends Controller
         $profit = $request->takeProfit;
         $profit = implode("@",$profit);
         $signal["takeProfit"] = $profit;
-        $data = SignalsModel::where('id',$id)->first();
-        $data->fill($signal);
-        $data->save();
+        $adminData = $request->session()->get("admin");
+        if ( $adminData['memberId'] != 7 || ($adminData['memberId'] == 7 && $adminData['verified'] == 1)) {
+            $data = SignalsModel::where('id',$id)->first();
+            $data->fill($signal);
+            $data->save();
+            $existingData = SignalsModel::where('editId',$id)->first();
+            if ($existingData) {
+                $oldId = $existingData->id;
+                $existingData->delete();
+                $data = SignalsModel::where('id',$id)->first();
+                $data->id = $oldId;
+                $data->pending = 0;
+                $data->save();
+            }
+            $signalPair = SignalPairModel::where('id',$data->forexPairs)->first();
+        }else{
+            $existingData = SignalsModel::where('editId',$id)->first();
+            if ($existingData) {
+                $data = SignalsModel::where('id',$id)->first();
+                $data->fill($signal);
+                $data->save();
+            }else{
+                $signal['userId'] = $adminData['id'];
+                $signal['pending'] = 1;
+                $data = new SignalsModel;
+                $data->fill($signal);
+                $data->save();
+                $oldData = SignalsModel::where('id',$id)->first();
+                $oldData->editId = $data->id;
+                $oldData->save();
+            }
+        }
+      
+        // // Pusher Notification Start
+        // $getUrl = $data->GetURL();
+        // $adminData = $request->session()->get("admin");
+        // $messageData['userId'] = $adminData['id'];
+        // $messageData['userType'] = 0;
+        // $messageData['message'] = "Edit a Signal.";
+        // $messageData['link'] = "signal/" . $getUrl;
+        // $clientNotification = new ClientNotificationModel;
+        // $clientNotification->fill($messageData);
+        // $clientNotification->save();
+        // $messageData['id'] = $clientNotification->id;
+        // PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+        // // Pusher Notification End
+
+        // admin Notification
+        $signalPair = SignalPairModel::where('id',$data->forexPairs)->first();
+        $user = $request->session()->get("admin");
+        if ($user['memberId'] == 7 ) {
+            $notification = new NotificationModel;
+            $notification->userId = $user->id;
+            $notification->text = "Active a Signal $signalPair->pair";
+            $notification->link = "ustaad/signals";
+            $previousData = NotificationModel::where('link',$notification->link)->first();
+            if ($previousData) {
+                $previousData->delete(); 
+            }
+            $notification->save();
+        }
         $success = "This signal has been updated successfully.";
         $request->session()->put("success",$success);
-        $signalPair = SignalPairModel::where('id',$data->forexPairs)->first();
-        $data44 = [
-			'title' => $signalPair->pair,
-			'message' => "Forexustaad Added A New Signal.",
-			'url' => "https://forexustaad.com/signal",
-		];
-		$request->session()->put('desktopNotification',$data44);
-
-        // Pusher Notification Start
-        $getUrl = $data->GetURL();
-        $adminData = $request->session()->get("admin");
-        $messageData['userId'] = $adminData['id'];
-        $messageData['userType'] = 0;
-        $messageData['message'] = "Edit a Signal.";
-        $messageData['link'] = "signal/" . $getUrl;
-        $clientNotification = new ClientNotificationModel;
-        $clientNotification->fill($messageData);
-        $clientNotification->save();
-        $messageData['id'] = $clientNotification->id;
-        PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
-        // Pusher Notification End
-
-        return back();
+        $redirectUrl = "ustaad/signals/edit" . "/" . $data->id;
+        return redirect($redirectUrl);
     }
     public function StarProcess(Request $request, $id){
         $broker = SignalsModel::find($id);

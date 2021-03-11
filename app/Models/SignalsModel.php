@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\SignalPairModel;
+use App\Models\AdminModel;
 
 class SignalsModel extends Model
 {
     protected $table = "signals";
-    protected $fillable = ["selectUser","orderType","detailDescription","buySale","forexPairs","price","stopLose","takeProfit","date","time","comments","result","expired","star","pips"];
+    protected $fillable = ["selectUser","orderType","detailDescription","buySale","forexPairs","price","stopLose","takeProfit","date","time","comments","result","expired","star","pips","userId","pending"];
     public function getPair(){
         $replys = SignalPairModel::where('id',$this->forexPairs)->first();
         return $replys;
@@ -26,5 +27,9 @@ class SignalsModel extends Model
             $pair = $pair . $no;
         }
         return $pair;
+    }
+    public function GetMember(){
+        $replys = AdminModel::where('id',$this->userId)->first();
+        return $replys;
     }
 }
