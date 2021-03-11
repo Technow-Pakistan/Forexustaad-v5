@@ -354,7 +354,7 @@ class BorkerController extends Controller
         $brokerNews = BrokerNewsModel::where('brokerId',$id)->get();
         for ($i=0; $i < count($brokerNews) ; $i++) { 
             $news = BrokerNewsModel::where('id',$brokerNews[$i]->id)->first();
-            if ($news != null) {
+            if($news != null) {
                 $news->trash = 0;
                 $news->save();
             }

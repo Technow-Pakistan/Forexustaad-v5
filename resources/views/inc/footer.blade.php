@@ -731,15 +731,6 @@
         }
       }
     });
-    $(".ContactFormSubmit").on("submit",function(e){
-      var email = $(".emailContact").val();
-      var emailHost = email.split("@")
-      console.log(email);
-      if (emailHost[1] != "gmail.com" && emailHost[1] != "yahoo.com"){
-        e.preventDefault();
-        $(".Contacterror").html("Please! correct your email.")
-      }
-    });
 
 </script>
 

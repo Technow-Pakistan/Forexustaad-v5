@@ -23,8 +23,10 @@
 										<li class="breadcrumb-item"><a href="#!">All Signals</a></li>
 									</ul>
 									<div>
-										<a href="{{URL::to('ustaad/signals/add')}}"> Add New Signal</a> /
-										<a href="{{URL::to('ustaad/signals/addPair')}}">Add Category & Pair </a>
+										<a href="{{URL::to('ustaad/signals/add')}}"> Add New Signal</a>
+                                        @if($value['memberId'] != 7)
+										     / <a href="{{URL::to('ustaad/signals/addPair')}}">Add Category & Pair </a>
+                                        @endif
 									</div>
 								</div>
 							</div>
@@ -45,7 +47,10 @@
 												<th>ID</th>
 												<th>User</th>
 												<th>Forex Pairs</th>
-												<th>Comments</th>
+                                                @if($value['memberId'] != 7)
+												    <th>Admin User</th>
+												    <th>Comments</th>
+                                                @endif
 												<th>Date</th>
 												<th>Time</th>
 												<th>Status</th>
@@ -88,7 +93,13 @@
                                                         <td>{{$icount}}</td>
                                                         <td>{{$data->selectUser}}</td>
                                                         <td>{{ isset($pair->pair) ? $pair->pair : $data->forexPairs}}</td>
-                                                        <td><a href="{{URL::to('/ustaad/signals/comment')}}/{{$data->id}}">View Comments</a></td>
+                                                        @if($value['memberId'] != 7)
+                                                            @php
+                                                                $adminUser = $data->GetMember();
+                                                            @endphp
+                                                            <td>{{$adminUser == null ? 'admin' : $adminUser->username}}</td>
+                                                            <td><a href="{{URL::to('/ustaad/signals/comment')}}/{{$data->id}}">View Comments</a></td>
+                                                        @endif
                                                         <td>{{$data->date}}</td>
                                                         <td>
                                                             @php
@@ -97,25 +108,48 @@
                                                             @endphp
                                                         </td>
                                                         <td>
-                                                            <span class="badge {{$data->status == 0 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 0 ? 'Active' : 'Deactive'}}</span>
-                                                            <div class="overlay-edit">
-                                                                @if($value['memberId'] == 1)
-                                                                    <form action="{{URL::to('ustaad/signals')}}/{{$data->star == 0 ? 'star' : 'unstar'}}/{{$data->id}}" method="post">
-                                                                        <span>
-                                                                            <input type="checkbox" class="AllowBroker hiddenCheckBox" name="pending" id="option{{$data->id}}" value="0">
-                                                                            <label for="option{{$data->id}}" class="mt-2 mr-2"><i class="fa fa-star {{$data->star == 1 ? 'yellowStar' : ''}}"></i></label>
-                                                                        </span>
-                                                                    </form>
-                                                                @endif
-                                                                <a href="{{URL::to('/ustaad/signals/edit')}}/{{$data->id}}">
-                                                                    <button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button>
-                                                                </a>
-                                                                @if($data->status == 0)
-                                                                    <button type="button" href="{{URL::to('/ustaad/signals/delete')}}/{{$data->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-lock"></i></button>
-                                                                @elseif($data->status == 1)
-                                                                    <button type="button" href="{{URL::to('/ustaad/signals/active')}}/{{$data->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock"></i></button>
-                                                                @endif
-                                                            </div>
+                                                            @if($data->pending == 1)
+                                                                <span class="badge badge-light-warning">Pending</span>
+                                                            @else
+                                                                <span class="badge {{$data->status == 0 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 0 ? 'Active' : 'Deactive'}}</span>
+                                                            @endif
+                                                            @if($data->pending == 1 && $value['memberId'] != 7)
+                                                                <div class="overlay-edit">
+																	<form action="{{URL::to('ustaad/signals/allow')}}/{{$data->id}}" method="post">
+																		<span class="badge badge-light-warning">
+																			Allow
+																			<input type="checkbox" class="AllowBroker" name="pending" id="" value="0">
+																		</span>
+																	</form>
+                                                                    <a href="{{URL::to('/ustaad/signals/edit')}}/{{$data->id}}">
+                                                                        <button type="button" class="btn btn-icon btn-success" style="width: 20px;height: 20px;padding: 12px;"><i class="fa fa-edit" style="font-size: 12px;"></i></button>
+                                                                    </a>
+                                                                    @if($data->status == 0)
+                                                                        <button type="button" href="{{URL::to('/ustaad/signals/delete')}}/{{$data->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"style="width: 20px;height: 20px;padding: 12px;"><i class="fa fa-lock" style="font-size: 12px;"></i></button>
+                                                                    @elseif($data->status == 1)
+                                                                        <button type="button" href="{{URL::to('/ustaad/signals/active')}}/{{$data->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal"style="width: 20px;height: 20px;padding: 12px;"><i class="fa fa-unlock" style="font-size: 12px;"></i></button>
+                                                                    @endif
+																</div>
+                                                            @else
+                                                                <div class="overlay-edit">
+                                                                    @if($value['memberId'] == 1)
+                                                                        <form action="{{URL::to('ustaad/signals')}}/{{$data->star == 0 ? 'star' : 'unstar'}}/{{$data->id}}" method="post">
+                                                                            <span>
+                                                                                <input type="checkbox" class="AllowBroker hiddenCheckBox" name="pending" id="option{{$data->id}}" value="0">
+                                                                                <label for="option{{$data->id}}" class="mt-2 mr-2"><i class="fa fa-star {{$data->star == 1 ? 'yellowStar' : ''}}"></i></label>
+                                                                            </span>
+                                                                        </form>
+                                                                    @endif
+                                                                    <a href="{{URL::to('/ustaad/signals/edit')}}/{{$data->id}}">
+                                                                        <button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button>
+                                                                    </a>
+                                                                    @if($data->status == 0)
+                                                                        <button type="button" href="{{URL::to('/ustaad/signals/delete')}}/{{$data->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-lock"></i></button>
+                                                                    @elseif($data->status == 1)
+                                                                        <button type="button" href="{{URL::to('/ustaad/signals/active')}}/{{$data->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock"></i></button>
+                                                                    @endif
+                                                                </div>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endif
@@ -126,7 +160,10 @@
 												<th>ID</th>
 												<th>User</th>
 												<th>Forex Pairs</th>
-												<th>Comments</th>
+                                                @if($value['memberId'] != 7)
+												    <th>Admin User</th>
+												    <th>Comments</th>
+                                                @endif
 												<th>Date</th>
 												<th>Time</th>
 												<th>Status</th>
@@ -148,7 +185,10 @@
 												<th>ID</th>
 												<th>User</th>
 												<th>Forex Pairs</th>
-												<th>Comments</th>
+                                                @if($value['memberId'] != 7)
+												    <th>Admin User</th>
+												    <th>Comments</th>
+                                                @endif
 												<th>Result</th>
 												<th>Status</th>
 											</tr>
@@ -190,7 +230,13 @@
                                                         <td>{{$icount}}</td>
                                                         <td>{{$data->selectUser}}</td>
                                                         <td>{{ isset($pair->pair) ? $pair->pair : $data->forexPairs}}</td>
-                                                        <td><a href="{{URL::to('/ustaad/signals/comment')}}/{{$data->id}}">View Comments</a></td>
+                                                        @if($value['memberId'] != 7)
+                                                            @php
+                                                                $adminUser = $data->GetMember();
+                                                            @endphp
+                                                            <td>{{$adminUser == null ? 'admin' : $adminUser->username}}</td>
+                                                            <td><a href="{{URL::to('/ustaad/signals/comment')}}/{{$data->id}}">View Comments</a></td>
+                                                        @endif
                                                         <td><span class="badge {{($data->result == 'TP Hit' ? 'badge-light-success' : 'badge-light-danger')}}">{{$data->result}}</span></td>
                                                         <td>
                                                             <span class="badge {{$data->status == 0 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 0 ? 'Active' : 'Deactive'}}</span>
@@ -222,7 +268,10 @@
 												<th>ID</th>
 												<th>User</th>
 												<th>Forex Pairs</th>
-												<th>Comments</th>
+                                                @if($value['memberId'] != 7)
+												    <th>Admin User</th>
+												    <th>Comments</th>
+                                                @endif
 												<th>Result</th>
 												<th>Status</th>
 											</tr>
