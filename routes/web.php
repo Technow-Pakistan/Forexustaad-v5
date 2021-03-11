@@ -82,7 +82,18 @@ Route::get('/sendDesktopNotification', function () {
         // $ip = '182.186.255.8';
         // $data = Location::get($ip);
         // dd($data);
-        return substr(exec('getmac'), 0, 17);
+        // return substr(exec('getmac'), 0, 17);
+        $MAC = exec('getmac'); 
+  
+        // Storing 'getmac' value in $MAC 
+        $MAC = strtok($MAC, ' '); 
+  
+        // Updating $MAC value using strtok function,  
+        // strtok is used to split the string into tokens 
+        // split character of strtok is defined as a space 
+        // because getmac returns transport name after 
+        // MAC address    
+        echo " $MAC"; 
 
     });
     Route::get('device',function(){
@@ -389,6 +400,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/active/{id}',[SponoserAddController::class,'Active']);
     });
     Route::group(['prefix' => 'signals'],function(){
+        Route::post('/allow/{id}',[SignalController::class,'AllowSignalProcess']);
         Route::get('/comment/{id}',[SignalController::class,'Comment']);
         Route::post('/CommentViewReply/add',[SignalController::class,'CommentAdd']);
         Route::get('/',[SignalController::class,'Index']);

@@ -9,7 +9,7 @@ use App\Models\AdminMemberDetailModel;
 class AdminModel extends Model
 {
     protected $table = "admin";
-    protected $fillable = ["username","email","password","memberId","status"];
+    protected $fillable = ["username","email","password","memberId","status","verified"];
 
     public function GetMember(){
         $member = AdminMemberModel::where('id',$this->memberId)->first();
