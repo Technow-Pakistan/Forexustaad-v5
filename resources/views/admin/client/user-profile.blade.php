@@ -48,11 +48,16 @@
                                           @elseif($vipTypeNumber > 1000)
                                             <span class="badge badge-light-success fts_18">Big Deposit Account</span> <br>
                                           @endif
+                                          <div class="" style="position: relative">
+                                              <img src="{{URL::to('public/assets/assets/img/vipbg.png')}}" alt="adminn" style="width: 228px">
                                         @if($totalClientInfo->image == null)
-                                          <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                                          <div style="position: absolute; top:40px; left:69px">
+                                              <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="" style="width: 91px">
+                                          </div>
                                         @else
                                           <img src="{{URL::to('storage/app/')}}/{{$totalClientInfo->image}}" alt="Admin" class="rounded-circle" width="150">
                                         @endif
+                                    </div>
                                         <div class="mt-3">
                                           <h4>{{$totalClientInfo->name}}</h4>
                                           @php
@@ -60,8 +65,8 @@
                                           @endphp
                                           @if($value['memberId'] == 1 || $value['memberId'] == 2)
                                             <p class="text-secondary mb-1">{{$clientMember->member}}</p>
-                                            <form action="{{URL::to('/ustaad/changeMemberType')}}/{{$totalClientInfo->id}}" method="post"> 
-                                            
+                                            <form action="{{URL::to('/ustaad/changeMemberType')}}/{{$totalClientInfo->id}}" method="post">
+
                                               <a class="btn pl-0 text-primary" href="#!" data-toggle="collapse" data-target="#demo123">Change Member Type</a>
                                               <div id="demo123" class="collapse">
                                                 <label for="">Select Member Type</label>
@@ -117,7 +122,7 @@
                                             </a>
                                         </li>
                                       @endfor
-                                      
+
                                     </ul>
                                   </div>
                                 </div>
@@ -173,9 +178,9 @@
                                           </div>
                                         @else
                                             @php
-                                              $cityInfo = $totalClientInfo->GetCitysInfo(); 
-                                              $statesInfo = $totalClientInfo->GetStateInfo(); 
-                                              $CountryInfo = $totalClientInfo->GetCountryInfo(); 
+                                              $cityInfo = $totalClientInfo->GetCitysInfo();
+                                              $statesInfo = $totalClientInfo->GetStateInfo();
+                                              $CountryInfo = $totalClientInfo->GetCountryInfo();
                                             @endphp
                                             <div class="col-sm-3">
                                               <p class="mb-1 clr252525">City</p>
@@ -284,6 +289,8 @@
 @include('admin.include.footer')
 
 <style>
+
+
   .heig_10px{
     height:10px;
   }
