@@ -87,6 +87,7 @@ class AppServiceProvider extends ServiceProvider
         view()->share("HeaderUnReadMessage",UserContactModel::orderBy('id','desc')->where('read',0)->where('trashMail',0)->get());
         view()->share("NotificationMessage",NotificationModel::orderBy('id','desc')->get());
         view()->share("NonRegisterUser",NonRegisterVisitorModel::orderBy('id','desc')->get());
+        view()->share("signalPendingData",SignalsModel::orderBy('id','desc')->take(10)->get());
 
     }
 }

@@ -1,3 +1,4 @@
+
 @include('admin.include.header')
 <!-- [ Main Content ] start -->
 <div class="pcoded-main-container">
@@ -31,6 +32,7 @@
                                 $selected=0;
                                 if(isset($member)){
                                     $count=1;
+                                    $verified = $member->verified;
                                     $selected=$member->memberId;
                                 }
                             @endphp
@@ -56,7 +58,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                 <label for="user_login">Password<span class="text-danger">*</span></label>
-                                <input type="password" name="password" class="form-control" required>
+                                <input type="password" name="password" class="form-control" {{$count != 0 ? '' : 'required' }}>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                 <label for="user_login">Phone Number<span class="text-danger">*</span></label>
@@ -64,7 +66,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                 <label for="user_login">Role<span class="text-danger">*</span></label>
-                                <select class="form-control" name="memberId">
+                                <select class="form-control memberId12" name="memberId">
                                     @foreach($memberData as $member)
                                         @if($member->member != "Admin")
                                             <option value="{{$member->id}}"{{$selected == $member->id ? 'selected' : '' }}>{{$member->member}}</option>
@@ -75,6 +77,11 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                 <label for="user_login">Address<span class="text-danger">*</span></label>
                                 <input type="text" name="address" value="{{$count != 0 ? $memberDetail->address : '' }}" class="form-control" required>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                <p class="verifiedSignal"><br>
+                                    Verified <input type="checkbox" name="verified" value="1" {{$count != 0 ? ($verified == 1 ? 'checked' : '') : ''}}> 
+                                </p>
                             </div>
                         </div><br>
                         <p class="submit">
@@ -91,3 +98,21 @@
 <!-- [ Main Content ] end -->
 
 @include('admin.include.footer')
+
+<script>
+    $(".verifiedSignal").hide();
+        var data = $(".memberId12").val();
+        console.log(data);
+
+        if (data == 7) {
+            $(".verifiedSignal").show();
+        }  
+    $(".memberId12").on("change",function() {
+        var data = $(this).val();
+        if (data == 7) {
+            $(".verifiedSignal").show();
+        }else{
+            $(".verifiedSignal").hide();
+        }
+    })
+</script>

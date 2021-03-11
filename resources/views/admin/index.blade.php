@@ -122,7 +122,7 @@
 						</div>
 					</div>
 				<!-- active-user start -->
-				<!-- browser-% end -->
+				<!-- browser-% start -->
 					<div class="col-sm-4">
 						<div class="card table-card" style="height:430px;">
 							<div class="card-header borderless">
@@ -163,9 +163,122 @@
 						</div>
 					</div>
 				<!-- browser-% end -->
+				<!-- pending signal start -->
+					<div class="col-sm-4">
+						<div class="card table-card" style="height:430px;">
+							<div class="card-header borderless">
+								<h5>Pending Signal</h5>
+							</div>
+							<div class="col-sm-12">
+								
+								<div class="card user-profile-list">
+									<div class="card-body">
+										<div class="dt-responsive table-responsive">
+											<table id="user-list-table1s" class="table nowrap">
+												<thead>
+													<tr>
+														<th>Pairs</th>
+														<th>User</th>
+														<th>Status</th>
+													</tr>
+												</thead>
+												<tbody>
+													@foreach($signalPendingData as $data)
+														@php
+															$pair = $data->getPair();
+														@endphp
+														@php
+															$url = $data->id;
+															$loginClientData = Session::get('client');
+															$go = 1;
+															$go3 = 1;
+															$profits = explode('@',$data->takeProfit);
+															$time1 = strtotime($data->time);
+															$time = date('h:i A', $time1);
+															$date1 = strtotime($data->date);
+															$date = date('d M Y', $date1);
+															if($data->date == date("Y-m-d")){
+																if($data->time >= date("H:i:s")){
+																	$go = 0;
+																	$go3 = 3;
+																}
+															}
+															if($data->date > date("Y-m-d")){
+																$go = 0;
+																	$go3 = 3;
+															}
+															$timeDate1 = strtotime(date("Y-m-d H:i:s"));
+															$timeDate2 = strtotime($data->created_at->format("Y-m-d H:i:s"));
+															$minsDate = ($timeDate1 - $timeDate2) / 60;
+																		$pair = $data->getPair();
+															$flags = explode("/",$pair->pair);
+														@endphp
+                                                		@if($go3 == 3)
+															<tr>
+																<td>{{ isset($pair->pair) ? $pair->pair : $data->forexPairs}}</td>
+																@php
+																	$adminUser = $data->GetMember();
+																@endphp
+																<td>{{$adminUser == null ? 'admin' : $adminUser->username}}</td>
+																<td>
+																	@if($data->pending == 1)
+																		<span class="badge badge-light-warning">Pending</span>
+																	@else
+																		<span class="badge {{$data->status == 0 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 0 ? 'Active' : 'Deactive'}}</span>
+																	@endif
+																	@if($data->pending == 1 && $value['memberId'] != 7)
+																		<div class="overlay-edit">
+																			<form action="{{URL::to('ustaad/signals/allow')}}/{{$data->id}}" method="post">
+																				<span class="badge badge-light-warning">
+																					Allow
+																					<input type="checkbox" class="AllowBroker" name="pending" id="" value="0">
+																				</span>
+																			</form>
+																			<a href="{{URL::to('/ustaad/signals/edit')}}/{{$data->id}}">
+																				<button type="button" class="btn btn-icon btn-success" style="width: 20px;height: 20px;padding: 12px;"><i class="fa fa-edit" style="font-size: 12px;"></i></button>
+																			</a>
+																			@if($data->status == 0)
+																				<button type="button" href="{{URL::to('/ustaad/signals/delete')}}/{{$data->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"style="width: 20px;height: 20px;padding: 12px;"><i class="fa fa-lock" style="font-size: 12px;"></i></button>
+																			@elseif($data->status == 1)
+																				<button type="button" href="{{URL::to('/ustaad/signals/active')}}/{{$data->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal"style="width: 20px;height: 20px;padding: 12px;"><i class="fa fa-unlock" style="font-size: 12px;"></i></button>
+																			@endif
+																		</div>
+																	@else
+																		<div class="overlay-edit">
+																			@if($value['memberId'] == 1)
+																				<form action="{{URL::to('ustaad/signals')}}/{{$data->star == 0 ? 'star' : 'unstar'}}/{{$data->id}}" method="post">
+																					<span>
+																						<input type="checkbox" class="AllowBroker hiddenCheckBox" name="pending" id="option{{$data->id}}" value="0">
+																						<label for="option{{$data->id}}" class="mt-2 mr-2"><i class="fa fa-star {{$data->star == 1 ? 'yellowStar' : ''}}"></i></label>
+																					</span>
+																				</form>
+																			@endif
+																			<a href="{{URL::to('/ustaad/signals/edit')}}/{{$data->id}}">
+																				<button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button>
+																			</a>
+																			@if($data->status == 0)
+																				<button type="button" href="{{URL::to('/ustaad/signals/delete')}}/{{$data->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-lock"></i></button>
+																			@elseif($data->status == 1)
+																				<button type="button" href="{{URL::to('/ustaad/signals/active')}}/{{$data->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock"></i></button>
+																			@endif
+																		</div>
+																	@endif
+																</td>
+															</tr>
+														@endif
+													@endforeach
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<!-- pending signal end -->
 
-				<div class="col-md-6">
-                </div>
+				<!-- <div class="col-md-6">
+                </div> -->
 <!-- crypto-section start -->
                     <div class="col-md-12">
                         <div class="card">
@@ -340,7 +453,15 @@
 </style>
 
 @include('admin.include.footer')
-
+<script>
+	$(document).ready(function () {
+		$('#user-list-table1s').dataTable({
+			"autoWidth": false,
+			"lengthChange": false,
+			"pageLength": 5
+		});
+	});
+</script>
 <script>
 
 			@php
@@ -486,8 +607,7 @@
 </script>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
-<script>
-</script>
+
 <script>
     $(document).ready(function() {
 		var ctx = $("#chart-line");

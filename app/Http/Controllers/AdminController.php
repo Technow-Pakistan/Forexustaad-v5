@@ -214,6 +214,9 @@ class AdminController extends Controller
             if($admin['memberId'] == 6){
                 return  redirect("ustaad/broker/category");
             }
+            if($admin['memberId'] == 7){
+                return  redirect("ustaad/signals");
+            }
         };
         $Clients = ClientRegistrationModel::all();
         $TotalClientNumber = count($Clients);

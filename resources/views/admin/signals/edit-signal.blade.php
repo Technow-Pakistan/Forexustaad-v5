@@ -1,3 +1,6 @@
+@php
+	$value =Session::get('admin');
+@endphp
 @include('admin.include.header')
 		<!-- [ Main Content ] start -->
 		<section class="pcoded-main-container">
@@ -183,6 +186,10 @@
                             <div class="form-group">
                                 <label>Expired</label>
                                 <input type="checkbox" name="expired" id="expired" value="1" {{$data->expired == 1 ? 'checked' : ''}}>
+                                @if($value['memberId'] != 7 && $data->pending == 1)
+                                    <label class="ml-3">Allow</label>
+                                    <input type="checkbox" name="pending" id="pending" value="0">
+                                @endif
                             </div>
                             <p class="submit text-right">
                                 <input type="submit" name="submit" id="submit" class="btn btn-outline-primary" value="Update"> <span class="spinner"></span>

@@ -160,7 +160,9 @@
 </section>
 <!-- [ Main Content ] end -->
 @include('admin.include.footer')
+
 <script>
+    $("#user-list-table1").DataTable();
 	$(".editlink").on("click",function(){
 		var id = $(this).attr('value');
 		var icon = $(this).parent().parent().parent().children()[0].innerText;

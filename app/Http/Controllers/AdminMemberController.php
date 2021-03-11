@@ -42,8 +42,15 @@ class AdminMemberController extends Controller
         return view('admin.user-card',compact("memberData","memberDetail","member"));
     }
     public function EditMember (Request $request, $id){
+        $AdminMemberData = $request->all();
         $memberData = AdminModel::find($id);
-        $memberData->fill($request->all());
+        if (empty($request->password)) {
+            $AdminMemberData['password'] = $memberData->password;
+        }
+        if (!isset($request->verified)) {
+            $AdminMemberData['verified'] = 0;
+        }
+        $memberData->fill($AdminMemberData);
         $memberData->save();
         $memberDetail = AdminMemberDetailModel::where('adminTableId',$id)->first();
         $memberDetail->fill($request->all());
