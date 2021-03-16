@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Request;
+use Session;
 use Illuminate\Support\ServiceProvider;
 use App\Models\HeaderLeftBannerModel;
 use App\Models\HeaderRightBannerModel;
@@ -33,6 +35,8 @@ use App\Models\AllCitiesModel;
 use App\Models\AllStatesModel;
 use App\Models\AllCountriesModel;
 use App\Models\ClientNotificationModel; 
+use App\Models\ClientRegistrationModel; 
+use App\Models\ChatBoxModel; 
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -88,6 +92,8 @@ class AppServiceProvider extends ServiceProvider
         view()->share("NotificationMessage",NotificationModel::orderBy('id','desc')->get());
         view()->share("NonRegisterUser",NonRegisterVisitorModel::orderBy('id','desc')->get());
         view()->share("signalPendingData",SignalsModel::orderBy('id','desc')->take(10)->get());
+        view()->share("AllClientMemberData",ClientRegistrationModel::where('status',1)->where('confirmationEmail',1)->get());
+        view()->share("AllChatMemberData",ChatBoxModel::orderBy('id','desc')->get());
 
     }
 }

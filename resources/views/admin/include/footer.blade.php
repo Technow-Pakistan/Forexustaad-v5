@@ -1,5 +1,7 @@
 <!-- Toast Start -->
 
+<audio id ="NotificationSound" src="{{URL::to('public/assets/Sounds/notification.mp3')}}" loop="" style="display:none"></audio>
+
 <div id="snackbar"></div>
     <div id="snackbar1"></div>
 <script>
@@ -150,7 +152,7 @@
   //   });
 	// new $.fn.dataTable.FixedHeader( table );
 </script>
-	</body>
+</body>
 </html>
 
 <!-- drag & drop rows -->
@@ -182,7 +184,7 @@
 	});
 </script>
 <script>
-  $(function() {
+    $(function() {
         $("span.pie_1").peity("pie", {
             fill: ["#4099ff", "#eff3f6"]
         });
@@ -194,4 +196,210 @@
         });
         $(".data-attributes").peity("donut");
     });
+
+    // ChatDialogboxApprear
+    $(".header-user-list .userlist-box, .userlist-box1").on("click", function() {
+      var liveStatus = $(this).find(".live-status");
+      var id = $(this).attr("data-id");
+      $(".h-send-chat").attr("userId",id);
+      var url = "{{URL::to('ustaad/clientDataMessage')}}/" + id;
+      console.log(url);
+			$.ajax({
+				type: "Post",
+				url: url,
+				success: function(response){
+					var json = $.parseJSON(response);
+            var userId = json[0].id;
+            var chatName = json[0].name;
+            var chatImg = json[0].image;
+            if (chatImg == null) {
+              var chatImgSrc = "https://bootdey.com/img/Content/avatar/avatar7.png";
+            }else{
+              var chatImgSrc = "{{URL::to('storage/app')}}" + "/" + chatImg;
+            }
+              var chatImgSrc1 = "{{URL::to('public/assets/assets/img/favicon.png')}}";
+            json.shift();
+            $(".clientDataMessagesUser").html("");
+            $(".clientDataMessagesUser").html(chatName);
+            $(".clientDataMessagesUser").attr('userId',userId);
+            $(".main-friend-chat").html("");
+              var chatMessages = [];
+              var chatStartCount = 0; 
+              var AllAtOneClientMessageData = "";
+            for (let index = 0; index < json[0].length; index++) {
+              if (json[0][index].userType == 2 && chatStartCount == 1){
+                  for (let index1 = 0; index1 < chatMessages.length; index1++){
+                    AllAtOneClientMessageData = AllAtOneClientMessageData + chatMessages[index1];
+                  }
+                  ChatClientMessageThrough(chatImgSrc,AllAtOneClientMessageData)
+              }
+              if (json[0][index].userType == 1 && chatStartCount == 2){
+                  for (let index1 = 0; index1 < chatMessages.length; index1++){
+                    AllAtOneClientMessageData = AllAtOneClientMessageData + chatMessages[index1];
+                  }
+                  AdminClientMessageThrough(chatImgSrc1,AllAtOneClientMessageData)
+              }
+              if (json[0][index].userType == 1){
+                if (chatStartCount == 2) {
+                  console.log("a2");
+                  chatMessages = [];
+                  AllAtOneClientMessageData = "";
+                }
+                var chatOneMessage = "<p class='chat-cont mr-1'>"+json[0][index].message+"</p></br>"
+                chatMessages.push(chatOneMessage); 
+                chatStartCount = 1;
+              }
+              if (json[0][index].userType == 2){
+                if (chatStartCount == 1) {
+                  console.log("a1");
+                  chatMessages = [];
+                  AllAtOneClientMessageData = "";
+                }
+                var chatOneMessage = "<p class='chat-cont mr-1'>"+json[0][index].message+"</p></br>"
+                chatMessages.push(chatOneMessage); 
+                chatStartCount = 2;
+                  console.log("c");
+              }
+              if (index+1 == json[0].length) {
+                  for (let index1 = 0; index1 < chatMessages.length; index1++){
+                    AllAtOneClientMessageData = AllAtOneClientMessageData + chatMessages[index1];
+                  }
+                  if (json[0][index].userType == 2){
+                    AdminClientMessageThrough(chatImgSrc1,AllAtOneClientMessageData);
+                  }else{
+                    ChatClientMessageThrough(chatImgSrc,AllAtOneClientMessageData);
+                  }
+                }
+            }
+            $(".header-chat").addClass("open");
+            $(".header-user-list").toggleClass("msg-open");
+            var liveChatIconHeader = liveStatus.html();
+            var liveChatIconHeaderCount1 = $(".ChatMessageCount").html();
+            var liveChatIconHeaderCount = liveChatIconHeaderCount1 - liveChatIconHeader;
+            if(liveChatIconHeaderCount < 0){
+              liveChatIconHeaderCount = 0;
+            }
+            // Chat Box Scroll Bottom
+            var objDiv = document.getElementById("main-chat-cont ");
+            objDiv.scrollTop = objDiv.scrollHeight;
+            $(".ChatMessageCount").html(liveChatIconHeaderCount);
+            liveStatus.html(0);
+            console.log("ads2");
+            console.log("ads1");
+				},
+				error: function(data) {
+					console.log("fail");
+				}
+      });
+    });
+
+    function ChatClientMessageThrough(chatImgSrc,AllAtOneClientMessageData){
+      $(".main-friend-chat").append("<div class='media chat-messages'><a class='media-left photo-table' href='#!'><img class='media-object img-radius img-radius m-t-5' src='"+chatImgSrc+"' alt='Generic placeholder image'/></a><div class='media-body chat-menu-content'><div class=''>"+AllAtOneClientMessageData+"</div></div></div>")
+    }
+    function AdminClientMessageThrough(chatImgSrc1,AllAtOneClientMessageData){
+      $(".main-friend-chat").append("<div class='media chat-messages'><div class='media-body chat-menu-reply'><div class=''>"+AllAtOneClientMessageData+"</div></div><a class='media-left photo-table' href='#!'><img class='media-object img-radius img-radius m-t-5' src='"+chatImgSrc1+"' alt='Generic placeholder image'/></a></div>")
+    }
+
+
+    function b(g) {
+        $(".header-chat .main-friend-chat").append('<div class="media chat-messages"><div class="media-body chat-menu-reply"><div class=""><p class="chat-cont">' + $(".h-send-chat").val() + '</p></br></div></div><a class="media-right photo-table" href="#!"><img class="media-object img-radius img-radius m-t-5" src="https:forexustaad.com/public/assets/assets/img/favicon.png" alt="Generic placeholder image"></a></div>');
+        var chatMessageSave = $(".h-send-chat").val();
+        $(".h-send-chat").val(null);
+        var idToGet =  $(".h-send-chat").attr("userId");
+        var urlPost = "{{URL::to('ustaad/clientMessageSend')}}/" +  idToGet;
+        console.log(urlPost);
+        $.ajax({
+          type: "Post",
+          data : {
+            data1: chatMessageSave
+          },
+          url: urlPost,
+          success: function(response){
+            console.log(response);
+          },
+          error: function(data) {
+            console.log("fail");
+          }
+        });
+        var findedIndex = ".userId" + idToGet;
+          var countAdd = $(".main-friend-listRecent").find(findedIndex);
+          var add = countAdd.html();
+          if(countAdd[0] == null){
+            var urlPost1 = "{{URL::to('ustaad/GetClientInfo')}}/" +  idToGet;
+            $.ajax({
+              type: "Post",
+              url: urlPost1,
+              success: function(response){
+                var json1 = $.parseJSON(response);
+                $(".main-friend-listRecent").prepend("<div class='media userlist-box' data-id='"+json1.id+"' data-status='online' data-username='"+json1.name+"'><a class='media-left' href='#!'><img class='media-object img-radius' src='"+json1.image+"' alt='Generic placeholder image'/><div class='live-status userId"+json1.id+"'>0</div></a><div class='media-body'><h6 class='chat-header'>"+json1.name+"</h6></div></div>");
+              },
+              error: function(data) {
+                console.log("fail");
+              }
+            });
+          }
+    }
 </script>
+
+              <!-- Pusher Start -->
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script>
+
+      // Enable pusher logging - don't include this in production
+      Pusher.logToConsole = false;
+
+      var pusher = new Pusher("{{env('PUSHER_APP_KEY')}}", {
+        cluster: "{{env('PUSHER_APP_CLUSTER')}}"
+      });
+
+      
+      var channel = pusher.subscribe("AdminChatPush");
+        channel.bind("firstEvent", function(data) {
+          var findedIndex = ".userId" + data.message.userId;
+          var countAdd = $(".main-friend-listRecent").find(findedIndex);
+          var add = countAdd.html();
+          if(countAdd[0] == null){
+            var urlPost1 = "{{URL::to('ustaad/GetClientInfo')}}/" +  data.message.userId;
+            $.ajax({
+              type: "Post",
+              url: urlPost1,
+              success: function(response){
+                var json1 = $.parseJSON(response);
+                $(".main-friend-listRecent").prepend("<div class='media userlist-box' data-id='"+json1.id+"' data-status='online' data-username='"+json1.name+"'><a class='media-left' href='#!'><img class='media-object img-radius' src='"+json1.image+"' alt='Generic placeholder image'/><div class='live-status userId"+json1.id+"'>1</div></a><div class='media-body'><h6 class='chat-header'>"+json1.name+"</h6></div></div>");
+              },
+              error: function(data) {
+                console.log("fail");
+              }
+            });
+          }else{
+            countAdd.html(++add);
+            var ChatMessageCount = $(".ChatMessageCount").html();
+            var hideDivChat = countAdd.parent().parent();
+            var PrependDivChat = countAdd.parent().parent().parent();
+            $(PrependDivChat).prepend(hideDivChat);
+            console.log(hideDivChat);
+          }
+          var userId1 = $(".clientDataMessagesUser").attr("userId");
+          var ChatMessageCount = $(".ChatMessageCount").html();
+          var hideDivChat = countAdd.parent().parent();
+          console.log(hideDivChat);
+          if (data.message.userId == userId1) {
+            countAdd.html(--add);
+            var userIdSrc = ".userId" + data.message.userId;
+            var userIdSrc12 = $(userIdSrc).parent().children();
+            var userIdSrc13 = $(userIdSrc12).attr('src')
+            console.log(userIdSrc13);
+            var userIdSrcMessage = "<p class='chat-cont mr-1'>"+data.message.message+"</p></br>";
+            ChatClientMessageThrough(userIdSrc13,userIdSrcMessage);
+          }else{
+            $(".ChatMessageCount").html(++ChatMessageCount);
+          }
+          $("#NotificationSound")[0].play();
+          setTimeout(function(){ $("#NotificationSound")[0].pause(); }, 4000);
+          console.log(data.message.userId);
+          console.log("sad");
+        });
+
+    </script>
+
+

@@ -213,9 +213,10 @@ class AdminController extends Controller
             $admin = $request->session()->get("admin");
             if($admin['memberId'] == 6){
                 return  redirect("ustaad/broker/category");
-            }
-            if($admin['memberId'] == 7){
+            }elseif($admin['memberId'] == 7){
                 return  redirect("ustaad/signals");
+            }elseif($admin['memberId'] == 8){
+                return  redirect("ustaad/clientMember/All");
             }
         };
         $Clients = ClientRegistrationModel::all();

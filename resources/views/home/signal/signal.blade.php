@@ -139,7 +139,7 @@
                      </div>
                      <div class="scroll-tbl">
                         <h4 class="ml-2 Colorff0024">Expired Signals</h4>
-                        <table id="expiredSignal" class="table table-striped table-hover dt-responsive dataTable no-footer">
+                        <table id="expiredTable" class="table table-striped">
                            <thead>
                               <tr class="text-center">
                                  <th>Symbols/Pairs</th>
@@ -234,10 +234,4 @@
       color:#ff0024;
    }
 </style>
-<script>
 
-//Expired Signal
-$('#expiredSignal').DataTable({
-    responsive: true
-});
-</script>

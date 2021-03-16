@@ -1,3 +1,6 @@
+@php
+	$value =Session::get('admin');
+@endphp
 @include('admin.include.header')
 <!-- [ Main Content ] start -->
 <div class="pcoded-main-container">
@@ -12,7 +15,11 @@
 						</div>
 						<ul class="breadcrumb">
 							<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a></li>
-							<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/member/clientList')}}">Client Type</a></li>
+                  			@if($value['memberId'] != 8)
+								<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/member/clientList')}}">Client Type</a></li>
+							@else
+								<li class="breadcrumb-item"><a href="#">Users</a></li>
+							@endif
 							<li class="breadcrumb-item"><a href="#!">Client list</a></li>
 						</ul>
 					</div>
@@ -101,10 +108,14 @@
 												<td>
 													<span class="badge {{($member->status == 1 && $member->confirmationEmail == 1) ? 'badge-light-success' : 'badge-light-danger'}}">{{($member->status == 1 && $member->confirmationEmail == 1) ? 'Active' : 'Deactive'}}</span>
 													<div class="overlay-edit">
-														@if($member->status == 1)
-															<button href="{{URL::to('ustaad/client/delete')}}/{{$member->id}}" data-toggle="modal" data-target="#myModal" type="button" class="btn btn-icon btn-danger addAction"><i class="fa fa-lock"></i></button>
-														@elseif($member->status == 0)
-															<button href="{{URL::to('ustaad/client/active')}}/{{$member->id}}" data-toggle="modal" data-target="#myModal" type="button" class="btn btn-icon btn-success addAction"><i class="fa fa-unlock"></i></button>
+														@if($value['memberId'] != 8)
+															@if($member->status == 1)
+																<button href="{{URL::to('ustaad/client/delete')}}/{{$member->id}}" data-toggle="modal" data-target="#myModal" type="button" class="btn btn-icon btn-danger addAction"><i class="fa fa-lock"></i></button>
+															@elseif($member->status == 0)
+																<button href="{{URL::to('ustaad/client/active')}}/{{$member->id}}" data-toggle="modal" data-target="#myModal" type="button" class="btn btn-icon btn-success addAction"><i class="fa fa-unlock"></i></button>
+															@endif
+														@else
+															<button href="#" type="button" userId="{{$member->id}}" class="btn btn-icon btn-warning OpenClientDialogBox"><i class="fa fa-comment-dots"></i></button>
 														@endif
 													</div>
 												</td>
@@ -145,6 +156,93 @@
 	$(".AdminConfirmationEmail").on('change',function() {
 		var data = $(this).parent();
 		data.submit();
+	})
+
+	// User Direct Msg Send
+	$(".OpenClientDialogBox").on("click",function(){
+		var id = $(this).attr("userId");
+		$(".h-send-chat").attr("userId",id);
+      var url = "{{URL::to('ustaad/clientDataMessage')}}/" + id;
+      console.log(url);
+			$.ajax({
+				type: "Post",
+				url: url,
+				success: function(response){
+					var json = $.parseJSON(response);
+            var userId = json[0].id;
+            var chatName = json[0].name;
+            var chatImg = json[0].image;
+            if (chatImg == null) {
+              var chatImgSrc = "https://bootdey.com/img/Content/avatar/avatar7.png";
+            }else{
+              var chatImgSrc = "{{URL::to('storage/app')}}" + "/" + chatImg;
+            }
+              var chatImgSrc1 = "{{URL::to('public/assets/assets/img/favicon.png')}}";
+            json.shift();
+            $(".clientDataMessagesUser").html("");
+            $(".clientDataMessagesUser").html(chatName);
+            $(".clientDataMessagesUser").attr('userId',userId);
+            $(".main-friend-chat").html("");
+              var chatMessages = [];
+              var chatStartCount = 0; 
+              var AllAtOneClientMessageData = "";
+            for (let index = 0; index < json[0].length; index++) {
+              if (json[0][index].userType == 2 && chatStartCount == 1){
+                  for (let index1 = 0; index1 < chatMessages.length; index1++){
+                    AllAtOneClientMessageData = AllAtOneClientMessageData + chatMessages[index1];
+                  }
+                  ChatClientMessageThrough(chatImgSrc,AllAtOneClientMessageData)
+              }
+              if (json[0][index].userType == 1 && chatStartCount == 2){
+                  for (let index1 = 0; index1 < chatMessages.length; index1++){
+                    AllAtOneClientMessageData = AllAtOneClientMessageData + chatMessages[index1];
+                  }
+                  AdminClientMessageThrough(chatImgSrc1,AllAtOneClientMessageData)
+              }
+              if (json[0][index].userType == 1){
+                if (chatStartCount == 2) {
+                  console.log("a2");
+                  chatMessages = [];
+                  AllAtOneClientMessageData = "";
+                }
+                var chatOneMessage = "<p class='chat-cont mr-1'>"+json[0][index].message+"</p></br>"
+                chatMessages.push(chatOneMessage); 
+                chatStartCount = 1;
+              }
+              if (json[0][index].userType == 2){
+                if (chatStartCount == 1) {
+                  console.log("a1");
+                  chatMessages = [];
+                  AllAtOneClientMessageData = "";
+                }
+                var chatOneMessage = "<p class='chat-cont mr-1'>"+json[0][index].message+"</p></br>"
+                chatMessages.push(chatOneMessage); 
+                chatStartCount = 2;
+                  console.log("c");
+              }
+              if (index+1 == json[0].length) {
+                  for (let index1 = 0; index1 < chatMessages.length; index1++){
+                    AllAtOneClientMessageData = AllAtOneClientMessageData + chatMessages[index1];
+                  }
+                  if (json[0][index].userType == 2){
+                    AdminClientMessageThrough(chatImgSrc1,AllAtOneClientMessageData);
+                  }else{
+                    ChatClientMessageThrough(chatImgSrc,AllAtOneClientMessageData);
+                  }
+                }
+            }
+            $(".header-chat").addClass("open");
+            $(".header-user-list").toggleClass("msg-open");
+           
+            // Chat Box Scroll Bottom
+            var objDiv = document.getElementById("main-chat-cont ");
+			objDiv.scrollTop = objDiv.scrollHeight;
+			
+				},
+				error: function(data) {
+					console.log("fail");
+				}
+      });
 	})
 </script>
 
