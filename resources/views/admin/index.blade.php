@@ -612,14 +612,13 @@
     $(document).ready(function() {
 		var ctx = $("#chart-line");
 		var timer = setInterval(() => {
-			console.log("dsadas");
 			$.ajax({
 				type: "Post",
 				url: "{{URL::to('ustaad/GetRealTimeData/Get')}}",
 
 				success: function(response) {
 					var json = $.parseJSON(response);
-					console.log(json[3].length);
+					// console.log(json[3].length);
 					$(".activeUserAll").text(json[0].length);
 					$(".activeMobileUser").text(json[1].length);
 					$(".activeDesktopUser").text(json[2].length);

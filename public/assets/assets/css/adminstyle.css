@@ -25672,7 +25672,7 @@ body.box-layout .pcoded-navbar.theme-horizontal ~ .pcoded-header {
 }
 
 .header-user-list .nav-tabs .nav-item {
-    width: calc(100% / 3);
+    width: calc(100% / 2);
     text-align: center;
 }
 
@@ -25710,7 +25710,7 @@ body.box-layout .pcoded-navbar.theme-horizontal ~ .pcoded-header {
 .header-user-list.open .h-close-text i {
     position: absolute;
     top: 55px;
-    left: 7px;
+    left: 10px;
     font-size: 20px;
     z-index: 1003;
     color: #fff;
@@ -25742,7 +25742,7 @@ body.box-layout .pcoded-navbar.theme-horizontal ~ .pcoded-header {
     position: relative;
 }
 
-.h-list-body .userlist-box {
+.h-list-body .userlist-box, .userlist-box1 {
     cursor: pointer;
     display: -webkit-box;
     display: flex;
@@ -25762,7 +25762,21 @@ body.box-layout .pcoded-navbar.theme-horizontal ~ .pcoded-header {
     background: #f3f4f9;
 }
 
+.h-list-body .userlist-box1:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    width: calc(100% - 40px);
+    height: 1px;
+    background: #f3f4f9;
+}
+
 .h-list-body .userlist-box.active {
+    background: white;
+}
+
+.h-list-body .userlist-box1.active {
     background: white;
 }
 
@@ -25770,7 +25784,16 @@ body.box-layout .pcoded-navbar.theme-horizontal ~ .pcoded-header {
     padding-right: 10px;
 }
 
+.h-list-body .userlist-box1 .media-left {
+    padding-right: 10px;
+}
+
 .h-list-body .userlist-box .media-object {
+    width: 50px;
+    display: inline-block;
+}
+
+.h-list-body .userlist-box1 .media-object {
     width: 50px;
     display: inline-block;
 }
@@ -25781,12 +25804,36 @@ body.box-layout .pcoded-navbar.theme-horizontal ~ .pcoded-header {
     margin-bottom: 0;
 }
 
+.h-list-body .userlist-box1 .chat-header1 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
 .h-list-body .userlist-box .chat-header small {
     margin-top: 5px;
     font-size: 90%;
 }
 
+.h-list-body .userlist-box1 .chat-header1 small {
+    margin-top: 5px;
+    font-size: 90%;
+}
+
 .h-list-body .userlist-box .live-status {
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    top: 35px;
+    right: 20px;
+    border-radius: 100%;
+    color: #fff;
+    padding: 2px 0;
+    text-align: center;
+    background: #4099ff;
+}
+
+.h-list-body .userlist-box1 .live-status {
     height: 25px;
     width: 25px;
     position: absolute;
