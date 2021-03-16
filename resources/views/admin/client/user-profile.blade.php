@@ -1,3 +1,6 @@
+@php
+  $value =Session::get('admin');
+@endphp
 @include('admin.include.header')
 		<section class="pcoded-main-container">
 			<div class="pcoded-content">
@@ -13,8 +16,12 @@
 									<li class="breadcrumb-item">
 										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a>
 									</li>
-									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/member/clientList')}}">All Client Users</a></li>
-									<li class="breadcrumb-item">
+                  @if($value['memberId'] != 8)
+  									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/member/clientList')}}">All Client Users</a></li>
+									@else
+  									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/clientMember/All')}}">All Client</a></li>
+                  @endif
+                  <li class="breadcrumb-item">
 										<a href="#!">Profile</a>
 									</li>
 								</ul>
@@ -50,19 +57,16 @@
                                           @endif
                                           <div class="" style="position: relative">
                                               <img src="{{URL::to('public/assets/assets/img/vipbg.png')}}" alt="adminn" style="width: 228px">
+                                            <div style="position: absolute; top:40px; left:69px">
                                         @if($totalClientInfo->image == null)
-                                          <div style="position: absolute; top:40px; left:69px">
                                               <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="" style="width: 91px">
-                                          </div>
                                         @else
-                                          <img src="{{URL::to('storage/app/')}}/{{$totalClientInfo->image}}" alt="Admin" class="rounded-circle" width="150">
+                                          <img src="{{URL::to('storage/app/')}}/{{$totalClientInfo->image}}" alt="Admin" class="rounded-circle" width="91px" height="91px">
                                         @endif
+                                          </div>
                                     </div>
                                         <div class="mt-3">
                                           <h4>{{$totalClientInfo->name}}</h4>
-                                          @php
-                                            $value =Session::get('admin');
-                                          @endphp
                                           @if($value['memberId'] == 1 || $value['memberId'] == 2)
                                             <p class="text-secondary mb-1">{{$clientMember->member}}</p>
                                             <form action="{{URL::to('/ustaad/changeMemberType')}}/{{$totalClientInfo->id}}" method="post">
@@ -216,7 +220,7 @@
                                             <h6 class="d-flex align-items-center mb-3">
                                               <i class="material-icons text-info mr-2">{{$brokerTitle->title}}</i>
                                               <div class="verifiedBtnAccount d-flex justify-content-end">
-                                                @if($account->verified == 0)
+                                                @if($account->verified == 0 && $value['memberId'] == 1)
                                                   <form action="{{URL::to('ustaad/viewClientProfile/accountVerified')}}/{{$account->id}}" method="post" class="mr-2">
                                                     Verified <input type="checkbox" name="verified" id="" class="AdminConfirmationEmail" value="1">
                                                   </form>
@@ -229,7 +233,9 @@
                                                   <span class="badge badge-light-danger mr-2">Rejected</span>
                                                 @endif
                                               </div>
-                                              <a href="{{URL::to('ustaad/DeleteClientAccount')}}/{{$account->id}}" class="addAction trashBtnAccount" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash text-danger"></i></a>
+                                              @if($value['memberId'] == 1)
+                                                <a href="{{URL::to('ustaad/DeleteClientAccount')}}/{{$account->id}}" class="addAction trashBtnAccount" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash text-danger"></i></a>
+                                              @endif
                                             </h6>
                                             <small>Account Number</small>
                                             <div class="progress mb-3">
@@ -246,19 +252,19 @@
                                             <small class="d-flex justify-content-between">
                                               Deposit
                                                 <div class="d-flex">
-                                                @if($account->depositConfirm == 0)
+                                                @if($account->depositConfirm == 0  && $value['memberId'] == 1)
                                                   <form action="{{URL::to('ustaad/viewClientProfile/accountdepositConfirm')}}/{{$account->id}}" method="post" class="mr-2">
                                                     Yes <input type="checkbox" name="depositConfirm" id="" class="AdminConfirmationEmail heig_10px" value="1">
                                                   </form>
                                                   <form action="{{URL::to('ustaad/viewClientProfile/accountdepositConfirm')}}/{{$account->id}}" method="post" class="mr-2">
                                                   No <input type="checkbox" name="depositConfirm" id="" class="AdminConfirmationEmail heig_10px" value="2">
                                                   </form>
-                                                @elseif($account->depositConfirm == 1)
+                                                @elseif($account->depositConfirm == 1 && $value['memberId'] == 1)
                                                   <form action="{{URL::to('ustaad/viewClientProfile/accountdepositConfirm')}}/{{$account->id}}" method="post" class="mr-2">
                                                     No <input type="checkbox" name="depositConfirm" id="" class="AdminConfirmationEmail heig_10px" value="2">
                                                   </form>
                                                   <span class="badge badge-light-success mr-2">Yes</span>
-                                                @elseif($account->depositConfirm == 2)
+                                                @elseif($account->depositConfirm == 2 && $value['memberId'] == 1)
                                                   <form action="{{URL::to('ustaad/viewClientProfile/accountdepositConfirm')}}/{{$account->id}}" method="post" class="mr-2">
                                                   Yes <input type="checkbox" name="depositConfirm" id="" class="AdminConfirmationEmail heig_10px" value="1">
                                                   </form>

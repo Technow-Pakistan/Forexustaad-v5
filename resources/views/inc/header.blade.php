@@ -1,22 +1,23 @@
+
 @php 
-if(Session::has('client')){
-    $clientDataNoti = Session::get('client');
-    $clientNotiID = $clientDataNoti['id'];
-    $countLoop = count($ClientNotificationMessage);
-    $finalData = array();
-    foreach($ClientNotificationMessage as $clientNoti){
-        if($clientNoti->email != null && $clientNoti->email == $clientDataNoti['email']){
-            array_push($finalData,$clientNoti);
-        };
-        if($clientNoti->email == null){
-            $viewClientNotiMember = $clientNoti->viewClientsId;
-            $arrayViewNoti = explode("@",$viewClientNotiMember);
-            if(array_search($clientNotiID,$arrayViewNoti) === false){
+    if(Session::has('client')){
+        $clientDataNoti = Session::get('client');
+        $clientNotiID = $clientDataNoti['id'];
+        $countLoop = count($ClientNotificationMessage);
+        $finalData = array();
+        foreach($ClientNotificationMessage as $clientNoti){
+            if($clientNoti->email != null && $clientNoti->email == $clientDataNoti['email']){
                 array_push($finalData,$clientNoti);
+            };
+            if($clientNoti->email == null){
+                $viewClientNotiMember = $clientNoti->viewClientsId;
+                $arrayViewNoti = explode("@",$viewClientNotiMember);
+                if(array_search($clientNotiID,$arrayViewNoti) === false){
+                    array_push($finalData,$clientNoti);
+                }
             }
         }
     }
-}
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -246,7 +247,11 @@ if(Session::has('client')){
                                         <div class="after-login">
                                             <div class="dropdown">
                                             <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="user">
+                                            @if($clientAccountData->image == null)
+                                                <img id="ChatClientImageShowSrc" src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="user">
+                                            @else
+                                                <img id="ChatClientImageShowSrc" src="{{URL::to('/storage/app')}}/{{$clientAccountData->image}}" alt="user">
+                                            @endif
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <a class="dropdown-item" href="{{URL::to('/user-profile')}}">User Profile</a>

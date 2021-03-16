@@ -595,8 +595,7 @@
                                         <div class="tab-pane fade show active" id="crypto" role="tabpanel"
                                             aria-labelledby="crypto-tab">
                                             <div class="scroll-tbl">
-                                                <table id="cryptoTable"
-                                                    class="table table-striped table-hover dt-responsive"
+                                                <table id="cryptoTable" class="table table-striped table-hover dt-responsive"
                                                     style="width:100%">
                                                     <thead>
                                                         <tr>

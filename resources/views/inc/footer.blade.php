@@ -1,6 +1,70 @@
-
+<style>
+  .countChatBoxUnRead{
+    position:absolute;
+    top:2px;
+    font-size:12px;
+    left:107px;
+    color:white;
+    background:black;
+    padding:0px 4px;
+    border-radius:50%;
+  }
+</style>
 		<!--==============================-->
-		<!--=        	Toast         	 =-->
+		<!--=====      Chat Box      =====-->
+    <!--==============================-->
+    @if(Session::has('client'))
+      <section class="chatbox js-chatbox">
+          <div class="chatbox__header">
+            <h3 class="chatbox__header-cta-text pt-2"><span class="chatbox__header-cta-icon"><i class="fas fa-comments"></i></span>Let's chat</h3>
+              @php 
+                $value = Session::get('client');
+                $ClientChatMessagesData = App\Models\ChatBoxModel::where('userId',$value['id'])->get();
+                if(count($ClientChatMessagesData) > 0){
+                  $ClientChatMessagesDataUnRead =  count($ClientChatMessagesData[0]->GetTotalUnReadAM());
+                  if($ClientChatMessagesDataUnRead == 0){
+                    $ClientChatMessagesDataUnRead = "";
+                  }
+                }else{
+                  $ClientChatMessagesDataUnRead = "";
+                }
+              @endphp
+            <span class="countChatBoxUnRead" id="blink1">{{$ClientChatMessagesDataUnRead}}</span>
+            <button class="js-chatbox-toggle chatbox__header-cta-btn u-btn btn"><i class="fas fa-chevron-up"></i></button>
+          </div>
+          <!-- End of .chatbox__header -->
+          <div class="js-chatbox-display chatbox__display" id="chatbox__display">
+              @foreach($ClientChatMessagesData as $chatMsg)
+                @php
+                  if($value['image'] == null){
+                    $srcImage = URL::to('/public/assets/assets/img/user1.jpg') ;
+                  }else{
+                    $srcImage = URL::to('/storage/app/') . "/" . $value['image'];
+                  }
+                @endphp
+                @if($chatMsg->userType == 2)
+                  <div class="d-flex">
+                      <img class="media-object img-radius mr-2" src="{{URL::to('/public/assets/assets/img/favicon.png')}}" alt="">
+                      <p class="chatbox__display-chat mt-1">{{$chatMsg->message}} </p>
+                  </div>
+                @elseif($chatMsg->userType == 1)
+                  <div class="d-flex justify-content-end">
+                      <p class="chatbox__display-chat mt-1">{{$chatMsg->message}}</p>
+                      <img class="media-object img-radius ml-2" src="{{$srcImage}}" alt="">
+                  </div>
+                @endif
+              @endforeach
+          </div>
+          <!-- End of .chatbox__display -->
+          <form class="js-chatbox-form chatbox__form">
+            <input type="text" class="js-chatbox-input chatbox__form-input" placeholder="Type your message..." required>
+            <button class="chatbox__form-submit u-btn btn"><i class="fas fa-paper-plane"></i></button>
+          </form>
+          <!-- End of .chatbox__form -->
+      </section>
+    @endif
+		<!--==============================-->
+		     <!--=     Toast     =-->
     <!--==============================-->
 
     <audio id ="NotificationSound" src="{{URL::to('public/assets/Sounds/notification.mp3')}}" loop="" style="display:none"></audio>
@@ -450,6 +514,103 @@
     </div>
   </div>
 </div>
+
+
+<style>
+        .img-radius{
+            margin-top: 5px;
+            border-radius: 50%;
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            margin-bottom: 5px;
+        }
+        *, *::after, *::before {
+            box-sizing: border-box;
+        }
+        .u-btn {
+            all: unset;
+            cursor: pointer;
+        }
+        .chatbox {
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.25);
+            bottom: 0;
+            position: fixed;
+            right: 1em;
+            transform: translatey(23.5em);
+            transition: all 300ms ease;
+            width: 18.5em;
+        }
+        .chatbox--is-visible {
+            transform: translatey(0);
+            z-index:25;
+        }
+        .chatbox__header {
+            background:linear-gradient( 45deg , #ff0024, #0d5fe9);;
+            border-top-right-radius: 0.5em;
+            border-top-left-radius: 0.5em;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 0.75em;
+            user-select: none;
+        }
+        .chatbox__header-cta-text {
+            color: #fff;
+            font-weight: 300;
+            font-size: 1.025rem;
+        }
+        .chatbox__header-cta-icon {
+            color: #fff;
+            margin-right: 0.75em;
+        }
+        .chatbox__header-cta-btn {
+            background: none;
+            border: none;
+            color: #aaa;
+            padding: 0.5em;
+            transition: all 300ms ease;
+        }
+        .chatbox__header-cta-btn:hover {
+            color: #fff;
+        }
+        .chatbox__display {
+            background: #ededed;
+            height: 20em;
+            overflow: auto;
+            padding: 0.75em;
+        }
+        .chatbox__display-chat {
+            background: #fff;
+            border-radius: 0.5em;
+            color: #666;
+            font-weight: 300;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            padding: 0.75em;
+            text-align: justify;
+        }
+        .chatbox__form {
+            display: flex;
+        }
+        .chatbox__form-input {
+            border: none;
+            color: #222;
+            font-size: 0.9rem;
+            font-weight: 300;
+            padding: 1.25em 1em;
+            width: 100%;
+        }
+        .chatbox__form-input:required {
+            box-shadow: none;
+        }
+        .chatbox__form-submit {
+          background: #fff;
+          border-left: 1px solid #aaa;
+          color: #aaa;
+          padding: 1em;
+        }
+        
+    </style>
 <!-- Request Quote Modal ends -->
 <script src="{{URL::to('/public/assets/assets/js/jquery-3.2.1.min.js')}}"></script>
      <!-- <script src="assets/js/isotope.pkgd.min.js"></script> -->
@@ -476,6 +637,78 @@
      <!-- charts ends -->
      <script src="{{URL::to('/public/assets/assets/js/custom.js')}}"></script>
 
+     <script>
+        // Chat Box Scroll Bottom
+        var objDiv = document.getElementById("chatbox__display");
+        objDiv.scrollTop = objDiv.scrollHeight;
+
+        // Chat Box script start 
+
+        var ChatClientImageShowSrc = $("#ChatClientImageShowSrc").attr('src');
+        const toggleChatboxBtn = document.querySelector(".js-chatbox-toggle");
+        const chatbox = document.querySelector(".js-chatbox");
+        const chatboxMsgDisplay = document.querySelector(".js-chatbox-display");
+        const chatboxForm = document.querySelector(".js-chatbox-form");
+
+        // Use to create chat bubble when user submits text
+        // Appends to display
+        const createChatBubble = input => {
+          $(".chatbox__display").append("<div class='d-flex justify-content-end'><p class='chatbox__display-chat mt-1'>"+input+" </p><img class='media-object img-radius ml-2' src='"+ChatClientImageShowSrc+"' alt=''></div>");
+          var urlPost = "{{URL::to('/adminMessageSend')}}";
+          var chatMessageSave = input;
+          console.log(urlPost);
+          $.ajax({
+            type: "POST",
+            data : {
+              data1: chatMessageSave
+            },
+            url: urlPost,
+            success: function(response){
+              console.log(response);
+            },
+            error: function(data) {
+              console.log("fail");
+            }
+          });
+        };
+
+        // Toggle the visibility of the chatbox element when clicked
+        // And change the icon depending on visibility
+        toggleChatboxBtn.addEventListener("click", () => {
+        chatbox.classList.toggle("chatbox--is-visible");
+        $(".countChatBoxUnRead").html("");
+        $(".countChatBoxUnRead").attr("class","countChatBoxUnRead1");
+        var URLPost12 = "{{URL::to('GetReadChatMessages')}}/" + "{{$value['id']}}";
+        $.ajax({
+            type: "POST",
+            url: URLPost12,
+            success: function(response){
+              console.log("success");
+            },
+            error: function(data) {
+              console.log("fail");
+            }
+          });
+        if (chatbox.classList.contains("chatbox--is-visible")) {
+            toggleChatboxBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
+        } else {
+            toggleChatboxBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+        }
+        });
+
+        // Form input using method createChatBubble
+        // To append any user message to display
+        chatboxForm.addEventListener("submit", e => {
+        const chatInput = document.querySelector(".js-chatbox-input").value;
+
+        createChatBubble(chatInput);
+
+        e.preventDefault();
+        chatboxForm.reset();
+        });
+
+    </script>
+      <!-- Chat Box script end -->
 
 <script>
     $(document).ready(function(){
@@ -736,9 +969,15 @@
 
     <script type="text/javascript">
       var blink = document.getElementById('blink');
+      @if(Session::has('client'))
+        var blink1 = document.getElementById('blink1');
+      @endif
       setInterval(function() {
         blink.style.opacity = (blink.style.opacity == 0 ? 1 : 0);
-      }, 500);
+        @if(Session::has('client'))
+          blink1.style.opacity = (blink1.style.opacity == 0 ? 1 : 0);
+        @endif
+      }, 700);
 
 
           // city & State Error
@@ -904,6 +1143,17 @@
       });
 
       var channel = pusher.subscribe("{{$value['email']}}");
+      channel.bind("firstEvent12", function(data) {
+        console.log(data.message.message);
+        $(".countChatBoxUnRead1").attr("class","countChatBoxUnRead");
+        var countChatBoxUnReadCount = $(".countChatBoxUnRead").html();
+        $(".countChatBoxUnRead").html(++countChatBoxUnReadCount);
+        $("#NotificationSound")[0].play();
+        setTimeout(function(){ $("#NotificationSound")[0].pause(); }, 4000);
+        $(".chatbox__display").append("<div class='d-flex'><img class='media-object img-radius mr-2' src='{{URL::to('public/assets/assets/img/favicon.png')}}' alt=''><p class='chatbox__display-chat mt-1'>"+data.message.message+" </p></div>");
+      });
+
+      var channel = pusher.subscribe("{{$value['email']}}");
       channel.bind("firstEvent", function(data) {
         var emailNoti = "{{$value['email']}}";
             if(data.message.email == emailNoti){
@@ -942,43 +1192,43 @@
         console.log((data.message));
       });
 
-    var channel = pusher.subscribe("firstChannel1");
-    channel.bind("firstEvent1", function(data) {
+      var channel = pusher.subscribe("firstChannel1");
+      channel.bind("firstEvent1", function(data) {
 
-        var url12 =  "";
-                var linkNoti = "{{URL::to('clientNotification')}}" + '/' + data.message.id;
-                if(data.message.userType == 0){
-                    url12 = "{{URL::to('getAdminDetail')}}" + '/' + data.message.userId;
-                }else{
-                    url12 = "{{URL::to('getClientDetail')}}" + '/' + data.message.userId;
-                }
-                $.ajax({
-                    type: "POST",
-                    url: url12,
-                    success: function(data123){
-                        if (data.message.userType == 0) {
-                            if(data123.userImage == null){
-                                data123.userImage = "WebImages/avatar-5.jpg";
-                            }
-                            var imageSrc = "{{URL::to('public/assets/assets/img/favicon.png')}}";
-                            var ClientNotiName = "Admin";
-                        }else{
-                            if(data123.image == null){
-                                data123.image = "WebImages/avatar-5.jpg";
-                            }
-                            var imageSrc = "{{URL::to('storage/app')}}" + '/' + data123.image;
-                            var ClientNotiName = data123.name;
-                        }
-                        $(".list-unstyled12").prepend("<li class='media'><div class='media'><img class='img-radius ImageClientNotification' src='"+imageSrc+"' alt='Generic placeholder image' /><div class='media-body'><p class='m-0'><strong>"+ClientNotiName+"</strong></p><p class='m-0'>"+data.message.message+"</p></div><a href='"+linkNoti+"' class='text-primary linkClientNotification m-0'>View</a></div></li>");
-                        var ClientNotificationCount = $(".ClientNotificationCount").html();
-                        $(".ClientNotificationCount").html(++ClientNotificationCount);
-                        $("#NotificationSound")[0].play();
-                        setTimeout(function(){ $("#NotificationSound")[0].pause(); }, 4000);
-                    }
-                });
+          var url12 =  "";
+                  var linkNoti = "{{URL::to('clientNotification')}}" + '/' + data.message.id;
+                  if(data.message.userType == 0){
+                      url12 = "{{URL::to('getAdminDetail')}}" + '/' + data.message.userId;
+                  }else{
+                      url12 = "{{URL::to('getClientDetail')}}" + '/' + data.message.userId;
+                  }
+                  $.ajax({
+                      type: "POST",
+                      url: url12,
+                      success: function(data123){
+                          if (data.message.userType == 0) {
+                              if(data123.userImage == null){
+                                  data123.userImage = "WebImages/avatar-5.jpg";
+                              }
+                              var imageSrc = "{{URL::to('public/assets/assets/img/favicon.png')}}";
+                              var ClientNotiName = "Admin";
+                          }else{
+                              if(data123.image == null){
+                                  data123.image = "WebImages/avatar-5.jpg";
+                              }
+                              var imageSrc = "{{URL::to('storage/app')}}" + '/' + data123.image;
+                              var ClientNotiName = data123.name;
+                          }
+                          $(".list-unstyled12").prepend("<li class='media'><div class='media'><img class='img-radius ImageClientNotification' src='"+imageSrc+"' alt='Generic placeholder image' /><div class='media-body'><p class='m-0'><strong>"+ClientNotiName+"</strong></p><p class='m-0'>"+data.message.message+"</p></div><a href='"+linkNoti+"' class='text-primary linkClientNotification m-0'>View</a></div></li>");
+                          var ClientNotificationCount = $(".ClientNotificationCount").html();
+                          $(".ClientNotificationCount").html(++ClientNotificationCount);
+                          $("#NotificationSound")[0].play();
+                          setTimeout(function(){ $("#NotificationSound")[0].pause(); }, 4000);
+                      }
+                  });
 
-        console.log((data.message));
-    });
+          console.log((data.message));
+      });
 
     </script>
 @endif

@@ -45,6 +45,7 @@ use App\Http\Controllers\OtherPagesContentController;
 use App\Http\Controllers\FundamentalController;
 use App\Http\Controllers\SponoserAddController;
 use App\Http\Controllers\MidBannerController;
+use App\Http\Controllers\ChatBoxController;
 use App\Models\AdminMemberDetailModel;
 use Stevebauman\Location\Facades\Location;
 use App\Models\ClientRegistrationModel;
@@ -272,6 +273,8 @@ Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
             $data = ClientRegistrationModel::where('id',$id)->first();
             return $data;
         });
+        Route::post('/GetReadChatMessages/{id}',[ChatBoxController::class,'GetReadChatLientMessages']);
+        Route::post('/adminMessageSend',[ChatBoxController::class,'AdminMessageSend']);
         Route::get('/clientNotification/{id}',[HomeController::class,'ClientNotificationView']);
         Route::get('/strategies',[StrategiesController::class,'ViewAll']);
         Route::get('/strategies/{id}',[StrategiesController::class,'StrategyDetail']);
@@ -301,6 +304,9 @@ Route::get('/ustaad',[AdminController::class,'Login']);
 Route::post('/ustaad',[AdminController::class,'Index']);
 
 Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
+    Route::post('/clientDataMessage/{id}',[ChatBoxController::class,'GetClientMessage']);
+    Route::post('/GetClientInfo/{id}',[ChatBoxController::class,'GetClientInfo']);
+    Route::post('/clientMessageSend/{id}',[ChatBoxController::class,'ClientMessageSend']);
     Route::post('/GetRealTimeData/Get',[AdminController::class,'GetRealTimeData']);
     Route::get('/widgets',function(){
         return view('admin.widget-chart');

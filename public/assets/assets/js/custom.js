@@ -197,6 +197,10 @@ $('#forexTable').DataTable({
 $('#stocksTable').DataTable({
     responsive: true
 });
+//expiredTable Table
+$('#expiredTable').DataTable({
+    responsive: true
+});
 //Dtatable Tab
 $("a[data-toggle=\"tab\"]").on("shown.bs.tab", function(e) {
     $($.fn.dataTable.tables(true)).DataTable().columns.adjust();

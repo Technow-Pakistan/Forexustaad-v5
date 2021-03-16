@@ -158,7 +158,7 @@ class HomeController extends Controller
         if ($time <= $time2) {
             $email = base64_decode($id);
             $registration = ClientRegistrationModel::where('email',$email)->first();
-            return view("home.Forget-password",compact('registration'));
+            return view("home.forget-password",compact('registration'));
         }else {
             $error = "Your link is expired. Please! try again";
             $request->session()->put("error",$error);
