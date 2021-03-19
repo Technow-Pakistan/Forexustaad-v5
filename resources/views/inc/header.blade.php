@@ -66,7 +66,10 @@
     <link rel="stylesheet" href="{{URL::to('/public/assets/assets/css/style.css')}}" type="text/css">
     <link rel="stylesheet" href="{{URL::to('/public/assets/assets/css/responsive.css')}}" type="text/css">
     <link rel="stylesheet" href="{{URL::to('/public/assets/assets/css/animate.css')}}" type="text/css">
-    <link href="{{URL::to('/public/assets/assets/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
+       <!-- datatable Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="{{ URL::to('/public/assets/DataTable/datatables.net/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::to('/public/assets/DataTable/data-table/extensions/responsive/css/responsive.dataTables.css') }}" type="text/css" media="all">
+        <!-- datatable Stylesheet -->
     <link href="{{URL::to('/public/assets/assets/css/bootstrap-toggle.min.css')}}" rel="stylesheet">
 
 <!-- news Slider -->
@@ -94,7 +97,7 @@
                     font-family: 'Font Awesome 5 Pro', 'Font Awesome 5 Free','Font Awesome 5 Solids', 'Font Awesome 5 Brands' !important;
                 }
             </style>
-
+            
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-602bc30f9629ba67"></script>
 <style>
@@ -127,10 +130,10 @@
             </div><br>
             <div class='adblock-text'>
                 <h3>
-                Please disable your ad blocker!
+                    Please disable your ad blocker!
                 </h3>
                 <p>
-                We know ads are annoying but please bear with us here & disable your ad blocker!
+                    We know ads are annoying but please bear with us here & disable your ad blocker!
                 </p>
             </div>
             <div class='adblock-button'>
@@ -145,10 +148,10 @@
 
 
     <!-- Preloader starts -->
-    <!-- <div id="loading">
-  <img id="loading-image" src="assets/img/preloader.gif" alt="Loading..." />
-  <p class="mt-3"><strong>LOADING...</strong></p>
-</div> -->
+    <div id="loading">
+        <img id="loading-image" src="{{('public/assets/assets/img/preloader.gif')}}" alt="Loading..." />
+        <p class="mt-3"><strong>LOADING...</strong></p>
+    </div>
     <!-- Preloader ends -->
     <div class="wrapper" id="top">
         <?php
@@ -277,9 +280,6 @@
 
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent1">
                                     <ul class="navbar-nav">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{URL::to('/vipTraining/advance/all')}}"><span>Advance Training</span> </a>
-                                        </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{URL::to('/strategies')}}"><span>Strategies</span> </a>
                                         </li>
@@ -558,7 +558,7 @@
                                 <ul class="dropdown-menu fade-up">
                                     <li><a class="dropdown-item" href="{{URL::to('/training/Basic/all')}}">Basic Training</a></li>
                                     @if(!Session::has('client'))
-                                        <li><a class="dropdown-item LoginButton">Advance Training</a></li>
+                                        <li><a class="dropdown-item LoginButton" data-toggle="modal" data-target="#requestQuoteModal">Advance Training</a></li>
                                     @else
                                         <li><a class="dropdown-item" href="{{URL::to('/training/Advance/all')}}">Advance Training</a></li>
                                     @endif

@@ -85,6 +85,9 @@ a:focus {
 .page-item.active .page-link {
 	background-image: linear-gradient(45deg, #ff0024, #0d5fe9);
 }
+.dataTables_paginate .pagination{
+	justify-content: flex-end;
+}
 .btn-primary {
 	background-color: #0d5fe9 !important;
 	border-color: #0d5fe9 !important;

@@ -1,4 +1,10 @@
 <style>
+  
+  @media (max-width: 991px){
+      .scroll-tbl table:not(.curr_list) {
+         min-width: 100%;
+      }
+   }
   .countChatBoxUnRead{
     position:absolute;
     top:2px;
@@ -540,6 +546,7 @@
             transform: translatey(23.5em);
             transition: all 300ms ease;
             width: 18.5em;
+            z-index:100;
         }
         .chatbox--is-visible {
             transform: translatey(0);
@@ -619,9 +626,16 @@
      <script src="{{URL::to('/public/assets/assets/js/jquery.marquee.min.js')}}"></script>
      <script defer src="{{URL::to('/public/assets/node_modules/bootstrap/dist/js/bootstrap.js')}}"></script>
      <script src="{{URL::to('/public/assets/assets/js/popper.min.js')}}"></script>
-     <script src="{{URL::to('/public/assets/assets/js/jquery.dataTables.min.js')}}"></script>
-     <script src="{{URL::to('/public/assets/assets/js/dataTables.bootstrap.min.js')}}"></script>
-     <script src="{{URL::to('/public/assets/assets/js/dataTables.responsive.min.js')}}"></script>
+
+          <!-- DataTable start -->
+
+      <script src="{{URL::to('/public/assets/DataTable/datatables.net/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+      <script src="{{URL::to('/public/assets/DataTable/data-table/extensions/responsive/js/dataTables.responsive.min.js')}}"></script>
+      <script src="{{URL::to('/public/assets/DataTable/datatables.net/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+      <script src="{{URL::to('/public/assets/DataTable/data-table/extensions/responsive/js/responsive-custom.js')}}"></script>
+
+          <!-- DataTable ends -->
+
      <script src="{{URL::to('/public/assets/assets/js/bootstrap-toggle.min.js')}}"></script>
      <!-- charts -->
       <!--news slide script  -->
@@ -637,78 +651,80 @@
      <!-- charts ends -->
      <script src="{{URL::to('/public/assets/assets/js/custom.js')}}"></script>
 
-     <script>
-        // Chat Box Scroll Bottom
-        var objDiv = document.getElementById("chatbox__display");
-        objDiv.scrollTop = objDiv.scrollHeight;
+    @if(Session::has('client'))
+      <script>
+          // Chat Box Scroll Bottom
+          var objDiv = document.getElementById("chatbox__display");
+          objDiv.scrollTop = objDiv.scrollHeight;
 
-        // Chat Box script start 
+          // Chat Box script start 
 
-        var ChatClientImageShowSrc = $("#ChatClientImageShowSrc").attr('src');
-        const toggleChatboxBtn = document.querySelector(".js-chatbox-toggle");
-        const chatbox = document.querySelector(".js-chatbox");
-        const chatboxMsgDisplay = document.querySelector(".js-chatbox-display");
-        const chatboxForm = document.querySelector(".js-chatbox-form");
+          var ChatClientImageShowSrc = $("#ChatClientImageShowSrc").attr('src');
+          const toggleChatboxBtn = document.querySelector(".js-chatbox-toggle");
+          const chatbox = document.querySelector(".js-chatbox");
+          const chatboxMsgDisplay = document.querySelector(".js-chatbox-display");
+          const chatboxForm = document.querySelector(".js-chatbox-form");
 
-        // Use to create chat bubble when user submits text
-        // Appends to display
-        const createChatBubble = input => {
-          $(".chatbox__display").append("<div class='d-flex justify-content-end'><p class='chatbox__display-chat mt-1'>"+input+" </p><img class='media-object img-radius ml-2' src='"+ChatClientImageShowSrc+"' alt=''></div>");
-          var urlPost = "{{URL::to('/adminMessageSend')}}";
-          var chatMessageSave = input;
-          console.log(urlPost);
-          $.ajax({
-            type: "POST",
-            data : {
-              data1: chatMessageSave
-            },
-            url: urlPost,
-            success: function(response){
-              console.log(response);
-            },
-            error: function(data) {
-              console.log("fail");
-            }
+          // Use to create chat bubble when user submits text
+          // Appends to display
+          const createChatBubble = input => {
+            $(".chatbox__display").append("<div class='d-flex justify-content-end'><p class='chatbox__display-chat mt-1'>"+input+" </p><img class='media-object img-radius ml-2' src='"+ChatClientImageShowSrc+"' alt=''></div>");
+            var urlPost = "{{URL::to('/adminMessageSend')}}";
+            var chatMessageSave = input;
+            console.log(urlPost);
+            $.ajax({
+              type: "POST",
+              data : {
+                data1: chatMessageSave
+              },
+              url: urlPost,
+              success: function(response){
+                console.log(response);
+              },
+              error: function(data) {
+                console.log("fail");
+              }
+            });
+          };
+
+          // Toggle the visibility of the chatbox element when clicked
+          // And change the icon depending on visibility
+          toggleChatboxBtn.addEventListener("click", () => {
+          chatbox.classList.toggle("chatbox--is-visible");
+          $(".countChatBoxUnRead").html("");
+          $(".countChatBoxUnRead").attr("class","countChatBoxUnRead1");
+          var URLPost12 = "{{URL::to('GetReadChatMessages')}}/" + "{{$value['id']}}";
+          $.ajax({ 
+              type: "POST",
+              url: URLPost12,
+              success: function(response){
+                console.log("success");
+              },
+              error: function(data) {
+                console.log("fail");
+              }
+            });
+          if (chatbox.classList.contains("chatbox--is-visible")) {
+              toggleChatboxBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
+          } else {
+              toggleChatboxBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+          }
           });
-        };
 
-        // Toggle the visibility of the chatbox element when clicked
-        // And change the icon depending on visibility
-        toggleChatboxBtn.addEventListener("click", () => {
-        chatbox.classList.toggle("chatbox--is-visible");
-        $(".countChatBoxUnRead").html("");
-        $(".countChatBoxUnRead").attr("class","countChatBoxUnRead1");
-        var URLPost12 = "{{URL::to('GetReadChatMessages')}}/" + "{{$value['id']}}";
-        $.ajax({
-            type: "POST",
-            url: URLPost12,
-            success: function(response){
-              console.log("success");
-            },
-            error: function(data) {
-              console.log("fail");
-            }
+          // Form input using method createChatBubble
+          // To append any user message to display
+          chatboxForm.addEventListener("submit", e => {
+          const chatInput = document.querySelector(".js-chatbox-input").value;
+
+          createChatBubble(chatInput);
+
+          e.preventDefault();
+          chatboxForm.reset();
           });
-        if (chatbox.classList.contains("chatbox--is-visible")) {
-            toggleChatboxBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
-        } else {
-            toggleChatboxBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
-        }
-        });
 
-        // Form input using method createChatBubble
-        // To append any user message to display
-        chatboxForm.addEventListener("submit", e => {
-        const chatInput = document.querySelector(".js-chatbox-input").value;
-
-        createChatBubble(chatInput);
-
-        e.preventDefault();
-        chatboxForm.reset();
-        });
-
-    </script>
+      </script>
       <!-- Chat Box script end -->
+    @endif
 
 <script>
     $(document).ready(function(){

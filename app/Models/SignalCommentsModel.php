@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\ClientRegistrationModel;
 use App\Models\AdminModel;
 use App\Models\AdminMemberDetailModel;
+use App\Models\SignalPairModel;
+use App\Models\SignalsModel;
 
 class SignalCommentsModel extends Model
 {
@@ -27,5 +29,10 @@ class SignalCommentsModel extends Model
     public function getAdminDetailInformation(){
         $member = AdminMemberDetailModel::where('adminTableId',$this->memberId)->first();
         return $member;
+    }
+    public function getPair(){
+        $signal = SignalsModel::where('id',$this->signalId)->first();
+        $replys = SignalPairModel::where('id',$signal->forexPairs)->first();
+        return $replys;
     }
 }

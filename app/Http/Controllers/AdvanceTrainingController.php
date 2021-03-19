@@ -15,59 +15,27 @@ use App\Models\PusherModel;
 
 class AdvanceTrainingController extends Controller
 {
-    public function ViewVipAll  (Request $request, $id){
-            $clientInformation = $request->session()->get('client');
-            $userId = $clientInformation["memberType"];
-            if ($userId != 1) {
-                $category = "Advance";
-                if($id == "all"){
-                    $lecture = AdvanceTrainingModel::orderBy('poistion','asc')->where('vipMember',1)->first();
-                }else{
-                    $title = str_replace('-',' ',$id);
-                    $lecture = AdvanceTrainingModel::where('title',$title)->where('vipMember',1)->first();
-                }
-                if($lecture){
-                    $Lecture1Done = AdvanceTrainingModel::orderBy('poistion','asc')->where('vipMember',1)->first();
-                    $nextLecture = AdvanceTrainingModel::orderBy('id','asc')->where('poistion', '>' , $lecture->poistion)->where('vipMember',1)->first();
-                    $lastLecture = AdvanceTrainingModel::orderBy('id','desc')->where('poistion', '<' , $lecture->poistion)->where('vipMember',1)->first();
-                    $Lectures = AdvanceTrainingModel::orderBy('poistion','asc')->where('vipMember',1)->get();
-                    $comments = AdvanceCommentsModel::orderBy('id','desc')->where('lectureId', $lecture->id)->get();
-                    $clientInformation = $request->session()->get('client');
-                    $userId = $clientInformation["id"];
-                    if ($lastLecture) {
-                        $commentAllow = AdvanceCommentsModel::where('memberId', $userId)->where('lectureId',$lastLecture->id)->first();
-
-                    }else {
-                        $commentAllow = null;
-                    }
-                    // print_r($commentAllow);
-                    // die;
-                    return view('training.advance.vipAdvance',compact('Lectures','lecture','lastLecture','nextLecture','category','comments','commentAllow','Lecture1Done'));
-                }else{
-                    $error = "This Lecture is not exist";
-                    $request->session()->put("error",$error);
-                    return redirect('/');
-                }
-            }else{
-                $error = "This Advance Training is for Vip Members.";
-                $request->session()->put("error",$error);
-                return back();
-            }
-    }
-
     public function ViewAll (Request $request, $id1, $id){
         if ($id1 == "Advance"){
             if ($request->session()->has('client')) {
                 $category = "Advance";
                 if($id == "all"){
-                    $lecture = AdvanceTrainingModel::orderBy('poistion','asc')->where('vipMember',0)->first();
+                    $lecture = AdvanceTrainingModel::orderBy('poistion','asc')->first();
                 }else{
                     $title = str_replace('-',' ',$id);
-                    $lecture = AdvanceTrainingModel::where('title',$title)->where('vipMember',0)->first();
+                    $lecture = AdvanceTrainingModel::where('title',$title)->first();
+                    if ($lecture->vipMember == 1) {
+                        $clientData = $request->session()->get('client');
+                        if ($clientData->memberType == 1) {
+                            $error = "This Advance Training is for Vip Members.";
+                            $request->session()->put("error",$error);
+                            return redirect('/');
+                        }
+                    }
                 }
                 if($lecture){
-                    $nextLecture = AdvanceTrainingModel::orderBy('id','asc')->where('poistion', '>' , $lecture->poistion)->where('vipMember',0)->first();
-                    $lastLecture = AdvanceTrainingModel::orderBy('id','desc')->where('poistion', '<' , $lecture->poistion)->where('vipMember',0)->first();
+                    $nextLecture = AdvanceTrainingModel::orderBy('id','asc')->where('poistion', '>' , $lecture->poistion)->first();
+                    $lastLecture = AdvanceTrainingModel::orderBy('id','desc')->where('poistion', '<' , $lecture->poistion)->first();
                     $comments = AdvanceCommentsModel::orderBy('id','desc')->where('lectureId', $lecture->id)->get();
                     $clientInformation = $request->session()->get('client');
                     $userId = $clientInformation["id"];
@@ -76,7 +44,7 @@ class AdvanceTrainingController extends Controller
                     }else {
                         $commentAllow = null;
                     }
-                    $Lectures = AdvanceTrainingModel::orderBy('poistion','asc')->where('vipMember',0)->get();
+                    $Lectures = AdvanceTrainingModel::orderBy('poistion','asc')->get();
                 }else{
                     $error = "This Lecture is not exist";
                     $request->session()->put("error",$error);
