@@ -171,7 +171,7 @@
 								<a href="{{URL::to('ustaad/signals/add')}}">Add New Signal</a>
 							</div>
 							<div class="col-sm-12">
-								
+
 								<div class="card user-profile-list">
 									<div class="card-body">
 										<div class="dt-responsive table-responsive">
@@ -284,7 +284,7 @@
 								<h5>Latest Signal Comments</h5>
 							</div>
 							<div class="col-sm-12">
-								
+
 								<div class="card user-profile-list">
 									<div class="card-body">
 										<div class="dt-responsive table-responsive">
@@ -300,7 +300,7 @@
 														@php
 															$pair = $data->getPair();
 														@endphp
-															
+
 														<tr>
 															<td><a href="{{URL::to('ustaad/signals/comment')}}/{{$data->signalId}}" class="text-dark">{{$pair->pair}}</a></td>
 															<td class="tdLinkScroll"><a href="{{URL::to('ustaad/signals/comment')}}/{{$data->signalId}}" class="text-dark">{{$data->comment}}</a></td>
@@ -321,7 +321,7 @@
 							<div class="card-header borderless d-flex justify-content-between">
 								<h5>Latest Training Comments</h5>
 								<p class="m-0">
-									Fliter:  
+									Fliter:
 									<select name="fliterTraining" id="LatestTrainingCommentChange">
 										<option value="Advance">Advance</option>
 										<option value="Basic">Basic</option>
@@ -330,7 +330,7 @@
 								</p>
 							</div>
 							<div class="col-sm-12">
-								
+
 								<div class="card user-profile-list">
 									<div class="card-body">
 										<div class="dt-responsive table-responsive AdvanceTrainingTableChange">
@@ -400,7 +400,7 @@
 								<h5>Latest Blog Post Comments</h5>
 							</div>
 							<div class="col-sm-12">
-								
+
 								<div class="card user-profile-list">
 									<div class="card-body">
 										<div class="dt-responsive table-responsive">
@@ -416,9 +416,9 @@
 														@php
 															$blogPost = $data->getBlogPost();
 														@endphp
-															
+
 														<tr>
-															<td><a href="{{URL::to('ustaad/post/comment')}}/{{$data->blogId}}" class="text-dark">{{$blogPost->mainTitle}}</a></td>
+															<td class="tdLinkScroll"><a href="{{URL::to('ustaad/post/comment')}}/{{$data->blogId}}" class="text-dark">{{$blogPost->mainTitle}}</a></td>
 															<td class="tdLinkScroll"><a href="{{URL::to('ustaad/post/comment')}}/{{$data->blogId}}" class="text-dark">{{$data->comment}}</a></td>
 														</tr>
 													@endforeach
@@ -613,7 +613,7 @@
 	$(".BasicTrainingTableChange").hide();
 	$("#LatestTrainingCommentChange").on("change",function(){
 		var LatestTrainingCommentChange = $(this).val();
-		
+
 		if(LatestTrainingCommentChange == "Basic"){
 			$(".AdvanceTrainingTableChange").hide();
 			$(".HabbitTrainingTableChange").hide();
@@ -659,7 +659,7 @@
 		$('#user-list-table4s').dataTable({
 			"autoWidth": false,
 			"lengthChange": false,
-			"pageLength": 5
+			"pageLength": 3
 		});
 	});
 </script>
