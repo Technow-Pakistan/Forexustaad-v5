@@ -26,8 +26,7 @@
 
 		<!-- animate -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
-		<!-- data Tables -->
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css"/>
+
   		<!-- font-awesome -->
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
 		<style>

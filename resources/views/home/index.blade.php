@@ -595,333 +595,30 @@
                                         <div class="tab-pane fade show active" id="crypto" role="tabpanel"
                                             aria-labelledby="crypto-tab">
                                             <div class="scroll-tbl">
-                                                <table id="cryptoTable" class="table table-striped table-hover dt-responsive"
-                                                    style="width:100%">
-                                                    <thead>
+                                                <table id="cryptoTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                                                    <thead>                                                      
                                                         <tr>
-                                                            <th>Name</th>
-                                                            <th>Ticker</th>
+                                                            <th>Id</th>
+                                                            <th>Symbol</th>
                                                             <th>Price</th>
-                                                            <th>Capitalization</th>
-                                                            <th>Max Quantity</th>
-                                                            <th>1D change</th>
-                                                            <th>Graph</th>
+                                                            <th>Opening Price</th>
+                                                            <th>High Price</th>
+                                                            <th>Low Price</th>
+                                                            <th>Date & Time</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/BTC.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Bitcoin</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">BTC</span></td>
-                                                            <td><span class="value_price">$8,874.19</span></td>
-                                                            <td><span class="value_cap">$150.36 B</span></td>
-                                                            <td><span class="value_max_quantity">21 M</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_positive">+13.08%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#35a947"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/ETH.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Ethereum</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">ETH</span></td>
-                                                            <td><span class="value_price">$864.14</span></td>
-                                                            <td><span class="value_cap">$85.68 B</span></td>
-                                                            <td><span class="value_max_quantity">Unlimited</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_positive">+6.82%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#35a947"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/XRP.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Ripple</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">XRP</span></td>
-                                                            <td><span class="value_price">$1.06</span></td>
-                                                            <td><span class="value_cap">$43.16 B</span></td>
-                                                            <td><span class="value_max_quantity">99.99 B</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_positive">+43.04%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#35a947"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/LTC.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Litecoin</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">LTC</span></td>
-                                                            <td><span class="value_price">$145.25</span></td>
-                                                            <td><span class="value_cap">$8.05 B</span></td>
-                                                            <td><span class="value_max_quantity">84 M</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_negative">-11.53%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#e34828"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/tron.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">TRON</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">TRX</span></td>
-                                                            <td><span class="value_price">$0.04</span></td>
-                                                            <td><span class="value_cap">$2.73 B</span></td>
-                                                            <td><span class="value_max_quantity">Unlimited</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_negative">-18.58%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#e34828"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/BTG.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Bitcoin Gold</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">BTG</span></td>
-                                                            <td><span class="value_price">$108.07</span></td>
-                                                            <td><span class="value_cap">$381,159</span></td>
-                                                            <td><span class="value_max_quantity">Unlimited</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_positive">-12.93%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#35a947"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/qtum.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Qtum</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">BTG</span></td>
-                                                            <td><span class="value_price">$108.07</span></td>
-                                                            <td><span class="value_cap">$381,159</span></td>
-                                                            <td><span class="value_max_quantity">Unlimited</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_negative">-12.93%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#e34828"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/stellar.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Stellar</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">XLM</span></td>
-                                                            <td><span class="value_price">$0.35</span></td>
-                                                            <td><span class="value_cap">$6.69 B</span></td>
-                                                            <td><span class="value_max_quantity">103.27 B</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_positive">-13.7%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#35a947"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/DASH.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Dash</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">DASH</span></td>
-                                                            <td><span class="value_price">$578.69</span></td>
-                                                            <td><span class="value_cap">$4.55 B</span></td>
-                                                            <td><span class="value_max_quantity">18.9 M</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_positive">-13.21%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#35a947"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/ETC.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Ethereum
-                                                                        Classic</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">ETC</span></td>
-                                                            <td><span class="value_price">$22.23</span></td>
-                                                            <td><span class="value_cap">$2.21 B</span></td>
-                                                            <td><span class="value_max_quantity">Unlimited</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_positive">-17.05%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#35a947"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/ZEC.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Zcash</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">ZEC</span></td>
-                                                            <td><span class="value_price">$22.23</span></td>
-                                                            <td><span class="value_cap">$2.21 B</span></td>
-                                                            <td><span class="value_max_quantity">140.25 M</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_positive">-17.05%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#35a947"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/neo.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Neo</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">NEO</span></td>
-                                                            <td><span class="value_price">$22.23</span></td>
-                                                            <td><span class="value_cap">$2.21 B</span></td>
-                                                            <td><span class="value_max_quantity">140.25 M</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_positive">-17.05%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#35a947"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
+                                                        @foreach($CryptoApiData as $cryptoData)
+                                                            <tr>
+                                                                <td>{{$cryptoData->id}}</td>
+                                                                <td>{{$cryptoData->s}}</td>
+                                                                <td>{{$cryptoData->c}}</td>
+                                                                <td>{{$cryptoData->o}}</td>
+                                                                <td>{{$cryptoData->h}}</td>
+                                                                <td>{{$cryptoData->l}}</td>
+                                                                <td>{{$cryptoData->tm}}</td>
+                                                            </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -929,47 +626,30 @@
                                         <div class="tab-pane fade" id="forex" role="tabpanel"
                                             aria-labelledby="forex-tab">
                                             <div class="scroll-tbl">
-                                                <table id="forexTable"
-                                                    class="table table-striped table-hover dt-responsive"
-                                                    style="width:100%">
-                                                    <thead>
+                                                <table id="forexTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                                                    <thead>                                                     
                                                         <tr>
-                                                            <th>Name</th>
-                                                            <th>Ticker</th>
-                                                            <th>Bid</th>
-                                                            <th>Ask</th>
-                                                            <th>Spread</th>
-                                                            <th>1D change</th>
-                                                            <th>Graph</th>
+                                                            <th>Id</th>
+                                                            <th>Symbol</th>
+                                                            <th>Price</th>
+                                                            <th>Opening Price</th>
+                                                            <th>High Price</th>
+                                                            <th>Low Price</th>
+                                                            <th>Date & Time</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/EURGBP.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">EUR/GBP</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">EURGBP</span></td>
-                                                            <td><span class="value_price">0.88621</span></td>
-                                                            <td><span class="value_cap">0.88649</span></td>
-                                                            <td><span class="value_spread">0.032%</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_positive">+0.77%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#35a947"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
+                                                        @foreach($forexApiData as $forexData)
+                                                            <tr>
+                                                                <td>{{$forexData->id}}</td>
+                                                                <td>{{$forexData->s}}</td>
+                                                                <td>{{$forexData->c}}</td>
+                                                                <td>{{$forexData->o}}</td>
+                                                                <td>{{$forexData->h}}</td>
+                                                                <td>{{$forexData->l}}</td>
+                                                                <td>{{$forexData->tm}}</td>
+                                                            </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -977,340 +657,28 @@
                                         <div class="tab-pane fade" id="stocks" role="tabpanel"
                                             aria-labelledby="stocks-tab">
                                             <div class="scroll-tbl">
-                                                <table id="stocksTable"
-                                                    class="table table-striped table-hover dt-responsive"
-                                                    style="width:100%">
-                                                    <thead>
+                                                <table id="stocksTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                                                    <thead>                                                    
                                                         <tr>
-                                                            <th>Name</th>
-                                                            <th>Ticker</th>
+                                                            <th>Id</th>
+                                                            <th>Symbol</th>
                                                             <th>Price</th>
-                                                            <th>Capitalization</th>
-                                                            <th>Industry</th>
-                                                            <th>1D change</th>
-                                                            <th>Graph</th>
+                                                            <th>High Price</th>
+                                                            <th>Low Price</th>
+                                                            <th>Date & Time</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/AAPL.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Apple Inc.</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">AAPL</span></td>
-                                                            <td><span class="value_price">$8,874.19</span></td>
-                                                            <td><span class="value_cap">$150.36 B</span></td>
-                                                            <td><span class="value_overflow">Information
-                                                                    Technology</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_positive">+13.08%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#35a947"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/GOOG.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Alphabet Inc.</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">GOOGL</span></td>
-                                                            <td><span class="value_price">$864.14</span></td>
-                                                            <td><span class="value_cap">$85.68 B</span></td>
-                                                            <td><span class="value_overflow">Information
-                                                                    Technology</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_positive">+6.82%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#35a947"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/AMZN.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Amazon</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">AMZN</span></td>
-                                                            <td><span class="value_price">$1.06</span></td>
-                                                            <td><span class="value_cap">$43.16 B</span></td>
-                                                            <td><span class="value_overflow">Consumer
-                                                                    Discretionary</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_positive">+43.04%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#35a947"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/FB.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Facebook</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">FB</span></td>
-                                                            <td><span class="value_price">$145.25</span></td>
-                                                            <td><span class="value_cap">$8.05 B</span></td>
-                                                            <td><span class="value_overflow">Information
-                                                                    Technology</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_negative">-11.53%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#e34828"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/MSFT.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Microsoft
-                                                                        Corporation</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">MSFT</span></td>
-                                                            <td><span class="value_price">$0.04</span></td>
-                                                            <td><span class="value_cap">$2.73 B</span></td>
-                                                            <td><span class="value_overflow">Information
-                                                                    Technology</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_negative">-18.58%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#e34828"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/BTG.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Bitcoin Gold</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">BTG</span></td>
-                                                            <td><span class="value_price">$108.07</span></td>
-                                                            <td><span class="value_cap">$381,159</span></td>
-                                                            <td><span class="value_max_quantity">Unlimited</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_positive">-12.93%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#35a947"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/qtum.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Qtum</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">BTG</span></td>
-                                                            <td><span class="value_price">$108.07</span></td>
-                                                            <td><span class="value_cap">$381,159</span></td>
-                                                            <td><span class="value_max_quantity">Unlimited</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_negative">-12.93%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#e34828"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/stellar.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Stellar</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">XLM</span></td>
-                                                            <td><span class="value_price">$0.35</span></td>
-                                                            <td><span class="value_cap">$6.69 B</span></td>
-                                                            <td><span class="value_max_quantity">103.27 B</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_positive">-13.7%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#35a947"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/DASH.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Dash</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">DASH</span></td>
-                                                            <td><span class="value_price">$578.69</span></td>
-                                                            <td><span class="value_cap">$4.55 B</span></td>
-                                                            <td><span class="value_max_quantity">18.9 M</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_positive">-13.21%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#35a947"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/ETC.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Ethereum
-                                                                        Classic</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">ETC</span></td>
-                                                            <td><span class="value_price">$22.23</span></td>
-                                                            <td><span class="value_cap">$2.21 B</span></td>
-                                                            <td><span class="value_max_quantity">Unlimited</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_positive">-17.05%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#35a947"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/ZEC.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Zcash</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">ZEC</span></td>
-                                                            <td><span class="value_price">$22.23</span></td>
-                                                            <td><span class="value_cap">$2.21 B</span></td>
-                                                            <td><span class="value_max_quantity">140.25 M</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_positive">-17.05%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#35a947"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-href="price.html">
-                                                            <td>
-                                                                <div class="logo-name">
-                                                                    <div class="item-logo">
-                                                                        <img src="{{URL::to('/public/assets/assets/img/neo.svg')}}"
-                                                                            class="img-responsive" alt="">
-                                                                    </div>
-                                                                    <span class="item_name_value">Neo</span>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="value_ticker">NEO</span></td>
-                                                            <td><span class="value_price">$22.23</span></td>
-                                                            <td><span class="value_cap">$2.21 B</span></td>
-                                                            <td><span class="value_max_quantity">140.25 M</span></td>
-                                                            <td><span
-                                                                    class="value_d1_return percent_positive">-17.05%</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="value_graph"><svg viewBox="0 0 500 100"
-                                                                        class="chart">
-                                                                        <polyline fill="none" stroke="#35a947"
-                                                                            stroke-width="5"
-                                                                            points=" 00,120 20,60 40,80 60,20 80,80 100,80 120,60 140,100 160,90 180,80 200, 110 220, 10 240, 70 260, 100 280, 100 300, 40 320, 0 340, 100 360, 100 380, 120 400, 60 420, 70 440, 80 " />
-                                                                    </svg></span>
-                                                            </td>
-                                                        </tr>
+                                                        @foreach($StockApiData as $stockData)
+                                                            <tr>
+                                                                <td>{{$stockData->id}}</td>
+                                                                <td>{{$stockData->name}}</td>
+                                                                <td>{{$stockData->c}}</td>
+                                                                <td>{{$stockData->h}}</td>
+                                                                <td>{{$stockData->l}}</td>
+                                                                <td>{{$stockData->tm}}</td>
+                                                            </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -1358,7 +726,7 @@
                                             <th>Brokers</th>
                                             <th>Regulation</th>
                                             <th>Minimum Deposit</th>
-                                            <th>&nbsp;</th>
+                                            <th>Trade</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1375,10 +743,7 @@
                                             <td>{{$deposit->min}}</td>
                                             <td>
                                                 <div class="checkbox">
-                                                    <label>
-                                                        <a href="{{$promotion->link}}"
-                                                            class="btn btn-mine radial">Trade</a>
-                                                    </label>
+                                                    <a href="{{$promotion->link}}"class="btn btn-mine radial">Trade</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -1402,3 +767,56 @@
     <!--     <div id="particles-js" style="height: 0;"></div> -->
 </div>
 @include ('inc/footer')
+
+
+<script>
+   
+// // Stock Indices
+//     $.ajax({
+//       type: "Get",
+//       url: "https://fcsapi.com/api-v3/stock/indices_latest?id=1,2,3,4,5&access_key=&access_key=7bcaAttKq4UFZwKhrE2LEHn",
+//       success: function(response){
+//         json = response.response;
+//         $("#stocksTable tbody").html("");
+//         for (let index = 0; index < json.length; index++) {
+//             $("#stocksTable tbody").append("<tr><td>"+json[index].name+"</td><td>"+json[index].c+"</td><td>"+json[index].h+"</td><td>"+json[index].l+"</td><td>"+json[index].tm+"</td></tr>");          
+//         }
+//       },
+//       error: function(data) {
+//         console.log("fail");
+//       }
+//     });
+
+
+// // Crypto
+//     $.ajax({
+//       type: "Get",
+//       url: "https://fcsapi.com/api-v3/crypto/latest?symbol=all_crypto&access_key=7bcaAttKq4UFZwKhrE2LEHn",
+//       success: function(response){
+//         json = response.response;
+//         $("#cryptoTable tbody").html("");
+//         for (let index = 0; index < json.length; index++) {
+//             $("#cryptoTable tbody").append("<tr><td>"+json[index].s+"</td><td>"+json[index].c+"</td><td>"+json[index].o+"</td><td>"+json[index].h+"</td><td>"+json[index].l+"</td><td>"+json[index].tm+"</td></tr>");          
+//         }
+//       },
+//       error: function(data) {
+//         console.log("fail");
+//       }
+//     });
+
+// // Forex
+    // $.ajax({
+    //   type: "Get",
+    //   url: "https://fcsapi.com/api-v3/forex/latest?symbol=all_forex&access_key=7bcaAttKq4UFZwKhrE2LEHn",
+    //   success: function(response){
+    //     json = response.response;
+    //     $("#forexTable tbody").html("");
+    //     for (let index = 0; index < json.length; index++) {
+    //         $("#forexTable tbody").append("<tr><td>"+json[index].s+"</td><td>"+json[index].c+"</td><td>"+json[index].o+"</td><td>"+json[index].h+"</td><td>"+json[index].l+"</td><td>"+json[index].tm+"</td></tr>");          
+    //     }
+    //   },
+    //   error: function(data) {
+    //     console.log("fail");
+    //   }
+    // });
+</script>

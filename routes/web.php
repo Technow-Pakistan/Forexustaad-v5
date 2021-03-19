@@ -49,6 +49,8 @@ use App\Http\Controllers\ChatBoxController;
 use App\Models\AdminMemberDetailModel;
 use Stevebauman\Location\Facades\Location;
 use App\Models\ClientRegistrationModel;
+use App\Models\SignalsModel;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -67,7 +69,8 @@ Route::get('/tv1', function () {
     return view("home.index",["channel" => "firstChannel1", "event" => "firstEvent1"]);
 });
 Route::get('/Practice', function () {
-    return view("practic");
+    $signalData = SignalsModel::orderBy('id','desc')->where('status',0)->where('pending',0)->get();
+    return view("practic",compact('signalData'));
 });
 Route::get('/sendDesktopNotification', function () {
     return view("send");
@@ -279,7 +282,6 @@ Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
         Route::get('/strategies',[StrategiesController::class,'ViewAll']);
         Route::get('/strategies/{id}',[StrategiesController::class,'StrategyDetail']);
         Route::get('/vipWebinar',[HomeController::class,'VipWebinar']);
-        Route::get('/vipTraining/advance/{id}',[AdvanceTrainingController::class,'ViewVipAll']);
         Route::get('/changePassword',[HomeController::class,'ChangePassword']);
         Route::post('/changePassword',[HomeController::class,'ChangePasswordAdd']);
         Route::post('/advance/comment/add',[AdvanceCommentsController::class,'Add']);

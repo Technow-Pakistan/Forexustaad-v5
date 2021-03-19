@@ -1,3 +1,8 @@
+@php
+	if(Session::has('client')){
+    $value =Session::get('client');
+  }
+@endphp
 @include('inc.header')
 <!-- Content Area -->
 <div class="content_area">
@@ -168,17 +173,44 @@
                                     $img123456 = null;
                                   }
                                 @endphp
-                                <a href="{{URL::to('/training'). '/' .  $category . '/' . $title}}">
-                                  <div class="col-sm-12 pl-3 {{$lecture->id == $data->id ? 'activeVideo pre-header' : ''}}" id="{{$lecture->id == $data->id ? 'activeVideo' : ''}}">
-                                      <div class="media">
-                                          <p class="mt-4 mr-2">{{$data->poistion}}. </p>
-                                        <img class="mr-3 BorderNone" src="http://i.ytimg.com/vi/{{$img123456}}/hqdefault.jpg" alt="Generic placeholder image">
-                                        <div class="media-body">
-                                          <h6 class="m-0 text-{{$lecture->id == $data->id ? 'white' : 'primary'}}">{{$data->title}}</h6>
-                                        </div>
+                                @php $icountData = 10;  @endphp
+                                @if($category == "Advance")
+                                  @if($data->vipMember == 1 && $value['memberType'] == 1)
+                                    <div class="contentLock">
+                                      <div class="content-overlay"></div>
+                                      <div>
+                                        <a href="#!">
+                                          <div class="col-sm-12 pl-3 {{$lecture->id == $data->id ? 'activeVideo pre-header' : ''}}" id="{{$lecture->id == $data->id ? 'activeVideo' : ''}}">
+                                            <div class="media">
+                                                <p class="mt-4 mr-2">{{$data->poistion}}. </p>
+                                              <img class="mr-3 BorderNone" src="http://i.ytimg.com/vi/{{$img123456}}/hqdefault.jpg" alt="Generic placeholder image">
+                                              <div class="media-body">
+                                                <h6 class="m-0 text-{{$lecture->id == $data->id ? 'white' : 'primary'}}">{{$data->title}}</h6>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </a>
                                       </div>
-                                  </div>
-                                </a>
+                                      <div class="content-details fadeIn-left">
+                                        <a href="{{URL::to('user-registration')}}" class="btn btn-primary btn-radial"><i class="fa fa-lock"></i> Become VIP First</a>
+                                      </div>
+                                    </div>
+                                    @php $icountData = 20;  @endphp
+                                  @endif
+                                @endif
+                                @if($icountData == 10)
+                                  <a href="{{URL::to('/training'). '/' .  $category . '/' . $title}}">
+                                    <div class="col-sm-12 pl-3 {{$lecture->id == $data->id ? 'activeVideo pre-header' : ''}}" id="{{$lecture->id == $data->id ? 'activeVideo' : ''}}">
+                                        <div class="media">
+                                            <p class="mt-4 mr-2">{{$data->poistion}}. </p>
+                                          <img class="mr-3 BorderNone" src="http://i.ytimg.com/vi/{{$img123456}}/hqdefault.jpg" alt="Generic placeholder image">
+                                          <div class="media-body">
+                                            <h6 class="m-0 text-{{$lecture->id == $data->id ? 'white' : 'primary'}}">{{$data->title}}</h6>
+                                          </div>
+                                        </div>
+                                    </div>
+                                  </a>
+                                @endif
                               @endforeach
                             </div>
                         </div>
@@ -192,7 +224,7 @@
                               <div class="content_area_heading large-heading text-center">
 
                                 <h1 class="heading_title wow animated fadeInUp">
-                                  Sponsers Adds
+                                  Sponsers Ads
                                 </h1>
                                 <div class="heading_border wow animated fadeInUp">
                                   <span class="one"></span><span class="two"></span><span class="three"></span>
@@ -408,6 +440,78 @@
 </script>
 
 <style>
+    /* contentLock style start */
+
+    .contentLock {
+      position: relative;
+      width: 90%;
+      max-width: 400px;
+      overflow: hidden;
+    }
+
+    .contentLock .content-overlay {
+      background: rgba(0,0,0,0.7);
+      position: absolute;
+      height: 99%;
+      width: 100%;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      opacity: 0;
+      -webkit-transition: all 0.4s ease-in-out 0s;
+      -moz-transition: all 0.4s ease-in-out 0s;
+      transition: all 0.4s ease-in-out 0s;
+    }
+
+    .contentLock:hover .content-overlay{
+      opacity: 0.5;
+    }
+
+    .content-image{
+      width: 100%;
+    }
+
+    .content-details {
+      position: absolute;
+      text-align: center;
+      padding-left: 1em;
+      padding-right: 1em;
+      width: 100%;
+      top: 50%;
+      left: 50%;
+      opacity: 0;
+      -webkit-transform: translate(-50%, -50%);
+      -moz-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      -webkit-transition: all 0.3s ease-in-out 0s;
+      -moz-transition: all 0.3s ease-in-out 0s;
+      transition: all 0.3s ease-in-out 0s;
+    }
+
+    .contentLock:hover .content-details{
+      top: 50%;
+      left: 50%;
+      opacity: 1;
+    }
+
+    .content-details h3{
+      color: #fff;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.5em;
+      text-transform: uppercase;
+    }
+
+    .content-details p{
+      color: #fff;
+      font-size: 0.8em;
+    }
+
+    .fadeIn-left{
+      left: 20%;
+    }
+    /* contentLock style end */
 		.pre-header {
     		background-image: linear-gradient(45deg, #ff0024, #0d5fe9);
     		color: white;

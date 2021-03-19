@@ -32159,12 +32159,10 @@ new-task label input[type=checkbox] {
 
 
 .tdLinkScroll{
-    max-width: 350px;
-    overflow:auto;
+    white-space: normal !important;
 }
 #user-list-table tbody tr td{
-    max-width: 350px;
-    overflow:auto;
+    white-space: normal !important;
 }
 .fts_18{
     font-size:18px;
