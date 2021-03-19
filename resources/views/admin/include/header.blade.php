@@ -26,6 +26,7 @@
 
 		<!-- animate -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css"/>
 
   		<!-- font-awesome -->
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
@@ -532,7 +533,7 @@
 								@foreach($AllChatMemberData as $chatData1)
 									@php
 										$repeatN = 0;
-										$userId = $chatData1->userId; 
+										$userId = $chatData1->userId;
 										if(array_search($userId,$chatArray) === false){
 											$repeatN = 1;
 											array_push($chatArray,$userId);
@@ -565,7 +566,7 @@
 				</div>
 				<div class="tab-pane fade" id="user" role="tabpanel" aria-labelledby="user-tab">
 					<div class="h-list-header">
-								
+
 						<div class="input-group">
 							<input
 								type="text"
@@ -579,7 +580,7 @@
 						<div class="main-friend-cont scroll-div">
 							<div class="main-friend-list">
 								@foreach($AllClientMemberData as $clientData)
-									@php 
+									@php
 										if($clientData->image == null){
 											$srcImage = "https://bootdey.com/img/Content/avatar/avatar7.png";
 										}else{
