@@ -199,6 +199,13 @@ $('#stocksTable').DataTable({
 });
 //expiredTable Table
 $('#expiredTable').DataTable({
+    rowReorder: {
+        selector: 'td:nth-child(2)'
+    },
+    responsive: true
+});
+//topbroker Table
+$('#topbroker-list').DataTable({
     responsive: true
 });
 //Dtatable Tab

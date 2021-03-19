@@ -180,7 +180,6 @@ class SignalController extends Controller
             // return back();
     }
 
-
     //Admin Panel
 
     public function AllowSignalProcess(Request $request, $id){
@@ -224,12 +223,10 @@ class SignalController extends Controller
 
         return back();
     }
-
     public function Comment(Request $request,$id){
         $comments = SignalCommentsModel::where('signalId',$id)->get();
         return view('admin.comment.ViewSignalComment',compact('comments'));
     }
-
     public function CommentAdd(Request $request){
         $comments = new SignalCommentsModel;
         $comments->fill($request->all());
@@ -249,7 +246,6 @@ class SignalController extends Controller
         PusherModel::BoardCast($member->email,"firstEvent",["message" => $messageData]);
         return back();
     }
-
     public function Index(Request $request){
         $adminData = $request->session()->get("admin");
         if ($adminData['memberId'] == 7) {

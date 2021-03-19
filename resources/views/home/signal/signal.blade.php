@@ -28,191 +28,196 @@
                      </div>
                      <div class="scroll-tbl">
                         <h4 class="ml-2 Color0d5fe9">Current Signals</h4>
-                        <table id="free-signals-list" class="table table-striped">
-                           <thead>
-                              <tr class="text-center">
-                                 <th>Symbols/Pairs</th>
-                                 <th>Status</th>
-                                 <th>Users</th>
-                                 <th>Valid Till</th>
-                                 <th>Signal</th>
-                                 <th>&nbsp;</th>
-                              </tr>
-                           </thead>
-                           <tbody>
-                              @foreach($signalData as $data)
-                                       @php
-                                          $url = $data->GetURL();
-	                                       $loginClientData = Session::get('client');
-                                          $go = 1;
-                                          $go3 = 1;
-                                          $profits = explode('@',$data->takeProfit);
-                                          $time1 = strtotime($data->time);
-                                          $time = date('h:i A', $time1);
-                                          $date1 = strtotime($data->date);
-                                          $date = date('d M Y', $date1);
-                                          if($data->date == date("Y-m-d")){
-                                             if($data->time >= date("H:i:s")){
+                        <div class="dt-responsive table-responsive">
+                           <table id="new-cons" class="table table-bordered nowrap Border-Theme">
+                              <thead>
+                                 <tr class="back-Theme">
+                                    <th>Sr#</th>
+                                    <th>Symbols/Pairs</th>
+                                    <th>Status</th>
+                                    <th>Users</th>
+                                    <th>Valid Till</th>
+                                    <th>Signal</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                    @php $icount = 1 @endphp
+                                 @foreach($signalData as $data)
+                                          @php
+                                             $url = $data->GetURL();
+                                             $loginClientData = Session::get('client');
+                                             $go = 1;
+                                             $go3 = 1;
+                                             $profits = explode('@',$data->takeProfit);
+                                             $time1 = strtotime($data->time);
+                                             $time = date('h:i A', $time1);
+                                             $date1 = strtotime($data->date);
+                                             $date = date('d M Y', $date1);
+                                             if($data->date == date("Y-m-d")){
+                                                if($data->time >= date("H:i:s")){
+                                                   $go = 0;
+                                                   $go3 = 3;
+                                                }
+                                             }
+                                             if($data->date > date("Y-m-d")){
                                                 $go = 0;
                                                 $go3 = 3;
                                              }
-                                          }
-                                          if($data->date > date("Y-m-d")){
-                                             $go = 0;
-                                             $go3 = 3;
-                                          }
-                                          $timeDate1 = strtotime(date("Y-m-d H:i:s"));
-                                          $timeDate2 = strtotime($data->created_at->format("Y-m-d H:i:s"));
-                                          $minsDate = ($timeDate1 - $timeDate2) / 60;
-                                          $formatEng = "min";
-                                          $finelmin = intval($minsDate);
-                                          if($finelmin > 60){
-                                             $finelmin /= 60;
-                                             $formatEng = "hours";
-                                             if($finelmin > 24){
-                                                $finelmin /= 24;
-                                                $formatEng = "days";
-                                                if($finelmin > 7){
-                                                   $finelmin /= 7;
-                                                   $formatEng = "weeks";
-                                                   if($finelmin > 4){
-                                                      $finelmin /= 4;
-                                                      $formatEng = "moths";
-                                                      if($finelmin > 12){
-                                                         $finelmin /= 12;
-                                                         $formatEng = "years";
+                                             $timeDate1 = strtotime(date("Y-m-d H:i:s"));
+                                             $timeDate2 = strtotime($data->created_at->format("Y-m-d H:i:s"));
+                                             $minsDate = ($timeDate1 - $timeDate2) / 60;
+                                             $formatEng = "min";
+                                             $finelmin = intval($minsDate);
+                                             if($finelmin > 60){
+                                                $finelmin /= 60;
+                                                $formatEng = "hours";
+                                                if($finelmin > 24){
+                                                   $finelmin /= 24;
+                                                   $formatEng = "days";
+                                                   if($finelmin > 7){
+                                                      $finelmin /= 7;
+                                                      $formatEng = "weeks";
+                                                      if($finelmin > 4){
+                                                         $finelmin /= 4;
+                                                         $formatEng = "moths";
+                                                         if($finelmin > 12){
+                                                            $finelmin /= 12;
+                                                            $formatEng = "years";
+                                                         }
                                                       }
                                                    }
                                                 }
                                              }
+                                             $finelmin = intval($finelmin);
+                                             $pair = $data->getPair();
+                                             $flags = explode("/",$pair->pair);
+                                          @endphp
+                                       @if($go3 == 3)
+                                          <tr>
+                                             <td>{{$icount++}}</td>
+                                             <td class="text-center">
+                                                <p class="mb-2">
+                                                   @foreach($flags as $flag)
+                                                      @php $flag4 = str_replace(' ', '', $flag) @endphp
+                                                      <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
+                                                   @endforeach
+                                                   <!-- <span class="flag-icon flag-icon-ad">&nbsp;</span>
+                                                   <span class="flag-icon flag-icon-us">&nbsp;</span> -->
+                                                </p>
+                                                <h6 class="m-0 font-weight-bold"><strong>{{$pair->pair}}</strong></h6>
+                                                <h6 class="m-0 text-danger">{{$finelmin}} {{$formatEng}} ago</h6>
+                                             </td>
+                                             <td>
+                                                <button class="btn btn-success btn-sm buttonBlinking">Active</button>
+                                             </td>
+                                             <td><strong class="font-weight-bold">{{$data->selectUser}}</strong></td>
+                                             <td>
+                                                <span><strong class="mr-2"> {{$date}}</strong><strong> {{$time}} </strong></span>
+                                             </td>
+                                             <td>
+                                                @if($go == 0)
+                                                   @if($data->selectUser == "Register User" && !Session::has('client'))
+                                                      <a href="#!"  class="LoginButton" data-toggle="modal" data-target="#requestQuoteModal">View Signal</a>
+                                                   @elseif($data->selectUser == "VIP Member")
+                                                      @if(!Session::has('client'))
+                                                         <a href="#!"  class="LoginButton" data-toggle="modal" data-target="#requestQuoteModal">View Signal</a>
+                                                      @elseif(isset($loginClientData->memberType))
+                                                         @if($loginClientData->memberType == 1)
+                                                            <a href="#!" onclick="snackbar1()">View Signal</a>
+                                                         @else
+                                                            <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
+                                                         @endif
+                                                      @endif
+                                                   @else
+                                                      <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
+                                                   @endif
+                                                @endif
+                                             </td>
+                                          </tr>
+                                       @endif
+                                 @endforeach
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                     <div class="scroll-tbl">
+                        <h4 class="ml-2 Colorff0024">Expired Signals</h4>
+                           <table id="expiredTable" class="table table-bordered dt-responsive nowrap Border-Theme" style="width:100%">
+                              <thead>
+                                    <tr class="back-Theme">
+                                       <th>Sr#</th>
+                                       <th>Symbols/Pairs</th>
+                                       <th>Status</th>
+                                       <th>Users</th>
+                                       <th>Result</th>
+                                       <th>Pips</th>
+                                       <th>Signal</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                 @php $icount = 1 @endphp
+                                 @foreach($signalData as $data)
+                                    @php
+                                       $url = $data->GetURL();
+                                       $loginClientData = Session::get('client');
+                                       $go = 1;
+                                       $go3 = 1;
+                                       $profits = explode('@',$data->takeProfit);
+                                       $time1 = strtotime($data->time);
+                                       $time = date('h:i A', $time1);
+                                       $date1 = strtotime($data->date);
+                                       $date = date('d M Y', $date1);
+                                       if($data->date == date("Y-m-d")){
+                                          if($data->time >= date("H:i:s")){
+                                             $go = 0;
+                                             $go3 = 3;
                                           }
-                                          $finelmin = intval($finelmin);
-													   $pair = $data->getPair();
-                                          $flags = explode("/",$pair->pair);
-                                       @endphp
-                                    @if($go3 == 3)
-                                       <tr class="text-center">
+                                       }
+                                       if($data->date > date("Y-m-d")){
+                                          $go = 0;
+                                             $go3 = 3;
+                                       }
+                                       $timeDate1 = strtotime(date("Y-m-d H:i:s"));
+                                       $timeDate2 = strtotime($data->created_at->format("Y-m-d H:i:s"));
+                                       $minsDate = ($timeDate1 - $timeDate2) / 60;
+                                       $pair = $data->getPair();
+                                       $flags = explode("/",$pair->pair);
+                                    @endphp
+                                    @if($go3 != 3)
+                                       <tr>
+                                          <td>{{$icount++}}</td>
                                           <td>
                                              <p class="mb-2">
                                                 @foreach($flags as $flag)
                                                    @php $flag4 = str_replace(' ', '', $flag) @endphp
-                                                   <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
+                                                   <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" class="thumbnail" width="50" height="35" alt=""> &nbsp;&nbsp;
                                                 @endforeach
                                                 <!-- <span class="flag-icon flag-icon-ad">&nbsp;</span>
                                                 <span class="flag-icon flag-icon-us">&nbsp;</span> -->
                                              </p>
                                              <h6 class="m-0 font-weight-bold"><strong>{{$pair->pair}}</strong></h6>
-                                             <h6 class="m-0 text-danger">{{$finelmin}} {{$formatEng}} ago</h6>
+                                             <h6 class="m-0 text-danger">Expired</h6>
                                           </td>
                                           <td>
-                                             <button class="btn btn-success btn-sm buttonBlinking">Active</button>
+                                             <button class="btn btn-secondary btn-sm">Expired</button>
                                           </td>
                                           <td><strong class="font-weight-bold">{{$data->selectUser}}</strong></td>
-                                          <td class="text-center d-initial-flex">
-                                             <p class="m-0 pr-2"><strong> {{$date}}</strong></p>
-                                             <p class="m-0"><strong> {{$time}} </strong></p>
+                                          <td class="text-center">
+                                             <span class="{{$data->result == 'TP Hit' ? 'text-success' : ''}}{{$data->result == 'SL Hit' ? 'text-danger' : ''}}"><strong> {{$data->result == null ? 'none' : $data->result}}</strong></span>
+                                          </td>
+                                          <td class="text-center">
+                                             @if($data->pips != null)
+                                             <span class="m-0 {{str_contains($data->pips,'+') != null ? 'text-success' : ''}}{{str_contains($data->pips,'-') ? 'text-danger' : ''}}"><strong> {{$data->pips == null ? 'none' : $data->pips}}</strong></span>
+                                             @endif
                                           </td>
                                           <td colspan="2" class="pl-0">
-                                             @if($go == 0)
-                                                @if($data->selectUser == "Register User" && !Session::has('client'))
-                                                   <a href="#!"  class="LoginButton" data-toggle="modal" data-target="#requestQuoteModal">View Signal</a>
-                                                @elseif($data->selectUser == "VIP Member")
-                                                   @if(!Session::has('client'))
-                                                      <a href="#!"  class="LoginButton" data-toggle="modal" data-target="#requestQuoteModal">View Signal</a>
-                                                   @elseif(isset($loginClientData->memberType))
-                                                      @if($loginClientData->memberType == 1)
-                                                         <a href="#!" onclick="snackbar1()">View Signal</a>
-                                                      @else
-                                                         <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
-                                                      @endif
-                                                   @endif
-                                                @else
-                                                   <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
-                                                @endif
-                                             @endif
+                                             <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
                                           </td>
                                        </tr>
                                     @endif
-                              @endforeach
-                           </tbody>
-                        </table>
-                     </div>
-                     <div class="scroll-tbl">
-                        <h4 class="ml-2 Colorff0024">Expired Signals</h4>
-                        <table id="expiredTable" class="table table-striped">
-                           <thead>
-                              <tr class="text-center">
-                                 <th>Symbols/Pairs</th>
-                                 <th>Status</th>
-                                 <th>Users</th>
-                                 <th>Result</th>
-                                 <th>Pips</th>
-                                 <th>Signal</th>
-                                 <th>&nbsp;</th>
-                              </tr>
-                           </thead>
-                           <tbody>
-                              @foreach($signalData as $data)
-                                       @php
-                                          $url = $data->GetURL();
-	                                       $loginClientData = Session::get('client');
-                                          $go = 1;
-                                          $go3 = 1;
-                                          $profits = explode('@',$data->takeProfit);
-                                          $time1 = strtotime($data->time);
-                                          $time = date('h:i A', $time1);
-                                          $date1 = strtotime($data->date);
-                                          $date = date('d M Y', $date1);
-                                          if($data->date == date("Y-m-d")){
-                                             if($data->time >= date("H:i:s")){
-                                                $go = 0;
-                                                $go3 = 3;
-                                             }
-                                          }
-                                          if($data->date > date("Y-m-d")){
-                                             $go = 0;
-                                                $go3 = 3;
-                                          }
-                                          $timeDate1 = strtotime(date("Y-m-d H:i:s"));
-                                          $timeDate2 = strtotime($data->created_at->format("Y-m-d H:i:s"));
-                                          $minsDate = ($timeDate1 - $timeDate2) / 60;
-													   $pair = $data->getPair();
-                                          $flags = explode("/",$pair->pair);
-                                       @endphp
-                                    @if($go3 != 3)
-                                 <tr class="text-center">
-                                    <td>
-                                       <p class="mb-2">
-                                          @foreach($flags as $flag)
-                                             @php $flag4 = str_replace(' ', '', $flag) @endphp
-                                             <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" class="thumbnail" width="50" height="35" alt=""> &nbsp;&nbsp;
-                                          @endforeach
-                                          <!-- <span class="flag-icon flag-icon-ad">&nbsp;</span>
-                                          <span class="flag-icon flag-icon-us">&nbsp;</span> -->
-                                       </p>
-                                       <h6 class="m-0 font-weight-bold"><strong>{{$pair->pair}}</strong></h6>
-                                       <h6 class="m-0 text-danger">Expired</h6>
-                                    </td>
-                                    <td>
-                                       <button class="btn btn-secondary btn-sm">Expired</button>
-                                    </td>
-                                    <td><strong class="font-weight-bold">{{$data->selectUser}}</strong></td>
-                                    <td class="text-center">
-                                       <p class="m-0 {{$data->result == 'TP Hit' ? 'text-success' : ''}}{{$data->result == 'SL Hit' ? 'text-danger' : ''}}"><strong> {{$data->result == null ? 'none' : $data->result}}</strong></p>
-                                    </td>
-                                    <td class="text-center">
-                                       @if($data->pips != null)
-                                       <p class="m-0 {{str_contains($data->pips,'+') != null ? 'text-success' : ''}}{{str_contains($data->pips,'-') ? 'text-danger' : ''}}"><strong> {{$data->pips == null ? 'none' : $data->pips}}</strong></p>
-                                       @endif
-                                    </td>
-                                    <td colspan="2" class="pl-0">
-                                       <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
-                                    </td>
-                                 </tr>
-                                 @endif
-                              @endforeach
-                           </tbody>
-                        </table>
+                                 @endforeach
+                              </tbody>
+                           </table>
                      </div>
                   </div>
                </section>
@@ -227,6 +232,16 @@
 </div>
 @include('inc.footer')
 <style>
+   .Border-Theme{
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 8px;
+    border-image-source: linear-gradient(45deg, #ff0024, #0d5fe9);
+   }
+   .back-Theme th{
+    background: linear-gradient(45deg, #0d5fe9, #ff0024);
+    color: white;
+   }
    .Color0d5fe9{
       color: #0d5fe9;
    }
@@ -234,4 +249,5 @@
       color:#ff0024;
    }
 </style>
+
 

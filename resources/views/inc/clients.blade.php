@@ -1,4 +1,6 @@
-<section class="page-section gray-sec">
+
+@if(count($SponoserAddActive) > 0)
+	<section class="page-section gray-sec">
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
@@ -14,16 +16,13 @@
 				</div>
 			</div>
 			<section class="customer-logos slider fadeInUp wow" data-wow-delay="0.2s">
-				<?php 
-				$clients = array('exness.png','cabana.png','liquidity.png');
-				$countsClients = count($clients);
-				?>
-				@foreach ($clients as $value) 
+				@foreach($SponoserAddActive as $sponoserAdd)
 					<div class="">
-						<img src="{{URL::to('public/assets/assets/img/brands')}}/{{$value}}" class="card-img">
+						<img src="{{URL::to('storage/app')}}/{{$sponoserAdd->image}}" class="card-img">
 					</div>
 		      	@endforeach
 		   </section>
 		</div>
 	</section>
+@endif
 

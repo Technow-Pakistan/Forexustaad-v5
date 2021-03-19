@@ -166,8 +166,9 @@
 				<!-- pending signal start -->
 					<div class="col-sm-4">
 						<div class="card table-card" style="height:430px;">
-							<div class="card-header borderless">
-								<h5>Pending Signal</h5>
+							<div class="card-header borderless d-flex justify-content-between">
+								<h5>Signals</h5>
+								<a href="{{URL::to('ustaad/signals/add')}}">Add New Signal</a>
 							</div>
 							<div class="col-sm-12">
 								
@@ -276,6 +277,160 @@
 						</div>
 					</div>
 				<!-- pending signal end -->
+				<!-- Latest Signal Comments start -->
+					<div class="col-sm-4">
+						<div class="card table-card" style="height:470px;">
+							<div class="card-header borderless">
+								<h5>Latest Signal Comments</h5>
+							</div>
+							<div class="col-sm-12">
+								
+								<div class="card user-profile-list">
+									<div class="card-body">
+										<div class="dt-responsive table-responsive">
+											<table id="user-list-table2s" class="table nowrap">
+												<thead>
+													<tr>
+														<th>Pairs</th>
+														<th>Comment</th>
+													</tr>
+												</thead>
+												<tbody>
+													@foreach($signalLatestComments as $data)
+														@php
+															$pair = $data->getPair();
+														@endphp
+															
+														<tr>
+															<td><a href="{{URL::to('ustaad/signals/comment')}}/{{$data->signalId}}" class="text-dark">{{$pair->pair}}</a></td>
+															<td class="tdLinkScroll"><a href="{{URL::to('ustaad/signals/comment')}}/{{$data->signalId}}" class="text-dark">{{$data->comment}}</a></td>
+														</tr>
+													@endforeach
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<!-- Latest Signal Comments end -->
+				<!-- Latest Training Comments start -->
+					<div class="col-sm-4">
+						<div class="card table-card" style="height:470px;">
+							<div class="card-header borderless d-flex justify-content-between">
+								<h5>Latest Training Comments</h5>
+								<p class="m-0">
+									Fliter:  
+									<select name="fliterTraining" id="LatestTrainingCommentChange">
+										<option value="Advance">Advance</option>
+										<option value="Basic">Basic</option>
+										<option value="Habbit">Habbit</option>
+									</select>
+								</p>
+							</div>
+							<div class="col-sm-12">
+								
+								<div class="card user-profile-list">
+									<div class="card-body">
+										<div class="dt-responsive table-responsive AdvanceTrainingTableChange">
+											<table id="user-list-table3s" class="table nowrap">
+												<thead>
+													<tr>
+														<th>Lecture</th>
+														<th>Comment</th>
+													</tr>
+												</thead>
+												<tbody id="LatestTrainingCommentChangeBody">
+													@foreach($AdvanceTrainingLatestComments as $data)
+														<tr>
+															<td><a href="{{URL::to('ustaad/lecture/AdvanceCategory')}}/{{$data->lectureId}}" class="text-dark">Lecture {{$data->lectureId}}</a></td>
+															<td class="tdLinkScroll"><a href="{{URL::to('ustaad/lecture/AdvanceCategory')}}/{{$data->lectureId}}" class="text-dark">{{$data->comment}}</a></td>
+														</tr>
+													@endforeach
+												</tbody>
+											</table>
+										</div>
+										<div class="dt-responsive table-responsive BasicTrainingTableChange">
+											<table id="user-list-table31s" class="table nowrap">
+												<thead>
+													<tr>
+														<th>Lecture</th>
+														<th>Comment</th>
+													</tr>
+												</thead>
+												<tbody id="LatestTrainingCommentChangeBody">
+													@foreach($BasicTrainingLatestComments as $data)
+														<tr>
+															<td><a href="{{URL::to('ustaad/lecture/BasicCategory')}}/{{$data->lectureId}}" class="text-dark">Lecture {{$data->lectureId}}</a></td>
+															<td class="tdLinkScroll"><a href="{{URL::to('ustaad/lecture/BasicCategory')}}/{{$data->lectureId}}" class="text-dark">{{$data->comment}}</a></td>
+														</tr>
+													@endforeach
+												</tbody>
+											</table>
+										</div>
+										<div class="dt-responsive table-responsive HabbitTrainingTableChange">
+											<table id="user-list-table32s" class="table nowrap">
+												<thead>
+													<tr>
+														<th>Lecture</th>
+														<th>Comment</th>
+													</tr>
+												</thead>
+												<tbody id="LatestTrainingCommentChangeBody">
+													@foreach($HabbitTrainingLatestComments as $data)
+														<tr>
+															<td><a href="{{URL::to('ustaad/lecture/HabbitCategory')}}/{{$data->lectureId}}" class="text-dark">Lecture {{$data->lectureId}}</a></td>
+															<td class="tdLinkScroll"><a href="{{URL::to('ustaad/lecture/HabbitCategory')}}/{{$data->lectureId}}" class="text-dark">{{$data->comment}}</a></td>
+														</tr>
+													@endforeach
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<!-- Latest Training Comments end -->
+				<!-- Latest Signal Comments start -->
+					<div class="col-sm-4">
+						<div class="card table-card" style="height:470px;">
+							<div class="card-header borderless">
+								<h5>Latest Blog Post Comments</h5>
+							</div>
+							<div class="col-sm-12">
+								
+								<div class="card user-profile-list">
+									<div class="card-body">
+										<div class="dt-responsive table-responsive">
+											<table id="user-list-table4s" class="table nowrap">
+												<thead>
+													<tr>
+														<th>Title</th>
+														<th>Comment</th>
+													</tr>
+												</thead>
+												<tbody>
+													@foreach($BlogPostLatestComments as $data)
+														@php
+															$blogPost = $data->getBlogPost();
+														@endphp
+															
+														<tr>
+															<td><a href="{{URL::to('ustaad/post/comment')}}/{{$data->blogId}}" class="text-dark">{{$blogPost->mainTitle}}</a></td>
+															<td class="tdLinkScroll"><a href="{{URL::to('ustaad/post/comment')}}/{{$data->blogId}}" class="text-dark">{{$data->comment}}</a></td>
+														</tr>
+													@endforeach
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<!-- Latest Signal Comments end -->
 
 				<!-- <div class="col-md-6">
                 </div> -->
@@ -454,8 +609,54 @@
 
 @include('admin.include.footer')
 <script>
+	$(".HabbitTrainingTableChange").hide();
+	$(".BasicTrainingTableChange").hide();
+	$("#LatestTrainingCommentChange").on("change",function(){
+		var LatestTrainingCommentChange = $(this).val();
+		
+		if(LatestTrainingCommentChange == "Basic"){
+			$(".AdvanceTrainingTableChange").hide();
+			$(".HabbitTrainingTableChange").hide();
+			$(".BasicTrainingTableChange").show();
+		}else if(LatestTrainingCommentChange == "Advance"){
+			$(".HabbitTrainingTableChange").hide();
+			$(".BasicTrainingTableChange").hide();
+			$(".AdvanceTrainingTableChange").show();
+        }else if(LatestTrainingCommentChange == "Habbit"){
+			$(".AdvanceTrainingTableChange").hide();
+			$(".BasicTrainingTableChange").hide();
+			$(".HabbitTrainingTableChange").show();
+        }
+	})
+</script>
+<script>
 	$(document).ready(function () {
 		$('#user-list-table1s').dataTable({
+			"autoWidth": false,
+			"lengthChange": false,
+			"pageLength": 5
+		});
+		$('#user-list-table2s').dataTable({
+			"autoWidth": false,
+			"lengthChange": false,
+			"pageLength": 5
+		});
+		$('#user-list-table3s').dataTable({
+			"autoWidth": false,
+			"lengthChange": false,
+			"pageLength": 5
+		});
+		$('#user-list-table31s').dataTable({
+			"autoWidth": false,
+			"lengthChange": false,
+			"pageLength": 5
+		});
+		$('#user-list-table32s').dataTable({
+			"autoWidth": false,
+			"lengthChange": false,
+			"pageLength": 5
+		});
+		$('#user-list-table4s').dataTable({
 			"autoWidth": false,
 			"lengthChange": false,
 			"pageLength": 5

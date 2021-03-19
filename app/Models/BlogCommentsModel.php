@@ -6,12 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\ClientRegistrationModel;
 use App\Models\AdminModel;
 use App\Models\AdminMemberDetailModel;
+use App\Models\BlogPostModel;
 
 class BlogCommentsModel extends Model
 {
     protected $table = "blog_comments";
     protected $fillable = ["comment","memberId","userType","commentId","status","reply","blogId","replyName"];
 
+    public function getBlogPost(){
+        $replys = BlogPostModel::where('id',$this->blogId)->first();
+        return $replys;
+    }
     public function getReply(){
         $replys = BlogCommentsModel::where('commentId',$this->id)->get();
         return $replys;

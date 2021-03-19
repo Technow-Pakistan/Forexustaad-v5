@@ -19,7 +19,13 @@ use App\Models\NonRegisterVisitorModel;
 use App\Models\ActiveOnSiteModel;
 use App\Models\NotificationModel;
 use App\Models\PusherModel;
+use App\Models\SignalCommentsModel;
+use App\Models\SignalsModel;
 use App\Models\ClientNotificationModel;
+use App\Models\BlogCommentsModel;
+use App\Models\AdvanceCommentsModel;
+use App\Models\HabbitCommentsModel;
+use App\Models\BasicCommentsModel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SubscriberMail;
 
@@ -285,7 +291,13 @@ class AdminController extends Controller
             }
             array_push($browserDataUniqueArray,$persontage);
         }
-        return view('admin.index',compact('browserDataUniqueArray','activeUserGraphAllDataArray','TotalClientNumber','MonthlyClientNumber','ToDayClientNumber','WeeklyClientNumber','TotalAdminUsersNumber','MonthlyAdminUsersNumber','TotalBrokerNumber','MonthlyBrokerNumber','TotalPostNumber','MonthlyPostNumber'));
+        $signalPendingData = SignalsModel::orderBy('id','desc')->take(10)->get();
+        $signalLatestComments = SignalCommentsModel::orderBy('id','desc')->skip(0)->take(20)->get();
+        $AdvanceTrainingLatestComments = AdvanceCommentsModel::orderBy('id','desc')->skip(0)->take(20)->get();
+        $BasicTrainingLatestComments = BasicCommentsModel::orderBy('id','desc')->skip(0)->take(20)->get();
+        $HabbitTrainingLatestComments = HabbitCommentsModel::orderBy('id','desc')->skip(0)->take(20)->get();
+        $BlogPostLatestComments = BlogCommentsModel::orderBy('id','desc')->skip(0)->take(20)->get();
+        return view('admin.index',compact('BasicTrainingLatestComments','HabbitTrainingLatestComments','BlogPostLatestComments','AdvanceTrainingLatestComments','signalLatestComments','signalPendingData','browserDataUniqueArray','activeUserGraphAllDataArray','TotalClientNumber','MonthlyClientNumber','ToDayClientNumber','WeeklyClientNumber','TotalAdminUsersNumber','MonthlyAdminUsersNumber','TotalBrokerNumber','MonthlyBrokerNumber','TotalPostNumber','MonthlyPostNumber'));
     }
     public function Logout(Request $request){
         $request->session()->pull("admin");
