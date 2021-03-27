@@ -220,49 +220,12 @@
 																@php
 																	$adminUser = $data->GetMember();
 																@endphp
-																<td>{{$adminUser == null ? 'admin' : $adminUser->username}}</td>
+																<td class="tdLinkScroll">{{$adminUser == null ? 'admin' : $adminUser->username}}</td>
 																<td>
 																	@if($data->pending == 1)
 																		<span class="badge badge-light-warning">Pending</span>
 																	@else
 																		<span class="badge {{$data->status == 0 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 0 ? 'Active' : 'Deactive'}}</span>
-																	@endif
-																	@if($data->pending == 1 && $value['memberId'] != 7)
-																		<div class="overlay-edit">
-																			<form action="{{URL::to('ustaad/signals/allow')}}/{{$data->id}}" method="post">
-																				<span class="badge badge-light-warning">
-																					Allow
-																					<input type="checkbox" class="AllowBroker" name="pending" id="" value="0">
-																				</span>
-																			</form>
-																			<a href="{{URL::to('/ustaad/signals/edit')}}/{{$data->id}}">
-																				<button type="button" class="btn btn-icon btn-success" style="width: 20px;height: 20px;padding: 12px;"><i class="fa fa-edit" style="font-size: 12px;"></i></button>
-																			</a>
-																			@if($data->status == 0)
-																				<button type="button" href="{{URL::to('/ustaad/signals/delete')}}/{{$data->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"style="width: 20px;height: 20px;padding: 12px;"><i class="fa fa-lock" style="font-size: 12px;"></i></button>
-																			@elseif($data->status == 1)
-																				<button type="button" href="{{URL::to('/ustaad/signals/active')}}/{{$data->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal"style="width: 20px;height: 20px;padding: 12px;"><i class="fa fa-unlock" style="font-size: 12px;"></i></button>
-																			@endif
-																		</div>
-																	@else
-																		<div class="overlay-edit">
-																			@if($value['memberId'] == 1)
-																				<form action="{{URL::to('ustaad/signals')}}/{{$data->star == 0 ? 'star' : 'unstar'}}/{{$data->id}}" method="post">
-																					<span>
-																						<input type="checkbox" class="AllowBroker hiddenCheckBox" name="pending" id="option{{$data->id}}" value="0">
-																						<label for="option{{$data->id}}" class="mt-2 mr-2"><i class="fa fa-star {{$data->star == 1 ? 'yellowStar' : ''}}"></i></label>
-																					</span>
-																				</form>
-																			@endif
-																			<a href="{{URL::to('/ustaad/signals/edit')}}/{{$data->id}}">
-																				<button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button>
-																			</a>
-																			@if($data->status == 0)
-																				<button type="button" href="{{URL::to('/ustaad/signals/delete')}}/{{$data->id}}" class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-lock"></i></button>
-																			@elseif($data->status == 1)
-																				<button type="button" href="{{URL::to('/ustaad/signals/active')}}/{{$data->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock"></i></button>
-																			@endif
-																		</div>
 																	@endif
 																</td>
 															</tr>
@@ -279,7 +242,7 @@
 				<!-- pending signal end -->
 				<!-- Latest Signal Comments start -->
 					<div class="col-sm-4">
-						<div class="card table-card" style="height:470px;">
+						<div class="card table-card">
 							<div class="card-header borderless">
 								<h5>Latest Signal Comments</h5>
 							</div>
@@ -317,7 +280,7 @@
 				<!-- Latest Signal Comments end -->
 				<!-- Latest Training Comments start -->
 					<div class="col-sm-4">
-						<div class="card table-card" style="height:470px;">
+						<div class="card table-card">
 							<div class="card-header borderless d-flex justify-content-between">
 								<h5>Latest Training Comments</h5>
 								<p class="m-0">
@@ -395,7 +358,7 @@
 				<!-- Latest Training Comments end -->
 				<!-- Latest Signal Comments start -->
 					<div class="col-sm-4">
-						<div class="card table-card" style="height:470px;">
+						<div class="card table-card">
 							<div class="card-header borderless">
 								<h5>Latest Blog Post Comments</h5>
 							</div>

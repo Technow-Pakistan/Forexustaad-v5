@@ -262,11 +262,10 @@ class AdminController extends Controller
         }else {
             $firstDate = date("Y-m-d");
         }
-        $loopCount = abs(strtotime(date("Y-m-d")) - strtotime($firstDate));
+        $loopCount = abs(strtotime(date("2021-03-29")) - strtotime($firstDate));
         $years = floor($loopCount / (365*60*60*24));
         $months = floor(($loopCount - $years * 365*60*60*24) / (30*60*60*24));
-        $days = floor(($loopCount - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
-
+        $days = round($loopCount / (60 * 60 * 24));
         for ($i=0; $i <= $days ; $i++) {
             $endTime = strtotime("$i days", strtotime($firstDate));
             $activeUserGraphData = NonRegisterVisitorModel::where('strtotime',$endTime)->get();
@@ -276,7 +275,6 @@ class AdminController extends Controller
             array_push($temporaryData,$endstrtotime,$countofStrtotitme);
             array_push($activeUserGraphAllDataArray,$temporaryData);
         }
-
         // Get browser Data one by one & Whole
 
         $VistorDailyBrowserGraphALLDataGet = NonRegisterVisitorModel::all();

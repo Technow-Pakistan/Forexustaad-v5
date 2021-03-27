@@ -137,13 +137,19 @@ class HomeController extends Controller
         $StockApiData = array();
         // $data1 = file_get_contents("https://fcsapi.com/api-v3/forex/latest?symbol=all_forex&access_key=DGBiPcd81sslKeJJuwC17lhGW");
         // $daata1 =  json_decode($data1);
-        // $forexApiData = $daata1->response;  
+        // if(isset($daata1->response)){
+        //  $forexApiData = $daata1->response; 
+        // } 
         // $data2 = file_get_contents("https://fcsapi.com/api-v3/crypto/latest?symbol=all_crypto&access_key=DGBiPcd81sslKeJJuwC17lhGW");
         // $daata2 =  json_decode($data2);
-        // $CryptoApiData = $daata2->response;
+        // if(isset($daata2->response)){
+        //  $CryptoApiData = $daata2->response;
         // $data3 = file_get_contents("https://fcsapi.com/api-v3/stock/indices_latest?id=1,2,3,4,5&access_key=DGBiPcd81sslKeJJuwC17lhGW");
-        // $daata3 =  json_decode($data3);
-        // $StockApiData = $daata3->response;
+        //  $daata3 =  json_decode($data3);
+        // } 
+        // if(isset($daata3->response)){
+        //  $StockApiData = $daata3->response;
+        // } 
         return view('home.index',compact('forexApiData','CryptoApiData','StockApiData'));
     }
     public function privacyPolicy(){

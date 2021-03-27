@@ -577,7 +577,7 @@
 
                     <section class="currency-table-list">
                         <!-- /.End of How to Get  Start -->
-                        <div class="currency-table">
+                        <!-- <div class="currency-table">
                             <div class="with-nav-tabs currency-tabs">
                                 <div class="tab-header">
                                     <ul class="nav nav-tabs" id="currencyTab" role="tablist">
@@ -686,7 +686,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- /.End of currency table -->
                     </section>
 
@@ -791,7 +791,7 @@
 // // Crypto
 //     $.ajax({
 //       type: "Get",
-//       url: "https://fcsapi.com/api-v3/crypto/latest?symbol=all_crypto&access_key=7bcaAttKq4UFZwKhrE2LEHn",
+//       url: "https://fcsapi.com/api-v3/crypto/latest?symbol=all_crypto&access_key=DGBiPcd81sslKeJJuwC17lhGW",
 //       success: function(response){
 //         json = response.response;
 //         $("#cryptoTable tbody").html("");
