@@ -152,7 +152,7 @@
                                     <div class="form-group">
                                         <label>Result</label>
                                         <select name="result" class="form-control">
-                                            <option value="none">None</option>
+                                            <option value="">None</option>
                                             <option value="Manually Closed" {{$data->result == "Manually Closed" ? 'selected' : ''}}>Manually Closed</option>
                                             <option value="TP Hit" {{$data->result == "TP Hit" ? 'selected' : ''}}>TP Hit</option>
                                             <option value="SL Hit" {{$data->result =="SL Hit"  ? 'selected' : ''}}>SL Hit</option>

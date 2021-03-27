@@ -203,7 +203,6 @@
       var id = $(this).attr("data-id");
       $(".h-send-chat").attr("userId",id);
       var url = "{{URL::to('ustaad/clientDataMessage')}}/" + id;
-      console.log(url);
 			$.ajax({
 				type: "Post",
 				url: url,
@@ -241,7 +240,6 @@
               }
               if (json[0][index].userType == 1){
                 if (chatStartCount == 2) {
-                  console.log("a2");
                   chatMessages = [];
                   AllAtOneClientMessageData = "";
                 }
@@ -251,14 +249,12 @@
               }
               if (json[0][index].userType == 2){
                 if (chatStartCount == 1) {
-                  console.log("a1");
                   chatMessages = [];
                   AllAtOneClientMessageData = "";
                 }
                 var chatOneMessage = "<p class='chat-cont mr-1'>"+json[0][index].message+"</p></br>"
                 chatMessages.push(chatOneMessage); 
                 chatStartCount = 2;
-                  console.log("c");
               }
               if (index+1 == json[0].length) {
                   for (let index1 = 0; index1 < chatMessages.length; index1++){
@@ -284,8 +280,6 @@
             objDiv.scrollTop = objDiv.scrollHeight;
             $(".ChatMessageCount").html(liveChatIconHeaderCount);
             liveStatus.html(0);
-            console.log("ads2");
-            console.log("ads1");
 				},
 				error: function(data) {
 					console.log("fail");
@@ -302,12 +296,12 @@
 
 
     function b(g) {
-        $(".header-chat .main-friend-chat").append('<div class="media chat-messages"><div class="media-body chat-menu-reply"><div class=""><p class="chat-cont">' + $(".h-send-chat").val() + '</p></br></div></div><a class="media-right photo-table" href="#!"><img class="media-object img-radius img-radius m-t-5" src="https:forexustaad.com/public/assets/assets/img/favicon.png" alt="Generic placeholder image"></a></div>');
+        var chatImgSrc111 = "{{URL::to('public/assets/assets/img/favicon.png')}}";
+        $(".header-chat .main-friend-chat").append("<div class='media chat-messages'><div class='media-body chat-menu-reply'><div class=''><p class='chat-cont'>" + $('.h-send-chat').val() + "</p></br></div></div><a class='media-right photo-table' href='#!'><img class='media-object img-radius img-radius m-t-5' src='"+chatImgSrc111+"' alt='Generic placeholder image'></a></div>");
         var chatMessageSave = $(".h-send-chat").val();
         $(".h-send-chat").val(null);
         var idToGet =  $(".h-send-chat").attr("userId");
         var urlPost = "{{URL::to('ustaad/clientMessageSend')}}/" +  idToGet;
-        console.log(urlPost);
         $.ajax({
           type: "Post",
           data : {
@@ -315,7 +309,7 @@
           },
           url: urlPost,
           success: function(response){
-            console.log(response);
+            console.log("success");
           },
           error: function(data) {
             console.log("fail");
@@ -377,18 +371,15 @@
             var hideDivChat = countAdd.parent().parent();
             var PrependDivChat = countAdd.parent().parent().parent();
             $(PrependDivChat).prepend(hideDivChat);
-            console.log(hideDivChat);
           }
           var userId1 = $(".clientDataMessagesUser").attr("userId");
           var ChatMessageCount = $(".ChatMessageCount").html();
           var hideDivChat = countAdd.parent().parent();
-          console.log(hideDivChat);
           if (data.message.userId == userId1) {
             countAdd.html(--add);
             var userIdSrc = ".userId" + data.message.userId;
             var userIdSrc12 = $(userIdSrc).parent().children();
             var userIdSrc13 = $(userIdSrc12).attr('src')
-            console.log(userIdSrc13);
             var userIdSrcMessage = "<p class='chat-cont mr-1'>"+data.message.message+"</p></br>";
             ChatClientMessageThrough(userIdSrc13,userIdSrcMessage);
           }else{
@@ -396,8 +387,6 @@
           }
           $("#NotificationSound")[0].play();
           setTimeout(function(){ $("#NotificationSound")[0].pause(); }, 4000);
-          console.log(data.message.userId);
-          console.log("sad");
         });
 
     </script>

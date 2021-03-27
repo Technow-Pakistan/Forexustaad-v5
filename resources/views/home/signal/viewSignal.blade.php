@@ -72,7 +72,7 @@
                                             (<span class="totalLiked text-primary">{{count($TotalLikes)}}</span>)
                                             <span class="likeForm likeForm1 {{!Session::has('client') ? "LoginButton" : ''}} {{$clientLikeshow == 1 ? ($clientLike->liked == 1 ? 'text-primary' :'') : '' }}" text="{{$clientLikeshow == 1 ? ($clientLike->liked == 1 ? 'text-primary' :'') : ''  }}" value="1" {{!Session::has('client') ? "data-toggle=modal data-target=#requestQuoteModal" : ''}}> <i class="fa fa-thumbs-up"></i> </span>
                                             (<span class="totalDisliked text-danger">{{count($TotalDislikes)}}</span>)
-                                            <span class="likeForm disLikeForm1 {{!Session::has('client') ? "LoginButton" : ''}} {{$clientLikeshow == 1 ? ($clientLike->liked == 0 ? 'text-danger' :'') : ''  }}" text="{{$clientLikeshow == 1 ? ($clientLike->liked == 0 ? 'text-danger' :'') : ''  }}" value="0" {{!Session::has('client') ? "data-toggle=modal data-target=#requestQuoteModal" : ''}}><i class="fa fa-thumbs-down"></i></span>
+                                            <span class="likeForm disLikeForm1 {{!Session::has('client') ? "LoginButton" : ''}} {{$clientLikeshow == 1 ? ($clientLike->liked == 0 ? 'text-danger' :'') : ''  }}" text="{{$clientLikeshow == 1 ? ($clientLike->liked == 0 ? 'text-danger' :'') : ''  }}" value="0" {{!Session::has('client') ? "data-toggle=modal data-target=#requestQuoteModal" : ''}}><i class="fa fa-thumbs-up" style="transform: rotate(174deg);"></i></span>
                                         </div>
                                       </div>
                                     </div>
@@ -176,6 +176,68 @@
                                                 </div>
                                             </div>
                                             <hr>
+                                        @endif
+                                        @if($signalApiData)
+                                          @if($signalData->result == null && $signalData->pips == null)
+                                              <div class="row">
+                                                  <div class="col-sm-4">
+                                                      <h6 class="mb-0">Current Market Price</h6>
+                                                  </div>
+                                                  <div class="col-sm-8 fontBold">
+                                                      {{$signalApiData->price}}
+                                                  </div>
+                                              </div>
+                                              <hr>
+                                              <div class="row">
+                                                  <div class="col-sm-4">
+                                                      <h6 class="mb-0">Current Market Opening Price</h6>
+                                                  </div>
+                                                  <div class="col-sm-8 fontBold">
+                                                      {{$signalApiData->opening_price}}
+                                                  </div>
+                                              </div>
+                                              <hr>
+                                              <div class="row">
+                                                  <div class="col-sm-4">
+                                                      <h6 class="mb-0">Current Market High</h6>
+                                                  </div>
+                                                  <div class="col-sm-8 fontBold">
+                                                      {{$signalApiData->high}}
+                                                  </div>
+                                              </div>
+                                              <hr>
+                                              <div class="row">
+                                                  <div class="col-sm-4">
+                                                      <h6 class="mb-0">Current Market Low</h6>
+                                                  </div>
+                                                  <div class="col-sm-8 fontBold">
+                                                      {{$signalApiData->low}}
+                                                  </div>
+                                              </div>
+                                              <hr>
+                                              <div class="row">
+                                                  <div class="col-sm-4">
+                                                      <h6 class="mb-0">Our PIPs</h6>
+                                                  </div>
+                                                  <div class="col-sm-8 fontBold {{$signalApiData->pips > 0 ? 'text-primary' : 'text-danger' }}">
+                                                      {{$signalApiData->pips}}
+                                                  </div>
+                                              </div>
+                                              <hr>
+                                              @if($signalApiData->result != null)
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <h6 class="mb-0">Our Current Result</h6>
+                                                    </div>
+
+                                                    <div class="col-sm-8 fontBold {{$signalApiData->result != 'SL Hit' ? 'text-primary' : 'text-danger'}} ">
+                                                        {{$signalApiData->result}} 
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                              @endif
+                                          @endif
+                                                
                                         @endif
                                         <!-- <div class="row">
                                             <div class="col-sm-3">
@@ -869,3 +931,5 @@
         })
     </script>
 @endif
+
+<script data-ad-client="ca-pub-4965167409528757" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

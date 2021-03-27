@@ -39,18 +39,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Forexustaad is the best platforms for learning free forex trading in urdu/hindi. So, join our free forex training now and reshape your future with us.
 ">
-
-<!--Desktop Notification Script-->
 <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
 <script>
   window.OneSignal = window.OneSignal || [];
   OneSignal.push(function() {
     OneSignal.init({
-      appId: "2e2a8527-b671-4d10-bbe3-bca1064dc33b",
-      safari_web_id: "web.onesignal.auto.2e2a8527-b671-4d10-bbe3-bca1064dc33b",
-      notifyButton: {
-        enable: true,
-      },
+      appId: "02ee1eb6-82fc-4aa7-9d6a-3615c671f963",
     });
   });
 </script>
@@ -82,10 +76,24 @@
 
 <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
 
-<script data-ad-client="ca-pub-4965167409528757" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
 <!-- Google recaptch -->
 <script src="https://www.google.com/recaptcha/api.js?render=6LfoWyEaAAAAAC-Bs8wiRSMTBSLB3AR8Nq8eS3kH"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script type="text/javascript">
+      var onloadCallback = function() {
+        grecaptcha.render('html_element', {
+          'sitekey' : '6LezBIYaAAAAABr8gfLi76swA4va2bPoD-gykpGi'
+        });
+      };
+      window.onload = function() {
+    var $recaptcha = document.querySelector('#g-recaptcha-response');
+
+    if($recaptcha) {
+        $recaptcha.setAttribute("required", "required");
+    }
+};
+    </script>
         <!-- font-awesome -->
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
             <style>
@@ -149,7 +157,7 @@
 
     <!-- Preloader starts -->
     <div id="loading">
-        <img id="loading-image" src="{{('public/assets/assets/img/preloader.gif')}}" alt="Loading..." />
+        <img id="loading-image" src="{{URL::to('public/assets/assets/img/preloader.gif')}}" alt="Loading..." />
         <p class="mt-3"><strong>LOADING...</strong></p>
     </div>
     <!-- Preloader ends -->
