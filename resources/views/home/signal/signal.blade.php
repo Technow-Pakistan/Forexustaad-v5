@@ -250,4 +250,5 @@
    }
 </style>
 
+<script data-ad-client="ca-pub-4965167409528757" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 

@@ -143,6 +143,7 @@
 	 height: 100%;
 }
  .form h3 {
+		text-align: center;
 	 color: #fff;
 	 letter-spacing: 2px;
 	 margin-bottom: 30px;

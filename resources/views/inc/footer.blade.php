@@ -979,7 +979,15 @@
           $(".RegistrationError").html("Your Password and Comfirmed Password is not matched.")
         }
       }
+      var $captcha = $( '#recaptcha' ),
+              response = grecaptcha.getResponse();
+          
+          if (response.length === 0) {
+              e.preventDefault();
+              $(".RegistrationError").html("Recaptcha is mandatory.");
+          } 
     });
+
 
 </script>
 
