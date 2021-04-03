@@ -13,6 +13,7 @@ use App\Models\PusherModel;
 use App\Models\ClientRegistrationModel;
 use App\Models\ClientNotificationModel;
 use App\Models\SignalApiModel;
+use App\Models\SignalApiKeyModel;
 
 class SignalController extends Controller
 {
@@ -45,7 +46,6 @@ class SignalController extends Controller
             $TotalDislikes = SignalLikeModel::where('signalId',$signalData->id)->where('liked',0)->get();
             $title = "Signal";
             // signal is expired or not start
-
             $go = 1;
             $go3 = 1;
             $time1 = strtotime($signalData->time);
@@ -66,16 +66,17 @@ class SignalController extends Controller
             // signal is expired or not end
             $signalPair = SignalPairModel::find($signalData->forexPairs);
             $signalApiData = SignalApiModel::where('signal_id',$signalData->id)->first();
+            $signalApiKey = SignalApiKeyModel::where('id',1)->first();
             if($go3 == 3){  
                 if ($signalApiData) {
                     if ($signalApiData->result != "SL Hit" || $signalApiData->result != "Finel TP Hit") {
                         $time = $signalApiData->lastUpdate;
                         $date1 = strtotime($time);
-                        $date = date("Y-m-d H:i:s");
+                        $date = date("Y-m-d h:i:s");
                         $date2 = strtotime($date);
                         $date3 = $date2-$date1;
                         if ($date3 >= 900) {
-                            $data1 = file_get_contents("https://fcsapi.com/api-v3/forex/latest?symbol=$signalApiData->symbol&access_key=DGBiPcd81sslKeJJuwC17lhGW");
+                            $data1 = file_get_contents("https://fcsapi.com/api-v3/forex/latest?symbol=$signalApiData->symbol&access_key=$signalApiKey->apiKey");
                             $daata1 =  json_decode($data1);
                             if(isset($daata1->response)){
                                 $forexApiData = $daata1->response;
@@ -100,7 +101,7 @@ class SignalController extends Controller
                                                 $TakeProfit += 1;
                                             }
                                             if ($TakeProfit == "Finel") {
-                                                $apiData['pips'] = $Profits[$i];
+                                                $$pips1 = $Profits[$i];
                                             }
                                         }
                                     }
@@ -114,10 +115,14 @@ class SignalController extends Controller
                                     }
                                 }elseif($stopLose > $pips){
                                     $apiData['result'] = "SL Hit";
-                                    $apiData['pips'] = $stopLose;
                                     $pips1 = $stopLose;
                                 }
-                                $apiData['pips'] = $pips1;
+                                if ($signalPair->categoryId == 1 && $signalPair->categoryId == 2) {
+                                    $pips1 = $pips1 * 10000;
+                                }else{
+                                    $pips1 = $pips1 * 100;
+                                }
+                                $apiData['pips'] = number_format((float)$pips1, 1, '.', '');
                                 $apiData['price'] = $forexApiData[0]->c;
                                 $apiData['opening_price'] = $forexApiData[0]->o;
                                 $apiData['high'] = $forexApiData[0]->h;
@@ -371,8 +376,20 @@ class SignalController extends Controller
         //     $request->session()->put('desktopNotification',$data44);
         // }
         $signalPair = SignalPairModel::where('id',$signal->forexPairs)->first();
-        if($signalPair->categoryId == 1){
-            $data1 = file_get_contents("https://fcsapi.com/api-v3/forex/latest?symbol=$signalPair->pair&access_key=DGBiPcd81sslKeJJuwC17lhGW");
+        $signalApiKey = SignalApiKeyModel::where('id',1)->first();
+        
+        if($signalPair->categoryId == 1 || $signalPair->categoryId == 2 || $signalPair->pair == "Gold" || $signalPair->pair == "Crude Oil WTI" ){
+            if ($signalPair->categoryId == 1) {
+                $data1 = file_get_contents("https://fcsapi.com/api-v3/forex/latest?symbol=$signalPair->pair&access_key=$signalApiKey->apiKey");
+            }elseif($signalPair->pair == "Gold"){
+                $data1 = file_get_contents("https://fcsapi.com/api-v3/forex/latest?symbol=XAU/USD&access_key=$signalApiKey->apiKey");
+            }elseif($signalPair->pair == "Crude Oil WTI"){
+                $data1 = file_get_contents("https://fcsapi.com/api-v3/forex/latest?symbol=WTI/USD&access_key=$signalApiKey->apiKey");
+            }elseif($signalPair->categoryId == 2){
+                $cryptoSignal = $signalPair->pair;
+                $cryptoSignal = str_replace(' ', '', $cryptoSignal);
+                $data1 = file_get_contents("https://fcsapi.com/api-v3/crypto/latest?symbol=$cryptoSignal&access_key=$signalApiKey->apiKey");
+            }
             $daata1 =  json_decode($data1);
             if(isset($daata1->response)){
                 $forexApiData = $daata1->response;

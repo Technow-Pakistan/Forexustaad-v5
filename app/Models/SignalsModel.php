@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\SignalPairModel;
 use App\Models\AdminModel;
+use App\Models\SignalApiModel;
 
 class SignalsModel extends Model
 {
@@ -32,5 +33,9 @@ class SignalsModel extends Model
     public function GetMember(){
         $replys = AdminModel::where('id',$this->userId)->first();
         return $replys;
+    }
+    public function GetSignalApiData(){
+        $data = SignalApiModel::where('signal_id',$this->id)->first();;
+        return $data;
     }
 }
