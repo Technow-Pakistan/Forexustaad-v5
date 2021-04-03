@@ -184,7 +184,11 @@
 													</tr>
 												</thead>
 												<tbody>
+														@php
+															$wholeData = [];
+														@endphp
 													@foreach($signalPendingData as $data)
+
 														@php
 															$pair = $data->getPair();
 														@endphp
@@ -214,7 +218,7 @@
 																		$pair = $data->getPair();
 															$flags = explode("/",$pair->pair);
 														@endphp
-                                                		@if($go3 == 3)
+														@if($go3 == 3)
 															<tr>
 																<td>{{ isset($pair->pair) ? $pair->pair : $data->forexPairs}}</td>
 																@php
@@ -239,162 +243,105 @@
 							</div>
 						</div>
 					</div>
-				<!-- pending signal end -->
-				<!-- Latest Signal Comments start -->
-					<div class="col-sm-4">
-						<div class="card table-card">
-							<div class="card-header borderless">
-								<h5>Latest Signal Comments</h5>
-							</div>
-							<div class="col-sm-12">
-
-								<div class="card user-profile-list">
-									<div class="card-body">
-										<div class="dt-responsive table-responsive">
-											<table id="user-list-table2s" class="table nowrap">
-												<thead>
-													<tr>
-														<th>Pairs</th>
-														<th>Comment</th>
-													</tr>
-												</thead>
-												<tbody>
 													@foreach($signalLatestComments as $data)
 														@php
 															$pair = $data->getPair();
 														@endphp
-
-														<tr>
-															<td><a href="{{URL::to('ustaad/signals/comment')}}/{{$data->signalId}}" class="text-dark">{{$pair->pair}}</a></td>
-															<td class="tdLinkScroll"><a href="{{URL::to('ustaad/signals/comment')}}/{{$data->signalId}}" class="text-dark">{{$data->comment}}</a></td>
-														</tr>
+															@php 
+																$data['titleName'] = "Signal";
+																array_push($wholeData,$data)
+															@endphp
 													@endforeach
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				<!-- Latest Signal Comments end -->
-				<!-- Latest Training Comments start -->
-					<div class="col-sm-4">
-						<div class="card table-card">
-							<div class="card-header borderless d-flex justify-content-between">
-								<h5>Latest Training Comments</h5>
-								<p class="m-0">
-									Fliter:
-									<select name="fliterTraining" id="LatestTrainingCommentChange">
-										<option value="Advance">Advance</option>
-										<option value="Basic">Basic</option>
-										<option value="Habbit">Habbit</option>
-									</select>
-								</p>
-							</div>
-							<div class="col-sm-12">
-
-								<div class="card user-profile-list">
-									<div class="card-body">
-										<div class="dt-responsive table-responsive AdvanceTrainingTableChange">
-											<table id="user-list-table3s" class="table nowrap">
-												<thead>
-													<tr>
-														<th>Lecture</th>
-														<th>Comment</th>
-													</tr>
-												</thead>
-												<tbody id="LatestTrainingCommentChangeBody">
 													@foreach($AdvanceTrainingLatestComments as $data)
-														<tr>
-															<td><a href="{{URL::to('ustaad/lecture/AdvanceCategory')}}/{{$data->lectureId}}" class="text-dark">Lecture {{$data->lectureId}}</a></td>
-															<td class="tdLinkScroll"><a href="{{URL::to('ustaad/lecture/AdvanceCategory')}}/{{$data->lectureId}}" class="text-dark">{{$data->comment}}</a></td>
-														</tr>
+															@php 
+																$data['titleName'] = "Advance Training";
+																array_push($wholeData,$data)
+															@endphp
 													@endforeach
-												</tbody>
-											</table>
-										</div>
-										<div class="dt-responsive table-responsive BasicTrainingTableChange">
-											<table id="user-list-table31s" class="table nowrap">
-												<thead>
-													<tr>
-														<th>Lecture</th>
-														<th>Comment</th>
-													</tr>
-												</thead>
-												<tbody id="LatestTrainingCommentChangeBody">
 													@foreach($BasicTrainingLatestComments as $data)
-														<tr>
-															<td><a href="{{URL::to('ustaad/lecture/BasicCategory')}}/{{$data->lectureId}}" class="text-dark">Lecture {{$data->lectureId}}</a></td>
-															<td class="tdLinkScroll"><a href="{{URL::to('ustaad/lecture/BasicCategory')}}/{{$data->lectureId}}" class="text-dark">{{$data->comment}}</a></td>
-														</tr>
+															@php 
+																$data['titleName'] = "Basic Training";
+																array_push($wholeData,$data)
+															@endphp
 													@endforeach
-												</tbody>
-											</table>
-										</div>
-										<div class="dt-responsive table-responsive HabbitTrainingTableChange">
-											<table id="user-list-table32s" class="table nowrap">
-												<thead>
-													<tr>
-														<th>Lecture</th>
-														<th>Comment</th>
-													</tr>
-												</thead>
-												<tbody id="LatestTrainingCommentChangeBody">
 													@foreach($HabbitTrainingLatestComments as $data)
-														<tr>
-															<td><a href="{{URL::to('ustaad/lecture/HabbitCategory')}}/{{$data->lectureId}}" class="text-dark">Lecture {{$data->lectureId}}</a></td>
-															<td class="tdLinkScroll"><a href="{{URL::to('ustaad/lecture/HabbitCategory')}}/{{$data->lectureId}}" class="text-dark">{{$data->comment}}</a></td>
-														</tr>
+															@php 
+																$data['titleName'] = "Habbit Training";
+																array_push($wholeData,$data)
+															@endphp
 													@endforeach
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				<!-- Latest Training Comments end -->
-				<!-- Latest Signal Comments start -->
-					<div class="col-sm-4">
-						<div class="card table-card">
-							<div class="card-header borderless">
-								<h5>Latest Blog Post Comments</h5>
-							</div>
-							<div class="col-sm-12">
-
-								<div class="card user-profile-list">
-									<div class="card-body">
-										<div class="dt-responsive table-responsive">
-											<table id="user-list-table4s" class="table nowrap">
-												<thead>
-													<tr>
-														<th>Title</th>
-														<th>Comment</th>
-													</tr>
-												</thead>
-												<tbody>
+								
 													@foreach($BlogPostLatestComments as $data)
-														@php
-															$blogPost = $data->getBlogPost();
-														@endphp
-
-														<tr>
-															<td class="tdLinkScroll"><a href="{{URL::to('ustaad/post/comment')}}/{{$data->blogId}}" class="text-dark">{{$blogPost->mainTitle}}</a></td>
-															<td class="tdLinkScroll"><a href="{{URL::to('ustaad/post/comment')}}/{{$data->blogId}}" class="text-dark">{{$data->comment}}</a></td>
-														</tr>
+															@php 
+																$data['titleName'] = "Blog";
+																array_push($wholeData,$data)
+															@endphp
 													@endforeach
-												</tbody>
-											</table>
-										</div>
-									</div>
+				<!-- Latest Signal Comments end -->
+@php 
+	function date_sort($a, $b) {
+		return strtotime($a->created_at) - strtotime($b->created_at);
+	}
+	usort($wholeData, "date_sort");
+@endphp
+				<div class="col-md-12">
+					<div class="card table-card">
+						<div class="card-header borderless">
+							<h5>Recent Comment</h5>
+							<div class="card-header-right">
+								<div class="btn-group card-option show">
+									<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+										<i class="fa fa-ellipsis-h"></i>
+									</button>
+									<ul class="list-unstyled card-option dropdown-menu dropdown-menu-right show" x-placement="top-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-148px, -130px, 0px);">
+										<li class="dropdown-item full-card"><a href="#!"><span style=""><i class="fa fa-expand"></i> maximize</span><span style="display: none;"><i class="fa fa-compress"></i> Restore</span></a></li>
+										<li class="dropdown-item minimize-card"><a href="#!"><span><i class="fa fa-minus"></i> collapse</span><span style="display:none"><i class="fa fa-plus"></i> expand</span></a></li>
+										<li class="dropdown-item reload-card"><a href="#!"><i class="fa fa-sync-alt"></i> reload</a></li>
+										<li class="dropdown-item close-card"><a href="#!"><i class="fa fa-trash"></i> remove</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="card-body p-0">
+							<div class="table-responsive">
+								<div class="recent-scroll" style="height:384px;position:relative;">
+									<table class="table table-hover">
+										<tbody>
+											@foreach($wholeData as $data)
+												@php 
+													$member = App\Models\ClientRegistrationModel::where('id',$data->memberId)->first();
+													if($member){
+														if($member->image == null){
+															$memberImage = URL::to("public/assets/assets/img/user1.jpg");
+														}else{
+															$memberImage = $member->image;
+														}
+													}else{
+														$memberImage = URL::to("public/assets/assets/img/user1.jpg");
+													}
+												@endphp
+												<tr>
+													<td class="d-flex">
+														<div>
+															<img class="rounded-circle" style="width:40px;" src="{{$memberImage}}" alt="activity-user">
+														</div>
+														<div class="ml-4">
+															<h6 class="mb-1">{{$member->name}}</h6>
+															<p class="m-0" style="white-space:normal">{{$data->comment}}</p>
+														</div>
+													</td>
+													<td class="text-black">
+														{{$data->titleName}}
+													</td>
+												</tr>
+											@endforeach
+										</tbody>
+									</table>
 								</div>
 							</div>
 						</div>
 					</div>
-				<!-- Latest Signal Comments end -->
-
+				</div>
 				<!-- <div class="col-md-6">
                 </div> -->
 <!-- crypto-section start -->

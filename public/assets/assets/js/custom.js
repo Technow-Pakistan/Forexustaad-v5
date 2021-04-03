@@ -197,6 +197,10 @@ $('#forexTable').DataTable({
 $('#stocksTable').DataTable({
     responsive: true
 });
+
+
+
+
 //expiredTable Table
 $('#expiredTable').DataTable({
     rowReorder: {

@@ -254,7 +254,7 @@ class AdminController extends Controller
         $MonthlyBrokerNumber = count($MonthlyBroker);
 
         // Active Visitors Graph Data
-
+        
         $activeUserGraphAllDataArray = array();
         $activeUserGraphFirstData = NonRegisterVisitorModel::orderBy('id','asc')->first();
         if($activeUserGraphFirstData){
@@ -262,7 +262,7 @@ class AdminController extends Controller
         }else {
             $firstDate = date("Y-m-d");
         }
-        $loopCount = abs(strtotime(date("2021-03-29")) - strtotime($firstDate));
+        $loopCount = abs(strtotime(date("Y-m-d")) - strtotime($firstDate));
         $years = floor($loopCount / (365*60*60*24));
         $months = floor(($loopCount - $years * 365*60*60*24) / (30*60*60*24));
         $days = round($loopCount / (60 * 60 * 24));
