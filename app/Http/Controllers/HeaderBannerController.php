@@ -15,14 +15,19 @@ class HeaderBannerController extends Controller
         return view('admin.header-banner',compact('totalData','totalRightData'));
     }
     public function Add(Request $request){
+        $banner = new HeaderLeftBannerModel;
         if($request->file("file_photo") != null){
             $path = $request->file("file_photo")->store("WebImages");
             $bannerImage = $path;
-        }
-
-        $banner = new HeaderLeftBannerModel;
-        if (isset($bannerImage)) {
             $banner->banner = $bannerImage;
+        }
+        if($request->active == 0){
+            $oldData =  HeaderLeftBannerModel::where('active',0)->first();
+            if($oldData){
+                $oldData->active = 1;
+                $oldData->save();
+            }
+            $banner->active = 0;
         }
         $banner->start = $request->start;
         $banner->end = $request->end;
@@ -37,7 +42,6 @@ class HeaderBannerController extends Controller
         $Trash = TrashModel::where('deleteId',$id)->where('category',"Header Left Banner")->first();
         $Trash->delete();
         
-        
         $data = HeaderLeftBannerModel::find($id);
         $data->delete();
         $error = "This banner has been deleted successfully.";
@@ -46,7 +50,18 @@ class HeaderBannerController extends Controller
     }
     public function EditLeft(Request $request, $id){
         $data = HeaderLeftBannerModel::find($id);
-        $data->fill($request->all());
+        $data2 = $request->all();
+        if($request->active == 0){
+            $oldData =  HeaderLeftBannerModel::where('active',0)->first();
+            if($oldData){
+                $oldData->active = 1;
+                $oldData->save();
+            }
+            $data2['active'] = 0;
+        }else {
+            $data2['active'] = 1;
+        }
+        $data->fill($data2);
         $data->save();
         $success = "This banner has been updated successfully.";
         $request->session()->put("success",$success);
@@ -83,7 +98,14 @@ class HeaderBannerController extends Controller
             $path = $request->file("file_photo")->store("WebImages");
             $bannerImage = $path;
         }
-
+        if($request->active == 0){
+            $oldData =  HeaderRightBannerModel::where('active',0)->first();
+            if($oldData){
+                $oldData->active = 1;
+                $oldData->save();
+            }
+        }
+        $banner->active = 0;
         $banner = new HeaderRightBannerModel;
         if (isset($bannerImage)) {
             $banner->banner = $bannerImage;
@@ -109,7 +131,18 @@ class HeaderBannerController extends Controller
     }
     public function EditRight(Request $request, $id){
         $data = HeaderRightBannerModel::find($id);
-        $data->fill($request->all());
+        $data2 = $request->all();
+        if($request->active == 0){
+            $oldData =  HeaderRightBannerModel::where('active',0)->first();
+            if($oldData){
+                $oldData->active = 1;
+                $oldData->save();
+            }
+            $data2['active'] = 0;
+        }else {
+            $data2['active'] = 1;
+        }
+        $data->fill($data2);
         $data->save();
         $success = "This banner has been updated successfully.";
         $request->session()->put("success",$success);

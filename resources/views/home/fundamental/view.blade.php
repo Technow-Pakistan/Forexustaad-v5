@@ -26,7 +26,17 @@
                                             @endphp
 
                                         </div>
-                    </div>
+                                        <div style="width:100%!important text-center">
+                                            
+                                @if($fundamental->embed != null)
+                                    @php 
+                                        echo $fundamental->embed;
+                                    @endphp
+                                @endif
+                                        
+                                        </div>
+                                
+                          </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 order-3 order-lg-3">
                 @include('inc.home-right-sidebar')

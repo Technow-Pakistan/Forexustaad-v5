@@ -573,13 +573,23 @@ class SignalController extends Controller
     }
     public function AddPairProcess(Request $request){
         $data = new SignalPairModel;
-        $data->fill($request->all());
+        $data2 = $request->all();
+        if ($request->file("image") != null) {
+            $path = $request->file("image")->store("WebImages");
+            $data2['image'] = $path;
+        }
+        $data->fill($data2);
         $data->save();
         return back();
     }
     public function EditPairProcess(Request $request, $id){
         $data = SignalPairModel::find($id);
-        $data->fill($request->all());
+        $data2 = $request->all();
+        if ($request->file("image") != null) {
+            $path = $request->file("image")->store("WebImages");
+            $data2['image'] = $path;
+        }
+        $data->fill($data2);
         $data->save();
         return back();
     }

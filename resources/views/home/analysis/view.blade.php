@@ -21,7 +21,7 @@
                                         </div>
                                         <div class="pt-3">
                                             @php
-                                                $Description = html_entity_decode($analysis->description);
+                                                $Description = html_entity_decode($analysis->detailDescription);
                                                 echo $Description;
                                             @endphp
 

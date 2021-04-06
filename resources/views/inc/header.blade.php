@@ -44,7 +44,7 @@
   window.OneSignal = window.OneSignal || [];
   OneSignal.push(function() {
     OneSignal.init({
-      appId: "02ee1eb6-82fc-4aa7-9d6a-3615c671f963",
+      appId: "{{$onesignalApiKey->apiKey}}",
     });
   });
 </script>
@@ -152,9 +152,6 @@
             </div>
         </div>
     </div>
-
-
-
     <!-- Preloader starts -->
     <div id="loading">
         <img id="loading-image" src="{{URL::to('public/assets/assets/img/preloader.gif')}}" alt="Loading..." />
