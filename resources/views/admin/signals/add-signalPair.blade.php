@@ -22,13 +22,13 @@
         <!-- [ breadcrumb ] end -->
         <!-- [ Main Content ] start -->
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="card">
                             <div class="card-header">
                                 Add Pair Category
                             </div>
                             <div class="card-body">
-								<form class="socialForm1" action="{{URL::to('ustaad/signals/pairCategory')}}" method="post">
+								<form class="socialForm1" action="{{URL::to('ustaad/signals/pairCategory')}}" method="post" enctype="multipart/form-data">
 									<div class="form-group pt-4">
 										<label for="" class="">Add Pair Category</label>
 										<input type="text" name="category" class="form-control socialLink1" placeholder="Enter Category" required>
@@ -38,13 +38,13 @@
 							</div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <div class="card">
                             <div class="card-header">
                                 Add Pair
                             </div>
                             <div class="card-body">
-								<form class="socialForm" action="" method="post">
+								<form class="socialForm" action="" method="post" enctype="multipart/form-data">
 									<div class="alignleft actions bulkactions">
 										<label for="bulk-action-selector-top" class="d-block ">Select Category</label>
 										<select name="categoryId" class="form-control d-inline-block socialIcon" id="bulk-action-selector-top">
@@ -60,6 +60,11 @@
 										<label for="" class="">Add Pair</label>
 										<input type="text" name="pair" class="form-control socialLink" placeholder="Enter Pair" required>
 									</div>
+									<div class="form-group pt-4">
+                                        <img src="" class="socialImage" width="100px" height="100px" alt="" style="display:none">
+										<label for="" class="">Add Image</label>
+										<input type="file" name="image" class="form-control h-100" placeholder="Enter Pair" required>
+									</div>
 									<input type="submit" id="doaction" class="btn btn-outline-primary mt-4 socialButton" value="Apply">
 								</form>
 							</div>
@@ -68,7 +73,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="card">
                             <div class="card-header">
                                 List of Categories
@@ -106,7 +111,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <div class="card">
                             <div class="card-header">
                                 List of Pairs
@@ -117,6 +122,7 @@
                                         <tr>
                                             <th class="w-30">Pair</th>
                                             <th>Category</th>
+                                            <th>Image</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -132,6 +138,11 @@
 												<td class="tdLinkScroll">
 													{{$categoryInfo->category}}
 												</td>
+												<td class="tdLinkScroll">
+                                                    @if($data->image != null)
+													    <img src="{{URL::to('storage/app')}}/{{$data->image}}" width="100px" height="100px" alt="">
+                                                    @endif
+                                                </td>
 												<td>
 													<a href="#">
 														<i class="far fa-edit text-success mr-2 editlink" value="{{$data->id}}"></i>
@@ -167,6 +178,16 @@
 		var id = $(this).attr('value');
 		var icon = $(this).parent().parent().parent().children()[0].innerText;
 		var link = $(this).parent().parent().parent().children()[1].innerText;
+		var Image = $(this).parent().parent().parent().children()[2].childNodes[1];
+        if(Image!= undefined){
+            var img = $(Image).attr("src");
+            console.log(img);
+            $(".socialImage").attr("src",img);
+            $(".socialImage").css("display","block");
+        }else{
+            $(".socialImage").attr("src"," ");
+            $(".socialImage").css("display","none");
+        }
 		$(".socialIcon").find("."+link).attr("selected",true);
 		$(".socialLink").val(icon);
 		$(".socialButton").val("Update");

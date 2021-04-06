@@ -37,6 +37,7 @@ use App\Models\AllCountriesModel;
 use App\Models\ClientNotificationModel; 
 use App\Models\ClientRegistrationModel; 
 use App\Models\ChatBoxModel; 
+use App\Models\SignalApiKeyModel;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -57,8 +58,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->share("headerLeftBanner",HeaderLeftBannerModel::orderBy('id','desc')->whereDate('start', '<=', date("Y-m-d"))->whereDate('end', '>=', date("Y-m-d"))->first());
-        view()->share("headerRightBanner",HeaderRightBannerModel::orderBy('id','desc')->whereDate('start', '<=', date("Y-m-d"))->whereDate('end', '>=', date("Y-m-d"))->first());
+        view()->share("headerLeftBanner",HeaderLeftBannerModel::orderBy('id','desc')->whereDate('start', '<=', date("Y-m-d"))->whereDate('end', '>=', date("Y-m-d"))->where('active',0)->first());
+        view()->share("headerRightBanner",HeaderRightBannerModel::orderBy('id','desc')->whereDate('start', '<=', date("Y-m-d"))->whereDate('end', '>=', date("Y-m-d"))->where('active',0)->first());
         view()->share("MainLogo",LogoPanelModel::orderBy('id','desc')->where('active',1)->first());
         view()->share("MainFavicon",FaviconPanelModel::orderBy('id','desc')->where('active',1)->first());
         view()->share("SlidingImagesData",SlidingImagesModel::orderBy('id','desc')->get());
@@ -93,6 +94,8 @@ class AppServiceProvider extends ServiceProvider
         view()->share("NonRegisterUser",NonRegisterVisitorModel::orderBy('id','desc')->get());
         view()->share("AllClientMemberData",ClientRegistrationModel::where('status',1)->where('confirmationEmail',1)->get());
         view()->share("AllChatMemberData",ChatBoxModel::orderBy('id','desc')->get());
+        view()->share("onesignalApiKey",SignalApiKeyModel::where('id',2)->first());
+        
 
     }
 }

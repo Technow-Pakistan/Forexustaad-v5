@@ -8,7 +8,7 @@ use App\Models\SignalPairCategoryModel;
 class SignalPairModel extends Model
 {
     protected $table = "signal_pairs";
-    protected $fillable = ["pair","categoryId"];
+    protected $fillable = ["pair","categoryId","image"];
 
     public function getCategory(){
         $category = SignalPairCategoryModel::find($this->categoryId);

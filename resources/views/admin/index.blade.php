@@ -280,7 +280,7 @@
 				<!-- Latest Signal Comments end -->
 @php 
 	function date_sort($a, $b) {
-		return strtotime($a->created_at) - strtotime($b->created_at);
+		return strtotime($b->created_at) - strtotime($a->created_at);
 	}
 	usort($wholeData, "date_sort");
 @endphp
@@ -293,7 +293,7 @@
 									<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 										<i class="fa fa-ellipsis-h"></i>
 									</button>
-									<ul class="list-unstyled card-option dropdown-menu dropdown-menu-right show" x-placement="top-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-148px, -130px, 0px);">
+									<ul class="list-unstyled card-option dropdown-menu dropdown-menu-right" x-placement="top-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-148px, -130px, 0px);">
 										<li class="dropdown-item full-card"><a href="#!"><span style=""><i class="fa fa-expand"></i> maximize</span><span style="display: none;"><i class="fa fa-compress"></i> Restore</span></a></li>
 										<li class="dropdown-item minimize-card"><a href="#!"><span><i class="fa fa-minus"></i> collapse</span><span style="display:none"><i class="fa fa-plus"></i> expand</span></a></li>
 										<li class="dropdown-item reload-card"><a href="#!"><i class="fa fa-sync-alt"></i> reload</a></li>
@@ -314,7 +314,7 @@
 														if($member->image == null){
 															$memberImage = URL::to("public/assets/assets/img/user1.jpg");
 														}else{
-															$memberImage = $member->image;
+															$memberImage = URL::to("storage/app" . "/" .$member->image);
 														}
 													}else{
 														$memberImage = URL::to("public/assets/assets/img/user1.jpg");
@@ -326,7 +326,7 @@
 															<img class="rounded-circle" style="width:40px;" src="{{$memberImage}}" alt="activity-user">
 														</div>
 														<div class="ml-4">
-															<h6 class="mb-1">{{$member->name}}</h6>
+															<h6 class="mb-1">{{$member != null ? $member->name : ''}}</h6>
 															<p class="m-0" style="white-space:normal">{{$data->comment}}</p>
 														</div>
 													</td>
@@ -362,130 +362,7 @@
 <!-- crypto-section end -->
 
 
-					<!-- users visite start -->
-					<div class="col-md-12 col-xl-6">
-						<div class="card">
-							<div class="card-header">
-								<h5>Unique Visitor</h5>
-							</div>
-							<div class="card-body pl-0 pb-0">
-								<div id="unique-visitor-chart"></div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12 col-xl-6">
-						<div class="row">
-							<div class="col-sm-6">
-								<div class="card">
-									<div class="card-body bg-patern">
-										<div class="row">
-											<div class="col-auto">
-												<span>Customers</span>
-											</div>
-											<div class="col text-right">
-												<h2 class="mb-0">826</h2>
-												<span class="text-c-green"
-													>8.2%<i class="feather icon-trending-up ml-1"></i
-												></span>
-											</div>
-										</div>
-										<div id="customer-chart"></div>
-										<div class="row mt-3">
-											<div class="col">
-												<h3 class="m-0">
-													<i class="fas fa-circle f-10 m-r-5 text-success"></i
-													>674
-												</h3>
-												<span class="ml-3">New</span>
-											</div>
-											<div class="col">
-												<h3 class="m-0">
-													<i class="fas fa-circle text-primary f-10 m-r-5"></i
-													>182
-												</h3>
-												<span class="ml-3">Return</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-6">
-								<div class="card bg-primary text-white">
-									<div class="card-body bg-patern-white">
-										<div class="row">
-											<div class="col-auto">
-												<span>Customers</span>
-											</div>
-											<div class="col text-right">
-												<h2 class="mb-0 text-white">826</h2>
-												<span class="text-white"
-													>8.2%<i class="feather icon-trending-up ml-1"></i
-												></span>
-											</div>
-										</div>
-										<div id="customer-chart1"></div>
-										<div class="row mt-3">
-											<div class="col">
-												<h3 class="m-0 text-white">
-													<i class="fas fa-circle f-10 m-r-5 text-success"></i
-													>674
-												</h3>
-												<span class="ml-3">New</span>
-											</div>
-											<div class="col">
-												<h3 class="m-0 text-white">
-													<i class="fas fa-circle f-10 m-r-5 text-white"></i>182
-												</h3>
-												<span class="ml-3">Return</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- users visite end -->
-					<!-- social statustic start -->
-					<div class="col-md-6 col-lg-4">
-						<div class="card seo-card overflow-hidden">
-							<div class="card-body seo-statustic">
-								<i class="fa fa-save f-20 text-c-red"></i>
-								<h5 class="mb-1">65%</h5>
-								<p>Memory</p>
-							</div>
-							<div class="seo-chart">
-								<div id="seo-card1"></div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12 col-lg-4">
-						<div class="card">
-							<div class="card-body text-center">
-								<i class="fa fa-envelope-open text-c-blue d-block f-40"></i>
-								<h4 class="m-t-20">
-									<span class="text-c-blue">8.62k</span> Subscribers
-								</h4>
-								<p class="m-b-20">Your main list is growing</p>
-								<button class="btn btn-primary btn-sm btn-round">
-									Manage List
-								</button>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-lg-4">
-						<div class="card">
-							<div class="card-body text-center">
-								<i class="fab fa-twitter text-c-green d-block f-40"></i>
-								<h4 class="m-t-20">
-									<span class="text-c-blgreenue">+40</span> Followers
-								</h4>
-								<p class="m-b-20">Your main list is growing</p>
-								<button class="btn btn-success btn-sm btn-round">
-									Check them out
-								</button>
-							</div>
-						</div>
-					</div>
+					
 					<!-- social statustic end -->
 				</div>
 				<!-- [ Main Content ] end -->
