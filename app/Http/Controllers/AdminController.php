@@ -228,12 +228,14 @@ class AdminController extends Controller
         $Clients = ClientRegistrationModel::all();
         $TotalClientNumber = count($Clients);
         $lastMonth = date("m",strtotime("0 months"));
+        $lastMonth1 = date("m",strtotime("-7 days"));
         $lastDay = date("d",strtotime("0 days"));
         $lastWeek = date("d",strtotime("-7 days"));
         $lastYear = date("Y",strtotime("0 months"));
+     
         $MonthlyClients = ClientRegistrationModel::whereMonth("created_at",$lastMonth)->whereYear("created_at",$lastYear)->get();
         $ToDayClients = ClientRegistrationModel::whereDay("created_at",$lastDay)->whereMonth("created_at",$lastMonth)->whereYear("created_at",$lastYear)->get();
-        $WeeklyClients = ClientRegistrationModel::whereDay("created_at",'>=',$lastWeek)->whereMonth("created_at",$lastMonth)->whereYear("created_at",$lastYear)->get();
+        $WeeklyClients = ClientRegistrationModel::whereDay("created_at",'>=',$lastWeek)->whereMonth("created_at",$lastMonth1)->whereYear("created_at",$lastYear)->get();
         $MonthlyClientNumber = count($MonthlyClients);
         $ToDayClientNumber = count($ToDayClients);
         $WeeklyClientNumber = count($WeeklyClients);
@@ -290,11 +292,11 @@ class AdminController extends Controller
             array_push($browserDataUniqueArray,$persontage);
         }
         $signalPendingData = SignalsModel::orderBy('id','desc')->take(10)->get();
-        $signalLatestComments = SignalCommentsModel::orderBy('id','desc')->skip(0)->take(20)->get();
-        $AdvanceTrainingLatestComments = AdvanceCommentsModel::orderBy('id','desc')->skip(0)->take(20)->get();
-        $BasicTrainingLatestComments = BasicCommentsModel::orderBy('id','desc')->skip(0)->take(20)->get();
-        $HabbitTrainingLatestComments = HabbitCommentsModel::orderBy('id','desc')->skip(0)->take(20)->get();
-        $BlogPostLatestComments = BlogCommentsModel::orderBy('id','desc')->skip(0)->take(20)->get();
+        $signalLatestComments = SignalCommentsModel::orderBy('id','desc')->skip(0)->take(10)->get();
+        $AdvanceTrainingLatestComments = AdvanceCommentsModel::orderBy('id','desc')->skip(0)->take(10)->get();
+        $BasicTrainingLatestComments = BasicCommentsModel::orderBy('id','desc')->skip(0)->take(10)->get();
+        $HabbitTrainingLatestComments = HabbitCommentsModel::orderBy('id','desc')->skip(0)->take(10)->get();
+        $BlogPostLatestComments = BlogCommentsModel::orderBy('id','desc')->skip(0)->take(10)->get();
         return view('admin.index',compact('BasicTrainingLatestComments','HabbitTrainingLatestComments','BlogPostLatestComments','AdvanceTrainingLatestComments','signalLatestComments','signalPendingData','browserDataUniqueArray','activeUserGraphAllDataArray','TotalClientNumber','MonthlyClientNumber','ToDayClientNumber','WeeklyClientNumber','TotalAdminUsersNumber','MonthlyAdminUsersNumber','TotalBrokerNumber','MonthlyBrokerNumber','TotalPostNumber','MonthlyPostNumber'));
     }
     public function Logout(Request $request){

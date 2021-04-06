@@ -113,10 +113,14 @@
                                                                   <td>{{$icount++}}</td>
                                                                   <td class="text-center">
                                                                      <p class="mb-2">
-                                                                        @foreach($flags as $flag)
-                                                                           @php $flag4 = str_replace(' ', '', $flag) @endphp
-                                                                           <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
-                                                                        @endforeach
+                                                                        @if($data->image == null)
+                                                                           @foreach($flags as $flag)
+                                                                              @php $flag4 = str_replace(' ', '', $flag) @endphp
+                                                                              <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
+                                                                           @endforeach
+                                                                        @else
+                                                                           <img src="{{URL::to('storage/app')}}/{{$data->image}}" width="100" height="70"  alt="">
+                                                                        @endif
                                                                         <!-- <span class="flag-icon flag-icon-ad">&nbsp;</span>
                                                                         <span class="flag-icon flag-icon-us">&nbsp;</span> -->
                                                                      </p>
@@ -224,10 +228,14 @@
                                                                <td>{{$icount++}}</td>
                                                                <td class="text-center">
                                                                   <p class="mb-2">
-                                                                     @foreach($flags as $flag)
-                                                                        @php $flag4 = str_replace(' ', '', $flag) @endphp
-                                                                        <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
-                                                                     @endforeach
+                                                                     @if($data->image == null)
+                                                                        @foreach($flags as $flag)
+                                                                           @php $flag4 = str_replace(' ', '', $flag) @endphp
+                                                                           <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
+                                                                        @endforeach
+                                                                     @else
+                                                                        <img src="{{URL::to('storage/app')}}/{{$data->image}}" width="100" height="70"  alt="">
+                                                                     @endif
                                                                      <!-- <span class="flag-icon flag-icon-ad">&nbsp;</span>
                                                                      <span class="flag-icon flag-icon-us">&nbsp;</span> -->
                                                                   </p>
@@ -335,10 +343,14 @@
                                                                <td>{{$icount++}}</td>
                                                                <td class="text-center">
                                                                   <p class="mb-2">
-                                                                     @foreach($flags as $flag)
-                                                                        @php $flag4 = str_replace(' ', '', $flag) @endphp
-                                                                        <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
-                                                                     @endforeach
+                                                                     @if($data->image == null)
+                                                                        @foreach($flags as $flag)
+                                                                           @php $flag4 = str_replace(' ', '', $flag) @endphp
+                                                                           <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
+                                                                        @endforeach
+                                                                     @else
+                                                                        <img src="{{URL::to('storage/app')}}/{{$data->image}}" width="100" height="70"  alt="">
+                                                                     @endif
                                                                      <!-- <span class="flag-icon flag-icon-ad">&nbsp;</span>
                                                                      <span class="flag-icon flag-icon-us">&nbsp;</span> -->
                                                                   </p>
@@ -448,10 +460,14 @@
                                                                <td>{{$icount++}}</td>
                                                                <td>
                                                                   <p class="mb-2">
-                                                                     @foreach($flags as $flag)
-                                                                        @php $flag4 = str_replace(' ', '', $flag) @endphp
-                                                                        <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" class="thumbnail" width="50" height="35" alt=""> &nbsp;&nbsp;
-                                                                     @endforeach
+                                                                     @if($data->image == null)
+                                                                        @foreach($flags as $flag)
+                                                                           @php $flag4 = str_replace(' ', '', $flag) @endphp
+                                                                           <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" class="thumbnail" width="50" height="35" alt=""> &nbsp;&nbsp;
+                                                                        @endforeach
+                                                                     @else
+                                                                        <img src="{{URL::to('storage/app')}}/{{$data->image}}" width="100" height="70"  alt="">
+                                                                     @endif
                                                                      <!-- <span class="flag-icon flag-icon-ad">&nbsp;</span>
                                                                      <span class="flag-icon flag-icon-us">&nbsp;</span> -->
                                                                   </p>
@@ -533,10 +549,14 @@
                                                                <td>{{$icount++}}</td>
                                                                <td>
                                                                   <p class="mb-2">
-                                                                     @foreach($flags as $flag)
-                                                                        @php $flag4 = str_replace(' ', '', $flag) @endphp
-                                                                        <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" class="thumbnail" width="50" height="35" alt=""> &nbsp;&nbsp;
-                                                                     @endforeach
+                                                                     @if($data->image == null)
+                                                                        @foreach($flags as $flag)
+                                                                           @php $flag4 = str_replace(' ', '', $flag) @endphp
+                                                                           <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" class="thumbnail" width="50" height="35" alt=""> &nbsp;&nbsp;
+                                                                        @endforeach
+                                                                     @else
+                                                                        <img src="{{URL::to('storage/app')}}/{{$data->image}}" width="100" height="70"  alt="">
+                                                                     @endif
                                                                      <!-- <span class="flag-icon flag-icon-ad">&nbsp;</span>
                                                                      <span class="flag-icon flag-icon-us">&nbsp;</span> -->
                                                                   </p>
@@ -618,10 +638,14 @@
                                                                <td>{{$icount++}}</td>
                                                                <td>
                                                                   <p class="mb-2">
-                                                                     @foreach($flags as $flag)
-                                                                        @php $flag4 = str_replace(' ', '', $flag) @endphp
-                                                                        <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" class="thumbnail" width="50" height="35" alt=""> &nbsp;&nbsp;
-                                                                     @endforeach
+                                                                     @if($data->image == null)
+                                                                        @foreach($flags as $flag)
+                                                                           @php $flag4 = str_replace(' ', '', $flag) @endphp
+                                                                           <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" class="thumbnail" width="50" height="35" alt=""> &nbsp;&nbsp;
+                                                                        @endforeach
+                                                                     @else
+                                                                        <img src="{{URL::to('storage/app')}}/{{$data->image}}" width="100" height="70"  alt="">
+                                                                     @endif
                                                                      <!-- <span class="flag-icon flag-icon-ad">&nbsp;</span>
                                                                      <span class="flag-icon flag-icon-us">&nbsp;</span> -->
                                                                   </p>

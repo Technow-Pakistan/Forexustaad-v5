@@ -65,6 +65,10 @@
 										<label for="" class="">End Date </label>
 										<input type="date" class="form-control bannerLeftEnd" name="end" required>
 									</div>
+									<div class="form-group pt-2">
+										<label for="" class="">Active </label>
+										<input type="checkbox" class="bannerLeftActive" value="0" name="active">
+									</div>
 									<input type="submit" class="btn btn-info mt-3 bannerLeftButton" value="Upload">
 									<p class="error1 text-danger"></p>
 								</form>
@@ -74,6 +78,7 @@
 											<th>Image</th>
 											<th>Start</th>
 											<th>End</th>
+											<th>Active</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -87,6 +92,8 @@
 															id="slider1"
 															src="{{URL::to('/storage/app')}}/{{$data->banner}}"
 															class="img-fluid"
+															width="100px"
+															height="100px"
 															alt="your image"
 														/>
 													</a>
@@ -103,6 +110,11 @@
 											</td>
 											<td>
 												{{$data->end}}
+											</td>
+											<td>											
+												@if($data->active == 0)
+													Active
+												@endif
 											</td>
 											<td>
 												<a href="#">
@@ -156,6 +168,10 @@
 										<label for="" class="">End Date</label>
 										<input type="date" class="form-control bannerRightEnd" name="end" required>
 									</div>
+									<div class="form-group pt-2">
+										<label for="" class="">Active </label>
+										<input type="checkbox" class="bannerRightActive" value="0" name="active">
+									</div>
 									<input type="submit" class="btn btn-info mt-3 bannerRightButton" value="Upload">
 									<p class="error2 text-danger"></p>
 								</form>
@@ -165,6 +181,7 @@
 											<th>Image</th>
 											<th>Start</th>
 											<th>End</th>
+											<th>Active</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -178,6 +195,8 @@
 																id="slider1"
 																src="{{URL::to('/storage/app')}}/{{$data->banner}}"
 																class="img-fluid"
+																width="100px"
+																height="100px"
 																alt="your image"
 															/>
 														</a>
@@ -194,6 +213,11 @@
 												</td>
 												<td>
 													{{$data->end}}
+												</td>
+												<td>											
+													@if($data->active == 0)
+														Active
+													@endif
 												</td>
 												<td>
 													<a href="#">
@@ -226,10 +250,16 @@
 			title = title.trim();
 			var start = $(this).parent().parent().parent()[0].children[1].innerText;
 			var end = $(this).parent().parent().parent()[0].children[2].innerText;
+			var active = $(this).parent().parent().parent()[0].children[3].innerText;
 			$(".bannerLeftTitle").show();
 			$(".bannerLeftTitle").html(title);
 			$(".bannerLeftStart").val(start);
 			$(".bannerLeftEnd").val(end);
+			if (active == "Active") {
+				$(".bannerLeftActive").attr("checked",true)
+			}else{
+				$(".bannerLeftActive").attr("checked",false)
+			}
 			$(".bannerLeftButton").val("Update");
 			$(".bannerLeftButton").attr("class","btn btn-outline-danger mt-4 bannerLeftButton");
 			$(".bannerLeftForm").attr("action","{{URL::to('/ustaad/banner/header-banner/edit-left')}}/"+id+"");
@@ -261,10 +291,16 @@
 			title2 = title2.trim();
 			var start2 = $(this).parent().parent().parent()[0].children[1].innerText;
 			var end2 = $(this).parent().parent().parent()[0].children[2].innerText;
+			var active2 = $(this).parent().parent().parent()[0].children[3].innerText;
 			$(".bannerRightTitle").show();
 			$(".bannerRightTitle").html(title2);
 			$(".bannerRightStart").val(start2);
 			$(".bannerRightEnd").val(end2);
+			if (active2 == "Active") {
+				$(".bannerRightActive").attr("checked",true)
+			}else{
+				$(".bannerRightActive").attr("checked",false)
+			}
 			$(".bannerRightButton").val("Update");
 			$(".bannerRightButton").attr("class","btn btn-outline-danger mt-4 bannerRightButton");
 			$(".bannerRightForm").attr("action","{{URL::to('/ustaad/banner/header-banner/edit-right')}}/"+id2+"");

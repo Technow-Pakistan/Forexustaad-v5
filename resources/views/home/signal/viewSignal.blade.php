@@ -49,10 +49,14 @@
                                     <div class="card-body">
                                       <div class="d-flex flex-column align-items-center text-center">
 									  		<div>
-												@foreach($flags as $flag)
-												@php $flag4 = str_replace(' ', '', $flag) @endphp
-												  <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
-												@endforeach
+                        @if($data->image == null)
+                          @foreach($flags as $flag)
+                            @php $flag4 = str_replace(' ', '', $flag) @endphp
+                              <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
+                          @endforeach
+                        @else
+                          <img src="{{URL::to('storage/app')}}/{{$data->image}}" width="100" height="70"  alt="">
+                        @endif
 											</div>
                                         <div class="mt-3">
                                           <h4>{{$pair->pair}}</h4>
