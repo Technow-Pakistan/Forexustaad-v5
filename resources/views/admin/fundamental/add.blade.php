@@ -70,11 +70,11 @@
 											</textarea>
                                         </div>
 										<div class="form-group">
-										<label for="">Embed Code</label>
-										<div>
-											<textarea name="embed" id="" class="form-control" required>{{($count != 0 ? $fundamental->embed : '' )}}</textarea>
+											<label for="">Embed Code</label>
+											<div>
+												<textarea name="embed" id="" class="form-control" required>{{($count != 0 ? $fundamental->embed : '' )}}</textarea>
+											</div>
 										</div>
-									</div>
 										<br>
                                         
                                         <p class="submit">

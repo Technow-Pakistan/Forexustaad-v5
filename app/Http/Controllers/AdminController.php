@@ -212,6 +212,14 @@ class AdminController extends Controller
             return view('admin.login');
         }
     }
+    public function GetLatestComment(Request $request){
+        $signalLatestComments = SignalCommentsModel::orderBy('id','desc')->get();
+        $AdvanceTrainingLatestComments = AdvanceCommentsModel::orderBy('id','desc')->get();
+        $BasicTrainingLatestComments = BasicCommentsModel::orderBy('id','desc')->get();
+        $HabbitTrainingLatestComments = HabbitCommentsModel::orderBy('id','desc')->get();
+        $BlogPostLatestComments = BlogCommentsModel::orderBy('id','desc')->get();
+        return view('admin.latestCommentPage',compact('signalLatestComments','AdvanceTrainingLatestComments','BasicTrainingLatestComments','HabbitTrainingLatestComments','BlogPostLatestComments'));
+    }
     public function Dashboard(Request $request){
         if(!$request->session()->has("admin")){
             return  redirect("ustaad");
