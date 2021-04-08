@@ -469,6 +469,7 @@
                         </div>
                       </div>
                     </div>
+                    <div class="g-recaptcha" data-sitekey="6LezBIYaAAAAABr8gfLi76swA4va2bPoD-gykpGi"></div>
                         <input type="hidden" name="token" id="token" value="">
                     <div class="form-group text-left ml-3">
                         <p> <input type="checkbox" value="1" class="RegistrationCheckBox" name="Terms&Conditions" required style="height: 12px;margin-bottom: 0px;"> Please Accept over <a href="https://forexustaad.com/p/Terms-And-Conditions" target="_blank">Term and Conditions</a></p>
