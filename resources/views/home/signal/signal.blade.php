@@ -596,7 +596,7 @@
                                                    <thead>                                                    
                                                       <tr class="back-Theme">
                                                       <th>Sr#</th>
-                                                      <th>Symbols/Pairs</th>
+                                                      <th colspan="2">Symbols/Pairs</th>
                                                       <th>Signal</th>
                                                       <th>Users</th>
                                                       <th>Result</th>
@@ -636,7 +636,7 @@
                                                          @if($go3 != 3 && ($pair->categoryId == 3 || $pair->categoryId == 4))
                                                             <tr>
                                                                <td>{{$icount++}}</td>
-                                                               <td>
+                                                               <td colspan="2">
                                                                   <p class="mb-2">
                                                                      @if($data->image == null)
                                                                         @foreach($flags as $flag)

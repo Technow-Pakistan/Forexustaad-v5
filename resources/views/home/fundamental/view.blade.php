@@ -24,7 +24,6 @@
                                                 $Description = html_entity_decode($fundamental->detailDescription);
                                                 echo $Description;
                                             @endphp
-
                                         </div>
                                         <div style="width:100%!important text-center">
                                             
@@ -39,8 +38,7 @@
                           </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 order-3 order-lg-3">
-                @include('inc.home-right-sidebar')
-
+                    @include('inc.home-right-sidebar')
                 </div>
             </div>
         </div>

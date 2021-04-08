@@ -310,6 +310,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::post('/GetClientInfo/{id}',[ChatBoxController::class,'GetClientInfo']);
     Route::post('/clientMessageSend/{id}',[ChatBoxController::class,'ClientMessageSend']);
     Route::post('/GetRealTimeData/Get',[AdminController::class,'GetRealTimeData']);
+    Route::get('/latestComments',[AdminController::class,'GetLatestComment']);
     Route::get('/widgets',function(){
         return view('admin.widget-chart');
     });

@@ -16,16 +16,25 @@
                         </div>
                     @endif
                     <div class="family">
-                                        <div>
-                                            <h4>{{$analysis->title}}</h4>
-                                        </div>
-                                        <div class="pt-3">
-                                            @php
-                                                $Description = html_entity_decode($analysis->detailDescription);
-                                                echo $Description;
-                                            @endphp
+                        <div>
+                            <h4>{{$analysis->title}}</h4>
+                        </div>
+                        <div class="pt-3">
+                            @php
+                                $Description = html_entity_decode($analysis->detailDescription);
+                                echo $Description;
+                            @endphp
 
-                                        </div>
+                        </div>
+                        <div style="width:100%!important text-center">
+                                        
+                            @if($fundamental->embed != null)
+                                @php 
+                                    echo $fundamental->embed;
+                                @endphp
+                            @endif
+                        
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 order-3 order-lg-3">
