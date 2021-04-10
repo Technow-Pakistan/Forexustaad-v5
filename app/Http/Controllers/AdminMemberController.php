@@ -16,7 +16,7 @@ class AdminMemberController extends Controller
         return view('admin.user-profile',compact('memberDetail','memberId','member'));
     }
     public function Add(Request $request){
-        $memberData = AdminMemberModel::all(); 
+        $memberData = AdminMemberModel::all();
         return view('admin.user-card',compact("memberData"));
     }
     public function AddMember(Request $request){
@@ -32,7 +32,7 @@ class AdminMemberController extends Controller
         return back();
     }
     public function UserList(Request $request){
-        $memberData = AdminModel::all(); 
+        $memberData = AdminModel::all();
         return view('admin.user-list',compact("memberData"));
     }
     public function Edit(Request $request, $id){

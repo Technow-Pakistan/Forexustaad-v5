@@ -599,7 +599,7 @@
 											><img
 												class="media-object img-radius"
 												src="{{$srcImage}}"
-												alt="Generic placeholder image "
+												alt="User Image"
 											/>
 											<!-- <div class="live-status">3</div> -->
 										</a>

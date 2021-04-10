@@ -49,13 +49,13 @@
                                     <div class="card-body">
                                       <div class="d-flex flex-column align-items-center text-center">
 									  		<div>
-                        @if($data->image == null)
+                        @if($pair->image == null)
                           @foreach($flags as $flag)
                             @php $flag4 = str_replace(' ', '', $flag) @endphp
                               <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
                           @endforeach
                         @else
-                          <img src="{{URL::to('storage/app')}}/{{$data->image}}" width="100" height="70"  alt="">
+                          <img src="{{URL::to('storage/app')}}/{{$pair->image}}" width="100" height="35"  alt="">
                         @endif
 											</div>
                                         <div class="mt-3">
@@ -235,13 +235,13 @@
                                                     </div>
 
                                                     <div class="col-sm-8 fontBold {{$signalApiData->result != 'SL Hit' ? 'text-primary' : 'text-danger'}} ">
-                                                        {{$signalApiData->result}} 
+                                                        {{$signalApiData->result}}
                                                     </div>
                                                 </div>
                                                 <hr>
                                               @endif
                                           @endif
-                                                
+
                                         @endif
                                         <!-- <div class="row">
                                             <div class="col-sm-3">

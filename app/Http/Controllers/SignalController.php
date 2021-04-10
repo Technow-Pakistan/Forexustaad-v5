@@ -67,7 +67,7 @@ class SignalController extends Controller
             $signalPair = SignalPairModel::find($signalData->forexPairs);
             $signalApiData = SignalApiModel::where('signal_id',$signalData->id)->first();
             $signalApiKey = SignalApiKeyModel::where('id',1)->first();
-            if($go3 == 3){  
+            if($go3 == 3){
                 if ($signalApiData) {
                     if ($signalApiData->result != "SL Hit" || $signalApiData->result != "Finel TP Hit") {
                         $time = $signalApiData->lastUpdate;
@@ -101,7 +101,10 @@ class SignalController extends Controller
                                                 $TakeProfit += 1;
                                             }
                                             if ($TakeProfit == "Finel") {
-                                                $$pips1 = $Profits[$i];
+                                                $pips1 = $Profits[$i];
+                                                $signalData['date'] = date("Y-m-d");
+                                                $signalData['time'] = date("H:i");
+                                                $signalData->save();
                                             }
                                         }
                                     }
@@ -115,6 +118,9 @@ class SignalController extends Controller
                                     }
                                 }elseif($stopLose > $pips){
                                     $apiData['result'] = "SL Hit";
+                                    $signalData['date'] = date("Y-m-d");
+                                    $signalData['time'] = date("H:i");
+                                    $signalData->save();
                                     $pips1 = $stopLose;
                                 }
                                 if ($signalPair->categoryId == 1 && $signalPair->categoryId == 2) {
@@ -377,7 +383,7 @@ class SignalController extends Controller
         // }
         $signalPair = SignalPairModel::where('id',$signal->forexPairs)->first();
         $signalApiKey = SignalApiKeyModel::where('id',1)->first();
-        
+
         if($signalPair->categoryId == 1 || $signalPair->categoryId == 2 || $signalPair->pair == "Gold" || $signalPair->pair == "Crude Oil WTI" ){
             if ($signalPair->categoryId == 1) {
                 $data1 = file_get_contents("https://fcsapi.com/api-v3/forex/latest?symbol=$signalPair->pair&access_key=$signalApiKey->apiKey");
@@ -415,7 +421,7 @@ class SignalController extends Controller
             $notification->link = "ustaad/signals";
             $previousData = NotificationModel::where('link',$notification->link)->first();
             if ($previousData){
-                $previousData->delete(); 
+                $previousData->delete();
             }
             $notification->save();
         }
@@ -437,7 +443,7 @@ class SignalController extends Controller
             $notification->link = "ustaad/signals";
             $previousData = NotificationModel::where('link',$notification->link)->first();
             if ($previousData) {
-                $previousData->delete(); 
+                $previousData->delete();
             }
             $notification->save();
         }
@@ -459,7 +465,7 @@ class SignalController extends Controller
             $notification->link = "ustaad/signals";
             $previousData = NotificationModel::where('link',$notification->link)->first();
             if ($previousData) {
-                $previousData->delete(); 
+                $previousData->delete();
             }
             $notification->save();
         }
@@ -519,7 +525,7 @@ class SignalController extends Controller
                 $oldData->save();
             }
         }
-      
+
         // // Pusher Notification Start
         // $getUrl = $data->GetURL();
         // $adminData = $request->session()->get("admin");
@@ -544,7 +550,7 @@ class SignalController extends Controller
             $notification->link = "ustaad/signals";
             $previousData = NotificationModel::where('link',$notification->link)->first();
             if ($previousData) {
-                $previousData->delete(); 
+                $previousData->delete();
             }
             $notification->save();
         }
