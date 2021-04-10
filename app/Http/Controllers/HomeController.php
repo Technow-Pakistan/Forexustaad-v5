@@ -131,25 +131,25 @@ class HomeController extends Controller
         return view('home/construction');
     }
     public function Index(){
-      
-        $forexApiData = array();  
+
+        $forexApiData = array();
         $CryptoApiData = array();
         $StockApiData = array();
         // $data1 = file_get_contents("https://fcsapi.com/api-v3/forex/latest?symbol=all_forex&access_key=DGBiPcd81sslKeJJuwC17lhGW");
         // $daata1 =  json_decode($data1);
         // if(isset($daata1->response)){
-        //  $forexApiData = $daata1->response; 
-        // } 
+        //  $forexApiData = $daata1->response;
+        // }
         // $data2 = file_get_contents("https://fcsapi.com/api-v3/crypto/latest?symbol=all_crypto&access_key=DGBiPcd81sslKeJJuwC17lhGW");
         // $daata2 =  json_decode($data2);
         // if(isset($daata2->response)){
         //  $CryptoApiData = $daata2->response;
         // $data3 = file_get_contents("https://fcsapi.com/api-v3/stock/indices_latest?id=1,2,3,4,5&access_key=DGBiPcd81sslKeJJuwC17lhGW");
         //  $daata3 =  json_decode($data3);
-        // } 
+        // }
         // if(isset($daata3->response)){
         //  $StockApiData = $daata3->response;
-        // } 
+        // }
         return view('home.index',compact('forexApiData','CryptoApiData','StockApiData'));
     }
     public function privacyPolicy(){
@@ -204,29 +204,29 @@ class HomeController extends Controller
         $mobile = ClientRegistrationModel::where('mobile',$request->mobile)->first();
         if ($email == null && $mobile == null ) {
 
-            //captcha integration started
-            $url = "https://www.google.com/recaptcha/api/siteverify";
-            $testdata = [
-                "secret" => "6LfoWyEaAAAAAH8jCKDwBkS71bJQIrMPwD3y2ykv",
-                "response" => $_POST["token"],
-                "remoteip" => $_SERVER["REMOTE_ADDR"]
-            ];
+            // //captcha integration started
+            // $url = "https://www.google.com/recaptcha/api/siteverify";
+            // $testdata = [
+            //     "secret" => "6LfoWyEaAAAAAH8jCKDwBkS71bJQIrMPwD3y2ykv",
+            //     "response" => $_POST["token"],
+            //     "remoteip" => $_SERVER["REMOTE_ADDR"]
+            // ];
 
-            $options = array(
-                'http' => array(
-                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method'  => 'POST',
-                'content' => http_build_query($testdata)
-                )
-            );
+            // $options = array(
+            //     'http' => array(
+            //     'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+            //     'method'  => 'POST',
+            //     'content' => http_build_query($testdata)
+            //     )
+            // );
 
 
-            //captcha integration ended
-            $context  = stream_context_create($options);
-            $response = file_get_contents($url, false, $context);
+            // //captcha integration ended
+            // $context  = stream_context_create($options);
+            // $response = file_get_contents($url, false, $context);
 
-            $res = json_decode($response, true);
-            if (isset($res['success']) && $res['success'] == 1) {
+            // $res = json_decode($response, true);
+            // if (isset($res['success']) && $res['success'] == 1) {
                 $registration = new ClientRegistrationModel;
                 $registration->fill($request->all());
                 $registration->save();
@@ -234,10 +234,10 @@ class HomeController extends Controller
                 $success = "Please check mail in spam for confirmation Subscription.";
                 $request->session()->put("success1",$success);
                 $request->session()->put("reSendMailId",$registration->id);
-            }else {
-                $error = "Your email does not pass captcha test. Please! try again";
-                $request->session()->put("error",$error);
-            }
+            // }else {
+            //     $error = "Your email does not pass captcha test. Please! try again";
+            //     $request->session()->put("error",$error);
+            // }
 
         }else {
             $error = "Your account has already register.Please! login.";
@@ -300,8 +300,8 @@ class HomeController extends Controller
                 return back();
             }
             if ($mobile->status != 0) {
-                $login->online = ++$login->online;
-                $login->save();
+                $mobile->online = ++$mobile->online;
+                $mobile->save();
                 $request->session()->put("client",$mobile);
                 return redirect('/');
             }else {
@@ -315,11 +315,13 @@ class HomeController extends Controller
         return back();
     }
     public function LogoutProcess(Request $request){
-        $value = $request->session()->get("client");
-        $dataOnline = ClientRegistrationModel::find($value['id']);
-        $dataOnline->online = 0;
-        $dataOnline->save();
-        $request->session()->pull("client");
+        if($request->session()->has("client")){
+            $value = $request->session()->get("client");
+            $dataOnline = ClientRegistrationModel::find($value['id']);
+            $dataOnline->online = 0;
+            $dataOnline->save();
+            $request->session()->pull("client");
+        }
         return back();
     }
     public function BrokerView(){

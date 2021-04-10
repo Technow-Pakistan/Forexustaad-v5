@@ -1,20 +1,20 @@
 <style>
-  
-  @media (max-width: 991px){
-      .scroll-tbl table:not(.curr_list) {
-         min-width: 100%;
-      }
-   }
-  .countChatBoxUnRead{
-    position:absolute;
-    top:2px;
-    font-size:12px;
-    left:107px;
-    color:white;
-    background:black;
-    padding:0px 4px;
-    border-radius:50%;
-  }
+
+    @media (max-width: 991px){
+        .scroll-tbl table:not(.curr_list) {
+            min-width: 100%;
+        }
+    }
+    .countChatBoxUnRead{
+        position:absolute;
+        top:2px;
+        font-size:12px;
+        left:107px;
+        color:white;
+        background:black;
+        padding:0px 4px;
+        border-radius:50%;
+    }
 </style>
 		<!--==============================-->
 		<!--=====      Chat Box      =====-->
@@ -23,18 +23,18 @@
       <section class="chatbox js-chatbox">
           <div class="chatbox__header">
             <h3 class="chatbox__header-cta-text pt-2"><span class="chatbox__header-cta-icon"><i class="fas fa-comments"></i></span>Let's chat</h3>
-              @php 
+            @php
                 $value = Session::get('client');
                 $ClientChatMessagesData = App\Models\ChatBoxModel::where('userId',$value['id'])->get();
                 if(count($ClientChatMessagesData) > 0){
-                  $ClientChatMessagesDataUnRead =  count($ClientChatMessagesData[0]->GetTotalUnReadAM());
-                  if($ClientChatMessagesDataUnRead == 0){
-                    $ClientChatMessagesDataUnRead = "";
-                  }
+                    $ClientChatMessagesDataUnRead =  count($ClientChatMessagesData[0]->GetTotalUnReadAM());
+                    if($ClientChatMessagesDataUnRead == 0){
+                        $ClientChatMessagesDataUnRead = "";
+                    }
                 }else{
-                  $ClientChatMessagesDataUnRead = "";
+                    $ClientChatMessagesDataUnRead = "";
                 }
-              @endphp
+            @endphp
             <span class="countChatBoxUnRead" id="blink1">{{$ClientChatMessagesDataUnRead}}</span>
             <button class="js-chatbox-toggle chatbox__header-cta-btn u-btn btn"><i class="fas fa-chevron-up"></i></button>
           </div>
@@ -470,7 +470,7 @@
                       </div>
                     </div>
                     <div class="g-recaptcha" data-sitekey="6LezBIYaAAAAABr8gfLi76swA4va2bPoD-gykpGi"></div>
-                        <input type="hidden" name="token" id="token" value="">
+                        {{-- <input type="hidden" name="token" id="token" value=""> --}}
                     <div class="form-group text-left ml-3">
                         <p> <input type="checkbox" value="1" class="RegistrationCheckBox" name="Terms&Conditions" required style="height: 12px;margin-bottom: 0px;"> Please Accept over <a href="https://forexustaad.com/p/Terms-And-Conditions" target="_blank">Term and Conditions</a></p>
                         <button type="submit" class="btn btn-primary text-uppercase quote_send_msg mr-4" data-type="quote">Register</button>
@@ -617,7 +617,7 @@
           color: #aaa;
           padding: 1em;
         }
-        
+
     </style>
 <!-- Request Quote Modal ends -->
 <script src="{{URL::to('/public/assets/assets/js/jquery-3.2.1.min.js')}}"></script>
@@ -658,7 +658,7 @@
           var objDiv = document.getElementById("chatbox__display");
           objDiv.scrollTop = objDiv.scrollHeight;
 
-          // Chat Box script start 
+          // Chat Box script start
 
           var ChatClientImageShowSrc = $("#ChatClientImageShowSrc").attr('src');
           const toggleChatboxBtn = document.querySelector(".js-chatbox-toggle");
@@ -695,7 +695,7 @@
           $(".countChatBoxUnRead").html("");
           $(".countChatBoxUnRead").attr("class","countChatBoxUnRead1");
           var URLPost12 = "{{URL::to('GetReadChatMessages')}}/" + "{{$value['id']}}";
-          $.ajax({ 
+          $.ajax({
               type: "POST",
               url: URLPost12,
               success: function(response){
@@ -982,11 +982,11 @@
       }
       var $captcha = $( '#recaptcha' ),
               response = grecaptcha.getResponse();
-          
+
           if (response.length === 0) {
               e.preventDefault();
               $(".RegistrationError").html("Recaptcha is mandatory.");
-          } 
+          }
     });
 
 

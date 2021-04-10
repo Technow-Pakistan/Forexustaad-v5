@@ -1,5 +1,5 @@
 
-@php 
+@php
     if(Session::has('client')){
         $clientDataNoti = Session::get('client');
         $clientNotiID = $clientDataNoti['id'];
@@ -105,7 +105,7 @@
                     font-family: 'Font Awesome 5 Pro', 'Font Awesome 5 Free','Font Awesome 5 Solids', 'Font Awesome 5 Brands' !important;
                 }
             </style>
-            
+
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-602bc30f9629ba67"></script>
 <style>
@@ -153,10 +153,10 @@
         </div>
     </div>
     <!-- Preloader starts -->
-    <div id="loading">
+    {{-- <div id="loading">
         <img id="loading-image" src="{{URL::to('public/assets/assets/img/preloader.gif')}}" alt="Loading..." />
         <p class="mt-3"><strong>LOADING...</strong></p>
-    </div>
+    </div> --}}
     <!-- Preloader ends -->
     <div class="wrapper" id="top">
         <?php
