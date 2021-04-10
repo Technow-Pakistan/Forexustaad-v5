@@ -47,7 +47,7 @@
                                             <div class="scroll-tbl">
                                                 <h4 class="ml-2 Color0d5fe9">Current Signals</h4>
                                                 <table id="cryptoTable1" class="Border-Theme table table-striped table-bordered dt-responsive nowrap" style="width:100%">
-                                                    <thead>                                                      
+                                                    <thead>
                                                         <tr class="back-Theme">
                                                             <th>Sr#</th>
                                                             <th>Symbols/Pairs</th>
@@ -113,13 +113,13 @@
                                                                   <td>{{$icount++}}</td>
                                                                   <td class="text-center">
                                                                      <p class="mb-2">
-                                                                        @if($data->image == null)
+                                                                        @if($pair->image == null)
                                                                            @foreach($flags as $flag)
                                                                               @php $flag4 = str_replace(' ', '', $flag) @endphp
                                                                               <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
                                                                            @endforeach
                                                                         @else
-                                                                           <img src="{{URL::to('storage/app')}}/{{$data->image}}" width="100" height="70"  alt="">
+                                                                           <img src="{{URL::to('storage/app')}}/{{$pair->image}}" width="100" height="35"  alt="">
                                                                         @endif
                                                                         <!-- <span class="flag-icon flag-icon-ad">&nbsp;</span>
                                                                         <span class="flag-icon flag-icon-us">&nbsp;</span> -->
@@ -162,7 +162,7 @@
                                             <div class="scroll-tbl">
                                                 <h4 class="ml-2 Color0d5fe9">Current Signals</h4>
                                                 <table id="forexTable1" class="Border-Theme table table-striped table-bordered dt-responsive nowrap" style="width:100%">
-                                                   <thead>                                                     
+                                                   <thead>
                                                       <tr class="back-Theme">
                                                          <th>Sr#</th>
                                                          <th>Symbols/Pairs</th>
@@ -228,13 +228,13 @@
                                                                <td>{{$icount++}}</td>
                                                                <td class="text-center">
                                                                   <p class="mb-2">
-                                                                     @if($data->image == null)
+                                                                     @if($pair->image == null)
                                                                         @foreach($flags as $flag)
                                                                            @php $flag4 = str_replace(' ', '', $flag) @endphp
                                                                            <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
                                                                         @endforeach
                                                                      @else
-                                                                        <img src="{{URL::to('storage/app')}}/{{$data->image}}" width="100" height="70"  alt="">
+                                                                        <img src="{{URL::to('storage/app')}}/{{$pair->image}}" width="100" height="35"  alt="">
                                                                      @endif
                                                                      <!-- <span class="flag-icon flag-icon-ad">&nbsp;</span>
                                                                      <span class="flag-icon flag-icon-us">&nbsp;</span> -->
@@ -277,7 +277,7 @@
                                             <div class="scroll-tbl">
                                                 <h4 class="ml-2 Color0d5fe9">Current Signals</h4>
                                                 <table id="stocks" class="Border-Theme stocks table table-striped table-bordered dt-responsive nowrap" style="width:100%">
-                                                    <thead>                                                    
+                                                    <thead>
                                                         <tr class="back-Theme">
                                                             <th>Sr#</th>
                                                             <th>Symbols/Pairs</th>
@@ -343,13 +343,13 @@
                                                                <td>{{$icount++}}</td>
                                                                <td class="text-center">
                                                                   <p class="mb-2">
-                                                                     @if($data->image == null)
+                                                                     @if($pair->image == null)
                                                                         @foreach($flags as $flag)
                                                                            @php $flag4 = str_replace(' ', '', $flag) @endphp
                                                                            <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
                                                                         @endforeach
                                                                      @else
-                                                                        <img src="{{URL::to('storage/app')}}/{{$data->image}}" width="100" height="70"  alt="">
+                                                                        <img src="{{URL::to('storage/app')}}/{{$pair->image}}" width="100" height="35"  alt="">
                                                                      @endif
                                                                      <!-- <span class="flag-icon flag-icon-ad">&nbsp;</span>
                                                                      <span class="flag-icon flag-icon-us">&nbsp;</span> -->
@@ -415,7 +415,7 @@
                                             <div class="scroll-tbl">
                                                 <h4 class="ml-2 Colorff0024">Expired Signals</h4>
                                                 <table id="cryptoTable2" class="Border-Theme table table-striped table-bordered dt-responsive nowrap" style="width:100%">
-                                                    <thead>                                                      
+                                                    <thead>
                                                         <tr class="back-Theme">
                                                             <th>Sr#</th>
                                                             <th>Symbols/Pairs</th>
@@ -457,45 +457,45 @@
                                                          @endphp
                                                          @if($go3 != 3 && $pair->categoryId == 2)
                                                             <tr>
-                                                               <td>{{$icount++}}</td>
-                                                               <td>
-                                                                  <p class="mb-2">
-                                                                     @if($data->image == null)
-                                                                        @foreach($flags as $flag)
-                                                                           @php $flag4 = str_replace(' ', '', $flag) @endphp
-                                                                           <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" class="thumbnail" width="50" height="35" alt=""> &nbsp;&nbsp;
-                                                                        @endforeach
-                                                                     @else
-                                                                        <img src="{{URL::to('storage/app')}}/{{$data->image}}" width="100" height="70"  alt="">
-                                                                     @endif
-                                                                     <!-- <span class="flag-icon flag-icon-ad">&nbsp;</span>
-                                                                     <span class="flag-icon flag-icon-us">&nbsp;</span> -->
-                                                                  </p>
-                                                                  <h6 class="m-0 font-weight-bold"><strong>{{$pair->pair}}</strong></h6>
-                                                                  <h6 class="m-0 text-danger">Expired</h6>
-                                                               </td>
-                                                               <td class="pl-0">
-                                                                  <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
-                                                               </td>
-                                                               <td><strong class="font-weight-bold">{{$data->selectUser}}</strong></td>
-                                                               <td class="text-center">
-                                                                  @if($data->result != null)
-                                                                     <span class="{{$data->result == 'TP Hit' ? 'text-success' : ''}}{{$data->result == 'SL Hit' ? 'text-danger' : ''}}"><strong> {{$data->result == null ? 'manually closed' : $data->result}}</strong></span>
-                                                                  @elseif($signalDataApi)
-                                                                     <span class="{{$signalDataApi->result == 'TP Hit' ? 'text-success' : ''}}{{$signalDataApi->result == 'SL Hit' ? 'text-danger' : ''}}"><strong> {{$signalDataApi->result == null ? 'manually closed' : $signalDataApi->result}}</strong></span>
-                                                                  @endif
-                                                               </td>
-                                                               <td class="text-center">
-                                                                  @if($data->pips != null)
-                                                                     <span class="m-0 {{str_contains($data->pips,'+') != null ? 'text-success' : ''}}{{str_contains($data->pips,'-') ? 'text-danger' : ''}}"><strong> {{$data->pips == null ? '0' : $data->pips}}</strong></span>
-                                                                  @elseif($signalDataApi)
-                                                                     <span class="m-0 {{str_contains($signalDataApi->pips,'+') != null ? 'text-success' : ''}}{{str_contains($signalDataApi->pips,'-') ? 'text-danger' : ''}}"><strong> {{$signalDataApi->pips == null ? 'none' : $signalDataApi->pips}}</strong></span>
-                                                                  @endif
-                                                               </td>
+                                                                <td>{{$icount++}}</td>
+                                                                <td>
+                                                                    <p class="mb-2">
+                                                                        @if($pair->image == null)
+                                                                            @foreach($flags as $flag)
+                                                                            @php $flag4 = str_replace(' ', '', $flag) @endphp
+                                                                            <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" class="thumbnail" width="50" height="35" alt=""> &nbsp;&nbsp;
+                                                                            @endforeach
+                                                                        @else
+                                                                            <img src="{{URL::to('storage/app')}}/{{$pair->image}}" width="100" height="35"  alt="">
+                                                                        @endif
+                                                                        <!-- <span class="flag-icon flag-icon-ad">&nbsp;</span>
+                                                                        <span class="flag-icon flag-icon-us">&nbsp;</span> -->
+                                                                    </p>
+                                                                    <h6 class="m-0 font-weight-bold"><strong>{{$pair->pair}}</strong></h6>
+                                                                    <h6 class="m-0 text-danger">Expired</h6>
+                                                                </td>
+                                                                <td class="pl-0">
+                                                                    <a href="{{URL::to('signal')}}/{{$url}}">View Signal</a>
+                                                                </td>
+                                                                <td><strong class="font-weight-bold">{{$data->selectUser}}</strong></td>
+                                                                <td class="text-center">
+                                                                    @if($data->result != null)
+                                                                        <span class="{{$data->result == 'TP Hit' ? 'text-success' : ''}}{{$data->result == 'SL Hit' ? 'text-danger' : ''}}"><strong style="white-space: normal"> {{$data->result == null ? 'manually closed' : $data->result}}</strong></span>
+                                                                    @elseif($signalDataApi)
+                                                                        <span class="{{$signalDataApi->result == 'TP Hit' ? 'text-success' : ''}}{{$signalDataApi->result == 'SL Hit' ? 'text-danger' : ''}}"><strong> {{$signalDataApi->result == null ? 'manually closed' : $signalDataApi->result}}</strong></span>
+                                                                    @endif
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    @if($data->pips != null)
+                                                                        <span class="m-0 {{str_contains($data->pips,'+') != null ? 'text-success' : ''}}{{str_contains($data->pips,'-') ? 'text-danger' : ''}}"><strong> {{$data->pips == null ? '0' : $data->pips}}</strong></span>
+                                                                    @elseif($signalDataApi)
+                                                                        <span class="m-0 {{str_contains($signalDataApi->pips,'+') != null ? 'text-success' : ''}}{{str_contains($signalDataApi->pips,'-') ? 'text-danger' : ''}}"><strong> {{$signalDataApi->pips == null ? 'none' : $signalDataApi->pips}}</strong></span>
+                                                                    @endif
+                                                                </td>
                                                             </tr>
-                                                         @endif
-                                                      @endforeach
-                                                   </tbody>
+                                                        @endif
+                                                    @endforeach
+                                                    </tbody>
                                                 </table>
                                             </div>
                                         </div>
@@ -504,7 +504,7 @@
                                             <div class="scroll-tbl">
                                                 <h4 class="ml-2 Colorff0024">Expired Signals</h4>
                                                 <table id="forexTable2" class="Border-Theme table table-striped table-bordered dt-responsive nowrap" style="width:100%">
-                                                    <thead>                                                     
+                                                    <thead>
                                                         <tr class="back-Theme">
                                                             <th>Sr#</th>
                                                             <th>Symbols/Pairs</th>
@@ -549,13 +549,13 @@
                                                                <td>{{$icount++}}</td>
                                                                <td>
                                                                   <p class="mb-2">
-                                                                     @if($data->image == null)
+                                                                     @if($pair->image == null)
                                                                         @foreach($flags as $flag)
                                                                            @php $flag4 = str_replace(' ', '', $flag) @endphp
                                                                            <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" class="thumbnail" width="50" height="35" alt=""> &nbsp;&nbsp;
                                                                         @endforeach
                                                                      @else
-                                                                        <img src="{{URL::to('storage/app')}}/{{$data->image}}" width="100" height="70"  alt="">
+                                                                        <img src="{{URL::to('storage/app')}}/{{$pair->image}}" width="100" height="35"  alt="">
                                                                      @endif
                                                                      <!-- <span class="flag-icon flag-icon-ad">&nbsp;</span>
                                                                      <span class="flag-icon flag-icon-us">&nbsp;</span> -->
@@ -569,7 +569,7 @@
                                                                <td><strong class="font-weight-bold">{{$data->selectUser}}</strong></td>
                                                                <td class="text-center">
                                                                   @if($data->result != null)
-                                                                     <span class="{{$data->result == 'TP Hit' ? 'text-success' : ''}}{{$data->result == 'SL Hit' ? 'text-danger' : ''}}"><strong> {{$data->result == null ? 'manually closed' : $data->result}}</strong></span>
+                                                                     <span class="{{$data->result == 'TP Hit' ? 'text-success' : ''}}{{$data->result == 'SL Hit' ? 'text-danger' : ''}}"><strong style="white-space: normal"> {{$data->result == null ? 'manually closed' : $data->result}}</strong></span>
                                                                   @elseif($signalDataApi)
                                                                      <span class="{{$signalDataApi->result == 'TP Hit' ? 'text-success' : ''}}{{$signalDataApi->result == 'SL Hit' ? 'text-danger' : ''}}"><strong> {{$signalDataApi->result == null ? 'manually closed' : $signalDataApi->result}}</strong></span>
                                                                   @endif
@@ -593,7 +593,7 @@
                                             <div class="scroll-tbl">
                                                 <h4 class="ml-2 Colorff0024">Expired Signals</h4>
                                                 <table id="stocksTable2" class="Border-Theme table table-striped table-bordered dt-responsive nowrap" style="width:100%">
-                                                   <thead>                                                    
+                                                   <thead>
                                                       <tr class="back-Theme">
                                                       <th>Sr#</th>
                                                       <th colspan="2">Symbols/Pairs</th>
@@ -638,13 +638,13 @@
                                                                <td>{{$icount++}}</td>
                                                                <td colspan="2">
                                                                   <p class="mb-2">
-                                                                     @if($data->image == null)
+                                                                     @if($pair->image == null)
                                                                         @foreach($flags as $flag)
                                                                            @php $flag4 = str_replace(' ', '', $flag) @endphp
                                                                            <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" class="thumbnail" width="50" height="35" alt=""> &nbsp;&nbsp;
                                                                         @endforeach
                                                                      @else
-                                                                        <img src="{{URL::to('storage/app')}}/{{$data->image}}" width="100" height="70"  alt="">
+                                                                        <img src="{{URL::to('storage/app')}}/{{$pair->image}}" width="100" height="35"  alt="">
                                                                      @endif
                                                                      <!-- <span class="flag-icon flag-icon-ad">&nbsp;</span>
                                                                      <span class="flag-icon flag-icon-us">&nbsp;</span> -->
@@ -658,7 +658,7 @@
                                                                <td><strong class="font-weight-bold">{{$data->selectUser}}</strong></td>
                                                                <td class="text-center">
                                                                   @if($data->result != null)
-                                                                     <span class="{{$data->result == 'TP Hit' ? 'text-success' : ''}}{{$data->result == 'SL Hit' ? 'text-danger' : ''}}"><strong> {{$data->result == null ? 'manually closed' : $data->result}}</strong></span>
+                                                                     <span class="{{$data->result == 'TP Hit' ? 'text-success' : ''}}{{$data->result == 'SL Hit' ? 'text-danger' : ''}}"><strong style="white-space: normal"> {{$data->result == null ? 'manually closed' : $data->result}}</strong></span>
                                                                   @elseif($signalDataApi)
                                                                      <span class="{{$signalDataApi->result == 'TP Hit' ? 'text-success' : ''}}{{$signalDataApi->result == 'SL Hit' ? 'text-danger' : ''}}"><strong> {{$signalDataApi->result == null ? 'manually closed' : $signalDataApi->result}}</strong></span>
                                                                   @endif

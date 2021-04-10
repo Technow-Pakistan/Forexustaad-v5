@@ -236,14 +236,15 @@ class AdminController extends Controller
         $Clients = ClientRegistrationModel::all();
         $TotalClientNumber = count($Clients);
         $lastMonth = date("m",strtotime("0 months"));
-        $lastMonth1 = date("m",strtotime("-7 days"));
+        $lastMonth1 = date("Y-m-d h:i:s ",strtotime("-7 days"));
         $lastDay = date("d",strtotime("0 days"));
         $lastWeek = date("d",strtotime("-7 days"));
         $lastYear = date("Y",strtotime("0 months"));
-     
+
         $MonthlyClients = ClientRegistrationModel::whereMonth("created_at",$lastMonth)->whereYear("created_at",$lastYear)->get();
         $ToDayClients = ClientRegistrationModel::whereDay("created_at",$lastDay)->whereMonth("created_at",$lastMonth)->whereYear("created_at",$lastYear)->get();
-        $WeeklyClients = ClientRegistrationModel::whereDay("created_at",'>=',$lastWeek)->whereMonth("created_at",$lastMonth1)->whereYear("created_at",$lastYear)->get();
+        $WeeklyClients = ClientRegistrationModel::where("created_at",">=",$lastMonth1)->get();
+
         $MonthlyClientNumber = count($MonthlyClients);
         $ToDayClientNumber = count($ToDayClients);
         $WeeklyClientNumber = count($WeeklyClients);
@@ -264,7 +265,7 @@ class AdminController extends Controller
         $MonthlyBrokerNumber = count($MonthlyBroker);
 
         // Active Visitors Graph Data
-        
+
         $activeUserGraphAllDataArray = array();
         $activeUserGraphFirstData = NonRegisterVisitorModel::orderBy('id','asc')->first();
         if($activeUserGraphFirstData){

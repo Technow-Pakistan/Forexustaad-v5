@@ -334,13 +334,13 @@
                                                         <div class="services_wrapper">
                                                             <div class="">
                                                                 <div class="services_icon">
-                                                                     @if($data->image == null)
+                                                                     @if($pair->image == null)
                                                                         @foreach($flags as $flag)
                                                                             @php $flag4 = str_replace(' ', '', $flag) @endphp
                                                                             <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
                                                                         @endforeach
                                                                     @else
-                                                                    <img src="{{URL::to('storage/app')}}/{{$data->image}}" width="100" height="70"  alt="">
+                                                                    <img src="{{URL::to('storage/app')}}/{{$pair->image}}" width="100" height="35"  alt="">
                                                                     @endif
                                                                 </div>
                                                             </div>
@@ -600,7 +600,7 @@
                                             aria-labelledby="crypto-tab">
                                             <div class="scroll-tbl">
                                                 <table id="cryptoTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
-                                                    <thead>                                                      
+                                                    <thead>
                                                         <tr>
                                                             <th>Id</th>
                                                             <th>Symbol</th>
@@ -631,7 +631,7 @@
                                             aria-labelledby="forex-tab">
                                             <div class="scroll-tbl">
                                                 <table id="forexTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
-                                                    <thead>                                                     
+                                                    <thead>
                                                         <tr>
                                                             <th>Id</th>
                                                             <th>Symbol</th>
@@ -662,7 +662,7 @@
                                             aria-labelledby="stocks-tab">
                                             <div class="scroll-tbl">
                                                 <table id="stocksTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
-                                                    <thead>                                                    
+                                                    <thead>
                                                         <tr>
                                                             <th>Id</th>
                                                             <th>Symbol</th>
@@ -774,7 +774,7 @@
 
 
 <script>
-   
+
 // // Stock Indices
 //     $.ajax({
 //       type: "Get",
@@ -783,7 +783,7 @@
 //         json = response.response;
 //         $("#stocksTable tbody").html("");
 //         for (let index = 0; index < json.length; index++) {
-//             $("#stocksTable tbody").append("<tr><td>"+json[index].name+"</td><td>"+json[index].c+"</td><td>"+json[index].h+"</td><td>"+json[index].l+"</td><td>"+json[index].tm+"</td></tr>");          
+//             $("#stocksTable tbody").append("<tr><td>"+json[index].name+"</td><td>"+json[index].c+"</td><td>"+json[index].h+"</td><td>"+json[index].l+"</td><td>"+json[index].tm+"</td></tr>");
 //         }
 //       },
 //       error: function(data) {
@@ -800,7 +800,7 @@
 //         json = response.response;
 //         $("#cryptoTable tbody").html("");
 //         for (let index = 0; index < json.length; index++) {
-//             $("#cryptoTable tbody").append("<tr><td>"+json[index].s+"</td><td>"+json[index].c+"</td><td>"+json[index].o+"</td><td>"+json[index].h+"</td><td>"+json[index].l+"</td><td>"+json[index].tm+"</td></tr>");          
+//             $("#cryptoTable tbody").append("<tr><td>"+json[index].s+"</td><td>"+json[index].c+"</td><td>"+json[index].o+"</td><td>"+json[index].h+"</td><td>"+json[index].l+"</td><td>"+json[index].tm+"</td></tr>");
 //         }
 //       },
 //       error: function(data) {
@@ -816,7 +816,7 @@
     //     json = response.response;
     //     $("#forexTable tbody").html("");
     //     for (let index = 0; index < json.length; index++) {
-    //         $("#forexTable tbody").append("<tr><td>"+json[index].s+"</td><td>"+json[index].c+"</td><td>"+json[index].o+"</td><td>"+json[index].h+"</td><td>"+json[index].l+"</td><td>"+json[index].tm+"</td></tr>");          
+    //         $("#forexTable tbody").append("<tr><td>"+json[index].s+"</td><td>"+json[index].c+"</td><td>"+json[index].o+"</td><td>"+json[index].h+"</td><td>"+json[index].l+"</td><td>"+json[index].tm+"</td></tr>");
     //     }
     //   },
     //   error: function(data) {
