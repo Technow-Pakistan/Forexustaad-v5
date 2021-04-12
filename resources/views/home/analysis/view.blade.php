@@ -24,13 +24,12 @@
                                 $Description = html_entity_decode($analysis->detailDescription);
                                 echo $Description;
                             @endphp
-
                         </div>
                         <div style="width:100%!important text-center">
                                         
-                            @if($fundamental->embed != null)
+                            @if($analysis->embed != null)
                                 @php 
-                                    echo $fundamental->embed;
+                                    echo $analysis->embed;
                                 @endphp
                             @endif
                         

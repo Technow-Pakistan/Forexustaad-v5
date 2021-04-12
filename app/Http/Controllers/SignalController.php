@@ -14,6 +14,7 @@ use App\Models\ClientRegistrationModel;
 use App\Models\ClientNotificationModel;
 use App\Models\SignalApiModel;
 use App\Models\SignalApiKeyModel;
+use App\Models\SignalApiRecordModel;
 
 class SignalController extends Controller
 {
@@ -411,6 +412,8 @@ class SignalController extends Controller
                 $newApiData = new SignalApiModel;
                 $newApiData->fill($apiData);
                 $newApiData->save();
+                $signal->price = $newApiData->price;
+                $signal->save();
             }
         }
         $user = $request->session()->get("admin");
@@ -575,7 +578,8 @@ class SignalController extends Controller
     public function AddPair(Request $request){
         $totalData = SignalPairModel::all();
         $totalCategory = SignalPairCategoryModel::all();
-        return view('admin.signals.add-signalPair',compact('totalData','totalCategory'));
+        $signalPairs = SignalApiRecordModel::all();
+        return view('admin.signals.add-signalPair',compact('totalData','totalCategory','signalPairs'));
     }
     public function AddPairProcess(Request $request){
         $data = new SignalPairModel;

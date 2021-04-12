@@ -47,10 +47,24 @@
 								<form class="socialForm" action="" method="post" enctype="multipart/form-data">
 									<div class="alignleft actions bulkactions">
 										<label for="bulk-action-selector-top" class="d-block ">Select Category</label>
-										<select name="categoryId" class="form-control d-inline-block socialIcon" id="bulk-action-selector-top">
+										<select name="categoryId" class="form-control d-inline-block socialIcon" id="fieldtwo">
+                                            @php $ijk = 0; @endphp
                                             @foreach($totalCategory as $category)
                                                 @if($category->active == 0)
+                                                    @if($ijk == 0) @php $data2345 = $category->id; @endphp @endif
 											        <option class="{{$category->category}}" value="{{$category->id}}">{{$category->category}}</option>
+                                                    @php $ijk++ @endphp
+                                                @endif
+                                            @endforeach
+										</select>
+										
+									</div>
+                                    <div class="alignleft actions bulkactions">
+										<label for="bulk-action-selector-top" class="d-block ">find Pair</label>
+										<select name="categoryId" class="form-control d-inline-block js-example-tags" id="findtwo">
+                                            @foreach($signalPairs as $sig)
+                                                @if($data2345 == $sig->categoryId)
+                                                    <option value="{{$sig->pair}}">{{$sig->pair}}</option>
                                                 @endif
                                             @endforeach
 										</select>
@@ -172,9 +186,34 @@
 <!-- [ Main Content ] end -->
 @include('admin.include.footer')
 
+<script type='text/javascript'>
+        $(".js-example-tags").select2({
+            tags: true
+        });
+    <?php
+        $php_array1 = $totalCategory;
+        $js_array1 = json_encode($php_array1);
+        echo "var javascript_array1 = ". $js_array1 . ";\n";
+        $php_array2 = $signalPairs;
+        $js_array2 = json_encode($php_array2);
+        echo "var javascript_array2 = ". $js_array2 . ";\n";
+    ?>
+    console.log(javascript_array1);
+    $("#fieldtwo").on('change',function(){
+        console.log(":sda");
+        var selectedOption = $("#fieldtwo").val();
+        console.log(selectedOption);
+        $("#findtwo").html("");
+        for (let i = 0; i < javascript_array2.length; i++){
+            if (javascript_array2[i].categoryId == selectedOption) {
+                $("#findtwo").append("<option value='"+javascript_array2[i].id+"'>"+javascript_array2[i].pair+"</option>");
+            }
+        }
+    })
+</script>
 <script>
     $("#user-list-table1").DataTable();
-	$(".editlink").on("click",function(){
+    $("#user-list-table1").on("click", ".editlink", function(){
 		var id = $(this).attr('value');
 		var icon = $(this).parent().parent().parent().children()[0].innerText;
 		var link = $(this).parent().parent().parent().children()[1].innerText;
