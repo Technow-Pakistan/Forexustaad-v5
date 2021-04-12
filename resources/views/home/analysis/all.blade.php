@@ -30,9 +30,9 @@
                     		</div>
                         </div>
                         @foreach($Analysis as $data)
-                        @php
-                            $url = str_replace(" ","-",$data->title);
-                        @endphp
+                            @php
+                                $url = str_replace(" ","-",$data->title);
+                            @endphp
                                 <div class=" col-sm-12 col-md-6">
                                     <div class="wow animated fadeInUp mt-1 bg-light">
                                         <div class="container-fluid ">

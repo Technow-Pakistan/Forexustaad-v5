@@ -34,9 +34,26 @@ use App\Models\OtherPagesContentModel;
 use App\Models\NonRegisterVisitorModel;
 use App\Models\ActiveOnSiteModel;
 use App\Models\ClientNotificationModel;
+use App\Models\FundamentalModel;
+use App\Models\AnalysisModel;
+use App\Models\SignalsModel;
+use App\Models\BasicTrainingModel;
+use App\Models\HabbitTrainingModel;
 
 class HomeController extends Controller
 {
+    public function Index(){
+        $LatestFundamental = FundamentalModel::orderBy('id','desc')->where('status',1)->skip(0)->take(4)->get();
+        $LatestAnalysis = AnalysisModel::orderBy('id','desc')->where('status',1)->skip(0)->take(4)->get();
+        $LatestBrokerNews  = BrokerNewsModel::orderBy('id','desc')->where('pending',0)->skip(0)->take(4)->get();
+        $latestWebinars = MainWebinarModel::orderBy('id','desc')->where('status',1)->take(5)->get();
+        $LatestBlogsData = BlogPostModel::orderBy('id','desc')->where('status',1)->where('pending',1)->where('stickToTop',1)->whereDate('publishDate', '<=', date("Y-m-d"))->take(5)->get();
+        $StarBrokerHome = BrokerCompanyInformationModel::orderBy('id','desc')->where('star',1)->where('pending',0)->where('status',0)->skip(0)->take(10)->get();
+        $StarSignalsHome = SignalsModel::orderBy('id','desc')->where('star',1)->where('expired',0)->where('status',0)->skip(0)->take(6)->get();
+        $LatestBasicTraining = BasicTrainingModel::orderBy('id','desc')->where('status',0)->skip(0)->take(5)->get();
+        $LatestHabbitTraining = HabbitTrainingModel::orderBy('id','desc')->where('status',0)->skip(0)->take(5)->get();
+        return view('home.index',compact('LatestFundamental','LatestAnalysis','LatestBrokerNews','latestWebinars','LatestBlogsData','StarBrokerHome','StarSignalsHome','LatestBasicTraining','LatestHabbitTraining'));
+    }
     public function ClientNotificationView(Request $request,$id){
         $ClientNotification = ClientNotificationModel::where('id',$id)->first();
         if($ClientNotification){
@@ -129,28 +146,6 @@ class HomeController extends Controller
     }
     public function Construction(){
         return view('home/construction');
-    }
-    public function Index(){
-
-        $forexApiData = array();
-        $CryptoApiData = array();
-        $StockApiData = array();
-        // $data1 = file_get_contents("https://fcsapi.com/api-v3/forex/latest?symbol=all_forex&access_key=DGBiPcd81sslKeJJuwC17lhGW");
-        // $daata1 =  json_decode($data1);
-        // if(isset($daata1->response)){
-        //  $forexApiData = $daata1->response;
-        // }
-        // $data2 = file_get_contents("https://fcsapi.com/api-v3/crypto/latest?symbol=all_crypto&access_key=DGBiPcd81sslKeJJuwC17lhGW");
-        // $daata2 =  json_decode($data2);
-        // if(isset($daata2->response)){
-        //  $CryptoApiData = $daata2->response;
-        // $data3 = file_get_contents("https://fcsapi.com/api-v3/stock/indices_latest?id=1,2,3,4,5&access_key=DGBiPcd81sslKeJJuwC17lhGW");
-        //  $daata3 =  json_decode($data3);
-        // }
-        // if(isset($daata3->response)){
-        //  $StockApiData = $daata3->response;
-        // }
-        return view('home.index',compact('forexApiData','CryptoApiData','StockApiData'));
     }
     public function privacyPolicy(){
         $data = OtherPagesContentModel::where('contentPage','privacyPolice')->first();

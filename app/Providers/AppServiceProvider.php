@@ -38,6 +38,8 @@ use App\Models\ClientNotificationModel;
 use App\Models\ClientRegistrationModel; 
 use App\Models\ChatBoxModel; 
 use App\Models\SignalApiKeyModel;
+use App\Models\AnalysisModel;
+use App\Models\BrokerNewsModel;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -76,12 +78,6 @@ class AppServiceProvider extends ServiceProvider
         view()->share("AllRightApi",ApiRightModel::orderBy('id','desc')->where('trash',0)->get());
         view()->share("SocialMediaLink",FirstNavBarModel::all());
         view()->share("copyRight",FooterCopyRightModel::where('id',1)->first());
-        view()->share("latestWebinars", MainWebinarModel::orderBy('id','desc')->where('status',1)->take(5)->get());
-        view()->share("LatestBlogsData",BlogPostModel::orderBy('id','desc')->where('status',1)->where('pending',1)->where('stickToTop',1)->whereDate('publishDate', '<=', date("Y-m-d"))->take(5)->get());
-        view()->share("StarBrokerHome",BrokerCompanyInformationModel::orderBy('id','desc')->where('star',1)->where('pending',0)->where('status',0)->skip(0)->take(10)->get());
-        view()->share("StarSignalsHome",SignalsModel::orderBy('id','desc')->where('star',1)->where('expired',0)->where('status',0)->skip(0)->take(6)->get());
-        view()->share("ClientAccountDetailInfo",ClientAccountDetailModel::all());
-        view()->share("LatestFundamental",FundamentalModel::orderBy('id','desc')->where('status',1)->skip(0)->take(4)->get());
         view()->share("SponoserAddActive",SponoserAddModel::orderBy('id','desc')->where('status',0)->skip(0)->take(9)->get());
         view()->share("MidBannerHomeActive",MidBannerModel::where('status',0)->where('active',1)->first());
         view()->share("AllCities",AllCitiesModel::all());
@@ -89,12 +85,14 @@ class AppServiceProvider extends ServiceProvider
         view()->share("AllCountries",AllCountriesModel::all());
         view()->share("ClientNotificationMessage",ClientNotificationModel::orderBy('id','desc')->get());
         /** Admin Panel Function  */
+        view()->share("ClientAccountDetailInfo",ClientAccountDetailModel::all());
         view()->share("HeaderUnReadMessage",UserContactModel::orderBy('id','desc')->where('read',0)->where('trashMail',0)->get());
         view()->share("NotificationMessage",NotificationModel::orderBy('id','desc')->get());
         view()->share("NonRegisterUser",NonRegisterVisitorModel::orderBy('id','desc')->get());
         view()->share("AllClientMemberData",ClientRegistrationModel::where('status',1)->where('confirmationEmail',1)->get());
         view()->share("AllChatMemberData",ChatBoxModel::orderBy('id','desc')->get());
         view()->share("onesignalApiKey",SignalApiKeyModel::where('id',2)->first());
+        view()->share("signalApiRateKey",SignalApiKeyModel::where('id',1)->first());
         
 
     }

@@ -67,6 +67,17 @@
 										</div>
 									</div>
 									<div class="form-group">
+										<label for="">Lecture Thumbnail</label>
+										<div>
+											@if($count != 0)
+												@if($lecture->thumbnail != null)
+													<img src="{{URL::to('storage/app')}}/{{$lecture->thumbnail}}" alt="" width="100px" height="100px">
+												@endif
+											@endif
+											<input type="file" name="thumbnail"  class="form-control" >
+										</div>
+									</div>
+									<div class="form-group">
 										<label for="">Embed Code</label>
 										<div>
 											<textarea name="embed" id="" class="form-control" required>{{($count != 0 ? $lecture->embed : '' )}}</textarea>

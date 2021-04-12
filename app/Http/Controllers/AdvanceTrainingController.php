@@ -155,6 +155,11 @@ class AdvanceTrainingController extends Controller
             $poistion = HabbitTrainingModel::orderBy('poistion','desc')->first();
             $clientNotilectureCategory = "Habbit";
         }
+        if ($request->file("thumbnail") != null) {
+            $path = $request->file("thumbnail")->store("WebImages");
+            $Image = $path;
+            $data['thumbnail'] = $Image;
+        }
         $data['poistion'] = ++$poistion->poistion;
         $lecture->fill($data);
         $lecture->save();
@@ -201,6 +206,11 @@ class AdvanceTrainingController extends Controller
         }else{
             $lecture = HabbitTrainingModel::find($id);
             $clientNotilectureCategory = "Habbit";
+        }
+        if ($request->file("thumbnail") != null) {
+            $path = $request->file("thumbnail")->store("WebImages");
+            $Image = $path;
+            $data['thumbnail'] = $Image;
         }
         $lecture->fill($data);
         $lecture->save();

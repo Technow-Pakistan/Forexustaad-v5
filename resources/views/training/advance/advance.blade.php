@@ -183,7 +183,11 @@
                                           <div class="col-sm-12 pl-3 {{$lecture->id == $data->id ? 'activeVideo pre-header' : ''}}" id="{{$lecture->id == $data->id ? 'activeVideo' : ''}}">
                                             <div class="media">
                                                 <p class="mt-4 mr-2">{{$data->poistion}}. </p>
-                                              <img class="mr-3 BorderNone" src="http://i.ytimg.com/vi/{{$img123456}}/hqdefault.jpg" alt="Generic placeholder image">
+                                                @if($data->thumbnail == null)
+                                                  <img class="mr-3 BorderNone" src="http://i.ytimg.com/vi/{{$img123456}}/hqdefault.jpg" alt="Generic placeholder image">
+                                                @else
+                                                  <img class="mr-3 BorderNone" src="{{URL::to('')}}/{{$data->thumbnail}}" alt="Generic placeholder image">
+                                                @endif
                                               <div class="media-body">
                                                 <h6 class="m-0 text-{{$lecture->id == $data->id ? 'white' : 'primary'}}">{{$data->title}}</h6>
                                               </div>
