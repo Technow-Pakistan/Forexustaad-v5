@@ -340,7 +340,7 @@
                                                                             <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
                                                                         @endforeach
                                                                     @else
-                                                                    <img src="{{URL::to('storage/app')}}/{{$pair->image}}" width="100" height="35"  alt="">
+                                                                        <img src="{{URL::to('storage/app')}}/{{$pair->image}}" width="100" height="35"  alt="">
                                                                     @endif
                                                                 </div>
                                                             </div>
@@ -500,6 +500,274 @@
                             </div>
                         </section>
                     @endif
+                    
+                    @if(count($LatestAnalysis) > 0)
+                        <section class="analysis">
+                            <div class="container">
+                                <div class="content_area_heading large-heading text-center">
+
+                                    <h1 class="heading_title wow animated fadeInUp">
+                                        Analysis & Opinion
+                                    </h1>
+                                    <div class="heading_border wow animated fadeInUp">
+                                        <span class="one"></span><span class="two"></span><span class="three"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                @foreach($LatestAnalysis as $data)
+                                    @php
+                                        $url = str_replace(" ","-",$data->title);
+                                    @endphp
+                                        <div class=" col-sm-12 col-md-6">
+                                            <div class="wow animated fadeInUp mt-1 bg-light">
+                                                <div class="container-fluid ">
+                                                    <div class="row">
+                                                        <div class="col-sm-12 ">
+
+                                                            <div class="new_description-details">
+                                                                <h6>
+                                                                    <a href="{{URL::to('analysis')}}/{{$url}}">
+                                                                        {{$data->title}}
+                                                                    </a>
+                                                                </h6>
+                                                                <p>
+                                                                    {{$data->description}} <a href="{{URL::to('analysis')}}/{{$url}}">Learn more</a>
+                                                                </p>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="re_img w-100 p-4">
+                                                    <a href="{{URL::to('analysis')}}/{{$url}}">
+                                                        <img src="{{URL::to('/storage/app')}}/{{$data->image}}" width="100%" height="125px" >
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                @endforeach
+
+                                </div>
+                            </div>
+                        </section>
+                    @endif
+                    <!-- education Tabs -->
+                    <section>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home"
+                                            role="tab" aria-controls="home" aria-selected="true">Basic Training</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact"
+                                            role="tab" aria-controls="contact" aria-selected="false">Habbit Training</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                        aria-labelledby="home-tab">
+                                        <div id="catab9" class="cat-tabs-wrap cat-tabs-wrap1" style="display: block;">
+                                            <div>
+                                                <ul>
+                                                    @php $icount = 0 @endphp
+                                                    @foreach($LatestBasicTraining as $basic)
+                                                        @php
+                                                            $title = str_replace(' ','-',$basic->title);
+                                                            $img12 = $basic->embed;
+                                                            $img123 = explode ("/",$img12);
+                                                            if(isset($img123[4])){
+                                                                $img1234 = explode (" ",$img123[4]);
+                                                                $img12345 = strlen($img1234[0]);
+                                                                $img123456 = substr($img1234[0],0,--$img12345);
+                                                                $img123456 = "http://i.ytimg.com/vi/" . $img123456 . "/hqdefault.jpg";
+                                                            }else if($basic->thumbnail != null){
+                                                                $img123456 = URL::to('storage/app') . '/' . $basic->thumbnail;
+                                                            }else{
+                                                                $img123456 = null;
+                                                            }
+                                                            $icount++
+                                                        @endphp
+                                                        @if($icount == 1)
+                                                            <li class="first-news">
+                                                                <div class="post-thumbnail tie-appear">
+                                                                    <a href="{{URL::to('/training/Basic')}}/{{$title}}" rel="bookmark">
+                                                                        <img width="310" height="165" src="{{$img123456}}"
+                                                                            class="attachment-tie-medium size-tie-medium wp-post-image tie-appear"
+                                                                            alt="" loading="lazy"> <span
+                                                                            class="fa overlay-icon"></span>
+                                                                    </a>
+                                                                </div>
+                                                                <h2 class="post-box-title"><a href="{{URL::to('/training/Basic')}}/{{$title}}" rel="bookmark">{{$basic->title}}</a></h2>
+                                                                <p class="post-meta">
+                                                                    <span title="Nice"
+                                                                        class="post-single-rate post-small-rate stars-small">
+                                                                        <span style="width: 78.571428571429%"></span>
+                                                                    </span>
+                                                                    <span class="tie-date">{{$basic->created_at->format('M d,Y')}}</span>
+                                                                </p>
+                                                                <div class="entry">
+                                                                    <p>{{$basic->description}}</p>
+                                                                    <a class="btn btn-mine radial" href="{{URL::to('/training/Basic')}}/{{$title}}">Read
+                                                                        More »</a>
+                                                                </div>
+                                                            </li>
+                                                        @endif
+                                                        <li class="tie_video">
+                                                            <div class="post-thumbnail tie-appear">
+                                                                <a href="{{URL::to('/training/Basic')}}/{{$title}}" rel="bookmark"><img width="110" height="75"
+                                                                        src="{{$img123456}}"
+                                                                        class="attachment-tie-small size-tie-small wp-post-image tie-appear"
+                                                                        alt="" loading="lazy"><span
+                                                                        class="fa overlay-icon"></span></a>
+                                                            </div>
+                                                            <h3 class="post-box-title"><a href="{{URL::to('/training/Basic')}}/{{$title}}" rel="bookmark">{{$basic->title}}</a></h3>
+                                                            <p class="post-meta">
+                                                                <span title="Good"
+                                                                    class="post-single-rate post-small-rate stars-small">
+                                                                    <span style="width: 89.5714285714%"></span>
+                                                                </span>
+                                                                <span class="tie-date">{{$basic->created_at->format('M d,Y')}}</span>
+                                                            </p>
+                                                        </li>
+                                                    @endforeach
+
+                                                </ul>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="contact" role="tabpanel"
+                                        aria-labelledby="contact-tab">
+                                        <div id="catab9" class="cat-tabs-wrap cat-tabs-wrap1" style="display: block;">
+                                            <div>
+                                                <ul>
+                                                    @php $icount = 0 @endphp
+                                                    @foreach($LatestHabbitTraining as $habbit)
+                                                        @php
+                                                            $title = str_replace(' ','-',$habbit->title);
+                                                            $img12 = $habbit->embed;
+                                                            $img123 = explode ("/",$img12);
+                                                            if(isset($img123[4])){
+                                                                $img1234 = explode (" ",$img123[4]);
+                                                                $img12345 = strlen($img1234[0]);
+                                                                $img123456 = substr($img1234[0],0,--$img12345);
+                                                                $img123456 = "http://i.ytimg.com/vi/" . $img123456 . "/hqdefault.jpg";
+                                                            }else if($habbit->thumbnail != null){
+                                                                $img123456 = URL::to('storage/app') . '/' . $habbit->thumbnail;
+                                                            }else{
+                                                                $img123456 = null;
+                                                            }
+                                                            $icount++
+                                                        @endphp
+                                                        @if($icount == 1)
+                                                            <li class="first-news">
+                                                                <div class="post-thumbnail tie-appear">
+                                                                    <a href="{{URL::to('/training/Habbit')}}/{{$title}}" rel="bookmark">
+                                                                        <img width="310" height="165" src="{{$img123456}}"
+                                                                            class="attachment-tie-medium size-tie-medium wp-post-image tie-appear"
+                                                                            alt="" loading="lazy"> <span
+                                                                            class="fa overlay-icon"></span>
+                                                                    </a>
+                                                                </div>
+                                                                <h2 class="post-box-title"><a href="{{URL::to('/training/Habbit')}}/{{$title}}" rel="bookmark">{{$habbit->title}}</a></h2>
+                                                                <p class="post-meta">
+                                                                    <span title="Nice"
+                                                                        class="post-single-rate post-small-rate stars-small">
+                                                                        <span style="width: 78.571428571429%"></span>
+                                                                    </span>
+                                                                    <span class="tie-date">{{$habbit->created_at->format('M d,Y')}}</span>
+                                                                </p>
+                                                                <div class="entry">
+                                                                    <p>{{$habbit->description}}</p>
+                                                                    <a class="btn btn-mine radial" href="{{URL::to('/training/Habbit')}}/{{$title}}">Read
+                                                                        More »</a>
+                                                                </div>
+                                                            </li>
+                                                        @endif
+                                                        <li class="tie_video">
+                                                            <div class="post-thumbnail tie-appear">
+                                                                <a href="{{URL::to('/training/Basic')}}/{{$title}}" rel="bookmark"><img width="110" height="75"
+                                                                        src="{{$img123456}}"
+                                                                        class="attachment-tie-small size-tie-small wp-post-image tie-appear"
+                                                                        alt="" loading="lazy"><span
+                                                                        class="fa overlay-icon"></span></a>
+                                                            </div>
+                                                            <h3 class="post-box-title"><a href="{{URL::to('/training/Basic')}}/{{$title}}" rel="bookmark">{{$basic->title}}</a></h3>
+                                                            <p class="post-meta">
+                                                                <span title="Good"
+                                                                    class="post-single-rate post-small-rate stars-small">
+                                                                    <span style="width: 89.5714285714%"></span>
+                                                                </span>
+                                                                <span class="tie-date">{{$basic->created_at->format('M d,Y')}}</span>
+                                                            </p>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    @if(count($LatestBrokerNews) > 0)
+                        <section class="analysis">
+                            <div class="container">
+                                <div class="content_area_heading large-heading text-center">
+
+                                    <h1 class="heading_title wow animated fadeInUp">
+                                        Broker News
+                                    </h1>
+                                    <div class="heading_border wow animated fadeInUp">
+                                        <span class="one"></span><span class="two"></span><span class="three"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                @foreach($LatestBrokerNews as $data)
+                                    @php
+                                        $NewsTitle = str_replace(" ","-",$data->NewsTitle);
+                                    @endphp
+                                    <div class=" col-sm-12 col-md-6 bg-light">
+                                        <div class="wow animated fadeInUp mt-1">
+                                            <div class="re_img w-100 p-4">
+                                                <a href="{{URL::to('/brokerList/brokerNews/NewsDetail')}}/{{$NewsTitle}}">
+                                                    <img src="{{URL::to('/storage/app')}}/{{$data->image}}" width="100%" height="150px" >
+                                                </a>
+                                            </div>
+                                            <div class="container-fluid ">
+                                                <div class="row">
+                                                    <div class="col-sm-12 ">
+
+                                                        <div class="new_description-details">
+                                                            <h6>
+                                                                <a href="{{URL::to('/brokerList/brokerNews/NewsDetail')}}/{{$NewsTitle}}">
+                                                                    {{$data->NewsTitle}}
+                                                                </a>
+                                                            </h6>
+                                                            <p>
+                                                                {{$data->shortDescription}}
+                                                            </p>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                                </div>
+                            </div>
+                        </section>
+                    @endif
                     <section>
                         <div class="row">
                             <div class="col-sm-12">
@@ -578,121 +846,6 @@
                         </section>
                     @endif
 
-
-                    <section class="currency-table-list">
-                        <!-- /.End of How to Get  Start -->
-                        <!-- <div class="currency-table">
-                            <div class="with-nav-tabs currency-tabs">
-                                <div class="tab-header">
-                                    <ul class="nav nav-tabs" id="currencyTab" role="tablist">
-                                        <li class="nav-item" class="active"><a class="nav-link active" href="#crypto"
-                                                data-toggle="tab" role="tab" aria-controls="crypto"
-                                                aria-selected="true">Crypto</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#forex" data-toggle="tab"
-                                                role="tab" aria-controls="forex" aria-selected="false">Forex</a></li>
-                                        <li class="nav-item"><a class="nav-link" role="tab" aria-controls="stocks"
-                                                aria-selected="false" href="#stocks" data-toggle="tab">Stocks</a></li>
-                                    </ul>
-                                </div>
-                                <div class="container">
-                                    <div class="tab-content" id="currencyTabContent">
-                                        <div class="tab-pane fade show active" id="crypto" role="tabpanel"
-                                            aria-labelledby="crypto-tab">
-                                            <div class="scroll-tbl">
-                                                <table id="cryptoTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Id</th>
-                                                            <th>Symbol</th>
-                                                            <th>Price</th>
-                                                            <th>Opening Price</th>
-                                                            <th>High Price</th>
-                                                            <th>Low Price</th>
-                                                            <th>Date & Time</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach($CryptoApiData as $cryptoData)
-                                                            <tr>
-                                                                <td>{{$cryptoData->id}}</td>
-                                                                <td>{{$cryptoData->s}}</td>
-                                                                <td>{{$cryptoData->c}}</td>
-                                                                <td>{{$cryptoData->o}}</td>
-                                                                <td>{{$cryptoData->h}}</td>
-                                                                <td>{{$cryptoData->l}}</td>
-                                                                <td>{{$cryptoData->tm}}</td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="forex" role="tabpanel"
-                                            aria-labelledby="forex-tab">
-                                            <div class="scroll-tbl">
-                                                <table id="forexTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Id</th>
-                                                            <th>Symbol</th>
-                                                            <th>Price</th>
-                                                            <th>Opening Price</th>
-                                                            <th>High Price</th>
-                                                            <th>Low Price</th>
-                                                            <th>Date & Time</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach($forexApiData as $forexData)
-                                                            <tr>
-                                                                <td>{{$forexData->id}}</td>
-                                                                <td>{{$forexData->s}}</td>
-                                                                <td>{{$forexData->c}}</td>
-                                                                <td>{{$forexData->o}}</td>
-                                                                <td>{{$forexData->h}}</td>
-                                                                <td>{{$forexData->l}}</td>
-                                                                <td>{{$forexData->tm}}</td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="stocks" role="tabpanel"
-                                            aria-labelledby="stocks-tab">
-                                            <div class="scroll-tbl">
-                                                <table id="stocksTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Id</th>
-                                                            <th>Symbol</th>
-                                                            <th>Price</th>
-                                                            <th>High Price</th>
-                                                            <th>Low Price</th>
-                                                            <th>Date & Time</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach($StockApiData as $stockData)
-                                                            <tr>
-                                                                <td>{{$stockData->id}}</td>
-                                                                <td>{{$stockData->name}}</td>
-                                                                <td>{{$stockData->c}}</td>
-                                                                <td>{{$stockData->h}}</td>
-                                                                <td>{{$stockData->l}}</td>
-                                                                <td>{{$stockData->tm}}</td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- /.End of currency table -->
-                    </section>
 
 
                     <section>

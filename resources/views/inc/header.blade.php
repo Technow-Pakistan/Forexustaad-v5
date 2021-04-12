@@ -575,7 +575,7 @@
                                     Trading Tools
                                 </a>
                                 <ul class="dropdown-menu fade-up">
-                                    <li><a class="dropdown-item" href="{{URL::to('/analysis/')}}">Analysis</a></li>
+                                    <li><a class="dropdown-item" href="{{URL::to('/analysis/')}}">Fundamental Analysis</a></li>
                                     <li><a class="dropdown-item" href="{{URL::to('/fundamental/')}}">Fundamental History</a></li>
                                 </ul>
                             </li>
