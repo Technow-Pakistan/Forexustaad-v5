@@ -62,6 +62,7 @@ use App\Models\SignalsModel;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::post('/EditMetaProcess',[GalleryController::class,'EditMetaProcess']);
 Route::get('/successData3', [MidBannerController::class, 'getPosts']);
 Route::match(['get', 'post'], '/publish',[MidBannerController::class, 'savePost']);
 Route::get('/channel/{message}/{message2}',[AdminController::class,'GetPusherName']);
@@ -87,17 +88,17 @@ Route::get('/sendDesktopNotification', function () {
         // $data = Location::get($ip);
         // dd($data);
         // return substr(exec('getmac'), 0, 17);
-        $MAC = exec('getmac'); 
-  
-        // Storing 'getmac' value in $MAC 
-        $MAC = strtok($MAC, ' '); 
-  
-        // Updating $MAC value using strtok function,  
-        // strtok is used to split the string into tokens 
-        // split character of strtok is defined as a space 
-        // because getmac returns transport name after 
-        // MAC address    
-        echo " $MAC"; 
+        $MAC = exec('getmac');
+
+        // Storing 'getmac' value in $MAC
+        $MAC = strtok($MAC, ' ');
+
+        // Updating $MAC value using strtok function,
+        // strtok is used to split the string into tokens
+        // split character of strtok is defined as a space
+        // because getmac returns transport name after
+        // MAC address
+        echo " $MAC";
 
     });
     Route::get('device',function(){
