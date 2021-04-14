@@ -34,12 +34,13 @@ use App\Models\NonRegisterVisitorModel;
 use App\Models\AllCitiesModel;
 use App\Models\AllStatesModel;
 use App\Models\AllCountriesModel;
-use App\Models\ClientNotificationModel; 
-use App\Models\ClientRegistrationModel; 
-use App\Models\ChatBoxModel; 
+use App\Models\ClientNotificationModel;
+use App\Models\ClientRegistrationModel;
+use App\Models\ChatBoxModel;
 use App\Models\SignalApiKeyModel;
 use App\Models\AnalysisModel;
 use App\Models\BrokerNewsModel;
+use App\Models\MetaKeywordsModel;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -93,7 +94,8 @@ class AppServiceProvider extends ServiceProvider
         view()->share("AllChatMemberData",ChatBoxModel::orderBy('id','desc')->get());
         view()->share("onesignalApiKey",SignalApiKeyModel::where('id',2)->first());
         view()->share("signalApiRateKey",SignalApiKeyModel::where('id',1)->first());
-        
+        view()->share("MetaKeywords",MetaKeywordsModel::all());
+
 
     }
 }
