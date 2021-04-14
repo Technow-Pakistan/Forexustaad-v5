@@ -47,11 +47,17 @@
                                         <textarea name="description" class="form-control">{{$meta->description}}</textarea>
                                         <label for="">Keywords</label>
                                         <select class="js-example-tokenizer col-sm-12" name="keywords[]" multiple="multiple" required>
-                                            @php
-                                                $keywords = explode(',',$meta->keywordsimp);
-                                            @endphp
                                             @foreach ($MetaKeywords as $metas)
-                                                <option value="{{$metas->name}}" {{array_search($metas->name,$keywords) ? 'selected' : ''}}>{{$metas->name}}</option>
+                                                @php 
+                                                    $keywords = explode(',',$meta->keywordsimp);
+                                                    $selectedAll = 0; 
+                                                @endphp
+                                                @for($i = 0; $i< count($keywords); $i++)
+                                                    @if($keywords[$i] == $metas->name)
+                                                        @php   $selectedAll = 1;  @endphp
+                                                    @endif
+                                                @endfor
+                                                <option value="{{$metas->name}}" {{$selectedAll == 1 ? 'selected' : ''}}>{{$metas->name}}</option>
                                             @endforeach
                                         </select>
                                         <p align="right">

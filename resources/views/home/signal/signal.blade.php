@@ -223,7 +223,7 @@
                                                             $pair = $data->getPair();
                                                             $flags = explode("/",$pair->pair);
                                                          @endphp
-                                                         @if($go3 == 3 && ($pair->categoryId == 3 || $pair->categoryId == 4 ))
+                                                         @if($go3 == 3 && $pair->categoryId ==1)
                                                             <tr>
                                                                <td>{{$icount++}}</td>
                                                                <td class="text-center">
@@ -338,7 +338,7 @@
                                                             $pair = $data->getPair();
                                                             $flags = explode("/",$pair->pair);
                                                          @endphp
-                                                         @if($go3 == 3 && $pair->categoryId ==1)
+                                                         @if($go3 == 3 && ($pair->categoryId == 3 || $pair->categoryId == 4))
                                                             <tr>
                                                                <td>{{$icount++}}</td>
                                                                <td class="text-center">

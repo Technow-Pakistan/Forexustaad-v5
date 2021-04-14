@@ -28,6 +28,16 @@
                 <div class="card">
                     <div class="card-body">
                         <form action="" method="post">
+                            <label for="">Title</label>
+                            <input type="text" class="form-control" name="metaTitle" value="">
+                            <label for="">Description</label>
+                            <textarea name="metaDescription" class="form-control"></textarea>
+                            <label for="">Keywords</label>
+                            <select class="js-example-tokenizer col-sm-12" name="metaKeywords[]" multiple="multiple" required>
+                                @foreach ($MetaKeywords as $metas)
+                                    <option value="{{$metas->name}}">{{$metas->name}}</option>
+                                @endforeach
+                            </select>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">

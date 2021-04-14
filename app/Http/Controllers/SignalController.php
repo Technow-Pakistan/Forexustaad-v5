@@ -16,13 +16,14 @@ use App\Models\SignalApiModel;
 use App\Models\SignalApiKeyModel;
 use App\Models\SignalApiRecordModel;
 use App\Models\MetaTagsModel;
+use App\Models\MetaKeywordsModel;
 
 class SignalController extends Controller
 {
     public function signal(Request $request){
-        $title = "Signals";
+        $meta = MetaTagsModel::where('name_page','signal')->first();
         $signalData = SignalsModel::orderBy('id','desc')->where('status',0)->where('pending',0)->get();
-        return view('home.signal.signal',compact('signalData','title'));
+        return view('home.signal.signal',compact('signalData','meta'));
     }
     public function signalView(Request $request, $id){
         $id = str_replace('-','/',$id);
@@ -161,7 +162,9 @@ class SignalController extends Controller
                     return redirect('/signal');
                 }
             }
-            return view('home.signal.viewSignal',compact('signalData','title','comments','TotalLikes','TotalDislikes','signalApiData'));
+            $name_page = "signal@" . $signalData->id;
+            $meta = MetaTagsModel::where('name_page',$name_page)->first();
+            return view('home.signal.viewSignal',compact('signalData','title','comments','TotalLikes','TotalDislikes','signalApiData','meta'));
         }else{
             $error = "This signal is not exist.";
             $request->session()->put("error",$error);
@@ -362,6 +365,22 @@ class SignalController extends Controller
         $signal->save();
         $success = "This signal has been added successfully.";
         $request->session()->put("success",$success);
+        // meta Tags save start
+            for ($i=0; $i < count($request->metaKeywords); $i++) {
+                $find = MetaKeywordsModel::where('name',$request->metaKeywords[$i])->first();
+                if($find == null){
+                    $key = new MetaKeywordsModel;
+                    $key->name = $request->metaKeywords[$i];
+                    $key->save();
+                }
+            }
+            $newMeta = new MetaTagsModel;
+            $newMeta->name_page = "signal@" . $signal->id;
+            $newMeta->description = $request->metaDescription;
+            $newMeta->title = $request->metaTitle;
+            $newMeta->keywordsimp = implode(",",$request->metaKeywords);
+            $newMeta->save();
+        // meta Tags save end
         // if ($signal->pending != 1) {
         //     // Pusher Notification Start
         //     $getUrl = $signal->GetURL();
@@ -477,11 +496,13 @@ class SignalController extends Controller
         return back();
     }
     public function Edit(Request $request, $id){
+        $name_page = "signal@" . $id;
+        $newMeta = MetaTagsModel::where('name_page',$name_page)->first();
         $data = SignalsModel::where('id',$id)->first();
         $SelectedPair = SignalPairModel::find($data->forexPairs);
         $totalCategory = SignalPairCategoryModel::where('active',0)->get();
         $totalData = SignalPairModel::all();
-        return view('admin.signals.edit-signal',compact('data','totalCategory','totalData','SelectedPair'));
+        return view('admin.signals.edit-signal',compact('data','totalCategory','totalData','SelectedPair','newMeta'));
     }
     public function EditProcess(Request $request, $id){
         $signal = $request->all();
@@ -531,6 +552,26 @@ class SignalController extends Controller
             }
         }
 
+        // meta Tags save start
+            for ($i=0; $i < count($request->metaKeywords); $i++) {
+                $find = MetaKeywordsModel::where('name',$request->metaKeywords[$i])->first();
+                if($find == null){
+                    $key = new MetaKeywordsModel;
+                    $key->name = $request->metaKeywords[$i];
+                    $key->save();
+                }
+            }
+            $name_page = "signal@" . $id;
+            $newMeta = MetaTagsModel::where('name_page',$name_page)->first();
+            if($newMeta == null){
+                $newMeta = new MetaTagsModel;
+            }
+            $newMeta->name_page = "signal@" . $id;
+            $newMeta->description = $request->metaDescription;
+            $newMeta->title = $request->metaTitle;
+            $newMeta->keywordsimp = implode(",",$request->metaKeywords);
+            $newMeta->save();
+        // meta Tags save end
         // // Pusher Notification Start
         // $getUrl = $data->GetURL();
         // $adminData = $request->session()->get("admin");
