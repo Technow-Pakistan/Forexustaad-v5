@@ -31,6 +31,27 @@
                 <div class="card">
                     <div class="card-body">
                         <form action="" method="post">
+                            <label for="">Title</label>
+                            <input type="text" class="form-control" name="metaTitle" value="{{$newMeta != null ? $newMeta->title : ''}}">
+                            <label for="">Description</label>
+                            <textarea name="metaDescription" class="form-control">{{$newMeta != null ? $newMeta->description : ''}}</textarea>
+                            <label for="">Keywords</label>
+                            <select class="js-example-tokenizer col-sm-12" name="metaKeywords[]" multiple="multiple" required>
+                                @foreach ($MetaKeywords as $metas)
+                                    @if($newMeta != null)
+                                        @php 
+                                            $keywords = explode(',',$newMeta->keywordsimp);
+                                            $selectedAll = 0; 
+                                        @endphp
+                                        @for($i = 0; $i< count($keywords); $i++)
+                                            @if($keywords[$i] == $metas->name)
+                                                @php   $selectedAll = 1;  @endphp
+                                            @endif
+                                        @endfor
+                                    @endif
+                                    <option value="{{$metas->name}}" {{$newMeta != null ? ($selectedAll == 1 ? 'selected' : '') : ''}}>{{$metas->name}}</option>
+                                @endforeach
+                            </select>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
