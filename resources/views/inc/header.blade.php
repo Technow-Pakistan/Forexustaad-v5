@@ -37,8 +37,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Forexustaad is the best platforms for learning free forex trading in urdu/hindi. So, join our free forex training now and reshape your future with us.
-">
+    @if(isset($meta))
+        <title>{{$meta->title}}</title>
+        <meta name="description" content="{{$meta->description}}">
+        <meta name="Keywords" content="{{$meta->keywordsimp}}">
+    @else
+        <title>Forex Ustaad:Free Forex Training In Urdu/Hindi | Forexustaad</title>
+        <meta name="description" content="Forexustaad is the best platforms for learning free forex trading in urdu/hindi. So, join our free forex training now and reshape your future with us.">
+    @endif
 <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
 <script>
   window.OneSignal = window.OneSignal || [];
@@ -48,9 +54,6 @@
     });
   });
 </script>
-    <title>Forex Ustaad:Free Forex Training In Urdu/Hindi | Forexustaad</title>
-    <!-- Fav Icon -->
-    <title>{{isset($title) ? "$title" : 'Forex Ustaad'}}:Free Forex Training In Urdu/Hindi | Forexustaad</title>
     <!-- Fav Icon -->
     <link rel="icon" type="image/png" href="{{URL::to('/storage/app')}}/{{$MainFavicon->favicon}}">
     <!-- Dependency Styles -->
