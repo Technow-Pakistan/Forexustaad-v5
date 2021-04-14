@@ -40,6 +40,25 @@
 						<div class="card user-profile-list">
 							<div class="card-body">
 								<div class="dt-responsive table-responsive">
+                                    <form action="{{URL::to('/EditMetaProcess')}}" method="post">
+                                        <label for="">Title</label>
+                                        <input type="text" class="form-control" name="title" value="{{$meta->title}}">
+                                        <label for="">Description</label>
+                                        <textarea name="description" class="form-control">{{$meta->description}}</textarea>
+                                        <label for="">Keywords</label>
+                                        <select class="js-example-tokenizer col-sm-12" name="keywords[]" multiple="multiple" required>
+                                            @php
+                                                $keywords = explode(',',$meta->keywordsimp);
+                                            @endphp
+                                            @foreach ($MetaKeywords as $metas)
+                                                <option value="{{$metas->name}}" {{array_search($metas->name,$keywords) ? 'selected' : ''}}>{{$metas->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <p align="right">
+                                            <input type="hidden" name="name" value="{{$meta->name_page}}">
+                                            <input type="submit" value="Save" class="btn btn-primary mt-3 mb-3 btn-sm">
+                                        </p>
+                                    </form>
                                     <h1 class="text-primary">Current Signal</h1>
 									<table id="user-list-table" class="table nowrap">
 										<thead>

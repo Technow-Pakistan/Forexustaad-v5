@@ -8,13 +8,15 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Models\GalleryImagesDetailModel;
 use App\Models\TrashGalleryModel;
+use App\Models\MetaTagsModel;
+use App\Models\MetaKeywordsModel;
 
 class GalleryController extends Controller
 {
     public function Index(Request $request, $id){
         $totalData = Storage::files($id);
         // $totalData = array_reverse($totalData);
-        
+
         return view('admin.galleryImages',compact('totalData','id'));
     }
     public function Add(Request $request, $id){
@@ -56,7 +58,7 @@ class GalleryController extends Controller
         if ($data == null) {
             $count = 0;
         }
-        return view('admin.galleryImagesEdit',compact('data','title','count'));  
+        return view('admin.galleryImagesEdit',compact('data','title','count'));
     }
     public function EditProcess(Request $request, $id){
         $title = str_replace("@-","/",$id);
@@ -65,6 +67,29 @@ class GalleryController extends Controller
         $image = new GalleryImagesDetailModel;
         $image->fill($data);
         $image->save();
-        return back();  
+        return back();
+    }
+    public function EditMetaProcess(Request $request){
+        $data = $request->all();
+        for ($i=0; $i < count($request->keywords); $i++) {
+            $find = MetaKeywordsModel::where('name',$request->keywords[$i])->first();
+            if($find == null){
+                $key = new MetaKeywordsModel;
+                $key->name = $request->keywords[$i];
+                $key->save();
+            }
+        }
+        $data['keywordsimp'] = implode(",",$request->keywords);
+        $meta = MetaTagsModel::where('name_page',$request->name)->first();
+        if($meta){
+            $meta->fill($data);
+            $meta->save();
+        }else{
+            $newMeta = new MetaTagsModel;
+            $data['name_page'] = $request->name;
+            $newMeta->fill($data);
+            $newMeta->save();
+        }
+        return back()->with('success',"Meta Tags Updated Successfully.");
     }
 }

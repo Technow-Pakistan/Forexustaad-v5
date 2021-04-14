@@ -57,10 +57,9 @@
                                                 @endif
                                             @endforeach
 										</select>
-										
 									</div>
-                                    <div class="alignleft actions bulkactions">
-										<label for="bulk-action-selector-top" class="d-block ">find Pair</label>
+                                    <div class="alignleft actions bulkactions" id="findtwoGroup">
+										<label for="bulk-action-selector-top" class="d-block ">Add Pair</label>
 										<select name="categoryId" class="form-control d-inline-block js-example-tags" id="findtwo">
                                             @foreach($signalPairs as $sig)
                                                 @if($data2345 == $sig->categoryId)
@@ -68,11 +67,10 @@
                                                 @endif
                                             @endforeach
 										</select>
-										
 									</div>
-									<div class="form-group pt-4">
+									<div class="form-group pt-4" id="addPairFliedGroup" style="display:none">
 										<label for="" class="">Add Pair</label>
-										<input type="text" name="pair" class="form-control socialLink" placeholder="Enter Pair" required>
+										<input type="text" name="pair" id="addPairFlied" class="form-control socialLink" placeholder="Enter Pair" required>
 									</div>
 									<div class="form-group pt-4">
                                         <img src="" class="socialImage" width="100px" height="100px" alt="" style="display:none">
@@ -142,7 +140,7 @@
                                     </thead>
                                     <tbody class="border border-primary">
 										@foreach($totalData as $data)
-                                            @php 
+                                            @php
                                                 $categoryInfo = $data->getCategory();
                                             @endphp
 											<tr>
@@ -171,9 +169,9 @@
 												</td>
 											</tr>
 										@endforeach
-                                        
-                                        
-                                        
+
+
+
                                     </tbody>
                                 </table>
                             </div>
@@ -206,9 +204,26 @@
         $("#findtwo").html("");
         for (let i = 0; i < javascript_array2.length; i++){
             if (javascript_array2[i].categoryId == selectedOption) {
-                $("#findtwo").append("<option value='"+javascript_array2[i].id+"'>"+javascript_array2[i].pair+"</option>");
+                $("#findtwo").append("<option value='"+javascript_array2[i].pair+"'>"+javascript_array2[i].pair+"</option>");
             }
         }
+        var findFliedHide = $(this).val();
+        if (findFliedHide == 1 || findFliedHide == 2) {
+            $("#addPairFliedGroup").hide();
+            $("#findtwoGroup").show();
+        }else{
+            $("#addPairFliedGroup").show();
+            $("#findtwoGroup").hide();
+        }
+        var valueAddPair = $("#findtwo").val();
+        $("#addPairFlied").val(valueAddPair);
+    })
+        var valueAddPair = $("#findtwo").val();
+        $("#addPairFlied").val(valueAddPair);
+    $("#findtwo").on('change',function() {
+        console.log("sd");
+        var valueAddPair = $(this).val();
+        $("#addPairFlied").val(valueAddPair);
     })
 </script>
 <script>

@@ -15,6 +15,7 @@ use App\Models\ClientNotificationModel;
 use App\Models\SignalApiModel;
 use App\Models\SignalApiKeyModel;
 use App\Models\SignalApiRecordModel;
+use App\Models\MetaTagsModel;
 
 class SignalController extends Controller
 {
@@ -326,13 +327,14 @@ class SignalController extends Controller
         return back();
     }
     public function Index(Request $request){
+        $meta = MetaTagsModel::where('name_page','signal')->first();
         $adminData = $request->session()->get("admin");
         if ($adminData['memberId'] == 7) {
             $signalData = SignalsModel::orderBy('id','desc')->where('userId',$adminData['id'])->where('editId',0)->get();
         }else{
             $signalData = SignalsModel::orderBy('id','desc')->where('editId',0)->get();
         }
-        return view('admin.signals.all-signal',compact('signalData'));
+        return view('admin.signals.all-signal',compact('signalData','meta'));
     }
     public function Add(Request $request){
         $totalCategory = SignalPairCategoryModel::where('active',0)->get();
