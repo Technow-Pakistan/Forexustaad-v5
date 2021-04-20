@@ -500,7 +500,7 @@
                             </div>
                         </section>
                     @endif
-                    
+
                     @if(count($LatestAnalysis) > 0)
                         <section class="analysis">
                             <div class="container">
@@ -610,29 +610,35 @@
                                                                     <span class="tie-date">{{$basic->created_at->format('M d,Y')}}</span>
                                                                 </p>
                                                                 <div class="entry">
-                                                                    <p>{{$basic->description}}</p>
+                                                                    <p>
+                                                                        @php
+                                                                            $desc = html_entity_decode($basic->description);
+                                                                            echo substr($desc, 0, 200) . "...";
+                                                                        @endphp
+                                                                    </p>
                                                                     <a class="btn btn-mine radial" href="{{URL::to('/training/Basic')}}/{{$title}}">Read
                                                                         More »</a>
                                                                 </div>
                                                             </li>
+                                                        @else
+                                                            <li class="tie_video">
+                                                                <div class="post-thumbnail tie-appear">
+                                                                    <a href="{{URL::to('/training/Basic')}}/{{$title}}" rel="bookmark"><img width="110" height="75"
+                                                                            src="{{$img123456}}"
+                                                                            class="attachment-tie-small size-tie-small wp-post-image tie-appear"
+                                                                            alt="" loading="lazy"><span
+                                                                            class="fa overlay-icon"></span></a>
+                                                                </div>
+                                                                <h3 class="post-box-title"><a href="{{URL::to('/training/Basic')}}/{{$title}}" rel="bookmark">{{$basic->title}}</a></h3>
+                                                                <p class="post-meta">
+                                                                    <span title="Good"
+                                                                        class="post-single-rate post-small-rate stars-small">
+                                                                        <span style="width: 89.5714285714%"></span>
+                                                                    </span>
+                                                                    <span class="tie-date">{{$basic->created_at->format('M d,Y')}}</span>
+                                                                </p>
+                                                            </li>
                                                         @endif
-                                                        <li class="tie_video">
-                                                            <div class="post-thumbnail tie-appear">
-                                                                <a href="{{URL::to('/training/Basic')}}/{{$title}}" rel="bookmark"><img width="110" height="75"
-                                                                        src="{{$img123456}}"
-                                                                        class="attachment-tie-small size-tie-small wp-post-image tie-appear"
-                                                                        alt="" loading="lazy"><span
-                                                                        class="fa overlay-icon"></span></a>
-                                                            </div>
-                                                            <h3 class="post-box-title"><a href="{{URL::to('/training/Basic')}}/{{$title}}" rel="bookmark">{{$basic->title}}</a></h3>
-                                                            <p class="post-meta">
-                                                                <span title="Good"
-                                                                    class="post-single-rate post-small-rate stars-small">
-                                                                    <span style="width: 89.5714285714%"></span>
-                                                                </span>
-                                                                <span class="tie-date">{{$basic->created_at->format('M d,Y')}}</span>
-                                                            </p>
-                                                        </li>
                                                     @endforeach
 
                                                 </ul>
@@ -682,29 +688,35 @@
                                                                     <span class="tie-date">{{$habbit->created_at->format('M d,Y')}}</span>
                                                                 </p>
                                                                 <div class="entry">
-                                                                    <p>{{$habbit->description}}</p>
+                                                                    <p>
+                                                                    @php
+                                                                        $desc = html_entity_decode($habbit->description);
+                                                                        echo substr($desc, 0, 200) . "...";
+                                                                    @endphp
+                                                                    </p>
                                                                     <a class="btn btn-mine radial" href="{{URL::to('/training/Habbit')}}/{{$title}}">Read
                                                                         More »</a>
                                                                 </div>
                                                             </li>
+                                                        @else
+                                                            <li class="tie_video">
+                                                                <div class="post-thumbnail tie-appear">
+                                                                    <a href="{{URL::to('/training/Basic')}}/{{$title}}" rel="bookmark"><img width="110" height="75"
+                                                                            src="{{$img123456}}"
+                                                                            class="attachment-tie-small size-tie-small wp-post-image tie-appear"
+                                                                            alt="" loading="lazy"><span
+                                                                            class="fa overlay-icon"></span></a>
+                                                                </div>
+                                                                <h3 class="post-box-title"><a href="{{URL::to('/training/Basic')}}/{{$title}}" rel="bookmark">{{$habbit->title}}</a></h3>
+                                                                <p class="post-meta">
+                                                                    <span title="Good"
+                                                                        class="post-single-rate post-small-rate stars-small">
+                                                                        <span style="width: 89.5714285714%"></span>
+                                                                    </span>
+                                                                    <span class="tie-date">{{$habbit->created_at->format('M d,Y')}}</span>
+                                                                </p>
+                                                            </li>
                                                         @endif
-                                                        <li class="tie_video">
-                                                            <div class="post-thumbnail tie-appear">
-                                                                <a href="{{URL::to('/training/Basic')}}/{{$title}}" rel="bookmark"><img width="110" height="75"
-                                                                        src="{{$img123456}}"
-                                                                        class="attachment-tie-small size-tie-small wp-post-image tie-appear"
-                                                                        alt="" loading="lazy"><span
-                                                                        class="fa overlay-icon"></span></a>
-                                                            </div>
-                                                            <h3 class="post-box-title"><a href="{{URL::to('/training/Basic')}}/{{$title}}" rel="bookmark">{{$basic->title}}</a></h3>
-                                                            <p class="post-meta">
-                                                                <span title="Good"
-                                                                    class="post-single-rate post-small-rate stars-small">
-                                                                    <span style="width: 89.5714285714%"></span>
-                                                                </span>
-                                                                <span class="tie-date">{{$basic->created_at->format('M d,Y')}}</span>
-                                                            </p>
-                                                        </li>
                                                     @endforeach
                                                 </ul>
                                             </div>
@@ -925,55 +937,3 @@
 </div>
 @include ('inc/footer')
 
-
-<script>
-
-// // Stock Indices
-//     $.ajax({
-//       type: "Get",
-//       url: "https://fcsapi.com/api-v3/stock/indices_latest?id=1,2,3,4,5&access_key=&access_key=7bcaAttKq4UFZwKhrE2LEHn",
-//       success: function(response){
-//         json = response.response;
-//         $("#stocksTable tbody").html("");
-//         for (let index = 0; index < json.length; index++) {
-//             $("#stocksTable tbody").append("<tr><td>"+json[index].name+"</td><td>"+json[index].c+"</td><td>"+json[index].h+"</td><td>"+json[index].l+"</td><td>"+json[index].tm+"</td></tr>");
-//         }
-//       },
-//       error: function(data) {
-//         console.log("fail");
-//       }
-//     });
-
-
-// // Crypto
-//     $.ajax({
-//       type: "Get",
-//       url: "https://fcsapi.com/api-v3/crypto/latest?symbol=all_crypto&access_key=DGBiPcd81sslKeJJuwC17lhGW",
-//       success: function(response){
-//         json = response.response;
-//         $("#cryptoTable tbody").html("");
-//         for (let index = 0; index < json.length; index++) {
-//             $("#cryptoTable tbody").append("<tr><td>"+json[index].s+"</td><td>"+json[index].c+"</td><td>"+json[index].o+"</td><td>"+json[index].h+"</td><td>"+json[index].l+"</td><td>"+json[index].tm+"</td></tr>");
-//         }
-//       },
-//       error: function(data) {
-//         console.log("fail");
-//       }
-//     });
-
-// // Forex
-    // $.ajax({
-    //   type: "Get",
-    //   url: "https://fcsapi.com/api-v3/forex/latest?symbol=all_forex&access_key=7bcaAttKq4UFZwKhrE2LEHn",
-    //   success: function(response){
-    //     json = response.response;
-    //     $("#forexTable tbody").html("");
-    //     for (let index = 0; index < json.length; index++) {
-    //         $("#forexTable tbody").append("<tr><td>"+json[index].s+"</td><td>"+json[index].c+"</td><td>"+json[index].o+"</td><td>"+json[index].h+"</td><td>"+json[index].l+"</td><td>"+json[index].tm+"</td></tr>");
-    //     }
-    //   },
-    //   error: function(data) {
-    //     console.log("fail");
-    //   }
-    // });
-</script>

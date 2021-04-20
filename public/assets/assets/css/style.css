@@ -2405,6 +2405,7 @@ p.post-meta {
 	font-weight: bold;
 }
 .entry p {
+    font-size: 14px;
 	color: #0d5fe9;
 	text-decoration: none;
 	background-color: transparent;

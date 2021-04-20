@@ -60,7 +60,7 @@ class ContactController extends Controller
         if (isset($request->inbox)) {
             $data = $request->inbox;
             $count = count($data);
-            for ($i=0; $i <$count ; $i++) { 
+            for ($i=0; $i <$count ; $i++) {
                 $data12 = UserContactModel::where('id',$data[$i])->first();
                 $data12->trashMail = 1;
                 $data12->save();
@@ -68,7 +68,7 @@ class ContactController extends Controller
         }elseif (isset($request->sent)){
             $data = $request->sent;
             $count = count($data);
-            for ($i=0; $i <$count ; $i++) { 
+            for ($i=0; $i <$count ; $i++) {
                 $data12 = ComposeEmailModel::where('id',$data[$i])->first();
                 $data12->trashMail = 1;
                 $data12->save();
@@ -76,14 +76,14 @@ class ContactController extends Controller
         }elseif (isset($request->inboxTrash)) {
             $data = $request->inboxTrash;
             $count = count($data);
-            for ($i=0; $i <$count ; $i++) { 
+            for ($i=0; $i <$count ; $i++) {
                 $data12 = UserContactModel::where('id',$data[$i])->first();
                 $data12->delete();
             }
         }elseif (isset($request->sentTrash)){
             $data = $request->sentTrash;
             $count = count($data);
-            for ($i=0; $i <$count ; $i++) { 
+            for ($i=0; $i <$count ; $i++) {
                 $data12 = ComposeEmailModel::where('id',$data[$i])->first();
                 $data12->delete();
             }
@@ -94,7 +94,7 @@ class ContactController extends Controller
         if (isset($request->inboxTrash)) {
             $data = $request->inboxTrash;
             $count = count($data);
-            for ($i=0; $i <$count ; $i++) { 
+            for ($i=0; $i <$count ; $i++) {
                 $data12 = UserContactModel::where('id',$data[$i])->first();
                 $data12->trashMail = 0;
                 $data12->save();
@@ -102,7 +102,7 @@ class ContactController extends Controller
         }elseif (isset($request->sentTrash)){
             $data = $request->sentTrash;
             $count = count($data);
-            for ($i=0; $i <$count ; $i++) { 
+            for ($i=0; $i <$count ; $i++) {
                 $data12 = ComposeEmailModel::where('id',$data[$i])->first();
                 $data12->trashMail = 0;
                 $data12->save();

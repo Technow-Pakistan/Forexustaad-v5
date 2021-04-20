@@ -45,6 +45,7 @@ use App\Http\Controllers\OtherPagesContentController;
 use App\Http\Controllers\FundamentalController;
 use App\Http\Controllers\SponoserAddController;
 use App\Http\Controllers\MidBannerController;
+use App\Http\Controllers\MetaTagsController;
 use App\Http\Controllers\ChatBoxController;
 use App\Models\AdminMemberDetailModel;
 use Stevebauman\Location\Facades\Location;
@@ -62,7 +63,6 @@ use App\Models\SignalsModel;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::post('/EditMetaProcess',[GalleryController::class,'EditMetaProcess']);
 Route::get('/successData3', [MidBannerController::class, 'getPosts']);
 Route::match(['get', 'post'], '/publish',[MidBannerController::class, 'savePost']);
 Route::get('/channel/{message}/{message2}',[AdminController::class,'GetPusherName']);
@@ -259,7 +259,7 @@ Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
     Route::get('/about-page',[HomeController::class,'AboutPage']);
     Route::get('p/{id}',[OtherPagesContentController::class,'Index']);
     Route::get('/term-of-services.html',[HomeController::class,'termServices']);
-    Route::get('/contact-us',[ContactController::class,'contact']);
+    // Route::get('/contact-us',[ContactController::class,'contact']);
     Route::get('/signal',[SignalController::class,'signal']);
     Route::get('/signal/{id}',[SignalController::class,'signalView']);
     Route::post('/contact/add',[ContactController::class,'Add']);
@@ -325,6 +325,11 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::post('/viewClientProfile/accountdepositConfirm/{id}',[AdminController::class,'ClientProfileaccountdepositConfirm']);
     Route::post('/changeMemberType/{id}',[AdminController::class,'ChangeMemberType']);
 
+    Route::group(['prefix' => 'meta-tags'],function(){
+        Route::get('/',[MetaTagsController::class,'Index']);
+        Route::get('/edit/{id}',[MetaTagsController::class,'Edit']);
+        Route::post('/edit/{id}',[MetaTagsController::class,'EditProcess']);
+    });
     Route::get('/dashboard',[AdminController::class,'Dashboard']);
     Route::get('/trash',[AdminController::class,'Trash']);
     Route::get('/trashGallery',[AdminController::class,'TrashGallery']);

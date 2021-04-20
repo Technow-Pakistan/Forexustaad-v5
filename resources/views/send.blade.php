@@ -12,7 +12,7 @@
             );
 
             $fields = array(
-                'app_id' => "{{$onesignalApiKey->apiKey}}",
+                'app_id' => "sd",
                 'included_segments' => array('All'),
                 'contents' => $content,
                 'headings' => $headings,

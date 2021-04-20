@@ -31,10 +31,10 @@
                             <div class="with-nav-tabs currency-tabs">
                                 <div class="tab-header">
                                     <ul class="nav nav-tabs" id="currencyTab" role="tablist">
-                                        <li class="nav-item" class="active"><a class="nav-link active" href="#crypto"
+                                        <li class="nav-item"><a class="nav-link" href="#crypto"
                                                 data-toggle="tab" role="tab" aria-controls="crypto"
                                                 aria-selected="true">Crypto</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#forex" data-toggle="tab"
+                                        <li class="nav-item" class="active"><a class="nav-link active" href="#forex" data-toggle="tab"
                                                 role="tab" aria-controls="forex" aria-selected="false">Forex</a></li>
                                         <li class="nav-item"><a class="nav-link" role="tab" aria-controls="stocks"
                                                 aria-selected="false" href="#stocks" data-toggle="tab">Stocks</a></li>
@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="container">
                                     <div class="tab-content" id="currencyTabContent">
-                                        <div class="tab-pane fade show active" id="crypto" role="tabpanel"
+                                        <div class="tab-pane fade" id="crypto" role="tabpanel"
                                             aria-labelledby="crypto-tab">
                                             <div class="scroll-tbl">
                                                 <h4 class="ml-2 Color0d5fe9">Current Signals</h4>
@@ -157,7 +157,7 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="forex" role="tabpanel"
+                                        <div class="tab-pane fade show active" id="forex" role="tabpanel"
                                             aria-labelledby="forex-tab">
                                             <div class="scroll-tbl">
                                                 <h4 class="ml-2 Color0d5fe9">Current Signals</h4>
@@ -399,10 +399,10 @@
                             <div class="with-nav-tabs currency-tabs">
                                 <div class="tab-header">
                                     <ul class="nav nav-tabs" id="currencyTab" role="tablist">
-                                        <li class="nav-item" class="active"><a class="nav-link active" href="#crypto1"
+                                        <li class="nav-item"><a class="nav-link" href="#crypto1"
                                                 data-toggle="tab" role="tab" aria-controls="crypto"
                                                 aria-selected="true">Crypto</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#forex1" data-toggle="tab"
+                                        <li class="nav-item" class="active"><a class="nav-link active" href="#forex1" data-toggle="tab"
                                                 role="tab" aria-controls="forex" aria-selected="false">Forex</a></li>
                                         <li class="nav-item"><a class="nav-link" role="tab" aria-controls="stocks"
                                                 aria-selected="false" href="#stocks1" data-toggle="tab">Stocks</a></li>
@@ -410,7 +410,7 @@
                                 </div>
                                 <div class="container">
                                     <div class="tab-content" id="currencyTabContent">
-                                        <div class="tab-pane fade show active" id="crypto1" role="tabpanel"
+                                        <div class="tab-pane fade" id="crypto1" role="tabpanel"
                                             aria-labelledby="crypto-tab">
                                             <div class="scroll-tbl">
                                                 <h4 class="ml-2 Colorff0024">Expired Signals</h4>
@@ -480,9 +480,9 @@
                                                                 <td><strong class="font-weight-bold">{{$data->selectUser}}</strong></td>
                                                                 <td class="text-center">
                                                                     @if($data->result != null)
-                                                                        <span class="{{$data->result == 'TP Hit' ? 'text-success' : ''}}{{$data->result == 'SL Hit' ? 'text-danger' : ''}}"><strong style="white-space: normal"> {{$data->result == null ? 'manually closed' : $data->result}}</strong></span>
+                                                                        <span class="{{strpos($data->result,'TP Hit') != null ? 'text-success' : ''}}{{$data->result == 'SL Hit' ? 'text-danger' : ''}}"><strong style="white-space: normal"> {{$data->result == null ? 'manually closed' : $data->result}}</strong></span>
                                                                     @elseif($signalDataApi)
-                                                                        <span class="{{$signalDataApi->result == 'TP Hit' ? 'text-success' : ''}}{{$signalDataApi->result == 'SL Hit' ? 'text-danger' : ''}}"><strong> {{$signalDataApi->result == null ? 'manually closed' : $signalDataApi->result}}</strong></span>
+                                                                        <span class="{{strpos($signalDataApi->result,'TP Hit') != null ? 'text-success' : ''}}{{$signalDataApi->result == 'SL Hit' ? 'text-danger' : ''}}"><strong> {{$signalDataApi->result == null ? 'manually closed' : $signalDataApi->result}}</strong></span>
                                                                     @endif
                                                                 </td>
                                                                 <td class="text-center">
@@ -499,7 +499,7 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="forex1" role="tabpanel"
+                                        <div class="tab-pane fade show active" id="forex1" role="tabpanel"
                                             aria-labelledby="forex-tab">
                                             <div class="scroll-tbl">
                                                 <h4 class="ml-2 Colorff0024">Expired Signals</h4>
@@ -569,9 +569,9 @@
                                                                <td><strong class="font-weight-bold">{{$data->selectUser}}</strong></td>
                                                                <td class="text-center">
                                                                   @if($data->result != null)
-                                                                     <span class="{{$data->result == 'TP Hit' ? 'text-success' : ''}}{{$data->result == 'SL Hit' ? 'text-danger' : ''}}"><strong style="white-space: normal"> {{$data->result == null ? 'manually closed' : $data->result}}</strong></span>
+                                                                     <span class="{{strpos($data->result,'TP Hit') != null ? 'text-success' : ''}}{{$data->result == 'SL Hit' ? 'text-danger' : ''}}"><strong style="white-space: normal"> {{$data->result == null ? 'manually closed' : $data->result}}</strong></span>
                                                                   @elseif($signalDataApi)
-                                                                     <span class="{{$signalDataApi->result == 'TP Hit' ? 'text-success' : ''}}{{$signalDataApi->result == 'SL Hit' ? 'text-danger' : ''}}"><strong> {{$signalDataApi->result == null ? 'manually closed' : $signalDataApi->result}}</strong></span>
+                                                                     <span class="{{strpos($signalDataApi->result,'TP Hit') != null ? 'text-success' : ''}}{{$signalDataApi->result == 'SL Hit' ? 'text-danger' : ''}}"><strong> {{$signalDataApi->result == null ? 'manually closed' : $signalDataApi->result}}</strong></span>
                                                                   @endif
                                                                </td>
                                                                <td class="text-center">
@@ -658,9 +658,9 @@
                                                                <td><strong class="font-weight-bold">{{$data->selectUser}}</strong></td>
                                                                <td class="text-center">
                                                                   @if($data->result != null)
-                                                                     <span class="{{$data->result == 'TP Hit' ? 'text-success' : ''}}{{$data->result == 'SL Hit' ? 'text-danger' : ''}}"><strong style="white-space: normal"> {{$data->result == null ? 'manually closed' : $data->result}}</strong></span>
+                                                                     <span class="{{strpos($data->result,'TP Hit') != null ? 'text-success' : ''}}{{$data->result == 'SL Hit' ? 'text-danger' : ''}}"><strong style="white-space: normal"> {{$data->result == null ? 'manually closed' : $data->result}}</strong></span>
                                                                   @elseif($signalDataApi)
-                                                                     <span class="{{$signalDataApi->result == 'TP Hit' ? 'text-success' : ''}}{{$signalDataApi->result == 'SL Hit' ? 'text-danger' : ''}}"><strong> {{$signalDataApi->result == null ? 'manually closed' : $signalDataApi->result}}</strong></span>
+                                                                     <span class="{{strpos($signalDataApi->result,'TP Hit') != null ? 'text-success' : ''}}{{$signalDataApi->result == 'SL Hit' ? 'text-danger' : ''}}"><strong> {{$signalDataApi->result == null ? 'manually closed' : $signalDataApi->result}}</strong></span>
                                                                   @endif
                                                                </td>
                                                                <td class="text-center">

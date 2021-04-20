@@ -35,6 +35,31 @@
 						<div class="card user-profile-list">
 							<div class="card-body">
 								<div class="dt-responsive table-responsive">
+                                    <form action="{{URL::to('/EditMetaProcess')}}" method="post">
+                                        <label for="">Title</label>
+                                        <input type="text" class="form-control" name="title" value="{{$meta->title}}">
+                                        <label for="">Description</label>
+                                        <textarea name="description" class="form-control">{{$meta->description}}</textarea>
+                                        <label for="">Keywords</label>
+                                        <select class="js-example-tokenizer col-sm-12" name="keywords[]" multiple="multiple" required>
+                                            @foreach ($MetaKeywords as $metas)
+                                                @php
+                                                    $keywords = explode(',',$meta->keywordsimp);
+                                                    $selectedAll = 0;
+                                                @endphp
+                                                @for($i = 0; $i< count($keywords); $i++)
+                                                    @if($keywords[$i] == $metas->name)
+                                                        @php   $selectedAll = 1;  @endphp
+                                                    @endif
+                                                @endfor
+                                                <option value="{{$metas->name}}" {{$selectedAll == 1 ? 'selected' : ''}}>{{$metas->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <p align="right">
+                                            <input type="hidden" name="name" value="{{$meta->name_page}}">
+                                            <input type="submit" value="Save" class="btn btn-primary mt-3 mb-3 btn-sm">
+                                        </p>
+                                    </form>
 									<form action="{{URL::to('/ustaad/fundamental/order')}}" method="post">
 										<table id="user-list-table" class="table nowrap">
 											<thead>
@@ -55,7 +80,7 @@
 														</td>
 														<td>
 																<img src="{{URL::to('storage/app')}}/{{$data->image}}" alt="" class="img-fluid" width="150">
-													
+
 														</td>
 														<td>{{$data->title}}</td>
 														<td>{{$data->created_at->format('Md, Y')}}</td>

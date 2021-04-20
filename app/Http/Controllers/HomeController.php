@@ -39,10 +39,12 @@ use App\Models\AnalysisModel;
 use App\Models\SignalsModel;
 use App\Models\BasicTrainingModel;
 use App\Models\HabbitTrainingModel;
+use App\Models\MetaTagsModel;
 
 class HomeController extends Controller
 {
     public function Index(){
+        $meta = MetaTagsModel::where('name_page','Home')->first();
         $LatestFundamental = FundamentalModel::orderBy('id','desc')->where('status',1)->skip(0)->take(4)->get();
         $LatestAnalysis = AnalysisModel::orderBy('id','desc')->where('status',1)->skip(0)->take(4)->get();
         $LatestBrokerNews  = BrokerNewsModel::orderBy('id','desc')->where('pending',0)->skip(0)->take(4)->get();
@@ -52,7 +54,7 @@ class HomeController extends Controller
         $StarSignalsHome = SignalsModel::orderBy('id','desc')->where('star',1)->where('expired',0)->where('status',0)->skip(0)->take(6)->get();
         $LatestBasicTraining = BasicTrainingModel::orderBy('id','desc')->where('status',0)->skip(0)->take(5)->get();
         $LatestHabbitTraining = HabbitTrainingModel::orderBy('id','desc')->where('status',0)->skip(0)->take(5)->get();
-        return view('home.index',compact('LatestFundamental','LatestAnalysis','LatestBrokerNews','latestWebinars','LatestBlogsData','StarBrokerHome','StarSignalsHome','LatestBasicTraining','LatestHabbitTraining'));
+        return view('home.index',compact('LatestFundamental','LatestAnalysis','LatestBrokerNews','latestWebinars','LatestBlogsData','StarBrokerHome','StarSignalsHome','LatestBasicTraining','LatestHabbitTraining','meta'));
     }
     public function ClientNotificationView(Request $request,$id){
         $ClientNotification = ClientNotificationModel::where('id',$id)->first();
@@ -111,7 +113,7 @@ class HomeController extends Controller
                 $mathRandor = $request->session()->get('mathRander');
                 $data->active = $mathRandor;
             }
-                $data->save();
+            $data->save();
         }
     }
     public function ChangePassword(){
@@ -152,8 +154,9 @@ class HomeController extends Controller
         return view('home/other-pages-content',compact('data'));
     }
     public function AboutPage(){
+        $meta = MetaTagsModel::where('name_page','About')->first();
         $data = OtherPagesContentModel::where('contentPage','AboutPage')->first();
-        return view('home/other-pages-content',compact('data'));
+        return view('home/other-pages-content',compact('data','meta'));
     }
     public function ConfirmationEmail(Request $request, $id){
         $email = base64_decode($id);
@@ -193,6 +196,9 @@ class HomeController extends Controller
         return view('home/other-pages-content',compact('data'));
     }
     public function RegistrationProcess(Request $request){
+        if(!isset($request->cityId) || $request->cityId == null){
+            return back()->with('danger',"You cannot select any city.");
+        }
         $password = md5($request->password);
         $request['password'] = $password;
         $email = ClientRegistrationModel::where('email',$request->email)->first();
@@ -320,10 +326,10 @@ class HomeController extends Controller
         return back();
     }
     public function BrokerView(){
-        $title = "Our Broker";
+        $meta = MetaTagsModel::where('name_page','Broker-main-page')->first();
         $totalData = BrokerCompanyInformationModel::orderBy('id','desc')->where('trash',0)->where('pending',0)->get();
         $totalBrokerCategories = BrokerCategoryModel::where('active',0)->get();
-        return view('broker/brokerView',compact('title','totalData','totalBrokerCategories'));
+        return view('broker/brokerView',compact('meta','totalData','totalBrokerCategories'));
     }
     public function ImageSrc(Request $request){
         if ($request->file("file") != null) {

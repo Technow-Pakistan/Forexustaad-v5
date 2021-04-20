@@ -7,13 +7,14 @@ use App\Models\BlogPostModel;
 use App\Models\CommentsModel;
 use App\Models\ReplyModel;
 use App\Models\BlogCommentsModel;
+use App\Models\MetaTagsModel;
 
 class BlogController extends Controller
 {
     public function Index(){
-        $title = "Blog";
+        $meta = MetaTagsModel::where('name_page','Blog-Post')->first();
         $BlogData = BlogPostModel::orderBy('id','desc')->where('status',1)->where('pending',1)->whereDate('publishDate', '<=', date("Y-m-d"))->get();
-        return view('blog.index',compact('BlogData','title'));
+        return view('blog.index',compact('BlogData','meta'));
     }
     public function DetailBlog(Request $request, $id, $id2){
         $BlogDetail = BlogPostModel::orderBy('id','desc')->where('status',1)->where('pending',1)->where('permalink',$id2)->whereDate('publishDate', '<=', date("Y-m-d"))->first();
