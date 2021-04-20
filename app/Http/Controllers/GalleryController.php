@@ -69,27 +69,4 @@ class GalleryController extends Controller
         $image->save();
         return back();
     }
-    public function EditMetaProcess(Request $request){
-        $data = $request->all();
-        for ($i=0; $i < count($request->keywords); $i++) {
-            $find = MetaKeywordsModel::where('name',$request->keywords[$i])->first();
-            if($find == null){
-                $key = new MetaKeywordsModel;
-                $key->name = $request->keywords[$i];
-                $key->save();
-            }
-        }
-        $data['keywordsimp'] = implode(",",$request->keywords);
-        $meta = MetaTagsModel::where('name_page',$request->name)->first();
-        if($meta){
-            $meta->fill($data);
-            $meta->save();
-        }else{
-            $newMeta = new MetaTagsModel;
-            $data['name_page'] = $request->name;
-            $newMeta->fill($data);
-            $newMeta->save();
-        }
-        return back()->with('success',"Meta Tags Updated Successfully.");
-    }
 }

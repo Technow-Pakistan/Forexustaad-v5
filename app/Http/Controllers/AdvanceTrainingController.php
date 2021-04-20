@@ -11,12 +11,14 @@ use App\Models\BasicCommentsModel;
 use App\Models\HabbitCommentsModel;
 use App\Models\ClientNotificationModel;
 use App\Models\PusherModel;
+use App\Models\MetaTagsModel;
 
 
 class AdvanceTrainingController extends Controller
 {
     public function ViewAll (Request $request, $id1, $id){
         if ($id1 == "Advance"){
+            $meta = MetaTagsModel::where('name_page','Advance-Training')->first();
             if ($request->session()->has('client')) {
                 $category = "Advance";
                 if($id == "all"){
@@ -55,8 +57,9 @@ class AdvanceTrainingController extends Controller
                 $request->session()->put("error",$error);
                 return redirect('/');
             }
-            return view('training.advance.advance',compact('Lectures','lecture','lastLecture','nextLecture','category','comments','commentAllow'));
+            return view('training.advance.advance',compact('Lectures','lecture','lastLecture','nextLecture','category','comments','commentAllow','meta'));
         }elseif ($id1 == "Basic"){
+            $meta = MetaTagsModel::where('name_page','Basic-Training')->first();
             $category = "Basic";
             if($id == "all"){
                 $lecture = BasicTrainingModel::orderBy('poistion','asc')->first();
@@ -77,6 +80,7 @@ class AdvanceTrainingController extends Controller
                 return redirect('/');
             }
         }else{
+            $meta = MetaTagsModel::where('name_page','Habbit-Training')->first();
             $category = "Habbit";
             if($id == "all"){
                 $lecture = HabbitTrainingModel::orderBy('poistion','asc')->first();
@@ -97,7 +101,7 @@ class AdvanceTrainingController extends Controller
                 return redirect('/');
             }
         }
-        return view('training.advance.advance',compact('Lectures','lecture','lastLecture','nextLecture','category','comments'));
+        return view('training.advance.advance',compact('Lectures','lecture','lastLecture','nextLecture','category','comments','meta'));
     }
 
     // Admin Panel
