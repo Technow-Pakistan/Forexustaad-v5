@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\FundamentalModel;
 use App\Models\ClientNotificationModel;
 use App\Models\PusherModel;
+use App\Models\MetaTagsModel;
 
 class FundamentalController extends Controller
 {
     public function ViewAll(Request $request){
-        $title = "Fundamental";
+        $meta = MetaTagsModel::where('name_page','Fundamental-History')->first();
         $Fundamental = FundamentalModel::orderBy('id','desc')->where('status',1)->get();
-        return view('home.fundamental.all',compact('Fundamental','title'));
+        return view('home.fundamental.all',compact('Fundamental','meta'));
     }
     public function ViewDetail(Request $request,$id){
         $title = str_replace("-"," ",$id);
@@ -44,8 +45,9 @@ class FundamentalController extends Controller
         return back();
     }
     public function Index(Request $request){
+        $meta = MetaTagsModel::where('name_page','Fundamental')->first();
         $Fundamental = FundamentalModel::orderBy('id','desc')->get();
-        return view('admin.fundamental.all',compact('Fundamental'));
+        return view('admin.fundamental.all',compact('Fundamental','meta'));
     }
     public function Add(Request $request){
         return view('admin.fundamental.add');

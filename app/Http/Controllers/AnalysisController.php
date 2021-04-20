@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\AnalysisModel;
 use App\Models\ClientNotificationModel;
 use App\Models\PusherModel;
+use App\Models\MetaTagsModel;
 
 class AnalysisController extends Controller
 {
     public function ViewAll(Request $request){
-        $title = "Analysis";
+        $meta = MetaTagsModel::where('name_page','Fundamental-Analysis')->first();
         $Analysis = AnalysisModel::orderBy('id','desc')->where('status',1)->get();
-        return view('home.analysis.all',compact('Analysis','title'));
+        return view('home.analysis.all',compact('Analysis','meta'));
     }
     public function ViewDetail(Request $request,$id){
         $title = str_replace("-"," ",$id);

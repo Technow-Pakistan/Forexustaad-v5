@@ -135,14 +135,14 @@
                                         <hr>
                                         <div class="row">
                                             <div class="col-sm-4">
-                                                <h6 class="mb-0  pt-2">Take Profit</h6>
+                                                <h6 class="mb-0  pt-2">Take Profit 1</h6>
                                             </div>
                                             <div class="col-sm-8 text-secondary fontBold">
                                                 <span class="text-primary">{{$profit}}</span>
                                             </div>
                                             @for($i=0; $i < count($Profits); $i++)
                                                 <div class="col-sm-4">
-                                                    <h6 class="mb-0  pt-2">Take Profit{{$i + 1}}</h6>
+                                                    <h6 class="mb-0  pt-2">Take Profit {{$i + 2}}</h6>
                                                 </div>
                                                 <div class="col-sm-8 text-secondary fontBold">
                                                     <span class="text-primary">{{$Profits[$i]}}</span>

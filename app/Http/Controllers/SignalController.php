@@ -72,66 +72,138 @@ class SignalController extends Controller
             $signalApiKey = SignalApiKeyModel::where('id',1)->first();
             if($go3 == 3){
                 if ($signalApiData) {
-                    if ($signalApiData->result != "SL Hit" || $signalApiData->result != "Finel TP Hit") {
+                    if ($signalApiData->result != "SL Hit" || $signalApiData->result != "TP Hit") {
                         $time = $signalApiData->lastUpdate;
                         $date1 = strtotime($time);
                         $date = date("Y-m-d h:i:s");
                         $date2 = strtotime($date);
                         $date3 = $date2-$date1;
                         if ($date3 >= 900) {
-                            $data1 = file_get_contents("https://fcsapi.com/api-v3/forex/latest?symbol=$signalApiData->symbol&access_key=$signalApiKey->apiKey");
+                            if ($signalPair->categoryId == 1) {
+                                $data1 = file_get_contents("https://fcsapi.com/api-v3/forex/latest?symbol=$signalApiData->symbol&access_key=$signalApiKey->apiKey");
+                            }elseif($signalPair->pair == "Gold"){
+                                $data1 = file_get_contents("https://fcsapi.com/api-v3/forex/latest?symbol=XAU/USD&access_key=$signalApiKey->apiKey");
+                            }elseif($signalPair->pair == "Crude Oil WTI"){
+                                $data1 = file_get_contents("https://fcsapi.com/api-v3/forex/latest?symbol=WTI/USD&access_key=$signalApiKey->apiKey");
+                            }elseif($signalPair->categoryId == 2){
+                                $data1 = file_get_contents("https://fcsapi.com/api-v3/crypto/latest?symbol=$signalApiData->symbol&access_key=$signalApiKey->apiKey");
+                            }
                             $daata1 =  json_decode($data1);
                             if(isset($daata1->response)){
                                 $forexApiData = $daata1->response;
-                                // pips Configration
-                                $pips1 = $forexApiData[0]->c - $signalData->price;
-                                // Result Configration
-                                $Profits = explode('@',$signalData->takeProfit);
-                                $profit = array_shift($Profits);
-                                $pips = $forexApiData[0]->c - $signalData->price;
-                                $takeProfit1 = $profit - $signalData->price;
-                                $stopLose = $signalData->stopLose - $signalData->price;
-                                if($takeProfit1 <= $pips){
-                                    $tpPips = $takeProfit1;
-                                    $TakeProfit = 1;
-                                    for($i=0; $i < count($Profits); $i++){
-                                        $takeProfit2 = $Profits[$i] - $signalData->price;
-                                        if($takeProfit2 <= $pips){
-                                            $tpPips = $takeProfit2;
-                                            if ($i == count($Profits)) {
-                                                $TakeProfit = "Finel";
+                                if ($signalData->orderType != "Pending Order") {
+                                    if ($signalData->buySale == "Buy limit" || $signalData->buySale == "Buy" || $signalData->buySale == "Buy Stop") {
+                                        // pips Configration
+                                        $pips1 = $forexApiData[0]->c - $signalData->price;
+                                        // Result Configration
+                                        $Profits = explode('@',$signalData->takeProfit);
+                                        $profit = array_shift($Profits);
+                                        $pips = $forexApiData[0]->c - $signalData->price;
+                                        $takeProfit1 = $profit - $signalData->price;
+                                        $stopLose = $signalData->stopLose - $signalData->price;
+                                        if($takeProfit1 <= $pips){
+                                            $tpPips = $takeProfit1;
+                                            $TakeProfit = 1;
+                                            for($i=0; $i < count($Profits); $i++){
+                                                $takeProfit2 = $Profits[$i] - $signalData->price;
+                                                if($takeProfit2 <= $pips){
+                                                    $tpPips = $takeProfit2;
+                                                    if ($i == count($Profits)) {
+                                                        $TakeProfit = "Finel";
+                                                    }else{
+                                                        $TakeProfit += 1;
+                                                    }
+                                                    if ($TakeProfit == "Finel") {
+                                                        $pips1 = $Profits[$i];
+                                                        // $signalData['date'] = date("Y-m-d");
+                                                        // $signalData['time'] = date("H:i");
+                                                        // $signalData->save();
+                                                    }
+                                                }
+                                            }
+                                            if($signalApiData->tpPips == null){
+                                                $apiData['tpPips'] = $tpPips;
+                                                $apiData['result'] = "$TakeProfit TP Hit";
                                             }else{
-                                                $TakeProfit += 1;
+                                                if ($signalApiData->tpPips < $pips) {
+                                                    $pips1 = $signalApiData->tpPips;
+                                                }
                                             }
-                                            if ($TakeProfit == "Finel") {
-                                                $pips1 = $Profits[$i];
-                                                $signalData['date'] = date("Y-m-d");
-                                                $signalData['time'] = date("H:i");
-                                                $signalData->save();
-                                            }
+                                        }elseif($stopLose >= $pips){
+                                            $apiData['result'] = "SL Hit";
+                                            // $signalData['date'] = date("Y-m-d");
+                                            // $signalData['time'] = date("H:i");
+                                            // $signalData->save();
+                                            $pips1 = $stopLose;
                                         }
-                                    }
-                                    if($signalApiData->tpPips == null){
-                                        $apiData['tpPips'] = $tpPips;
-                                        $apiData['result'] = "$TakeProfit TP Hit";
+                                        if ($signalPair->categoryId == 1 && $signalPair->categoryId == 2) {
+                                            $pips1 = $pips1 * 10000;
+                                        }else{
+                                            $pips1 = $pips1 * 100;
+                                        }
+                                        $apiData['pips'] = number_format((float)$pips1, 1, '.', '');
                                     }else{
-                                        if ($signalApiData->tpPips < $pips) {
-                                            $pips1 = $signalApiData->tpPips;
+                                        // pips Configration
+                                        $pips1 = $forexApiData[0]->c - $signalData->price;
+                                        // Result Configration
+                                        $Profits = explode('@',$signalData->takeProfit);
+                                        $profit = array_shift($Profits);
+                                        $pips = $forexApiData[0]->c - $signalData->price;
+                                        $takeProfit1 = $profit - $signalData->price;
+                                        $stopLose = $signalData->stopLose - $signalData->price;
+                                        if($takeProfit1 >= $pips){
+                                            $tpPips = $takeProfit1;
+                                            $TakeProfit = 1;
+                                            for($i=0; $i < count($Profits); $i++){
+                                                $takeProfit2 = $Profits[$i] - $signalData->price;
+                                                if($takeProfit2 >= $pips){
+                                                    $tpPips = $takeProfit2;
+                                                    if ($i == count($Profits)) {
+                                                        $TakeProfit = "Finel";
+                                                    }else{
+                                                        $TakeProfit += 1;
+                                                    }
+                                                    if ($TakeProfit == "Finel") {
+                                                        $pips1 = $Profits[$i];
+                                                        // $signalData['date'] = date("Y-m-d");
+                                                        // $signalData['time'] = date("H:i");
+                                                        // $signalData->save();
+                                                    }
+                                                }
+                                            }
+                                            if($signalApiData->tpPips == null){
+                                                $apiData['tpPips'] = $tpPips;
+                                                $apiData['result'] = "$TakeProfit TP Hit";
+                                            }else{
+                                                if ($signalApiData->tpPips > $pips) {
+                                                    $pips1 = $signalApiData->tpPips;
+                                                }
+                                            }
+                                        }elseif($stopLose <= $pips){
+                                            $apiData['result'] = "SL Hit";
+                                            // $signalData['date'] = date("Y-m-d");
+                                            // $signalData['time'] = date("H:i");
+                                            // $signalData->save();
+                                            $pips1 = $stopLose;
+                                        }
+                                        if ($signalPair->categoryId == 1 && $signalPair->categoryId == 2) {
+                                            $pips1 = $pips1 * 10000;
+                                        }else{
+                                            $pips1 = $pips1 * 100;
+                                        }
+                                        $apiData['pips'] = number_format((float)$pips1, 1, '.', '');
+                                    }
+                                }else{
+                                    if($signalData->buySale == "Buy limit" || $signalData->buySale == "Sell limit"){
+                                        if($forexApiData[0]->c <= $signalData->price){
+                                            $signalData->orderType = "Order Executed";
+                                        }
+                                    }elseif($signalData->buySale == "Buy Stop" || $signalData->buySale == "Sell Stop"){
+                                        if($forexApiData[0]->c >= $signalData->price){
+                                            $signalData->orderType = "Order Executed";
                                         }
                                     }
-                                }elseif($stopLose > $pips){
-                                    $apiData['result'] = "SL Hit";
-                                    $signalData['date'] = date("Y-m-d");
-                                    $signalData['time'] = date("H:i");
-                                    $signalData->save();
-                                    $pips1 = $stopLose;
                                 }
-                                if ($signalPair->categoryId == 1 && $signalPair->categoryId == 2) {
-                                    $pips1 = $pips1 * 10000;
-                                }else{
-                                    $pips1 = $pips1 * 100;
-                                }
-                                $apiData['pips'] = number_format((float)$pips1, 1, '.', '');
                                 $apiData['price'] = $forexApiData[0]->c;
                                 $apiData['opening_price'] = $forexApiData[0]->o;
                                 $apiData['high'] = $forexApiData[0]->h;
@@ -142,14 +214,22 @@ class SignalController extends Controller
                                 $signalApiData->save();
                             }
                         }
+                    }else {
+                        $signalData['date'] = date("Y-m-d");
+                        $signalData['time'] = date("H:i");
+                        $signalData->save();
                     }
                 }
                 if ($signalData->selectUser != "Free User" && $go3 == 3) {
                     if($request->session()->has('client')){
                         $value = $request->session()->get('client');
                         if(($value['memberType'] == 1 || $value['memberType'] == 2) && $signalData->selectUser == "Register User"){
+                            $name_page = "signal@" . $signalData->id;
+                            $meta = MetaTagsModel::where('name_page',$name_page)->first();
                             return view('home.signal.viewSignal',compact('signalData','title','comments','TotalLikes','TotalDislikes','signalApiData'));
                         }elseif ($value['memberType'] == 2 && $signalData->selectUser == "VIP Member") {
+                            $name_page = "signal@" . $signalData->id;
+                            $meta = MetaTagsModel::where('name_page',$name_page)->first();
                             return view('home.signal.viewSignal',compact('signalData','title','comments','TotalLikes','TotalDislikes','signalApiData'));
                         }else{
                             $error = "Become VIP First";
@@ -387,7 +467,7 @@ class SignalController extends Controller
         //     $adminData = $request->session()->get("admin");
         //     $messageData['userId'] = $adminData['id'];
         //     $messageData['userType'] = 0;
-        //     $messageData['message'] = "Updated a New Signal.";
+        //     $messageData['message'] = "Added a New Signal.";
         //     $messageData['link'] = "signal/" . $getUrl;
         //     $clientNotification = new ClientNotificationModel;
         //     $clientNotification->fill($messageData);
@@ -398,8 +478,8 @@ class SignalController extends Controller
         //     $signalPair = SignalPairModel::where('id',$signal->forexPairs)->first();
         //     $data44 = [
         //         'title' => $signalPair->pair,
-        //         'message' => "Forexustaad Updated A New Signal.",
-        //         'url' => "https://forexustaad.com/signal",
+        //         'message' => "Forexustaad Added A New Signal.",
+        //         'url' => "https://forexustaad.com/signal" . $getUrl,
         //     ];
         //     $request->session()->put('desktopNotification',$data44);
         // }
@@ -625,15 +705,23 @@ class SignalController extends Controller
         return view('admin.signals.add-signalPair',compact('totalData','totalCategory','signalPairs'));
     }
     public function AddPairProcess(Request $request){
-        $data = new SignalPairModel;
-        $data2 = $request->all();
-        if ($request->file("image") != null) {
-            $path = $request->file("image")->store("WebImages");
-            $data2['image'] = $path;
+        $oldData = SignalPairModel::where('pair',$request->pair)->first();
+        if ($oldData) {
+            $error = "This pair already in Pair List.";
+            $request->session()->put("success",$error);
+        }else {
+            $data = new SignalPairModel;
+            $data2 = $request->all();
+            if ($request->file("image") != null) {
+                $path = $request->file("image")->store("WebImages");
+                $data2['image'] = $path;
+            }
+            $data->fill($data2);
+            $data->save();
+            $success = "This data has added successfully.";
+            $request->session()->put("success",$success);
         }
-        $data->fill($data2);
-        $data->save();
-        return back();
+            return back();
     }
     public function EditPairProcess(Request $request, $id){
         $data = SignalPairModel::find($id);

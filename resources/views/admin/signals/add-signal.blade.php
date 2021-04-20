@@ -28,10 +28,16 @@
                 <div class="card">
                     <div class="card-body">
                         <form action="" method="post">
-                            <label for="">Title</label>
-                            <input type="text" class="form-control" name="metaTitle" value="">
-                            <label for="">Description</label>
-                            <textarea name="metaDescription" class="form-control"></textarea>
+                            <div class="d-flex justify-content-between">
+                                <label for="">Title</label>
+                                <p class="text-right text-danger m-0 titleCount"></p>
+                            </div>
+                            <input type="text" class="form-control titleCountFlied" maxlength="580" name="metaTitle" value="">
+                            <div class="d-flex justify-content-between">
+                                <label for="">Description</label>
+                                <p class="text-right text-danger m-0 descriptionCount"></p>
+                            </div>
+                            <textarea name="metaDescription"  maxlength="990" class="form-control description"></textarea>
                             <label for="">Keywords</label>
                             <select class="js-example-tokenizer col-sm-12" name="metaKeywords[]" multiple="multiple" required>
                                 @foreach ($MetaKeywords as $metas)
@@ -188,6 +194,38 @@
         }
     </style>
 @include('admin.include.footer')
+
+<script>
+    // description Limit
+    $(".descriptionCount").hide();
+    $(".description").on("keyup",function(){
+       var count = $(".description").val();
+       var len = count.length;
+
+       if(len == 0){
+          $(".descriptionCount").hide();
+       }else{
+          $(".descriptionCount").show();
+       }
+       len = 990 - len;
+       $(".descriptionCount").html("remaining: " + len);
+    });
+
+    // title Limit
+    $(".titleCount").hide();
+    $(".titleCountFlied").on("keyup",function(){
+       var count = $(".titleCountFlied").val();
+       var len = count.length;
+
+       if(len == 0){
+          $(".titleCount").hide();
+       }else{
+          $(".titleCount").show();
+       }
+       len = 580 - len;
+       $(".titleCount").html("remaining: " + len);
+    });
+</script>
 
 <script type='text/javascript'>
 <?php

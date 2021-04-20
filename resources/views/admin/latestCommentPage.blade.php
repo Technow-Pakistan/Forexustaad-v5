@@ -4,7 +4,7 @@
 		<div class="pcoded-content">
 				<!-- [ Main Content ] start -->
 			<div class="row">
-                
+
             <!-- tabs card start -->
             <div class="col-sm-12">
                 <div class="card tabs-card">
@@ -46,7 +46,7 @@
                                         </thead>
                                         <tbody>
 											@foreach($signalLatestComments as $data)
-												@php 
+												@php
 													$member = App\Models\ClientRegistrationModel::where('id',$data->memberId)->first();
 													if($member){
 														if($member->image == null){
@@ -59,13 +59,13 @@
 													}
 												@endphp
 												<tr>
-													<td class="d-flex">
-														<a href="{{URL::to('ustaad/signals/comment/')}}/{{$data->signalId}}">
+													<td>
+														<a href="{{URL::to('ustaad/signals/comment/')}}/{{$data->signalId}}" class="d-flex">
 															<div>
 																<img class="rounded-circle" style="width:40px;" src="{{$memberImage}}" alt="activity-user">
 															</div>
 															<div class="ml-4">
-																<h6 class="mb-1">{{$member != null ? $member->name : ''}}</h6>
+																<h6 class="mb-1">{{$member != null ? $member->name : 'Admin'}}</h6>
 																<p class="m-0 text-dark" style="white-space:normal">{{$data->comment}}</p>
 															</div>
 														</a>
@@ -88,7 +88,7 @@
                                         </thead>
                                         <tbody>
 											@foreach($BlogPostLatestComments as $data)
-												@php 
+												@php
 													$member = App\Models\ClientRegistrationModel::where('id',$data->memberId)->first();
 													if($member){
 														if($member->image == null){
@@ -101,13 +101,13 @@
 													}
 												@endphp
 												<tr>
-													<td class="d-flex">
-														<a href="{{URL::to('ustaad/post/comment/')}}/{{$data->blogId}}">
+													<td>
+														<a href="{{URL::to('ustaad/post/comment/')}}/{{$data->blogId}}" class="d-flex">
 															<div>
 																<img class="rounded-circle" style="width:40px;" src="{{$memberImage}}" alt="activity-user">
 															</div>
 															<div class="ml-4">
-																<h6 class="mb-1">{{$member != null ? $member->name : ''}}</h6>
+																<h6 class="mb-1">{{$member != null ? $member->name : 'Admin'}}</h6>
 																<p class="m-0 text-dark" style="white-space:normal">{{$data->comment}}</p>
 															</div>
 														</a>
@@ -130,7 +130,7 @@
                                         </thead>
                                         <tbody>
 											@foreach($AdvanceTrainingLatestComments as $data)
-												@php 
+												@php
 													$member = App\Models\ClientRegistrationModel::where('id',$data->memberId)->first();
 													if($member){
 														if($member->image == null){
@@ -143,14 +143,14 @@
 													}
 												@endphp
 												<tr>
-													<td class="d-flex">
-														<a href="{{URL::to('ustaad/lecture/AdvanceCategory')}}/{{$data->lectureId}}">
+													<td>
+														<a href="{{URL::to('ustaad/lecture/AdvanceCategory')}}/{{$data->lectureId}}" class="d-flex">
 															<div>
 																<img class="rounded-circle" style="width:40px;" src="{{$memberImage}}" alt="activity-user">
 															</div>
 															<div class="ml-4">
-																<h6 class="mb-1">{{$member != null ? $member->name : ''}}</h6>
-																<p class="m-0" style="white-space:normal">{{$data->comment}}</p>
+																<h6 class="mb-1">{{$member != null ? $member->name : 'Admin'}}</h6>
+																<p class="m-0 text-dark" style="white-space:normal">{{$data->comment}}</p>
 															</div>
 														</a>
 													</td>
@@ -172,7 +172,7 @@
                                         </thead>
                                         <tbody>
 											@foreach($BasicTrainingLatestComments as $data)
-												@php 
+												@php
 													$member = App\Models\ClientRegistrationModel::where('id',$data->memberId)->first();
 													if($member){
 														if($member->image == null){
@@ -185,14 +185,14 @@
 													}
 												@endphp
 												<tr>
-													<td class="d-flex">
-														<a href="{{URL::to('ustaad/lecture/BasicCategory')}}/{{$data->lectureId}}">
+													<td>
+														<a href="{{URL::to('ustaad/lecture/BasicCategory')}}/{{$data->lectureId}}" class="d-flex">
 															<div>
 																<img class="rounded-circle" style="width:40px;" src="{{$memberImage}}" alt="activity-user">
 															</div>
 															<div class="ml-4">
-																<h6 class="mb-1">{{$member != null ? $member->name : ''}}</h6>
-																<p class="m-0" style="white-space:normal">{{$data->comment}}</p>
+																<h6 class="mb-1">{{$member != null ? $member->name : 'Admin'}}</h6>
+																<p class="m-0 text-dark" style="white-space:normal">{{$data->comment}}</p>
 															</div>
 														</a>
 													</td>
@@ -214,7 +214,7 @@
                                         </thead>
                                         <tbody>
 											@foreach($HabbitTrainingLatestComments as $data)
-												@php 
+												@php
 													$member = App\Models\ClientRegistrationModel::where('id',$data->memberId)->first();
 													if($member){
 														if($member->image == null){
@@ -227,15 +227,15 @@
 													}
 												@endphp
 												<tr>
-													<td class="d-flex">
-													
-														<a href="{{URL::to('ustaad/lecture/HabbitCategory')}}/{{$data->lectureId}}">
+													<td>
+
+														<a href="{{URL::to('ustaad/lecture/HabbitCategory')}}/{{$data->lectureId}}" class="d-flex">
 															<div>
 																<img class="rounded-circle" style="width:40px;" src="{{$memberImage}}" alt="activity-user">
 															</div>
 															<div class="ml-4">
-																<h6 class="mb-1">{{$member != null ? $member->name : ''}}</h6>
-																<p class="m-0" style="white-space:normal">{{$data->comment}}</p>
+																<h6 class="mb-1">{{$member != null ? $member->name : 'Admin'}}</h6>
+																<p class="m-0 text-dark" style="white-space:normal">{{$data->comment}}</p>
 															</div>
 														</a>
 													</td>

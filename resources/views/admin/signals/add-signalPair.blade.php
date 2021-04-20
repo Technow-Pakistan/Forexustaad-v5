@@ -60,7 +60,7 @@
 									</div>
                                     <div class="alignleft actions bulkactions" id="findtwoGroup">
 										<label for="bulk-action-selector-top" class="d-block ">Add Pair</label>
-										<select name="categoryId" class="form-control d-inline-block js-example-tags" id="findtwo">
+										<select name="" class="form-control d-inline-block js-example-tags" id="findtwo">
                                             @foreach($signalPairs as $sig)
                                                 @if($data2345 == $sig->categoryId)
                                                     <option value="{{$sig->pair}}">{{$sig->pair}}</option>

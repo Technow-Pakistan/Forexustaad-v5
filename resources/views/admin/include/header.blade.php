@@ -79,6 +79,19 @@
 										>
 									</li>
 									<li class="nav-item pcoded-menu-caption">
+										<label>Meta Tags</label>
+									</li>
+									<li class="nav-item pcoded-hasmenu">
+										<a href="#!" class="nav-link"
+											><span class="pcoded-micon"
+												><i class="fab fa-blogger"></i></span
+											><span class="pcoded-mtext">Meta Tags</span></a
+										>
+										<ul class="pcoded-submenu">
+											<li><a href="{{URL::to('ustaad/meta-tags')}}">Meta Tags</a></li>
+										</ul>
+									</li>
+									<li class="nav-item pcoded-menu-caption">
 										<label>Posts Area</label>
 									</li>
 									<li class="nav-item pcoded-hasmenu">
