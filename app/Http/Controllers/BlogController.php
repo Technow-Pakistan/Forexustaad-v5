@@ -8,6 +8,7 @@ use App\Models\CommentsModel;
 use App\Models\ReplyModel;
 use App\Models\BlogCommentsModel;
 use App\Models\MetaTagsModel;
+use App\Models\MetaKeywordsModel;
 
 class BlogController extends Controller
 {
@@ -20,8 +21,10 @@ class BlogController extends Controller
         $BlogDetail = BlogPostModel::orderBy('id','desc')->where('status',1)->where('pending',1)->where('permalink',$id2)->whereDate('publishDate', '<=', date("Y-m-d"))->first();
         if ($BlogDetail) {
             $title = $BlogDetail->mainTitle;
+            $name_page = "blogPost@" . $BlogDetail->id;
+            $meta = MetaTagsModel::where('name_page',$name_page)->first();
             $comments = BlogCommentsModel::orderBy('id','desc')->where('blogId', $BlogDetail->id)->get();
-            return view('blog.blogDetail',compact('title','BlogDetail','comments'));
+            return view('blog.blogDetail',compact('title','BlogDetail','comments','meta'));
         }else{
             $error = "This url does not exit.";
             $request->session()->put("error",$error);

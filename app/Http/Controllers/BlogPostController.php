@@ -14,16 +14,18 @@ use App\Models\BlogPostAllSubCategoryModel;
 use App\Models\ClientMemberModel;
 use App\Models\ClientNotificationModel;
 use App\Models\PusherModel;
+use App\Models\MetaTagsModel;
+use App\Models\MetaKeywordsModel;
 
 class BlogPostController extends Controller
 {
     public function New(Request $request, $id){
+        $newMeta = null;
         $allTags = BlogPostAllTagsModel::all();
         $allMainCategory = BlogPostAllMainCategoryModel::all();
         $allSubCategory = BlogPostAllSubCategoryModel::all();
         $ClientMember = ClientMemberModel::all();
-
-        return view('admin.add-post',compact('id','allTags','allSubCategory','allMainCategory','ClientMember'));
+        return view('admin.add-post',compact('id','allTags','allSubCategory','allMainCategory','ClientMember','newMeta'));
     }
     public function Add(Request $request){
         $data = $request->all();
@@ -77,6 +79,24 @@ class BlogPostController extends Controller
         $blogPost = new BlogPostModel;
         $blogPost->fill($data);
         $blogPost->save();
+
+        // meta Tags save start
+            for ($i=0; $i < count($request->metaKeywords); $i++) {
+                $find = MetaKeywordsModel::where('name',$request->metaKeywords[$i])->first();
+                if($find == null){
+                    $key = new MetaKeywordsModel;
+                    $key->name = $request->metaKeywords[$i];
+                    $key->save();
+                }
+            }
+            $newMeta = new MetaTagsModel;
+            $newMeta->name_page = "blogPost@" . $blogPost->id;
+            $newMeta->description = $request->metaDescription;
+            $newMeta->title = $request->metaTitle;
+            $newMeta->keywordsimp = implode(",",$request->metaKeywords);
+            $newMeta->save();
+        // meta Tags save end
+
 
         $postId = $blogPost->id;
         // Add Post Visibility
@@ -146,6 +166,8 @@ class BlogPostController extends Controller
 
     public function Edit(Request $request, $id){
         $allTags = BlogPostAllTagsModel::all();
+        $name_page = "blogPost@" . $id;
+        $newMeta = MetaTagsModel::where('name_page',$name_page)->first();
         $allMainCategory = BlogPostAllMainCategoryModel::all();
         $allSubCategory = BlogPostAllSubCategoryModel::all();
         $ClientMember = ClientMemberModel::all();
@@ -155,7 +177,7 @@ class BlogPostController extends Controller
         $mainCategoryPostData = BlogPostMainCategoryModel::where('postId',$id)->get();
         $subCategoryPostData = BlogPostSubCategoryModel::where('postId',$id)->get();
 
-        return view('admin.edit-post',compact('id','allTags','allSubCategory','allMainCategory','blogPostData','visibilityPostData','tagsPostData','mainCategoryPostData','subCategoryPostData','ClientMember','id'));
+        return view('admin.edit-post',compact('id','allTags','allSubCategory','allMainCategory','blogPostData','visibilityPostData','tagsPostData','mainCategoryPostData','subCategoryPostData','ClientMember','id','newMeta'));
     }
     public function EditProcess(Request $request, $id){
         $data = $request->all();
@@ -223,6 +245,27 @@ class BlogPostController extends Controller
         $blogPost = BlogPostModel::where('id',$id)->first();
         $blogPost->fill($data);
         $blogPost->save();
+
+        // meta Tags save start
+            for ($i=0; $i < count($request->metaKeywords); $i++) {
+                $find = MetaKeywordsModel::where('name',$request->metaKeywords[$i])->first();
+                if($find == null){
+                    $key = new MetaKeywordsModel;
+                    $key->name = $request->metaKeywords[$i];
+                    $key->save();
+                }
+            }
+            $name_page = "blogPost@" . $id;
+            $newMeta = MetaTagsModel::where('name_page',$name_page)->first();
+            if($newMeta == null){
+                $newMeta = new MetaTagsModel;
+            }
+            $newMeta->name_page = "blogPost@" . $id;
+            $newMeta->description = $request->metaDescription;
+            $newMeta->title = $request->metaTitle;
+            $newMeta->keywordsimp = implode(",",$request->metaKeywords);
+            $newMeta->save();
+        // meta Tags save end
 
         $postId = $blogPost->id;
         // Delete Previous Visibility

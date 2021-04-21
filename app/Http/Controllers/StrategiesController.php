@@ -7,20 +7,24 @@ use Illuminate\Http\Request;
 use App\Models\StrategiesModel;
 use App\Models\ClientNotificationModel;
 use App\Models\PusherModel;
+use App\Models\MetaTagsModel;
+use App\Models\MetaKeywordsModel;
 
 class StrategiesController extends Controller
 {
     public function ViewAll(Request $request){
-        $title = "Strategies";
+        $meta = MetaTagsModel::where('name_page','Strategies')->first();
         $Strategies = StrategiesModel::orderBy('id','desc')->where('status',0)->get();
-        return view('strategies.viewAll',compact('Strategies','title'));
+        return view('strategies.viewAll',compact('Strategies','meta'));
     }
     public function StrategyDetail(Request $request, $id){
         $url = str_replace("-"," ",$id);
         $Strategy = StrategiesModel::where('title',$url)->first();
         if ($Strategy) {
             $title = $Strategy->title;
-            return view('strategies.viewDetail',compact('Strategy','title'));
+            $name_page = "Strategy@" . $Strategy->id;
+            $meta = MetaTagsModel::where('name_page',$name_page)->first();
+            return view('strategies.viewDetail',compact('Strategy','title','meta'));
         }else{
             $error = "This strategies is not exist.";
             $request->session()->put("error",$error);
@@ -35,7 +39,8 @@ class StrategiesController extends Controller
         return view('admin.strategies.index',compact('Strategies'));
     }
     public function Add(Request $request){
-        return view('admin.strategies.add');
+        $newMeta = null;
+        return view('admin.strategies.add',compact('newMeta'));
     }
     public function AddStrategy(Request $request){
         $data = $request->all();
@@ -51,6 +56,23 @@ class StrategiesController extends Controller
         $news->save();
         $success = "This strategy has been added successfully.";
         $request->session()->put("success",$success);
+
+        // meta Tags save start
+            for ($i=0; $i < count($request->metaKeywords); $i++) {
+                $find = MetaKeywordsModel::where('name',$request->metaKeywords[$i])->first();
+                if($find == null){
+                    $key = new MetaKeywordsModel;
+                    $key->name = $request->metaKeywords[$i];
+                    $key->save();
+                }
+            }
+            $newMeta = new MetaTagsModel;
+            $newMeta->name_page = "Strategy@" . $news->id;
+            $newMeta->description = $request->metaDescription;
+            $newMeta->title = $request->metaTitle;
+            $newMeta->keywordsimp = implode(",",$request->metaKeywords);
+            $newMeta->save();
+        // meta Tags save end
 
         // Pusher Notification Start
         $url = str_replace(" ", "-",$news->title);
@@ -69,8 +91,10 @@ class StrategiesController extends Controller
         return back();
     }
     public function Edit(Request $request, $id){
+        $name_page = "Strategy@" . $id;
+        $newMeta = MetaTagsModel::where('name_page',$name_page)->first();
         $strategy = StrategiesModel::find($id);
-        return view('admin.strategies.add',compact("strategy"));
+        return view('admin.strategies.add',compact("strategy","newMeta"));
     }
     public function EditStrategy(Request $request, $id){
         $data = $request->all();
@@ -86,6 +110,27 @@ class StrategiesController extends Controller
         $news->save();
         $success = "This strategy has been updated successfully.";
         $request->session()->put("success",$success);
+
+        // meta Tags save start
+            for ($i=0; $i < count($request->metaKeywords); $i++) {
+                $find = MetaKeywordsModel::where('name',$request->metaKeywords[$i])->first();
+                if($find == null){
+                    $key = new MetaKeywordsModel;
+                    $key->name = $request->metaKeywords[$i];
+                    $key->save();
+                }
+            }
+            $name_page = "Strategy@" . $id;
+            $newMeta = MetaTagsModel::where('name_page',$name_page)->first();
+            if($newMeta == null){
+                $newMeta = new MetaTagsModel;
+            }
+            $newMeta->name_page = "Strategy@" . $id;
+            $newMeta->description = $request->metaDescription;
+            $newMeta->title = $request->metaTitle;
+            $newMeta->keywordsimp = implode(",",$request->metaKeywords);
+            $newMeta->save();
+        // meta Tags save end
 
         // Pusher Notification Start
         $url = str_replace(" ", "-",$news->title);

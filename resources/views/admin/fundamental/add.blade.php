@@ -42,6 +42,33 @@
                             <div class="col-sm-12 col-xl-12 col-md-12 ">
                                 <div class="form-wrap">
                                     <form id="addtag" method="post" action="" class="" enctype="multipart/form-data">
+										<div class="d-flex justify-content-between">
+											<label for="">Title</label>
+											<p class="text-right text-danger m-0 titleCount"></p>
+										</div>
+										<input type="text" class="form-control titleCountFlied" maxlength="580" name="metaTitle" value="{{$newMeta != null ? $newMeta->title : ''}}">
+										<div class="d-flex justify-content-between">
+											<label for="">Description</label>
+											<p class="text-right text-danger m-0 descriptionCount"></p>
+										</div>
+										<textarea name="metaDescription" maxlength="990" class="form-control description">{{$newMeta != null ? $newMeta->description : ''}}</textarea>
+										<label for="">Keywords</label>
+										<select class="js-example-tokenizer col-sm-12" name="metaKeywords[]" multiple="multiple" required>
+											@foreach ($MetaKeywords as $metas)
+												@if($newMeta != null)
+													@php
+														$keywords = explode(',',$newMeta->keywordsimp);
+														$selectedAll = 0;
+													@endphp
+													@for($i = 0; $i< count($keywords); $i++)
+														@if($keywords[$i] == $metas->name)
+															@php   $selectedAll = 1;  @endphp
+														@endif
+													@endfor
+												@endif
+												<option value="{{$metas->name}}" {{$newMeta != null ? ($selectedAll == 1 ? 'selected' : '') : ''}}>{{$metas->name}}</option>
+											@endforeach
+										</select>
                                         <div class="form-group">
                                             <label for="fundamental-name" class="form-control-label">Title</label>
                                             <input name="title" class="form-control " id="fundamental-name" type="text" value="{{($count != 0 ? $fundamental->title : '' )}}" size="40" aria-required="true" required="">
@@ -50,7 +77,7 @@
 										<div class="form-group">
 											@isset($fundamental->image)
 												<div>
-													<img src="{{URL::to('storage/app')}}/{{$fundamental->image}}" alt="Your Image" />
+													<img src="{{URL::to('storage/app')}}/{{$fundamental->image}}" alt="Your Image" width="100px" height="100px"/>
 												</div>
 											@endisset
 											@if($count == 0)
@@ -93,3 +120,41 @@
 		</section>
 		<!-- [ Main Content ] end -->
 @include('admin.include.footer')
+
+<script>
+    // description Limit
+    var count = $(".description").val();
+    var len = count.length;
+    len = 990 - len;
+    $(".descriptionCount").html("remaining: " + len);
+    $(".description").on("keyup",function(){
+       var count = $(".description").val();
+       var len = count.length;
+
+       if(len == 0){
+          $(".descriptionCount").hide();
+       }else{
+          $(".descriptionCount").show();
+       }
+       len = 990 - len;
+       $(".descriptionCount").html("remaining: " + len);
+    });
+
+    // title Limit
+    var count = $(".titleCountFlied").val();
+    var len = count.length;
+    len = 580 - len;
+    $(".titleCount").html("remaining: " + len);
+    $(".titleCountFlied").on("keyup",function(){
+       var count = $(".titleCountFlied").val();
+       var len = count.length;
+
+       if(len == 0){
+          $(".titleCount").hide();
+       }else{
+          $(".titleCount").show();
+       }
+       len = 580 - len;
+       $(".titleCount").html("remaining: " + len);
+    });
+</script>
