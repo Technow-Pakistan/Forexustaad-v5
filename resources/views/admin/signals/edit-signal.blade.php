@@ -40,7 +40,7 @@
                                 <label for="">Description</label>
                                 <p class="text-right text-danger m-0 descriptionCount"></p>
                             </div>
-                            <textarea name="metaDescription" maxlength="990" class="form-control descriptionCount">{{$newMeta != null ? $newMeta->description : ''}}</textarea>
+                            <textarea name="metaDescription" maxlength="990" class="form-control asdasd">{{$newMeta != null ? $newMeta->description : ''}}</textarea>
                             <label for="">Keywords</label>
                             <select class="js-example-tokenizer col-sm-12" name="metaKeywords[]" multiple="multiple" required>
                                 @foreach ($MetaKeywords as $metas)

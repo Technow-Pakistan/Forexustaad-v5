@@ -89,6 +89,34 @@
 				<!-- [ Main Content ] start -->
                 
                 <form id="SaveButton" method="post" action="{{URL::to('ustaad/post/all')}}" class="PostFormSubmit"  enctype="multipart/form-data">
+                
+										<div class="d-flex justify-content-between">
+											<label for="">Title</label>
+											<p class="text-right text-danger m-0 titleCount"></p>
+										</div>
+										<input type="text" class="form-control titleCountFlied" maxlength="580" name="metaTitle" value="{{$newMeta != null ? $newMeta->title : ''}}">
+										<div class="d-flex justify-content-between">
+											<label for="">Description</label>
+											<p class="text-right text-danger m-0 descriptionCount1"></p>
+										</div>
+										<textarea name="metaDescription" maxlength="990" class="form-control description1">{{$newMeta != null ? $newMeta->description : ''}}</textarea>
+										<label for="">Keywords</label>
+										<select class="js-example-tokenizer col-sm-12" name="metaKeywords[]" multiple="multiple" required>
+											@foreach ($MetaKeywords as $metas)
+												@if($newMeta != null)
+													@php
+														$keywords = explode(',',$newMeta->keywordsimp);
+														$selectedAll = 0;
+													@endphp
+													@for($i = 0; $i< count($keywords); $i++)
+														@if($keywords[$i] == $metas->name)
+															@php   $selectedAll = 1;  @endphp
+														@endif
+													@endfor
+												@endif
+												<option value="{{$metas->name}}" {{$newMeta != null ? ($selectedAll == 1 ? 'selected' : '') : ''}}>{{$metas->name}}</option>
+											@endforeach
+										</select>
    <div class="row">
       <div class="col-sm-8 col-xl-8 col-md-8 ">
          <div class="card">
@@ -487,5 +515,45 @@
         });
       });
    });
+</script>
+
+
+
+<script>
+    // description Limit
+    var count = $(".description1").val();
+    var len = count.length;
+    len = 990 - len;
+    $(".descriptionCount1").html("remaining: " + len);
+    $(".description1").on("keyup",function(){
+       var count = $(".description1").val();
+       var len = count.length;
+
+       if(len == 0){
+          $(".descriptionCount1").hide();
+       }else{
+          $(".descriptionCount1").show();
+       }
+       len = 990 - len;
+       $(".descriptionCount1").html("remaining: " + len);
+    });
+
+    // title Limit
+    var count = $(".titleCountFlied").val();
+    var len = count.length;
+    len = 580 - len;
+    $(".titleCount").html("remaining: " + len);
+    $(".titleCountFlied").on("keyup",function(){
+       var count = $(".titleCountFlied").val();
+       var len = count.length;
+
+       if(len == 0){
+          $(".titleCount").hide();
+       }else{
+          $(".titleCount").show();
+       }
+       len = 580 - len;
+       $(".titleCount").html("remaining: " + len);
+    });
 </script>
 

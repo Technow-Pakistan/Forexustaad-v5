@@ -136,10 +136,10 @@ class HomeController extends Controller
             return back();
         }
     }
-    public function VipWebinar(){
-        $title = "Webinar";
+    public function VipWebinar(Request $request){
+        $meta = MetaTagsModel::where('name_page','Webinars')->first();
         $totalData = MainWebinarModel::orderBy('id','desc')->where('vipMember',1)->get();
-        return view('vipWebinar/webinar',compact('totalData','title'));
+        return view('vipWebinar/webinar',compact('totalData','meta'));
     }
     public function webinar(){
         $title = "Webinar";

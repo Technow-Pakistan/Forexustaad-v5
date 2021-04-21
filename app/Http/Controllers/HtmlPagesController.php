@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\MetaTagsModel;
 
 class HtmlPagesController extends Controller
 {
@@ -121,7 +122,8 @@ class HtmlPagesController extends Controller
         return view('htmlPages.what-is-candlestick-strategy-in-urduhindi-part-1');
     }
     public function Page39(Request $request){
-        return view('htmlPages.what-is-forex-trading');
+        $meta = MetaTagsModel::where('name_page','What-is-forex-trading')->first();
+        return view('htmlPages.what-is-forex-trading',compact('meta'));
     }
     public function Page40(Request $request){
         return view('htmlPages.what-is-forex-trading-in-urdu-webinar');
