@@ -8,6 +8,7 @@ use App\Models\FundamentalModel;
 use App\Models\ClientNotificationModel;
 use App\Models\PusherModel;
 use App\Models\MetaTagsModel;
+use App\Models\MetaKeywordsModel;
 
 class FundamentalController extends Controller
 {
@@ -20,7 +21,9 @@ class FundamentalController extends Controller
         $title = str_replace("-"," ",$id);
         $fundamental = FundamentalModel::where('title',$title)->where('status',1)->first();
         if ($fundamental) {
-            return view('home.fundamental.view',compact('fundamental','title'));
+            $name_page = "Fundamental@" . $fundamental->id;
+            $meta = MetaTagsModel::where('name_page',$name_page)->first();
+            return view('home.fundamental.view',compact('fundamental','title','meta'));
         }else {
             $error = "This url does not exit.";
             $request->session()->put("error",$error);
@@ -50,7 +53,8 @@ class FundamentalController extends Controller
         return view('admin.fundamental.all',compact('Fundamental','meta'));
     }
     public function Add(Request $request){
-        return view('admin.fundamental.add');
+        $newMeta = null;
+        return view('admin.fundamental.add',compact('newMeta'));
     }
     public function AddProcess(Request $request){
         $data = $request->all();
@@ -65,6 +69,22 @@ class FundamentalController extends Controller
         $news->fill($data);
         $news->save();
 
+        // meta Tags save start
+            for ($i=0; $i < count($request->metaKeywords); $i++) {
+                $find = MetaKeywordsModel::where('name',$request->metaKeywords[$i])->first();
+                if($find == null){
+                    $key = new MetaKeywordsModel;
+                    $key->name = $request->metaKeywords[$i];
+                    $key->save();
+                }
+            }
+            $newMeta = new MetaTagsModel;
+            $newMeta->name_page = "Fundamental@" . $news->id;
+            $newMeta->description = $request->metaDescription;
+            $newMeta->title = $request->metaTitle;
+            $newMeta->keywordsimp = implode(",",$request->metaKeywords);
+            $newMeta->save();
+        // meta Tags save end
         $success = "This fundamental has been added successfully.";
         $request->session()->put("success",$success);
 
@@ -100,6 +120,26 @@ class FundamentalController extends Controller
         $success = "This fundamental has been Updated successfully.";
         $request->session()->put("success",$success);
 
+        // meta Tags save start
+            for ($i=0; $i < count($request->metaKeywords); $i++) {
+                $find = MetaKeywordsModel::where('name',$request->metaKeywords[$i])->first();
+                if($find == null){
+                    $key = new MetaKeywordsModel;
+                    $key->name = $request->metaKeywords[$i];
+                    $key->save();
+                }
+            }
+            $name_page = "Fundamental@" . $id;
+            $newMeta = MetaTagsModel::where('name_page',$name_page)->first();
+            if($newMeta == null){
+                $newMeta = new MetaTagsModel;
+            }
+            $newMeta->name_page = "Fundamental@" . $id;
+            $newMeta->description = $request->metaDescription;
+            $newMeta->title = $request->metaTitle;
+            $newMeta->keywordsimp = implode(",",$request->metaKeywords);
+            $newMeta->save();
+        // meta Tags save end
         // Pusher Notification Start
         $url = str_replace(" ", "-",$news->title);
         $adminData = $request->session()->get("admin");
@@ -117,8 +157,10 @@ class FundamentalController extends Controller
         return back();
     }
     public function Edit(Request $request, $id){
+        $name_page = "Fundamental@" . $id;
+        $newMeta = MetaTagsModel::where('name_page',$name_page)->first();
         $fundamental = FundamentalModel::find($id);
-        return view('admin.fundamental.add',compact('fundamental'));
+        return view('admin.fundamental.add',compact('fundamental','newMeta'));
     }
     public function Deactive(Request $request, $id){
         $Fundamental = FundamentalModel::find($id);
