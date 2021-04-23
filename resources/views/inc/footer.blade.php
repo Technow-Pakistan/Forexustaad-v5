@@ -1257,6 +1257,19 @@
 
     </script>
 @endif
+<style>
 
+    .jssocials-share-logo{
+        color: white;
+    }
+</style>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
+<script>
+    $("#shareLink").jsSocials({
+    showLabel: false,
+    showCount: false,
+    shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+});
+</script>
 </body>
 </html>
