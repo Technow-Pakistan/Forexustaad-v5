@@ -24,6 +24,7 @@
                                 <li><i class="fa fa-user"></i> Raheel Nawaz</li>
                                 <li><i class="fa fa-clock-o"></i> {{$BlogDetail->publishDate}}</li>
                                 <li>
+                                    <div id="shareLink"></div>
                 <!-- Go to www.addthis.com/dashboard to customize your tools -->
                 <!-- <div class="addthis_inline_share_toolbox_sv9g"></div> -->
                 <!-- <i class="fa fa-folder"></i> Forex Education -->

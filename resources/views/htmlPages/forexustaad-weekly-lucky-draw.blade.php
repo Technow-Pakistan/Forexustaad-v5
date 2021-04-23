@@ -22,7 +22,8 @@
                                                 <li><i class="fa fa-eye"></i> 4,276 Views</li>
                                             </ul>
                                         </div>
-                                        
+
+                                    <div id="shareLink"></div>
                                         <div>
                                             <div>
                                                 <iframe width="100%" height="315" src="https://www.youtube.com/embed/6v6i9Dqc3yM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -31,15 +32,15 @@
                                                 Forexustaad Lucky Draws promotion is going to be promoted by Mr Raheel Nawaz on 21/11/2016 as an incentive to encourage the local Forex traders to trade with XM.COM also to know about the only broker
                                             BIG . FAIR . HUMAN
                                             </p>
-                                            
+
                                             <p>
                                                 Therefore, Forexustaad is working as a partner with XM.COM with aims to increasing and educating traders with proper complete knowledge.
                                             </p>
-                                            
+
                                             <p>
                                                 To participate in the Lucky Draw, traders must fill up the following form with full details of themselves and their XM Trading Accounts. CLICK HERE
                                             </p>
-                                            
+
                                             <div class="text-center">
                                                 <img src="{{URL::to('/public/assets/assets/img/blog-post/raheel-nawaz-lucky-.jpg')}}" class="img-fluid ">
                                             </div>
@@ -122,7 +123,7 @@
                                                 </li>
                                             </ul>
                                             </div>
-                                            
+
                                             <h5 class="text-center">
                                                 Going to announce 1st winner of Forexustaad lucky draw</h5>
                                             <div class="text-center">
@@ -140,19 +141,19 @@
                                             <div class="mt-3 text-center">
                                                 <iframe width="576" height="315" src="https://www.youtube.com/embed/vOWW2n8G35M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                 </div>
-                               
-               
+
+
                 <div class="col-lg-3 col-md-6 col-sm-12 order-3 order-lg-3">
                     @include('inc.home-right-sidebar')
                 </div>
             </div>
         </div>
     </section>
-     
+
 <!--     <div id="particles-js" style="height: 0;"></div> -->
 </div>
 
