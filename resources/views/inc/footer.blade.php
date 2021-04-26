@@ -1268,7 +1268,7 @@
     $("#shareLink").jsSocials({
     showLabel: false,
     showCount: false,
-    shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+    shares: ["twitter", "facebook", "whatsapp"]
 });
 </script>
 </body>
