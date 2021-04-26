@@ -72,7 +72,8 @@ class SignalController extends Controller
             $signalApiKey = SignalApiKeyModel::where('id',1)->first();
             if($go3 == 3){
                 if ($signalApiData) {
-                    if ($signalApiData->result != "SL Hit" || $signalApiData->result != "TP Hit") {
+                    if ($signalApiData->result == null) {
+                   
                         $time = $signalApiData->lastUpdate;
                         $date1 = strtotime($time);
                         $date = date("Y-m-d h:i:s");
@@ -115,9 +116,9 @@ class SignalController extends Controller
                                                     }
                                                     if ($TakeProfit == "Finel") {
                                                         $pips1 = $Profits[$i];
-                                                        // $signalData['date'] = date("Y-m-d");
-                                                        // $signalData['time'] = date("H:i");
-                                                        // $signalData->save();
+                                                        $signalData['date'] = date("Y-m-d");
+                                                        $signalData['time'] = date("H:i");
+                                                        $signalData->save();
                                                     }
                                                 }
                                             }
@@ -131,9 +132,9 @@ class SignalController extends Controller
                                             }
                                         }elseif($stopLose >= $pips){
                                             $apiData['result'] = "SL Hit";
-                                            // $signalData['date'] = date("Y-m-d");
-                                            // $signalData['time'] = date("H:i");
-                                            // $signalData->save();
+                                            $signalData['date'] = date("Y-m-d");
+                                            $signalData['time'] = date("H:i");
+                                            $signalData->save();
                                             $pips1 = $stopLose;
                                         }
                                         if ($signalPair->categoryId == 1 && $signalPair->categoryId == 2) {
@@ -165,9 +166,9 @@ class SignalController extends Controller
                                                     }
                                                     if ($TakeProfit == "Finel") {
                                                         $pips1 = $Profits[$i];
-                                                        // $signalData['date'] = date("Y-m-d");
-                                                        // $signalData['time'] = date("H:i");
-                                                        // $signalData->save();
+                                                        $signalData['date'] = date("Y-m-d");
+                                                        $signalData['time'] = date("H:i");
+                                                        $signalData->save();
                                                     }
                                                 }
                                             }
@@ -181,9 +182,9 @@ class SignalController extends Controller
                                             }
                                         }elseif($stopLose <= $pips){
                                             $apiData['result'] = "SL Hit";
-                                            // $signalData['date'] = date("Y-m-d");
-                                            // $signalData['time'] = date("H:i");
-                                            // $signalData->save();
+                                            $signalData['date'] = date("Y-m-d");
+                                            $signalData['time'] = date("H:i");
+                                            $signalData->save();
                                             $pips1 = $stopLose;
                                         }
                                         if ($signalPair->categoryId == 1 && $signalPair->categoryId == 2) {

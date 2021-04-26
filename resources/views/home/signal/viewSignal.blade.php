@@ -78,6 +78,7 @@
                                             (<span class="totalDisliked text-danger">{{count($TotalDislikes)}}</span>)
                                             <span class="likeForm disLikeForm1 {{!Session::has('client') ? "LoginButton" : ''}} {{$clientLikeshow == 1 ? ($clientLike->liked == 0 ? 'text-danger' :'') : ''  }}" text="{{$clientLikeshow == 1 ? ($clientLike->liked == 0 ? 'text-danger' :'') : ''  }}" value="0" {{!Session::has('client') ? "data-toggle=modal data-target=#requestQuoteModal" : ''}}><i class="fa fa-thumbs-up" style="transform: rotate(174deg);"></i></span>
                                         </div>
+                                        <div id="shareLink"></div>
                                       </div>
                                     </div>
                                   </div>

@@ -20,6 +20,7 @@
                                                 <li><i class="fa fa-folder"></i> Jobs scams, Scams</li>
                                                 <li><i class="fa fa-comments"></i> 10 Comments </li>
                                                 <li><i class="fa fa-eye"></i> 4,276 Views</li>
+                                                <li><div id="shareLink"></div></li>
                                             </ul>
                                         </div>
                                         
