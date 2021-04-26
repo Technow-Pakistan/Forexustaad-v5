@@ -19,6 +19,7 @@
                                                 <li><i class="fa fa-folder"></i> Forex Education</li>
                                                 <li><i class="fa fa-comments"></i> 8 Comments </li>
                                                 <li><i class="fa fa-eye"></i> 4,106 Views</li>
+                                                <li><div id="shareLink"></div></li>
                                             </ul>
                                         </div>
                                         
