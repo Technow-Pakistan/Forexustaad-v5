@@ -41,6 +41,7 @@
         <title>{{$meta->title}}</title>
         <meta name="description" content="{{$meta->description}}">
         <meta name="Keywords" content="{{$meta->keywordsimp}}">
+        <meta property="og:image"  content="{{URL::to('/storage/app')}}/{{$meta->image}}" />
     @else
         <title>Forex Ustaad:Free Forex Training In Urdu/Hindi | Forexustaad</title>
         <meta name="description" content="Forexustaad is the best platforms for learning free forex trading in urdu/hindi. So, join our free forex training now and reshape your future with us.">

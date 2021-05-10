@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class MetaTagsModel extends Model
 {
     protected $table = "meta_tags";
-    protected $fillable = ["title","description","keywordsimp","name_page"];
+    protected $fillable = ["title","description","image","keywordsimp","name_page"];
 }

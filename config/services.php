@@ -38,4 +38,14 @@ return [
         'app_id' => env('ONESIGNAL_APP_ID'),
         'rest_api_key' => env('ONESIGNAL_REST_API_KEY')
     ],
+    'facebook' => [
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect' => 'http://localhost/forexustaad/login/facebook/callback',
+    ],
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => 'http://localhost/forexustaad/login/google/callback',
+    ],
 ];

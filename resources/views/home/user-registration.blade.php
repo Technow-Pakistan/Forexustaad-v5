@@ -19,7 +19,7 @@
                         @php Session::pull('error') @endphp
                     </div>
                 @endisset
-    
+
                 <div class="col-lg-9 col-md-12 order-1 order-lg-2 justify-content-center d-flex">
 
                     <div class="user-ragistration">
@@ -75,7 +75,7 @@
                                                                 <div class="col-md-4">
                                                                     <div class="form-group">
                                                                         <select name="" id="sel1" class="form-control">
-                                                                            @php 
+                                                                            @php
                                                                                 $cityId = $clientValue['cityId'];
                                                                                 if($cityId != null){
                                                                                     $citiesInfo = App\Models\AllCitiesModel::find($cityId);
@@ -90,7 +90,7 @@
                                                                                         if($country->id == $citiesInfo->country_id){
                                                                                             $selected1 = 1;
                                                                                         }
-                                                                                    }  
+                                                                                    }
                                                                                 @endphp
                                                                                 <option value="{{$country->id}}" {{$selected1 == 1 ? 'selected' : ''}}>{{$country->name}}</option>
                                                                             @endforeach
@@ -108,7 +108,7 @@
                                                                                             if($state->id == $citiesInfo->state_id){
                                                                                                 $selected2 = 1;
                                                                                             }
-                                                                                        }  
+                                                                                        }
                                                                                     @endphp
                                                                                     <option value="{{$state->id}}" {{$selected2 == 1 ? 'selected' : ''}}>{{$state->name}}</option>
                                                                                 @endforeach
@@ -127,7 +127,7 @@
                                                                                             if($city->id == $citiesInfo->id){
                                                                                                 $selected3 = 1;
                                                                                             }
-                                                                                        }  
+                                                                                        }
                                                                                     @endphp
                                                                                     <option value="{{$city->id}}" {{$selected3 == 1 ? 'selected' : ''}}>{{$city->name}}</option>
                                                                                 @endforeach
@@ -146,7 +146,7 @@
                                                                             $socailLinks = explode('@#',$clientValue['socialLink']);
                                                                         @endphp
                                                                         <!-- Enter the estimate profit -->
-                                                                            <input type="text" name="mobile" value="{{$clientValue['mobile']}}" placeholder="Enter Your Number" required="" disabled class="form-control">
+                                                                            <input type="text" name="mobile" value="{{$clientValue['mobile']}}" placeholder="Enter Your Number" required="" {{$clientValue['mobile'] == null ? '' : 'disabled'}} class="form-control">
                                                                         @for($i=0; $i < count($mobiles); $i++)
                                                                             <div class="dynamic-field1" id="dynamic-field-{{$i+50}}">
                                                                                 <label class="d-none"></label>
@@ -271,7 +271,7 @@
                                                                                     <label class="d-none"></label>
                                                                                     <div class="row">
                                                                                         <div class="col-sm-6 pb-3">
-                                                                                            <input type="hidden" class="form-control" name="verified[]" value="{{$accountInfo->verified}}"/> 
+                                                                                            <input type="hidden" class="form-control" name="verified[]" value="{{$accountInfo->verified}}"/>
                                                                                             <select class="custom-select" name="brokerId[]"{{$accountInfo->verified == 1 ? 'disabled' : ''}}>
                                                                                                 @foreach($allBroker as $broker)
                                                                                                     <option value="{{$broker->id}}" {{$broker->id == $accountInfo->brokerId ? 'selected' : ''}}>{{$broker->title}}</option>
@@ -315,8 +315,8 @@
                                                                                                     <input type="number" class="form-control" name="accountdeposit[]" value="{{$accountInfo->accountdeposit}}" placeholder="Deposit" required/>
                                                                                                 @else
                                                                                                     <div class="d-flex justifly-content-end">
-                                                                                                        <input type="hidden" class="form-control alreadyDeposit{{$addAccount}}" name="accountdeposit[]" value="{{$accountInfo->accountdeposit}}" placeholder="Deposit"/> 
-                                                                                                        <input type="number" class="form-control" name="" value="{{$accountInfo->accountdeposit}}" placeholder="Deposit" disabled/> 
+                                                                                                        <input type="hidden" class="form-control alreadyDeposit{{$addAccount}}" name="accountdeposit[]" value="{{$accountInfo->accountdeposit}}" placeholder="Deposit"/>
+                                                                                                        <input type="number" class="form-control" name="" value="{{$accountInfo->accountdeposit}}" placeholder="Deposit" disabled/>
                                                                                                         <span class="m-2">+</span>
                                                                                                         <input type="number" class="form-control newDeposit{{$addAccount}}">
                                                                                                     </div>
@@ -333,7 +333,7 @@
                                                                                 <label class="d-none"></label>
                                                                                 <div class="row ">
                                                                                     <div class="col-sm-6 pb-3">
-                                                                                            <input type="hidden" class="form-control" name="verified[]" value="0"/> 
+                                                                                            <input type="hidden" class="form-control" name="verified[]" value="0"/>
                                                                                         <select class="custom-select" name="brokerId[]">
                                                                                             @foreach($allBroker as $broker)
                                                                                                 <option value="{{$broker->id}}">{{$broker->title}}</option>
@@ -460,7 +460,7 @@
             }
         });
     });
-    
+
       $(document).ready(function() {
         var buttonAdd = $("#add-button");
         var buttonRemove = $("#remove-button");

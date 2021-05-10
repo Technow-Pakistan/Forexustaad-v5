@@ -20,6 +20,14 @@ class MetaTagsController extends Controller
     }
     public function EditProcess(Request $request,$id) {
         $data1 = $request->all();
+        if ($request->file("image") != null) {
+            $path = $request->file("image")->store("WebImages");
+            $data1['image'] = $path;
+        }
+        if ($request->file("image") != null) {
+            $path = $request->file("image")->store("WebImages");
+            $data2['image'] = $path;
+        }
         for ($i=0; $i < count($request->metaKeywords); $i++) {
             $find = MetaKeywordsModel::where('name',$request->metaKeywords[$i])->first();
             if($find == null){

@@ -43,6 +43,7 @@ use App\Models\MetaTagsModel;
 
 class HomeController extends Controller
 {
+
     public function Index(){
         $meta = MetaTagsModel::where('name_page','Home')->first();
         $LatestFundamental = FundamentalModel::orderBy('id','desc')->where('status',1)->skip(0)->take(4)->get();
@@ -151,7 +152,9 @@ class HomeController extends Controller
     }
     public function privacyPolicy(){
         $data = OtherPagesContentModel::where('contentPage','privacyPolice')->first();
-        return view('home/other-pages-content',compact('data'));
+        $name_page = "StaticPages@" . $data->id;
+        $meta = MetaTagsModel::where('name_page',$name_page)->first();
+        return view('home/other-pages-content',compact('data','meta'));
     }
     public function AboutPage(){
         $meta = MetaTagsModel::where('name_page','About')->first();
@@ -193,7 +196,9 @@ class HomeController extends Controller
     }
     public function termServices(){
         $data = OtherPagesContentModel::where('contentPage','TOS')->first();
-        return view('home/other-pages-content',compact('data'));
+        $name_page = "StaticPages@" . $data->id;
+        $meta = MetaTagsModel::where('name_page',$name_page)->first();
+        return view('home/other-pages-content',compact('data','meta'));
     }
     public function RegistrationProcess(Request $request){
         if(!isset($request->cityId) || $request->cityId == null){
