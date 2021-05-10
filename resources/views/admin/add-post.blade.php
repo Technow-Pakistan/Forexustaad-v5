@@ -87,14 +87,20 @@
 				</div>
 				<!-- [ breadcrumb ] end -->
 				<!-- [ Main Content ] start -->
-                
+
                 <form id="SaveButton" method="post" action="{{URL::to('ustaad/post/all')}}" class="PostFormSubmit"  enctype="multipart/form-data">
-                
+
 										<div class="d-flex justify-content-between">
 											<label for="">Title</label>
 											<p class="text-right text-danger m-0 titleCount"></p>
 										</div>
 										<input type="text" class="form-control titleCountFlied" maxlength="580" name="metaTitle" value="{{$newMeta != null ? $newMeta->title : ''}}">
+                                        <div class="form-group">
+                                            <label for="">
+                                                Image
+                                            </label>
+                                            <input type="file" class="form-control" name="image">
+                                        </div>
 										<div class="d-flex justify-content-between">
 											<label for="">Description</label>
 											<p class="text-right text-danger m-0 descriptionCount1"></p>
@@ -132,7 +138,7 @@
                      <input name="subTitle" class="form-control " id="sub-title" type="text" value="" size="40" aria-required="true" required="">
                      <small>This is subtitle is how it appears on your Forex News Page.</small>
                   </div> -->
-                  @php 
+                  @php
                      $value =Session::get('admin');
                   @endphp
                   <input type="hidden" name="userId" value="{{$value['id']}}">
@@ -288,7 +294,7 @@
                                        <option value="None" selected>None</option>
                                     @endif
                                     @foreach($allMainCategory as $mainCategory)
-                                       <option value="{{$mainCategory->categoryName}}">{{$mainCategory->categoryName}}</option>                                       
+                                       <option value="{{$mainCategory->categoryName}}">{{$mainCategory->categoryName}}</option>
                                     @endforeach
                                  </select>
                                  <!-- <input type="text" class="form-control"> -->
@@ -318,7 +324,7 @@
                            <label for="">Add Tags</label>
                            <div class=" ">
                               <select class="js-example-tokenizer col-sm-12" name="tag[]" multiple="multiple" required>
-                                @foreach($allTags as $tag)   
+                                @foreach($allTags as $tag)
                                     <option value="{{$tag->tagName}}">{{$tag->tagName}}</option>
                                 @endforeach
                               </select>
@@ -405,7 +411,7 @@
 		</section>
 		<!-- [ Main Content ] end -->
 
-       
+
 <style>
    #showmenu{
       cursor: pointer;
@@ -444,7 +450,7 @@
         $('#showmenu').click(function() {
                 $('.menu').slideToggle("fast");
         });
-    }); 
+    });
     var link = $(".permalink").html();
     $(".mainTitle").on("change",function(){
         console.log("asd");
@@ -470,7 +476,7 @@
             }else{
                 var className = "." + selectedIndex;
                 var asd = $(".ulcat").find(className).append("<ul style='list-style-type:none'><li class='"+input+"'><input type='checkbox' name='subCategory[]' value="+input+"@"+selectedIndex+"> "+input+"</li></ul>");
-               
+
                 var oldSub = $(".newSubCategory").val();
                 var newSubCat =  oldSub + "," + input + "@" + selectedIndex;
                 $(".newSubCategory").val(newSubCat);
@@ -497,10 +503,10 @@
     // file src get
    $(document).ready(function() {
       $('#srcImage').change(function(){
-        var file_data = $('#srcImage').prop('files')[0]; 
-        var file_path = $('#filePath').val();   
-        var form_data = new FormData();                  
-        form_data.append('file', file_data);             
+        var file_data = $('#srcImage').prop('files')[0];
+        var file_path = $('#filePath').val();
+        var form_data = new FormData();
+        form_data.append('file', file_data);
         form_data.append('filePath', file_path);
         $.ajax({
             url: "{{URL::to('/pro-img-disk.php')}}",

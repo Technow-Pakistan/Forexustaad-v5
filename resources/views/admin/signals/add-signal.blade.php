@@ -27,12 +27,18 @@
 				<!-- [ Main Content ] start -->
                 <div class="card">
                     <div class="card-body">
-                        <form action="" method="post">
+                        <form action="" method="post"  enctype="multipart/form-data">
                             <div class="d-flex justify-content-between">
                                 <label for="">Title</label>
                                 <p class="text-right text-danger m-0 titleCount"></p>
                             </div>
                             <input type="text" class="form-control titleCountFlied" maxlength="580" name="metaTitle" value="">
+                            <div class="form-group">
+                                <label for="">
+                                    Image
+                                </label>
+                                <input type="file" class="form-control" name="image">
+                            </div>
                             <div class="d-flex justify-content-between">
                                 <label for="">Description</label>
                                 <p class="text-right text-danger m-0 descriptionCount"></p>
@@ -170,6 +176,12 @@
                                     <div class="form-group">
                                         <label>Enter Image and Article</label>
                                         <textarea class="form-control" name="editor1"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Star</label>
+                                        <input type="checkbox" name="star" id="" value="1">
                                     </div>
                                 </div>
                             </div>

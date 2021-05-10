@@ -79,6 +79,10 @@ class FundamentalController extends Controller
                 }
             }
             $newMeta = new MetaTagsModel;
+            if ($request->file("image") != null) {
+                $path = $request->file("image")->store("WebImages");
+                $newMeta->image = $path;
+            }
             $newMeta->name_page = "Fundamental@" . $news->id;
             $newMeta->description = $request->metaDescription;
             $newMeta->title = $request->metaTitle;

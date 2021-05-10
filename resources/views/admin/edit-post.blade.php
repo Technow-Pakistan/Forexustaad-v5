@@ -87,14 +87,24 @@
 				</div>
 				<!-- [ breadcrumb ] end -->
 				<!-- [ Main Content ] start -->
-                
+
                 <form id="" method="post" action="{{URL::to('ustaad/post/edit')}}/{{$id}}" class="PostFormSubmit"  enctype="multipart/form-data">
-                
+
 										<div class="d-flex justify-content-between">
 											<label for="">Title</label>
 											<p class="text-right text-danger m-0 titleCount"></p>
 										</div>
 										<input type="text" class="form-control titleCountFlied" maxlength="580" name="metaTitle" value="{{$newMeta != null ? $newMeta->title : ''}}">
+                                        <div class="form-group">
+                                            <label for="">
+                                                @if ($newMeta == null || $newMeta->image == null)
+                                                    Image
+                                                @else
+                                                    <img src="{{URL::to('storage/app')}}/{{$newMeta->image}}" alt="" width="100px" height="100px">
+                                                @endif
+                                            </label>
+                                            <input type="file" class="form-control" name="image">
+                                        </div>
 										<div class="d-flex justify-content-between">
 											<label for="">Description</label>
 											<p class="text-right text-danger m-0 descriptionCount1"></p>
@@ -132,7 +142,7 @@
                      <input name="subTitle" class="form-control " id="sub-title" type="text" value="{{$blogPostData->subTitle}}" size="40" aria-required="true" required="">
                      <small>This is subtitle is how it appears on your Forex News Page.</small>
                   </div> -->
-                  @php 
+                  @php
                      $value =Session::get('admin');
                   @endphp
                   <input type="hidden" name="userId" value="{{$value['id']}}">
@@ -181,7 +191,7 @@
                            <div class="form-group">
                               <span>Visibility</span>
                               <span>
-                                 <select class="js-example-basic-hide-search col-sm-12 visibility" name="visibility[]" value="hello" multiple="multiple" style="width: 75%" required>                                 
+                                 <select class="js-example-basic-hide-search col-sm-12 visibility" name="visibility[]" value="hello" multiple="multiple" style="width: 75%" required>
                                     @php $selectedAll = 0; @endphp
                                     @for($i = 0; $i< count($visibilityPostData); $i++)
                                        @if($visibilityPostData[$i]->visibility == 0)
@@ -318,7 +328,7 @@
                                        <option value="None" selected>None</option>
                                     @endif
                                     @foreach($allMainCategory as $mainCategory)
-                                       <option value="{{$mainCategory->categoryName}}">{{$mainCategory->categoryName}}</option>                                       
+                                       <option value="{{$mainCategory->categoryName}}">{{$mainCategory->categoryName}}</option>
                                     @endforeach
                                  </select>
                                  <!-- <input type="text" class="form-control"> -->
@@ -443,7 +453,7 @@
 		</section>
 		<!-- [ Main Content ] end -->
 
-   
+
 <style>
    #showmenu{
       cursor: pointer;
@@ -451,7 +461,7 @@
    #submit{
       cursor: pointer;
    }
-</style>       
+</style>
 
 @include('admin.include.footer')
 <script src="{{URL::to('/public/AdminAssets/assets/js/plugins/moment.min.js')}}"></script>
@@ -557,7 +567,7 @@
         $('#showmenu').click(function() {
                 $('.menu').slideToggle("fast");
         });
-    }); 
+    });
 
 
     $(".newCategoryRegister").on("click",function(){
@@ -575,7 +585,7 @@
             }else{
                 var className = "." + selectedIndex;
                 var asd = $(".ulcat").find(className).append("<ul style='list-style-type:none'><li class='"+input+"'><input type='checkbox' name='subCategory[]' value="+input+"@"+selectedIndex+"  class='dataSubCategory'> "+input+"</li></ul>");
-               
+
                 var oldSub = $(".newSubCategory").val();
                 var newSubCat =  oldSub + "," + input + "@" + selectedIndex;
                 $(".newSubCategory").val(newSubCat);
@@ -584,7 +594,7 @@
         }
     })
     $(".visibility").find(".select2-selection__rendered").append("<li class='select2-selection__choice' title='Subscribers'><span class='select2-selection__choice__remove' role='presentation'>×</span>Subscribers</li>")
-    
+
     // description Limit
        var count = $(".description").val();
        var len = count.length;
@@ -609,9 +619,9 @@
     $(document).ready(function() {
     $("#cke_248_label").attr("id",'cke_195_fileInput_input2');
     $('#srcImage').change(function(){
-        var file_data = $('#srcImage').prop('files')[0];   
-        var form_data = new FormData();                  
-        form_data.append('file', file_data);       
+        var file_data = $('#srcImage').prop('files')[0];
+        var form_data = new FormData();
+        form_data.append('file', file_data);
         form_data.append('filePath', file_path);
         $.ajax({
             url: "{{URL::to('/pro-img-disk.php')}}",

@@ -37,7 +37,7 @@
                                         <li class="nav-item" class="active"><a class="nav-link active" href="#forex" data-toggle="tab"
                                                 role="tab" aria-controls="forex" aria-selected="false">Forex</a></li>
                                         <li class="nav-item"><a class="nav-link" role="tab" aria-controls="stocks"
-                                                aria-selected="false" href="#stocks" data-toggle="tab">Stocks</a></li>
+                                                aria-selected="false" href="#stocks" data-toggle="tab">Commodities</a></li>
                                     </ul>
                                 </div>
                                 <div class="container">
@@ -405,7 +405,7 @@
                                         <li class="nav-item" class="active"><a class="nav-link active" href="#forex1" data-toggle="tab"
                                                 role="tab" aria-controls="forex" aria-selected="false">Forex</a></li>
                                         <li class="nav-item"><a class="nav-link" role="tab" aria-controls="stocks"
-                                                aria-selected="false" href="#stocks1" data-toggle="tab">Stocks</a></li>
+                                                aria-selected="false" href="#stocks1" data-toggle="tab">Commodities</a></li>
                                     </ul>
                                 </div>
                                 <div class="container">

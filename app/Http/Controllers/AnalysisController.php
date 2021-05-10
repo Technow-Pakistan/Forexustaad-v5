@@ -39,7 +39,8 @@ class AnalysisController extends Controller
         return view('admin.analysis.all',compact('Analysis'));
     }
     public function Add(Request $request){
-        return view('admin.analysis.add');
+        $newMeta = null;
+        return view('admin.analysis.add',compact('newMeta'));
     }
     public function AddProcess(Request $request){
         $data = $request->all();
@@ -64,6 +65,10 @@ class AnalysisController extends Controller
                 }
             }
             $newMeta = new MetaTagsModel;
+            if ($request->file("image") != null) {
+                $path = $request->file("image")->store("WebImages");
+                $newMeta->image = $path;
+            }
             $newMeta->name_page = "Analysis@" . $news->id;
             $newMeta->description = $request->metaDescription;
             $newMeta->title = $request->metaTitle;
@@ -118,6 +123,10 @@ class AnalysisController extends Controller
             $newMeta = MetaTagsModel::where('name_page',$name_page)->first();
             if($newMeta == null){
                 $newMeta = new MetaTagsModel;
+            }
+            if ($request->file("image") != null) {
+                $path = $request->file("image")->store("WebImages");
+                $newMeta->image = $path;
             }
             $newMeta->name_page = "Analysis@" . $id;
             $newMeta->description = $request->metaDescription;

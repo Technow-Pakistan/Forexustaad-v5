@@ -165,7 +165,7 @@
                                                 <div class="col-sm-4">
                                                     <h6 class="mb-0">Result</h6>
                                                 </div>
-                                                <div class="col-sm-8 {{$signalData->result == 'TP Hit' ? 'text-success' : ''}}{{$signalData->result == 'SL Hit' ? 'text-danger' : ''}} fontBold">
+                                                <div class="col-sm-8 {{$signalData->result == 'TP Hit' ? 'text-success' : ''}}{{strpos($signalData->result,'TP Hit') != null ? 'text-success' : ''}}{{$signalData->result == 'SL Hit' ? 'text-danger' : ''}} fontBold">
                                                     {{$signalData->result == null ? 'none' : $signalData->result}}
                                                 </div>
                                             </div>

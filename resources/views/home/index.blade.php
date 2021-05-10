@@ -91,18 +91,21 @@
         </div>
     </div>
     <!-- ticker rates add-->
-    <div class="ticker">
-        <div class="list-wrpaaer">
-            <ul id="marquee-horizontal">
-                <li class="list-ite">
-                    @php
-                        echo $MainHomeApi->link
-                    @endphp
-                </li>
+    @if ($MainHomeApi != null)
 
-            </ul>
+        <div class="ticker">
+            <div class="list-wrpaaer">
+                <ul id="marquee-horizontal">
+                    <li class="list-ite">
+                        @php
+                            echo $MainHomeApi->link
+                        @endphp
+                    </li>
+
+                </ul>
+            </div>
         </div>
-    </div>
+    @endif
     <!-- /.End of tricker -->
     <section class="after_banner_content_area">
         <div class="container">

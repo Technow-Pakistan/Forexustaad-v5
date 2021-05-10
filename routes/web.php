@@ -63,6 +63,35 @@ use App\Models\SignalsModel;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Auth::routes();
+
+// Facebook login
+Route::get('login/facebook', [App\Http\Controllers\Auth\LoginController::class, 'redirectToFacebook'])->name('login.facebook');
+Route::get('login/facebook/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleFacebookCallback']);
+// -----------------------------forget password ------------------------------
+Route::get('forget-password', 'App\Http\Controllers\Auth\ForgotPasswordController@getEmail')->name('forget-password');
+Route::post('forget-password', 'App\Http\Controllers\Auth\ForgotPasswordController@postEmail')->name('forget-password');
+
+Route::get('reset-password/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@getPassword');
+Route::post('reset-password', 'App\Http\Controllers\Auth\ResetPasswordController@updatePassword');
+
+
+// Google login
+Route::get('login/google', [App\Http\Controllers\Auth\LoginController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('login/google/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleGoogleCallback']);
+// -----------------------------forget password ------------------------------
+Route::get('forget-password', 'App\Http\Controllers\Auth\ForgotPasswordController@getEmail')->name('forget-password');
+Route::post('forget-password', 'App\Http\Controllers\Auth\ForgotPasswordController@postEmail')->name('forget-password');
+
+Route::get('reset-password/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@getPassword');
+Route::post('reset-password', 'App\Http\Controllers\Auth\ResetPasswordController@updatePassword');
+
+
+
+
+// Pusher Routes
 Route::get('/successData3', [MidBannerController::class, 'getPosts']);
 Route::match(['get', 'post'], '/publish',[MidBannerController::class, 'savePost']);
 Route::get('/channel/{message}/{message2}',[AdminController::class,'GetPusherName']);
@@ -709,3 +738,4 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::get("/brokerReserchEducation/allow/{id}",[BrokerBottomInformationController::class,'BrokerReserchEducationAllow']);
     Route::get("/brokerformPromotion/allow/{id}",[BrokerBottomInformationController::class,'BrokerformPromotionAllow']);
 });
+
