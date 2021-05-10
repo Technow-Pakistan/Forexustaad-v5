@@ -73,7 +73,7 @@ class SignalController extends Controller
             if($go3 == 3){
                 if ($signalApiData) {
                     if ($signalApiData->result == null) {
-                   
+
                         $time = $signalApiData->lastUpdate;
                         $date1 = strtotime($time);
                         $date = date("Y-m-d h:i:s");
@@ -137,7 +137,14 @@ class SignalController extends Controller
                                             $signalData->save();
                                             $pips1 = $stopLose;
                                         }
-                                        if ($signalPair->categoryId == 1 && $signalPair->categoryId == 2) {
+                                        if ($signalPair->categoryId == 1) {
+                                            $decimal = strlen(substr(strrchr($pips1, "."), 1));
+                                            if($decimal > 4){
+                                                $pips1 = $pips1 * 10000;
+                                            }else{
+                                                $pips1 = $pips1 * 100;
+                                            }
+                                        }elseif ($signalPair->categoryId == 2) {
                                             $pips1 = $pips1 * 10000;
                                         }else{
                                             $pips1 = $pips1 * 100;
@@ -145,7 +152,7 @@ class SignalController extends Controller
                                         $apiData['pips'] = number_format((float)$pips1, 1, '.', '');
                                     }else{
                                         // pips Configration
-                                        $pips1 = $forexApiData[0]->c - $signalData->price;
+                                        $pips1 = $signalData->price - $forexApiData[0]->c;
                                         // Result Configration
                                         $Profits = explode('@',$signalData->takeProfit);
                                         $profit = array_shift($Profits);
@@ -187,7 +194,14 @@ class SignalController extends Controller
                                             $signalData->save();
                                             $pips1 = $stopLose;
                                         }
-                                        if ($signalPair->categoryId == 1 && $signalPair->categoryId == 2) {
+                                        if ($signalPair->categoryId == 1) {
+                                            $decimal = strlen(substr(strrchr($pips1, "."), 1));
+                                            if($decimal > 4){
+                                                $pips1 = $pips1 * 10000;
+                                            }else{
+                                                $pips1 = $pips1 * 100;
+                                            }
+                                        }elseif ($signalPair->categoryId == 2) {
                                             $pips1 = $pips1 * 10000;
                                         }else{
                                             $pips1 = $pips1 * 100;
@@ -380,7 +394,7 @@ class SignalController extends Controller
         //     $data44 = [
         //         'title' => $signalPair->pair,
         //         'message' => "Forexustaad Added A New Signal.",
-        //         'url' => "https://forexustaad.com/signal",
+        //         'url' => "https://forexustaad.com/signal" ."/" . $getUrl,
         //     ];
         //     $request->session()->put('desktopNotification',$data44);
 
@@ -456,6 +470,10 @@ class SignalController extends Controller
                 }
             }
             $newMeta = new MetaTagsModel;
+            if ($request->file("image") != null) {
+                $path = $request->file("image")->store("WebImages");
+                $newMeta->image = $path;
+            }
             $newMeta->name_page = "signal@" . $signal->id;
             $newMeta->description = $request->metaDescription;
             $newMeta->title = $request->metaTitle;
@@ -480,7 +498,7 @@ class SignalController extends Controller
         //     $data44 = [
         //         'title' => $signalPair->pair,
         //         'message' => "Forexustaad Added A New Signal.",
-        //         'url' => "https://forexustaad.com/signal" . $getUrl,
+        //         'url' => "https://forexustaad.com/signal" ."/" . $getUrl,
         //     ];
         //     $request->session()->put('desktopNotification',$data44);
         // }
@@ -646,6 +664,10 @@ class SignalController extends Controller
             $newMeta = MetaTagsModel::where('name_page',$name_page)->first();
             if($newMeta == null){
                 $newMeta = new MetaTagsModel;
+            }
+            if ($request->file("image") != null) {
+                $path = $request->file("image")->store("WebImages");
+                $newMeta->image = $path;
             }
             $newMeta->name_page = "signal@" . $id;
             $newMeta->description = $request->metaDescription;

@@ -7112,6 +7112,8 @@ button.bg-dark:focus {
 
 .rounded-circle {
     border-radius: 50% !important;
+    width: 50px !important;
+    height: 50px !important;
 }
 
 .rounded-pill {
@@ -18649,7 +18651,9 @@ strong {
 }
 
 .img-radius {
-    border-radius: 50%;
+    border-radius: 50% !important;
+    width: 50px !important;
+    height: 50px !important;
 }
 
 .page-header {

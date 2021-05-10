@@ -1,4 +1,4 @@
-<section class="explore_services mb-5">
+<section class="explore_services">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -6,11 +6,11 @@
                         @include ('inc/counter')
                     </div>
                 </div>
-                
+
                 <!-- <div class="col-sm-12">
                     <div class="service_us">
                         <div class="content_area_heading large-heading ">
-                            
+
                             <p class="h1 heading_title wow animated fadeInUp">
                                 Our Process
                             </p>
@@ -24,7 +24,7 @@
                     <div class="services_circle_box text-center">
                         <div class="circle_module_circuit_services fadeInUp wow animated circle_services">
                             <div class="services_wrapper">
-                
+
                                 <?php
                                     $services = [
                                         ['id' => '1', 'left_margin' => '53.7283%', 'top_margin' => '2.00887%', 'icon_1' => 'services_icon-grad1 fa fa-search', 'icon_2' => 'services_icon-grad2 fa fa-search', 'tagline_title' => 'Choose Your Wallet'],
@@ -44,7 +44,7 @@
                                                             <div class="services_item-content">
                                                                 <div class="services_subtitle"></div>
                                                                 <h3 class="services_title">'.$value['tagline_title'].'</h3>
-                                                                
+
                                                             </div>
                                                         </div>
                                                                     ';
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                 </div>  -->
-                
+
             </div>
         </div>
     </section>
@@ -65,7 +65,7 @@
 <!-- <section class="analysis">
     <div class="container">
         <div class="content_area_heading large-heading">
-        
+
             <p class="h1 heading_title wow animated fadeInUp">
               Upcoming Webinars
             </p>
@@ -105,7 +105,7 @@ foreach ($analysis as $analysiss_val => $value) {
     echo ($opinion_analysis);
 
 ?>
-            
+
 
         </div>
     </div>
@@ -123,11 +123,11 @@ foreach ($analysis as $analysiss_val => $value) {
                     <div class="mb-4">
                         @php
                             echo $TopApi->link
-                        @endphp  
-                    </div> 
+                        @endphp
+                    </div>
                 @endif
             @endforeach
-            
+
             <!-- Banner Top Left -->
             @foreach($AllLeftBanner as $TopBanner)
                 @if($TopBanner->area == "Top")
@@ -146,7 +146,7 @@ foreach ($analysis as $analysiss_val => $value) {
                     @endif
                 @endif
             @endforeach
-            
+
             <!-- Banner Center Left -->
             @foreach($AllLeftBanner as $CenterBanner)
                 @if($CenterBanner->area == "Center")
@@ -163,7 +163,7 @@ foreach ($analysis as $analysiss_val => $value) {
                     @endif
                 @endif
             @endforeach
-            
+
             <!-- Api Center Left -->
             @foreach($AllLeftApi as $CenterApi)
                 @if($CenterApi->area == "Center")
@@ -171,7 +171,7 @@ foreach ($analysis as $analysiss_val => $value) {
                         @php
                             echo $CenterApi->link
                         @endphp
-                    </div>   
+                    </div>
                 @endif
             @endforeach
 
@@ -191,14 +191,14 @@ foreach ($analysis as $analysiss_val => $value) {
                     @endif
                 @endif
             @endforeach
-            
+
             <!-- Api Bottom Left -->
             @foreach($AllLeftApi as $BottomApi)
                 @if($BottomApi->area == "Bottom")
                     <div class="mb-4">
                         @php
                             echo $BottomApi->link
-                        @endphp   
+                        @endphp
                     </div>
                 @endif
             @endforeach

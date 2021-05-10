@@ -28,7 +28,7 @@
 						<div class="card">
 							<div class="card-header">Meta Tags</div>
 							<div class="card-body">
-                                <form action="" method="post">
+                                <form action="" method="post" enctype="multipart/form-data">
                                     <label for="">Page</label>
                                     <input type="text" class="form-control" name="" value="{{$data->name_page}}" disabled>
                                     <div class="d-flex justify-content-between">
@@ -36,6 +36,10 @@
                                         <p class="text-right text-danger m-0 titleCount"></p>
                                     </div>
                                     <input type="text" class="form-control titleCountFlied" maxlength="580" name="metaTitle" value="{{$data != null ? $data->title : ''}}">
+                                    <div class="form-group">
+                                        <label for=""><img src="{{URL::to('storage/app')}}/{{$data->image}}" alt="" width="100px" height="100px"></label>
+                                        <input type="file" class="form-control" name="image">
+                                    </div>
                                     <div class="d-flex justify-content-between">
                                         <label for="">Description</label>
                                         <p class="text-right text-danger m-0 descriptionCount"></p>

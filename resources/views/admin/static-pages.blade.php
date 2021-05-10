@@ -27,14 +27,51 @@
 						</div>
 					</div>
 				</div>
-				<!-- [ breadcrumb ] end -->
+				<!-- [ breadcrumb ] end --> 
 				<!-- [ Main Content ] start -->
                 <div class="row">
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-header">{{!isset($data) ? '' : $data->title}}</div>
 							<div class="card-body">
-                                <form action="" method="post">
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    <div class="d-flex justify-content-between">
+                                        <label for="">Meta Title</label>
+                                        <p class="text-right text-danger m-0 titleCount"></p>
+                                    </div>
+                                    <input type="text" class="form-control titleCountFlied" maxlength="580" name="metaTitle" value="{{$newMeta != null ? $newMeta->title : ''}}">
+                                    <div class="form-group">
+                                        <label for="">
+                                            @if ($newMeta == null || $newMeta->image == null)
+                                                Image
+                                            @else
+                                                <img src="{{URL::to('storage/app')}}/{{$newMeta->image}}" alt="" width="100px" height="100px">
+                                            @endif
+                                        </label>
+                                        <input type="file" class="form-control" name="image">
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <label for="">Meta Description</label>
+                                        <p class="text-right text-danger m-0 descriptionCount1"></p>
+                                    </div>
+                                    <textarea name="metaDescription" maxlength="990" class="form-control description1">{{$newMeta != null ? $newMeta->description : ''}}</textarea>
+                                    <label for="">Meta Keywords</label>
+                                    <select class="js-example-tokenizer col-sm-12" name="metaKeywords[]" multiple="multiple" required>
+                                        @foreach ($MetaKeywords as $metas)
+                                            @if($newMeta != null)
+                                                @php
+                                                    $keywords = explode(',',$newMeta->keywordsimp);
+                                                    $selectedAll = 0;
+                                                @endphp
+                                                @for($i = 0; $i< count($keywords); $i++)
+                                                    @if($keywords[$i] == $metas->name)
+                                                        @php   $selectedAll = 1;  @endphp
+                                                    @endif
+                                                @endfor
+                                            @endif
+                                            <option value="{{$metas->name}}" {{$newMeta != null ? ($selectedAll == 1 ? 'selected' : '') : ''}}>{{$metas->name}}</option>
+                                        @endforeach
+                                    </select>
                                     <label for="">Title</label>
                                     <input type="text" class="form-control title" name="title" value="{{!isset($data) ? '' : $data->title}}" required>
                                     <label for="">Description</label>
@@ -80,5 +117,43 @@
 		console.log(url);
         $(".permalink").val(url);
     })
+</script>
+
+<script>
+    // description Limit
+    var count = $(".description1").val();
+    var len = count.length;
+    len = 990 - len;
+    $(".descriptionCount1").html("remaining: " + len);
+    $(".description1").on("keyup",function(){
+       var count = $(".description1").val();
+       var len = count.length;
+
+       if(len == 0){
+          $(".descriptionCount1").hide();
+       }else{
+          $(".descriptionCount1").show();
+       }
+       len = 990 - len;
+       $(".descriptionCount1").html("remaining: " + len);
+    });
+
+    // title Limit
+    var count = $(".titleCountFlied").val();
+    var len = count.length;
+    len = 580 - len;
+    $(".titleCount").html("remaining: " + len);
+    $(".titleCountFlied").on("keyup",function(){
+       var count = $(".titleCountFlied").val();
+       var len = count.length;
+
+       if(len == 0){
+          $(".titleCount").hide();
+       }else{
+          $(".titleCount").show();
+       }
+       len = 580 - len;
+       $(".titleCount").html("remaining: " + len);
+    });
 </script>
 

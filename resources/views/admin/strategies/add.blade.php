@@ -1,12 +1,12 @@
 @include('admin.include.header')
-								@php 
+								@php
 									$count = 0;
 									$url = "new";
 								@endphp
 								@isset($strategy->id)
-									@php 
+									@php
 										$url = "edit/" . $strategy->id;
-										$count++; 
+										$count++;
 									@endphp
 								@endisset
 		<!-- [ Main Content ] start -->
@@ -46,6 +46,16 @@
 										<p class="text-right text-danger m-0 titleCount"></p>
 									</div>
 									<input type="text" class="form-control titleCountFlied" maxlength="580" name="metaTitle" value="{{$newMeta != null ? $newMeta->title : ''}}">
+                                    <div class="form-group">
+                                        <label for="">
+                                            @if ($newMeta == null || $newMeta->image == null)
+                                                Image
+                                            @else
+                                                <img src="{{URL::to('storage/app')}}/{{$newMeta->image}}" alt="" width="100px" height="100px">
+                                            @endif
+                                        </label>
+                                        <input type="file" class="form-control" name="image">
+                                    </div>
 									<div class="d-flex justify-content-between">
 										<label for="">Description</label>
 										<p class="text-right text-danger m-0 descriptionCount1"></p>

@@ -33,6 +33,7 @@
 										<tr>
 											<th>ID</th>
 											<th>Title</th>
+											<th>Image</th>
 											<th>Page</th>
 											<th>Action</th>
 										</tr>
@@ -42,6 +43,7 @@
                                             <tr>
                                                 <td>{{$data->id}}</td>
                                                 <td>{{$data->title}}</td>
+                                                <td><img src="{{URL::to('storage/app')}}/{{$data->image}}" alt="" width="100px" height="100px"></td>
                                                 <td>{{$data->name_page}}</td>
                                                 <td>
                                                     <a href="{{URL::to('ustaad/meta-tags/edit')}}/{{$data->id}}">

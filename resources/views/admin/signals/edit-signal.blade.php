@@ -30,12 +30,22 @@
 				<!-- [ Main Content ] start -->
                 <div class="card">
                     <div class="card-body">
-                        <form action="" method="post">
+                        <form action="" method="post" enctype="multipart/form-data">
                             <div class="d-flex justify-content-between">
                                 <label for="">Title</label>
                                 <p class="text-right text-danger m-0 titleCount"></p>
                             </div>
                             <input type="text" class="form-control titleCountFlied" maxlength="580" name="metaTitle" value="{{$newMeta != null ? $newMeta->title : ''}}">
+                            <div class="form-group">
+                                <label for="">
+                                    @if ($newMeta == null || $newMeta->image == null)
+                                        Image
+                                    @else
+                                        <img src="{{URL::to('storage/app')}}/{{$newMeta->image}}" alt="" width="100px" height="100px">
+                                    @endif
+                                </label>
+                                <input type="file" class="form-control" name="image">
+                            </div>
                             <div class="d-flex justify-content-between">
                                 <label for="">Description</label>
                                 <p class="text-right text-danger m-0 descriptionCount"></p>
@@ -181,7 +191,13 @@
                                         <select name="result" class="form-control">
                                             <option value="">None</option>
                                             <option value="Manually Closed" {{$data->result == "Manually Closed" ? 'selected' : ''}}>Manually Closed</option>
-                                            <option value="TP Hit" {{$data->result == "TP Hit" ? 'selected' : ''}}>TP Hit</option>
+                                            @for($i=1; $i<=count($profits); $i++)
+                                                @if($i == 1 && $data->result == "TP Hit")
+                                                    <option value="{{$i}} TP Hit" selected>{{$i}} TP Hit</option>
+                                                @else
+                                                    <option value="{{$i}} TP Hit" {{$data->result == "$i TP Hit" ? 'selected' : ''}}>{{$i}} TP Hit</option>
+                                                @endif
+                                            @endfor
                                             <option value="SL Hit" {{$data->result =="SL Hit"  ? 'selected' : ''}}>SL Hit</option>
                                         </select>
                                     </div>

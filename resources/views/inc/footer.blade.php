@@ -476,6 +476,22 @@
                         <button type="submit" class="btn btn-primary text-uppercase quote_send_msg mr-4" data-type="quote">Register</button>
                         <span class="btn btn-primary text-uppercase quote_send_msg LoginButton">Login</span>
                         <span class="text-danger RegistrationError" id="RegistrationErrorChecker"></span>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6 col-12 col-sm-6">
+                                <a href="{{ route('login.facebook') }}">
+                                    <button type="button" class="btn btn-block btn-facebook">
+                                        <i class="fa fa-facebook mr-2"></i>Facebook
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-12 col-sm-6">
+                                <a href="{{ route('login.google') }}">
+                                    <button type="button" class="btn btn-block btn-google">
+                                        <i class="fa fa-google mr-2"></i>Google
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                   </div>
               </form>
@@ -492,11 +508,27 @@
                       <input type="password" class="form-control text-gray explore_form name abc_into passwordHide" placeholder="Enter Password" name="password" id="quote_name" required>
                     </div>
                     <div class="form-group text-left ml-3">
-                      <button type="submit" class="btn btn-primary text-uppercase quote_send_msg ForgetButton mr-4" data-type="quote">Login</button>
-                      <span class="btn btn-primary text-uppercase quote_send_msg RegistrationButton">Register</span><br>
-                      <a href="#" class="text-primary ReSendMail mr-5">Re Send Mail</a>
-                      <a href="#" class="text-danger ForgetPassword ml-2">Forget Password</a>
-                      <span class="text-danger LoginError"></span>
+                        <button type="submit" class="btn btn-primary text-uppercase quote_send_msg ForgetButton mr-4" data-type="quote">Login</button>
+                        <span class="btn btn-primary text-uppercase quote_send_msg RegistrationButton">Register</span><br>
+                        <a href="#" class="text-primary ReSendMail mr-5">Re Send Mail</a>
+                        <a href="#" class="text-danger ForgetPassword ml-2">Forget Password</a>
+                        <span class="text-danger LoginError"></span>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6 col-12 col-sm-6">
+                                <a href="{{ route('login.facebook') }}">
+                                    <button type="button" class="btn btn-block btn-facebook">
+                                        <i class="fa fa-facebook mr-2"></i>Facebook
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-12 col-sm-6">
+                                <a href="{{ route('login.google') }}">
+                                    <button type="button" class="btn btn-block btn-google">
+                                        <i class="fa fa-google mr-2"></i>Google
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                   </div>
               </form>
@@ -1267,7 +1299,7 @@
 <script>
     $("#shareLink").jsSocials({
     showLabel: false,
-    showCount: false,
+    showCount: true,
     shares: ["twitter", "facebook", "whatsapp"]
 });
 </script>

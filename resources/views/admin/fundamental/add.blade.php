@@ -1,13 +1,13 @@
 @include('admin.include.header')
-								@php 
+								@php
 									$value =Session::get('admin');
 									$count = 0;
 									$url = "new";
 								@endphp
 								@isset($fundamental->id)
-									@php 
+									@php
 										$url = "edit/" . $fundamental->id;
-										$count++; 
+										$count++;
 									@endphp
 								@endisset
 		<!-- [ Main Content ] start -->
@@ -47,6 +47,16 @@
 											<p class="text-right text-danger m-0 titleCount"></p>
 										</div>
 										<input type="text" class="form-control titleCountFlied" maxlength="580" name="metaTitle" value="{{$newMeta != null ? $newMeta->title : ''}}">
+                                        <div class="form-group">
+                                            <label for="">
+                                                @if ($newMeta == null || $newMeta->image == null)
+                                                    Image
+                                                @else
+                                                    <img src="{{URL::to('storage/app')}}/{{$newMeta->image}}" alt="" width="100px" height="100px">
+                                                @endif
+                                            </label>
+                                            <input type="file" class="form-control" name="image">
+                                        </div>
 										<div class="d-flex justify-content-between">
 											<label for="">Description</label>
 											<p class="text-right text-danger m-0 descriptionCount"></p>
@@ -88,7 +98,7 @@
                                         <div class="form-group">
                                             <label for="fundamental-description" class="form-control-label">Detail Description</label>
                                             <textarea name="editor1" class="form-control" id="description" rows="5" cols="40" placeholder="Enter your Description here ...">
-												@if($count != 0) 
+												@if($count != 0)
 													@php
 														$detailDescription = html_entity_decode($fundamental->detailDescription);
 														echo $detailDescription;
@@ -103,9 +113,9 @@
 											</div>
 										</div>
 										<br>
-                                        
+
                                         <p class="submit">
-                                            <input type="hidden" name="userId" value="{{$value['id']}}"> 
+                                            <input type="hidden" name="userId" value="{{$value['id']}}">
                                             <input type="submit" id="submit" class="btn btn-outline-primary" value="Post"> <span class="spinner"></span>
                                             <input type="reset" id="reset" class="btn btn-outline-danger" value="reset"> <span class="spinner"></span>
                                         </p>
