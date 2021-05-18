@@ -17,7 +17,7 @@ class BlogController extends Controller
         $BlogData = BlogPostModel::orderBy('id','desc')->where('status',1)->where('pending',1)->whereDate('publishDate', '<=', date("Y-m-d"))->get();
         return view('blog.index',compact('BlogData','meta'));
     }
-    public function DetailBlog(Request $request, $id, $id2){
+    public function DetailBlog(Request $request, $id2){
         $BlogDetail = BlogPostModel::orderBy('id','desc')->where('status',1)->where('pending',1)->where('permalink',$id2)->whereDate('publishDate', '<=', date("Y-m-d"))->first();
         if ($BlogDetail) {
             $title = $BlogDetail->mainTitle;

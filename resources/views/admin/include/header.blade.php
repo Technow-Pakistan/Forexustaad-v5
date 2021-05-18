@@ -26,7 +26,12 @@
 
 		<!-- animate -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css"/>
+       <!-- datatable Stylesheet -->
+			<link rel="stylesheet" type="text/css" href="{{ URL::to('/public/assets/DataTable/datatables.net/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
+			<link rel="stylesheet" href="{{ URL::to('/public/assets/DataTable/data-table/extensions/responsive/css/responsive.dataTables.css') }}" type="text/css" media="all">
+		<!-- datatable Stylesheet -->
+			<link href="{{URL::to('/public/assets/assets/css/bootstrap-toggle.min.css')}}" rel="stylesheet">
+        <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css"/> -->
 
   		<!-- font-awesome -->
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">

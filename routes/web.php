@@ -206,22 +206,24 @@ Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
     Route::post('/unRegisterUser/Delete',[HomeController::class,'unRegisterUserDelete']);
     // Route::get('/unRegisterUser/Save',[HomeController::class,'unRegisterUserSave']);
 
-    Route::get('/training/{id1}/{id}',[AdvanceTrainingController::class,'ViewAll']);
+    Route::get('/Basic/{id}',[AdvanceTrainingController::class,'ViewAll']);
+    Route::get('/Advance/{id}',[AdvanceTrainingController::class,'ViewAll']);
+    Route::get('/Habbit/{id}',[AdvanceTrainingController::class,'ViewAll']);
     Route::get('/analysis',[AnalysisController::class,'ViewAll']);
     Route::get('/analysis/{id}',[AnalysisController::class,'ViewDetail']);
     Route::get('/fundamental',[FundamentalController::class,'ViewAll']);
     Route::get('/fundamental/{id}',[FundamentalController::class,'ViewDetail']);
 
-    Route::get('/brokerList/training/{id}',[BrokerTrainingController::class,'BrokerTraining']);
+    Route::get('/brokertraining/{id}',[BrokerTrainingController::class,'BrokerTraining']);
     Route::get('/broker/training/{id}',[BrokerTrainingController::class,'ChangeTraining']);
     Route::get('/brokerList',[HomeController::class,'BrokerView']);
-    Route::get('/brokerList/brokerDetail/{id}',[HomeController::class,'brokerDetail']);
-    Route::get('/brokerList/brokerReview/{id}',[HomeController::class,'brokerReview']);
-    Route::get('/brokerList/brokerReview/ReviewDetail/{id}',[HomeController::class,'brokerReviewDetail']);
-    Route::get('/brokerList/brokerNews/{id}',[HomeController::class,'brokerNews']);
-    Route::get('/brokerList/brokerNews/NewsDetail/{id}',[HomeController::class,'brokerNewsDetail']);
-    Route::get('/brokerList/brokerPromotion/{id}',[HomeController::class,'brokerPromotion']);
-    Route::get('/brokerList/brokerPromotion/PromotionDetail/{id}',[HomeController::class,'brokerPromotionDetail']);
+    Route::get('/brokerDetail/{id}',[HomeController::class,'brokerDetail']);
+    Route::get('/brokerReview/{id}',[HomeController::class,'brokerReview']);
+    Route::get('/ReviewDetail/{id}',[HomeController::class,'brokerReviewDetail']);
+    Route::get('/brokerNews/{id}',[HomeController::class,'brokerNews']);
+    Route::get('/NewsDetail/{id}',[HomeController::class,'brokerNewsDetail']);
+    Route::get('/brokerPromotion/{id}',[HomeController::class,'brokerPromotion']);
+    Route::get('/PromotionDetail/{id}',[HomeController::class,'brokerPromotionDetail']);
 
 
 
@@ -283,7 +285,7 @@ Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
     Route::post('/clientForget',[HomeController::class,'ForgetProcess']);
     Route::get('/clientLogout',[HomeController::class,'LogoutProcess']);
     Route::get('/blog-post.html',[BlogController::class,'Index']);
-    Route::get('/Posts/{id}/{id2}',[BlogController::class,'DetailBlog']);
+    Route::get('/Post/{id2}',[BlogController::class,'DetailBlog']);
     Route::get('/privacy-policy.html',[HomeController::class,'privacyPolicy']);
     Route::get('/about-page',[HomeController::class,'AboutPage']);
     Route::get('p/{id}',[OtherPagesContentController::class,'Index']);
@@ -350,6 +352,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::get('/notification/{id}',[AdminController::class,'NotificationView']);
     Route::post('/notification/checked/delete',[AdminController::class,'NotificationDelete']);
     Route::get('/viewClientProfile/{id}',[AdminController::class,'ViewClientProfile']);
+    Route::post('/viewClientProfile/Keyword/{id}',[AdminController::class,'ViewClientProfileKeywordProcess']);
     Route::post('/viewClientProfile/accountVerified/{id}',[AdminController::class,'ClientProfileAccountVerified']);
     Route::post('/viewClientProfile/accountdepositConfirm/{id}',[AdminController::class,'ClientProfileaccountdepositConfirm']);
     Route::post('/changeMemberType/{id}',[AdminController::class,'ChangeMemberType']);

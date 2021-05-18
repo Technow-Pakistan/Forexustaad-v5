@@ -25,7 +25,7 @@
                     	<div class="col-sm-6">
                     		<div class="news_us">
                         		<div class="content_area_heading large-heading text-center">
-									<a href="{{URL::to('training/Basic/all')}}">
+									<a href="{{URL::to('Basic/all')}}">
 										<h1 class="heading_title wow animated fadeInUp">
 											Basic Training
 										</h1>
@@ -50,7 +50,7 @@
                                 <div class=" col-sm-12 col-md-6 bg-light">
                                     <div class="wow animated fadeInUp mt-1">
                                         <div class="re_img w-100 p-4">
-                                            <a href="{{URL::to('Posts')}}/{{$category->mainCategory}}/{{$data->permalink}}">
+                                            <a href="{{URL::to('Post')}}/{{$data->permalink}}">
                                                 <img src="{{URL::to('/storage/app')}}/{{$data->image}}" >
                                             </a>
                                         </div>
@@ -60,7 +60,7 @@
 
                                                     <div class="new_description-details">
                                                         <h6>
-                                                            <a href="{{URL::to('Posts')}}/{{$category->mainCategory}}/{{$data->permalink}}">
+                                                            <a href="{{URL::to('Post')}}/{{$data->permalink}}">
                                                                 {{$data->mainTitle}}
                                                             </a>
                                                         </h6>

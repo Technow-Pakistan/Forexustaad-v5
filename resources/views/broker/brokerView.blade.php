@@ -64,7 +64,7 @@
                                                                 <img src="{{URL::to('storage/app')}}/{{$data->image}}" class="img-fluid" />
                                                             </div>
                                                             <div class="link pt-3">
-                                                                <a href="{{URL::to('/brokerList/brokerReview')}}/{{$title}}" class="text-danger">{{$data->title}} Review</a>
+                                                                <a href="{{URL::to('/brokerReview')}}/{{$title}}" class="text-danger">{{$data->title}} Review</a>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-5 col-sm-6 col-xs-12 text-align-c768">
@@ -100,7 +100,7 @@
                                                         <div class="col-md-2 col-sm-2 col-xs-12 text-align-center p-a-15">
                                                             <div class="form-group">
                                                             <div class="link pt-3">
-                                                                <a href="{{URL::to('/brokerList/brokerDetail')}}/{{$title}}" class="text-danger">Visit {{$data->title}}
+                                                                <a href="{{URL::to('/brokerDetail')}}/{{$title}}" class="text-danger">Visit {{$data->title}}
 
                                                                 </a>
 
@@ -113,9 +113,9 @@
                                                         </div>
                                                         <div class="col-lg-12 col-sm-12 col-12 col-xl-12">
                                                             <div class="link">
-                                                                <a href="{{URL::to('/brokerList/brokerNews')}}/{{$title}}"  class="text-danger mr-3">{{$data->title}} News</a>
-                                                                <a href="{{URL::to('brokerList/brokerPromotion')}}/{{$title}}"  class="text-danger mr-3">{{$data->title}} Promotions</a>
-                                                                <a href="{{URL::to('brokerList/training/')}}/{{$title}}"  class="text-danger">{{$data->title}} Training</a>
+                                                                <a href="{{URL::to('/brokerNews')}}/{{$title}}"  class="text-danger mr-3">{{$data->title}} News</a>
+                                                                <a href="{{URL::to('brokerPromotion')}}/{{$title}}"  class="text-danger mr-3">{{$data->title}} Promotions</a>
+                                                                <a href="{{URL::to('brokertraining/')}}/{{$title}}"  class="text-danger">{{$data->title}} Training</a>
                                                             </div>
                                                         </div>
                                                     </div>
