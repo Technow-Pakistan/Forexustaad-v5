@@ -36,7 +36,7 @@
                             <div class=" col-sm-12 col-md-6 bg-light">
                                 <div class="wow animated fadeInUp mt-1">
                                     <div class="re_img w-100 p-4">
-                                        <a href="{{URL::to('/brokerList/brokerPromotion/PromotionDetail')}}/{{$PromotionTitle}}">
+                                        <a href="{{URL::to('PromotionDetail')}}/{{$PromotionTitle}}">
                                             <img src="{{URL::to('/storage/app')}}/{{$data->image}}" >
                                         </a>
                                     </div>
@@ -46,7 +46,7 @@
 
                                                 <div class="new_description-details">
                                                     <h6>
-                                                        <a href="{{URL::to('/brokerList/brokerPromotion/PromotionDetail')}}/{{$PromotionTitle}}">
+                                                        <a href="{{URL::to('PromotionDetail')}}/{{$PromotionTitle}}">
                                                             {{$data->PromotionTitle}}
                                                         </a>
                                                     </h6>

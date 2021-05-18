@@ -16,7 +16,14 @@ use App\Models\MetaTagsModel;
 
 class AdvanceTrainingController extends Controller
 {
-    public function ViewAll (Request $request, $id1, $id){
+    public function ViewAll (Request $request, $id){
+        $urlCurrent = url()->current();
+        $url1 = explode("/",$urlCurrent);
+        if($url1[2] == "localhost"){
+            $id1 = $url1[4];
+        }else{
+            $id1 = $url1[3];
+        }
         if ($id1 == "Advance"){
             $meta = MetaTagsModel::where('name_page','Advance-Training')->first();
             if ($request->session()->has('client')) {

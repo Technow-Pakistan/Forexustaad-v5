@@ -175,7 +175,7 @@
 								<div class="card user-profile-list">
 									<div class="card-body">
 										<div class="dt-responsive table-responsive">
-											<table id="user-list-table1s" class="table nowrap">
+											<table id="user-list-table1s" class="table table-striped table-bordered dt-responsive nowrap">
 												<thead>
 													<tr>
 														<th>Pairs</th>

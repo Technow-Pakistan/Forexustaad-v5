@@ -476,7 +476,7 @@
                         <button type="submit" class="btn btn-primary text-uppercase quote_send_msg mr-4" data-type="quote">Register</button>
                         <span class="btn btn-primary text-uppercase quote_send_msg LoginButton">Login</span>
                         <span class="text-danger RegistrationError" id="RegistrationErrorChecker"></span>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-md-6 col-lg-6 col-12 col-sm-6">
                                 <a href="{{ route('login.facebook') }}">
                                     <button type="button" class="btn btn-block btn-facebook">
@@ -491,7 +491,7 @@
                                     </button>
                                 </a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                   </div>
               </form>
@@ -513,7 +513,7 @@
                         <a href="#" class="text-primary ReSendMail mr-5">Re Send Mail</a>
                         <a href="#" class="text-danger ForgetPassword ml-2">Forget Password</a>
                         <span class="text-danger LoginError"></span>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-md-6 col-lg-6 col-12 col-sm-6">
                                 <a href="{{ route('login.facebook') }}">
                                     <button type="button" class="btn btn-block btn-facebook">
@@ -528,7 +528,7 @@
                                     </button>
                                 </a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                   </div>
               </form>
