@@ -19,7 +19,13 @@ class ClientMemberController extends Controller
     }
     public function clientMemberView(Request $request, $id){
         if($id == "All"){
-            $memberData = ClientRegistrationModel::orderBy('id','desc')->get();
+            if ($request->has('startDate') && $request->has('endDate')) {
+                $startDate = $request->startDate;
+                $endDate = $request->endDate;
+                $memberData = ClientRegistrationModel::orderBy('id','desc')->where('created_at','>',$startDate)->where('created_at','<=',$endDate)->get();
+            }else{
+                $memberData = ClientRegistrationModel::orderBy('id','desc')->get();
+            }
         }elseif(isset($request->client) && !empty($request->client)){
             if ($request->client == "confirm") {
                $confirm = 1;

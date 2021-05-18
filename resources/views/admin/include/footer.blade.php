@@ -84,6 +84,9 @@
 
 	<!-- style modal -->
 	<style>
+  div.dataTables_wrapper div.dataTables_paginate ul.pagination, div.dataTables_wrapper div.dataTables_filter{
+    float:right;
+  }
 	 /* star Checkbox */
 	.hiddenCheckBox{
 		display:none;
@@ -114,10 +117,18 @@
 		<script src="{{URL::to('/public/assets/assets/js/dashboard-main.js')}}"></script>
 		<!-- <script src="https://cdn.tiny.cloud/1/hkemh60vfhq4w7kvvdv59h4ml0yn66nigaxbgv7xbj0ttyk8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
 
+          <!-- DataTable start -->
+
+            <script src="{{URL::to('/public/assets/DataTable/datatables.net/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+            <script src="{{URL::to('/public/assets/DataTable/data-table/extensions/responsive/js/dataTables.responsive.min.js')}}"></script>
+            <script src="{{URL::to('/public/assets/DataTable/datatables.net/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+            <script src="{{URL::to('/public/assets/DataTable/data-table/extensions/responsive/js/responsive-custom.js')}}"></script>
+
+          <!-- DataTable ends -->
 <!-- datatable Js -->
 
 
-  <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+  <!-- <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script> -->
 
 		<script>
 			CKEDITOR.replace('editor1',{

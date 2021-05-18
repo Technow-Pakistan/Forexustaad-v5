@@ -203,7 +203,7 @@
                                   @endif
                                 @endif
                                 @if($icountData == 10)
-                                  <a href="{{URL::to('/training'). '/' .  $category . '/' . $title}}">
+                                  <a href="{{URL::to('/'). '/' .  $category . '/' . $title}}">
                                     <div class="col-sm-12 pl-3 {{$lecture->id == $data->id ? 'activeVideo pre-header' : ''}}" id="{{$lecture->id == $data->id ? 'activeVideo' : ''}}">
                                         <div class="media">
                                             <p class="mt-4 mr-2">{{$data->poistion}}. </p>

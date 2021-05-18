@@ -349,5 +349,15 @@ class AdminController extends Controller
         $request->session()->put("success",$success);
         return back();
     }
+    public function ViewClientProfileKeywordProcess(Request $request, $id){
+        $data = $request->keywords;
+        $keywords = implode(",",$data);
+        $totalClientInfo = ClientRegistrationModel::where('id',$id)->first();
+        $totalClientInfo->keywords = $keywords;
+        $totalClientInfo->save();
+        $success = "This client Keywords save successfully.";
+        $request->session()->put("success",$success);
+        return back();
+    }
 
 }

@@ -571,13 +571,13 @@
                                     Forex Education
                                 </a>
                                 <ul class="dropdown-menu fade-up">
-                                    <li><a class="dropdown-item" href="{{URL::to('/training/Basic/all')}}">Basic Training</a></li>
+                                    <li><a class="dropdown-item" href="{{URL::to('/Basic/all')}}">Basic Training</a></li>
                                     @if(!Session::has('client'))
                                         <li><a class="dropdown-item LoginButton" data-toggle="modal" data-target="#requestQuoteModal">Advance Training</a></li>
                                     @else
-                                        <li><a class="dropdown-item" href="{{URL::to('/training/Advance/all')}}">Advance Training</a></li>
+                                        <li><a class="dropdown-item" href="{{URL::to('/Advance/all')}}">Advance Training</a></li>
                                     @endif
-                                    <li><a class="dropdown-item" href="{{URL::to('/training/Habbit/all')}}">50 Habbit Training</a></li>
+                                    <li><a class="dropdown-item" href="{{URL::to('/Habbit/all')}}">50 Habbit Training</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item">

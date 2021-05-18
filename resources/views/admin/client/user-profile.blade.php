@@ -32,6 +32,26 @@
 				<!-- [ breadcrumb ] end -->
 				<!-- [ Main Content ] start -->
                 <div class="card">
+                  <div class="card-body" style="background-color: lightgray;">
+                    <div class="">
+                      <form action="{{URL::to('ustaad/viewClientProfile/Keyword')}}/{{$totalClientInfo->id}}" method="post">
+                        <label for="">Keywords</label>
+                        <select class="js-example-tokenizer form-control w-50 m-0" name="keywords[]" multiple="multiple" required>
+                          @if($totalClientInfo->keywords != null)
+                            @php
+                              $allKeywords = explode(',',$totalClientInfo->keywords);
+                            @endphp
+                            @foreach ($allKeywords as $Keyword)
+                              <option value="{{$Keyword}}" selected>{{$Keyword}}</option>
+                            @endforeach
+                          @endif
+                        </select>
+                        <input type="submit" value="Save" class="btn btn-primary btn-sm" >
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
                     <div class="card-body" style="background-color: lightgray;">
                         <div class="">
                             <div class="">
@@ -59,9 +79,9 @@
                                               <img src="{{URL::to('public/assets/assets/img/vipbg.png')}}" alt="adminn" style="width: 228px">
                                             <div style="position: absolute; top:40px; left:69px">
                                         @if($totalClientInfo->image == null)
-                                              <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="" style="width: 91px">
+                                              <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" style="width: 91px!important;height: 91px !important;">
                                         @else
-                                          <img src="{{URL::to('storage/app/')}}/{{$totalClientInfo->image}}" alt="Admin" class="rounded-circle" width="91px" height="91px">
+                                          <img src="{{URL::to('storage/app/')}}/{{$totalClientInfo->image}}" alt="Admin" class="rounded-circle" style="width: 91px!important;height: 91px !important;">
                                         @endif
                                           </div>
                                     </div>
@@ -291,12 +311,12 @@
 		</section>
 		<!-- [ Main Content ] end -->
 
-
 @include('admin.include.footer')
 
 <style>
-
-
+  .select2-container--default{
+    margin-bottom:0px;
+  }
   .heig_10px{
     height:10px;
   }
@@ -366,29 +386,28 @@
 	})
 </script>
 
-
 <style>
-    .certificated-badge-style{
-      bottom: 8px;
-      right: 0;
-      z-index: 2;
-      position: relative;
-      bottom: 15px;
-      LEFT: 15px;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      background: #fff;
-      padding: 5px 3px;
-    }
-    .fa-certificate-style{
-      font-size: 55px;
-    }
-    .front-broker-title-style{
-      font-size: 11px;
-      position: absolute;
-      top: 22PX;
-      left: 11px;
-    }
-  </style>
+  .certificated-badge-style{
+    bottom: 8px;
+    right: 0;
+    z-index: 2;
+    position: relative;
+    bottom: 15px;
+    LEFT: 15px;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    padding: 5px 3px;
+  }
+  .fa-certificate-style{
+    font-size: 55px;
+  }
+  .front-broker-title-style{
+    font-size: 11px;
+    position: absolute;
+    top: 22PX;
+    left: 11px;
+  }
+</style>
 
