@@ -35,23 +35,6 @@ class AdminController extends Controller
     public function GetPusherName(Request $request,$message,$message2){
         PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $message,"message2" => $message2]);
     }
-    public function GetRealTimeData(Request $request){
-        $selectedTime = date("Y-m-d H:i:s");
-        $endTime = strtotime("-10 seconds", strtotime($selectedTime));
-        $formatted_date =  date('Y-m-d H:i:s', $endTime);
-        $result = ActiveOnSiteModel::where('created_at','<=',$formatted_date)->get();
-        foreach($result as $ret){
-            $ret->delete();
-        }
-        $a=array();
-        $activeUserAll = ActiveOnSiteModel::all();
-        $activeMobileUser = ActiveOnSiteModel::where('device','Mobile')->get();
-        $activeDesktopUser = ActiveOnSiteModel::where('device','Desktop')->get();
-        $activeTabUser = ActiveOnSiteModel::where('device','Tab')->get();
-        array_push($a,$activeUserAll,$activeMobileUser,$activeDesktopUser,$activeTabUser);
-        $data = json_encode($a);
-        return $data;
-    }
     public function ReconformationMail(Request $request, $id){
         $registration = ClientRegistrationModel::where('id',$id)->first();
         Mail::to($registration->email)->send(new SubscriberMail($registration));
@@ -286,27 +269,13 @@ class AdminController extends Controller
             array_push($temporaryData,$endstrtotime,$countofStrtotitme);
             array_push($activeUserGraphAllDataArray,$temporaryData);
         }
-        // Get browser Data one by one & Whole
-
-        $VistorDailyBrowserGraphALLDataGet = NonRegisterVisitorModel::all();
-        $browserDataUniqueArray = array();
-        $AllBroswer = ["Chrome", "Firefox", "Safari", "Internet Explorer", "Opera", "Microsoft Edge"];
-        for ($i=0; $i < 6 ; $i++) {
-            $VistorDailyUniqueBrowserGraphALLDataGet = NonRegisterVisitorModel::where('browser',$AllBroswer[$i])->get();
-            if(count($VistorDailyUniqueBrowserGraphALLDataGet) != 0){
-                $persontage = round(((count($VistorDailyUniqueBrowserGraphALLDataGet)/count($VistorDailyBrowserGraphALLDataGet))*100));
-            }else{
-                $persontage = 0;
-            }
-            array_push($browserDataUniqueArray,$persontage);
-        }
         $signalPendingData = SignalsModel::orderBy('id','desc')->take(10)->get();
         $signalLatestComments = SignalCommentsModel::orderBy('id','desc')->skip(0)->take(10)->get();
         $AdvanceTrainingLatestComments = AdvanceCommentsModel::orderBy('id','desc')->skip(0)->take(10)->get();
         $BasicTrainingLatestComments = BasicCommentsModel::orderBy('id','desc')->skip(0)->take(10)->get();
         $HabbitTrainingLatestComments = HabbitCommentsModel::orderBy('id','desc')->skip(0)->take(10)->get();
         $BlogPostLatestComments = BlogCommentsModel::orderBy('id','desc')->skip(0)->take(10)->get();
-        return view('admin.index',compact('BasicTrainingLatestComments','HabbitTrainingLatestComments','BlogPostLatestComments','AdvanceTrainingLatestComments','signalLatestComments','signalPendingData','browserDataUniqueArray','activeUserGraphAllDataArray','TotalClientNumber','MonthlyClientNumber','ToDayClientNumber','WeeklyClientNumber','TotalAdminUsersNumber','MonthlyAdminUsersNumber','TotalBrokerNumber','MonthlyBrokerNumber','TotalPostNumber','MonthlyPostNumber'));
+        return view('admin.index',compact('BasicTrainingLatestComments','HabbitTrainingLatestComments','BlogPostLatestComments','AdvanceTrainingLatestComments','signalLatestComments','signalPendingData','activeUserGraphAllDataArray','TotalClientNumber','MonthlyClientNumber','ToDayClientNumber','WeeklyClientNumber','TotalAdminUsersNumber','MonthlyAdminUsersNumber','TotalBrokerNumber','MonthlyBrokerNumber','TotalPostNumber','MonthlyPostNumber'));
     }
     public function Logout(Request $request){
         $request->session()->pull("admin");

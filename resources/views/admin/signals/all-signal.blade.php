@@ -41,7 +41,7 @@ $icount = 0;
                         <div class="card-body">
                             <div class="dt-responsive table-responsive">
                                 <h1 class="text-primary">Current Signal</h1>
-                                <table id="user-list-table" class="table nowrap">
+                                <table id="user-list-table" class="table table-striped table-bordered dt-responsive nowrap">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -53,6 +53,7 @@ $icount = 0;
                                             @endif
                                             <th>Date</th>
                                             <th>Time</th>
+                                            <th>Rating</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
@@ -106,6 +107,21 @@ $icount = 0;
                                                             $date = strtotime($data->time);
                                                             echo date('h:i a', $date);
                                                         @endphp
+                                                    </td>
+                                                    <td>
+                                                        @php $SignalRatingPoints = $data->GetRatingPoints(); @endphp
+                                                        <fieldset class="rating1">
+                                                            <input type="radio" name="rating1" value="5" {{ $SignalRatingPoints == 5 ? 'checked' : '' }}/><i class="fa fa-star full" for="star5" title="Awesome - 5 stars"></i>
+                                                            <input type="radio" name="rating1" value="4.5"  {{ $SignalRatingPoints == 4.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star4half" title="Pretty good - 4.5 stars"></i>
+                                                            <input type="radio" name="rating1" value="4"  {{ $SignalRatingPoints == 4 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star4" title="Pretty good - 4 stars"></i>
+                                                            <input type="radio" name="rating1" value="3.5"  {{ $SignalRatingPoints == 3.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star3half" title="Meh - 3.5 stars"></i>
+                                                            <input type="radio" name="rating1" value="3"  {{ $SignalRatingPoints == 3 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star3" title="Meh - 3 stars"></i>
+                                                            <input type="radio" name="rating1" value="2.5"  {{ $SignalRatingPoints == 2.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star2half" title="Kinda bad - 2.5 stars"></i>
+                                                            <input type="radio" name="rating1" value="2"  {{ $SignalRatingPoints == 2 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star2" title="Kinda bad - 2 stars"></i>
+                                                            <input type="radio" name="rating1" value="1.5"  {{ $SignalRatingPoints == 1.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star1half" title="Meh - 1.5 stars"></i>
+                                                            <input type="radio" name="rating1" value="1"  {{ $SignalRatingPoints == 1 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star1" title="Sucks big time - 1 star"></i>
+                                                            <input type="radio" name="rating1" value="0.5"  {{ $SignalRatingPoints == 0.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="starhalf" title="Sucks big time - 0.5 stars"></i>
+                                                        </fieldset>
                                                     </td>
                                                     <td>
                                                         @if($data->pending == 1)
@@ -166,6 +182,7 @@ $icount = 0;
                                             @endif
                                             <th>Date</th>
                                             <th>Time</th>
+                                            <th>Rating</th>
                                             <th>Status</th>
                                         </tr>
                                     </tfoot>
@@ -179,7 +196,7 @@ $icount = 0;
                         <div class="card-body">
                             <div class="dt-responsive table-responsive">
                                 <h1 class="text-danger">Expired Signal</h1>
-                                <table id="user-list-table1" class="table nowrap">
+                                <table id="user-list-table1" class="table table-striped table-bordered dt-responsive nowrap">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -190,6 +207,7 @@ $icount = 0;
                                                 <th>Comments</th>
                                             @endif
                                             <th>Result</th>
+                                            <th>Rating</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
@@ -246,6 +264,21 @@ $icount = 0;
                                                         @endif
                                                     </td>
                                                     <td>
+                                                        @php $SignalRatingPoints = $data->GetRatingPoints(); @endphp
+                                                        <fieldset class="rating1">
+                                                            <input type="radio" name="rating1" value="5" {{ $SignalRatingPoints == 5 ? 'checked' : '' }}/><i class="fa fa-star full" for="star5" title="Awesome - 5 stars"></i>
+                                                            <input type="radio" name="rating1" value="4.5"  {{ $SignalRatingPoints == 4.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star4half" title="Pretty good - 4.5 stars"></i>
+                                                            <input type="radio" name="rating1" value="4"  {{ $SignalRatingPoints == 4 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star4" title="Pretty good - 4 stars"></i>
+                                                            <input type="radio" name="rating1" value="3.5"  {{ $SignalRatingPoints == 3.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star3half" title="Meh - 3.5 stars"></i>
+                                                            <input type="radio" name="rating1" value="3"  {{ $SignalRatingPoints == 3 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star3" title="Meh - 3 stars"></i>
+                                                            <input type="radio" name="rating1" value="2.5"  {{ $SignalRatingPoints == 2.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star2half" title="Kinda bad - 2.5 stars"></i>
+                                                            <input type="radio" name="rating1" value="2"  {{ $SignalRatingPoints == 2 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star2" title="Kinda bad - 2 stars"></i>
+                                                            <input type="radio" name="rating1" value="1.5"  {{ $SignalRatingPoints == 1.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star1half" title="Meh - 1.5 stars"></i>
+                                                            <input type="radio" name="rating1" value="1"  {{ $SignalRatingPoints == 1 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star1" title="Sucks big time - 1 star"></i>
+                                                            <input type="radio" name="rating1" value="0.5"  {{ $SignalRatingPoints == 0.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="starhalf" title="Sucks big time - 0.5 stars"></i>
+                                                        </fieldset>
+                                                    </td>
+                                                    <td>
                                                         <span class="badge {{$data->status == 0 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 0 ? 'Active' : 'Deactive'}}</span>
                                                         <div class="overlay-edit">
                                                             @if($value['memberId'] == 1)
@@ -280,6 +313,7 @@ $icount = 0;
                                                 <th>Comments</th>
                                             @endif
                                             <th>Result</th>
+                                            <th>Rating</th>
                                             <th>Status</th>
                                         </tr>
                                     </tfoot>
@@ -295,7 +329,45 @@ $icount = 0;
         </div>
     </section>
     <!-- [ Main Content ] end -->
+<style>
+    
+  /* Star Rating style start */
+  .rating,.rating1 { 
+      float:left;
+      border: none;
+      position:relative;
+    }
 
+    .rating > input,.rating1 > input { display: none; } 
+    .rating > i:before,.rating1 > i:before { 
+      margin: 5px;
+      font-size: 1.25em;
+    }
+
+    .rating > .half:before,.rating1 > .half:before { 
+      content: "\f089";
+      position: absolute;
+      top: -5px;
+    }
+
+    .rating > i,.rating1 > i { 
+      color: #ddd; 
+      float: right; 
+    }
+
+    /***** CSS Magic to Highlight Stars on Hover *****/
+
+    .rating1 > input:checked ~ i, /* show gold star when clicked */
+    .rating > input:checked ~ i, /* show gold star when clicked */
+    .rating:not(:checked) > i:hover, /* hover current star */
+    .rating:not(:checked) > i:hover ~ i { color: #FFD700;  } /* hover previous stars in list */
+
+    .rating > input:checked + i:hover, /* hover current star when changing rating */
+    .rating > input:checked ~ i:hover,
+    .rating > i:hover ~ input:checked ~ i, /* lighten current selection */
+    .rating > input:checked ~ i:hover ~ i { color: #FFED85;  } 
+  /* Star Rating style end */
+</style>
 @include('admin.include.footer')
 <script>
 $('#user-list-table1').DataTable();
