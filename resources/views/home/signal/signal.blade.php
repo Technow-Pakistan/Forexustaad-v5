@@ -128,23 +128,7 @@
                                                                      <h6 class="m-0 text-danger">{{$finelmin}} {{$formatEng}} ago</h6>
                                                                   </td>
                                                                   <td>
-                                                                     @if($go == 0)
-                                                                        @if($data->selectUser == "Register User" && !Session::has('client'))
-                                                                           <a href="#!"  class="LoginButton btn btn-success btn-sm buttonBlinking" data-toggle="modal" data-target="#requestQuoteModal">Active</a>
-                                                                        @elseif($data->selectUser == "VIP Member")
-                                                                           @if(!Session::has('client'))
-                                                                              <a href="#!"  class="LoginButton btn btn-success btn-sm buttonBlinking" data-toggle="modal" data-target="#requestQuoteModal">Active</a>
-                                                                           @elseif(isset($loginClientData->memberType))
-                                                                              @if($loginClientData->memberType == 1)
-                                                                                 <a href="#!" class="btn btn-success btn-sm buttonBlinking" onclick="snackbar1()">Active</a>
-                                                                              @else
-                                                                                 <a href="{{URL::to('signal')}}/{{$url}}" class="btn btn-success btn-sm buttonBlinking">Active</a>
-                                                                              @endif
-                                                                           @endif
-                                                                        @else
-                                                                           <a href="{{URL::to('signal')}}/{{$url}}" class="btn btn-success btn-sm buttonBlinking">Active</a>
-                                                                        @endif
-                                                                     @endif
+                                                                     <a href="{{URL::to('signal')}}/{{$url}}" class="btn btn-success btn-sm buttonBlinking">Active</a>
                                                                   </td>
                                                                   <td><strong class="font-weight-bold">{{$data->selectUser}}</strong></td>
                                                                   <td>
@@ -243,23 +227,7 @@
                                                                   <h6 class="m-0 text-danger">{{$finelmin}} {{$formatEng}} ago</h6>
                                                                </td>
                                                                <td>
-                                                                  @if($go == 0)
-                                                                     @if($data->selectUser == "Register User" && !Session::has('client'))
-                                                                        <a href="#!"  class="LoginButton btn btn-success btn-sm buttonBlinking" data-toggle="modal" data-target="#requestQuoteModal">Active</a>
-                                                                     @elseif($data->selectUser == "VIP Member")
-                                                                        @if(!Session::has('client'))
-                                                                           <a href="#!"  class="LoginButton btn btn-success btn-sm buttonBlinking" data-toggle="modal" data-target="#requestQuoteModal">Active</a>
-                                                                        @elseif(isset($loginClientData->memberType))
-                                                                           @if($loginClientData->memberType == 1)
-                                                                              <a href="#!" class="btn btn-success btn-sm buttonBlinking" onclick="snackbar1()">Active</a>
-                                                                           @else
-                                                                              <a href="{{URL::to('signal')}}/{{$url}}" class="btn btn-success btn-sm buttonBlinking">Active</a>
-                                                                           @endif
-                                                                        @endif
-                                                                     @else
-                                                                        <a href="{{URL::to('signal')}}/{{$url}}" class="btn btn-success btn-sm buttonBlinking">Active</a>
-                                                                     @endif
-                                                                  @endif
+                                                                  <a href="{{URL::to('signal')}}/{{$url}}" class="btn btn-success btn-sm buttonBlinking">Active</a>
                                                                </td>
                                                                <td><strong class="font-weight-bold">{{$data->selectUser}}</strong></td>
                                                                <td>
@@ -358,23 +326,7 @@
                                                                   <h6 class="m-0 text-danger">{{$finelmin}} {{$formatEng}} ago</h6>
                                                                </td>
                                                                <td>
-                                                                  @if($go == 0)
-                                                                     @if($data->selectUser == "Register User" && !Session::has('client'))
-                                                                        <a href="#!"  class="LoginButton btn btn-success btn-sm buttonBlinking" data-toggle="modal" data-target="#requestQuoteModal">Active</a>
-                                                                     @elseif($data->selectUser == "VIP Member")
-                                                                        @if(!Session::has('client'))
-                                                                           <a href="#!"  class="LoginButton btn btn-success btn-sm buttonBlinking" data-toggle="modal" data-target="#requestQuoteModal">Active</a>
-                                                                        @elseif(isset($loginClientData->memberType))
-                                                                           @if($loginClientData->memberType == 1)
-                                                                              <a href="#!" class="btn btn-success btn-sm buttonBlinking" onclick="snackbar1()">Active</a>
-                                                                           @else
-                                                                              <a href="{{URL::to('signal')}}/{{$url}}" class="btn btn-success btn-sm buttonBlinking">Active</a>
-                                                                           @endif
-                                                                        @endif
-                                                                     @else
-                                                                        <a href="{{URL::to('signal')}}/{{$url}}" class="btn btn-success btn-sm buttonBlinking">Active</a>
-                                                                     @endif
-                                                                  @endif
+                                                                  <a href="{{URL::to('signal')}}/{{$url}}" class="btn btn-success btn-sm buttonBlinking">Active</a>
                                                                </td>
                                                                <td><strong class="font-weight-bold">{{$data->selectUser}}</strong></td>
                                                                <td>

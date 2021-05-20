@@ -8,6 +8,7 @@ use App\Models\AdminModel;
 use App\Models\AdminMemberDetailModel;
 use App\Models\SignalPairModel;
 use App\Models\SignalsModel;
+use App\Models\SignalCommmentLikeModel;
 
 class SignalCommentsModel extends Model
 {
@@ -34,5 +35,13 @@ class SignalCommentsModel extends Model
         $signal = SignalsModel::where('id',$this->signalId)->first();
         $replys = SignalPairModel::where('id',$signal->forexPairs)->first();
         return $replys;
+    }
+    public function getCommentLike(){
+        $member = SignalCommmentLikeModel::where('signalCommentId',$this->id)->where('liked',1)->count();
+        return $member;
+    }
+    public function getCommentDislike(){
+        $member = SignalCommmentLikeModel::where('signalCommentId',$this->id)->where('liked',0)->count();
+        return $member;
     }
 }
