@@ -1,7 +1,6 @@
 @include('inc.header')
 
         <!-- Content Area -->
-
         <div class="content_area">
     <section class="after_banner_content_area">
         <div class="container">
@@ -9,7 +8,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 order-2 order-lg-1">
                     @include('inc.home-left-sidebar')
                 </div>
-                <div class="col-lg-6 col-md-12 order-1 order-lg-2">
+                <div class="col-lg-6 col-md-12 order-1 order-lg-2 {{$blur == 1 ? 'blur' : '' }}">
                     @if($MidBannerHomeActive)
                         <div class="mb-5">
                             <a href="{{$MidBannerHomeActive->link}}" target="_blank">
@@ -79,9 +78,50 @@
                                             <span class="likeForm disLikeForm1 {{!Session::has('client') ? "LoginButton" : ''}} {{$clientLikeshow == 1 ? ($clientLike->liked == 0 ? 'text-danger' :'') : ''  }}" text="{{$clientLikeshow == 1 ? ($clientLike->liked == 0 ? 'text-danger' :'') : ''  }}" value="0" {{!Session::has('client') ? "data-toggle=modal data-target=#requestQuoteModal" : ''}}><i class="fa fa-thumbs-up" style="transform: rotate(174deg);"></i></span>
                                         </div>
                                         <div id="shareLink"></div>
+                                        @php $SignalRatingPoints = $signalData->GetRatingPoints(); @endphp
+                                        <fieldset class="rating1">
+                                          <input type="radio" name="rating1" value="5" {{ $SignalRatingPoints == 5 ? 'checked' : '' }}/><i class="fa fa-star full" for="star5" title="Awesome - 5 stars"></i>
+                                          <input type="radio" name="rating1" value="4.5"  {{ $SignalRatingPoints == 4.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star4half" title="Pretty good - 4.5 stars"></i>
+                                          <input type="radio" name="rating1" value="4"  {{ $SignalRatingPoints == 4 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star4" title="Pretty good - 4 stars"></i>
+                                          <input type="radio" name="rating1" value="3.5"  {{ $SignalRatingPoints == 3.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star3half" title="Meh - 3.5 stars"></i>
+                                          <input type="radio" name="rating1" value="3"  {{ $SignalRatingPoints == 3 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star3" title="Meh - 3 stars"></i>
+                                          <input type="radio" name="rating1" value="2.5"  {{ $SignalRatingPoints == 2.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star2half" title="Kinda bad - 2.5 stars"></i>
+                                          <input type="radio" name="rating1" value="2"  {{ $SignalRatingPoints == 2 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star2" title="Kinda bad - 2 stars"></i>
+                                          <input type="radio" name="rating1" value="1.5"  {{ $SignalRatingPoints == 1.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star1half" title="Meh - 1.5 stars"></i>
+                                          <input type="radio" name="rating1" value="1"  {{ $SignalRatingPoints == 1 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star1" title="Sucks big time - 1 star"></i>
+                                          <input type="radio" name="rating1" value="0.5"  {{ $SignalRatingPoints == 0.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="starhalf" title="Sucks big time - 0.5 stars"></i>
+                                        </fieldset>
                                       </div>
                                     </div>
                                   </div>
+                                  @if(Session::has('client'))
+                                    <div class="card mt-3">
+                                      <div class="card">
+                                          <div class="card-header">
+                                              Your Rating
+                                          </div>
+                                          <div class="card-body">
+                                            @php 
+                                              $clientData = Session::get('client');
+                                              $userId   = $clientData['id'];
+                                              $UserSignalRatingPoints = $signalData->GetUSerRatingPoints($userId); 
+                                            @endphp
+                                            <fieldset class="rating">
+                                              <input type="radio" id="star5" name="rating" value="5" {{ $UserSignalRatingPoints == 5 ? 'checked' : '' }}/><i class="fa fa-star full ratingPick" for="star5" title="Awesome - 5 stars"></i>
+                                              <input type="radio" id="star4half" name="rating" value="4.5" {{ $UserSignalRatingPoints == 4.5 ? 'checked' : '' }}/><i class="fa fa-star half ratingPick" for="star4half" title="Pretty good - 4.5 stars"></i>
+                                              <input type="radio" id="star4" name="rating" value="4" {{ $UserSignalRatingPoints == 4 ? 'checked' : '' }}/><i class = "fa fa-star full ratingPick" for="star4" title="Pretty good - 4 stars"></i>
+                                              <input type="radio" id="star3half" name="rating" value="3.5" {{ $UserSignalRatingPoints == 3.5 ? 'checked' : '' }}/><i class="fa fa-star half ratingPick" for="star3half" title="Meh - 3.5 stars"></i>
+                                              <input type="radio" id="star3" name="rating" value="3" {{ $UserSignalRatingPoints == 3 ? 'checked' : '' }}/><i class = "fa fa-star full ratingPick" for="star3" title="Meh - 3 stars"></i>
+                                              <input type="radio" id="star2half" name="rating" value="2.5" {{ $UserSignalRatingPoints == 2.5 ? 'checked' : '' }}/><i class="fa fa-star half ratingPick" for="star2half" title="Kinda bad - 2.5 stars"></i>
+                                              <input type="radio" id="star2" name="rating" value="2" {{ $UserSignalRatingPoints == 2 ? 'checked' : '' }}/><i class = "fa fa-star full ratingPick" for="star2" title="Kinda bad - 2 stars"></i>
+                                              <input type="radio" id="star1half" name="rating" value="1.5" {{ $UserSignalRatingPoints == 1.5 ? 'checked' : '' }}/><i class="fa fa-star half ratingPick" for="star1half" title="Meh - 1.5 stars"></i>
+                                              <input type="radio" id="star1" name="rating" value="1" {{ $UserSignalRatingPoints == 1 ? 'checked' : '' }}/><i class = "fa fa-star full ratingPick" for="star1" title="Sucks big time - 1 star"></i>
+                                              <input type="radio" id="starhalf" name="rating" value="0.5" {{ $UserSignalRatingPoints == 0.5 ? 'checked' : '' }}/><i class="fa fa-star half ratingPick" for="starhalf" title="Sucks big time - 0.5 stars"></i>
+                                            </fieldset>
+                                          </div>
+                                      </div>
+                                    </div>
+                                  @endif
                                             @php
                                               $Profits = explode('@',$signalData->takeProfit);
                                               $profit = array_shift($Profits);
@@ -357,11 +397,23 @@
                                             @else
                                               <a class="replay LoginButton" href="#" data-toggle="modal" data-target="#requestQuoteModal">Reply</a>
                                             @endif
-                                            <a class="ml-3" data-toggle="collapse" data-target="#demo{{$comment->id}}">View Replies <span class="text-dark">({{count($replys)}})</span></a>
-                                            <!-- <span aria-hidden="true"> · </span>
-                                            <i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
-                                            <span aria-hidden="true"> · </span>
-                                            <span>26m</span> -->
+                                            <a class="ml-3" data-toggle="collapse" data-target="#demo{{$comment->id}}">View Replies <span class="text-dark">({{count($replys)}})</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            @php
+                                                $clientLikeshow = 0;
+                                                if (Session::has('client')) {
+                                                    $value = Session::get('client');
+                                                    $clientLike = App\Models\SignalCommmentLikeModel::where('signalCommentId',$comment->id)->where('userId',$value['id'])->first();
+                                                    if ($clientLike) {
+                                                        $clientLikeshow = 1;
+                                                    }
+                                                }
+                                                $likeComment = $comment->getCommentLike();
+                                                $dislikeComment = $comment->getCommentDislike();
+                                            @endphp
+                                            <span CommentId="{{$comment->id}}" class="likeForm likeForm1 {{!Session::has('client') ? "LoginButton" : ''}} {{$clientLikeshow == 1 ? ($clientLike->liked == 1 ? 'text-primary' :'') : '' }}" text="{{$clientLikeshow == 1 ? ($clientLike->liked == 1 ? 'text-primary' :'') : ''  }}" value="1" {{!Session::has('client') ? "data-toggle=modal data-target=#requestQuoteModal" : ''}}> <i class="fa fa-thumbs-up"></i> </span>
+                                            (<span class="totalLiked text-primary">{{$likeComment}}</span>)
+                                            (<span class="totalDisliked text-danger">{{$dislikeComment}}</span>)
+                                            <span CommentId="{{$comment->id}}" class="likeForm disLikeForm1 {{!Session::has('client') ? "LoginButton" : ''}} {{$clientLikeshow == 1 ? ($clientLike->liked == 0 ? 'text-danger' :'') : ''  }}" text="{{$clientLikeshow == 1 ? ($clientLike->liked == 0 ? 'text-danger' :'') : ''  }}" value="0" {{!Session::has('client') ? "data-toggle=modal data-target=#requestQuoteModal" : ''}}><i class="fa fa-thumbs-up" style="transform: rotate(174deg);"></i></span>
                                           </div>
                                           <div id="demo{{$comment->id}}" class="collapse">
                                             @foreach($replys as $reply)
@@ -398,11 +450,23 @@
                                                           <a class="replay" commentId="{{$comment->id}}" replyId="{{$reply->reply}}" replyCommentMember="{{$reply->memberId}}">Reply</a>
                                                         @else
                                                           <a class="replay LoginButton" href="#" data-toggle="modal" data-target="#requestQuoteModal" href="javascript_void(0)">Reply</a>
-                                                        @endif
-                                                        <!-- <span aria-hidden="true"> · </span>
-                                                        <i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
-                                                        <span aria-hidden="true"> · </span>
-                                                        <span>26m</span> -->
+                                                        @endif&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        @php
+                                                            $clientLikeshow = 0;
+                                                            if (Session::has('client')) {
+                                                                $value = Session::get('client');
+                                                                $clientLike = App\Models\SignalCommmentLikeModel::where('signalCommentId',$reply->id)->where('userId',$value['id'])->first();
+                                                                if ($clientLike) {
+                                                                    $clientLikeshow = 1;
+                                                                }
+                                                            }
+                                                            $likeComment = $reply->getCommentLike();
+                                                            $dislikeComment = $reply->getCommentDislike();
+                                                        @endphp
+                                                        <span CommentId="{{$reply->id}}" class="likeForm likeForm1 {{!Session::has('client') ? "LoginButton" : ''}} {{$clientLikeshow == 1 ? ($clientLike->liked == 1 ? 'text-primary' :'') : '' }}" text="{{$clientLikeshow == 1 ? ($clientLike->liked == 1 ? 'text-primary' :'') : ''  }}" value="1" {{!Session::has('client') ? "data-toggle=modal data-target=#requestQuoteModal" : ''}}> <i class="fa fa-thumbs-up"></i> </span>
+                                                        (<span class="totalLiked text-primary">{{$likeComment}}</span>)
+                                                        (<span class="totalDisliked text-danger">{{$dislikeComment}}</span>)
+                                                        <span CommentId="{{$reply->id}}" class="likeForm disLikeForm1 {{!Session::has('client') ? "LoginButton" : ''}} {{$clientLikeshow == 1 ? ($clientLike->liked == 0 ? 'text-danger' :'') : ''  }}" text="{{$clientLikeshow == 1 ? ($clientLike->liked == 0 ? 'text-danger' :'') : ''  }}" value="0" {{!Session::has('client') ? "data-toggle=modal data-target=#requestQuoteModal" : ''}}><i class="fa fa-thumbs-up" style="transform: rotate(174deg);"></i></span>
                                                       </div>
                                                     </div>
                                                   </li>
@@ -426,6 +490,15 @@
 
                 </div>
             </div>
+            @if(Session::has('error1'))
+              <div class="errorModule pre-header">
+                <div class="errorIcon" style="margin-left: 40%;">
+                  <i class="fa fa-lock"></i>
+                </div>
+                <div class="errorMsg">{{Session::get('error1')}}</div>
+              </div>
+              @php Session::pull('error1') @endphp
+            @endif
         </div>
     </section>
 
@@ -433,6 +506,69 @@
 </div>
 
 <style>
+  /* blur style start */
+    .blur{
+        height:110% !important;
+        -webkit-filter: blur(5px); -moz-filter: blur(5px); -o-filter: blur(5px); -ms-filter: blur(5px); filter: blur(5px);
+    }
+  /* blur style end */
+  /* error Modele style start */
+    .errorModule {
+      padding:15px;
+      position: fixed;
+      top: 50%;
+      left: 45%;
+      color: #fff;
+    }
+    @media only screen and (max-width: 800px) {
+      .errorModule {
+        left: 15%;
+      }
+    }
+    .errorModule .errorIcon {
+      font-size: 50px;
+      margin: 15px;
+    }
+    .errorModule .errorMsg {
+      font-size: 30px;
+    }
+  /* error Modele style end */
+  /* Star Rating style start */
+    .rating,.rating1 { 
+      border: none;
+      float: left;
+      position:relative;
+    }
+
+    .rating > input,.rating1 > input { display: none; } 
+    .rating > i:before,.rating1 > i:before { 
+      margin: 5px;
+      font-size: 1.25em;
+    }
+
+    .rating > .half:before,.rating1 > .half:before { 
+      content: "\f089";
+      position: absolute;
+      top: -5px;
+    }
+
+    .rating > i,.rating1 > i { 
+      color: #ddd; 
+      float: right; 
+    }
+
+    /***** CSS Magic to Highlight Stars on Hover *****/
+
+    .rating1 > input:checked ~ i, /* show gold star when clicked */
+    .rating > input:checked ~ i, /* show gold star when clicked */
+    .rating:not(:checked) > i:hover, /* hover current star */
+    .rating:not(:checked) > i:hover ~ i { color: #FFD700;  } /* hover previous stars in list */
+
+    .rating > input:checked + i:hover, /* hover current star when changing rating */
+    .rating > input:checked ~ i:hover,
+    .rating > i:hover ~ input:checked ~ i, /* lighten current selection */
+    .rating > input:checked ~ i:hover ~ i { color: #FFED85;  } 
+  /* Star Rating style end */
     /* counter Styling start */
 
     #clockdiv{
@@ -521,11 +657,29 @@
 </style>
 
 @include('inc.footer')
+<script>
+  $(".ratingPick").on("click",function(){
+    var ratingPoints = $(this).attr('for');
+    $("#"+ratingPoints).attr("checked",true);
+    var ratingPointsValue = $("#"+ratingPoints).val();
+    console.log(ratingPoints);
+    var url12 = "{{URL::to('signal/UserSignalRating')}}" + "/" + "{{$signalData->id}}" + "/" + ratingPointsValue;
+    console.log(url12);
+      $.ajax({
+          type: "Post",
+          url: url12,
+
+          success: function(response) {
+              console.log("success");
+          },
+          error: function(data) {
+              console.log("fail");
+          }
+      });
+
+  })
+</script>
 <style>
-		.pre-header {
-    		background-image: linear-gradient(45deg, #ff0024, #0d5fe9);
-    		color: white;
-		}
 		@media all and (min-width: 992px) {
 			.navbar .nav-item .dropdown-menu{  display:block; opacity: 0;  visibility: hidden; transition:.3s; margin-top:0;  }
 			.navbar .nav-item:hover .nav-link{ color: #fff;  }
@@ -882,49 +1036,55 @@
         $(".likeForm").on("click",function(){
             var likeData = $(this).attr('value');
             var previousClass = $(this).attr('text');
+            var CommentId = $(this).attr('CommentId');
+            console.log(CommentId);
             if (likeData == 0) {
                 if (previousClass == null || previousClass == "") {
-                    var ifd = $(".likeForm1").attr('text');
+                    var ifd = $(this).parent().children(".likeForm1").attr('text');
                     console.log(ifd);
                     if (ifd != null && ifd != "") {
                         var like1 = $(".totalLiked").html();
-                        $(".totalLiked").html(--like1);
-                        $(".likeForm1").attr('class','likeForm likeForm1');
-                        $(".likeForm1").attr('text','');
+                        $(this).parent().children(".totalLiked").html(--like1);
+                        $(this).parent().children(".likeForm1").attr('class','likeForm likeForm1');
+                        $(this).parent().children(".likeForm1").attr('text','');
                     }
                     $(this).attr('class','likeForm disLikeForm1 text-danger');
                     $(this).attr('text','text-danger');
-                    var dislike = $(".totalDisliked").html();
-                    $(".totalDisliked").html(++dislike);
+                    var dislike = $(this).parent().children(".totalDisliked").html();
+                    $(this).parent().children(".totalDisliked").html(++dislike);
                 }else{
                     $(this).attr('class','likeForm disLikeForm1');
                     $(this).attr('text','');
-                    var dislike = $(".totalDisliked").html();
-                    $(".totalDisliked").html(--dislike);
+                    var dislike = $(this).parent().children(".totalDisliked").html();
+                    $(this).parent().children(".totalDisliked").html(--dislike);
                 }
             }else{
                 if (previousClass == null || previousClass == "") {
-                    var ifd1 = $(".disLikeForm1").attr('text');
+                    var ifd1 = $(this).parent().children(".disLikeForm1").attr('text');
                     console.log(ifd1);
                     if (ifd1 != null && ifd1 != "") {
                     console.log(ifd1);
-                        var dislike1 = $(".totalDisliked").html();
-                        $(".totalDisliked").html(--dislike1);
-                        $(".disLikeForm1").attr('class','likeForm disLikeForm1');
-                        $(".disLikeForm1").attr('text','');
+                        var dislike1 = $(this).parent().children(".totalDisliked").html();
+                        $(this).parent().children(".totalDisliked").html(--dislike1);
+                        $(this).parent().children(".disLikeForm1").attr('class','likeForm disLikeForm1');
+                        $(this).parent().children(".disLikeForm1").attr('text','');
                     }
                     $(this).attr('class','likeForm likeForm1 text-primary');
                     $(this).attr('text','text-primary');
-                    var like = $(".totalLiked").html();
-                    $(".totalLiked").html(++like);
+                    var like = $(this).parent().children(".totalLiked").html();
+                    $(this).parent().children(".totalLiked").html(++like);
                 }else{
                     $(this).attr('class','likeForm likeForm1');
                     $(this).attr('text','');
-                    var like = $(".totalLiked").html();
-                    $(".totalLiked").html(--like);
+                    var like = $(this).parent().children(".totalLiked").html();
+                    $(this).parent().children(".totalLiked").html(--like);
                 }
             }
-            var url = "{{URL::to('signal/like')}}" + "/" + "{{$signalData->id}}" + "/" + likeData;
+            if (CommentId != undefined) {
+              var url = "{{URL::to('signal/commentlike')}}" + "/" + CommentId + "/" + likeData;
+            }else{
+              var url = "{{URL::to('signal/like')}}" + "/" + "{{$signalData->id}}" + "/" + likeData;
+            }
             $.ajax({
                   type: "POST",
                   url: url,

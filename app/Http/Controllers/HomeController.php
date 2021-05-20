@@ -32,7 +32,6 @@ use App\Models\AllStatesModel;
 use App\Models\AllCountriesModel;
 use App\Models\OtherPagesContentModel;
 use App\Models\NonRegisterVisitorModel;
-use App\Models\ActiveOnSiteModel;
 use App\Models\ClientNotificationModel;
 use App\Models\FundamentalModel;
 use App\Models\AnalysisModel;
@@ -40,6 +39,7 @@ use App\Models\SignalsModel;
 use App\Models\BasicTrainingModel;
 use App\Models\HabbitTrainingModel;
 use App\Models\MetaTagsModel;
+use App\Models\ApiHomeModel;
 
 class HomeController extends Controller
 {
@@ -55,7 +55,8 @@ class HomeController extends Controller
         $StarSignalsHome = SignalsModel::orderBy('id','desc')->where('star',1)->where('expired',0)->where('status',0)->skip(0)->take(6)->get();
         $LatestBasicTraining = BasicTrainingModel::orderBy('id','desc')->where('status',0)->skip(0)->take(5)->get();
         $LatestHabbitTraining = HabbitTrainingModel::orderBy('id','desc')->where('status',0)->skip(0)->take(5)->get();
-        return view('home.index',compact('LatestFundamental','LatestAnalysis','LatestBrokerNews','latestWebinars','LatestBlogsData','StarBrokerHome','StarSignalsHome','LatestBasicTraining','LatestHabbitTraining','meta'));
+        $MainHomeApi = ApiHomeModel::where('area','Top')->where('trash',0)->first();
+        return view('home.index',compact('LatestFundamental','LatestAnalysis','LatestBrokerNews','latestWebinars','LatestBlogsData','StarBrokerHome','StarSignalsHome','LatestBasicTraining','LatestHabbitTraining','meta','MainHomeApi'));
     }
     public function ClientNotificationView(Request $request,$id){
         $ClientNotification = ClientNotificationModel::where('id',$id)->first();
@@ -87,35 +88,6 @@ class HomeController extends Controller
             $request->session()->put("error",$error);
         }
         return back();
-    }
-    public function unRegisterUserSave(Request $request){
-        $selectedTime = date("Y-m-d H:i:s");
-        $endTime = strtotime("-8 seconds", strtotime($selectedTime));
-        $formatted_date =  date('Y-m-d H:i:s', $endTime);
-        $result = ActiveOnSiteModel::where('created_at','<=',$formatted_date)->get();
-        foreach($result as $ret){
-            $ret->delete();
-        }
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $exitData = ActiveOnSiteModel::where('userId',$ip)->first();
-        if(!isset($exitData)){
-            $data = new ActiveOnSiteModel;
-            $useragent = $_SERVER['HTTP_USER_AGENT'];
-            if(stripos($useragent, "Android") || stripos($useragent, "iPhone") || stripos($useragent, "Android") || stripos($useragent, "iOS")){
-                $data->device = "Mobile" ;
-            }elseif(stripos($useragent, "iPod") || stripos($useragent, "iPad")){
-                $data->device = "Tab";
-            }else{
-                $data->device = "Desktop";
-            }
-            $ip = $_SERVER['REMOTE_ADDR'];
-            $data->userId = $ip;
-            if ($request->session()->has('mathRander')) {
-                $mathRandor = $request->session()->get('mathRander');
-                $data->active = $mathRandor;
-            }
-            $data->save();
-        }
     }
     public function ChangePassword(){
         return view('home/changePassword');

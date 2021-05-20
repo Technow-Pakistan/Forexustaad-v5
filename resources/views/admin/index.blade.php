@@ -79,93 +79,9 @@
 						</div>
 					</div>
 				<!-- order-card end -->
-				<!-- active-user start -->
-					<div class="col-sm-4">
-						<div class="card bg-patern" style="height:430px;">
-							<div class="card-header d-flex justify-content-between">
-								<h4>Active User</h2> <strong class="activeUserAll"></strong>
-							</div>
-							<div class="card-body">
-								<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-									<div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-										<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
-									</div>
-									<div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-										<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
-									</div>
-								</div> <canvas id="chart-line" width="500" height="400" class="chartjs-render-monitor" style="display: block; width: 299px; height: 200px;"></canvas>
-								<div class="row mt-3">
-									<div class="col">
-										<h3 class="m-0">
-											<i class="fas fa-circle f-10 m-r-5 text-success"></i
-											><span class="activeMobileUser"></span>
-										</h3>
-										<span>Mobile</span>
-									</div>
-									<div class="col">
-										<h3 class="m-0">
-											<i class="fas fa-circle text-primary f-10 m-r-5"></i
-											><span class="activeDesktopUser"></span>
-										</h3>
-										<span>Desktop</span>
-									</div>
-									<div class="col">
-										<h3 class="m-0">
-											<i class="fas fa-circle text-warning f-10 m-r-5"></i
-											><span class="activeTabUser"></span>
-										</h3>
-										<span>Tab</span>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				<!-- active-user start -->
-				<!-- browser-% start -->
-					<div class="col-sm-4">
-						<div class="card table-card" style="height:430px;">
-							<div class="card-header borderless">
-								<h5>Browser States</h5>
-							</div>
-							<div class="card-body px-0 py-0">
-								<div class="table-responsive">
-									<table class="table table-hover mb-0">
-										<tbody>
-											<tr>
-												<td>Google Chrome</td>
-												<td><span class="text-right d-block m-0"><span class="m-r-15">{{$browserDataUniqueArray[0]}}%</span><span class="data-attributes" data-peity='{ "fill": ["#4099ff", "#eeeeee"],"innerRadius": 8, "radius": 13 }'>{{$browserDataUniqueArray[0]}}/100</span></span></td>
-											</tr>
-											<tr>
-												<td>Mozila Firefox</td>
-												<td><span class="text-right d-block m-0"><span class="m-r-15">{{$browserDataUniqueArray[1]}}%</span><span class="data-attributes" data-peity='{ "fill": ["#FF5370", "#eeeeee"],"innerRadius": 8, "radius": 13 }'>{{$browserDataUniqueArray[1]}}/100</span></span></td>
-											</tr>
-											<tr>
-												<td>Apple Safari</td>
-												<td><span class="text-right d-block m-0"><span class="m-r-15">{{$browserDataUniqueArray[2]}}%</span><span class="data-attributes" data-peity='{ "fill": ["#2ed8b6", "#eeeeee"],"innerRadius": 8, "radius": 13 }'>{{$browserDataUniqueArray[2]}}/100</span></span></td>
-											</tr>
-											<tr>
-												<td>Internet Explorer</td>
-												<td><span class="text-right d-block m-0"><span class="m-r-15">{{$browserDataUniqueArray[3]}}%</span><span class="data-attributes" data-peity='{ "fill": ["#7759de", "#eeeeee"],"innerRadius": 8, "radius": 13 }'>{{$browserDataUniqueArray[3]}}/100</span></span></td>
-											</tr>
-											<tr>
-												<td>Opera mini</td>
-												<td><span class="text-right d-block m-0"><span class="m-r-15">{{$browserDataUniqueArray[4]}}%</span><span class="data-attributes" data-peity='{ "fill": ["#FF9800", "#eeeeee"],"innerRadius": 8, "radius": 13 }'>{{$browserDataUniqueArray[4]}}/100</span></span></td>
-											</tr>
-											<tr>
-												<td>Microsoft Edge</td>
-												<td><span class="text-right d-block m-0"><span class="m-r-15">{{$browserDataUniqueArray[5]}}%</span><span class="data-attributes" data-peity='{ "fill": ["#152B39", "#eeeeee"],"innerRadius": 8, "radius": 13 }'>{{$browserDataUniqueArray[5]}}/100</span></span></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-				<!-- browser-% end -->
 				<!-- pending signal start -->
 					<div class="col-sm-4">
-						<div class="card table-card" style="height:430px;">
+						<div class="card table-card" style="height:455px;">
 							<div class="card-header borderless d-flex justify-content-between">
 								<h5>Signals</h5>
 								<a href="{{URL::to('ustaad/signals/add')}}">Add New Signal</a>
@@ -270,7 +186,6 @@
 																array_push($wholeData,$data)
 															@endphp
 													@endforeach
-								
 													@foreach($BlogPostLatestComments as $data)
 															@php 
 																$data['titleName'] = "Blog";
@@ -284,7 +199,7 @@
 	}
 	usort($wholeData, "date_sort");
 @endphp
-				<div class="col-md-12">
+				<div class="col-md-8">
 					<div class="card table-card">
 						<div class="card-header borderless">
 							<h5>Recent Comment</h5>
@@ -594,47 +509,3 @@
     // [ crypto-chart ] end
 </script>
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
-
-<script>
-    $(document).ready(function() {
-		var ctx = $("#chart-line");
-		var timer = setInterval(() => {
-			$.ajax({
-				type: "Post",
-				url: "{{URL::to('ustaad/GetRealTimeData/Get')}}",
-
-				success: function(response) {
-					var json = $.parseJSON(response);
-					// console.log(json[3].length);
-					$(".activeUserAll").text(json[0].length);
-					$(".activeMobileUser").text(json[1].length);
-					$(".activeDesktopUser").text(json[2].length);
-					$(".activeTabUser").text(json[3].length);
-					if (json[1].length != 0 || json[2].length != 0 || json[3].length != 0) {
-						$("#chart-line").css('display','block');
-						var myLineChart = new Chart(ctx, {
-							type: 'doughnut',
-							data: {
-								labels: ["Mobile", "Desktop", "Tab"],
-								datasets: [{
-									data: [json[1].length, json[2].length, json[3].length],
-									backgroundColor: ["#2ed8b6", "#4099ff", "#ffcb80"]
-								}]
-							},
-							options: {
-							}
-						});
-
-					}else{
-						$("#chart-line").css('display','none');
-					}
-				},
-				error: function(data) {
-					console.log("fail");
-				}
-			});
-
-		}, 5000);
-    });
-</script>

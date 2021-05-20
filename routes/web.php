@@ -46,7 +46,6 @@ use App\Http\Controllers\FundamentalController;
 use App\Http\Controllers\SponoserAddController;
 use App\Http\Controllers\MidBannerController;
 use App\Http\Controllers\MetaTagsController;
-use App\Http\Controllers\ChatBoxController;
 use App\Models\AdminMemberDetailModel;
 use Stevebauman\Location\Facades\Location;
 use App\Models\ClientRegistrationModel;
@@ -90,7 +89,6 @@ Route::post('reset-password', 'App\Http\Controllers\Auth\ResetPasswordController
 
 
 
-
 // Pusher Routes
 Route::get('/successData3', [MidBannerController::class, 'getPosts']);
 Route::match(['get', 'post'], '/publish',[MidBannerController::class, 'savePost']);
@@ -98,113 +96,14 @@ Route::get('/channel/{message}/{message2}',[AdminController::class,'GetPusherNam
 Route::get('/tv1', function () {
     return view("home.index",["channel" => "firstChannel1", "event" => "firstEvent1"]);
 });
-Route::get('/Practice', function () {
-    $signalData = SignalsModel::orderBy('id','desc')->where('status',0)->where('pending',0)->get();
-    return view("practic",compact('signalData'));
-});
 Route::get('/sendDesktopNotification', function () {
     return view("send");
 });
-    //
-    // var screen_width = screen.width;
-    // var screen_height = screen.height;
-
-    // $ip = $_SERVER['REMOTE_ADDR'];
-    // echo $ip;
-    // die;
-    Route::get('get-ip-details', function () {
-        // $ip = '182.186.255.8';
-        // $data = Location::get($ip);
-        // dd($data);
-        // return substr(exec('getmac'), 0, 17);
-        $MAC = exec('getmac');
-
-        // Storing 'getmac' value in $MAC
-        $MAC = strtok($MAC, ' ');
-
-        // Updating $MAC value using strtok function,
-        // strtok is used to split the string into tokens
-        // split character of strtok is defined as a space
-        // because getmac returns transport name after
-        // MAC address
-        echo " $MAC";
-
-    });
-    Route::get('device',function(){
-        $useragent = $_SERVER['HTTP_USER_AGENT'];
-        // echo $useragent;
-        if(stripos($useragent, "iPod")){
-            echo "iPod";
-        }elseif (stripos($useragent, "iPad")){
-            echo "iPad";
-        }elseif (stripos($useragent, "Android")){
-            echo "Android";
-        }elseif (stripos($useragent, "iPhone")){
-            echo "iPhone";
-        }elseif (stripos($useragent, "Android")){
-            echo "Android";
-        }elseif (stripos($useragent, "iOS")){
-            echo "iOS";
-        }else{
-            echo "Desktop";
-        }
-
-    });
-        // echo URL::current() . "\n";
-        // if (URL::current() != url()->previous()) {
-        //     echo url()->previous();
-        // }
-    // Route::get('url',function(){
-    //     $url = (isset($_SERVER['HTTPS'])) ? 'https' : 'http';
-    //     $url.="://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    //     $ref = "";
-    //     if (isset($_SERVER['HTTP_REFERER'])) {
-    //         $ref = $_SERVER['HTTP_REFERER'];
-    //     }
-    //     echo $ref;
-    // });
-    Route::get('broswer',function(){
-        // $browser = get_browser(null, true);
-        // print_r($browser);
-        $useragent = $_SERVER['HTTP_USER_AGENT'] . "\n\n";
-        // echo $useragent;
-        if(stripos($useragent, "Chrome")){
-            echo "Chrome";
-        }elseif (stripos($useragent, "Firefox")){
-            echo "Firefox";
-        }elseif (stripos($useragent, "Opera")){
-            echo "Opera";
-        }elseif (stripos($useragent, "Edg")){
-            echo "Microsoft Edge";
-        }elseif (stripos($useragent, "Trident")){
-            echo "Internet Explorer";
-        }elseif (stripos($useragent, "iOS")){
-            echo "Internet Explorer";
-        }else{
-            echo "Desktop";
-        }
-    });
     Route::get('macEmail',function(){
         return view("home.email");
     });
-    Route::get('macAddress',function(){
-
-        // $user_ip = getenv('REMOTE_ADDR');
-        // $geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip=$user_ip"));
-        // $country = $geo["geoplugin_countryName"];
-        // $city = $geo["geoplugin_city"];
-        // echo $city;
-
-        echo $exist = $_SERVER['REMOTE_ADDR'];
-        $result = json_decode(file_get_contents('http://ip-api.io/json/' . $exist));
-        dd($result);
-
-    });
 
 Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
-    Route::post('/unRegisterUser/Save',[HomeController::class,'unRegisterUserSave']);
-    Route::post('/unRegisterUser/Delete',[HomeController::class,'unRegisterUserDelete']);
-    // Route::get('/unRegisterUser/Save',[HomeController::class,'unRegisterUserSave']);
 
     Route::get('/Basic/{id}',[AdvanceTrainingController::class,'ViewAll']);
     Route::get('/Advance/{id}',[AdvanceTrainingController::class,'ViewAll']);
@@ -308,8 +207,6 @@ Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
             $data = ClientRegistrationModel::where('id',$id)->first();
             return $data;
         });
-        Route::post('/GetReadChatMessages/{id}',[ChatBoxController::class,'GetReadChatLientMessages']);
-        Route::post('/adminMessageSend',[ChatBoxController::class,'AdminMessageSend']);
         Route::get('/clientNotification/{id}',[HomeController::class,'ClientNotificationView']);
         Route::get('/strategies',[StrategiesController::class,'ViewAll']);
         Route::get('/strategies/{id}',[StrategiesController::class,'StrategyDetail']);
@@ -319,6 +216,8 @@ Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
         Route::post('/advance/comment/add',[AdvanceCommentsController::class,'Add']);
         Route::post('/signal/comment/add',[SignalController::class,'AddComment']);
         Route::post('/signal/like/{id}/{id2}',[SignalController::class,'AddLike']);
+        Route::post('/signal/UserSignalRating/{id}/{id2}',[SignalController::class,'UserSignalRating']);
+        Route::post('/signal/commentlike/{id}/{id2}',[SignalController::class,'AddCommentLike']);
         Route::post('/blog/comment/add',[BlogController::class,'AddComment']);
         Route::get('/user-registration',[HomeController::class,'userregistration']);
         Route::post('/user-registration',[HomeController::class,'userregistrationUpdate']);
@@ -338,10 +237,6 @@ Route::get('/ustaad',[AdminController::class,'Login']);
 Route::post('/ustaad',[AdminController::class,'Index']);
 
 Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
-    Route::post('/clientDataMessage/{id}',[ChatBoxController::class,'GetClientMessage']);
-    Route::post('/GetClientInfo/{id}',[ChatBoxController::class,'GetClientInfo']);
-    Route::post('/clientMessageSend/{id}',[ChatBoxController::class,'ClientMessageSend']);
-    Route::post('/GetRealTimeData/Get',[AdminController::class,'GetRealTimeData']);
     Route::get('/latestComments',[AdminController::class,'GetLatestComment']);
     Route::get('/widgets',function(){
         return view('admin.widget-chart');

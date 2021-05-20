@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\SignalPairModel;
 use App\Models\AdminModel;
 use App\Models\SignalApiModel;
+use App\Models\SignalRatingModel;
 
 class SignalsModel extends Model
 {
@@ -37,5 +38,24 @@ class SignalsModel extends Model
     public function GetSignalApiData(){
         $data = SignalApiModel::where('signal_id',$this->id)->first();;
         return $data;
+    }
+    public function GetRatingPoints(){
+        $TotalRatingPoints = SignalRatingModel::where('signalId',$this->id)->sum('rating');
+        $countRows = SignalRatingModel::where('signalId',$this->id)->count();
+        if($countRows > 0){
+            $AverageRatingPoints = $TotalRatingPoints/$countRows;
+        }else{
+            $AverageRatingPoints = 0;
+        }
+        return $AverageRatingPoints;
+    }
+    public function GetUSerRatingPoints($userId){
+        $UserRatingPoints = SignalRatingModel::where('signalId',$this->id)->where('userId',$userId)->first();
+        if($UserRatingPoints){
+            $Rating = $UserRatingPoints->rating;
+        }else{
+            $Rating = 0;
+        }
+        return $Rating;
     }
 }

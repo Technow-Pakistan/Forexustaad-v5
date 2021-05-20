@@ -17,6 +17,8 @@ use App\Models\SignalApiKeyModel;
 use App\Models\SignalApiRecordModel;
 use App\Models\MetaTagsModel;
 use App\Models\MetaKeywordsModel;
+use App\Models\SignalCommmentLikeModel;
+use App\Models\SignalRatingModel;
 
 class SignalController extends Controller
 {
@@ -241,25 +243,34 @@ class SignalController extends Controller
                         if(($value['memberType'] == 1 || $value['memberType'] == 2) && $signalData->selectUser == "Register User"){
                             $name_page = "signal@" . $signalData->id;
                             $meta = MetaTagsModel::where('name_page',$name_page)->first();
-                            return view('home.signal.viewSignal',compact('signalData','title','comments','TotalLikes','TotalDislikes','signalApiData'));
+                            $blur = 0;
+                            return view('home.signal.viewSignal',compact('signalData','title','comments','TotalLikes','TotalDislikes','signalApiData','blur'));
                         }elseif ($value['memberType'] == 2 && $signalData->selectUser == "VIP Member") {
                             $name_page = "signal@" . $signalData->id;
                             $meta = MetaTagsModel::where('name_page',$name_page)->first();
-                            return view('home.signal.viewSignal',compact('signalData','title','comments','TotalLikes','TotalDislikes','signalApiData'));
+                            $blur = 0;
+                            return view('home.signal.viewSignal',compact('signalData','title','comments','TotalLikes','TotalDislikes','signalApiData','blur'));
                         }else{
                             $error = "Become VIP First";
-                            $request->session()->put("error",$error);
-                            return redirect('/signal');
+                            $request->session()->put("error1",$error);
+                            $blur = 1;
+                            $name_page = "signal@" . $signalData->id;
+                            $meta = MetaTagsModel::where('name_page',$name_page)->first();
+                            return view('home.signal.viewSignal',compact('signalData','title','comments','TotalLikes','TotalDislikes','signalApiData','meta','blur'));
                         }
                     }
                     $error = "Please! Login First.";
-                    $request->session()->put("error",$error);
-                    return redirect('/signal');
+                    $request->session()->put("error1",$error);
+                    $blur = 1;
+                    $name_page = "signal@" . $signalData->id;
+                    $meta = MetaTagsModel::where('name_page',$name_page)->first();
+                    return view('home.signal.viewSignal',compact('signalData','title','comments','TotalLikes','TotalDislikes','signalApiData','meta','blur'));
                 }
             }
             $name_page = "signal@" . $signalData->id;
             $meta = MetaTagsModel::where('name_page',$name_page)->first();
-            return view('home.signal.viewSignal',compact('signalData','title','comments','TotalLikes','TotalDislikes','signalApiData','meta'));
+            $blur = 0;
+            return view('home.signal.viewSignal',compact('signalData','title','comments','TotalLikes','TotalDislikes','signalApiData','meta','blur'));
         }else{
             $error = "This signal is not exist.";
             $request->session()->put("error",$error);
@@ -356,6 +367,50 @@ class SignalController extends Controller
                 $notification->link = "https://forexustaad.com/ustaad";
                 $notification->save();
             // return back();
+    }
+    public function UserSignalRating(Request $request, $id, $id2){
+        $userId = $request->session()->get('client');
+        $Data['userId'] = $userId['id'];
+        $Data['rating'] = $id2;
+        $Data['signalId'] = $id;
+        $previousRating = SignalRatingModel::where('signalId',$id)->where('userId',$userId['id'])->first();
+        if($previousRating){
+                $previousRating->fill($Data);
+                $previousRating->save();
+        }else{
+            $newRating = new SignalRatingModel;
+            $newRating->fill($Data);
+            $newRating->save();
+        }
+    }
+    public function AddCommentLike(Request $request, $id, $id2){
+            $userId = $request->session()->get('client');
+            $likeData['userId'] = $userId['id'];
+            $likeData['liked'] = $id2;
+            $likeData['signalCommentId'] = $id;
+            $previousLike = SignalCommmentLikeModel::where('signalCommentId',$id)->where('userId',$userId['id'])->first();
+            if($previousLike){
+                if ($previousLike->liked == $id2) {
+                    $previousLike->delete();
+                }else {
+                    $previousLike->fill($likeData);
+                    $previousLike->save();
+                    if ($previousLike->liked == 0) {
+                        $like = "Dislike";
+                    }else {
+                        $like = "Like";
+                    }
+                }
+            }else{
+                $newLike = new SignalCommmentLikeModel;
+                $newLike->fill($likeData);
+                $newLike->save();
+                if ($newLike->liked == 0) {
+                    $like = "Dislike";
+                }else {
+                    $like = "Like";
+                }
+            }
     }
 
     //Admin Panel
