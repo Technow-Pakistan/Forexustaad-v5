@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SignalsModel;
-use App\Models\SignalCommentsModel;
 use App\Models\SignalPairModel;
 use App\Models\SignalPairCategoryModel;
 use App\Models\SignalLikeModel;
@@ -17,8 +16,9 @@ use App\Models\SignalApiKeyModel;
 use App\Models\SignalApiRecordModel;
 use App\Models\MetaTagsModel;
 use App\Models\MetaKeywordsModel;
-use App\Models\SignalCommmentLikeModel;
 use App\Models\SignalRatingModel;
+use App\Models\AllCommentsModel;
+use App\Models\AllCommmentLikeModel;
 
 class SignalController extends Controller
 {
@@ -46,7 +46,7 @@ class SignalController extends Controller
         }
         if (isset($pairData) && count($pairData) >= $signalNumber) {
             $signalData = $pairData[$signalNumber];
-            $comments = SignalCommentsModel::orderBy('id','desc')->where('signalId', $signalData->id)->get();
+            $comments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 1)->where('objectId', $signalData->id)->get();
             $TotalLikes = SignalLikeModel::where('signalId',$signalData->id)->where('liked',1)->get();
             $TotalDislikes = SignalLikeModel::where('signalId',$signalData->id)->where('liked',0)->get();
             $title = "Signal";
@@ -240,12 +240,12 @@ class SignalController extends Controller
                 if ($signalData->selectUser != "Free User" && $go3 == 3) {
                     if($request->session()->has('client')){
                         $value = $request->session()->get('client');
-                        if(($value['memberType'] == 1 || $value['memberType'] == 2) && $signalData->selectUser == "Register User"){
+                        if($value['id'] != 0 && $signalData->selectUser == "Register User"){
                             $name_page = "signal@" . $signalData->id;
                             $meta = MetaTagsModel::where('name_page',$name_page)->first();
                             $blur = 0;
                             return view('home.signal.viewSignal',compact('signalData','title','comments','TotalLikes','TotalDislikes','signalApiData','blur'));
-                        }elseif ($value['memberType'] == 2 && $signalData->selectUser == "VIP Member") {
+                        }elseif ($value['memberType'] != 1 && $signalData->selectUser == "VIP Member") {
                             $name_page = "signal@" . $signalData->id;
                             $meta = MetaTagsModel::where('name_page',$name_page)->first();
                             $blur = 0;
@@ -276,59 +276,6 @@ class SignalController extends Controller
             $request->session()->put("error",$error);
             return redirect('/');
         }
-    }
-    public function AddComment(Request $request){
-            $data = new SignalCommentsModel;
-            $data->fill($request->all());
-            $data->save();
-            $signalData = SignalsModel::where('id',$data->signalId)->first();
-            $signalPair = SignalPairModel::where('id',$signalData->forexPairs)->first();
-            if ($data->reply == 0 ) {
-                $comment = "comment";
-            }else{
-                $comment = "reply";
-
-                // Pusher Notification Start
-                $ClientData = ClientRegistrationModel::where('id',$data->replyCommentMember)->first();
-
-                $pairNo = SignalsModel::where('forexPairs',$signalData->forexPairs)->get();
-                for ($i=0; $i < count($pairNo) ; $i++) {
-                    if ($pairNo[$i]->id == $signalData->id) {
-                        $no = $i;
-                    }
-                }
-                $pair = str_replace('/','-',$signalPair->pair);
-                if ($no !== 0) {
-                    $pair = $pair . $no;
-                }
-
-                $url = str_replace("/", "-",$signalPair->pair);
-                $adminData = $request->session()->get("client");
-                $messageData['userId'] = $adminData['id'];
-                $messageData['userType'] = 1;
-                $messageData['email'] = $ClientData['email'];
-                $messageData['message'] = "Reply Your Comment.";
-                $messageData['link'] = "signal" . "/" . $pair;
-                $clientNotification = new ClientNotificationModel;
-                $clientNotification->fill($messageData);
-                $clientNotification->save();
-                $messageData['id'] = $clientNotification->id;
-                PusherModel::BoardCast($ClientData['email'],"firstEvent",["message" => $messageData]);
-                // Pusher Notification End
-
-            }
-            $userID = $request->session()->get('client');
-                $notification = new NotificationModel;
-                $notification->userId = $userID->id;
-                $notification->userType = 1;
-                $notification->text = "Add $comment in $signalPair->pair singnal.";
-                $notification->link = "ustaad/signals/comment/$data->signalId";
-                $previousData = NotificationModel::where('link',$notification->link)->first();
-                if ($previousData) {
-                    $previousData->delete();
-                }
-                $notification->save();
-            return back();
     }
     public function AddLike(Request $request, $id, $id2){
             $userId = $request->session()->get('client');
@@ -383,35 +330,6 @@ class SignalController extends Controller
             $newRating->save();
         }
     }
-    public function AddCommentLike(Request $request, $id, $id2){
-            $userId = $request->session()->get('client');
-            $likeData['userId'] = $userId['id'];
-            $likeData['liked'] = $id2;
-            $likeData['signalCommentId'] = $id;
-            $previousLike = SignalCommmentLikeModel::where('signalCommentId',$id)->where('userId',$userId['id'])->first();
-            if($previousLike){
-                if ($previousLike->liked == $id2) {
-                    $previousLike->delete();
-                }else {
-                    $previousLike->fill($likeData);
-                    $previousLike->save();
-                    if ($previousLike->liked == 0) {
-                        $like = "Dislike";
-                    }else {
-                        $like = "Like";
-                    }
-                }
-            }else{
-                $newLike = new SignalCommmentLikeModel;
-                $newLike->fill($likeData);
-                $newLike->save();
-                if ($newLike->liked == 0) {
-                    $like = "Dislike";
-                }else {
-                    $like = "Like";
-                }
-            }
-    }
 
     //Admin Panel
 
@@ -432,51 +350,41 @@ class SignalController extends Controller
         }
         $success = "This signal has been verified successfully.";
         $request->session()->put("success",$success);
-        //     // Pusher Notification Start
-        //     $getUrl = $signal->GetURL();
-        //     $adminData = $request->session()->get("admin");
-        //     $messageData['userId'] = $adminData['id'];
-        //     $messageData['userType'] = 0;
-        //     $messageData['message'] = "Added a New Signal.";
-        //     $messageData['link'] = "signal/" . $getUrl;
-        //     $clientNotification = new ClientNotificationModel;
-        //     $clientNotification->fill($messageData);
-        //     $clientNotification->save();
-        //     $messageData['id'] = $clientNotification->id;
-        //     PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
-        //     // Pusher Notification End
-        //     $signalPair = SignalPairModel::where('id',$signal->forexPairs)->first();
-        //     $data44 = [
-        //         'title' => $signalPair->pair,
-        //         'message' => "Forexustaad Added A New Signal.",
-        //         'url' => "https://forexustaad.com/signal" ."/" . $getUrl,
-        //     ];
-        //     $request->session()->put('desktopNotification',$data44);
+            // Pusher Notification Start
+            $getUrl = $signal->GetURL();
+            $adminData = $request->session()->get("admin");
+            $messageData['userId'] = $adminData['id'];
+            $messageData['userType'] = 0;
+            $messageData['message'] = "Added a New Signal.";
+            $messageData['link'] = "signal/" . $getUrl;
+            $clientNotification = new ClientNotificationModel;
+            $clientNotification->fill($messageData);
+            $clientNotification->save();
+            $messageData['id'] = $clientNotification->id;
+            PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+            // Pusher Notification End
+            $signalPair = SignalPairModel::where('id',$signal->forexPairs)->first();
+            $data44 = [
+                'title' => $signalPair->pair,
+                'message' => "Forexustaad Added A New Signal.",
+                'url' => "https://forexustaad.com/signal" ."/" . $getUrl,
+            ];
+            $request->session()->put('desktopNotification',$data44);
 
 
         return back();
     }
     public function Comment(Request $request,$id){
-        $comments = SignalCommentsModel::where('signalId',$id)->get();
+        $comments = AllCommentsModel::where('commentPageId', 1)->where('objectId', $id)->get();
         return view('admin.comment.ViewSignalComment',compact('comments'));
     }
     public function CommentAdd(Request $request){
-        $comments = new SignalCommentsModel;
-        $comments->fill($request->all());
-        $comments->save();
-        $memberId = SignalCommentsModel::where('id',$comments->commentId)->first();
-        $member = ClientRegistrationModel::where('id',$memberId->memberId)->first();
-        $adminData = $request->session()->get("admin");
-        $messageData['email'] = $member->email;
-        $messageData['userId'] = $adminData['id'];
-        $messageData['userType'] = 0;
-        $messageData['message'] = "Reply your comment.";
-        $messageData['link'] = "signal/" . $comments->signalId;
-        $clientNotification = new ClientNotificationModel;
-        $clientNotification->fill($messageData);
-        $clientNotification->save();
-        $messageData['id'] = $clientNotification->id;
-        PusherModel::BoardCast($member->email,"firstEvent",["message" => $messageData]);
+        $reply = new AllCommentsModel;
+        $reply->commentPageId = 1;
+        $reply->fill($request->all());
+        $reply->save();
+        $success = "Your reply has been saved successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
     public function Index(Request $request){
@@ -535,28 +443,28 @@ class SignalController extends Controller
             $newMeta->keywordsimp = implode(",",$request->metaKeywords);
             $newMeta->save();
         // meta Tags save end
-        // if ($signal->pending != 1) {
-        //     // Pusher Notification Start
-        //     $getUrl = $signal->GetURL();
-        //     $adminData = $request->session()->get("admin");
-        //     $messageData['userId'] = $adminData['id'];
-        //     $messageData['userType'] = 0;
-        //     $messageData['message'] = "Added a New Signal.";
-        //     $messageData['link'] = "signal/" . $getUrl;
-        //     $clientNotification = new ClientNotificationModel;
-        //     $clientNotification->fill($messageData);
-        //     $clientNotification->save();
-        //     $messageData['id'] = $clientNotification->id;
-        //     PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
-        //     // Pusher Notification End
-        //     $signalPair = SignalPairModel::where('id',$signal->forexPairs)->first();
-        //     $data44 = [
-        //         'title' => $signalPair->pair,
-        //         'message' => "Forexustaad Added A New Signal.",
-        //         'url' => "https://forexustaad.com/signal" ."/" . $getUrl,
-        //     ];
-        //     $request->session()->put('desktopNotification',$data44);
-        // }
+        if ($signal->pending != 1) {
+            // Pusher Notification Start
+            $getUrl = $signal->GetURL();
+            $adminData = $request->session()->get("admin");
+            $messageData['userId'] = $adminData['id'];
+            $messageData['userType'] = 0;
+            $messageData['message'] = "Added a New Signal.";
+            $messageData['link'] = "signal/" . $getUrl;
+            $clientNotification = new ClientNotificationModel;
+            $clientNotification->fill($messageData);
+            $clientNotification->save();
+            $messageData['id'] = $clientNotification->id;
+            PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+            // Pusher Notification End
+            $signalPair = SignalPairModel::where('id',$signal->forexPairs)->first();
+            $data44 = [
+                'title' => $signalPair->pair,
+                'message' => "Forexustaad Added A New Signal.",
+                'url' => "https://forexustaad.com/signal" ."/" . $getUrl,
+            ];
+            $request->session()->put('desktopNotification',$data44);
+        }
         $signalPair = SignalPairModel::where('id',$signal->forexPairs)->first();
         $signalApiKey = SignalApiKeyModel::where('id',1)->first();
 
@@ -730,19 +638,19 @@ class SignalController extends Controller
             $newMeta->keywordsimp = implode(",",$request->metaKeywords);
             $newMeta->save();
         // meta Tags save end
-        // // Pusher Notification Start
-        // $getUrl = $data->GetURL();
-        // $adminData = $request->session()->get("admin");
-        // $messageData['userId'] = $adminData['id'];
-        // $messageData['userType'] = 0;
-        // $messageData['message'] = "Updated a Signal.";
-        // $messageData['link'] = "signal/" . $getUrl;
-        // $clientNotification = new ClientNotificationModel;
-        // $clientNotification->fill($messageData);
-        // $clientNotification->save();
-        // $messageData['id'] = $clientNotification->id;
-        // PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
-        // // Pusher Notification End
+        // Pusher Notification Start
+        $getUrl = $data->GetURL();
+        $adminData = $request->session()->get("admin");
+        $messageData['userId'] = $adminData['id'];
+        $messageData['userType'] = 0;
+        $messageData['message'] = "Updated a Signal.";
+        $messageData['link'] = "signal/" . $getUrl;
+        $clientNotification = new ClientNotificationModel;
+        $clientNotification->fill($messageData);
+        $clientNotification->save();
+        $messageData['id'] = $clientNotification->id;
+        PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+        // Pusher Notification End
 
         // admin Notification
         $signalPair = SignalPairModel::where('id',$data->forexPairs)->first();

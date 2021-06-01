@@ -6,12 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\AdvanceTrainingModel;
 use App\Models\BasicTrainingModel;
 use App\Models\HabbitTrainingModel;
-use App\Models\AdvanceCommentsModel;
-use App\Models\BasicCommentsModel;
-use App\Models\HabbitCommentsModel;
 use App\Models\ClientNotificationModel;
 use App\Models\PusherModel;
 use App\Models\MetaTagsModel;
+use App\Models\AllCommentsModel;
 
 
 class AdvanceTrainingController extends Controller
@@ -45,11 +43,11 @@ class AdvanceTrainingController extends Controller
                 if($lecture){
                     $nextLecture = AdvanceTrainingModel::orderBy('id','asc')->where('poistion', '>' , $lecture->poistion)->first();
                     $lastLecture = AdvanceTrainingModel::orderBy('id','desc')->where('poistion', '<' , $lecture->poistion)->first();
-                    $comments = AdvanceCommentsModel::orderBy('id','desc')->where('lectureId', $lecture->id)->get();
+                    $comments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 6)->where('objectId', $lecture->id)->get();
                     $clientInformation = $request->session()->get('client');
                     $userId = $clientInformation["id"];
-                    if ($lastLecture) {
-                        $commentAllow = AdvanceCommentsModel::where('memberId', $userId)->where('lectureId',$lastLecture->id)->first();
+                    if ($lastLecture){
+                        $commentAllow = AllCommentsModel::where('commentPageId', 6)->where('objectId', $lecture->id)->first();
                     }else {
                         $commentAllow = null;
                     }
@@ -59,7 +57,7 @@ class AdvanceTrainingController extends Controller
                     $request->session()->put("error",$error);
                     return redirect('/');
                 }
-            }else {
+            }else{
                 $error = "Please! Login first to view this Advance Training.";
                 $request->session()->put("error",$error);
                 return redirect('/');
@@ -80,7 +78,7 @@ class AdvanceTrainingController extends Controller
                 $lastId = $lecture->poistion - 1;
                 $lastLecture = BasicTrainingModel::where('poistion',$lastId)->first();
                 $Lectures = BasicTrainingModel::orderBy('poistion','asc')->get();
-                $comments = BasicCommentsModel::orderBy('id','desc')->where('lectureId', $lecture->id)->get();
+                $comments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 5)->where('objectId', $lecture->id)->get();
             }else{
                 $error = "This Lecture is not exist";
                 $request->session()->put("error",$error);
@@ -101,7 +99,7 @@ class AdvanceTrainingController extends Controller
                 $lastId = $lecture->poistion - 1;
                 $lastLecture = HabbitTrainingModel::where('poistion',$lastId)->first();
                 $Lectures = HabbitTrainingModel::all();
-                $comments = HabbitCommentsModel::orderBy('id','desc')->where('lectureId', $lecture->id)->get();
+                $comments =  AllCommentsModel::orderBy('id','desc')->where('commentPageId', 7)->where('objectId', $lecture->id)->get();
             }else{
                 $error = "This Lecture is not exist";
                 $request->session()->put("error",$error);
@@ -272,27 +270,28 @@ class AdvanceTrainingController extends Controller
         return back();
     }
     public function ViewComment1(Request $request,$id){
-        $comments = BasicCommentsModel::where('lectureId',$id)->get();
+        $comments = AllCommentsModel::where('commentPageId', 5)->where('objectId',$id)->get();
         $category = 1;
         return view('admin.comment.ViewLectureComment',compact('comments','category'));
     }
     public function ViewComment2(Request $request,$id){
-        $comments = AdvanceCommentsModel::where('lectureId',$id)->get();
+        $comments = AllCommentsModel::where('commentPageId', 6)->where('objectId',$id)->get();
         $category = 2;
         return view('admin.comment.ViewLectureComment',compact('comments','category'));
     }
     public function ViewComment3(Request $request,$id){
-        $comments = HabbitCommentsModel::where('lectureId',$id)->get();
+        $comments = AllCommentsModel::where('commentPageId', 7)->where('objectId',$id)->get();
         $category = 3;
         return view('admin.comment.ViewLectureComment',compact('comments','category'));
     }
     public function SaveViewCommentReply(Request $request){
+            $reply = new AllCommentsModel;
         if($request->category == 1){
-            $reply = new BasicCommentsModel;
+            $reply->commentPageId = 5;
         }elseif($request->category == 2){
-            $reply = new AdvanceCommentsModel;
+            $reply->commentPageId = 6;
         }elseif($request->category == 3){
-            $reply = new HabbitCommentsModel;
+            $reply->commentPageId = 7;
         }
         $reply->fill($request->all());
         $reply->save();

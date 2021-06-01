@@ -2,59 +2,59 @@
     <!-- /.End of tricker -->
     <section class="after_banner_content_area">
         <div class="container">
-            <div class="row justify-content-center">
-                @php
-                    if(Session::has('error')){
-                        $error =Session::get('error');
-                    }
-                    @endphp
-                @isset($error)
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="alert alert-danger">{{$error}}</div>
-                        @php Session::pull('error') @endphp
+          <div class="row justify-content-center">
+            @php
+              if(Session::has('error')){
+                $error =Session::get('error');
+              }
+            @endphp
+              @isset($error)
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                  <div class="alert alert-danger">{{$error}}</div>
+                  @php Session::pull('error') @endphp
+                </div>
+              @endisset
+              <div class="col-lg-3 col-md-6 col-sm-12 order-2 order-lg-1">
+                  @include ('inc/home-left-sidebar')
+              </div>
+              <div class="col-lg-6 col-md-12 order-1 order-lg-2">
+
+                  <div id="signin">
+                      <h1>Change Password</h1>
+
+                      <!-- <div class="error">
+                        Oh no, an error occured!
+                      </div> -->
+                      @php
+                          $value =Session::get('client');
+                      @endphp
+                        <form class="ChangeForm" action="" method="post">
+                        <label for="" class="text-left forgetLabel">Your Email:</label>
+                          <input type="text" value="{{$value->email}}" disabled/>
+                          <input type="hidden" name="email" value="{{$value->email}}"/>
+                        <label for="" class="text-left forgetLabel">Old Password:</label>
+                          <input type="password" class="oldPassword1" name="oldPassword" placeholder="Password" required/>
+                        <label for="" class="text-left forgetLabel">Password:</label>
+                          <input type="password" class="password1" name="password" placeholder="Password" required/>
+                        <label for="" class="text-left forgetLabel">Confirm Password:</label>
+                          <input type="password" class="confirmPassword1" placeholder="Confirm Password" required/>
+
+                          <button type="submit">Change Password</button><br>
+                          <div class="error6 text-danger"></div>
+                      </form>
                     </div>
-                @endisset
-                <div class="col-lg-3 col-md-6 col-sm-12 order-2 order-lg-1">
-                    @include ('inc/home-left-sidebar')
-                </div>
-                <div class="col-lg-6 col-md-12 order-1 order-lg-2">
+                    <style>
+                      .forgetLabel{
+                        display: block;
+                        font-weight:900;
+                      }
+                    </style>
 
-                    <div id="signin">
-                        <h1>Change Password</h1>
-
-                        <!-- <div class="error">
-                          Oh no, an error occured!
-                        </div> -->
-                        @php
-                            $value =Session::get('client');
-                        @endphp
-                          <form class="ChangeForm" action="" method="post">
-                          <label for="" class="text-left forgetLabel">Your Email:</label>
-                            <input type="text" value="{{$value->email}}" disabled/>
-                            <input type="hidden" name="email" value="{{$value->email}}"/>
-                          <label for="" class="text-left forgetLabel">Old Password:</label>
-                            <input type="password" class="oldPassword1" name="oldPassword" placeholder="Password" required/>
-                          <label for="" class="text-left forgetLabel">Password:</label>
-                            <input type="password" class="password1" name="password" placeholder="Password" required/>
-                          <label for="" class="text-left forgetLabel">Confirm Password:</label>
-                            <input type="password" class="confirmPassword1" placeholder="Confirm Password" required/>
-
-                            <button type="submit">Change Password</button><br>
-                            <div class="error6 text-danger"></div>
-                        </form>
-                      </div>
-                      <style>
-                        .forgetLabel{
-                          display: block;
-                          font-weight:900;
-                        }
-                      </style>
-
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 order-3 order-lg-3">
-                    @include ('inc/home-right-sidebar')
-                </div>
-            </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-sm-12 order-3 order-lg-3">
+                  @include ('inc/home-right-sidebar')
+              </div>
+          </div>
         </div>
     </section>
 </div>

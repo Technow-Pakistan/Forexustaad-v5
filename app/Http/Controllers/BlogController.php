@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\BlogPostModel;
 use App\Models\CommentsModel;
 use App\Models\ReplyModel;
-use App\Models\BlogCommentsModel;
 use App\Models\MetaTagsModel;
 use App\Models\MetaKeywordsModel;
+use App\Models\AllCommentsModel;
 
 class BlogController extends Controller
 {
@@ -23,7 +23,7 @@ class BlogController extends Controller
             $title = $BlogDetail->mainTitle;
             $name_page = "blogPost@" . $BlogDetail->id;
             $meta = MetaTagsModel::where('name_page',$name_page)->first();
-            $comments = BlogCommentsModel::orderBy('id','desc')->where('blogId', $BlogDetail->id)->get();
+            $comments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 4)->where('objectId', $BlogDetail->id)->get();
             return view('blog.blogDetail',compact('title','BlogDetail','comments','meta'));
         }else{
             $error = "This url does not exit.";
@@ -31,26 +31,20 @@ class BlogController extends Controller
             return redirect('/');
         }
     }
-    public function AddComment(Request $request){
-        $data = new BlogCommentsModel;
-        $data->fill($request->all());
-        $data->save();
-        return back();
-    }
-
-
     // Admin Panel View
 
     public function Comment(Request $request,$id){
-        $comments = BlogCommentsModel::where('blogId',$id)->get();
-
+        $comments = AllCommentsModel::where('commentPageId', 4)->where('objectId', $id)->get();
         return view('admin.comment.ViewBlogComment',compact('comments'));
     }
 
     public function CommentAdd(Request $request){
-        $comments = new BlogCommentsModel;
-        $comments->fill($request->all());
-        $comments->save();
+        $reply = new AllCommentsModel;
+        $reply->commentPageId = 4;
+        $reply->fill($request->all());
+        $reply->save();
+        $success = "Your reply has been saved successfully.";
+        $request->session()->put("success",$success);
         return back();
     }
 }

@@ -16,26 +16,26 @@
                         </div>
                     @endif
                     <div class="family">
-                                        <div>
-                                            <h4>{{$fundamental->title}}</h4>
-                                        </div>
-                                        <div class="pt-3">
-                                            @php
-                                                $Description = html_entity_decode($fundamental->detailDescription);
-                                                echo $Description;
-                                            @endphp
-                                        </div>
-                                        <div style="width:100%!important text-center">
-                                            
-                                @if($fundamental->embed != null)
-                                    @php 
-                                        echo $fundamental->embed;
-                                    @endphp
-                                @endif
-                                        
-                                        </div>
-                                
-                          </div>
+                        <div>
+                            <h4>{{$fundamental->title}}</h4>
+                        </div>
+                        <div id="shareLink"></div>
+                        <div class="pt-3">
+                            @php
+                                $Description = html_entity_decode($fundamental->detailDescription);
+                                echo $Description;
+                            @endphp
+                        </div>
+                        <div style="width:100%!important text-center">
+                            @if($fundamental->embed != null)
+                                @php 
+                                    echo $fundamental->embed;
+                                @endphp
+                            @endif
+                        </div>   
+                    </div>
+                    
+                    @include('comments.comment',['commentObjectId'=>$fundamental->id,'commentPage'=>3])
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 order-3 order-lg-3">
                     @include('inc.home-right-sidebar')
@@ -53,3 +53,4 @@
 </style>
 
 @include('inc.footer')
+@include('comments.css_js',['commentObjectId'=>$fundamental->id,'commentPage'=>3])
