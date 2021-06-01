@@ -60,7 +60,7 @@
 												@endphp
 												<tr>
 													<td>
-														<a href="{{URL::to('ustaad/signals/comment/')}}/{{$data->signalId}}" class="d-flex">
+														<a href="{{URL::to('ustaad/signals/comment/')}}/{{$data->objectId}}" class="d-flex">
 															<div>
 																<img class="rounded-circle" style="width:40px;" src="{{$memberImage}}" alt="activity-user">
 															</div>
@@ -102,7 +102,7 @@
 												@endphp
 												<tr>
 													<td>
-														<a href="{{URL::to('ustaad/post/comment/')}}/{{$data->blogId}}" class="d-flex">
+														<a href="{{URL::to('ustaad/post/comment/')}}/{{$data->objectId}}" class="d-flex">
 															<div>
 																<img class="rounded-circle" style="width:40px;" src="{{$memberImage}}" alt="activity-user">
 															</div>
@@ -144,7 +144,7 @@
 												@endphp
 												<tr>
 													<td>
-														<a href="{{URL::to('ustaad/lecture/AdvanceCategory')}}/{{$data->lectureId}}" class="d-flex">
+														<a href="{{URL::to('ustaad/advance/comment')}}/{{$data->objectId}}" class="d-flex">
 															<div>
 																<img class="rounded-circle" style="width:40px;" src="{{$memberImage}}" alt="activity-user">
 															</div>
@@ -186,7 +186,7 @@
 												@endphp
 												<tr>
 													<td>
-														<a href="{{URL::to('ustaad/lecture/BasicCategory')}}/{{$data->lectureId}}" class="d-flex">
+														<a href="{{URL::to('ustaad/basic/comment')}}/{{$data->objectId}}" class="d-flex">
 															<div>
 																<img class="rounded-circle" style="width:40px;" src="{{$memberImage}}" alt="activity-user">
 															</div>
@@ -229,7 +229,7 @@
 												<tr>
 													<td>
 
-														<a href="{{URL::to('ustaad/lecture/HabbitCategory')}}/{{$data->lectureId}}" class="d-flex">
+														<a href="{{URL::to('ustaad/habbit/comment')}}/{{$data->objectId}}" class="d-flex">
 															<div>
 																<img class="rounded-circle" style="width:40px;" src="{{$memberImage}}" alt="activity-user">
 															</div>

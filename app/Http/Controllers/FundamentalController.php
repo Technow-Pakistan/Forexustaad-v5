@@ -9,6 +9,7 @@ use App\Models\ClientNotificationModel;
 use App\Models\PusherModel;
 use App\Models\MetaTagsModel;
 use App\Models\MetaKeywordsModel;
+use App\Models\AllCommentsModel;
 
 class FundamentalController extends Controller
 {
@@ -23,14 +24,14 @@ class FundamentalController extends Controller
         if ($fundamental) {
             $name_page = "Fundamental@" . $fundamental->id;
             $meta = MetaTagsModel::where('name_page',$name_page)->first();
-            return view('home.fundamental.view',compact('fundamental','title','meta'));
+            $comments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 3)->where('objectId', $fundamental->id)->get();
+            return view('home.fundamental.view',compact('fundamental','title','meta','comments'));
         }else {
             $error = "This url does not exit.";
             $request->session()->put("error",$error);
             return redirect("/");
         }
     }
-
 
     // Admin Panel
 
@@ -179,6 +180,21 @@ class FundamentalController extends Controller
         $Fundamental->status = 1;
         $Fundamental->save();
         $success = "This fundamental has been active successfully.";
+        $request->session()->put("success",$success);
+        return back();
+    }
+    // Veiws Comment
+    public function ViewComments(Request $request,$id){
+        $comments = AllCommentsModel::where('commentPageId', 3)->where('objectId', $id)->get();
+        return view('admin.fundamental.comments',compact('comments'));
+    }
+    // Save Reply by Admin
+    public function CommentAdd(Request $request){
+        $reply = new AllCommentsModel;
+        $reply->commentPageId = 3;
+        $reply->fill($request->all());
+        $reply->save();
+        $success = "Your reply has been saved successfully.";
         $request->session()->put("success",$success);
         return back();
     }

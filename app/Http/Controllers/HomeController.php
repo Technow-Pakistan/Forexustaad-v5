@@ -40,10 +40,45 @@ use App\Models\BasicTrainingModel;
 use App\Models\HabbitTrainingModel;
 use App\Models\MetaTagsModel;
 use App\Models\ApiHomeModel;
+use App\Models\BlogCommentsModel;
+use App\Models\AllCommentsModel;
 
 class HomeController extends Controller
 {
-
+    public function uploadCsv(){
+        $oldData = BlogCommentsModel::all();
+        foreach ($oldData as $data) {
+            $newData = new AllCommentsModel;
+            $newData->comment = $data->comment;
+            $newData->memberId = $data->memberId;
+            $newData->userType = $data->userType;
+            $newData->commentId = $data->commentId;
+            $newData->status = $data->status;
+            $newData->reply = $data->reply;
+            $newData->objectId = $data->blogId;
+            $newData->replyName = $data->replyName;
+            $newData->commentPageId = 4;
+            $newData->created_at = $data->created_at;
+            $newData->updated_at = $data->updated_at;
+            $newData->save();
+        }
+    }
+    public function csv(){
+        $file = fopen("public/txt.csv","w");
+        $meta = SignalCommentsModel::all();
+        $keysValues = $meta[0]->toArray();
+        $keys = array_keys($keysValues);
+        $keyString = implode(",",$keys);
+        fwrite($file,$keyString . "\r\n");
+        foreach ($meta as $met) {
+            $values = $met->toArray();
+            $comments = $values['comment'];
+            $values['comment'] =  str_replace("\r\n","</br>",$comments);
+            $value = implode(",",$values);
+            fwrite($file,$value . "\r\n");
+        }
+        fclose($file);
+    }
     public function Index(){
         $meta = MetaTagsModel::where('name_page','Home')->first();
         $LatestFundamental = FundamentalModel::orderBy('id','desc')->where('status',1)->skip(0)->take(4)->get();

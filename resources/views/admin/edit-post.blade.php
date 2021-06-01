@@ -324,7 +324,7 @@
                               <div class="form-group">
                                  <label for="">Parent Category</label>
                                  <select name="Pcategory" id="selectedIndex" class="form-control partentcat">
-                                    @if($value['memberId'] == 1)
+                                    @if($value['memberId'] == 1 || $value["memberId"] == 2)
                                        <option value="None" selected>None</option>
                                     @endif
                                     @foreach($allMainCategory as $mainCategory)

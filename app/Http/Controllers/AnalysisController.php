@@ -9,6 +9,7 @@ use App\Models\ClientNotificationModel;
 use App\Models\PusherModel;
 use App\Models\MetaTagsModel;
 use App\Models\MetaKeywordsModel;
+use App\Models\AllCommentsModel;
 
 class AnalysisController extends Controller
 {
@@ -23,15 +24,14 @@ class AnalysisController extends Controller
         if ($analysis) {
             $name_page = "Analysis@" . $analysis->id;
             $meta = MetaTagsModel::where('name_page',$name_page)->first();
-            return view('home.analysis.view',compact('analysis','title','meta'));
+            $comments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 2)->where('objectId', $analysis->id)->get();
+            return view('home.analysis.view',compact('analysis','title','meta','comments'));
         }else {
             $error = "This url does not exit.";
             $request->session()->put("error",$error);
             return redirect("/");
         }
     }
-
-
     // Admin Panel
 
     public function Index(Request $request){
@@ -169,6 +169,21 @@ class AnalysisController extends Controller
         $Analysis->status = 1;
         $Analysis->save();
         $success = "This analysis has been active successfully.";
+        $request->session()->put("success",$success);
+        return back();
+    }
+    // Veiws Comment
+    public function ViewComments(Request $request,$id){
+        $comments = AllCommentsModel::where('commentPageId', 2)->where('objectId', $id)->get();
+        return view('admin.analysis.comments',compact('comments'));
+    }
+    // Save Reply by Admin
+    public function CommentAdd(Request $request){
+        $reply = new AllCommentsModel;
+        $reply->commentPageId = 2;
+        $reply->fill($request->all());
+        $reply->save();
+        $success = "Your reply has been saved successfully.";
         $request->session()->put("success",$success);
         return back();
     }

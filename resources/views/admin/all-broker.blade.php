@@ -91,7 +91,7 @@
 															@if($data->pending == 0)
 																<span class="badge {{((($paymentDate >= $contractDateBegin) && ($paymentDate <= $contractDateEnd)) || $data->neverEnd == 1) ? 'badge-light-success' : 'badge-light-danger'}}">{{((($paymentDate >= $contractDateBegin) && ($paymentDate <= $contractDateEnd)) || $data->neverEnd == 1) ? 'Active' : 'Deactive'}}</span>
 																<div class="overlay-edit">
-																	@if($value['memberId'] == 1)
+																	@if($value['memberId'] == 1 || $value["memberId"] == 2)
 																		<form action="{{URL::to('ustaad/broker')}}/{{$data->star == 0 ? 'star' : 'unstar'}}/{{$data->id}}" method="post">
 																			<span>
 																				<input type="checkbox" class="AllowBroker hiddenCheckBox" name="pending" id="option{{$id3}}" value="0">

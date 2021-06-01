@@ -42,6 +42,7 @@
 													<th>Id</th>
 													<th>Image</th>
 													<th>Title</th>
+													<th>Comments</th>
 													<th>Date</th>
 													<th>Status</th>
 												</tr>
@@ -58,6 +59,7 @@
 
 														</td>
 														<td>{{$data->title}}</td>
+														<td><a href="{{URL::to('ustaad/fundamental/comment')}}/{{$data->id}}">View Comments</a></td>
 														<td>{{$data->created_at->format('Md, Y')}}</td>
 														<td>
 															<span class="badge {{$data->status == 1 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 1 ? 'Active' : 'Deactive'}}</span>

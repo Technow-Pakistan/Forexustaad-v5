@@ -103,7 +103,7 @@
 														@if($category == "advance")
 															<td>{{$data->vipMember == 0 ? 'Free' : 'Vip'}}</td>
 														@endif
-														<td><a href="{{URL::to('ustaad/lecture')}}/{{$CommentsCategory}}/{{$data->id}}">View Comments</a></td>
+														<td><a href="{{URL::to('ustaad')}}/{{$category}}/comment/{{$data->id}}">View Comments</a></td>
 														<td>{{$data->created_at->format("M d, Y")}}</td>
 														<td>
 															<span class="badge {{$data->status == 0 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 0 ? 'Active' : 'Deactive'}}</span>
