@@ -139,7 +139,7 @@
 															COMPANY INFORMATION
 														</div>
 														<div>
-															@if($value['memberId'] == 1)
+															@if($value['memberId'] == 1 || $value["memberId"] == 2)
 																@if($AllowCompanyInformation != null )
 																	<a href="{{URL::to('ustaad/brokerCompanyInformation/allow')}}/{{$broker1->id}}" class="btn btn-outline-primary">
 																		Allow

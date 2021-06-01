@@ -16,18 +16,13 @@ use App\Models\TrashGalleryModel;
 use App\Models\BlogPostModel;
 use App\Models\BrokerCompanyInformationModel;
 use App\Models\NonRegisterVisitorModel;
-use App\Models\ActiveOnSiteModel;
 use App\Models\NotificationModel;
 use App\Models\PusherModel;
-use App\Models\SignalCommentsModel;
 use App\Models\SignalsModel;
 use App\Models\ClientNotificationModel;
-use App\Models\BlogCommentsModel;
-use App\Models\AdvanceCommentsModel;
-use App\Models\HabbitCommentsModel;
-use App\Models\BasicCommentsModel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SubscriberMail;
+use App\Models\AllCommentsModel;
 
 class AdminController extends Controller
 {
@@ -151,9 +146,13 @@ class AdminController extends Controller
 
        // Pusher Notification Start
         if($totalClientInfo->memberType == 1) {
-            $PusherMessage = "OOPS You Become Suscriber.";
+            $PusherMessage = "Oops! You Become Suscriber.";
         }elseif($totalClientInfo->memberType == 2){
-            $PusherMessage = "Congrats You Become Our VIP Member.";
+            $PusherMessage = "Congrats! You Become Our VIP Member.";
+        }elseif($totalClientInfo->memberType == 3){
+            $PusherMessage = "Congrats! You Become Our Paid Member.";
+        }else{
+            $PusherMessage = "Oops";
         }
         $messageData['email'] = $totalClientInfo->email;
         $adminData = $request->session()->get("admin");
@@ -196,11 +195,11 @@ class AdminController extends Controller
         }
     }
     public function GetLatestComment(Request $request){
-        $signalLatestComments = SignalCommentsModel::orderBy('id','desc')->get();
-        $AdvanceTrainingLatestComments = AdvanceCommentsModel::orderBy('id','desc')->get();
-        $BasicTrainingLatestComments = BasicCommentsModel::orderBy('id','desc')->get();
-        $HabbitTrainingLatestComments = HabbitCommentsModel::orderBy('id','desc')->get();
-        $BlogPostLatestComments = BlogCommentsModel::orderBy('id','desc')->get();
+        $signalLatestComments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 1)->get();
+        $AdvanceTrainingLatestComments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 6)->get();
+        $BasicTrainingLatestComments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 5)->get();
+        $HabbitTrainingLatestComments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 7)->get();
+        $BlogPostLatestComments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 4)->get();
         return view('admin.latestCommentPage',compact('signalLatestComments','AdvanceTrainingLatestComments','BasicTrainingLatestComments','HabbitTrainingLatestComments','BlogPostLatestComments'));
     }
     public function Dashboard(Request $request){
@@ -208,12 +207,18 @@ class AdminController extends Controller
             return  redirect("ustaad");
         }else{
             $admin = $request->session()->get("admin");
-            if($admin['memberId'] == 6){
+            if($admin['memberId'] == 3 || $admin['memberId'] == 5){
+                return  redirect("ustaad/allCategories");
+            }elseif($admin['memberId'] == 6){
                 return  redirect("ustaad/broker/category");
             }elseif($admin['memberId'] == 7){
                 return  redirect("ustaad/signals");
-            }elseif($admin['memberId'] == 8){
-                return  redirect("ustaad/clientMember/All");
+            }elseif($admin['memberId'] == 9){
+                return  redirect("ustaad/firstNav");
+            }elseif($admin['memberId'] == 10){
+                return  redirect("ustaad/meta-tags");
+            }elseif($admin['memberId'] == 11){
+                return  redirect("ustaad/latestComments");
             }
         };
         $Clients = ClientRegistrationModel::all();
@@ -270,11 +275,12 @@ class AdminController extends Controller
             array_push($activeUserGraphAllDataArray,$temporaryData);
         }
         $signalPendingData = SignalsModel::orderBy('id','desc')->take(10)->get();
-        $signalLatestComments = SignalCommentsModel::orderBy('id','desc')->skip(0)->take(10)->get();
-        $AdvanceTrainingLatestComments = AdvanceCommentsModel::orderBy('id','desc')->skip(0)->take(10)->get();
-        $BasicTrainingLatestComments = BasicCommentsModel::orderBy('id','desc')->skip(0)->take(10)->get();
-        $HabbitTrainingLatestComments = HabbitCommentsModel::orderBy('id','desc')->skip(0)->take(10)->get();
-        $BlogPostLatestComments = BlogCommentsModel::orderBy('id','desc')->skip(0)->take(10)->get();
+        $signalLatestComments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 1)->take(10)->get();
+
+        $AdvanceTrainingLatestComments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 6)->take(10)->get();
+        $BasicTrainingLatestComments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 5)->take(10)->get();
+        $HabbitTrainingLatestComments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 7)->take(10)->get();
+        $BlogPostLatestComments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 4)->take(10)->get();
         return view('admin.index',compact('BasicTrainingLatestComments','HabbitTrainingLatestComments','BlogPostLatestComments','AdvanceTrainingLatestComments','signalLatestComments','signalPendingData','activeUserGraphAllDataArray','TotalClientNumber','MonthlyClientNumber','ToDayClientNumber','WeeklyClientNumber','TotalAdminUsersNumber','MonthlyAdminUsersNumber','TotalBrokerNumber','MonthlyBrokerNumber','TotalPostNumber','MonthlyPostNumber'));
     }
     public function Logout(Request $request){

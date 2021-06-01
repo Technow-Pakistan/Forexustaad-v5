@@ -439,9 +439,9 @@
                                                                 </td>
                                                                 <td class="text-center">
                                                                     @if($data->pips != null)
-                                                                        <span class="m-0 {{str_contains($data->pips,'+') != null ? 'text-success' : ''}}{{str_contains($data->pips,'-') ? 'text-danger' : ''}}"><strong> {{$data->pips == null ? '0' : $data->pips}}</strong></span>
+                                                                        <span class="m-0 {{strpos($data->pips,'+') != null ? 'text-success' : ''}}{{strpos($data->pips,'-') ? 'text-danger' : ''}}"><strong> {{$data->pips == null ? '0' : $data->pips}}</strong></span>
                                                                     @elseif($signalDataApi)
-                                                                        <span class="m-0 {{str_contains($signalDataApi->pips,'+') != null ? 'text-success' : ''}}{{str_contains($signalDataApi->pips,'-') ? 'text-danger' : ''}}"><strong> {{$signalDataApi->pips == null ? 'none' : $signalDataApi->pips}}</strong></span>
+                                                                        <span class="m-0 {{strpos($signalDataApi->pips,'+') != null ? 'text-success' : ''}}{{strpos($signalDataApi->pips,'-') ? 'text-danger' : ''}}"><strong> {{$signalDataApi->pips == null ? 'none' : $signalDataApi->pips}}</strong></span>
                                                                     @endif
                                                                 </td>
                                                             </tr>
@@ -528,9 +528,9 @@
                                                                </td>
                                                                <td class="text-center">
                                                                   @if($data->pips != null)
-                                                                     <span class="m-0 {{str_contains($data->pips,'+') != null ? 'text-success' : ''}}{{str_contains($data->pips,'-') ? 'text-danger' : ''}}"><strong> {{$data->pips == null ? '0' : $data->pips}}</strong></span>
+                                                                     <span class="m-0 {{strpos($data->pips,'+') != null ? 'text-success' : ''}}{{strpos($data->pips,'-') ? 'text-danger' : ''}}"><strong> {{$data->pips == null ? '0' : $data->pips}}</strong></span>
                                                                   @elseif($signalDataApi)
-                                                                     <span class="m-0 {{str_contains($signalDataApi->pips,'+') != null ? 'text-success' : ''}}{{str_contains($signalDataApi->pips,'-') ? 'text-danger' : ''}}"><strong> {{$signalDataApi->pips == null ? 'none' : $signalDataApi->pips}}</strong></span>
+                                                                     <span class="m-0 {{strpos($signalDataApi->pips,'+') != null ? 'text-success' : ''}}{{strpos($signalDataApi->pips,'-') ? 'text-danger' : ''}}"><strong> {{$signalDataApi->pips == null ? 'none' : $signalDataApi->pips}}</strong></span>
                                                                   @endif
                                                                </td>
                                                             </tr>
@@ -617,9 +617,9 @@
                                                                </td>
                                                                <td class="text-center">
                                                                   @if($data->pips != null)
-                                                                     <span class="m-0 {{str_contains($data->pips,'+') != null ? 'text-success' : ''}}{{str_contains($data->pips,'-') ? 'text-danger' : ''}}"><strong> {{$data->pips == null ? '0' : $data->pips}}</strong></span>
+                                                                     <span class="m-0 {{strpos($data->pips,'+') != null ? 'text-success' : ''}}{{strpos($data->pips,'-') ? 'text-danger' : ''}}"><strong> {{$data->pips == null ? '0' : $data->pips}}</strong></span>
                                                                   @elseif($signalDataApi)
-                                                                     <span class="m-0 {{str_contains($signalDataApi->pips,'+') != null ? 'text-success' : ''}}{{str_contains($signalDataApi->pips,'-') ? 'text-danger' : ''}}"><strong> {{$signalDataApi->pips == null ? 'none' : $signalDataApi->pips}}</strong></span>
+                                                                     <span class="m-0 {{strpos($signalDataApi->pips,'+') != null ? 'text-success' : ''}}{{strpos($signalDataApi->pips,'-') ? 'text-danger' : ''}}"><strong> {{$signalDataApi->pips == null ? 'none' : $signalDataApi->pips}}</strong></span>
                                                                   @endif
                                                                </td>
                                                             </tr>

@@ -44,7 +44,7 @@
 												}
 											@endphp
 											<div class="position-relative d-inline-block">
-												<img class="img-radius img-fluid wid-100" src="{{URL::to('storage/app')}}/{{$memberDetail->userImage}}" alt="User image">
+												<img class="img-radius img-fluid wid-100" src="{{URL::to('storage/app')}}/{{$memberDetail->userImage}}" alt="User image" style="width: 100% !important;height: 100%!important;">
 											</div>
 											<div class="overlay">
 												<span>change</span>

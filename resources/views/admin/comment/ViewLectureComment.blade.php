@@ -73,7 +73,6 @@
                                                                 <ul class="d-flex pl-13 p-0">
                                                                     <li class="cursor text-primary" data-toggle="collapse" data-target="#demo{{$idf}}">Reply</li>
                                                                     <li class="cursor" data-toggle="collapse" data-target="#demo{{$idf1}}">{{count($lectureReplies)}} Replies <i class="fa fa-angle-down" aria-hidden="true"></i></li>
-                                                                    <!-- <li><a href="{{URL::to('ustaad/comment/latest/delete')}}/{{$com->id}}" class="addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a></li> -->
                                                                 </ul>
                                                                 <div id="demo{{$idf}}" class="collapse">
                                                                     <form action="{{URL::to('/ustaad/lecture/CommentViewReply/add')}}" method="post">
@@ -81,7 +80,7 @@
                                                                         <input type="hidden" name="memberId" value="{{$value['id']}}">
                                                                         <input type="hidden" name="userType" value="admin">
                                                                         <input type="hidden" name="category" value="{{$category}}">
-                                                                        <input type="hidden" name="lectureId" value="{{$com->lectureId}}">
+                                                                        <input type="hidden" name="objectId" value="{{$com->objectId}}">
                                                                         <input type="hidden" name="reply" value="1">
                                                                         <input type="hidden" name="commentId" value="{{$com->id}}">
                                                                         <p class="text-right"><input type="submit" class="btn btn-primary mt-2" value="submit"></p>

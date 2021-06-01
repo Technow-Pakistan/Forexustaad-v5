@@ -12,7 +12,7 @@
             );
 
             $fields = array(
-                // 'app_id' => "2e2a8527-b671-4d10-bbe3-bca1064dc33b",
+                'app_id' => "2e2a8527-b671-4d10-bbe3-bca1064dc33b",
                 'included_segments' => array('All'),
                 'contents' => $content,
                 'headings' => $headings,

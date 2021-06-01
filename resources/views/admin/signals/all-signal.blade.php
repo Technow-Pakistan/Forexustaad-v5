@@ -148,7 +148,7 @@ $icount = 0;
                                                             </div>
                                                         @else
                                                             <div class="overlay-edit">
-                                                                @if($value['memberId'] == 1)
+                                                                @if($value['memberId'] == 1 || $value["memberId"] == 2)
                                                                     <form action="{{URL::to('ustaad/signals')}}/{{$data->star == 0 ? 'star' : 'unstar'}}/{{$data->id}}" method="post">
                                                                         <span>
                                                                             <input type="checkbox" class="AllowBroker hiddenCheckBox" name="pending" id="option{{$data->id}}" value="0">
@@ -281,7 +281,7 @@ $icount = 0;
                                                     <td>
                                                         <span class="badge {{$data->status == 0 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 0 ? 'Active' : 'Deactive'}}</span>
                                                         <div class="overlay-edit">
-                                                            @if($value['memberId'] == 1)
+                                                            @if($value['memberId'] == 1 || $value["memberId"] == 2)
                                                                 <form action="{{URL::to('ustaad/signals')}}/{{$data->star == 0 ? 'star' : 'unstar'}}/{{$data->id}}" method="post">
                                                                     <span>
                                                                         <input type="checkbox" class="AllowBroker hiddenCheckBox" name="pending" id="option{{$data->id}}" value="0">

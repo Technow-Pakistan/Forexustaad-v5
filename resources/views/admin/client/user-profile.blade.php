@@ -97,6 +97,7 @@
                                                 <select name="memberType" class="form-control" id="">
                                                   <option value="1" {{$clientMember->memberType == 1 ? 'selected' : ''}}>Subscriber</option>
                                                   <option value="2" {{$clientMember->memberType == 2 ? 'selected' : ''}}>Vip</option>
+                                                  <option value="3" {{$clientMember->memberType == 3 ? 'selected' : ''}}>Paid</option>
                                                 </select>
                                                 <input type="submit" class="btn btn-primary btn-outline mt-2" value="Submit">
                                               </div>
@@ -240,7 +241,7 @@
                                             <h6 class="d-flex align-items-center mb-3">
                                               <i class="material-icons text-info mr-2">{{$brokerTitle->title}}</i>
                                               <div class="verifiedBtnAccount d-flex justify-content-end">
-                                                @if($account->verified == 0 && $value['memberId'] == 1)
+                                                @if($account->verified == 0 && ($value['memberId'] == 1 || $value["memberId"] == 2))
                                                   <form action="{{URL::to('ustaad/viewClientProfile/accountVerified')}}/{{$account->id}}" method="post" class="mr-2">
                                                     Verified <input type="checkbox" name="verified" id="" class="AdminConfirmationEmail" value="1">
                                                   </form>
@@ -253,7 +254,7 @@
                                                   <span class="badge badge-light-danger mr-2">Rejected</span>
                                                 @endif
                                               </div>
-                                              @if($value['memberId'] == 1)
+                                              @if($value['memberId'] == 1 || $value["memberId"] == 2)
                                                 <a href="{{URL::to('ustaad/DeleteClientAccount')}}/{{$account->id}}" class="addAction trashBtnAccount" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash text-danger"></i></a>
                                               @endif
                                             </h6>
@@ -272,19 +273,19 @@
                                             <small class="d-flex justify-content-between">
                                               Deposit
                                                 <div class="d-flex">
-                                                @if($account->depositConfirm == 0  && $value['memberId'] == 1)
+                                                @if($account->depositConfirm == 0  && ($value['memberId'] == 1 || $value["memberId"] == 2))
                                                   <form action="{{URL::to('ustaad/viewClientProfile/accountdepositConfirm')}}/{{$account->id}}" method="post" class="mr-2">
                                                     Yes <input type="checkbox" name="depositConfirm" id="" class="AdminConfirmationEmail heig_10px" value="1">
                                                   </form>
                                                   <form action="{{URL::to('ustaad/viewClientProfile/accountdepositConfirm')}}/{{$account->id}}" method="post" class="mr-2">
                                                   No <input type="checkbox" name="depositConfirm" id="" class="AdminConfirmationEmail heig_10px" value="2">
                                                   </form>
-                                                @elseif($account->depositConfirm == 1 && $value['memberId'] == 1)
+                                                @elseif($account->depositConfirm == 1 && ($value['memberId'] == 1 || $value["memberId"] == 2))
                                                   <form action="{{URL::to('ustaad/viewClientProfile/accountdepositConfirm')}}/{{$account->id}}" method="post" class="mr-2">
                                                     No <input type="checkbox" name="depositConfirm" id="" class="AdminConfirmationEmail heig_10px" value="2">
                                                   </form>
                                                   <span class="badge badge-light-success mr-2">Yes</span>
-                                                @elseif($account->depositConfirm == 2 && $value['memberId'] == 1)
+                                                @elseif($account->depositConfirm == 2 && ($value['memberId'] == 1 || $value["memberId"] == 2))
                                                   <form action="{{URL::to('ustaad/viewClientProfile/accountdepositConfirm')}}/{{$account->id}}" method="post" class="mr-2">
                                                   Yes <input type="checkbox" name="depositConfirm" id="" class="AdminConfirmationEmail heig_10px" value="1">
                                                   </form>

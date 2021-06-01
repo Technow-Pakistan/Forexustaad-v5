@@ -38,7 +38,6 @@ use App\Http\Controllers\ComposeEmailController;
 use App\Http\Controllers\StrategiesController;
 use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\AdvanceTrainingController;
-use App\Http\Controllers\AdvanceCommentsController;
 use App\Http\Controllers\BrokerCategoryController;
 use App\Http\Controllers\BrokerTrainingController;
 use App\Http\Controllers\OtherPagesContentController;
@@ -47,7 +46,6 @@ use App\Http\Controllers\SponoserAddController;
 use App\Http\Controllers\MidBannerController;
 use App\Http\Controllers\MetaTagsController;
 use App\Models\AdminMemberDetailModel;
-use Stevebauman\Location\Facades\Location;
 use App\Models\ClientRegistrationModel;
 use App\Models\SignalsModel;
 
@@ -62,32 +60,10 @@ use App\Models\SignalsModel;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
-Auth::routes();
-
-// Facebook login
-Route::get('login/facebook', [App\Http\Controllers\Auth\LoginController::class, 'redirectToFacebook'])->name('login.facebook');
-Route::get('login/facebook/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleFacebookCallback']);
-// -----------------------------forget password ------------------------------
-Route::get('forget-password', 'App\Http\Controllers\Auth\ForgotPasswordController@getEmail')->name('forget-password');
-Route::post('forget-password', 'App\Http\Controllers\Auth\ForgotPasswordController@postEmail')->name('forget-password');
-
-Route::get('reset-password/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@getPassword');
-Route::post('reset-password', 'App\Http\Controllers\Auth\ResetPasswordController@updatePassword');
-
-
-// Google login
-Route::get('login/google', [App\Http\Controllers\Auth\LoginController::class, 'redirectToGoogle'])->name('login.google');
-Route::get('login/google/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleGoogleCallback']);
-// -----------------------------forget password ------------------------------
-Route::get('forget-password', 'App\Http\Controllers\Auth\ForgotPasswordController@getEmail')->name('forget-password');
-Route::post('forget-password', 'App\Http\Controllers\Auth\ForgotPasswordController@postEmail')->name('forget-password');
-
-Route::get('reset-password/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@getPassword');
-Route::post('reset-password', 'App\Http\Controllers\Auth\ResetPasswordController@updatePassword');
-
-
+Route::post('/comment/like/{id}/{id2}',[CommentController::class,'AddCommentLike']);
+Route::post('/comments/save',[CommentController::class,'CommentSave']);
+Route::get('/getCsv',[HomeController::class,'csv']);
+Route::get('/uploadCsv',[HomeController::class,'uploadCsv']);
 
 // Pusher Routes
 Route::get('/successData3', [MidBannerController::class, 'getPosts']);
@@ -213,18 +189,13 @@ Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
         Route::get('/vipWebinar',[HomeController::class,'VipWebinar']);
         Route::get('/changePassword',[HomeController::class,'ChangePassword']);
         Route::post('/changePassword',[HomeController::class,'ChangePasswordAdd']);
-        Route::post('/advance/comment/add',[AdvanceCommentsController::class,'Add']);
         Route::post('/signal/comment/add',[SignalController::class,'AddComment']);
         Route::post('/signal/like/{id}/{id2}',[SignalController::class,'AddLike']);
         Route::post('/signal/UserSignalRating/{id}/{id2}',[SignalController::class,'UserSignalRating']);
-        Route::post('/signal/commentlike/{id}/{id2}',[SignalController::class,'AddCommentLike']);
-        Route::post('/blog/comment/add',[BlogController::class,'AddComment']);
         Route::get('/user-registration',[HomeController::class,'userregistration']);
         Route::post('/user-registration',[HomeController::class,'userregistrationUpdate']);
         Route::post('/user-registration/Account',[HomeController::class,'userregistrationAccountAdd']);
         Route::get('/user-profile',[HomeController::class,'userProfile']);
-        // Route::get('/dashboard',[MemberController::class,'Dashboard']);
-        // Route::get('/logout',[MemberController::class,'Logout']);
     });
 
 });
@@ -272,11 +243,11 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::post('/{id1}/edit/{id}',[AdvanceTrainingController::class,'EditLecture']);
         Route::get('/{id1}/delete/{id}',[AdvanceTrainingController::class,'Delete']);
         Route::get('/{id1}/active/{id}',[AdvanceTrainingController::class,'Active']);
-        Route::get('/BasicCategory/{id}',[AdvanceTrainingController::class,'ViewComment1']);
-        Route::get('/AdvanceCategory/{id}',[AdvanceTrainingController::class,'ViewComment2']);
-        Route::get('/HabbitCategory/{id}',[AdvanceTrainingController::class,'ViewComment3']);
         Route::post('/CommentViewReply/add/',[AdvanceTrainingController::class,'SaveViewCommentReply']);
     });
+    Route::get('/basic/comment/{id}',[AdvanceTrainingController::class,'ViewComment1']);
+    Route::get('/advance/comment/{id}',[AdvanceTrainingController::class,'ViewComment2']);
+    Route::get('/habbit/comment/{id}',[AdvanceTrainingController::class,'ViewComment3']);
 
     Route::group(['prefix' => 'staticpages'],function(){
         Route::get('/',[OtherPagesContentController::class,'All']);
@@ -296,6 +267,8 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/active/{id}',[StrategiesController::class,'Active']);
     });
     Route::group(['prefix' => 'analysis'],function(){
+        Route::get('/comment/{id}',[AnalysisController::class,'ViewComments']);
+        Route::post('/CommentViewReply/add',[AnalysisController::class,'CommentAdd']);
         Route::get('/',[AnalysisController::class,'Index']);
         Route::get('/add',[AnalysisController::class,'Add']);
         Route::post('/add',[AnalysisController::class,'AddProcess']);
@@ -305,6 +278,8 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/active/{id}',[AnalysisController::class,'Active']);
     });
     Route::group(['prefix' => 'fundamental'],function(){
+        Route::get('/comment/{id}',[FundamentalController::class,'ViewComments']);
+        Route::post('/CommentViewReply/add',[FundamentalController::class,'CommentAdd']);
         Route::get('/',[FundamentalController::class,'Index']);
         Route::post('/order',[FundamentalController::class,'Order']);
         Route::get('/add',[FundamentalController::class,'Add']);
@@ -613,7 +588,6 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::group(['prefix' => 'comment'],function(){
         Route::get('/latest',[CommentController::class,'viewLatestComments']);
         Route::post('/latest/add/{id}',[CommentController::class,'addLatestComments']);
-        Route::get('/latest/delete/{id}',[CommentController::class,'DeleteLatestComment']);
 
     });
     Route::group(['prefix' => 'gallery'],function(){
