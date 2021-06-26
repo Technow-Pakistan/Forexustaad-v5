@@ -8,14 +8,13 @@
 						<div class="row align-items-center">
 							<div class="col-md-12">
 								<div class="page-header-title">
-									<h5 class="m-b-10">Header</h5>
+									<h5 class="m-b-10">Meta Tags</h5>
 								</div>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item">
 										<a href="{{URL::to('ustaad/dashboard')}}"><i class="fa fa-home"></i></a>
 									</li>
 									<li class="breadcrumb-item"><a href="#!">Meta Tags</a></li>
-									<!-- <li class="breadcrumb-item"><a href="#!">Invoice Summary</a></li> -->
 								</ul>
 							</div>
 						</div>
@@ -43,7 +42,13 @@
                                             <tr>
                                                 <td>{{$data->id}}</td>
                                                 <td>{{$data->title}}</td>
-                                                <td><img src="{{URL::to('storage/app')}}/{{$data->image}}" alt="" width="100px" height="100px"></td>
+                                                <td>
+													@if($data->image)
+														<img src="{{URL::to('storage/app')}}/{{$data->image}}" alt="" width="100px" height="100px">
+													@else
+														Image not Added.
+													@endif
+												</td>
                                                 <td>{{$data->name_page}}</td>
                                                 <td>
                                                     <a href="{{URL::to('ustaad/meta-tags/edit')}}/{{$data->id}}">
@@ -53,6 +58,15 @@
                                             </tr>
                                         @endforeach
                                     </tbody>
+									<tfoot>
+										<tr>
+											<th>ID</th>
+											<th>Title</th>
+											<th>Image</th>
+											<th>Page</th>
+											<th>Action</th>
+										</tr>
+									</tfoot>
 								</table>
 							</div>
 						</div>

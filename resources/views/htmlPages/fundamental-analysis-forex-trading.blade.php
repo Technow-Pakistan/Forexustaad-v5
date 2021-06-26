@@ -15,15 +15,11 @@
                             </div>
                             <div class="post_representor">
                                 <ul class="">
-                                    <li><i class="fa fa-user"></i> Raheel Nawaz</li>
-                                    <li><i class="fa fa-clock-o"></i> September 2, 2015</li>
-                                    <li><i class="fa fa-folder"></i> Jobs scams, Scams</li>
-                                    <li><i class="fa fa-comments"></i> 10 Comments </li>
-                                    <li><i class="fa fa-eye"></i> 4,276 Views</li>
-                                    <li><div id="shareLink"></div></li>
+                                    <li><i class="far fa-user"></i> Raheel Nawaz</li>
+                                    <li><i class="far fa-clock"></i> September 2, 2015</li>
                                 </ul>
+                                <div id="shareLink" align="right"></div>
                             </div>
-                            
                             <div class="pt-4">
                                 <p>
                                     Dear Friends 99% traders fail and they loss all there funds in Forex trading , I know you also worry about your future in Forex Market , Yo want to answer ?? why your Stop loss hit early and why you loss your all money in Forex Market, Today try to Find your all answer in our Fundamental Analysis  webinar, In this Video (webinar) I will teach you how to do Fundamental Analysis for your Forex Trading and stop losing money in Forex Market.

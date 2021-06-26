@@ -106,7 +106,6 @@
 									<ul class="pcoded-submenu">
 										<li><a href="{{URL::to('ustaad/allCategories')}}">Add New</a></li>
 										<li><a href="{{URL::to('ustaad/category')}}">Categories</a></li>
-										<li><a href="{{URL::to('ustaad/tag')}}">Tags</a></li>
 									</ul>
 								</li>
 								<li class="nav-item pcoded-menu-caption">
@@ -149,9 +148,9 @@
 									>
 									<ul class="pcoded-submenu">
 										<li><a href="{{URL::to('ustaad/allbrokers')}}/{{$value['memberId']}}">All Brokers</a></li>
-										<li><a href="{{URL::to('/ustaad/brokersPromotion')}}/{{$value['memberId']}}">All Broker Promotion</a></li>
-										<li><a href="{{URL::to('/ustaad/brokersNew')}}/{{$value['memberId']}}">All Broker News</a></li>
-										<li><a href="{{URL::to('/ustaad/brokersTraining')}}/{{$value['memberId']}}">All Broker Trainings</a></li>
+										<li><a href="{{URL::to('/ustaad/brokersPromotions')}}">All Broker Promotion</a></li>
+										<li><a href="{{URL::to('/ustaad/brokersNews')}}">All Broker News</a></li>
+										<li><a href="{{URL::to('/ustaad/brokersTrainings')}}">All Broker Trainings</a></li>
 									</ul>
 								</li>
 								<li class="nav-item pcoded-menu-caption">
@@ -175,6 +174,7 @@
 										<li><a href="{{URL::to('ustaad/firstNav')}}">First Nav Bar</a></li>
 										<li><a href="{{URL::to('ustaad/navMenu')}}">Nav Menus</a></li>
 										<li><a href="{{URL::to('ustaad/logo-panel')}}">Logo Panel</a></li>
+										<li><a href="{{URL::to('ustaad/feature-video')}}">Feature Videos</a></li>
 										<li><a href="{{URL::to('ustaad/sliding-images')}}">Sliding Images</a></li>
 									</ul>
 								</li>
@@ -228,7 +228,7 @@
 										><span class="pcoded-mtext">User</span></a
 									>
 									<ul class="pcoded-submenu">
-										<li><a href="{{URL::to('ustaad/member/userList')}}">User List</a></li>
+										<li><a href="{{URL::to('ustaad/member/userList')}}">Admin User List</a></li>
 										<li><a href="{{URL::to('ustaad/member/clientList')}}">Client User List</a></li>
 									</ul>
 								</li>
@@ -353,8 +353,8 @@
 									>
 									<ul class="pcoded-submenu">
 										<li><a href="{{URL::to('ustaad/allbrokers')}}/{{$value['memberId']}}">All Brokers</a></li>
-										<li><a href="{{URL::to('/ustaad/brokersPromotion')}}/{{$value['memberId']}}">All Broker Promotion</a></li>
-										<li><a href="{{URL::to('/ustaad/brokersNew')}}/{{$value['memberId']}}">All Broker News</a></li>
+										<li><a href="{{URL::to('/ustaad/brokersPromotions')}}">All Broker Promotion</a></li>
+										<li><a href="{{URL::to('/ustaad/brokersNews')}}">All Broker News</a></li>
 									</ul>
 								</li>
 							@endif
@@ -575,8 +575,8 @@
 							<div class="dropdown">
 								<a href="{{URL::to('ustaad/contact')}}">
 									<i class="fas fa-envelope"></i>
-									@if(count($HeaderUnReadMessage) != 0)
-										<sup><span class="text-success" style="position:absolute;top:4px;font-size:14px;">{{count($HeaderUnReadMessage)}}</span></sup>
+									@if($HeaderUnReadMessage != 0)
+										<sup><span class="text-success" style="position:absolute;top:4px;font-size:14px;">{{$HeaderUnReadMessage}}</span></sup>
 									@endif
 								</a>
 							</div>

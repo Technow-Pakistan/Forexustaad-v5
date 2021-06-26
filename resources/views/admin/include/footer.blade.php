@@ -94,6 +94,22 @@
 	.yellowStar{
 		color:yellow;
 	}
+   /* Meta Tags dropDown */
+   .arrow-toggle .fa-arrow-down, .arrow-toggle.collapsed .fa-arrow-up {
+      display: inline-block;
+    }
+    .arrow-toggle.collapsed .fa-arrow-down, .arrow-toggle .fa-arrow-up {
+      display: none;
+    }
+    .select2-container{
+      display: block;
+      width:100%;
+    }
+    tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
 	</style>
 
 
@@ -157,7 +173,40 @@
 		</script>
 
 <script>
-	$('#user-list-table').DataTable();
+  // broken img hide
+	document.querySelectorAll('img').forEach((img) => {
+		img.onerror = function() {
+			this.style.display = 'none';
+		}
+	});
+  $(document).ready(function() {
+    // Setup - add a text input to each footer cell
+    $('#user-list-table tfoot th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+    } );
+ 
+    // DataTable
+    var table = $('#user-list-table').DataTable({
+      pageLength : 10,
+      lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, 'All']],
+      initComplete: function () {
+          // Apply the search
+          this.api().columns().every( function () {
+              var that = this;
+
+              $( 'input', this.footer() ).on( 'keyup change clear', function () {
+                  if ( that.search() !== this.value ) {
+                      that
+                          .search( this.value )
+                          .draw();
+                  }
+              } );
+          } );
+      }
+    });
+ 
+  });
 </script>
 </body>
 </html>

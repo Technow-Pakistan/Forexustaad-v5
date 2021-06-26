@@ -47,6 +47,7 @@
 												<th>Broker Name</th>
 												<th>Category</th>
 												<th>User</th>
+												<th>Meta Tags</th>
 												<th>Broker Details</th>
 												@if($value['memberId'] != 6)
 													<th>Broker Review</th>
@@ -74,8 +75,7 @@
 														<td>{{$pendingData == null ? $data->title : $pendingData->title}}</td>
 														<td>{{$category->category}}</td>
 														<td>{{$user->username}}</td>
-														<!-- <td>{{$data->start}}</td>
-														<td>{{$data->end}}</td> -->
+														<td class="text-center"><a class="text-danger" href="{{URL::to('ustaad/broker/meta')}}/{{$data->id}}"> View </a></td>
 														<td><a class="text-danger" href="{{URL::to('ustaad/brokersDetail')}}/{{$data->id}}"> Click For Details </a></td>
 														@if($value['memberId'] != 6)
 															<td><a class="text-danger" href="{{URL::to('ustaad/brokersReview')}}/{{$data->id}}"> Click For Review </a></td>
@@ -128,7 +128,21 @@
 												@endif
 											@endforeach
 										</tbody>
-										
+										<tfoot>
+											<tr>
+												<th>ID</th>
+												<th>Broker</th>
+												<th>Broker Name</th>
+												<th>Category</th>
+												<th>User</th>
+												<th>Meta Tags</th>
+												<th>Broker Details</th>
+												@if($value['memberId'] != 6)
+													<th>Broker Review</th>
+												@endif
+												<th style="width:100px">Status</th>
+											</tr>
+										</tfoot>
 									</table>
 								</div>
 							</div>
@@ -143,7 +157,6 @@
 @include('admin.include.footer')
 
 <script>
-	$('#user-list-table').DataTable();
 
 	// Almost final example
 	// tr mai class row add krna h bs

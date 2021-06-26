@@ -35,43 +35,52 @@
 							<div class="card-header">{{!isset($data) ? '' : $data->title}}</div>
 							<div class="card-body">
                                 <form action="" method="post" enctype="multipart/form-data">
-                                    <div class="d-flex justify-content-between">
-                                        <label for="">Meta Title</label>
-                                        <p class="text-right text-danger m-0 titleCount"></p>
+                                    <div class="bg-primary p-3">
+                                        <span type="button" class="arrow-toggle collapsed" data-toggle="collapse" data-target="#collapseH" id="collapseP">
+                                            <span class="fa fa-arrow-down text-white"></span>
+                                            <span class="fa fa-arrow-up text-white"></span>
+                                            <span class="h3 text-white"> Meta Tags</span>
+                                        </span>
                                     </div>
-                                    <input type="text" class="form-control titleCountFlied" maxlength="580" name="metaTitle" value="{{$newMeta != null ? $newMeta->title : ''}}">
-                                    <div class="form-group">
-                                        <label for="">
-                                            @if ($newMeta == null || $newMeta->image == null)
-                                                Image
-                                            @else
-                                                <img src="{{URL::to('storage/app')}}/{{$newMeta->image}}" alt="" width="100px" height="100px">
-                                            @endif
-                                        </label>
-                                        <input type="file" class="form-control" name="image">
+									<div id="collapseH" class="collapse in px-5">
+                                        <div class="d-flex justify-content-between">
+                                            <label for="">Meta Title</label>
+                                            <p class="text-right text-danger m-0 titleCount"></p>
+                                        </div>
+                                        <input type="text" class="form-control titleCountFlied" maxlength="580" name="metaTitle" value="{{$newMeta != null ? $newMeta->title : ''}}">
+                                        <div class="form-group">
+                                            <label for="">
+                                                @if ($newMeta == null || $newMeta->image == null)
+                                                    Image
+                                                @else
+                                                    <img src="{{URL::to('storage/app')}}/{{$newMeta->image}}" alt="" width="100px" height="100px">
+                                                @endif
+                                            </label>
+                                            <input type="file" class="form-control" name="image">
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <label for="">Meta Description</label>
+                                            <p class="text-right text-danger m-0 descriptionCount1"></p>
+                                        </div>
+                                        <textarea name="metaDescription" maxlength="990" class="form-control description1">{{$newMeta != null ? $newMeta->description : ''}}</textarea>
+                                        <label for="">Meta Keywords</label>
+                                        <select class="js-example-tokenizer col-sm-12" name="metaKeywords[]" multiple="multiple" required>
+                                            @foreach ($MetaKeywords as $metas)
+                                                @if($newMeta != null)
+                                                    @php
+                                                        $keywords = explode(',',$newMeta->keywordsimp);
+                                                        $selectedAll = 0;
+                                                    @endphp
+                                                    @for($i = 0; $i< count($keywords); $i++)
+                                                        @if($keywords[$i] == $metas->name)
+                                                            @php   $selectedAll = 1;  @endphp
+                                                        @endif
+                                                    @endfor
+                                                @endif
+                                                <option value="{{$metas->name}}" {{$newMeta != null ? ($selectedAll == 1 ? 'selected' : '') : ''}}>{{$metas->name}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                    <div class="d-flex justify-content-between">
-                                        <label for="">Meta Description</label>
-                                        <p class="text-right text-danger m-0 descriptionCount1"></p>
-                                    </div>
-                                    <textarea name="metaDescription" maxlength="990" class="form-control description1">{{$newMeta != null ? $newMeta->description : ''}}</textarea>
-                                    <label for="">Meta Keywords</label>
-                                    <select class="js-example-tokenizer col-sm-12" name="metaKeywords[]" multiple="multiple" required>
-                                        @foreach ($MetaKeywords as $metas)
-                                            @if($newMeta != null)
-                                                @php
-                                                    $keywords = explode(',',$newMeta->keywordsimp);
-                                                    $selectedAll = 0;
-                                                @endphp
-                                                @for($i = 0; $i< count($keywords); $i++)
-                                                    @if($keywords[$i] == $metas->name)
-                                                        @php   $selectedAll = 1;  @endphp
-                                                    @endif
-                                                @endfor
-                                            @endif
-                                            <option value="{{$metas->name}}" {{$newMeta != null ? ($selectedAll == 1 ? 'selected' : '') : ''}}>{{$metas->name}}</option>
-                                        @endforeach
-                                    </select>
                                     <label for="">Title</label>
                                     <input type="text" class="form-control title" name="title" value="{{!isset($data) ? '' : $data->title}}" required>
                                     <label for="">Description</label>

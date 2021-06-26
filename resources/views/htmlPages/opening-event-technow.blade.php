@@ -14,15 +14,11 @@
                                         </div>
                                         <div class="post_representor">
                                             <ul class="">
-                                                <li><i class="fa fa-user"></i> Sajjid Nawaz</li>
-                                                <li><i class="fa fa-clock-o"></i> December 12, 2017</li>
-                                                <li><i class="fa fa-folder"></i> Forex Education</li>
-                                                <li><i class="fa fa-comments"></i> 8 Comments </li>
-                                                <li><i class="fa fa-eye"></i> 4,106 Views</li>
-                                                <li><div id="shareLink"></div></li>
+                                                <li><i class="far fa-user"></i> Raheel Nawaz</li>
+                                                <li><i class="far fa-clock"></i> September 2, 2015</li>
                                             </ul>
+                                            <div id="shareLink" align="right"></div>
                                         </div>
-                                        
                                         <div>
                                             <img src="{{URL::to('/public/assets/assets/img/blog-post/tech.jpg')}}" class="img-fluid pt-3">
                                         </div>

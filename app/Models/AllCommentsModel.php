@@ -13,6 +13,7 @@ use App\Models\AllCommentLikeModel;
 use App\Models\BasicTrainingModel;
 use App\Models\AdvanceTrainingModel;
 use App\Models\HabbitTrainingModel;
+use App\Models\CommentPagesModel;
 
 class AllCommentsModel extends Model
 {
@@ -21,6 +22,10 @@ class AllCommentsModel extends Model
 
     public function getReply(){
         $replys = AllCommentsModel::where('commentId',$this->id)->get();
+        return $replys;
+    }
+    public function getPageName(){
+        $replys = CommentPagesModel::find($this->commentPageId);
         return $replys;
     }
     public function getMemberInformation(){

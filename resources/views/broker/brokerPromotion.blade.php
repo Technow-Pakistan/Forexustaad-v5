@@ -16,17 +16,17 @@
                         </div>
                     @endif
                     <div class="family">
-                                        <div>
-                                            <h4>{{$brokerPromotion->PromotionTitle}}</h4>
-                                        </div>
-
-                                        <div class="pt-3">
-                                            @php
-                                                $Description = html_entity_decode($brokerPromotion->description);
-                                                echo $Description;
-                                            @endphp
-                                        </div>
-                                    </div>
+                        <div>
+                            <h4>{{$brokerPromotion->PromotionTitle}}</h4>
+                        </div>
+                        <div class="pt-3">
+                            @php
+                                $Description = html_entity_decode($brokerPromotion->description);
+                                echo $Description;
+                            @endphp
+                        </div>
+                    </div>
+                    @include('comments.comment',['commentObjectId'=>$brokerPromotion->id,'commentPage'=>8])
                 </div>
 
                 <div class="col-lg-3 col-md-6 col-sm-12 order-3 order-lg-3">
@@ -40,3 +40,4 @@
 </div>
 
 @include('inc.footer')
+@include('comments.css_js',['commentObjectId'=>$brokerPromotion->id,'commentPage'=>8])

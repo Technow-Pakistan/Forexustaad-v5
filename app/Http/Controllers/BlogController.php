@@ -15,7 +15,15 @@ class BlogController extends Controller
     public function Index(){
         $meta = MetaTagsModel::where('name_page','Blog-Post')->first();
         $BlogData = BlogPostModel::orderBy('id','desc')->where('status',1)->where('pending',1)->whereDate('publishDate', '<=', date("Y-m-d"))->get();
-        return view('blog.index',compact('BlogData','meta'));
+        $pastData = 0;
+        return view('blog.index',compact('BlogData','meta','pastData'));
+    }
+    public function BlogViewCategory(Request $request, $id){
+        $name_page = "blogCategory@" . $id;
+        $meta = MetaTagsModel::where('name_page',$name_page)->first();
+        $BlogData = BlogPostModel::join('blog_post_main_category','blog_post.id','=','blog_post_main_category.postId')->where('mainCategory',$id)->where('status',1)->where('pending',1)->whereDate('publishDate', '<=', date("Y-m-d"))->get();
+        $pastData = 1;
+        return view('blog.index',compact('BlogData','meta','pastData'));
     }
     public function DetailBlog(Request $request, $id2){
         $BlogDetail = BlogPostModel::orderBy('id','desc')->where('status',1)->where('pending',1)->where('permalink',$id2)->whereDate('publishDate', '<=', date("Y-m-d"))->first();
@@ -30,21 +38,5 @@ class BlogController extends Controller
             $request->session()->put("error",$error);
             return redirect('/');
         }
-    }
-    // Admin Panel View
-
-    public function Comment(Request $request,$id){
-        $comments = AllCommentsModel::where('commentPageId', 4)->where('objectId', $id)->get();
-        return view('admin.comment.ViewBlogComment',compact('comments'));
-    }
-
-    public function CommentAdd(Request $request){
-        $reply = new AllCommentsModel;
-        $reply->commentPageId = 4;
-        $reply->fill($request->all());
-        $reply->save();
-        $success = "Your reply has been saved successfully.";
-        $request->session()->put("success",$success);
-        return back();
     }
 }

@@ -20,14 +20,9 @@ use App\Models\ApiLeftModel;
 use App\Models\ApiRightModel;
 use App\Models\FirstNavBarModel;
 use App\Models\FooterCopyRightModel;
-use App\Models\BlogPostModel;
-use App\Models\MainWebinarModel;
 use App\Models\ClientAccountDetailModel;
-use App\Models\BrokerCompanyInformationModel;
-use App\Models\SignalsModel;
 use App\Models\UserContactModel;
 use App\Models\NotificationModel;
-use App\Models\FundamentalModel;
 use App\Models\SponoserAddModel;
 use App\Models\MidBannerModel;
 use App\Models\NonRegisterVisitorModel;
@@ -36,10 +31,9 @@ use App\Models\AllStatesModel;
 use App\Models\AllCountriesModel;
 use App\Models\ClientNotificationModel;
 use App\Models\ClientRegistrationModel;
-use App\Models\SignalApiKeyModel;
-use App\Models\AnalysisModel;
-use App\Models\BrokerNewsModel;
 use App\Models\MetaKeywordsModel;
+use App\Models\MainMenuModel;
+use App\Models\BlogPostAllMainCategoryModel;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -83,16 +77,15 @@ class AppServiceProvider extends ServiceProvider
         view()->share("AllStates",AllStatesModel::all());
         view()->share("AllCountries",AllCountriesModel::all());
         view()->share("ClientNotificationMessage",ClientNotificationModel::orderBy('id','desc')->get());
+        view()->share("AllMainMenu",MainMenuModel::where('trash',0)->where('upper',0)->get());
+        view()->share("AllUpperMainMenu",MainMenuModel::where('trash',0)->where('upper',1)->get());
+        view()->share("AllBlogSubMenu",BlogPostAllMainCategoryModel::all());
         /** Admin Panel Function  */
         view()->share("ClientAccountDetailInfo",ClientAccountDetailModel::all());
-        view()->share("HeaderUnReadMessage",UserContactModel::orderBy('id','desc')->where('read',0)->where('trashMail',0)->get());
+        view()->share("HeaderUnReadMessage",UserContactModel::orderBy('id','desc')->where('read',0)->where('trashMail',0)->count());
         view()->share("NotificationMessage",NotificationModel::orderBy('id','desc')->get());
         view()->share("NonRegisterUser",NonRegisterVisitorModel::orderBy('id','desc')->get());
         view()->share("AllClientMemberData",ClientRegistrationModel::where('status',1)->where('confirmationEmail',1)->get());
-        view()->share("onesignalApiKey",SignalApiKeyModel::where('id',2)->first());
-        view()->share("signalApiRateKey",SignalApiKeyModel::where('id',1)->first());
         view()->share("MetaKeywords",MetaKeywordsModel::all());
-
-
     }
 }
