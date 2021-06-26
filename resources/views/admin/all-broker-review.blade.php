@@ -37,11 +37,10 @@
 									<table id="user-list-table" class="table nowrap">
 										<thead>
 											<tr>
-												<th>Broker</th>
-												<th>Broker Name</th>
-												<th>Review Title</th>
 												<th>Review Image</th>
-												
+												<th>Review Title</th>
+												<th>Broker Name</th>
+												<th>Comments</th>
 												<th>Status</th>
 											</tr>
 										</thead>
@@ -50,20 +49,15 @@
 												@php
 													$broker = $news->GetBrokerInfo();
 												@endphp
-												<tr  draggable="true">
-													<td>
-														<div>
-															<img src="{{URL::to('storage/app')}}/{{$broker->image}}" alt="" class="img-fluid" width="150">
-														</div>
-													</td>
-													<td>{{$broker->title}}</td>
-													<td>{{$news->ReviewTitle}}</td>
+												<tr>
 													<td>
 														<div>
 															<img src="{{URL::to('storage/app')}}/{{$news->image}}" alt="" class="img-fluid" width="150">
 														</div>
 													</td>
-												
+													<td>{{$news->ReviewTitle}}</td>
+													<td>{{$broker->title}}</td>
+													<td><a href="{{URL::to('ustaad/brokersReview/comment')}}/{{$news->id}}">View Comments</a></td>
 													<td>
 													@if($news->pending == 0)
 														<span class="badge badge-light-success">Active</span>
@@ -89,7 +83,15 @@
 												</tr>
 											@endforeach
 										</tbody>
-										
+										<tfoot>
+											<tr>
+												<th>Review Image</th>
+												<th>Review Title</th>
+												<th>Broker Name</th>
+												<th>Comments</th>
+												<th>Status</th>
+											</tr>
+										</tfoot>
 									</table>
 								</div>
 							</div>

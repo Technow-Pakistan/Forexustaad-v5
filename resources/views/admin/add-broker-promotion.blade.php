@@ -1,6 +1,19 @@
 @php
 	$value =Session::get('admin');
 @endphp
+								@php 
+									$count = 0;
+									$titleId = 0;
+									$url = "new";
+									$value3 =Session::get('admin');
+									$breadcrumb = "Add";
+								@endphp
+								@isset($brokerNews->image)
+									@if($value3['memberId'] != 6 && $brokerNews->editId != null)
+										@php $exitingBroker = $brokerNews->GetAllowPromotion();  @endphp
+									@endif
+									<?php $url = "edit/" . $brokerNews->id;$breadcrumb = "Update"; ?>
+								@endisset
 @include('admin.include.header')
 		<!-- [ Main Content ] start -->
 		<section class="pcoded-main-container">
@@ -17,9 +30,9 @@
 									<li class="breadcrumb-item">
 										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a>
 									</li>
-									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/brokersPromotion')}}/{{$value['memberId']}}">All Brokers Promotions</a></li>
+									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/brokersPromotions')}}">All Brokers Promotions</a></li>
 									<li class="breadcrumb-item">
-										<a href="#!">Broker Promotions</a>
+										<a href="#!">{{$breadcrumb}}</a>
 									</li>
 								</ul>
 							</div>
@@ -33,19 +46,33 @@
 						<div class="card">
 							<div class="card-header">Broker Promotions</div>
 							<div class="card-body">
-								@php 
-									$count = 0;
-									$titleId = 0;
-									$url = "new";
-									$value3 =Session::get('admin');
-								@endphp
-								@isset($brokerNews->image)
-									@if($value3['memberId'] != 6 && $brokerNews->editId != null)
-										@php $exitingBroker = $brokerNews->GetAllowPromotion(); @endphp
-									@endif
-									<?php $url = "edit/" . $brokerNews->id; ?>
-								@endisset
 								<form action="{{URL::to('/ustaad/brokersPromotions')}}/{{$url}}" method="post" enctype="multipart/form-data">
+									<div class="bg-primary p-3">
+										<span type="button" class="arrow-toggle collapsed" data-toggle="collapse" data-target="#collapseH" id="collapseP">
+											<span class="fa fa-arrow-down text-white"></span>
+											<span class="fa fa-arrow-up text-white"></span>
+											<span class="h3 text-white"> Meta Tags</span>
+										</span>
+									</div>
+									<div id="collapseH" class="collapse in px-5">
+										<label for="">Keywords</label>
+										<select class="js-example-tokenizer col-sm-12" name="metaKeywords[]" multiple="multiple" required>
+											@foreach ($MetaKeywords as $metas)
+												@if($newMeta != null)
+													@php
+														$keywords = explode(',',$newMeta->keywordsimp);
+														$selectedAll = 0;
+													@endphp
+													@for($i = 0; $i< count($keywords); $i++)
+														@if($keywords[$i] == $metas->name)
+															@php   $selectedAll = 1;  @endphp
+														@endif
+													@endfor
+												@endif
+												<option value="{{$metas->name}}" {{$newMeta != null ? ($selectedAll == 1 ? 'selected' : '') : ''}}>{{$metas->name}}</option>
+											@endforeach
+										</select>
+									</div>
 									@isset($brokerNews->image)
 										<div>
 											<img src="{{URL::to('storage/app')}}/{{$brokerNews->image}}" alt="Your Image" height="150px"/>

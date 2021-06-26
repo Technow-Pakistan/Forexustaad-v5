@@ -8,13 +8,11 @@ use App\Models\ComposeEmailModel;
 
 class ContactController extends Controller
 {
-    public function contact(Request $request){
-        return view('home.contact');
-    }
     public function Index(Request $request){
         $totalData = UserContactModel::orderBy("id","desc")->get();
         $totalCompose = ComposeEmailModel::orderBy("id","desc")->get();
-        return view('admin.emailInbox',compact("totalData","totalCompose"));
+        $totalInboxNumber = UserContactModel::where('trashMail',0)->count();
+        return view('admin.emailInbox',compact("totalData","totalCompose","totalInboxNumber"));
     }
     public function Add(Request $request){
         $data = new UserContactModel;

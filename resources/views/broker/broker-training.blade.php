@@ -95,7 +95,7 @@
                                     $img123456 = null;
                                   }
                                 @endphp
-                                <a href="{{URL::to('/broker/training'). '/' . $title}}">
+                                <a href="{{URL::to('/brokertraining'). '/' . $title}}">
                                   <div class="col-sm-12 pl-3 {{$training->id == $data->id ? 'activeVideo pre-header' : ''}}" id="{{$training->id == $data->id ? 'activeVideo' : ''}}">
                                       <div class="media">
                                           <p class="mt-4 mr-2">{{$countId}}. </p>
@@ -113,6 +113,7 @@
                   </div>
                   <div class="row mt-5">
                       <div class="col-md-8">
+                          @include('comments.comment',['commentObjectId'=>$training->id,'commentPage'=>10])
                       </div>
                       <div class="col-md-4">
                         @include('inc.home-right-sidebar')
@@ -169,3 +170,5 @@
 		width:100%;
 	}
 </style>
+
+@include('comments.css_js',['commentObjectId'=>$training->id,'commentPage'=>10])

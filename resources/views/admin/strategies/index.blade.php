@@ -37,6 +37,7 @@
 												<th>Image</th>
 												<th>Title</th>
 												<th>Date</th>
+												<th>Comments</th>
 												<th>Status</th>
 											</tr>
 										</thead>
@@ -46,6 +47,7 @@
 													<td><img src="{{URL::to('storage/app')}}/{{$data->image}}" height="70px" alt="Your Image" /></td>
 													<td>{{$data->title}}</td>
 													<td>{{$data->created_at->format("M d, Y")}}</td>
+													<td><a href="{{URL::to('ustaad/strategies/comment')}}/{{$data->id}}">View Comments</a></td>
 													<td>
 														<span class="badge {{$data->status == 0 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 0 ? 'Active' : 'Deactive'}}</span>
 														<div class="overlay-edit">
@@ -71,6 +73,7 @@
 												<th>Image</th>
 												<th>Title</th>
 												<th>Date</th>
+												<th>Comments</th>
 												<th>Status</th>
 											</tr>
 										</tfoot>
@@ -86,12 +89,5 @@
 		<!-- [ Main Content ] end -->
 
 @include('admin.include.footer')
-		<!-- Data Table -->
-		<script src="assets/js/plugins/jquery.dataTables.min.js"></script>
-		<script src="assets/js/plugins/dataTables.bootstrap4.min.js"></script>
-
-<script>
-	$('#user-list-table').DataTable();
-</script>
 
 

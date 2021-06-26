@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\SignalPairModel;
 use App\Models\AdminModel;
-use App\Models\SignalApiModel;
 use App\Models\SignalRatingModel;
 
 class SignalsModel extends Model
@@ -35,10 +34,6 @@ class SignalsModel extends Model
         $replys = AdminModel::where('id',$this->userId)->first();
         return $replys;
     }
-    public function GetSignalApiData(){
-        $data = SignalApiModel::where('signal_id',$this->id)->first();;
-        return $data;
-    }
     public function GetRatingPoints(){
         $TotalRatingPoints = SignalRatingModel::where('signalId',$this->id)->sum('rating');
         $countRows = SignalRatingModel::where('signalId',$this->id)->count();
@@ -57,5 +52,49 @@ class SignalsModel extends Model
             $Rating = 0;
         }
         return $Rating;
+    }
+    public function GetNumberOfUserwhoRate(){
+        $countRows = SignalRatingModel::where('signalId',$this->id)->count();
+        return $countRows;
+    }
+    public function GetAgoTime(){
+        $timeDate1 = strtotime(date("Y-m-d H:i:s"));
+        $timeDate2 = strtotime($this->created_at->format("Y-m-d H:i:s"));
+        $minsDate = ($timeDate1 - $timeDate2) / 60;
+        $formatEng = "min";
+        $finelmin = intval($minsDate);
+        if($finelmin > 60){
+            $finelmin /= 60;
+            $formatEng = "hours";
+            if($finelmin > 24){
+                $finelmin /= 24;
+                $formatEng = "days";
+                if($finelmin > 7){
+                    $finelmin /= 7;
+                    $formatEng = "weeks";
+                    if($finelmin > 4){
+                        $finelmin /= 4;
+                        $formatEng = "moths";
+                        if($finelmin > 12){
+                            $finelmin /= 12;
+                            $formatEng = "years";
+                        }
+                    }
+                }
+            }
+        }
+        $finelmin = intval($finelmin);
+        $agoTime = $finelmin . " " . $formatEng . " ago";
+        return $agoTime;
+    }
+    public function GetExpiredOrNot(){
+        if($this->date > date("Y-m-d")){
+            $go = 1;
+        }elseif($this->date == date("Y-m-d") && $this->time >= date("H:i:s")){
+            $go = 1;
+        }else{
+            $go = 0;
+        }
+        return $go;
     }
 }

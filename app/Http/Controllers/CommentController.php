@@ -14,19 +14,6 @@ use App\Models\PusherModel;
 
 class CommentController extends Controller
 {
-    public function viewLatestComments(Request $request){
-        $comments = AllCommentsModel::orderBy('id','desc')->where('reply','!=','0')->where('commentPageId','5')->orWhere('commentPageId','6')->orWhere('commentPageId','7')->take(30)->get();
-        return view('admin.comment.latest',compact('comments'));
-    }
-    public function addLatestComments(Request $request, $id){
-        $reply = new AllCommentsModel;
-        $reply->commentPageId = 1;
-        $reply->fill($request->all());
-        $reply->save();
-        $success = "Your reply has been saved successfully.";
-        $request->session()->put("success",$success);
-        return back();
-    }
     public function CommentSave(Request $request){
         $data = new AllCommentsModel;
         $data->fill($request->all());
@@ -55,7 +42,7 @@ class CommentController extends Controller
         $notification = new NotificationModel;
         $notification->userId = $userID->id;
         $notification->userType = 1;
-        $notification->text = "Add $comment in $page->page.";
+        $notification->text = "Add $comment in $page->page_name.";
         $notification->link = "ustaad/$page->page/comment/$data->objectId";
         $previousData = NotificationModel::where('link',$notification->link)->first();
         if ($previousData) {
@@ -92,5 +79,57 @@ class CommentController extends Controller
                     $like = "Like";
                 }
             }
+    }
+    // Admin Panel function
+    public function ViewCommentAdminPanel(Request $request,$id,$id1){
+        $pageInfo = CommentPagesModel::where('page',$id)->first();
+        $comments = AllCommentsModel::where('commentPageId', $pageInfo->id)->where('objectId', $id1)->get();
+        return view('admin.comment.ViewComment',compact('comments','pageInfo'));
+    }
+    public function CommentReplyByAdminMember(Request $request,$id,$id1){
+        $pageInfo = CommentPagesModel::where('page',$id)->first();
+        $reply = new AllCommentsModel;
+        $reply->commentPageId = $pageInfo->id;
+        $reply->fill($request->all());
+        $reply->save();
+        $success = "Your reply has been saved successfully.";
+        $request->session()->put("success",$success);
+        return back();
+    }
+    public function viewLatestComments(Request $request){
+        $comments = AllCommentsModel::orderBy('id','desc')->where('reply','!=','0')->where('commentPageId','5')->orWhere('commentPageId','6')->orWhere('commentPageId','7')->take(30)->get();
+        return view('admin.comment.latest',compact('comments'));
+    }
+    public function addLatestComments(Request $request, $id){
+        $reply = new AllCommentsModel;
+        $reply->commentPageId = 1;
+        $reply->fill($request->all());
+        $reply->save();
+        $success = "Your reply has been saved successfully.";
+        $request->session()->put("success",$success);
+        return back();
+    }
+    public function DeleteComments(Request $request,$id){
+        $comm = AllCommentsModel::find($id);
+        $replies = AllCommentsModel::where('commentId',$id)->get();
+        foreach ($replies as $reply) {
+            $reply->delete();
+        }
+        $comm->delete();
+        $error = "This comment has been delete successfully.";
+        $request->session()->put("error",$error);
+        return back();
+    }
+    public function EditComment(Request $request,$id){
+        $comment = AllCommentsModel::find($id);
+        return  view('admin.comment.edit',compact('comment'));
+    }
+    public function EditProcessComment(Request $request,$id){
+        $comm = AllCommentsModel::find($id);
+        $comm->comment = $request->comment;
+        $comm->save();
+        $success = "This comment has been updated successfully.";
+        $request->session()->put("success",$success);
+        return back();
     }
 }

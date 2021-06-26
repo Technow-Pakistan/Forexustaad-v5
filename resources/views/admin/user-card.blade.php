@@ -56,24 +56,28 @@
                                 <label for="user_login">Website</label>
                                 <input type="text" name="website" value="{{$count != 0 ? $memberDetail->website : '' }}" class="form-control">
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                <label for="user_login">Password<span class="text-danger">*</span></label>
-                                <input type="password" name="password" class="form-control" {{$count != 0 ? '' : 'required' }}>
-                            </div>
+                            @if($member->id != 1)
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <label for="user_login">Password<span class="text-danger">*</span></label>
+                                    <input type="password" name="password" class="form-control" {{$count != 0 ? '' : 'required' }}>
+                                </div>
+                            @endif
                             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                 <label for="user_login">Phone Number<span class="text-danger">*</span></label>
                                 <input type="text" name="mobile" value="{{$count != 0 ? $memberDetail->mobile : '' }}" class="form-control" required>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                <label for="user_login">Role<span class="text-danger">*</span></label>
-                                <select class="form-control memberId12" name="memberId">
-                                    @foreach($memberData as $member)
-                                        @if($member->member != "Admin")
-                                            <option value="{{$member->id}}"{{$selected == $member->id ? 'selected' : '' }}>{{$member->member}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
+                            @if($member->id != 1)
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <label for="user_login">Role<span class="text-danger">*</span></label>
+                                    <select class="form-control memberId12" name="memberId">
+                                        @foreach($memberData as $member)
+                                            @if($member->member != "Admin")
+                                                <option value="{{$member->id}}"{{$selected == $member->id ? 'selected' : '' }}>{{$member->member}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endif
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                 <label for="user_login">Address<span class="text-danger">*</span></label>
                                 <input type="text" name="address" value="{{$count != 0 ? $memberDetail->address : '' }}" class="form-control" required>

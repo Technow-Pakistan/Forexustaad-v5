@@ -68,7 +68,7 @@
                                             <li class="nav-item mail-section inboxData">
                                                 <a class="nav-link text-left active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="false">
                                                     <span><i class="fa fa-envelope"></i>Inbox</span>
-                                                    <span class="float-right">{{count($totalData)}}</span>
+                                                    <span class="float-right">{{$totalInboxNumber}}</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item mail-section inboxData">

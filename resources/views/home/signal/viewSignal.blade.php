@@ -8,7 +8,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 order-2 order-lg-1">
                     @include('inc.home-left-sidebar')
                 </div>
-                <div class="col-lg-6 col-md-12 order-1 order-lg-2 {{$blur == 1 ? 'blur' : '' }}">
+                <div class="col-lg-6 col-md-12 order-1 order-lg-2">
                     @if($MidBannerHomeActive)
                         <div class="mb-5">
                             <a href="{{$MidBannerHomeActive->link}}" target="_blank">
@@ -16,299 +16,243 @@
                               </a>
                         </div>
                     @endif
-                    {{-- Counter Start --}}
-                    <div id="clockdiv" class="text-center mb-3">
-                        <div>
-                            <span class="days"></span>
-                            <div class="smalltext">Days</div>
-                        </div>
-                        <div>
-                            <span class="hours"></span>
-                            <div class="smalltext">Hours</div>
-                        </div>
-                        <div>
-                            <span class="minutes"></span>
-                            <div class="smalltext">Minutes</div>
-                        </div>
-                        <div>
-                            <span class="seconds"></span>
-                            <div class="smalltext">Seconds</div>
-                        </div>
-                    </div>
-                    {{-- Counter End --}}
-                    <div class="">
-                        <div class="">
-                          @php
-                            $pair = $signalData->getPair();
-                            $flags = explode("/",$pair->pair);
-                          @endphp
-                              <div class="row gutters-sm">
-                                <div class="col-md-4 mb-3">
-                                  <div class="card">
-                                    <div class="card-body">
-                                      <div class="d-flex flex-column align-items-center text-center">
-									  		<div>
-                        @if($pair->image == null)
-                          @foreach($flags as $flag)
-                            @php $flag4 = str_replace(' ', '', $flag) @endphp
-                              <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
-                          @endforeach
-                        @else
-                          <img src="{{URL::to('storage/app')}}/{{$pair->image}}" width="100" height="35"  alt="">
-                        @endif
-											</div>
-                                        <div class="mt-3">
-                                          <h4>{{$pair->pair}}</h4>
-                                          <p class="text-secondary mb-1">{{$signalData->selectUser}}</p>
-                                        </div>
-                                        <div>
-                                            @php
-                                                $clientLikeshow = 0;
-                                                if (Session::has('client')) {
-                                                    $value = Session::get('client');
-                                                    $clientLike = App\Models\SignalLikeModel::where('signalId',$signalData->id)->where('userId',$value['id'])->first();
-                                                    if ($clientLike) {
-                                                        $clientLikeshow = 1;
-                                                    }
-                                                }
-                                            @endphp
-                                            (<span class="totalLiked text-primary">{{count($TotalLikes)}}</span>)
-                                            <span class="likeForm likeForm1 {{!Session::has('client') ? "LoginButton" : ''}} {{$clientLikeshow == 1 ? ($clientLike->liked == 1 ? 'text-primary' :'') : '' }}" text="{{$clientLikeshow == 1 ? ($clientLike->liked == 1 ? 'text-primary' :'') : ''  }}" value="1" {{!Session::has('client') ? "data-toggle=modal data-target=#requestQuoteModal" : ''}}> <i class="fa fa-thumbs-up"></i> </span>
-                                            (<span class="totalDisliked text-danger">{{count($TotalDislikes)}}</span>)
-                                            <span class="likeForm disLikeForm1 {{!Session::has('client') ? "LoginButton" : ''}} {{$clientLikeshow == 1 ? ($clientLike->liked == 0 ? 'text-danger' :'') : ''  }}" text="{{$clientLikeshow == 1 ? ($clientLike->liked == 0 ? 'text-danger' :'') : ''  }}" value="0" {{!Session::has('client') ? "data-toggle=modal data-target=#requestQuoteModal" : ''}}><i class="fa fa-thumbs-up" style="transform: rotate(174deg);"></i></span>
-                                        </div>
-                                        <div id="shareLink"></div>
-                                        @php $SignalRatingPoints = $signalData->GetRatingPoints(); @endphp
-                                        <fieldset class="rating1">
-                                          <input type="radio" name="rating1" value="5" {{ $SignalRatingPoints == 5 ? 'checked' : '' }}/><i class="fa fa-star full" for="star5" title="Awesome - 5 stars"></i>
-                                          <input type="radio" name="rating1" value="4.5"  {{ $SignalRatingPoints == 4.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star4half" title="Pretty good - 4.5 stars"></i>
-                                          <input type="radio" name="rating1" value="4"  {{ $SignalRatingPoints == 4 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star4" title="Pretty good - 4 stars"></i>
-                                          <input type="radio" name="rating1" value="3.5"  {{ $SignalRatingPoints == 3.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star3half" title="Meh - 3.5 stars"></i>
-                                          <input type="radio" name="rating1" value="3"  {{ $SignalRatingPoints == 3 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star3" title="Meh - 3 stars"></i>
-                                          <input type="radio" name="rating1" value="2.5"  {{ $SignalRatingPoints == 2.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star2half" title="Kinda bad - 2.5 stars"></i>
-                                          <input type="radio" name="rating1" value="2"  {{ $SignalRatingPoints == 2 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star2" title="Kinda bad - 2 stars"></i>
-                                          <input type="radio" name="rating1" value="1.5"  {{ $SignalRatingPoints == 1.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star1half" title="Meh - 1.5 stars"></i>
-                                          <input type="radio" name="rating1" value="1"  {{ $SignalRatingPoints == 1 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star1" title="Sucks big time - 1 star"></i>
-                                          <input type="radio" name="rating1" value="0.5"  {{ $SignalRatingPoints == 0.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="starhalf" title="Sucks big time - 0.5 stars"></i>
-                                        </fieldset>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  @if(Session::has('client'))
-                                    <div class="card mt-3">
-                                      <div class="card">
-                                          <div class="card-header">
-                                              Your Rating
-                                          </div>
-                                          <div class="card-body">
-                                            @php 
-                                              $clientData = Session::get('client');
-                                              $userId   = $clientData['id'];
-                                              $UserSignalRatingPoints = $signalData->GetUSerRatingPoints($userId); 
-                                            @endphp
-                                            <fieldset class="rating">
-                                              <input type="radio" id="star5" name="rating" value="5" {{ $UserSignalRatingPoints == 5 ? 'checked' : '' }}/><i class="fa fa-star full ratingPick" for="star5" title="Awesome - 5 stars"></i>
-                                              <input type="radio" id="star4half" name="rating" value="4.5" {{ $UserSignalRatingPoints == 4.5 ? 'checked' : '' }}/><i class="fa fa-star half ratingPick" for="star4half" title="Pretty good - 4.5 stars"></i>
-                                              <input type="radio" id="star4" name="rating" value="4" {{ $UserSignalRatingPoints == 4 ? 'checked' : '' }}/><i class = "fa fa-star full ratingPick" for="star4" title="Pretty good - 4 stars"></i>
-                                              <input type="radio" id="star3half" name="rating" value="3.5" {{ $UserSignalRatingPoints == 3.5 ? 'checked' : '' }}/><i class="fa fa-star half ratingPick" for="star3half" title="Meh - 3.5 stars"></i>
-                                              <input type="radio" id="star3" name="rating" value="3" {{ $UserSignalRatingPoints == 3 ? 'checked' : '' }}/><i class = "fa fa-star full ratingPick" for="star3" title="Meh - 3 stars"></i>
-                                              <input type="radio" id="star2half" name="rating" value="2.5" {{ $UserSignalRatingPoints == 2.5 ? 'checked' : '' }}/><i class="fa fa-star half ratingPick" for="star2half" title="Kinda bad - 2.5 stars"></i>
-                                              <input type="radio" id="star2" name="rating" value="2" {{ $UserSignalRatingPoints == 2 ? 'checked' : '' }}/><i class = "fa fa-star full ratingPick" for="star2" title="Kinda bad - 2 stars"></i>
-                                              <input type="radio" id="star1half" name="rating" value="1.5" {{ $UserSignalRatingPoints == 1.5 ? 'checked' : '' }}/><i class="fa fa-star half ratingPick" for="star1half" title="Meh - 1.5 stars"></i>
-                                              <input type="radio" id="star1" name="rating" value="1" {{ $UserSignalRatingPoints == 1 ? 'checked' : '' }}/><i class = "fa fa-star full ratingPick" for="star1" title="Sucks big time - 1 star"></i>
-                                              <input type="radio" id="starhalf" name="rating" value="0.5" {{ $UserSignalRatingPoints == 0.5 ? 'checked' : '' }}/><i class="fa fa-star half ratingPick" for="starhalf" title="Sucks big time - 0.5 stars"></i>
-                                            </fieldset>
-                                          </div>
-                                      </div>
-                                    </div>
-                                  @endif
-                                            @php
-                                              $Profits = explode('@',$signalData->takeProfit);
-                                              $profit = array_shift($Profits);
-                                              $mobiles = explode('@#',$signalData->addMobile);
-                                              array_shift($mobiles);
-                                              $socials = explode('@#',$signalData->social);
-                                              $socialLinks = explode('@#',$signalData->socialLink);
-                                            @endphp
-                                  <div class="card mt-3">
-
-                                    <div class="card">
-                                        <div class="card-header">
-                                            Reviews
-                                        </div>
-                                        <div class="card-body">
-                                            {{$signalData->comments}}
-                                        </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-8">
-                                  <div class="card mb-3">
-                                    <div class="card-body">
-                                        @if($signalData->orderType != null)
-                                            <div class="row">
-                                                <div class="col-sm-4">
-                                                    <h6 class="mb-0">Order Type</h6>
-                                                </div>
-                                                <div class="col-sm-8 text-secondary fontBold">
-                                                    {{$signalData->orderType}}
-                                                </div>
-                                            </div>
-                                            <hr>
-                                        @endif
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <h6 class="mb-0">Order</h6>
-                                            </div>
-                                            <div class="col-sm-8 text-{{stripos($signalData->buySale,'Sell') !== false ? 'danger' : 'primary'}} fontBold">
-                                                {{$signalData->buySale}}
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <h6 class="mb-0">Price</h6>
-                                            </div>
-                                            <div class="col-sm-8 text-secondary fontBold">
-                                                {{$signalData->price}}
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <h6 class="mb-0  pt-2">Take Profit 1</h6>
-                                            </div>
-                                            <div class="col-sm-8 text-secondary fontBold">
-                                                <span class="text-primary">{{$profit}}</span>
-                                            </div>
-                                            @for($i=0; $i < count($Profits); $i++)
-                                                <div class="col-sm-4">
-                                                    <h6 class="mb-0  pt-2">Take Profit {{$i + 2}}</h6>
-                                                </div>
-                                                <div class="col-sm-8 text-secondary fontBold">
-                                                    <span class="text-primary">{{$Profits[$i]}}</span>
-                                                </div>
-                                            @endfor
-                                        </div>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <h6 class="mb-0">Stop Lose</h6>
-                                            </div>
-                                            <div class="col-sm-8 text-secondary fontBold">
-                                                <span class="text-danger">{{$signalData->stopLose}}</span>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        @if($signalData->result != null && $signalData->result != 'none')
-                                            <div class="row">
-                                                <div class="col-sm-4">
-                                                    <h6 class="mb-0">Result</h6>
-                                                </div>
-                                                <div class="col-sm-8 {{$signalData->result == 'TP Hit' ? 'text-success' : ''}}{{strpos($signalData->result,'TP Hit') != null ? 'text-success' : ''}}{{$signalData->result == 'SL Hit' ? 'text-danger' : ''}} fontBold">
-                                                    {{$signalData->result == null ? 'none' : $signalData->result}}
-                                                </div>
-                                            </div>
-                                            <hr>
-                                        @endif
-                                        @if($signalData->pips != null)
-                                            <div class="row">
-                                                <div class="col-sm-4">
-                                                    <h6 class="mb-0">Pips</h6>
-                                                </div>
-                                                <div class="col-sm-8 {{strpos($signalData->pips,'+') != null ? 'text-success' : ''}}{{strpos($signalData->pips,'-') ? 'text-danger' : ''}} fontBold">
-                                                    {{$signalData->pips == null ? 'none' : $signalData->pips}}
-                                                </div>
-                                            </div>
-                                            <hr>
-                                        @endif
-                                        @if($signalApiData)
-                                          @if($signalData->result == null && $signalData->pips == null)
-                                              <div class="row">
-                                                <div class="col-sm-4">
-                                                  <h6 class="mb-0">Current Market Price</h6>
-                                                </div>
-                                                <div class="col-sm-8 fontBold">
-                                                  {{$signalApiData->price}}
-                                                </div>
-                                              </div>
-                                              <hr>
-                                              <div class="row">
-                                                <div class="col-sm-4">
-                                                  <h6 class="mb-0">Current Market Opening Price</h6>
-                                                </div>
-                                                <div class="col-sm-8 fontBold">
-                                                  {{$signalApiData->opening_price}}
-                                                </div>
-                                              </div>
-                                              <hr>
-                                              <div class="row">
-                                                <div class="col-sm-4">
-                                                  <h6 class="mb-0">Current Market High</h6>
-                                                </div>
-                                                <div class="col-sm-8 fontBold">
-                                                  {{$signalApiData->high}}
-                                                </div>
-                                              </div>
-                                              <hr>
-                                              <div class="row">
-                                                <div class="col-sm-4">
-                                                  <h6 class="mb-0">Current Market Low</h6>
-                                                </div>
-                                                <div class="col-sm-8 fontBold">
-                                                  {{$signalApiData->low}}
-                                                </div>
-                                              </div>
-                                              <hr>
-                                              <div class="row">
-                                                <div class="col-sm-4">
-                                                  <h6 class="mb-0">Our PIPs</h6>
-                                                </div>
-                                                <div class="col-sm-8 fontBold {{$signalApiData->pips > 0 ? 'text-primary' : 'text-danger' }}">
-                                                  {{$signalApiData->pips}}
-                                                </div>
-                                              </div>
-                                              <hr>
-                                              @if($signalApiData->result != null)
-                                                <div class="row">
-                                                  <div class="col-sm-4">
-                                                    <h6 class="mb-0">Our Current Result</h6>
-                                                  </div>
-                                                  <div class="col-sm-8 fontBold {{$signalApiData->result != 'SL Hit' ? 'text-primary' : 'text-danger'}} ">
-                                                    {{$signalApiData->result}}
-                                                  </div>
-                                                </div>
-                                                <hr>
-                                              @endif
-                                          @endif
-                                        @endif
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-12">
-                                  @php
-                                    $detailDescription = html_entity_decode($signalData->detailDescription);
-                                    echo $detailDescription;
-                                  @endphp
-                                </div>
-                              </div>
+                    <div>
+                      <div class="{{$blur == 1 ? 'blur' : '' }}">
+                        {{-- Counter Start --}}
+                        <div id="clockdiv" class="text-center mb-3">
+                            <div>
+                                <span class="days"></span>
+                                <div class="smalltext">Days</div>
+                            </div>
+                            <div>
+                                <span class="hours"></span>
+                                <div class="smalltext">Hours</div>
+                            </div>
+                            <div>
+                                <span class="minutes"></span>
+                                <div class="smalltext">Minutes</div>
+                            </div>
+                            <div>
+                                <span class="seconds"></span>
+                                <div class="smalltext">Seconds</div>
                             </div>
                         </div>
+                        {{-- Counter End --}}
+                        <div class="">
+                          <div class="">
+                            @php
+                              $pair = $signalData->getPair();
+                              $flags = explode("/",$pair->pair);
+                            @endphp
+                                <div class="row gutters-sm">
+                                  <div class="col-md-4 mb-3">
+                                    <div class="card">
+                                      <div class="card-body">
+                                        <div class="d-flex flex-column align-items-center text-center">
+                          <div>
+                          @if($pair->image == null)
+                            @foreach($flags as $flag)
+                              @php $flag4 = str_replace(' ', '', $flag) @endphp
+                                <img src="{{URL::to('storage/app/signalFlag')}}/{{$flag4}}.jpg" width="50" height="35" alt=""> &nbsp;&nbsp;
+                            @endforeach
+                          @else
+                            <img src="{{URL::to('storage/app')}}/{{$pair->image}}" width="100" height="35"  alt="">
+                          @endif
+                        </div>
+                                          <div class="mt-3">
+                                            <h4>{{$pair->pair}}</h4>
+                                            <p class="text-secondary mb-1">{{$signalData->selectUser}}</p>
+                                          </div>
+                                          <div>
+                                              @php
+                                                  $clientLikeshow = 0;
+                                                  if (Session::has('client')) {
+                                                      $value = Session::get('client');
+                                                      $clientLike = App\Models\SignalLikeModel::where('signalId',$signalData->id)->where('userId',$value['id'])->first();
+                                                      if ($clientLike) {
+                                                          $clientLikeshow = 1;
+                                                      }
+                                                  }
+                                              @endphp
+                                              (<span class="totalLiked text-primary">{{count($TotalLikes)}}</span>)
+                                              <span class="likeForm123 likeForm1 {{!Session::has('client') ? "LoginButton" : ''}} {{$clientLikeshow == 1 ? ($clientLike->liked == 1 ? 'text-primary' :'') : '' }}" text="{{$clientLikeshow == 1 ? ($clientLike->liked == 1 ? 'text-primary' :'') : ''  }}" value="1" {{!Session::has('client') ? "data-toggle=modal data-target=#requestQuoteModal" : ''}}> <i class="fa fa-thumbs-up"></i> </span>
+                                              (<span class="totalDisliked text-danger">{{count($TotalDislikes)}}</span>)
+                                              <span class="likeForm123 disLikeForm1 {{!Session::has('client') ? "LoginButton" : ''}} {{$clientLikeshow == 1 ? ($clientLike->liked == 0 ? 'text-danger' :'') : ''  }}" text="{{$clientLikeshow == 1 ? ($clientLike->liked == 0 ? 'text-danger' :'') : ''  }}" value="0" {{!Session::has('client') ? "data-toggle=modal data-target=#requestQuoteModal" : ''}}><i class="fa fa-thumbs-up" style="transform: rotate(174deg);"></i></span>
+                                          </div>
+                                          <div id="shareLink"></div>
+                                          @php $SignalRatingPoints = $signalData->GetRatingPoints();$countRattinigUser = $signalData->GetNumberOfUserwhoRate(); @endphp
+                                          <fieldset class="rating1">
+                                            <input type="radio" name="rating1" value="5" {{ $SignalRatingPoints == 5 ? 'checked' : '' }}/><i class="fa fa-star full" for="star5" title="Awesome - 5 stars"></i>
+                                            <input type="radio" name="rating1" value="4.5"  {{ $SignalRatingPoints == 4.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star4half" title="Pretty good - 4.5 stars"></i>
+                                            <input type="radio" name="rating1" value="4"  {{ $SignalRatingPoints == 4 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star4" title="Pretty good - 4 stars"></i>
+                                            <input type="radio" name="rating1" value="3.5"  {{ $SignalRatingPoints == 3.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star3half" title="Meh - 3.5 stars"></i>
+                                            <input type="radio" name="rating1" value="3"  {{ $SignalRatingPoints == 3 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star3" title="Meh - 3 stars"></i>
+                                            <input type="radio" name="rating1" value="2.5"  {{ $SignalRatingPoints == 2.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star2half" title="Kinda bad - 2.5 stars"></i>
+                                            <input type="radio" name="rating1" value="2"  {{ $SignalRatingPoints == 2 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star2" title="Kinda bad - 2 stars"></i>
+                                            <input type="radio" name="rating1" value="1.5"  {{ $SignalRatingPoints == 1.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star1half" title="Meh - 1.5 stars"></i>
+                                            <input type="radio" name="rating1" value="1"  {{ $SignalRatingPoints == 1 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star1" title="Sucks big time - 1 star"></i>
+                                            <input type="radio" name="rating1" value="0.5"  {{ $SignalRatingPoints == 0.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="starhalf" title="Sucks big time - 0.5 stars"></i>
+                                          </fieldset>({{$countRattinigUser}})
+                                        </div>
+                                      </div>
+                                    </div>
+                                    @if(Session::has('client'))
+                                      <div class="card mt-3">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Your Rating
+                                            </div>
+                                            <div class="card-body">
+                                              @php 
+                                                $clientData = Session::get('client');
+                                                $userId   = $clientData['id'];
+                                                $UserSignalRatingPoints = $signalData->GetUSerRatingPoints($userId); 
+                                              @endphp
+                                              <fieldset class="rating">
+                                                <input type="radio" id="star5" name="rating" value="5" {{ $UserSignalRatingPoints == 5 ? 'checked' : '' }}/><i class="fa fa-star full ratingPick" for="star5" title="Awesome - 5 stars"></i>
+                                                <input type="radio" id="star4half" name="rating" value="4.5" {{ $UserSignalRatingPoints == 4.5 ? 'checked' : '' }}/><i class="fa fa-star half ratingPick" for="star4half" title="Pretty good - 4.5 stars"></i>
+                                                <input type="radio" id="star4" name="rating" value="4" {{ $UserSignalRatingPoints == 4 ? 'checked' : '' }}/><i class = "fa fa-star full ratingPick" for="star4" title="Pretty good - 4 stars"></i>
+                                                <input type="radio" id="star3half" name="rating" value="3.5" {{ $UserSignalRatingPoints == 3.5 ? 'checked' : '' }}/><i class="fa fa-star half ratingPick" for="star3half" title="Meh - 3.5 stars"></i>
+                                                <input type="radio" id="star3" name="rating" value="3" {{ $UserSignalRatingPoints == 3 ? 'checked' : '' }}/><i class = "fa fa-star full ratingPick" for="star3" title="Meh - 3 stars"></i>
+                                                <input type="radio" id="star2half" name="rating" value="2.5" {{ $UserSignalRatingPoints == 2.5 ? 'checked' : '' }}/><i class="fa fa-star half ratingPick" for="star2half" title="Kinda bad - 2.5 stars"></i>
+                                                <input type="radio" id="star2" name="rating" value="2" {{ $UserSignalRatingPoints == 2 ? 'checked' : '' }}/><i class = "fa fa-star full ratingPick" for="star2" title="Kinda bad - 2 stars"></i>
+                                                <input type="radio" id="star1half" name="rating" value="1.5" {{ $UserSignalRatingPoints == 1.5 ? 'checked' : '' }}/><i class="fa fa-star half ratingPick" for="star1half" title="Meh - 1.5 stars"></i>
+                                                <input type="radio" id="star1" name="rating" value="1" {{ $UserSignalRatingPoints == 1 ? 'checked' : '' }}/><i class = "fa fa-star full ratingPick" for="star1" title="Sucks big time - 1 star"></i>
+                                                <input type="radio" id="starhalf" name="rating" value="0.5" {{ $UserSignalRatingPoints == 0.5 ? 'checked' : '' }}/><i class="fa fa-star half ratingPick" for="starhalf" title="Sucks big time - 0.5 stars"></i>
+                                              </fieldset>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    @endif
+                                              @php
+                                                $Profits = explode('@',$signalData->takeProfit);
+                                                $profit = array_shift($Profits);
+                                                $mobiles = explode('@#',$signalData->addMobile);
+                                                array_shift($mobiles);
+                                                $socials = explode('@#',$signalData->social);
+                                                $socialLinks = explode('@#',$signalData->socialLink);
+                                              @endphp
+                                    <div class="card mt-3">
+
+                                      <div class="card">
+                                          <div class="card-header">
+                                              Reviews
+                                          </div>
+                                          <div class="card-body">
+                                              {{$signalData->comments}}
+                                          </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-8">
+                                    <div class="card mb-3">
+                                      <div class="card-body">
+                                          @if($signalData->orderType != null)
+                                              <div class="row">
+                                                  <div class="col-sm-4">
+                                                      <h6 class="mb-0">Order Type</h6>
+                                                  </div>
+                                                  <div class="col-sm-8 text-secondary fontBold">
+                                                      {{$signalData->orderType}}
+                                                  </div>
+                                              </div>
+                                              <hr>
+                                          @endif
+                                          <div class="row">
+                                              <div class="col-sm-4">
+                                                  <h6 class="mb-0">Order</h6>
+                                              </div>
+                                              <div class="col-sm-8 text-{{stripos($signalData->buySale,'Sell') !== false ? 'danger' : 'primary'}} fontBold">
+                                                  {{$signalData->buySale}}
+                                              </div>
+                                          </div>
+                                          <hr>
+                                          <div class="row">
+                                              <div class="col-sm-4">
+                                                  <h6 class="mb-0">Price</h6>
+                                              </div>
+                                              <div class="col-sm-8 text-secondary fontBold">
+                                                  {{$signalData->price}}
+                                              </div>
+                                          </div>
+                                          <hr>
+                                          <div class="row">
+                                              <div class="col-sm-4">
+                                                  <h6 class="mb-0  pt-2">Take Profit 1</h6>
+                                              </div>
+                                              <div class="col-sm-8 text-secondary fontBold">
+                                                  <span class="text-primary">{{$profit}}</span>
+                                              </div>
+                                              @for($i=0; $i < count($Profits); $i++)
+                                                  <div class="col-sm-4">
+                                                      <h6 class="mb-0  pt-2">Take Profit {{$i + 2}}</h6>
+                                                  </div>
+                                                  <div class="col-sm-8 text-secondary fontBold">
+                                                      <span class="text-primary">{{$Profits[$i]}}</span>
+                                                  </div>
+                                              @endfor
+                                          </div>
+                                          <hr>
+                                          <div class="row">
+                                              <div class="col-sm-4">
+                                                  <h6 class="mb-0">Stop Lose</h6>
+                                              </div>
+                                              <div class="col-sm-8 text-secondary fontBold">
+                                                  <span class="text-danger">{{$signalData->stopLose}}</span>
+                                              </div>
+                                          </div>
+                                          <hr>
+                                          @if($signalData->result != null && $signalData->result != 'none')
+                                              <div class="row">
+                                                  <div class="col-sm-4">
+                                                    <h6 class="mb-0">Result</h6>
+                                                  </div>
+                                                  <div class="col-sm-8 {{$signalData->result == 'TP Hit' ? 'text-success' : ''}}{{strpos($signalData->result,'TP Hit') != null ? 'text-success' : ''}}{{$signalData->result == 'SL Hit' ? 'text-danger' : ''}} fontBold">
+                                                    {{$signalData->result == null ? 'none' : $signalData->result}}
+                                                  </div>
+                                              </div>
+                                              <hr>
+                                          @endif
+                                          @if($signalData->pips != null)
+                                              <div class="row">
+                                                  <div class="col-sm-4">
+                                                      <h6 class="mb-0">Pips</h6>
+                                                  </div>
+                                                  <div class="col-sm-8 {{strpos($signalData->pips,'+') != null ? 'text-success' : ''}}{{strpos($signalData->pips,'-') ? 'text-danger' : ''}} fontBold">
+                                                      {{$signalData->pips == null ? 'none' : $signalData->pips}}
+                                                  </div>
+                                              </div>
+                                              <hr>
+                                          @endif
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-12">
+                                    @php
+                                      $detailDescription = html_entity_decode($signalData->detailDescription);
+                                      echo $detailDescription;
+                                    @endphp
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                      </div>
+                      @if(Session::has('error1'))
+                        <div class="errorModule pre-header">
+                          <div class="errorIcon" style="margin-left: 40%;">
+                            <i class="fa fa-lock"></i>
+                          </div>
+                          <div class="errorMsg">{{Session::get('error1')}}</div>
+                        </div>
+                        @php Session::pull('error1') @endphp
+                      @endif
+                    </div>
                         @include('comments.comment',['commentObjectId'=>$signalData->id,'commentPage'=>1])
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 order-3 order-lg-3">
                   @include('inc.home-right-sidebar')
                 </div>
             </div>
-            @if(Session::has('error1'))
-              <div class="errorModule pre-header">
-                <div class="errorIcon" style="margin-left: 40%;">
-                  <i class="fa fa-lock"></i>
-                </div>
-                <div class="errorMsg">{{Session::get('error1')}}</div>
-              </div>
-              @php Session::pull('error1') @endphp
-            @endif
         </div>
     </section>
 
@@ -318,16 +262,15 @@
 <style>
   /* blur style start */
     .blur{
-        height:110% !important;
         -webkit-filter: blur(5px); -moz-filter: blur(5px); -o-filter: blur(5px); -ms-filter: blur(5px); filter: blur(5px);
     }
   /* blur style end */
   /* error Modele style start */
     .errorModule {
       padding:15px;
-      position: fixed;
-      top: 50%;
-      left: 45%;
+      position: absolute;
+      top: 25%;
+      left: 30%;
       color: #fff;
     }
     @media only screen and (max-width: 800px) {
@@ -575,5 +518,83 @@
 
 </script>
 {{-- Counter Script End --}}
+
+<script>
+        $(".likeForm123").on("click",function(){
+            var likeData = $(this).attr('value');
+            var previousClass = $(this).attr('text');
+            var CommentId = $(this).attr('CommentId');
+            var totalDislikedComment = $(this).parent().children(".totalDisliked");
+            var totalLikedComment = $(this).parent().children(".totalLiked");
+            console.log(CommentId);
+            if (likeData == 0) {
+                if (previousClass == null || previousClass == "") {
+                    var ifd = $(this).parent().children(".likeForm1").attr('text');
+                    console.log(ifd);
+                    if (ifd != null && ifd != "") {
+                        var like1 = $(".totalLiked").html();
+                        $(this).parent().children(".totalLiked").html(--like1);
+                        $(this).parent().children(".likeForm1").attr('class','likeForm likeForm1');
+                        $(this).parent().children(".likeForm1").attr('text','');
+                    }
+                    $(this).attr('class','likeForm disLikeForm1 text-danger');
+                    $(this).attr('text','text-danger');
+                    var dislike = $(this).parent().children(".totalDisliked").html();
+                    if (CommentId == undefined) {
+                      $(this).parent().children(".totalDisliked").html(++dislike);
+                    }
+                }else{
+                    $(this).attr('class','likeForm disLikeForm1');
+                    $(this).attr('text','');
+                    var dislike = $(this).parent().children(".totalDisliked").html();
+                    if (CommentId == undefined) {
+                      $(this).parent().children(".totalDisliked").html(--dislike);
+                    }
+                }
+            }else{
+                if (previousClass == null || previousClass == "") {
+                    var ifd1 = $(this).parent().children(".disLikeForm1").attr('text');
+                    console.log(ifd1);
+                    if (ifd1 != null && ifd1 != "") {
+                    console.log(ifd1);
+                        var dislike1 = $(this).parent().children(".totalDisliked").html();
+                        $(this).parent().children(".totalDisliked").html(--dislike1);
+                        $(this).parent().children(".disLikeForm1").attr('class','likeForm disLikeForm1');
+                        $(this).parent().children(".disLikeForm1").attr('text','');
+                    }
+                    $(this).attr('class','likeForm likeForm1 text-primary');
+                    $(this).attr('text','text-primary');
+                    var like = $(this).parent().children(".totalLiked").html();
+                    if (CommentId == undefined) {
+                      $(this).parent().children(".totalLiked").html(++like);
+                    }
+                }else{
+                    $(this).attr('class','likeForm likeForm1');
+                    $(this).attr('text','');
+                    var like = $(this).parent().children(".totalLiked").html();
+                    if (CommentId == undefined) {
+                      $(this).parent().children(".totalLiked").html(--like);
+                    }
+                }
+            }
+            if (CommentId != undefined) {
+              var url = "{{URL::to('comment/like')}}" + "/" + CommentId + "/" + likeData;
+            }else{
+              var url = "{{URL::to('signal/like')}}" + "/" + "{{$commentObjectId}}" + "/" + likeData;
+            }
+            $.ajax({
+                  type: "POST",
+                  url: url,
+                  data: likeData,
+                  success: function(data){
+                      console.log(data);
+                      if (CommentId != undefined) {
+                        $(totalDislikedComment).html(data[1]);
+                        $(totalLikedComment).html(data[0]);
+                      }
+                  }
+              });
+        })
+    </script>
 @include('comments.css_js',['commentObjectId'=>$signalData->id,'commentPage'=>1])
 <script data-ad-client="ca-pub-4965167409528757" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

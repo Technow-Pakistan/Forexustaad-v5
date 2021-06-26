@@ -22,10 +22,6 @@
                                   </a>
                             </div>
                         @endif
-                          @if($category == "Basic")
-                            <div class="row">
-                              <div class="col-sm-6">
-                          @endif
                                 <div class="news_us">
                                     <div class="content_area_heading large-heading text-center">
 
@@ -37,24 +33,6 @@
                                         </div>
                                     </div>
                                 </div>
-                          @if($category == "Basic")
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="news_us">
-                                    <div class="content_area_heading large-heading text-center">
-                                        <a href="{{URL::to('blog-post.html')}}">
-                                            <h1 class="heading_title wow animated fadeInUp">
-                                              {{$category == "Basic" ? 'Blog View' : ''}}
-                                            </h1>
-                                            <div class="heading_border wow animated fadeInUp">
-                                              <span class="one"></span><span class="two"></span><span class="three"></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          @endif
                         <!-- <h4 class="text-center mt-5">
                             Advance Trainning
                         </h4> -->
@@ -306,75 +284,75 @@
 <style>
     /* contentLock style start */
 
-    .contentLock {
-      position: relative;
-      width: 90%;
-      max-width: 400px;
-      overflow: hidden;
-    }
+      .contentLock {
+        position: relative;
+        width: 90%;
+        max-width: 400px;
+        overflow: hidden;
+      }
 
-    .contentLock .content-overlay {
-      background: rgba(0,0,0,0.7);
-      position: absolute;
-      height: 99%;
-      width: 100%;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      opacity: 0;
-      -webkit-transition: all 0.4s ease-in-out 0s;
-      -moz-transition: all 0.4s ease-in-out 0s;
-      transition: all 0.4s ease-in-out 0s;
-    }
+      .contentLock .content-overlay {
+        background: rgba(0,0,0,0.7);
+        position: absolute;
+        height: 99%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        opacity: 0;
+        -webkit-transition: all 0.4s ease-in-out 0s;
+        -moz-transition: all 0.4s ease-in-out 0s;
+        transition: all 0.4s ease-in-out 0s;
+      }
 
-    .contentLock:hover .content-overlay{
-      opacity: 0.5;
-    }
+      .contentLock:hover .content-overlay{
+        opacity: 0.5;
+      }
 
-    .content-image{
-      width: 100%;
-    }
+      .content-image{
+        width: 100%;
+      }
 
-    .content-details {
-      position: absolute;
-      text-align: center;
-      padding-left: 1em;
-      padding-right: 1em;
-      width: 100%;
-      top: 50%;
-      left: 50%;
-      opacity: 0;
-      -webkit-transform: translate(-50%, -50%);
-      -moz-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-      -webkit-transition: all 0.3s ease-in-out 0s;
-      -moz-transition: all 0.3s ease-in-out 0s;
-      transition: all 0.3s ease-in-out 0s;
-    }
+      .content-details {
+        position: absolute;
+        text-align: center;
+        padding-left: 1em;
+        padding-right: 1em;
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        opacity: 0;
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        -webkit-transition: all 0.3s ease-in-out 0s;
+        -moz-transition: all 0.3s ease-in-out 0s;
+        transition: all 0.3s ease-in-out 0s;
+      }
 
-    .contentLock:hover .content-details{
-      top: 50%;
-      left: 50%;
-      opacity: 1;
-    }
+      .contentLock:hover .content-details{
+        top: 50%;
+        left: 50%;
+        opacity: 1;
+      }
 
-    .content-details h3{
-      color: #fff;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      margin-bottom: 0.5em;
-      text-transform: uppercase;
-    }
+      .content-details h3{
+        color: #fff;
+        font-weight: 500;
+        letter-spacing: 0.15em;
+        margin-bottom: 0.5em;
+        text-transform: uppercase;
+      }
 
-    .content-details p{
-      color: #fff;
-      font-size: 0.8em;
-    }
+      .content-details p{
+        color: #fff;
+        font-size: 0.8em;
+      }
 
-    .fadeIn-left{
-      left: 20%;
-    }
+      .fadeIn-left{
+        left: 20%;
+      }
     /* contentLock style end */
 		.pre-header {
     		background-image: linear-gradient(45deg, #ff0024, #0d5fe9);

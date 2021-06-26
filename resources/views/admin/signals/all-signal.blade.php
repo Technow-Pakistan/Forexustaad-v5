@@ -53,7 +53,7 @@ $icount = 0;
                                             @endif
                                             <th>Date</th>
                                             <th>Time</th>
-                                            <th>Rating</th>
+                                            <th class="none">Rating</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
@@ -61,35 +61,12 @@ $icount = 0;
                                         @foreach($signalData as $data)
                                             @php
                                                 $icount++;
-                                                $pair = $data->getPair();
-                                            @endphp
-                                            @php
                                                 $url = $data->id;
-                                                $loginClientData = Session::get('client');
-                                                $go = 1;
-                                                $go3 = 1;
-                                                $profits = explode('@',$data->takeProfit);
-                                                $time1 = strtotime($data->time);
-                                                $time = date('h:i A', $time1);
-                                                $date1 = strtotime($data->date);
-                                                $date = date('d M Y', $date1);
-                                                if($data->date == date("Y-m-d")){
-                                                    if($data->time >= date("H:i:s")){
-                                                        $go = 0;
-                                                        $go3 = 3;
-                                                    }
-                                                }
-                                                if($data->date > date("Y-m-d")){
-                                                    $go = 0;
-                                                        $go3 = 3;
-                                                }
-                                                $timeDate1 = strtotime(date("Y-m-d H:i:s"));
-                                                $timeDate2 = strtotime($data->created_at->format("Y-m-d H:i:s"));
-                                                $minsDate = ($timeDate1 - $timeDate2) / 60;
-                                                            $pair = $data->getPair();
+                                                $pair = $data->getPair();
                                                 $flags = explode("/",$pair->pair);
+                                                $signalExpired = $data->GetExpiredOrNot();
                                             @endphp
-                                            @if($go3 == 3)
+                                            @if($signalExpired == 1)
                                                 <tr>
                                                     <td>{{$icount}}</td>
                                                     <td>{{$data->selectUser}}</td>
@@ -102,14 +79,9 @@ $icount = 0;
                                                         <td><a href="{{URL::to('/ustaad/signals/comment')}}/{{$data->id}}">View Comments</a></td>
                                                     @endif
                                                     <td>{{$data->date}}</td>
+                                                    <td> {{date('h:i A', strtotime($data->time))}} </td>
                                                     <td>
-                                                        @php
-                                                            $date = strtotime($data->time);
-                                                            echo date('h:i a', $date);
-                                                        @endphp
-                                                    </td>
-                                                    <td>
-                                                        @php $SignalRatingPoints = $data->GetRatingPoints(); @endphp
+                                                        @php $SignalRatingPoints = $data->GetRatingPoints();$countRattinigUser = $data->GetNumberOfUserwhoRate(); @endphp
                                                         <fieldset class="rating1">
                                                             <input type="radio" name="rating1" value="5" {{ $SignalRatingPoints == 5 ? 'checked' : '' }}/><i class="fa fa-star full" for="star5" title="Awesome - 5 stars"></i>
                                                             <input type="radio" name="rating1" value="4.5"  {{ $SignalRatingPoints == 4.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star4half" title="Pretty good - 4.5 stars"></i>
@@ -121,7 +93,7 @@ $icount = 0;
                                                             <input type="radio" name="rating1" value="1.5"  {{ $SignalRatingPoints == 1.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star1half" title="Meh - 1.5 stars"></i>
                                                             <input type="radio" name="rating1" value="1"  {{ $SignalRatingPoints == 1 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star1" title="Sucks big time - 1 star"></i>
                                                             <input type="radio" name="rating1" value="0.5"  {{ $SignalRatingPoints == 0.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="starhalf" title="Sucks big time - 0.5 stars"></i>
-                                                        </fieldset>
+                                                        </fieldset>({{$countRattinigUser}})
                                                     </td>
                                                     <td>
                                                         @if($data->pending == 1)
@@ -207,44 +179,19 @@ $icount = 0;
                                                 <th>Comments</th>
                                             @endif
                                             <th>Result</th>
-                                            <th>Rating</th>
+                                            <th class="none">Rating</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($signalData as $data)
                                             @php
-                                                $signalDataApi = $data->GetSignalApiData();
                                                 $icount++;
                                                 $pair = $data->getPair();
-                                            @endphp
-                                            @php
-                                                $url = $data->id;
-                                                $loginClientData = Session::get('client');
-                                                $go = 1;
-                                                $go3 = 1;
-                                                $profits = explode('@',$data->takeProfit);
-                                                $time1 = strtotime($data->time);
-                                                $time = date('h:i A', $time1);
-                                                $date1 = strtotime($data->date);
-                                                $date = date('d M Y', $date1);
-                                                if($data->date == date("Y-m-d")){
-                                                    if($data->time >= date("H:i:s")){
-                                                        $go = 0;
-                                                        $go3 = 3;
-                                                    }
-                                                }
-                                                if($data->date > date("Y-m-d")){
-                                                    $go = 0;
-                                                        $go3 = 3;
-                                                }
-                                                $timeDate1 = strtotime(date("Y-m-d H:i:s"));
-                                                $timeDate2 = strtotime($data->created_at->format("Y-m-d H:i:s"));
-                                                $minsDate = ($timeDate1 - $timeDate2) / 60;
-                                                            $pair = $data->getPair();
                                                 $flags = explode("/",$pair->pair);
+                                                $signalExpired = $data->GetExpiredOrNot();
                                             @endphp
-                                            @if($go3 != 3)
+                                            @if($signalExpired == 0)
                                                 <tr>
                                                     <td>{{$icount}}</td>
                                                     <td>{{$data->selectUser}}</td>
@@ -257,14 +204,10 @@ $icount = 0;
                                                         <td><a href="{{URL::to('/ustaad/signals/comment')}}/{{$data->id}}">View Comments</a></td>
                                                     @endif
                                                     <td>
-                                                        @if($data->result != null)
-                                                            <span class="badge {{strpos($data->result,'TP Hit') != null ? 'badge-light-success' : ''}}{{$data->result == 'SL Hit' ? 'badge-light-danger' : ''}}"><strong style="white-space: normal"> {{$data->result == null ? 'manually closed' : $data->result}}</strong></span>
-                                                        @elseif($signalDataApi)
-                                                            <span class="badge {{strpos($signalDataApi->result,'TP Hit') != null ? 'badge-light-success' : ''}}{{$signalDataApi->result == 'SL Hit' ? 'badge-light-danger' : ''}}"><strong> {{$signalDataApi->result == null ? 'manually closed' : $signalDataApi->result}}</strong></span>
-                                                        @endif
+                                                        <span class="badge {{strpos($data->result,'TP Hit') != null ? 'badge-light-success' : ''}}{{$data->result == 'SL Hit' ? 'badge-light-danger' : ''}}"><strong style="white-space: normal"> {{$data->result == null ? 'manually closed' : $data->result}}</strong></span>
                                                     </td>
                                                     <td>
-                                                        @php $SignalRatingPoints = $data->GetRatingPoints(); @endphp
+                                                        @php $SignalRatingPoints = $data->GetRatingPoints();$countRattinigUser = $data->GetNumberOfUserwhoRate(); @endphp
                                                         <fieldset class="rating1">
                                                             <input type="radio" name="rating1" value="5" {{ $SignalRatingPoints == 5 ? 'checked' : '' }}/><i class="fa fa-star full" for="star5" title="Awesome - 5 stars"></i>
                                                             <input type="radio" name="rating1" value="4.5"  {{ $SignalRatingPoints == 4.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star4half" title="Pretty good - 4.5 stars"></i>
@@ -276,7 +219,7 @@ $icount = 0;
                                                             <input type="radio" name="rating1" value="1.5"  {{ $SignalRatingPoints == 1.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="star1half" title="Meh - 1.5 stars"></i>
                                                             <input type="radio" name="rating1" value="1"  {{ $SignalRatingPoints == 1 ? 'checked' : '' }}/><i class = "fa fa-star full" for="star1" title="Sucks big time - 1 star"></i>
                                                             <input type="radio" name="rating1" value="0.5"  {{ $SignalRatingPoints == 0.5 ? 'checked' : '' }}/><i class="fa fa-star half" for="starhalf" title="Sucks big time - 0.5 stars"></i>
-                                                        </fieldset>
+                                                        </fieldset>({{$countRattinigUser}})
                                                     </td>
                                                     <td>
                                                         <span class="badge {{$data->status == 0 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 0 ? 'Active' : 'Deactive'}}</span>
@@ -333,7 +276,6 @@ $icount = 0;
     
   /* Star Rating style start */
   .rating,.rating1 { 
-      float:left;
       border: none;
       position:relative;
     }
@@ -370,5 +312,32 @@ $icount = 0;
 </style>
 @include('admin.include.footer')
 <script>
-$('#user-list-table1').DataTable();
+  $(document).ready(function() {
+    // Setup - add a text input to each footer cell
+    $('#user-list-table1 tfoot th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+    } );
+ 
+    // DataTable
+    var table = $('#user-list-table1').DataTable({
+      pageLength : 10,
+      lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, 'All']],
+      initComplete: function () {
+          // Apply the search
+          this.api().columns().every( function () {
+              var that = this;
+
+              $( 'input', this.footer() ).on( 'keyup change clear', function () {
+                  if ( that.search() !== this.value ) {
+                      that
+                          .search( this.value )
+                          .draw();
+                  }
+              } );
+          } );
+      }
+    });
+ 
+  });
 </script>

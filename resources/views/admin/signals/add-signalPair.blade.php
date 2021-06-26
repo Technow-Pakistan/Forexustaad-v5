@@ -135,6 +135,7 @@
                                             <th class="w-30">Pair</th>
                                             <th>Category</th>
                                             <th>Image</th>
+                                            <th>Meta</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -154,6 +155,9 @@
                                                     @if($data->image != null)
 													    <img src="{{URL::to('storage/app')}}/{{$data->image}}" width="100px" height="100px" alt="">
                                                     @endif
+                                                </td>
+												<td class="tdLinkScroll">
+                                                    <a href="{{URL::to('ustaad/signals/pair/meta-tag')}}/{{$data->id}}">Veiw</a>
                                                 </td>
 												<td>
 													<a href="#">

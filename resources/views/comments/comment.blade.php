@@ -33,10 +33,6 @@
                                         @endif
                                         <div class="box_post">
                                         <div class="pull-right">
-                                            <span>
-                                                <img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="avatar" />
-                                                <i class="fa fa-caret-down"></i>
-                                            </span>
                                             @if(Session::has('client'))
                                                 @php
                                                     $value =Session::get('client');
@@ -82,7 +78,7 @@
                                           <img src="{{$urlImageSrc}}" alt="avatar"/>
                                         </div>
                                         <div class="result_comment col-md-10">
-                                          <h4>{{ $comment->userType == "client" ? $client->name : $adminDetailInfo->firstName . ' ' . $adminDetailInfo->lastName}}</h4>
+                                          <h4>{{$comment->userType == "client" ? $client->name : $adminDetailInfo->firstName . ' ' . $adminDetailInfo->lastName}}</h4>
                                           <p>{{$comment->comment}}</p>
                                           <div class="tools_comment">
                                             @php
@@ -95,16 +91,16 @@
                                             @endif
                                             <a class="ml-3" data-toggle="collapse" data-target="#demo{{$comment->id}}">View Replies <span class="text-dark">({{count($replys)}})</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
                                             @php
-                                                $clientLikeshow = 0;
-                                                if (Session::has('client')) {
-                                                    $value = Session::get('client');
-                                                    $clientLike = App\Models\AllCommentLikeModel::where('allCommentId',$comment->id)->where('userId',$value['id'])->first();
-                                                    if ($clientLike) {
-                                                        $clientLikeshow = 1;
-                                                    }
+                                              $clientLikeshow = 0;
+                                              if (Session::has('client')) {
+                                                $value = Session::get('client');
+                                                $clientLike = App\Models\AllCommentLikeModel::where('allCommentId',$comment->id)->where('userId',$value['id'])->first();
+                                                if ($clientLike){
+                                                  $clientLikeshow = 1;
                                                 }
-                                                $likeComment = $comment->getCommentLike();
-                                                $dislikeComment = $comment->getCommentDislike();
+                                              }
+                                              $likeComment = $comment->getCommentLike();
+                                              $dislikeComment = $comment->getCommentDislike();
                                             @endphp
                                             <span CommentId="{{$comment->id}}" class="likeForm likeForm1 {{!Session::has('client') ? "LoginButton" : ''}} {{$clientLikeshow == 1 ? ($clientLike->liked == 1 ? 'text-primary' :'') : '' }}" text="{{$clientLikeshow == 1 ? ($clientLike->liked == 1 ? 'text-primary' :'') : ''  }}" value="1" {{!Session::has('client') ? "data-toggle=modal data-target=#requestQuoteModal" : ''}}> <i class="fa fa-thumbs-up"></i> </span>
                                             (<span class="totalLiked text-primary">{{$likeComment}}</span>)

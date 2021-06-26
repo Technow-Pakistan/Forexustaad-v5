@@ -199,8 +199,9 @@ class AdminController extends Controller
         $AdvanceTrainingLatestComments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 6)->get();
         $BasicTrainingLatestComments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 5)->get();
         $HabbitTrainingLatestComments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 7)->get();
-        $BlogPostLatestComments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 4)->get();
-        return view('admin.latestCommentPage',compact('signalLatestComments','AdvanceTrainingLatestComments','BasicTrainingLatestComments','HabbitTrainingLatestComments','BlogPostLatestComments'));
+        $BlogPostLatestComments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 4)->get(); 
+        $wholeCommentData = AllCommentsModel::orderBy('created_at','desc')->where('commentPageId', 1)->orWhere('commentPageId', 4)->orWhere('commentPageId', 5)->orWhere('commentPageId', 6)->orWhere('commentPageId', 7)->get();
+        return view('admin.latestCommentPage',compact('signalLatestComments','wholeCommentData','AdvanceTrainingLatestComments','BasicTrainingLatestComments','HabbitTrainingLatestComments','BlogPostLatestComments'));
     }
     public function Dashboard(Request $request){
         if(!$request->session()->has("admin")){
@@ -221,36 +222,18 @@ class AdminController extends Controller
                 return  redirect("ustaad/latestComments");
             }
         };
-        $Clients = ClientRegistrationModel::all();
-        $TotalClientNumber = count($Clients);
         $lastMonth = date("m",strtotime("0 months"));
-        $lastMonth1 = date("Y-m-d h:i:s ",strtotime("-7 days"));
-        $lastDay = date("d",strtotime("0 days"));
-        $lastWeek = date("d",strtotime("-7 days"));
         $lastYear = date("Y",strtotime("0 months"));
-
-        $MonthlyClients = ClientRegistrationModel::whereMonth("created_at",$lastMonth)->whereYear("created_at",$lastYear)->get();
-        $ToDayClients = ClientRegistrationModel::whereDay("created_at",$lastDay)->whereMonth("created_at",$lastMonth)->whereYear("created_at",$lastYear)->get();
-        $WeeklyClients = ClientRegistrationModel::where("created_at",">=",$lastMonth1)->get();
-
-        $MonthlyClientNumber = count($MonthlyClients);
-        $ToDayClientNumber = count($ToDayClients);
-        $WeeklyClientNumber = count($WeeklyClients);
-
-        $AdminUsers = AdminModel::all();
-        $TotalAdminUsersNumber = count($AdminUsers);
-        $MonthlyAdminUsers = AdminModel::whereMonth("created_at",$lastMonth)->whereYear("created_at",$lastYear)->get();
-        $MonthlyAdminUsersNumber = count($MonthlyAdminUsers);
-
-        $TotalPost = BlogPostModel::all();
-        $TotalPostNumber = count($TotalPost);
-        $MonthlyPost = BlogPostModel::where('status',1)->where('pending',1)->whereDate('publishDate', '<=', date("Y-m-d"))->get();
-        $MonthlyPostNumber = count($MonthlyPost);
-
-        $TotalBroker = BrokerCompanyInformationModel::all();
-        $TotalBrokerNumber = count($TotalBroker);
-        $MonthlyBroker = BrokerCompanyInformationModel::where("trash",0)->where("pending",0)->get();
-        $MonthlyBrokerNumber = count($MonthlyBroker);
+        $TotalClientNumber = ClientRegistrationModel::count();
+        $MonthlyClientNumber = ClientRegistrationModel::whereMonth("created_at",$lastMonth)->whereYear("created_at",$lastYear)->count();
+        $ToDayClientNumber = ClientRegistrationModel::whereDay("created_at",date("d",strtotime("0 days")))->whereMonth("created_at",$lastMonth)->whereYear("created_at",$lastYear)->count();
+        $WeeklyClientNumber = ClientRegistrationModel::where("created_at",">=",date("Y-m-d h:i:s ",strtotime("-7 days")))->count();
+        $TotalAdminUsersNumber = AdminModel::count();
+        $MonthlyAdminUsersNumber = AdminModel::whereMonth("created_at",$lastMonth)->whereYear("created_at",$lastYear)->count();
+        $TotalPostNumber = BlogPostModel::count();
+        $MonthlyPostNumber = BlogPostModel::where('status',1)->where('pending',1)->whereDate('publishDate', '<=', date("Y-m-d"))->count();
+        $TotalBrokerNumber = BrokerCompanyInformationModel::count();
+        $MonthlyBrokerNumber = BrokerCompanyInformationModel::where("trash",0)->where("pending",0)->count();
 
         // Active Visitors Graph Data
 
@@ -262,26 +245,18 @@ class AdminController extends Controller
             $firstDate = date("Y-m-d");
         }
         $loopCount = abs(strtotime(date("Y-m-d")) - strtotime($firstDate));
-        $years = floor($loopCount / (365*60*60*24));
-        $months = floor(($loopCount - $years * 365*60*60*24) / (30*60*60*24));
         $days = round($loopCount / (60 * 60 * 24));
         for ($i=0; $i <= $days ; $i++) {
             $endTime = strtotime("$i days", strtotime($firstDate));
-            $activeUserGraphData = NonRegisterVisitorModel::where('strtotime',$endTime)->get();
+            $countofStrtotitme = NonRegisterVisitorModel::where('strtotime',$endTime)->count();
             $temporaryData = array();
             $endstrtotime = $endTime . "000";
-            $countofStrtotitme = count($activeUserGraphData);
             array_push($temporaryData,$endstrtotime,$countofStrtotitme);
             array_push($activeUserGraphAllDataArray,$temporaryData);
         }
-        $signalPendingData = SignalsModel::orderBy('id','desc')->take(10)->get();
-        $signalLatestComments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 1)->take(10)->get();
-
-        $AdvanceTrainingLatestComments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 6)->take(10)->get();
-        $BasicTrainingLatestComments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 5)->take(10)->get();
-        $HabbitTrainingLatestComments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 7)->take(10)->get();
-        $BlogPostLatestComments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 4)->take(10)->get();
-        return view('admin.index',compact('BasicTrainingLatestComments','HabbitTrainingLatestComments','BlogPostLatestComments','AdvanceTrainingLatestComments','signalLatestComments','signalPendingData','activeUserGraphAllDataArray','TotalClientNumber','MonthlyClientNumber','ToDayClientNumber','WeeklyClientNumber','TotalAdminUsersNumber','MonthlyAdminUsersNumber','TotalBrokerNumber','MonthlyBrokerNumber','TotalPostNumber','MonthlyPostNumber'));
+        $activeSignalData = SignalsModel::orderBy('id','desc')->take(10)->get();
+        $wholeCommentData = AllCommentsModel::orderBy('created_at','desc')->orWhere('commentPageId', 1)->orWhere('commentPageId', 4)->orWhere('commentPageId', 5)->orWhere('commentPageId', 6)->orWhere('commentPageId', 7)->take(50)->get();
+        return view('admin.index',compact('wholeCommentData','activeSignalData','activeUserGraphAllDataArray','TotalClientNumber','MonthlyClientNumber','ToDayClientNumber','WeeklyClientNumber','TotalAdminUsersNumber','MonthlyAdminUsersNumber','TotalBrokerNumber','MonthlyBrokerNumber','TotalPostNumber','MonthlyPostNumber'));
     }
     public function Logout(Request $request){
         $request->session()->pull("admin");

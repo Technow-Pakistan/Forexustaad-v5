@@ -65,13 +65,10 @@ class AnalysisController extends Controller
                 }
             }
             $newMeta = new MetaTagsModel;
-            if ($request->file("image") != null) {
-                $path = $request->file("image")->store("WebImages");
-                $newMeta->image = $path;
-            }
             $newMeta->name_page = "Analysis@" . $news->id;
-            $newMeta->description = $request->metaDescription;
-            $newMeta->title = $request->metaTitle;
+            $newMeta->description = $news->description;
+            $newMeta->title = $news->title;
+            $newMeta->image = $news->image;
             $newMeta->keywordsimp = implode(",",$request->metaKeywords);
             $newMeta->save();
         // meta Tags save end
@@ -124,13 +121,10 @@ class AnalysisController extends Controller
             if($newMeta == null){
                 $newMeta = new MetaTagsModel;
             }
-            if ($request->file("image") != null) {
-                $path = $request->file("image")->store("WebImages");
-                $newMeta->image = $path;
-            }
             $newMeta->name_page = "Analysis@" . $id;
-            $newMeta->description = $request->metaDescription;
-            $newMeta->title = $request->metaTitle;
+            $newMeta->description = $news->description;
+            $newMeta->title = $news->title;
+            $newMeta->image = $news->image;
             $newMeta->keywordsimp = implode(",",$request->metaKeywords);
             $newMeta->save();
         // meta Tags save end
@@ -169,21 +163,6 @@ class AnalysisController extends Controller
         $Analysis->status = 1;
         $Analysis->save();
         $success = "This analysis has been active successfully.";
-        $request->session()->put("success",$success);
-        return back();
-    }
-    // Veiws Comment
-    public function ViewComments(Request $request,$id){
-        $comments = AllCommentsModel::where('commentPageId', 2)->where('objectId', $id)->get();
-        return view('admin.analysis.comments',compact('comments'));
-    }
-    // Save Reply by Admin
-    public function CommentAdd(Request $request){
-        $reply = new AllCommentsModel;
-        $reply->commentPageId = 2;
-        $reply->fill($request->all());
-        $reply->save();
-        $success = "Your reply has been saved successfully.";
         $request->session()->put("success",$success);
         return back();
     }

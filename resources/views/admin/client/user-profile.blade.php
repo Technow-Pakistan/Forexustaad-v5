@@ -37,15 +37,15 @@
                       <form action="{{URL::to('ustaad/viewClientProfile/Keyword')}}/{{$totalClientInfo->id}}" method="post">
                         <label for="">Keywords</label>
                         <select class="js-example-tokenizer form-control w-50 m-0" name="keywords[]" multiple="multiple" required>
-                          @if($totalClientInfo->keywords != null)
+                          @if($totalClientInfo->Keywords != null)
                             @php
-                              $allKeywords = explode(',',$totalClientInfo->keywords);
+                              $allKeywords = explode(',',$totalClientInfo->Keywords);
                             @endphp
                             @foreach ($allKeywords as $Keyword)
                               <option value="{{$Keyword}}" selected>{{$Keyword}}</option>
                             @endforeach
                           @endif
-                        </select>
+                        </select><br>
                         <input type="submit" value="Save" class="btn btn-primary btn-sm" >
                       </form>
                     </div>
@@ -76,15 +76,27 @@
                                             <span class="badge badge-light-success fts_18">Big Deposit Account</span> <br>
                                           @endif
                                           <div class="" style="position: relative">
+                                            @php
+                                              if($totalClientInfo->image == null){
+                                                $imgProfileSrc = "https://bootdey.com/img/Content/avatar/avatar7.png";
+                                              }else{
+                                                $imgProfileSrc = URL::to('storage/app/') . "/" . $totalClientInfo->image;
+                                              }
+                                            @endphp
+                                            @if($totalClientInfo->memberType == 3)
+                                              <img src="{{URL::to('public/assets/assets/img/paid.png')}}" alt="adminn" style="width: 280px">
+                                              <div style="position: absolute; top:86px; left:100px">
+                                                <img src="{{$imgProfileSrc}}" class="rounded-circle" style="width: 82px !important;height: 78px !important;">
+                                              </div>
+                                            @elseif($totalClientInfo->memberType == 2)
                                               <img src="{{URL::to('public/assets/assets/img/vipbg.png')}}" alt="adminn" style="width: 228px">
-                                            <div style="position: absolute; top:40px; left:69px">
-                                        @if($totalClientInfo->image == null)
-                                              <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" style="width: 91px!important;height: 91px !important;">
-                                        @else
-                                          <img src="{{URL::to('storage/app/')}}/{{$totalClientInfo->image}}" alt="Admin" class="rounded-circle" style="width: 91px!important;height: 91px !important;">
-                                        @endif
+                                              <div style="position: absolute; top:49px; left:55px">
+                                                <img src="{{$imgProfileSrc}}" class="rounded-circle" style="width: 118px !important;height: 115px !important;">
+                                              </div>
+                                            @elseif($totalClientInfo->memberType == 1)
+                                              <img src="{{$imgProfileSrc}}" class="rounded-circle" style="width: 118px !important;height: 115px !important;">
+                                            @endif
                                           </div>
-                                    </div>
                                         <div class="mt-3">
                                           <h4>{{$totalClientInfo->name}}</h4>
                                           @if($value['memberId'] == 1 || $value['memberId'] == 2)

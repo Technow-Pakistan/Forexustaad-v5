@@ -37,7 +37,6 @@
 												<th>Member</th>
 												<th>Date</th>
 												<th>Time</th>
-
 												<th>Status</th>
 											</tr>
 										</thead>
@@ -71,7 +70,16 @@
 												</tr>
 											@endforeach
 										</tbody>
-
+										<tfoot>
+											<tr>
+												<th>Image</th>
+												<th>Title</th>
+												<th>Member</th>
+												<th>Date</th>
+												<th>Time</th>
+												<th>Status</th>
+											</tr>
+										</tfoot>
 									</table>
 								</div>
 							</div>

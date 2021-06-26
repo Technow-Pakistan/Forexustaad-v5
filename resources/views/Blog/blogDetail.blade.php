@@ -21,12 +21,10 @@
                         </div>
                         <div class="post_representor">
                             <ul class="">
-                                <li><i class="fa fa-user"></i> Raheel Nawaz</li>
-                                <li><i class="fa fa-clock-o"></i> {{$BlogDetail->publishDate}}</li>
-                                <li>
-                                    <div id="shareLink"></div>
-                                </li>
+                                <li><i class="far fa-user"></i> Raheel Nawaz</li>
+                                <li><i class="far fa-clock"></i> {{$BlogDetail->publishDate}}</li>
                             </ul>
+                            <div id="shareLink" align="right"></div>
                         </div>
                         <div class="pt-3">
                             @php

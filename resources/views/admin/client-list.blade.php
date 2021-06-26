@@ -100,7 +100,7 @@
 																		<img src="{{URL::to('/public/assets/assets/img/user1.jpg')}}" alt="user" class="img-radius align-top m-r-15 hei-40 wid-40">
 																	@else
 																		<img src="{{URL::to('/storage/app')}}/{{$member->image}}" alt="user" class="img-radius align-top m-r-15 hei-40 wid-40">
-																	@endif
+																	@endif <br>
 																	<div class="d-inline-block">
 																		<h6 class="m-b-0">{{$member->name}}{{$member->lastName}}</h6>
 																	</div>
@@ -158,7 +158,7 @@
 														<td>
 															<span>{{$memberAccountDeposit[0]}}</span> / <span class="text-success">{{$memberAccountDeposit[1]}}</span> / <span class="text-danger">{{$memberAccountDeposit[2]}}</span> / <span class="text-warning">{{$memberAccountDeposit[3]}}</span>
 														</td>
-														<td>{{$member->keywords}}</td>
+														<td>{{$member->Keywords}}</td>
 													</tr>
 											@endforeach
 										</tbody>

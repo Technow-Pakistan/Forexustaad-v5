@@ -1,5 +1,6 @@
 @php
 	$value =Session::get('admin');
+	$icount = 0;
 @endphp
 @include('admin.include.header')
 
@@ -35,49 +36,54 @@
 						<div class="card user-profile-list">
 							<div class="card-body">
 								<div class="dt-responsive table-responsive">
-									<form action="{{URL::to('/ustaad/fundamental/order')}}" method="post">
-										<table id="user-list-table" class="table nowrap">
-											<thead>
-												<tr>
-													<th>Id</th>
-													<th>Image</th>
-													<th>Title</th>
-													<th>Comments</th>
-													<th>Date</th>
-													<th>Status</th>
-												</tr>
-											</thead>
-											<tbody>
-												@foreach($Fundamental as $data)
-													<tr draggable="true" ondragstart="dragit(event)" ondragover="dragover(event)">
-														<td>
-															{{$data->position}}
-															<input type="hidden" name="position[]" value="{{$data->id}}">
-														</td>
-														<td>
-																<img src="{{URL::to('storage/app')}}/{{$data->image}}" alt="" class="img-fluid" width="150">
+									<table id="user-list-table" class="table table-striped table-bordered dt-responsive nowrap">
+										<thead>
+											<tr>
+												<th>Id</th>
+												<th>Image</th>
+												<th>Title</th>
+												<th>Comments</th>
+												<th>Date</th>
+												<th>Status</th>
+											</tr>
+										</thead>
+										<tbody>
+											@foreach($Fundamental as $data)
+												@php $icount++; @endphp
+												<tr >
+													<td>{{$icount}}</td>
+													<td>
+															<img src="{{URL::to('storage/app')}}/{{$data->image}}" alt="" class="img-fluid" width="150">
 
-														</td>
-														<td>{{$data->title}}</td>
-														<td><a href="{{URL::to('ustaad/fundamental/comment')}}/{{$data->id}}">View Comments</a></td>
-														<td>{{$data->created_at->format('Md, Y')}}</td>
-														<td>
-															<span class="badge {{$data->status == 1 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 1 ? 'Active' : 'Deactive'}}</span>
-															<div class="overlay-edit">
-																<a href="{{URL::to('/ustaad/fundamental/edit')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button></a>
-																@if($data->status == 1)
-																	<button href="{{URL::to('/ustaad/fundamental/deactive')}}/{{$data->id}}" type="button"  class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-lock"></i></button>
-																@elseif($data->status == 0)
-																	<button type="button" href="{{URL::to('/ustaad/fundamental/active')}}/{{$data->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock"></i></button>
-																@endif
-															</div>
-														</td>
-													</tr>
-												@endforeach
-											</tbody>
-										</table>
-										<input type="submit" class="btn btn-primary" value="Submit">
-									</form>
+													</td>
+													<td>{{$data->title}}</td>
+													<td><a href="{{URL::to('ustaad/fundamental/comment')}}/{{$data->id}}">View Comments</a></td>
+													<td>{{$data->created_at->format('Md, Y')}}</td>
+													<td>
+														<span class="badge {{$data->status == 1 ? 'badge-light-success' : 'badge-light-danger'}}">{{$data->status == 1 ? 'Active' : 'Deactive'}}</span>
+														<div class="overlay-edit">
+															<a href="{{URL::to('/ustaad/fundamental/edit')}}/{{$data->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button></a>
+															@if($data->status == 1)
+																<button href="{{URL::to('/ustaad/fundamental/deactive')}}/{{$data->id}}" type="button"  class="btn btn-icon btn-danger addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-lock"></i></button>
+															@elseif($data->status == 0)
+																<button type="button" href="{{URL::to('/ustaad/fundamental/active')}}/{{$data->id}}" class="btn btn-icon btn-success addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock"></i></button>
+															@endif
+														</div>
+													</td>
+												</tr>
+											@endforeach
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>Id</th>
+												<th>Image</th>
+												<th>Title</th>
+												<th>Comments</th>
+												<th>Date</th>
+												<th>Status</th>
+											</tr>
+										</tfoot>
+									</table>
 								</div>
 							</div>
 						</div>

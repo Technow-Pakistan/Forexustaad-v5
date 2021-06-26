@@ -65,11 +65,11 @@
 				</div>
                 <div class="row">
 					<div class="col-md-12">
-						<div class="card user-profile-list">
-							<div class="card-header">All Training</div>
-							<div class="card-body">
-								<div class="dt-responsive table-responsive">
-									<form action="{{URL::to('/ustaad/lecture/order')}}" method="post">
+						<form action="{{URL::to('/ustaad/lecture/order')}}" method="post">
+							<div class="card user-profile-list">
+								<div class="card-header">All Training</div>
+								<div class="card-body">
+									<div class="dt-responsive table-responsive">
 										<table id="user-list-table" class="table nowrap">
 											<thead>
 												<tr>
@@ -140,10 +140,10 @@
 										</table>
 										<input type="hidden" name="category" value="{{$category}}">
 										<input type="submit" class="btn btn-primary" value="Submit">
-									</form>
+									</div>
 								</div>
 							</div>
-						</div>
+						</form>
 					</div>
 				</div>
 				<!-- [ Main Content ] end -->

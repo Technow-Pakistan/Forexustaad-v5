@@ -63,7 +63,7 @@
                                 List of Social Media
                             </div>
                             <div class="card-body">
-                                <table class="table">
+                                <table id="user-list-table" class="table nowrap">
                                     <thead class="bg-primary text-white">
                                         <tr>
                                             <th class="w-30">Title</th>
@@ -99,6 +99,14 @@
                                         
                                         
                                     </tbody>
+									<tfoot>
+                                        <tr>
+                                            <th class="w-30">Title</th>
+                                            <th>Link</th>
+                                            <th>Date</th>
+                                            <th>Action</th>
+                                        </tr>
+									</tfoot>
                                 </table>
                             </div>
                         </div>

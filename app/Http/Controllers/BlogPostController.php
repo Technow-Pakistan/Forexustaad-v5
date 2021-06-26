@@ -39,6 +39,12 @@ class BlogPostController extends Controller
                     $blogPostNewMainCategory = new BlogPostAllMainCategoryModel;
                     $blogPostNewMainCategory->categoryName = $newMainCategory[$i];
                     $blogPostNewMainCategory->save();
+                    // meta Tags save start
+                        $newMeta = new MetaTagsModel;
+                        $newMeta->name_page = "blogCategory@" . $blogPostNewMainCategory->categoryName;
+                        $newMeta->main = 1;
+                        $newMeta->save();
+                    // meta Tags save end
                 }
             }
         }
@@ -90,13 +96,10 @@ class BlogPostController extends Controller
                 }
             }
             $newMeta = new MetaTagsModel;
-            if ($request->file("image") != null) {
-                $path = $request->file("image")->store("WebImages");
-                $newMeta->image = $path;
-            }
             $newMeta->name_page = "blogPost@" . $blogPost->id;
-            $newMeta->description = $request->metaDescription;
-            $newMeta->title = $request->metaTitle;
+            $newMeta->description = $blogPost->description;
+            $newMeta->title = $blogPost->mainTitle;
+            $newMeta->image = $blogPost->image;
             $newMeta->keywordsimp = implode(",",$request->metaKeywords);
             $newMeta->save();
         // meta Tags save end
@@ -149,20 +152,22 @@ class BlogPostController extends Controller
 
         $success = "This post has been saved successfully.";
         $request->session()->put("success",$success);
-        // Pusher Notification Start
-        $url = $blogPost->permalink;
-        $category = BlogPostMainCategoryModel::where('postId',$blogPost->id)->first();
-        $adminData = $request->session()->get("admin");
-        $messageData['userId'] = $adminData['id'];
-        $messageData['userType'] = 0;
-        $messageData['message'] = "Added a New Blog.";
-        $messageData['link'] = "Posts" . "/" . $category->mainCategory . "/" . $url ;
-        $clientNotification = new ClientNotificationModel;
-        $clientNotification->fill($messageData);
-        $clientNotification->save();
-        $messageData['id'] = $clientNotification->id;
-        PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
-        // Pusher Notification End
+        if ($blogPost->pending == 0) {
+            // Pusher Notification Start
+            $url = $blogPost->permalink;
+            $category = BlogPostMainCategoryModel::where('postId',$blogPost->id)->first();
+            $adminData = $request->session()->get("admin");
+            $messageData['userId'] = $adminData['id'];
+            $messageData['userType'] = 0;
+            $messageData['message'] = "Added a New Blog.";
+            $messageData['link'] = "Post" . "/" . $url ;
+            $clientNotification = new ClientNotificationModel;
+            $clientNotification->fill($messageData);
+            $clientNotification->save();
+            $messageData['id'] = $clientNotification->id;
+            PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+            // Pusher Notification End
+        }
 
         return back();
 
@@ -195,6 +200,12 @@ class BlogPostController extends Controller
                     $blogPostNewMainCategory = new BlogPostAllMainCategoryModel;
                     $blogPostNewMainCategory->categoryName = $newMainCategory[$i];
                     $blogPostNewMainCategory->save();
+                    // meta Tags save start
+                        $newMeta = new MetaTagsModel;
+                        $newMeta->name_page = "blogCategory@" . $blogPostNewMainCategory->categoryName;
+                        $newMeta->main = 1;
+                        $newMeta->save();
+                    // meta Tags save end
                 }
             }
         }
@@ -264,13 +275,10 @@ class BlogPostController extends Controller
             if($newMeta == null){
                 $newMeta = new MetaTagsModel;
             }
-            if ($request->file("image") != null) {
-                $path = $request->file("image")->store("WebImages");
-                $newMeta->image = $path;
-            }
             $newMeta->name_page = "blogPost@" . $id;
-            $newMeta->description = $request->metaDescription;
-            $newMeta->title = $request->metaTitle;
+            $newMeta->description = $blogPost->description;
+            $newMeta->title = $blogPost->mainTitle;
+            $newMeta->image = $blogPost->image;
             $newMeta->keywordsimp = implode(",",$request->metaKeywords);
             $newMeta->save();
         // meta Tags save end

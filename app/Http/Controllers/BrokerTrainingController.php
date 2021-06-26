@@ -8,6 +8,8 @@ use App\Models\BrokerCompanyInformationModel;
 use App\Models\BrokerTraningModel;
 use App\Models\NotificationModel;
 use App\Models\TrashModel;
+use App\Models\AllCommentsModel;
+use App\Models\MetaTagsModel;
 
 class BrokerTrainingController extends Controller
 {
@@ -16,50 +18,44 @@ class BrokerTrainingController extends Controller
         $title = str_replace("-"," ",$id);
         $broker1 = BrokerCompanyInformationModel::where('title',$title)->first();
         if ($broker1) {
-            $Trainings = BrokerTraningModel::orderBy('id','asc')->where('brokerId',$broker1->id)->get();
+            $Trainings = BrokerTraningModel::orderBy('id','asc')->where('brokerId',$broker1->id)->where('trash',0)->get();
             if (count($Trainings) > 0) {
-                $training = BrokerTraningModel::orderBy('id','asc')->where('brokerId',$broker1->id)->first();
-                return view('broker.broker-training',compact('Trainings','training','broker1'));
+                $training = BrokerTraningModel::orderBy('id','asc')->where('brokerId',$broker1->id)->where('trash',0)->first();
+                $comments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 10)->where('objectId', $training->id)->get();
+                $name_page = "brokerTraining@" . $broker1->title;
+                $meta = MetaTagsModel::where('name_page',$name_page)->first();
+                return view('broker.broker-training',compact('Trainings','training','broker1','comments','meta'));
+            }else{
+                $error = "This Broker Contains No Training.";
+                $request->session()->put("error",$error);
+                return back();
+            }
+        }else{
+            $title = str_replace("-"," ",$id);
+            $training = BrokerTraningModel::where('title',$title)->first();
+            if ($training) {
+                $Trainings = BrokerTraningModel::orderBy('id','asc')->where('brokerId',$training->brokerId)->get();
+                $broker1 = BrokerCompanyInformationModel::where('id',$training->brokerId)->first();
+                $comments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 10)->where('objectId', $training->id)->get();
+                if (count($Trainings) > 0) {
+                    return view('broker.broker-training',compact('Trainings','training','broker1','comments'));
+                }
             }
         }
-        $error = "This Broker Contains No Training.";
+        $error = "This Broker Training Doesn't Exit.";
         $request->session()->put("error",$error);
-        return back();
+        return redirect('/brokerList');
     }
-
-    public function ChangeTraining (Request $request, $id){
-        $title = str_replace("-"," ",$id);
-        $training = BrokerTraningModel::where('title',$title)->first();
-        if ($training) {
-            $Trainings = BrokerTraningModel::orderBy('id','asc')->where('brokerId',$training->brokerId)->get();
-            $broker1 = BrokerCompanyInformationModel::where('id',$training->brokerId)->first();
-
-            if (count($Trainings) > 0) {
-                return view('broker.broker-training',compact('Trainings','training','broker1'));
-            }
-        }
-        $error = "This URL Doesn't Exit.";
-        $request->session()->put("error",$error);
-        return redirect('/');
-    }
-
-
-
-
-
-
-
 
     // Admin Panel
-    public function Index(Request $request, $id){
-        if($id == 6){
-            $userID = $request->session()->get('admin');
-            $brokers = BrokerCompanyInformationModel::orderBy('id','desc')->where('Trash',0)->where('userId',$userID->id)->get();
-            return view('admin.broker.all-broker-training',compact('brokers'));
+    public function Index(Request $request){
+        $userId = $request->session()->get('admin');
+        if($userId->memberId == 6){
+            $brokerTraining  = BrokerTraningModel::orderBy('id','desc')->where('Trash',0)->where('userId',$userId->id)->get();
         }else{
-            $brokers = BrokerCompanyInformationModel::all();
-            return view('admin.broker.all-broker-training',compact('brokers'));
+            $brokerTraining  = BrokerTraningModel::orderBy('id','desc')->where('Trash',0)->get();
         }
+        return view('admin.broker.broker-training',compact('brokerTraining'));
     }
     public function All(Request $request, $id){
         $brokerTraining = BrokerTraningModel::where('brokerId',$id)->where('trash',0)->get();
