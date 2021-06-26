@@ -353,7 +353,6 @@
                       </div>
                     </div>
                     <div class="g-recaptcha" data-sitekey="6LezBIYaAAAAABr8gfLi76swA4va2bPoD-gykpGi"></div>
-                        {{-- <input type="hidden" name="token" id="token" value=""> --}}
                     <div class="form-group text-left ml-3">
                         <p> <input type="checkbox" value="1" class="RegistrationCheckBox" name="Terms&Conditions" required style="height: 12px;margin-bottom: 0px;"> Please Accept over <a href="https://forexustaad.com/p/Terms-And-Conditions" target="_blank">Term and Conditions</a></p>
                         <button type="submit" class="btn btn-primary text-uppercase quote_send_msg mr-4" data-type="quote">Register</button>
@@ -668,11 +667,6 @@
 </script>
 
 <script>
-    grecaptcha.ready(function() {
-        grecaptcha.execute('6LfoWyEaAAAAAC-Bs8wiRSMTBSLB3AR8Nq8eS3kH', {action: 'homepage'}).then(function(token) {
-            document.getElementById("token").value = token;
-        });
-    });
     $(".RegistrationForm").on("submit",function(e){
       var email = $(".emailRegistration").val();
       var emailHost = email.split("@")
@@ -702,14 +696,8 @@
 
     <script type="text/javascript">
       var blink = document.getElementById('blink');
-      @if(Session::has('client'))
-        var blink1 = document.getElementById('blink1');
-      @endif
       setInterval(function() {
         blink.style.opacity = (blink.style.opacity == 0 ? 1 : 0);
-        @if(Session::has('client'))
-          blink1.style.opacity = (blink1.style.opacity == 0 ? 1 : 0);
-        @endif
       }, 700);
 
 
@@ -745,7 +733,7 @@
                   success: function(data){
                       $("#sel3").html('');
                       for(var i = 0; i < data.length; i++) {
-                          $("#sel3").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>")
+                        $("#sel3").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>")
                       }
                   }
               });
@@ -890,6 +878,12 @@
 </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
 <script>
+  // broken img hide
+	document.querySelectorAll('img').forEach((img) => {
+		img.onerror = function() {
+			this.style.display = 'none';
+		}
+	});
     $("#shareLink").jsSocials({
     showLabel: false,
     showCount: true,

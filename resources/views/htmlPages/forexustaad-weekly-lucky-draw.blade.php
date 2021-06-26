@@ -15,13 +15,10 @@
                                         </div>
                                         <div class="post_representor">
                                             <ul class="">
-                                                <li><i class="fa fa-user"></i> Raheel Nawaz</li>
-                                                <li><i class="fa fa-clock-o"></i> September 2, 2015</li>
-                                                <li><i class="fa fa-folder"></i> Jobs scams, Scams</li>
-                                                <li><i class="fa fa-comments"></i> 10 Comments </li>
-                                                <li><i class="fa fa-eye"></i> 4,276 Views</li>
-                                                <li><div id="shareLink"></div></li>
+                                                <li><i class="far fa-user"></i> Raheel Nawaz</li>
+                                                <li><i class="far fa-clock"></i> September 2, 2015</li>
                                             </ul>
+                                            <div id="shareLink" align="right"></div>
                                         </div>
 
                                     <div id="shareLink"></div>

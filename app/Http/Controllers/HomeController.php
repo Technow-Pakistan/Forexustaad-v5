@@ -37,48 +37,16 @@ use App\Models\FundamentalModel;
 use App\Models\AnalysisModel;
 use App\Models\SignalsModel;
 use App\Models\BasicTrainingModel;
+use App\Models\AdvanceTrainingModel;
 use App\Models\HabbitTrainingModel;
 use App\Models\MetaTagsModel;
 use App\Models\ApiHomeModel;
 use App\Models\BlogCommentsModel;
 use App\Models\AllCommentsModel;
+use App\Models\FeatureVideosModel;
 
 class HomeController extends Controller
 {
-    public function uploadCsv(){
-        $oldData = BlogCommentsModel::all();
-        foreach ($oldData as $data) {
-            $newData = new AllCommentsModel;
-            $newData->comment = $data->comment;
-            $newData->memberId = $data->memberId;
-            $newData->userType = $data->userType;
-            $newData->commentId = $data->commentId;
-            $newData->status = $data->status;
-            $newData->reply = $data->reply;
-            $newData->objectId = $data->blogId;
-            $newData->replyName = $data->replyName;
-            $newData->commentPageId = 4;
-            $newData->created_at = $data->created_at;
-            $newData->updated_at = $data->updated_at;
-            $newData->save();
-        }
-    }
-    public function csv(){
-        $file = fopen("public/txt.csv","w");
-        $meta = SignalCommentsModel::all();
-        $keysValues = $meta[0]->toArray();
-        $keys = array_keys($keysValues);
-        $keyString = implode(",",$keys);
-        fwrite($file,$keyString . "\r\n");
-        foreach ($meta as $met) {
-            $values = $met->toArray();
-            $comments = $values['comment'];
-            $values['comment'] =  str_replace("\r\n","</br>",$comments);
-            $value = implode(",",$values);
-            fwrite($file,$value . "\r\n");
-        }
-        fclose($file);
-    }
     public function Index(){
         $meta = MetaTagsModel::where('name_page','Home')->first();
         $LatestFundamental = FundamentalModel::orderBy('id','desc')->where('status',1)->skip(0)->take(4)->get();
@@ -88,10 +56,12 @@ class HomeController extends Controller
         $LatestBlogsData = BlogPostModel::orderBy('id','desc')->where('status',1)->where('pending',1)->where('stickToTop',1)->whereDate('publishDate', '<=', date("Y-m-d"))->take(5)->get();
         $StarBrokerHome = BrokerCompanyInformationModel::orderBy('id','desc')->where('star',1)->where('pending',0)->where('status',0)->skip(0)->take(10)->get();
         $StarSignalsHome = SignalsModel::orderBy('id','desc')->where('star',1)->where('expired',0)->where('status',0)->skip(0)->take(6)->get();
+        $LatestAdvanceTraining = AdvanceTrainingModel::orderBy('id','desc')->where('status',0)->skip(0)->take(5)->get();
         $LatestBasicTraining = BasicTrainingModel::orderBy('id','desc')->where('status',0)->skip(0)->take(5)->get();
         $LatestHabbitTraining = HabbitTrainingModel::orderBy('id','desc')->where('status',0)->skip(0)->take(5)->get();
         $MainHomeApi = ApiHomeModel::where('area','Top')->where('trash',0)->first();
-        return view('home.index',compact('LatestFundamental','LatestAnalysis','LatestBrokerNews','latestWebinars','LatestBlogsData','StarBrokerHome','StarSignalsHome','LatestBasicTraining','LatestHabbitTraining','meta','MainHomeApi'));
+        $featureVideos = FeatureVideosModel::where('status',0)->get();
+        return view('home.index',compact('featureVideos','LatestFundamental','LatestAnalysis','LatestBrokerNews','latestWebinars','LatestBlogsData','StarBrokerHome','StarSignalsHome','LatestBasicTraining','LatestAdvanceTraining','LatestHabbitTraining','meta','MainHomeApi'));
     }
     public function ClientNotificationView(Request $request,$id){
         $ClientNotification = ClientNotificationModel::where('id',$id)->first();
@@ -153,9 +123,6 @@ class HomeController extends Controller
         $title = "Webinar";
         $totalData = MainWebinarModel::orderBy('id','desc')->where('vipMember',0)->where('status',1)->get();
         return view('home/webinar',compact('totalData','title'));
-    }
-    public function Construction(){
-        return view('home/construction');
     }
     public function privacyPolicy(){
         $data = OtherPagesContentModel::where('contentPage','privacyPolice')->first();
@@ -365,6 +332,8 @@ class HomeController extends Controller
         $broker1 = BrokerCompanyInformationModel::where('title',$title)->first();
         if ($broker1) {
             $id = $broker1->id;
+            $name_page = "brokerDetail@" . $broker1->title;
+            $meta = MetaTagsModel::where('name_page',$name_page)->first();
             $broker2 = BrokerDepositModel::where('brokerId',$id)->where('pending',0)->where('editId',null)->first();
             $broker3 = BrokerCommissionsFeesModel::where('brokerId',$id)->where('pending',0)->where('editId',null)->first();
             $broker4 = BrokerAccountInfoModel::where('brokerId',$id)->where('pending',0)->where('editId',null)->first();
@@ -375,7 +344,7 @@ class HomeController extends Controller
             $broker9 = BrokerReserchEducationModel::where('brokerId',$id)->where('pending',0)->where('editId',null)->first();
             $broker = BrokerPromotionModel::where('brokerId',$id)->where('pending',0)->where('editId',null)->first();
             $title = $broker1->title;
-            return view('broker/broker-detail',compact('broker1','title','broker2','broker3','broker4','broker5','broker6','broker7','broker8','broker9','broker','id'));
+            return view('broker/broker-detail',compact('broker1','title','broker2','broker3','broker4','broker5','broker6','broker7','broker8','broker9','broker','id','meta'));
         }else{
             return redirect('/');
         }
@@ -386,10 +355,11 @@ class HomeController extends Controller
         if ($broker1) {
             $id = $broker1->id;
             $totalData = BrokerReviewModel::orderBy('id','desc')->where('brokerId',$id)->where('trash',0)->where('pending',0)->get();
-
+            $name_page = "brokerReview@" . $broker1->title;
+            $meta = MetaTagsModel::where('name_page',$name_page)->first();
             if(count($totalData) != 0){
                 $title = $broker1->title;
-                return view('broker.ReviewList',compact('totalData','title'));
+                return view('broker.ReviewList',compact('totalData','title','meta'));
             }else{
                 $error = "This Broker Contains No Review.";
                 $request->session()->put("error",$error);
@@ -407,7 +377,10 @@ class HomeController extends Controller
         if ($brokerReview) {
             if($brokerReview != null){
                 $title = $brokerReview->title;
-                return view('broker.brokerReview',compact('brokerReview','title'));
+                $comments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 12)->where('objectId', $brokerReview->id)->get();
+                $name_page = "broker_reviews@" . $brokerReview->id;
+                $meta = MetaTagsModel::where('name_page',$name_page)->first();
+                return view('broker.brokerReview',compact('brokerReview','title','comments','meta'));
             }else{
                 $error = "This Broker Contains No Detail Review.";
                 $request->session()->put("error",$error);
@@ -425,10 +398,11 @@ class HomeController extends Controller
         if ($broker1) {
             $id = $broker1->id;
             $totalData = BrokerNewsModel::orderBy('id','desc')->where('brokerId',$id)->where('trash',0)->where('pending',0)->get();
-
+            $name_page = "brokerNews@" . $broker1->title;
+            $meta = MetaTagsModel::where('name_page',$name_page)->first();
             if(count($totalData) != 0){
                 $title = $broker1->title;
-                return view('broker.NewsList',compact('totalData','title'));
+                return view('broker.NewsList',compact('totalData','title','meta'));
             }else{
                 $error = "This Broker Contains No News.";
                 $request->session()->put("error",$error);
@@ -447,7 +421,10 @@ class HomeController extends Controller
 
             if($brokerNews != null){
                 $title = $brokerNews->title;
-                return view('broker.brokerNews',compact('brokerNews','title'));
+                $comments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 9)->where('objectId', $brokerNews->id)->get();
+                $name_page = "broker_news@" . $brokerNews->id;
+                $meta = MetaTagsModel::where('name_page',$name_page)->first();
+                return view('broker.brokerNews',compact('brokerNews','title','comments','meta'));
             }else{
                 $error = "This Broker Contains No Detail News.";
                 $request->session()->put("error",$error);
@@ -465,10 +442,11 @@ class HomeController extends Controller
         if ($broker1) {
             $id = $broker1->id;
             $totalData = BorkerPromotionsModel::orderBy('id','desc')->where('brokerId',$id)->where('trash',0)->where('pending',0)->get();
-
+            $name_page = "brokerPromotion@" . $broker1->title;
+            $meta = MetaTagsModel::where('name_page',$name_page)->first();
             if(count($totalData) != 0){
                 $title = $broker1->title;
-                return view('broker.PromotionList',compact('totalData','title'));
+                return view('broker.PromotionList',compact('totalData','title','meta'));
             }else{
                 $error = "This Broker Contains No Promotion.";
                 $request->session()->put("error",$error);
@@ -486,7 +464,10 @@ class HomeController extends Controller
         if ($brokerPromotion) {
             if($brokerPromotion != null){
                 $title = $brokerPromotion->title;
-                return view('broker.brokerPromotion',compact('brokerPromotion','title'));
+                $comments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 8)->where('objectId', $brokerPromotion->id)->get();
+                $name_page = "broker_promotions@" . $brokerPromotion->id;
+                $meta = MetaTagsModel::where('name_page',$name_page)->first();
+                return view('broker.brokerPromotion',compact('brokerPromotion','title','comments','meta'));
             }else{
                 $error = "This Broker Contains No Detail Promotion.";
                 $request->session()->put("error",$error);

@@ -81,7 +81,7 @@
 				<!-- order-card end -->
 				<!-- pending signal start -->
 					<div class="col-sm-4">
-						<div class="card table-card" style="height:455px;">
+						<div class="card table-card">
 							<div class="card-header borderless d-flex justify-content-between">
 								<h5>Signals</h5>
 								<a href="{{URL::to('ustaad/signals/add')}}">Add New Signal</a>
@@ -100,39 +100,21 @@
 													</tr>
 												</thead>
 												<tbody>
-														@php
-															$wholeData = [];
-														@endphp
-													@foreach($signalPendingData as $data)
+													@foreach($activeSignalData as $data)
 
 														@php
 															$pair = $data->getPair();
-														@endphp
-														@php
-															$url = $data->id;
-															$loginClientData = Session::get('client');
-															$go = 1;
 															$go3 = 1;
-															$profits = explode('@',$data->takeProfit);
-															$time1 = strtotime($data->time);
-															$time = date('h:i A', $time1);
-															$date1 = strtotime($data->date);
-															$date = date('d M Y', $date1);
+															$time = date('h:i A', strtotime($data->time));
+															$date = date('d M Y', strtotime($data->date));
 															if($data->date == date("Y-m-d")){
 																if($data->time >= date("H:i:s")){
-																	$go = 0;
 																	$go3 = 3;
 																}
 															}
 															if($data->date > date("Y-m-d")){
-																$go = 0;
-																	$go3 = 3;
+																$go3 = 3;
 															}
-															$timeDate1 = strtotime(date("Y-m-d H:i:s"));
-															$timeDate2 = strtotime($data->created_at->format("Y-m-d H:i:s"));
-															$minsDate = ($timeDate1 - $timeDate2) / 60;
-																		$pair = $data->getPair();
-															$flags = explode("/",$pair->pair);
 														@endphp
 														@if($go3 == 3)
 															<tr>
@@ -159,46 +141,7 @@
 							</div>
 						</div>
 					</div>
-													@foreach($signalLatestComments as $data)
-														@php
-															$pair = $data->getPair();
-														@endphp
-															@php 
-																$data['titleName'] = "Signal";
-																array_push($wholeData,$data)
-															@endphp
-													@endforeach
-													@foreach($AdvanceTrainingLatestComments as $data)
-															@php 
-																$data['titleName'] = "Advance Training";
-																array_push($wholeData,$data)
-															@endphp
-													@endforeach
-													@foreach($BasicTrainingLatestComments as $data)
-															@php 
-																$data['titleName'] = "Basic Training";
-																array_push($wholeData,$data)
-															@endphp
-													@endforeach
-													@foreach($HabbitTrainingLatestComments as $data)
-															@php 
-																$data['titleName'] = "Habbit Training";
-																array_push($wholeData,$data)
-															@endphp
-													@endforeach
-													@foreach($BlogPostLatestComments as $data)
-															@php 
-																$data['titleName'] = "Blog";
-																array_push($wholeData,$data)
-															@endphp
-													@endforeach
 				<!-- Latest Signal Comments end -->
-@php 
-	function date_sort($a, $b) {
-		return strtotime($b->created_at) - strtotime($a->created_at);
-	}
-	usort($wholeData, "date_sort");
-@endphp
 				<div class="col-md-8">
 					<div class="card table-card">
 						<div class="card-header borderless">
@@ -219,12 +162,13 @@
 						</div>
 						<div class="card-body p-0">
 							<div class="table-responsive">
-								<div class="recent-scroll" style="height:384px;position:relative;">
+								<div class="recent-scroll" style="height:535px;position:relative;">
 									<table class="table table-hover">
 										<tbody>
-											@foreach($wholeData as $data)
+											@foreach($wholeCommentData as $data)
 												@php 
-													$member = App\Models\ClientRegistrationModel::where('id',$data->memberId)->first();
+													$pageName = $data->getPageName();
+													$member = $data->getMemberInformation();
 													if($member){
 														if($member->image == null){
 															$memberImage = URL::to("public/assets/assets/img/user1.jpg");
@@ -246,7 +190,11 @@
 														</div>
 													</td>
 													<td class="text-black">
-														{{$data->titleName}}
+														{{$pageName->page_name}}
+													</td>
+													<td>
+														<a href="{{URL::to('ustaad/comment/edit')}}/{{$data->id}}"><i class="far fa-edit text-success mr-2 editlink" value="16"></i></a>
+														<a href="{{URL::to('ustaad/comment/delete')}}/{{$data->id}}" class="addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash text-danger"></i></a>
 													</td>
 												</tr>
 											@endforeach
@@ -337,31 +285,6 @@
 			"autoWidth": false,
 			"lengthChange": false,
 			"pageLength": 5
-		});
-		$('#user-list-table2s').dataTable({
-			"autoWidth": false,
-			"lengthChange": false,
-			"pageLength": 5
-		});
-		$('#user-list-table3s').dataTable({
-			"autoWidth": false,
-			"lengthChange": false,
-			"pageLength": 5
-		});
-		$('#user-list-table31s').dataTable({
-			"autoWidth": false,
-			"lengthChange": false,
-			"pageLength": 5
-		});
-		$('#user-list-table32s').dataTable({
-			"autoWidth": false,
-			"lengthChange": false,
-			"pageLength": 5
-		});
-		$('#user-list-table4s').dataTable({
-			"autoWidth": false,
-			"lengthChange": false,
-			"pageLength": 3
 		});
 	});
 </script>

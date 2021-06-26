@@ -188,7 +188,6 @@ class AdvanceTrainingController extends Controller
         $messageData['id'] = $clientNotification->id;
         PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
         // Pusher Notification End
-
         return back();
     }
     public function Edit(Request $request, $id1 , $id){
@@ -266,36 +265,6 @@ class AdvanceTrainingController extends Controller
         $lecture->status = 0;
         $lecture->save();
         $success = "Lecture has been active successfully.";
-        $request->session()->put("success",$success);
-        return back();
-    }
-    public function ViewComment1(Request $request,$id){
-        $comments = AllCommentsModel::where('commentPageId', 5)->where('objectId',$id)->get();
-        $category = 1;
-        return view('admin.comment.ViewLectureComment',compact('comments','category'));
-    }
-    public function ViewComment2(Request $request,$id){
-        $comments = AllCommentsModel::where('commentPageId', 6)->where('objectId',$id)->get();
-        $category = 2;
-        return view('admin.comment.ViewLectureComment',compact('comments','category'));
-    }
-    public function ViewComment3(Request $request,$id){
-        $comments = AllCommentsModel::where('commentPageId', 7)->where('objectId',$id)->get();
-        $category = 3;
-        return view('admin.comment.ViewLectureComment',compact('comments','category'));
-    }
-    public function SaveViewCommentReply(Request $request){
-            $reply = new AllCommentsModel;
-        if($request->category == 1){
-            $reply->commentPageId = 5;
-        }elseif($request->category == 2){
-            $reply->commentPageId = 6;
-        }elseif($request->category == 3){
-            $reply->commentPageId = 7;
-        }
-        $reply->fill($request->all());
-        $reply->save();
-        $success = "Your reply has been saved successfully.";
         $request->session()->put("success",$success);
         return back();
     }

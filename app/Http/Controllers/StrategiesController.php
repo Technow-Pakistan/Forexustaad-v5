@@ -9,6 +9,7 @@ use App\Models\ClientNotificationModel;
 use App\Models\PusherModel;
 use App\Models\MetaTagsModel;
 use App\Models\MetaKeywordsModel;
+use App\Models\AllCommentsModel;
 
 class StrategiesController extends Controller
 {
@@ -24,7 +25,8 @@ class StrategiesController extends Controller
             $title = $Strategy->title;
             $name_page = "Strategy@" . $Strategy->id;
             $meta = MetaTagsModel::where('name_page',$name_page)->first();
-            return view('strategies.viewDetail',compact('Strategy','title','meta'));
+            $comments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 11)->where('objectId', $Strategy->id)->get();
+            return view('strategies.viewDetail',compact('Strategy','title','meta','comments'));
         }else{
             $error = "This strategies is not exist.";
             $request->session()->put("error",$error);
@@ -67,13 +69,10 @@ class StrategiesController extends Controller
                 }
             }
             $newMeta = new MetaTagsModel;
-            if ($request->file("image") != null) {
-                $path = $request->file("image")->store("WebImages");
-                $newMeta->image = $path;
-            }
             $newMeta->name_page = "Strategy@" . $news->id;
-            $newMeta->description = $request->metaDescription;
-            $newMeta->title = $request->metaTitle;
+            $newMeta->description = $news->description;
+            $newMeta->title = $news->title;
+            $newMeta->image = $news->image;
             $newMeta->keywordsimp = implode(",",$request->metaKeywords);
             $newMeta->save();
         // meta Tags save end
@@ -105,6 +104,8 @@ class StrategiesController extends Controller
         if ($request->file("file_photo") != null) {
             $path = $request->file("file_photo")->store("WebImages");
             $image = $path;
+            echo $path;
+            die;
             $data['image'] = $image;
         }
         $description = htmlentities($request->editor1);
@@ -129,13 +130,10 @@ class StrategiesController extends Controller
             if($newMeta == null){
                 $newMeta = new MetaTagsModel;
             }
-            if ($request->file("image") != null) {
-                $path = $request->file("image")->store("WebImages");
-                $newMeta->image = $path;
-            }
             $newMeta->name_page = "Strategy@" . $id;
-            $newMeta->description = $request->metaDescription;
-            $newMeta->title = $request->metaTitle;
+            $newMeta->description = $news->shortDescription;
+            $newMeta->title = $news->title;
+            $newMeta->image = $news->image;
             $newMeta->keywordsimp = implode(",",$request->metaKeywords);
             $newMeta->save();
         // meta Tags save end

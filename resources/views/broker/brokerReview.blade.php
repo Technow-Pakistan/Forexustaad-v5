@@ -16,17 +16,18 @@
                         </div>
                     @endif
                     <div class="family">
-                                        <div>
-                                            <h4>{{$brokerReview->ReviewTitle}}</h4>
-                                        </div>
+                        <div>
+                            <h4>{{$brokerReview->ReviewTitle}}</h4>
+                        </div>
 
-                                        <div class="pt-3">
-                                            @php
-                                                $Description = html_entity_decode($brokerReview->description);
-                                                echo $Description;
-                                            @endphp
-                                        </div>
-                                    </div>
+                        <div class="pt-3">
+                            @php
+                                $Description = html_entity_decode($brokerReview->description);
+                                echo $Description;
+                            @endphp
+                        </div>
+                    </div>
+                    @include('comments.comment',['commentObjectId'=>$brokerReview->id,'commentPage'=>12])
                 </div>
 
                 <div class="col-lg-3 col-md-6 col-sm-12 order-3 order-lg-3">
@@ -40,3 +41,4 @@
 </div>
 
 @include('inc.footer')
+@include('comments.css_js',['commentObjectId'=>$brokerReview->id,'commentPage'=>12])

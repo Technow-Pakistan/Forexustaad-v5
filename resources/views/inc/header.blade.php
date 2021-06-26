@@ -37,7 +37,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @if(isset($meta))
+    @if(isset($meta) && $meta->title != null)
         <title>{{$meta->title}}</title>
         <meta name="description" content="{{$meta->description}}">
         <meta name="Keywords" content="{{$meta->keywordsimp}}">
@@ -51,7 +51,7 @@
   window.OneSignal = window.OneSignal || [];
   OneSignal.push(function() {
     OneSignal.init({
-      appId: "{{$onesignalApiKey->apiKey}}",
+    //   appId: "2e2a8527-b671-4d10-bbe3-bca1064dc33b",
     });
   });
 </script>
@@ -295,12 +295,29 @@
 
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent1">
                                     <ul class="navbar-nav">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{URL::to('/strategies')}}"><span>Strategies</span> </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{URL::to('/vipWebinar')}}"><span>Weekly Webinar</span> </a>
-                                        </li>
+                                        @foreach($AllUpperMainMenu as $upperMenu)
+                                            @php
+                                                $SubMenu = $upperMenu->GetSubMenu();
+                                                $SubMenuCount = 0;
+                                                if(count($SubMenu) > 0){
+                                                    $SubMenuCount = 1;
+                                                }
+                                            @endphp
+                                            <li class="nav-item {{$SubMenuCount == 1 ? 'dropdown' : ''}}">
+                                                @if($SubMenuCount == 1)
+                                                    <a class="nav-link  dropdown-toggle text-light" href="{{$upperMenu->link}}" data-toggle="dropdown">
+                                                        {{$upperMenu->menu}}
+                                                    </a>
+                                                    <ul class="dropdown-menu fade-up">
+                                                        @foreach($SubMenu as $submenus)
+                                                            <li><a class="dropdown-item" href="{{$submenus->link}}">{{$submenus->submenu}}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                @else
+                                                    <a class="nav-link" href="{{$upperMenu->link}}"><span>{{$upperMenu->menu}}</span> </a>
+                                                @endif
+                                            </li>
+                                        @endforeach 
                                     </ul>
                                 </div>
 
@@ -560,44 +577,45 @@
                     </a>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{URL::to('/')}}"><span>HOME</span> </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{URL::to('/brokerList')}}"><span>Brokers</span> </a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link  dropdown-toggle text-light" href="#" data-toggle="dropdown">
-                                    Forex Education
-                                </a>
-                                <ul class="dropdown-menu fade-up">
-                                    <li><a class="dropdown-item" href="{{URL::to('/Basic/all')}}">Basic Training</a></li>
-                                    @if(!Session::has('client'))
-                                        <li><a class="dropdown-item LoginButton" data-toggle="modal" data-target="#requestQuoteModal">Advance Training</a></li>
+                            @foreach($AllMainMenu as $mainMenu)
+                                @php
+                                    $SubMenu = $mainMenu->GetSubMenu();
+                                    $SubMenuCount = 0;
+                                    if(count($SubMenu) > 0){
+                                        $SubMenuCount = 1;
+                                    }elseif($mainMenu->menu == "Blog" ){
+                                        $SubMenuCount = 2;
+                                    }elseif($mainMenu->id == 6){
+                                        $SubMenuCount = 2;
+                                    }
+                                @endphp
+                                <li class="nav-item {{$SubMenuCount != 0 ? 'dropdown' : ''}}">
+                                    @if($SubMenuCount != 0)
+                                        <a class="nav-link  dropdown-toggle text-light" href="{{$mainMenu->link}}" data-toggle="dropdown">
+                                            {{$mainMenu->menu}}
+                                        </a>
+                                        @if($SubMenuCount == 1)
+                                            <ul class="dropdown-menu fade-up">
+                                                @foreach($SubMenu as $submenus)
+                                                    @if(!Session::has('client') && $submenus->submenu == "Advance Training")
+                                                        <li><a class="dropdown-item LoginButton" href="#"  data-toggle="modal" data-target="#requestQuoteModal">{{$submenus->submenu}}</a></li>
+                                                    @else
+                                                        <li><a class="dropdown-item" href="{{$submenus->link}}">{{$submenus->submenu}}</a></li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            <ul class="dropdown-menu fade-up">
+                                                @foreach($AllBlogSubMenu as $BlogSubMenu)
+                                                    <li><a class="dropdown-item" href="{{URL::to('blog')}}/{{$BlogSubMenu->categoryName}}">{{$BlogSubMenu->categoryName}}</a></li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
                                     @else
-                                        <li><a class="dropdown-item" href="{{URL::to('/Advance/all')}}">Advance Training</a></li>
+                                        <a class="nav-link" href="{{$mainMenu->link}}"><span>{{$mainMenu->menu}}@if($mainMenu->menu == "Signals")<sup id="blink" style="opacity: 1;">new</sup>@endif</span> </a>
                                     @endif
-                                    <li><a class="dropdown-item" href="{{URL::to('/Habbit/all')}}">50 Habbit Training</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link  dropdown-toggle text-light" href="#" data-toggle="dropdown">
-                                    Trading Tools
-                                </a>
-                                <ul class="dropdown-menu fade-up">
-                                    <li><a class="dropdown-item" href="{{URL::to('/analysis/')}}">Fundamental Analysis</a></li>
-                                    <li><a class="dropdown-item" href="{{URL::to('/fundamental/')}}">Fundamental History</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{URL::to('/signal')}}"><span>Signals <sup id="blink">new</sup></span></a>
-                            </li>
-                            <!-- <li class="nav-item">
-                                <a class="nav-link" href="{{URL::to('blog-post.html')}}"><span>blog</span></a>
-                            </li> -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{URL::to('/about-page')}}"><span>ABOUT</span></a>
-                            </li>
+                                </li>
+                            @endforeach  
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="modal" data-target=".bd-example-modal-lg"><span>contact us</span></a>
                             </li>

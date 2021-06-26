@@ -12,7 +12,11 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-pills nav-fill mb-3" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#home3" role="tab"><i class="fa fa-chart-line m-r-10"></i>Signal Comments</a>
+                                <a class="nav-link active" data-toggle="tab" href="#latest3" role="tab"><i class="fa fa-chart-line m-r-10"></i>Latest Comments</a>
+                                <div class="slide bg-c-blue"></div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#home3" role="tab"><i class="fa fa-chart-line m-r-10"></i>Signal Comments</a>
                                 <div class="slide bg-c-blue"></div>
                             </li>
                             <li class="nav-item">
@@ -34,20 +38,27 @@
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div class="tab-pane active" id="home3" role="tabpanel">
+                            <div class="tab-pane active" id="latest3" role="tabpanel">
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
                                             <tr>
                                                 <th>
-                                                    Signal Comments
+                                                    Latest Comments
+                                                </th>
+                                                <th>
+                                                    Page Name
+                                                </th>
+                                                <th>
+                                                    Operations
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
-											@foreach($signalLatestComments as $data)
+											@foreach($wholeCommentData as $data)
 												@php
-													$member = App\Models\ClientRegistrationModel::where('id',$data->memberId)->first();
+													$pageName = $data->getPageName();
+													$member = $data->getMemberInformation();
 													if($member){
 														if($member->image == null){
 															$memberImage = URL::to("public/assets/assets/img/user1.jpg");
@@ -70,6 +81,62 @@
 															</div>
 														</a>
 													</td>
+													<td class="text-black">
+														{{$pageName->page_name}}
+													</td>
+													<td>
+														<a href="{{URL::to('ustaad/comment/edit')}}/{{$data->id}}"><i class="far fa-edit text-success mr-2 editlink" value="16"></i></a>
+														<a href="{{URL::to('ustaad/comment/delete')}}/{{$data->id}}" class="addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash text-danger"></i></a>
+													</td>
+												</tr>
+											@endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="home3" role="tabpanel">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Signal Comments
+                                                </th>
+                                                <th>
+                                                    Operations
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+											@foreach($signalLatestComments as $data)
+												@php
+													$member = $data->getMemberInformation();
+													if($member){
+														if($member->image == null){
+															$memberImage = URL::to("public/assets/assets/img/user1.jpg");
+														}else{
+															$memberImage = URL::to("storage/app" . "/" .$member->image);
+														}
+													}else{
+														$memberImage = URL::to("public/assets/assets/img/user1.jpg");
+													}
+												@endphp
+												<tr>
+													<td>
+														<a href="{{URL::to('ustaad/signals/comment/')}}/{{$data->objectId}}" class="d-flex">
+															<div>
+																<img class="rounded-circle" style="width:40px;" src="{{$memberImage}}" alt="activity-user">
+															</div>
+															<div class="ml-4">
+																<h6 class="mb-1">{{$member != null ? $member->name : 'Admin'}}</h6>
+																<p class="m-0 text-dark" style="white-space:normal">{{$data->comment}}</p>
+															</div>
+														</a>
+													</td>
+													<td>
+														<a href="{{URL::to('ustaad/comment/edit')}}/{{$data->id}}"><i class="far fa-edit text-success mr-2 editlink" value="16"></i></a>
+														<a href="{{URL::to('ustaad/comment/delete')}}/{{$data->id}}" class="addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash text-danger"></i></a>
+													</td>
 												</tr>
 											@endforeach
                                         </tbody>
@@ -84,12 +151,15 @@
                                                 <th>
                                                    Blog Comments
                                                 </th>
+                                                <th>
+                                                    Operations
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
 											@foreach($BlogPostLatestComments as $data)
 												@php
-													$member = App\Models\ClientRegistrationModel::where('id',$data->memberId)->first();
+													$member = $data->getMemberInformation();
 													if($member){
 														if($member->image == null){
 															$memberImage = URL::to("public/assets/assets/img/user1.jpg");
@@ -112,6 +182,10 @@
 															</div>
 														</a>
 													</td>
+													<td>
+														<a href="{{URL::to('ustaad/comment/edit')}}/{{$data->id}}"><i class="far fa-edit text-success mr-2 editlink" value="16"></i></a>
+														<a href="{{URL::to('ustaad/comment/delete')}}/{{$data->id}}" class="addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash text-danger"></i></a>
+													</td>
 												</tr>
 											@endforeach
                                         </tbody>
@@ -126,12 +200,15 @@
                                                 <th>
                                                    Advance Training Latest Comments
                                                 </th>
+                                                <th>
+                                                    Operations
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
 											@foreach($AdvanceTrainingLatestComments as $data)
 												@php
-													$member = App\Models\ClientRegistrationModel::where('id',$data->memberId)->first();
+													$member = $data->getMemberInformation();
 													if($member){
 														if($member->image == null){
 															$memberImage = URL::to("public/assets/assets/img/user1.jpg");
@@ -154,6 +231,10 @@
 															</div>
 														</a>
 													</td>
+													<td>
+														<a href="{{URL::to('ustaad/comment/edit')}}/{{$data->id}}"><i class="far fa-edit text-success mr-2 editlink" value="16"></i></a>
+														<a href="{{URL::to('ustaad/comment/delete')}}/{{$data->id}}" class="addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash text-danger"></i></a>
+													</td>
 												</tr>
 											@endforeach
                                         </tbody>
@@ -168,12 +249,15 @@
                                                 <th>
                                                    Basic Training Latest Comments
                                                 </th>
+                                                <th>
+                                                    Operations
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
 											@foreach($BasicTrainingLatestComments as $data)
 												@php
-													$member = App\Models\ClientRegistrationModel::where('id',$data->memberId)->first();
+													$member = $data->getMemberInformation();
 													if($member){
 														if($member->image == null){
 															$memberImage = URL::to("public/assets/assets/img/user1.jpg");
@@ -196,6 +280,10 @@
 															</div>
 														</a>
 													</td>
+													<td>
+														<a href="{{URL::to('ustaad/comment/edit')}}/{{$data->id}}"><i class="far fa-edit text-success mr-2 editlink" value="16"></i></a>
+														<a href="{{URL::to('ustaad/comment/delete')}}/{{$data->id}}" class="addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash text-danger"></i></a>
+													</td>
 												</tr>
 											@endforeach
                                         </tbody>
@@ -210,12 +298,15 @@
                                                 <th>
                                                    Habbit Training Latest Comments
                                                 </th>
+                                                <th>
+                                                    Operations
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
 											@foreach($HabbitTrainingLatestComments as $data)
 												@php
-													$member = App\Models\ClientRegistrationModel::where('id',$data->memberId)->first();
+													$member = $data->getMemberInformation();
 													if($member){
 														if($member->image == null){
 															$memberImage = URL::to("public/assets/assets/img/user1.jpg");
@@ -238,6 +329,10 @@
 																<p class="m-0 text-dark" style="white-space:normal">{{$data->comment}}</p>
 															</div>
 														</a>
+													</td>
+													<td>
+														<a href="{{URL::to('ustaad/comment/edit')}}/{{$data->id}}"><i class="far fa-edit text-success mr-2 editlink" value="16"></i></a>
+														<a href="{{URL::to('ustaad/comment/delete')}}/{{$data->id}}" class="addAction" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash text-danger"></i></a>
 													</td>
 												</tr>
 											@endforeach

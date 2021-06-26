@@ -16,7 +16,6 @@ use App\Http\Controllers\ApiHomeController;
 use App\Http\Controllers\ApiLeftController;
 use App\Http\Controllers\ApiRightController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\TagController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\BrokerTopInformationController;
@@ -44,6 +43,7 @@ use App\Http\Controllers\OtherPagesContentController;
 use App\Http\Controllers\FundamentalController;
 use App\Http\Controllers\SponoserAddController;
 use App\Http\Controllers\MidBannerController;
+use App\Http\Controllers\FeatureVideosController;
 use App\Http\Controllers\MetaTagsController;
 use App\Models\AdminMemberDetailModel;
 use App\Models\ClientRegistrationModel;
@@ -62,8 +62,6 @@ use App\Models\SignalsModel;
 */
 Route::post('/comment/like/{id}/{id2}',[CommentController::class,'AddCommentLike']);
 Route::post('/comments/save',[CommentController::class,'CommentSave']);
-Route::get('/getCsv',[HomeController::class,'csv']);
-Route::get('/uploadCsv',[HomeController::class,'uploadCsv']);
 
 // Pusher Routes
 Route::get('/successData3', [MidBannerController::class, 'getPosts']);
@@ -75,12 +73,9 @@ Route::get('/tv1', function () {
 Route::get('/sendDesktopNotification', function () {
     return view("send");
 });
-    Route::get('macEmail',function(){
-        return view("home.email");
-    });
 
 Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
-
+    Route::get('/',[HomeController::class,'Index']);
     Route::get('/Basic/{id}',[AdvanceTrainingController::class,'ViewAll']);
     Route::get('/Advance/{id}',[AdvanceTrainingController::class,'ViewAll']);
     Route::get('/Habbit/{id}',[AdvanceTrainingController::class,'ViewAll']);
@@ -88,87 +83,83 @@ Route::group(['prefix' => '',"middleware" => "IsVisitor"],function(){
     Route::get('/analysis/{id}',[AnalysisController::class,'ViewDetail']);
     Route::get('/fundamental',[FundamentalController::class,'ViewAll']);
     Route::get('/fundamental/{id}',[FundamentalController::class,'ViewDetail']);
+    Route::get('/webinar',[HomeController::class,'webinar']);
+    Route::get('/signal',[SignalController::class,'signal']);
+    Route::get('/signal/{id}',[SignalController::class,'signalView']);
+    Route::post('/contact/add',[ContactController::class,'Add']);
+    Route::get('/privacy-policy.html',[HomeController::class,'privacyPolicy']);
+    Route::get('/about-page',[HomeController::class,'AboutPage']);
+    Route::get('p/{id}',[OtherPagesContentController::class,'Index']);
+    Route::get('/term-of-services.html',[HomeController::class,'termServices']);
 
-    Route::get('/brokertraining/{id}',[BrokerTrainingController::class,'BrokerTraining']);
-    Route::get('/broker/training/{id}',[BrokerTrainingController::class,'ChangeTraining']);
-    Route::get('/brokerList',[HomeController::class,'BrokerView']);
-    Route::get('/brokerDetail/{id}',[HomeController::class,'brokerDetail']);
-    Route::get('/brokerReview/{id}',[HomeController::class,'brokerReview']);
-    Route::get('/ReviewDetail/{id}',[HomeController::class,'brokerReviewDetail']);
-    Route::get('/brokerNews/{id}',[HomeController::class,'brokerNews']);
-    Route::get('/NewsDetail/{id}',[HomeController::class,'brokerNewsDetail']);
-    Route::get('/brokerPromotion/{id}',[HomeController::class,'brokerPromotion']);
-    Route::get('/PromotionDetail/{id}',[HomeController::class,'brokerPromotionDetail']);
+    // broker Pages routes start
+        Route::get('/brokertraining/{id}',[BrokerTrainingController::class,'BrokerTraining']);
+        Route::get('/brokerList',[HomeController::class,'BrokerView']);
+        Route::get('/brokerDetail/{id}',[HomeController::class,'brokerDetail']);
+        Route::get('/brokerReview/{id}',[HomeController::class,'brokerReview']);
+        Route::get('/ReviewDetail/{id}',[HomeController::class,'brokerReviewDetail']);
+        Route::get('/brokerNews/{id}',[HomeController::class,'brokerNews']);
+        Route::get('/NewsDetail/{id}',[HomeController::class,'brokerNewsDetail']);
+        Route::get('/brokerPromotion/{id}',[HomeController::class,'brokerPromotion']);
+        Route::get('/PromotionDetail/{id}',[HomeController::class,'brokerPromotionDetail']);
+    // broker Pages routes end
 
+    // .Html URL Pages of Blog View routes start
+        Route::get('/advance-forex-trading-plan.html',[HtmlPagesController::class,'Page1']);
+        Route::get('/advertise.html',[HtmlPagesController::class,'Page2']);
+        Route::get('/always-trad-with-stop-loss.html',[HtmlPagesController::class,'Page3']);
+        Route::get('/azadi-real-account-contest.html',[HtmlPagesController::class,'Page4']);
+        Route::get('/become-successful-forex-trader.html',[HtmlPagesController::class,'Page5']);
+        Route::get('/best-currency-pair-to-trade.html',[HtmlPagesController::class,'Page6']);
+        Route::get('/daily-time-frame-forex-trading.html',[HtmlPagesController::class,'Page7']);
+        Route::get('/deposit-money-exness-pakistan.html',[HtmlPagesController::class,'Page8']);
+        Route::get('/draw-perfect-trend-line.html',[HtmlPagesController::class,'Page9']);
+        Route::get('/exness-and-raheel-nawaz-is-organizing-seminar-in-gujranwala-pakistan.html',[HtmlPagesController::class,'Page10']);
+        Route::get('/flags-charts-patterns-urdu-hindi.html',[HtmlPagesController::class,'Page11']);
+        Route::get('/forex-trading-plan-july-2015.html',[HtmlPagesController::class,'Page12']);
+        Route::get('/forex-trading-stop-loss.html',[HtmlPagesController::class,'Page13']);
+        Route::get('/forex-trading-using-moving-average-strategy.html',[HtmlPagesController::class,'Page14']);
+        Route::get('/forex-trading-webinar-for-vips.html',[HtmlPagesController::class,'Page15']);
+        Route::get('/forexustaad-weekly-lucky-draw.html',[HtmlPagesController::class,'Page16']);
+        Route::get('/free-forexustaad-pro-indicator.html',[HtmlPagesController::class,'Page17']);
+        Route::get('/free-signals-analysis-and-news-updates.html',[HtmlPagesController::class,'Page18']);
+        Route::get('/fundamental-analysis-forex-trading.html',[HtmlPagesController::class,'Page19']);
+        Route::get('/fundamental-analysis-us-presidential-election-2016.html',[HtmlPagesController::class,'Page20']);
+        Route::get('/fundamental-analysis-webinar.html',[HtmlPagesController::class,'Page21']);
+        Route::get('/great-news-for-my-forex-lovers-friend.html',[HtmlPagesController::class,'Page22']);
+        Route::get('/how-to-choose-a-forex-broker-in-urdu-webinar.html',[HtmlPagesController::class,'Page23']);
+        Route::get('/how-to-choose-a-forex-broker-webinar-ready.html',[HtmlPagesController::class,'Page24']);
+        Route::get('/how-to-use-metatrader-4-full-training-in-urdu-part-1.html',[HtmlPagesController::class,'Page25']);
+        Route::get('/how-to-use-metatrader-4-full-training-in-urdu-part-2.html',[HtmlPagesController::class,'Page26']);
+        Route::get('/learn-forex-trading-in-pakistan.html',[HtmlPagesController::class,'Page27']);
+        Route::get('/live-radio.html',[HtmlPagesController::class,'Page28']);
+        Route::get('/market-reviews-euro-dollar-yen.html',[HtmlPagesController::class,'Page29']);
+        Route::get('/opening-event-technow.html',[HtmlPagesController::class,'Page30']);
+        Route::get('/pinbar-candlestick-strategies.html',[HtmlPagesController::class,'Page31']);
+        Route::get('/technical-analysis-trading-forex.html',[HtmlPagesController::class,'Page32']);
+        Route::get('/scam-fraud-internet.html',[HtmlPagesController::class,'Page33']);
+        Route::get('/schoolboy-made-72million-forex-trading-lunch-breaks.html',[HtmlPagesController::class,'Page34']);
+        Route::get('/support-and-resistance-chart.html',[HtmlPagesController::class,'Page35']);
+        Route::get('/timing-is-most-important-element-in-forex-trading.html',[HtmlPagesController::class,'Page36']);
+        Route::get('/trading-story-mr-bean-its-your.html',[HtmlPagesController::class,'Page37']);
+        Route::get('/what-is-candlestick-strategy-in-urduhindi-part-1.html',[HtmlPagesController::class,'Page38']);
+        Route::get('/what-is-forex-trading.html',[HtmlPagesController::class,'Page39']);
+        Route::get('/what-is-forex-trading-in-urdu-webinar.html',[HtmlPagesController::class,'Page40']);
+    // .Html URL Pages of Blog View routes end
 
-
-    Route::get('/advance-forex-trading-plan.html',[HtmlPagesController::class,'Page1']);
-    Route::get('/advertise.html',[HtmlPagesController::class,'Page2']);
-    Route::get('/always-trad-with-stop-loss.html',[HtmlPagesController::class,'Page3']);
-    Route::get('/azadi-real-account-contest.html',[HtmlPagesController::class,'Page4']);
-    Route::get('/become-successful-forex-trader.html',[HtmlPagesController::class,'Page5']);
-    Route::get('/best-currency-pair-to-trade.html',[HtmlPagesController::class,'Page6']);
-    Route::get('/daily-time-frame-forex-trading.html',[HtmlPagesController::class,'Page7']);
-    Route::get('/deposit-money-exness-pakistan.html',[HtmlPagesController::class,'Page8']);
-    Route::get('/draw-perfect-trend-line.html',[HtmlPagesController::class,'Page9']);
-    Route::get('/exness-and-raheel-nawaz-is-organizing-seminar-in-gujranwala-pakistan.html',[HtmlPagesController::class,'Page10']);
-    Route::get('/flags-charts-patterns-urdu-hindi.html',[HtmlPagesController::class,'Page11']);
-    Route::get('/forex-trading-plan-july-2015.html',[HtmlPagesController::class,'Page12']);
-    Route::get('/forex-trading-stop-loss.html',[HtmlPagesController::class,'Page13']);
-    Route::get('/forex-trading-using-moving-average-strategy.html',[HtmlPagesController::class,'Page14']);
-    Route::get('/forex-trading-webinar-for-vips.html',[HtmlPagesController::class,'Page15']);
-    Route::get('/forexustaad-weekly-lucky-draw.html',[HtmlPagesController::class,'Page16']);
-    Route::get('/free-forexustaad-pro-indicator.html',[HtmlPagesController::class,'Page17']);
-    Route::get('/free-signals-analysis-and-news-updates.html',[HtmlPagesController::class,'Page18']);
-    Route::get('/fundamental-analysis-forex-trading.html',[HtmlPagesController::class,'Page19']);
-    Route::get('/fundamental-analysis-us-presidential-election-2016.html',[HtmlPagesController::class,'Page20']);
-    Route::get('/fundamental-analysis-webinar.html',[HtmlPagesController::class,'Page21']);
-    Route::get('/great-news-for-my-forex-lovers-friend.html',[HtmlPagesController::class,'Page22']);
-    Route::get('/how-to-choose-a-forex-broker-in-urdu-webinar.html',[HtmlPagesController::class,'Page23']);
-    Route::get('/how-to-choose-a-forex-broker-webinar-ready.html',[HtmlPagesController::class,'Page24']);
-    Route::get('/how-to-use-metatrader-4-full-training-in-urdu-part-1.html',[HtmlPagesController::class,'Page25']);
-    Route::get('/how-to-use-metatrader-4-full-training-in-urdu-part-2.html',[HtmlPagesController::class,'Page26']);
-    Route::get('/learn-forex-trading-in-pakistan.html',[HtmlPagesController::class,'Page27']);
-    Route::get('/live-radio.html',[HtmlPagesController::class,'Page28']);
-    Route::get('/market-reviews-euro-dollar-yen.html',[HtmlPagesController::class,'Page29']);
-    Route::get('/opening-event-technow.html',[HtmlPagesController::class,'Page30']);
-    Route::get('/pinbar-candlestick-strategies.html',[HtmlPagesController::class,'Page31']);
-    Route::get('/technical-analysis-trading-forex.html',[HtmlPagesController::class,'Page32']);
-    Route::get('/scam-fraud-internet.html',[HtmlPagesController::class,'Page33']);
-    Route::get('/schoolboy-made-72million-forex-trading-lunch-breaks.html',[HtmlPagesController::class,'Page34']);
-    Route::get('/support-and-resistance-chart.html',[HtmlPagesController::class,'Page35']);
-    Route::get('/timing-is-most-important-element-in-forex-trading.html',[HtmlPagesController::class,'Page36']);
-    Route::get('/trading-story-mr-bean-its-your.html',[HtmlPagesController::class,'Page37']);
-    Route::get('/what-is-candlestick-strategy-in-urduhindi-part-1.html',[HtmlPagesController::class,'Page38']);
-    Route::get('/what-is-forex-trading.html',[HtmlPagesController::class,'Page39']);
-    Route::get('/what-is-forex-trading-in-urdu-webinar.html',[HtmlPagesController::class,'Page40']);
-
-    // Route::get('/', function () {
-    //     return view('welcome');
-    // });
     Route::get('/subscriberConfirmation/{id}',[HomeController::class,'ConfirmationEmail']);
     Route::get('/forgetPassword/{id}',[HomeController::class,'ForgetPasswordChange']);
     Route::post('/forgetPassword/{id}',[HomeController::class,'ForgetPasswordChangeProcess']);
     Route::post('/uploader/upload.php',[HomeController::class,'ImageSrc15']);
     Route::post('/pro-img-disk.php',[HomeController::class,'ImageSrc']);
-    Route::post('/comment1',[CommentController::class,'Add']);
-    Route::get('/',[HomeController::class,'Index']);
-    Route::get('/construction',[HomeController::class,'Construction']);
-    Route::get('/webinar',[HomeController::class,'webinar']);
     Route::post('/clientRegistration',[HomeController::class,'RegistrationProcess']);
     Route::post('/clientLogin',[HomeController::class,'LoginProcess']);
     Route::post('/clientForget',[HomeController::class,'ForgetProcess']);
     Route::get('/clientLogout',[HomeController::class,'LogoutProcess']);
     Route::get('/blog-post.html',[BlogController::class,'Index']);
+    Route::get('/blog/{id}',[BlogController::class,'BlogViewCategory']);
     Route::get('/Post/{id2}',[BlogController::class,'DetailBlog']);
-    Route::get('/privacy-policy.html',[HomeController::class,'privacyPolicy']);
-    Route::get('/about-page',[HomeController::class,'AboutPage']);
-    Route::get('p/{id}',[OtherPagesContentController::class,'Index']);
-    Route::get('/term-of-services.html',[HomeController::class,'termServices']);
-    // Route::get('/contact-us',[ContactController::class,'contact']);
-    Route::get('/signal',[SignalController::class,'signal']);
-    Route::get('/signal/{id}',[SignalController::class,'signalView']);
-    Route::post('/contact/add',[ContactController::class,'Add']);
+    
     // Users Panel Views
 
     Route::post('user-registration/stateData/{id}',[HomeController::class,'userregistrationStateCode']);
@@ -208,7 +199,12 @@ Route::get('/ustaad',[AdminController::class,'Login']);
 Route::post('/ustaad',[AdminController::class,'Index']);
 
 Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
+    Route::get('{id}/comment/{id1}',[CommentController::class,'ViewCommentAdminPanel']);
+    Route::post('{id}/comment/{id1}',[CommentController::class,'CommentReplyByAdminMember']);
     Route::get('/latestComments',[AdminController::class,'GetLatestComment']);
+    Route::get('comment/delete/{id}',[CommentController::class,'DeleteComments']);
+    Route::get('comment/edit/{id}',[CommentController::class,'EditComment']);
+    Route::post('comment/edit/{id}',[CommentController::class,'EditProcessComment']);
     Route::get('/widgets',function(){
         return view('admin.widget-chart');
     });
@@ -223,6 +219,15 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::post('/viewClientProfile/accountdepositConfirm/{id}',[AdminController::class,'ClientProfileaccountdepositConfirm']);
     Route::post('/changeMemberType/{id}',[AdminController::class,'ChangeMemberType']);
 
+    Route::group(['prefix' => 'feature-video'],function(){
+        Route::get('/',[FeatureVideosController::class,'Index']);
+        Route::get('/add',[FeatureVideosController::class,'Add']);
+        Route::post('/add',[FeatureVideosController::class,'AddProcess']);
+        Route::get('/edit/{id}',[FeatureVideosController::class,'Edit']);
+        Route::post('/edit/{id}',[FeatureVideosController::class,'EditProcess']);
+        Route::get('/deactive/{id}',[FeatureVideosController::class,'Delete']);
+        Route::get('/active/{id}',[FeatureVideosController::class,'Active']);
+    });
     Route::group(['prefix' => 'meta-tags'],function(){
         Route::get('/',[MetaTagsController::class,'Index']);
         Route::get('/edit/{id}',[MetaTagsController::class,'Edit']);
@@ -243,11 +248,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::post('/{id1}/edit/{id}',[AdvanceTrainingController::class,'EditLecture']);
         Route::get('/{id1}/delete/{id}',[AdvanceTrainingController::class,'Delete']);
         Route::get('/{id1}/active/{id}',[AdvanceTrainingController::class,'Active']);
-        Route::post('/CommentViewReply/add/',[AdvanceTrainingController::class,'SaveViewCommentReply']);
     });
-    Route::get('/basic/comment/{id}',[AdvanceTrainingController::class,'ViewComment1']);
-    Route::get('/advance/comment/{id}',[AdvanceTrainingController::class,'ViewComment2']);
-    Route::get('/habbit/comment/{id}',[AdvanceTrainingController::class,'ViewComment3']);
 
     Route::group(['prefix' => 'staticpages'],function(){
         Route::get('/',[OtherPagesContentController::class,'All']);
@@ -267,8 +268,6 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/active/{id}',[StrategiesController::class,'Active']);
     });
     Route::group(['prefix' => 'analysis'],function(){
-        Route::get('/comment/{id}',[AnalysisController::class,'ViewComments']);
-        Route::post('/CommentViewReply/add',[AnalysisController::class,'CommentAdd']);
         Route::get('/',[AnalysisController::class,'Index']);
         Route::get('/add',[AnalysisController::class,'Add']);
         Route::post('/add',[AnalysisController::class,'AddProcess']);
@@ -278,8 +277,6 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/active/{id}',[AnalysisController::class,'Active']);
     });
     Route::group(['prefix' => 'fundamental'],function(){
-        Route::get('/comment/{id}',[FundamentalController::class,'ViewComments']);
-        Route::post('/CommentViewReply/add',[FundamentalController::class,'CommentAdd']);
         Route::get('/',[FundamentalController::class,'Index']);
         Route::post('/order',[FundamentalController::class,'Order']);
         Route::get('/add',[FundamentalController::class,'Add']);
@@ -318,8 +315,6 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     });
     Route::group(['prefix' => 'signals'],function(){
         Route::post('/allow/{id}',[SignalController::class,'AllowSignalProcess']);
-        Route::get('/comment/{id}',[SignalController::class,'Comment']);
-        Route::post('/CommentViewReply/add',[SignalController::class,'CommentAdd']);
         Route::get('/',[SignalController::class,'Index']);
         Route::get('/add',[SignalController::class,'Add']);
         Route::post('/add',[SignalController::class,'AddProcess']);
@@ -331,6 +326,8 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::post('/unstar/{id}',[SignalController::class,'UnStarProcess']);
         Route::get('/addPair',[SignalController::class,'AddPair']);
         Route::post('/addPair',[SignalController::class,'AddPairProcess']);
+        Route::get('/pair/meta-tag/{id}',[MetaTagsController::class,'AddSignalPairMeta']);
+        Route::post('/pair/meta-tag/{id}',[MetaTagsController::class,'AddSignalPairMetaProcess']);
         Route::post('pair/edit/{id}',[SignalController::class,'EditPairProcess']);
         Route::get('/pair/delete/{id}',[SignalController::class,'DeletePairProcess']);
         Route::get('/pair/active/{id}',[SignalController::class,'ActivePairProcess']);
@@ -364,6 +361,14 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/trashRestore/{id}',[MainMenuController::class,'TrashRestore']);
         Route::get('/delete/{id}',[MainMenuController::class,'delete']);
         Route::post('/edit/{id}',[MainMenuController::class,'edit']);
+    });
+    Route::group(['prefix' => 'subMenu'],function(){
+        Route::get('/',[MainMenuController::class,'AllSubMenu']);
+        Route::post('/',[MainMenuController::class,'createSubMenu']);
+        Route::get('/trash/{id}',[MainMenuController::class,'TrashSubMenu']);
+        Route::get('/trashRestore/{id}',[MainMenuController::class,'TrashRestoreSubMenu']);
+        Route::get('/delete/{id}',[MainMenuController::class,'deleteSubMenu']);
+        Route::post('/edit/{id}',[MainMenuController::class,'editSubMenu']);
     });
     Route::group(['prefix' => 'logo-panel'],function(){
         Route::get('/',[LogoPanelController::class,'Index']);
@@ -467,15 +472,8 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::post('/',[CategoryController::class,'Add']);
         Route::get('/delete/{id}',[CategoryController::class,'delete']);
     });
-    Route::group(['prefix' => 'tag'],function(){
-        Route::get('/',[TagController::class,'Index']);
-        Route::post('/',[TagController::class,'Add']);
-        Route::get('/delete/{id}',[TagController::class,'delete']);
-    });
     Route::get('/allCategories',[CategoryController::class,'All']);
     Route::group(['prefix' => 'post'],function(){
-        Route::get('/comment/{id}',[BlogController::class,'Comment']);
-        Route::post('/CommentViewReply/add',[BlogController::class,'CommentAdd']);
         Route::get('/viewAll',[PostController::class,'Index']);
         Route::get('/delete/{id}',[PostController::class,'draft']);
         Route::get('/active/{id}',[PostController::class,'Active']);
@@ -485,6 +483,7 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::post('/all',[BlogPostController::class,'Add']);
     });
     Route::group(['prefix' => 'broker'],function(){
+        Route::get('/meta/{id}',[MetaTagsController::class,'BrokerPageMetas']);
         Route::get('/allow/{id}',[BrokerTopInformationController::class,'AllowBrokerProcess']);
         Route::post('/allow/{id}',[BrokerTopInformationController::class,'AllowBrokerProcess']);
         Route::post('/star/{id}',[BrokerTopInformationController::class,'StarBrokerProcess']);
@@ -514,10 +513,9 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
     Route::get('/editBroker/{id}',[BorkerController::class,'edit']);
     Route::post('/editBroker/{id}',[BorkerController::class,'editBrokerCompanyInformation']);
 
-    Route::get('brokersNew/{id}',[BorkerNewsController::class,'Index']);
 
     Route::group(['prefix' => 'brokersNews'],function(){
-        Route::get('/all/{id}',[BorkerNewsController::class,'All']);
+        Route::get('/',[BorkerNewsController::class,'Index']);
         Route::get('/new',[BorkerNewsController::class,'Add']);
         Route::post('/new',[BorkerNewsController::class,'AddNews']);
         Route::get('/edit/{id}',[BorkerNewsController::class,'Edit']);
@@ -528,10 +526,9 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::post('/allow/{id}',[BorkerNewsController::class,'AllowBrokerNewsProcess']);
     });
 
-    Route::get('brokersTraining/{id}',[BrokerTrainingController::class,'Index']);
 
     Route::group(['prefix' => 'brokersTrainings'],function(){
-        Route::get('/all/{id}',[BrokerTrainingController::class,'All']);
+        Route::get('/',[BrokerTrainingController::class,'Index']);
         Route::get('/new',[BrokerTrainingController::class,'Add']);
         Route::post('/new',[BrokerTrainingController::class,'AddNews']);
         Route::get('/edit/{id}',[BrokerTrainingController::class,'Edit']);
@@ -541,10 +538,9 @@ Route::group(['prefix' => 'ustaad',"middleware" => "IsLogin"],function(){
         Route::get('/trashRestore/{id}',[BrokerTrainingController::class,'TrashRestore']);
         Route::post('/allow/{id}',[BrokerTrainingController::class,'AllowBrokerNewsProcess']);
     });
-    Route::get('brokersPromotion/{id}',[BorkerPromotionsController::class,'Index']);
 
     Route::group(['prefix' => 'brokersPromotions'],function(){
-        Route::get('/all/{id}',[BorkerPromotionsController::class,'All']);
+        Route::get('/',[BorkerPromotionsController::class,'Index']);
         Route::get('/new',[BorkerPromotionsController::class,'Add']);
         Route::post('/new',[BorkerPromotionsController::class,'AddPromotions']);
         Route::get('/edit/{id}',[BorkerPromotionsController::class,'Edit']);

@@ -149,7 +149,7 @@
                             </div>
                         </div>
                     </section>
-                    @if(Session::has('client'))
+                    @if(Session::has('client') && count($featureVideos) > 0)
                     <section class="news-slid features">
                         <div class="container">
                             <div class="row">
@@ -160,7 +160,7 @@
                                             <!-- THE YOUTUBE PLAYER -->
                                             <div class="vid-container">
                                                 <div class="fluid-width-video-wrapper" style="padding-top: 55%;">
-                                                    <iframe id="vid_frame" src="https://www.youtube.com/embed/X9JClP-XMyc?rel=0&amp;showinfo=0&amp;autohide=1&amp;autoplay=1" frameborder="0" allow="" allowfullscreen=""></iframe>
+                                                    @php echo $featureVideos[0]->embed; @endphp
                                                 </div>
                                             </div>
                                         </section>
@@ -177,107 +177,25 @@
                            <svg xmlns="" width="16" height="16" viewBox="0 0 16 16"><g class="nc-icon-wrapper" fill="#111111"><polygon fill="#111111" points="11.1,15.7 3.4,8 11.1,0.3 12.6,1.7 6.3,8 12.6,14.3 "></polygon></g></svg>
                           </button>
                                             <!-- Swiper -->
-                                            <nav class="swiper-container swiper-container-videos slider-produtos-destaque"
-                                                style="top: 8px;">
+                                            <nav class="swiper-container swiper-container-videos slider-produtos-destaque" style="top: 8px;">
                                                 <ol class="swiper-wrapper" style="list-style-type: none; padding: 0px;">
-                                                    <li class="swiper-slide" style="width: 130px;">
-                                                        <a class="" href="javascript:void();"
-                                                            onClick="document.getElementById('vid_frame').src='https://youtube.com/embed/WAcnWtZjDWE?autoplay=1&rel=0&showinfo=0&autohide=1'">
-                                                            <span class="vid-thumb">
-                                                                <img
-                                                                    src="https://i.ytimg.com/vi/X9JClP-XMyc/hqdefault.jpg" />
-                                                            </span>
-                                                            <p class="desc">Lecture 1</p>
-                                                        </a>
-                                                    </li>
-
-                                                    <li class="swiper-slide" style="width: 130px;">
-                                                        <a href="javascript:void();"
-                                                            onClick="document.getElementById('vid_frame').src='https://www.youtube.com/embed/UC0AhxFpilA?autoplay=1&rel=0&showinfo=0&autohide=1'">
-                                                            <span class="vid-thumb"><img
-                                                                    src="https://i.ytimg.com/vi/UC0AhxFpilA/hqdefault.jpg" /></span>
-                                                            <p class="desc">Lecture 2</p>
-                                                        </a>
-                                                    </li>
-
-                                                    <li class="swiper-slide" style="width: 130px;">
-                                                        <a href="javascript:void();"
-                                                            onClick="document.getElementById('vid_frame').src='https://www.youtube.com/embed/sbCrpno-pE4?autoplay=1&rel=0&showinfo=0&autohide=1'">
-                                                            <span class="vid-thumb"><img
-                                                                    src="https://i.ytimg.com/vi/sbCrpno-pE4/hqdefault.jpg" /></span>
-                                                            <div class="desc">Lecture 3</div>
-                                                        </a>
-                                                    </li>
-
-                                                     <li class="swiper-slide" style="width: 130px;">
-                                                        <a href="javascript:void();"
-                                                            onClick="document.getElementById('vid_frame').src='https://www.youtube.com/embed/iHncnJ2LM60?autoplay=1&rel=0&showinfo=0&autohide=1'">
-                                                            <span class="vid-thumb"><img
-                                                                    src="https://i.ytimg.com/vi/iHncnJ2LM60/hqdefault.jpg" /></span>
-                                                            <div class="desc">Lecture 4</div>
-                                                        </a>
-                                                    </li>
-                                                    <li class="swiper-slide" style="width: 130px;">
-                                                        <a href="javascript:void();"
-                                                            onClick="document.getElementById('vid_frame').src='https://www.youtube.com/embed/6FokO8ntMvo?autoplay=1&rel=0&showinfo=0&autohide=1'">
-
-                                                            <span class="vid-thumb"><img
-                                                                    src="https://i.ytimg.com/vi/6FokO8ntMvo/hqdefault.jpg" /></span>
-                                                            <div class="desc">Lecture 5</div>
-                                                        </a>
-                                                    </li>
-                                                    <li class="swiper-slide" style="width: 130px;">
-                                                        <a href="javascript:void();"
-                                                            onClick="document.getElementById('vid_frame').src='https://www.youtube.com/embed/pmL632FYHfc?autoplay=1&rel=0&showinfo=0&autohide=1'">
-
-                                                            <span class="vid-thumb"><img
-                                                                    src="https://i.ytimg.com/vi/pmL632FYHfc/hqdefault.jpg" /></span>
-                                                            <div class="desc">Lecture 6</div>
-                                                        </a>
-                                                    </li>
-                                                    <li class="swiper-slide" style="width: 130px;">
-                                                        <a href="javascript:void();"
-                                                            onClick="document.getElementById('vid_frame').src='https://www.youtube.com/embed/FQLN-vMWNTE?autoplay=1&rel=0&showinfo=0&autohide=1'">
-
-                                                            <span class="vid-thumb"><img
-                                                                    src="https://i.ytimg.com/vi/FQLN-vMWNTE/hqdefault.jpg" /></span>
-                                                            <div class="desc">Lecture 7</div>
-                                                        </a>
-                                                    </li>
-                                                    <li class="swiper-slide" style="width: 130px;">
-                                                        <a href="javascript:void();"
-                                                            onClick="document.getElementById('vid_frame').src='https://www.dailymotion.com/embed/video/x23uw26?autoplay=1&rel=0&showinfo=0&autohide=1'">
-
-                                                            <span class="vid-thumb"><img
-                                                                    src="https://s1.dmcdn.net/v/7c2ZE1PeDikEO94Hj/x480" style="height:90px;" /></span>
-                                                            <div class="desc">Lecture 8</div>
-                                                        </a>
-                                                    </li>
-                                                    <li class="swiper-slide" style="width: 130px;">
-                                                        <a href="javascript:void();"
-                                                            onClick="document.getElementById('vid_frame').src='https://www.youtube.com/embed/vFG45cY6Em0?autoplay=1&rel=0&showinfo=0&autohide=1'">
-
-                                                            <span class="vid-thumb"><img
-                                                                    src="https://i.ytimg.com/vi/vFG45cY6Em0/hqdefault.jpg"  /></span>
-                                                            <div class="desc">Lecture 9</div>
-                                                        </a>
-                                                    </li>
-                                                    <li class="swiper-slide" style="width: 130px;">
-                                                        <a href="javascript:void();"
-                                                            onClick="document.getElementById('vid_frame').src='https://player.vimeo.com/video/126562298?autoplay=1&rel=0&showinfo=0&autohide=1'">
-
-                                                            <span class="vid-thumb"><img
-                                                                    src="https://i.vimeocdn.com/video/517171722_130x73.jpg" style="height:90px;" /></span>
-                                                            <div class="desc">Lecture 10</div>
-                                                        </a>
-                                                    </li>
-
-
+                                                    @foreach($featureVideos as $video)
+                                                        @php
+                                                            $replceString = str_replace("\"","dsa-a",$video->embed);
+                                                            $explode5 = explode("dsa-a",$replceString);
+                                                        @endphp
+                                                        <li class="swiper-slide" style="width: 130px;">
+                                                            <a class="" href="javascript:void();"
+                                                                onClick="document.getElementById('vid_frame').src='{{$explode5[5]}}'">
+                                                                <span class="vid-thumb">
+                                                                    <img src="{{URL::to('storage/app')}}/{{$video->thumbnail}}" style="width: 120px;height: 90px;"/>
+                                                                </span>
+                                                                <p class="desc">{{$video->name}}</p>
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
                                                 </ol>
-
-
                                             </nav>
-
                                         </section>
 
                                     </div>
@@ -445,9 +363,9 @@
                                                                 </div>
                                                                 <div class="new_description-details">
                                                                 <h6>
-                                                                    <a href="{{URL::to('/Posts')}}/{{$category->mainCategory}}/{{$value->permalink}}">
-                                                                            {{$value->mainTitle}}
-                                                                        </a>
+                                                                    <a href="{{URL::to('/Post')}}/{{$value->permalink}}">
+                                                                        {{$value->mainTitle}}
+                                                                    </a>
                                                                 </h6>
                                                                 <p>
                                                                     {{$value->description}}
@@ -565,6 +483,12 @@
                                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home"
                                             role="tab" aria-controls="home" aria-selected="true">Basic Training</a>
                                     </li>
+                                    @if(Session::has('client'))
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="advance-tab" data-toggle="tab" href="#advance"
+                                                role="tab" aria-controls="advance" aria-selected="false">Advance Training</a>
+                                        </li>
+                                    @endif
                                     <li class="nav-item">
                                         <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact"
                                             role="tab" aria-controls="contact" aria-selected="false">Habbit Training</a>
@@ -597,14 +521,14 @@
                                                         @if($icount == 1)
                                                             <li class="first-news">
                                                                 <div class="post-thumbnail tie-appear">
-                                                                    <a href="{{URL::to('/training/Basic')}}/{{$title}}" rel="bookmark">
+                                                                    <a href="{{URL::to('/Basic')}}/{{$title}}" rel="bookmark">
                                                                         <img width="310" height="165" src="{{$img123456}}"
                                                                             class="attachment-tie-medium size-tie-medium wp-post-image tie-appear"
                                                                             alt="" loading="lazy"> <span
                                                                             class="fa overlay-icon"></span>
                                                                     </a>
                                                                 </div>
-                                                                <h2 class="post-box-title"><a href="{{URL::to('/training/Basic')}}/{{$title}}" rel="bookmark">{{$basic->title}}</a></h2>
+                                                                <h2 class="post-box-title"><a href="{{URL::to('/Basic')}}/{{$title}}" rel="bookmark">{{$basic->title}}</a></h2>
                                                                 <p class="post-meta">
                                                                     <span title="Nice"
                                                                         class="post-single-rate post-small-rate stars-small">
@@ -619,20 +543,20 @@
                                                                             echo substr($desc, 0, 200) . "...";
                                                                         @endphp
                                                                     </p>
-                                                                    <a class="btn btn-mine radial" href="{{URL::to('/training/Basic')}}/{{$title}}">Read
+                                                                    <a class="btn btn-mine radial" href="{{URL::to('/Basic')}}/{{$title}}">Read
                                                                         More »</a>
                                                                 </div>
                                                             </li>
                                                         @else
                                                             <li class="tie_video">
                                                                 <div class="post-thumbnail tie-appear">
-                                                                    <a href="{{URL::to('/training/Basic')}}/{{$title}}" rel="bookmark"><img width="110" height="75"
+                                                                    <a href="{{URL::to('/Basic')}}/{{$title}}" rel="bookmark"><img width="110" height="75"
                                                                             src="{{$img123456}}"
                                                                             class="attachment-tie-small size-tie-small wp-post-image tie-appear"
                                                                             alt="" loading="lazy"><span
                                                                             class="fa overlay-icon"></span></a>
                                                                 </div>
-                                                                <h3 class="post-box-title"><a href="{{URL::to('/training/Basic')}}/{{$title}}" rel="bookmark">{{$basic->title}}</a></h3>
+                                                                <h3 class="post-box-title"><a href="{{URL::to('/Basic')}}/{{$title}}" rel="bookmark">{{$basic->title}}</a></h3>
                                                                 <p class="post-meta">
                                                                     <span title="Good"
                                                                         class="post-single-rate post-small-rate stars-small">
@@ -649,6 +573,110 @@
                                             <div class="clear"></div>
                                         </div>
                                     </div>
+                                    @if(Session::has('client'))
+                                        <div class="tab-pane fade" id="advance" role="tabpanel"
+                                            aria-labelledby="advance-tab">
+                                            <div id="catab9" class="cat-tabs-wrap cat-tabs-wrap1" style="display: block;">
+                                                <div>
+                                                    <ul>
+                                                        @php $icount = 0; $clientInfo = Session::get('client'); @endphp
+                                                        @foreach($LatestAdvanceTraining as $advance)
+                                                            @php
+                                                                $title = str_replace(' ','-',$advance->title);
+                                                                $img12 = $advance->embed;
+                                                                $img123 = explode ("/",$img12);
+                                                                if(isset($img123[4])){
+                                                                    $img1234 = explode (" ",$img123[4]);
+                                                                    $img12345 = strlen($img1234[0]);
+                                                                    $img123456 = substr($img1234[0],0,--$img12345);
+                                                                    $img123456 = "http://i.ytimg.com/vi/" . $img123456 . "/hqdefault.jpg";
+                                                                }else if($advance->thumbnail != null){
+                                                                    $img123456 = URL::to('storage/app') . '/' . $advance->thumbnail;
+                                                                }else{
+                                                                    $img123456 = null;
+                                                                }
+                                                                $icount++
+                                                            @endphp
+                                                            @if($icount == 1)
+                                                                <li class="first-news">
+                                                                @if($clientInfo['memberType'] == 1 && $advance->vipMember == 1)
+                                                                    <div class="contentLock">
+                                                                    <div class="content-overlay"></div>
+                                                                    <div>
+                                                                @endif
+                                                                    <div class="post-thumbnail tie-appear">
+                                                                        <a href="{{URL::to('/Advance')}}/{{$title}}" rel="bookmark">
+                                                                            <img width="310" height="165" src="{{$img123456}}"
+                                                                                class="attachment-tie-medium size-tie-medium wp-post-image tie-appear"
+                                                                                alt="" loading="lazy"> <span
+                                                                                class="fa overlay-icon"></span>
+                                                                        </a>
+                                                                    </div>
+                                                                    <h2 class="post-box-title"><a href="{{URL::to('/Advance')}}/{{$title}}" rel="bookmark">{{$advance->title}}</a></h2>
+                                                                    <p class="post-meta">
+                                                                        <span title="Nice"
+                                                                            class="post-single-rate post-small-rate stars-small">
+                                                                            <span style="width: 78.571428571429%"></span>
+                                                                        </span>
+                                                                        <span class="tie-date">{{$advance->created_at->format('M d,Y')}}</span>
+                                                                    </p>
+                                                                    <div class="entry">
+                                                                        <p>
+                                                                        @php
+                                                                            $desc = html_entity_decode($advance->description);
+                                                                            echo substr($desc, 0, 200) . "...";
+                                                                        @endphp
+                                                                        </p>
+                                                                        <a class="btn btn-mine radial" href="{{URL::to('/Advance')}}/{{$title}}">Read
+                                                                            More »</a>
+                                                                    </div>
+                                                                @if($clientInfo['memberType'] == 1 && $advance->vipMember == 1)
+                                                                    </div>
+                                                                    <div class="content-details fadeIn-left">
+                                                                        <a href="{{URL::to('user-registration')}}" class="btn btn-primary btn-radial"><i class="fa fa-lock"></i> Become VIP First</a>
+                                                                    </div>
+                                                                    </div>
+                                                                @endif
+                                                                </li>
+                                                            @else
+                                                                <li class="tie_video">
+                                                                @if($clientInfo['memberType'] == 1 && $advance->vipMember == 1)
+                                                                    <div class="contentLock">
+                                                                        <div class="content-overlay"></div>
+                                                                        <div>
+                                                                @endif
+                                                                    <div class="post-thumbnail tie-appear">
+                                                                        <a href="{{URL::to('/Advance')}}/{{$title}}" rel="bookmark"><img width="110" height="75"
+                                                                                src="{{$img123456}}"
+                                                                                class="attachment-tie-small size-tie-small wp-post-image tie-appear"
+                                                                                alt="" loading="lazy"><span
+                                                                                class="fa overlay-icon"></span></a>
+                                                                    </div>
+                                                                    <h3 class="post-box-title"><a href="{{URL::to('/Advance')}}/{{$title}}" rel="bookmark">{{$advance->title}}</a></h3>
+                                                                    <p class="post-meta">
+                                                                        <span title="Good"
+                                                                            class="post-single-rate post-small-rate stars-small">
+                                                                            <span style="width: 89.5714285714%"></span>
+                                                                        </span>
+                                                                        <span class="tie-date">{{$advance->created_at->format('M d,Y')}}</span>
+                                                                    </p>
+                                                                @if($clientInfo['memberType'] == 1 && $advance->vipMember == 1)
+                                                                    </div>
+                                                                    <div class="content-details fadeIn-left">
+                                                                        <a href="{{URL::to('user-registration')}}" class="btn btn-primary btn-radial"><i class="fa fa-lock"></i> Become VIP First</a>
+                                                                    </div>
+                                                                    </div>
+                                                                @endif
+                                                                </li>
+                                                            @endif
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+
+                                        </div>
+                                    @endif
                                     <div class="tab-pane fade" id="contact" role="tabpanel"
                                         aria-labelledby="contact-tab">
                                         <div id="catab9" class="cat-tabs-wrap cat-tabs-wrap1" style="display: block;">
@@ -675,14 +703,14 @@
                                                         @if($icount == 1)
                                                             <li class="first-news">
                                                                 <div class="post-thumbnail tie-appear">
-                                                                    <a href="{{URL::to('/training/Habbit')}}/{{$title}}" rel="bookmark">
+                                                                    <a href="{{URL::to('/Habbit')}}/{{$title}}" rel="bookmark">
                                                                         <img width="310" height="165" src="{{$img123456}}"
                                                                             class="attachment-tie-medium size-tie-medium wp-post-image tie-appear"
                                                                             alt="" loading="lazy"> <span
                                                                             class="fa overlay-icon"></span>
                                                                     </a>
                                                                 </div>
-                                                                <h2 class="post-box-title"><a href="{{URL::to('/training/Habbit')}}/{{$title}}" rel="bookmark">{{$habbit->title}}</a></h2>
+                                                                <h2 class="post-box-title"><a href="{{URL::to('/Habbit')}}/{{$title}}" rel="bookmark">{{$habbit->title}}</a></h2>
                                                                 <p class="post-meta">
                                                                     <span title="Nice"
                                                                         class="post-single-rate post-small-rate stars-small">
@@ -697,20 +725,20 @@
                                                                         echo substr($desc, 0, 200) . "...";
                                                                     @endphp
                                                                     </p>
-                                                                    <a class="btn btn-mine radial" href="{{URL::to('/training/Habbit')}}/{{$title}}">Read
+                                                                    <a class="btn btn-mine radial" href="{{URL::to('/Habbit')}}/{{$title}}">Read
                                                                         More »</a>
                                                                 </div>
                                                             </li>
                                                         @else
                                                             <li class="tie_video">
                                                                 <div class="post-thumbnail tie-appear">
-                                                                    <a href="{{URL::to('/training/Basic')}}/{{$title}}" rel="bookmark"><img width="110" height="75"
+                                                                    <a href="{{URL::to('/Habbit')}}/{{$title}}" rel="bookmark"><img width="110" height="75"
                                                                             src="{{$img123456}}"
                                                                             class="attachment-tie-small size-tie-small wp-post-image tie-appear"
                                                                             alt="" loading="lazy"><span
                                                                             class="fa overlay-icon"></span></a>
                                                                 </div>
-                                                                <h3 class="post-box-title"><a href="{{URL::to('/training/Basic')}}/{{$title}}" rel="bookmark">{{$habbit->title}}</a></h3>
+                                                                <h3 class="post-box-title"><a href="{{URL::to('/Habbit')}}/{{$title}}" rel="bookmark">{{$habbit->title}}</a></h3>
                                                                 <p class="post-meta">
                                                                     <span title="Good"
                                                                         class="post-single-rate post-small-rate stars-small">
@@ -752,7 +780,7 @@
                                     <div class=" col-sm-12 col-md-6 bg-light">
                                         <div class="wow animated fadeInUp mt-1">
                                             <div class="re_img w-100 p-4">
-                                                <a href="{{URL::to('/brokerList/brokerNews/NewsDetail')}}/{{$NewsTitle}}">
+                                                <a href="{{URL::to('/NewsDetail')}}/{{$NewsTitle}}">
                                                     <img src="{{URL::to('/storage/app')}}/{{$data->image}}" width="100%" height="150px" >
                                                 </a>
                                             </div>
@@ -762,7 +790,7 @@
 
                                                         <div class="new_description-details">
                                                             <h6>
-                                                                <a href="{{URL::to('/brokerList/brokerNews/NewsDetail')}}/{{$NewsTitle}}">
+                                                                <a href="{{URL::to('/NewsDetail')}}/{{$NewsTitle}}">
                                                                     {{$data->NewsTitle}}
                                                                 </a>
                                                             </h6>
@@ -938,5 +966,74 @@
 
     <!--     <div id="particles-js" style="height: 0;"></div> -->
 </div>
+<style>
+    .navbar-nav .dropdown-menu{
+        left : 0px!important;
+        right: auto!important;
+    }                     
+    /* contentLock style start */
+        .contentLock {
+            position: relative;
+            width: 90%;
+            max-width: 400px;
+            overflow: hidden;
+        }
+        .contentLock .content-overlay {
+            background: rgba(0,0,0,0.7);
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            opacity: 0;
+            -webkit-transition: all 0.4s ease-in-out 0s;
+            -moz-transition: all 0.4s ease-in-out 0s;
+            transition: all 0.4s ease-in-out 0s;
+        }
+        .contentLock:hover .content-overlay{
+            opacity: 0.5;
+        }
+        .content-image{
+            width: 100%;
+        }
+        .content-details {
+            position: absolute;
+            text-align: center;
+            padding-left: 1em;
+            padding-right: 1em;
+            width: 100%;
+            top: 50%;
+            left: 50%;
+            opacity: 0;
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            -webkit-transition: all 0.3s ease-in-out 0s;
+            -moz-transition: all 0.3s ease-in-out 0s;
+            transition: all 0.3s ease-in-out 0s;
+        }
+        .contentLock:hover .content-details{
+            top: 50%;
+            left: 50%;
+            opacity: 1;
+        }
+        .content-details h3{
+            color: #fff;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5em;
+            text-transform: uppercase;
+        }
+        .content-details p{
+            color: #fff;
+            font-size: 0.8em;
+        }
+        .fadeIn-left{
+            left: 20%;
+        }
+    /* contentLock style end */
+</style>
 @include ('inc/footer')
 

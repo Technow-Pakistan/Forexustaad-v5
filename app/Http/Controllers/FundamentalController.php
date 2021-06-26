@@ -80,13 +80,10 @@ class FundamentalController extends Controller
                 }
             }
             $newMeta = new MetaTagsModel;
-            if ($request->file("image") != null) {
-                $path = $request->file("image")->store("WebImages");
-                $newMeta->image = $path;
-            }
             $newMeta->name_page = "Fundamental@" . $news->id;
             $newMeta->description = $request->metaDescription;
-            $newMeta->title = $request->metaTitle;
+            $newMeta->title = $news->title;
+            $newMeta->image = $news->image;
             $newMeta->keywordsimp = implode(",",$request->metaKeywords);
             $newMeta->save();
         // meta Tags save end
@@ -113,8 +110,7 @@ class FundamentalController extends Controller
         $data = $request->all();
         if ($request->file("file_photo") != null) {
             $path = $request->file("file_photo")->store("PostImages");
-            $Image = $path;
-            $data['image'] = $Image;
+            $data['image'] = $path;
         }
         $description = htmlentities($request->editor1);
         $data['detailDescription'] = $description;
@@ -141,7 +137,8 @@ class FundamentalController extends Controller
             }
             $newMeta->name_page = "Fundamental@" . $id;
             $newMeta->description = $request->metaDescription;
-            $newMeta->title = $request->metaTitle;
+            $newMeta->title = $news->title;
+            $newMeta->image = $news->image;
             $newMeta->keywordsimp = implode(",",$request->metaKeywords);
             $newMeta->save();
         // meta Tags save end
@@ -180,21 +177,6 @@ class FundamentalController extends Controller
         $Fundamental->status = 1;
         $Fundamental->save();
         $success = "This fundamental has been active successfully.";
-        $request->session()->put("success",$success);
-        return back();
-    }
-    // Veiws Comment
-    public function ViewComments(Request $request,$id){
-        $comments = AllCommentsModel::where('commentPageId', 3)->where('objectId', $id)->get();
-        return view('admin.fundamental.comments',compact('comments'));
-    }
-    // Save Reply by Admin
-    public function CommentAdd(Request $request){
-        $reply = new AllCommentsModel;
-        $reply->commentPageId = 3;
-        $reply->fill($request->all());
-        $reply->save();
-        $success = "Your reply has been saved successfully.";
         $request->session()->put("success",$success);
         return back();
     }

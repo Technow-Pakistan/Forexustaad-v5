@@ -28,34 +28,12 @@
                 <div class="card">
                     <div class="card-body">
                         <form action="" method="post"  enctype="multipart/form-data">
-                            <div class="d-flex justify-content-between">
-                                <label for="">Title</label>
-                                <p class="text-right text-danger m-0 titleCount"></p>
-                            </div>
-                            <input type="text" class="form-control titleCountFlied" maxlength="580" name="metaTitle" value="">
-                            <div class="form-group">
-                                <label for="">
-                                    Image
-                                </label>
-                                <input type="file" class="form-control" name="image">
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <label for="">Description</label>
-                                <p class="text-right text-danger m-0 descriptionCount"></p>
-                            </div>
-                            <textarea name="metaDescription"  maxlength="990" class="form-control description"></textarea>
-                            <label for="">Keywords</label>
-                            <select class="js-example-tokenizer col-sm-12" name="metaKeywords[]" multiple="multiple" required>
-                                @foreach ($MetaKeywords as $metas)
-                                    <option value="{{$metas->name}}">{{$metas->name}}</option>
-                                @endforeach
-                            </select>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <!-- User Selection for signal view -->
                                         <label for="">Order Type</label>
-                                        <select class="form-control orderTypeSignal" name="orderType" required>
+                                        <select class="form-control" name="orderType" required>
                                             <option value="Market Execution">Market Execution</option>
                                             <option value="Pending Order">Pending Order</option>
                                         </select>
@@ -92,7 +70,7 @@
                                     <div class="form-group">
                                         <label for="">Select Category & Pair </label>
                                         <div class="d-flex justify-content-start">
-                                            <select name="fieldtwo" id="fieldtwo" class="form-control leftSelectParir pairCategorySignal">
+                                            <select name="fieldtwo" id="fieldtwo" class="form-control leftSelectParir">
                                                 @php $ijk = 0; @endphp
                                                 @foreach($totalCategory as $category)
                                                     @if($ijk == 0) @php $data2345 = $category->id; @endphp @endif
@@ -100,7 +78,7 @@
                                                     @php $ijk++ @endphp
                                                 @endforeach
                                             </select>
-                                            <select name="forexPairs" id="findtwo"  class="form-control js-example-tags rightSelectParir categoryPairSignal">
+                                            <select name="forexPairs" id="findtwo"  class="form-control js-example-tags rightSelectParir">
                                                 @foreach($totalData as $data)
                                                     @if($data2345 == $data->categoryId)
                                                         <option value="{{$data->id}}">{{$data->pair}}</option>
@@ -115,9 +93,8 @@
                                         <!-- Enter Stop lose for Signal -->
                                         <div class="d-flex justify-content-between">
                                             <label>Price</label>
-                                            <span class="priceSignal btn btn-success btn-sm">Get Price</button>
                                         </div>
-                                        <input type="text" required="" name="price" value="" placeholder="0.23242" class="form-control priceSignal12">
+                                        <input type="text" required="" name="price" value="" placeholder="0.23242" class="form-control">
                                         <!-- <small>Closed</small> -->
                                     </div>
                                 </div>
@@ -328,62 +305,6 @@
             removeLastField();
             disableButtonRemove();
             enableButtonAdd();
-        });
-    });
-    $(".orderTypeSignal").on('change',function () {
-        var pairCategorySignal = $(".pairCategorySignal").val();
-        var dsa = $(this).val();
-        if ( dsa == "Pending Order") {
-            $(".priceSignal").hide();
-        }else if (pairCategorySignal == 1 || pairCategorySignal == 2){
-            $(".priceSignal").show();
-        }
-    })
-    $(".pairCategorySignal").on('change',function () {
-        var pairCategorySignal = $(this).val();
-        var dsa = $(".orderTypeSignal").val();
-        if (pairCategorySignal == 1 || pairCategorySignal == 2 || pairCategorySignal == 3) {
-            if ( dsa == "Pending Order") {
-                $(".priceSignal").hide();
-            }else{
-                $(".priceSignal").show();
-            }
-        }else{
-            $(".priceSignal").hide();
-        }
-    })
-    $(".categoryPairSignal").on("change",function () {
-        var categoryPairSignal = $(this).val();
-        var pairCategorySignal = $(".pairCategorySignal").val();
-        var dsa = $(".orderTypeSignal").val();
-        if (pairCategorySignal == 3) {
-            if (categoryPairSignal == 56 || categoryPairSignal == 57) {
-                if ( dsa == "Pending Order") {
-                    $(".priceSignal").hide();
-                }else{
-                    $(".priceSignal").show();
-                }
-            }else{
-                $(".priceSignal").hide();
-            }
-        }
-    })
-    $(".priceSignal").on('click',function () {
-        var sysmbol = $( ".categoryPairSignal option:selected" ).text();
-        if(sysmbol == "Crude Oil WTI"){
-            sysmbol = "WTI/USD";
-        }else if(sysmbol == "Gold"){
-            sysmbol = "XAU/USD";
-        }
-        url = "https://fcsapi.com/api-v3/forex/latest?symbol="+sysmbol+"&access_key={{$signalApiRateKey->apiKey}}";
-        console.log(url);
-        $.ajax({
-            type: "Get",
-            url: url,
-            success: function(response){
-                var json = response.response;
-                $(".priceSignal12").val(json[0].c);
-            }
         });
     });
 </script>

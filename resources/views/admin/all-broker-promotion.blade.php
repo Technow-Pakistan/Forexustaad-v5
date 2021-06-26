@@ -14,13 +14,17 @@
 								<div class="page-header-title">
 									<h5 class="m-b-10">Broker Promotions</h5>
 								</div>
-								<ul class="breadcrumb">
-									<li class="breadcrumb-item">
-										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a>
-									</li>
-									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/brokersPromotion')}}/{{$value['memberId']}}">All Broker Promotions</a></li>
-									<li class="breadcrumb-item"><a href="#!">Broker Promotions</a></li>
-								</ul>
+								<div class="d-flex justify-content-between">
+									<ul class="breadcrumb p-0 m-0 bg-white">
+										<li class="breadcrumb-item">
+											<a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a>
+										</li>
+										<li class="breadcrumb-item"><a href="#!">All Broker Promotions</a></li>
+									</ul>
+									<div>
+										<a href="{{URL::to('ustaad/brokersPromotions/new')}}"> Add New Promotion</a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -36,11 +40,10 @@
 									<table id="user-list-table" class="table nowrap">
 										<thead>
 											<tr>
-												<th>Broker</th>
-												<th>Broker Name</th>
-												<th>Promotion Title</th>
 												<th>Promotion Image</th>
-												
+												<th>Promotion Title</th>
+												<th>Broker Name</th>
+												<th>Comments</th>
 												<th>Status</th>
 											</tr>
 										</thead>
@@ -51,52 +54,55 @@
 													$broker = $news->GetBrokerInfo();
 												@endphp
 												@if($pendingPromotion == null)
-													<tr  draggable="true">
-														<td>
-															<div>
-																<img src="{{URL::to('storage/app')}}/{{$broker->image}}" alt="" class="img-fluid" width="150">
-															</div>
-														</td>
-														<td>{{$broker->title}}</td>
-														<td>{{$news->PromotionTitle}}</td>
+													<tr>
 														<td>
 															<div>
 																<img src="{{URL::to('storage/app')}}/{{$news->image}}" alt="" class="img-fluid" width="150">
 															</div>
 														</td>
-													
+														<td>{{$news->PromotionTitle}}</td>
+														<td>{{$broker->title}}</td>
+														<td><a href="{{URL::to('ustaad/brokersPromotions/comment')}}/{{$news->id}}">View Comments</a></td>
 														<td>
-														@if($news->pending == 0)
-															<span class="badge badge-light-success">Active</span>
-															<div class="overlay-edit">
-																<a href="{{URL::to('/ustaad/brokersPromotions/edit')}}/{{$news->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button></a>
-																<button href="{{URL::to('/ustaad/brokersPromotions/trash')}}/{{$news->id}}" data-toggle="modal" data-target="#myModal" type="button" class="btn btn-icon btn-danger addAction"><i class="fa fa-trash"></i></button>
-															</div>
-														@elseif($value['memberId'] != 6)
-															<span class="badge badge-light-warning">Pending</span>
-															<div class="overlay-edit">
-																<form action="{{URL::to('ustaad/brokersPromotions/allow')}}/{{$news->id}}" method="post">
-																	<span class="badge badge-light-warning">
-																		Allow
-																		<input type="checkbox" class="AllowBroker" name="pending" id="" value="0">
-																	</span>
-																</form>
-																<a href="{{URL::to('/ustaad/brokersPromotions/edit')}}/{{$news->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button></a>
-																<a><button href="{{URL::to('/ustaad/brokersPromotions/trash')}}/{{$news->id}}" data-toggle="modal" data-target="#myModal" type="button" class="btn btn-icon btn-danger addAction"><i class="fa fa-trash"></i></button>
-															</div>
-														@elseif($value['memberId'] == 6)
-															<span class="badge badge-light-warning">Pending</span>
-															<div class="overlay-edit">
-																<a href="{{URL::to('/ustaad/brokersPromotions/edit')}}/{{$news->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button></a>
-																<a><button href="{{URL::to('/ustaad/brokersPromotions/trash')}}/{{$news->id}}" data-toggle="modal" data-target="#myModal" type="button" class="btn btn-icon btn-danger addAction"><i class="fa fa-trash"></i></button>
-															</div>
-														@endif
+															@if($news->pending == 0)
+																<span class="badge badge-light-success">Active</span>
+																<div class="overlay-edit">
+																	<a href="{{URL::to('/ustaad/brokersPromotions/edit')}}/{{$news->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button></a>
+																	<button href="{{URL::to('/ustaad/brokersPromotions/trash')}}/{{$news->id}}" data-toggle="modal" data-target="#myModal" type="button" class="btn btn-icon btn-danger addAction"><i class="fa fa-trash"></i></button>
+																</div>
+															@elseif($value['memberId'] != 6)
+																<span class="badge badge-light-warning">Pending</span>
+																<div class="overlay-edit">
+																	<form action="{{URL::to('ustaad/brokersPromotions/allow')}}/{{$news->id}}" method="post">
+																		<span class="badge badge-light-warning">
+																			Allow
+																			<input type="checkbox" class="AllowBroker" name="pending" id="" value="0">
+																		</span>
+																	</form>
+																	<a href="{{URL::to('/ustaad/brokersPromotions/edit')}}/{{$news->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button></a>
+																	<a><button href="{{URL::to('/ustaad/brokersPromotions/trash')}}/{{$news->id}}" data-toggle="modal" data-target="#myModal" type="button" class="btn btn-icon btn-danger addAction"><i class="fa fa-trash"></i></button>
+																</div>
+															@elseif($value['memberId'] == 6)
+																<span class="badge badge-light-warning">Pending</span>
+																<div class="overlay-edit">
+																	<a href="{{URL::to('/ustaad/brokersPromotions/edit')}}/{{$news->id}}"> <button type="button" class="btn btn-icon btn-success"><i class="fa fa-edit"></i></button></a>
+																	<a><button href="{{URL::to('/ustaad/brokersPromotions/trash')}}/{{$news->id}}" data-toggle="modal" data-target="#myModal" type="button" class="btn btn-icon btn-danger addAction"><i class="fa fa-trash"></i></button>
+																</div>
+															@endif
 														</td>
 													</tr>
 												@endif
 											@endforeach
 										</tbody>
-										
+										<tfoot>
+											<tr>
+												<th>Promotion Image</th>
+												<th>Promotion Title</th>
+												<th>Broker Name</th>
+												<th>Comments</th>
+												<th>Status</th>
+											</tr>
+										</tfoot>
 									</table>
 								</div>
 							</div>

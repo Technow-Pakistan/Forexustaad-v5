@@ -71,6 +71,15 @@
                                                 </tr>
                                             @endforeach
                                         </tbody>
+										<tfoot>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Title</th>
+                                                <th>Link</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                            </tr>
+										</tfoot>
                                     </table>
 								</div>
 							</div>

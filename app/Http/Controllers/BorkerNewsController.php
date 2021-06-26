@@ -7,26 +7,24 @@ use App\Models\BrokerCompanyInformationModel;
 use App\Models\BrokerNewsModel;
 use App\Models\NotificationModel;
 use App\Models\TrashModel;
+use App\Models\MetaTagsModel;
+use App\Models\MetaKeywordsModel;
 
 class BorkerNewsController extends Controller
 {
-    public function Index(Request $request, $id){
-        if($id == 6){
-            $userID = $request->session()->get('admin');
-            $brokers = BrokerCompanyInformationModel::orderBy('id','desc')->where('Trash',0)->where('userId',$userID->id)->get();
-            return view('admin.broker-news',compact('brokers'));
+    public function Index(Request $request){
+        $userId = $request->session()->get('admin');
+        if($userId->memberId == 6){
+            $brokerNews = BrokerNewsModel::orderBy('id','desc')->where('Trash',0)->where('userId',$userId->id)->get();
         }else{
-            $brokers = BrokerCompanyInformationModel::all();
-            return view('admin.broker-news',compact('brokers'));
+            $brokerNews = BrokerNewsModel::orderBy('id','desc')->where('Trash',0)->get();
         }
-    }
-    public function All(Request $request, $id){
-        $brokerNews = BrokerNewsModel::where('brokerId',$id)->get();
         return view('admin.all-broker-news',compact('brokerNews'));
     }
     public function Add(Request $request){
+        $newMeta = null;
         $broker = BrokerCompanyInformationModel::where('trash',0)->get();
-        return view('admin.add-broker-news',compact('broker'));
+        return view('admin.add-broker-news',compact('broker','newMeta'));
     }
     public function AddNews(Request $request){
         $data = $request->all();
@@ -58,6 +56,24 @@ class BorkerNewsController extends Controller
             }
             $notification->save();
         }
+        // meta Tags save start
+            for ($i=0; $i < count($request->metaKeywords); $i++) {
+                $find = MetaKeywordsModel::where('name',$request->metaKeywords[$i])->first();
+                if($find == null){
+                    $key = new MetaKeywordsModel;
+                    $key->name = $request->metaKeywords[$i];
+                    $key->save();
+                }
+            }
+            $newMeta = new MetaTagsModel;
+            $newMeta->name_page = "broker_news@" . $news->id;
+            $newMeta->description = $news->shortDescription;
+            $newMeta->title = $news->NewsTitle;
+            $newMeta->image = $news->image;
+            $newMeta->keywordsimp = implode(",",$request->metaKeywords);
+            $newMeta->save();
+        // meta Tags save end
+
         $success = "This broker news has been added successfully.";
         $request->session()->put("success",$success);
         return back();
@@ -65,9 +81,32 @@ class BorkerNewsController extends Controller
     public function Edit(Request $request, $id){
         $broker = BrokerCompanyInformationModel::where('trash',0)->get();
         $brokerNews = BrokerNewsModel::find($id);
-        return view('admin.add-broker-news',compact('broker',"brokerNews"));
+        $name_page = "broker_news@" . $id;
+        $newMeta = MetaTagsModel::where('name_page',$name_page)->first();
+        return view('admin.add-broker-news',compact('broker',"brokerNews","newMeta"));
     }
     public function EditNews(Request $request, $id){
+        // meta Tags part1 save start
+            for ($i=0; $i < count($request->metaKeywords); $i++) {
+                $find = MetaKeywordsModel::where('name',$request->metaKeywords[$i])->first();
+                if($find == null){
+                    $key = new MetaKeywordsModel;
+                    $key->name = $request->metaKeywords[$i];
+                    $key->save();
+                }
+            }
+            $name_page = "broker_news@" . $id;
+            $newMeta = MetaTagsModel::where('name_page',$name_page)->first();
+            if($newMeta == null){
+                $newMeta = new MetaTagsModel; 
+                $newMeta->name_page = "broker_news@" . $id;
+                $newMeta->description = $request->shortDescription;
+                $newMeta->title = $request->NewsTitle;
+                $newMeta->image = $request->image;
+                $newMeta->keywordsimp = implode(",",$request->metaKeywords);
+                $newMeta->save();
+            }
+        // meta Tags part1 save end
         $data = $request->all();
         if ($request->file("file_photo") != null) {
             $path = $request->file("file_photo")->store("BrokerImages");
@@ -88,6 +127,15 @@ class BorkerNewsController extends Controller
             $data['userId'] = $news->userId;
             $editData->fill($data);
             $editData->save();
+            // meta Tags part2 save start
+                $newMeta = new MetaTagsModel; 
+                $newMeta->name_page = "broker_news@" . $editData->id;
+                $newMeta->description = $editData->shortDescription;
+                $newMeta->title = $editData->NewsTitle;
+                $newMeta->image = $editData->image;
+                $newMeta->keywordsimp = implode(",",$request->metaKeywords);
+                $newMeta->save();
+            // meta Tags part2 save end
         }else{
             $news->fill($data);
             $news->save();

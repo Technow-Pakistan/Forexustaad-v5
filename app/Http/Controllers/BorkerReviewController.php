@@ -7,6 +7,8 @@ use App\Models\BrokerCompanyInformationModel;
 use App\Models\BrokerReviewModel;
 use App\Models\NotificationModel;
 use App\Models\TrashModel;
+use App\Models\MetaTagsModel;
+use App\Models\MetaKeywordsModel;
 
 class BorkerReviewController extends Controller
 {
@@ -16,7 +18,8 @@ class BorkerReviewController extends Controller
     }
     public function Add(Request $request){
         $broker = BrokerCompanyInformationModel::where('trash',0)->get();
-        return view('admin.add-broker-review',compact('broker'));
+        $newMeta = null;
+        return view('admin.add-broker-review',compact('broker','newMeta'));
     }
     public function AddReview(Request $request){
         $data = $request->all();
@@ -34,6 +37,23 @@ class BorkerReviewController extends Controller
         $Review = new BrokerReviewModel;
         $Review->fill($data);
         $Review->save();
+        // meta Tags save start
+            for ($i=0; $i < count($request->metaKeywords); $i++) {
+                $find = MetaKeywordsModel::where('name',$request->metaKeywords[$i])->first();
+                if($find == null){
+                    $key = new MetaKeywordsModel;
+                    $key->name = $request->metaKeywords[$i];
+                    $key->save();
+                }
+            }
+            $newMeta = new MetaTagsModel;
+            $newMeta->name_page = "broker_reviews@" . $Review->id;
+            $newMeta->description = $Review->shortDescription;
+            $newMeta->title = $Review->ReviewTitle;
+            $newMeta->image = $Review->image;
+            $newMeta->keywordsimp = implode(",",$request->metaKeywords);
+            $newMeta->save();
+        // meta Tags save end
         $broker1 = BrokerCompanyInformationModel::find($Review->brokerId);
         if ($userID['memberId'] == 6 ) {
             $notification = new NotificationModel;
@@ -53,7 +73,9 @@ class BorkerReviewController extends Controller
     public function Edit(Request $request, $id){
         $broker = BrokerCompanyInformationModel::where('trash',0)->get();
         $brokerReview = BrokerReviewModel::find($id);
-        return view('admin.add-broker-review',compact('broker',"brokerReview"));
+        $name_page = "broker_reviews@" . $id;
+        $newMeta = MetaTagsModel::where('name_page',$name_page)->first();
+        return view('admin.add-broker-review',compact('broker',"brokerReview","newMeta"));
     }
     public function EditReview(Request $request, $id){
         $data = $request->all();
@@ -67,6 +89,27 @@ class BorkerReviewController extends Controller
         $Review = BrokerReviewModel::find($id);
         $Review->fill($data);
         $Review->save();
+        // meta Tags save start
+            for ($i=0; $i < count($request->metaKeywords); $i++) {
+                $find = MetaKeywordsModel::where('name',$request->metaKeywords[$i])->first();
+                if($find == null){
+                    $key = new MetaKeywordsModel;
+                    $key->name = $request->metaKeywords[$i];
+                    $key->save();
+                }
+            }
+            $name_page = "broker_reviews@" . $id;
+            $newMeta = MetaTagsModel::where('name_page',$name_page)->first();
+            if($newMeta == null){
+                $newMeta = new MetaTagsModel;
+            }
+            $newMeta->name_page = "broker_reviews@" . $Review->id;
+            $newMeta->description = $Review->shortDescription;
+            $newMeta->title = $Review->ReviewTitle;
+            $newMeta->image = $Review->image;
+            $newMeta->keywordsimp = implode(",",$request->metaKeywords);
+            $newMeta->save();
+        // meta Tags save end
         $userID = $request->session()->get('admin');
         $broker1 = BrokerCompanyInformationModel::find($Review->brokerId);
         if ($userID['memberId'] == 6 ) {

@@ -16,15 +16,11 @@
                             </div>
                             <div class="post_representor">
                                 <ul class="">
-                                    <li><i class="fa fa-user"></i> Raheel Nawaz</li>
-                                    <li><i class="fa fa-clock-o"></i> September 2, 2015</li>
-                                    <li><i class="fa fa-folder"></i> Jobs scams, Scams</li>
-                                    <li><i class="fa fa-comments"></i> 10 Comments </li>
-                                    <li><i class="fa fa-eye"></i> 4,276 Views</li>
-                                    <li><div id="shareLink"></div></li>
+                                    <li><i class="far fa-user"></i> Raheel Nawaz</li>
+                                    <li><i class="far fa-clock"></i> September 2, 2015</li>
                                 </ul>
+                                <div id="shareLink" align="right"></div>
                             </div>
-                            
                             <div class="pt-4">
                                 <p>
                                     No matter what you’re trading analysis is important. In the world of trading, analysis is the process of using the data that’s available to you to make predictions with regard to which direction the value of the asset you’re trading is heading, how far it might go, and more. In all reality, analysis is a very broad term, that for the most part, is broken into two different buckets. Those include technical analysis and fundamental analysis. Today, we’re going to focus on technical analysis as for forex traders, it is key.

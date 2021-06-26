@@ -11,8 +11,6 @@ use App\Models\NotificationModel;
 use App\Models\PusherModel;
 use App\Models\ClientRegistrationModel;
 use App\Models\ClientNotificationModel;
-use App\Models\SignalApiModel;
-use App\Models\SignalApiKeyModel;
 use App\Models\SignalApiRecordModel;
 use App\Models\MetaTagsModel;
 use App\Models\MetaKeywordsModel;
@@ -25,7 +23,20 @@ class SignalController extends Controller
     public function signal(Request $request){
         $meta = MetaTagsModel::where('name_page','signal')->first();
         $signalData = SignalsModel::orderBy('id','desc')->where('status',0)->where('pending',0)->get();
-        return view('home.signal.signal',compact('signalData','meta'));
+        $startPoint = $signalData[count($signalData)-1]->created_at->format("Y-m-d");
+        $endPoint = date("Y-m-d");
+        if($request->startPoint != null && $request->endPoint  != null) {
+            $startPoint = $request->startPoint;
+            $endPoint = $request->endPoint;
+        }
+        $TotalSignalCount = SignalsModel::where('status',0)->where('pending',0)->whereDate('created_at','>=',$startPoint)->whereDate('created_at','<=',$endPoint)->count();
+        $TotalTpHit = SignalsModel::where('status',0)->where('pending',0)->whereDate('created_at','>=',$startPoint)->whereDate('created_at','<=',$endPoint)->where('result', 'LIKE', '%TP Hit%')->count();
+        $TotalSlHit = SignalsModel::where('status',0)->where('pending',0)->whereDate('created_at','>=',$startPoint)->whereDate('created_at','<=',$endPoint)->where('result', 'LIKE', '%SL Hit%')->count();
+        $TotalManuallyClosed = SignalsModel::where('status',0)->where('pending',0)->whereDate('created_at','>=',$startPoint)->whereDate('created_at','<=',$endPoint)->where('result', 'LIKE', '%Manually Closed%')->count();
+        $TotalTpHitPips = SignalsModel::where('status',0)->where('pending',0)->whereDate('created_at','>=',$startPoint)->whereDate('created_at','<=',$endPoint)->where('result', 'LIKE', '%TP Hit%')->sum('pips');
+        $TotalSlHitPips = SignalsModel::where('status',0)->where('pending',0)->whereDate('created_at','>=',$startPoint)->whereDate('created_at','<=',$endPoint)->where('result', 'LIKE', '%SL Hit%')->sum('pips');
+        $RemainingPips = $TotalTpHitPips - $TotalSlHitPips;
+        return view('home.signal.signal',compact('signalData','meta','TotalSignalCount','RemainingPips','TotalTpHit','TotalSlHit','TotalManuallyClosed','startPoint','endPoint'));
     }
     public function signalView(Request $request, $id){
         $id = str_replace('-','/',$id);
@@ -49,228 +60,49 @@ class SignalController extends Controller
             $comments = AllCommentsModel::orderBy('id','desc')->where('commentPageId', 1)->where('objectId', $signalData->id)->get();
             $TotalLikes = SignalLikeModel::where('signalId',$signalData->id)->where('liked',1)->get();
             $TotalDislikes = SignalLikeModel::where('signalId',$signalData->id)->where('liked',0)->get();
-            $title = "Signal";
             // signal is expired or not start
-            $go = 1;
-            $go3 = 1;
-            $time1 = strtotime($signalData->time);
-            $time = date('h:i A', $time1);
-            $date1 = strtotime($signalData->date);
-            $date = date('d M Y', $date1);
-            if($signalData->date == date("Y-m-d")){
-               if($signalData->time >= date("H:i:s")){
-                  $go = 0;
-                  $go3 = 3;
-               }
-            }
-            if($signalData->date > date("Y-m-d")){
-               $go = 0;
-               $go3 = 3;
-            }
-
+                if($signalData->date > date("Y-m-d")){
+                    $go = 1;
+                }elseif($signalData->date == date("Y-m-d") && $signalData->time >= date("H:i:s")){
+                    $go = 1;
+                }else{
+                    $go = 0;
+                }
             // signal is expired or not end
             $signalPair = SignalPairModel::find($signalData->forexPairs);
-            $signalApiData = SignalApiModel::where('signal_id',$signalData->id)->first();
-            $signalApiKey = SignalApiKeyModel::where('id',1)->first();
-            if($go3 == 3){
-                if ($signalApiData) {
-                    if ($signalApiData->result == null) {
-
-                        $time = $signalApiData->lastUpdate;
-                        $date1 = strtotime($time);
-                        $date = date("Y-m-d h:i:s");
-                        $date2 = strtotime($date);
-                        $date3 = $date2-$date1;
-                        if ($date3 >= 900) {
-                            if ($signalPair->categoryId == 1) {
-                                $data1 = file_get_contents("https://fcsapi.com/api-v3/forex/latest?symbol=$signalApiData->symbol&access_key=$signalApiKey->apiKey");
-                            }elseif($signalPair->pair == "Gold"){
-                                $data1 = file_get_contents("https://fcsapi.com/api-v3/forex/latest?symbol=XAU/USD&access_key=$signalApiKey->apiKey");
-                            }elseif($signalPair->pair == "Crude Oil WTI"){
-                                $data1 = file_get_contents("https://fcsapi.com/api-v3/forex/latest?symbol=WTI/USD&access_key=$signalApiKey->apiKey");
-                            }elseif($signalPair->categoryId == 2){
-                                $data1 = file_get_contents("https://fcsapi.com/api-v3/crypto/latest?symbol=$signalApiData->symbol&access_key=$signalApiKey->apiKey");
-                            }
-                            $daata1 =  json_decode($data1);
-                            if(isset($daata1->response)){
-                                $forexApiData = $daata1->response;
-                                if ($signalData->orderType != "Pending Order") {
-                                    if ($signalData->buySale == "Buy limit" || $signalData->buySale == "Buy" || $signalData->buySale == "Buy Stop") {
-                                        // pips Configration
-                                        $pips1 = $forexApiData[0]->c - $signalData->price;
-                                        // Result Configration
-                                        $Profits = explode('@',$signalData->takeProfit);
-                                        $profit = array_shift($Profits);
-                                        $pips = $forexApiData[0]->c - $signalData->price;
-                                        $takeProfit1 = $profit - $signalData->price;
-                                        $stopLose = $signalData->stopLose - $signalData->price;
-                                        if($takeProfit1 <= $pips){
-                                            $tpPips = $takeProfit1;
-                                            $TakeProfit = 1;
-                                            for($i=0; $i < count($Profits); $i++){
-                                                $takeProfit2 = $Profits[$i] - $signalData->price;
-                                                if($takeProfit2 <= $pips){
-                                                    $tpPips = $takeProfit2;
-                                                    if ($i == count($Profits)) {
-                                                        $TakeProfit = "Finel";
-                                                    }else{
-                                                        $TakeProfit += 1;
-                                                    }
-                                                    if ($TakeProfit == "Finel") {
-                                                        $pips1 = $Profits[$i];
-                                                        $signalData['date'] = date("Y-m-d");
-                                                        $signalData['time'] = date("H:i");
-                                                        $signalData->save();
-                                                    }
-                                                }
-                                            }
-                                            if($signalApiData->tpPips == null){
-                                                $apiData['tpPips'] = $tpPips;
-                                                $apiData['result'] = "$TakeProfit TP Hit";
-                                            }else{
-                                                if ($signalApiData->tpPips < $pips) {
-                                                    $pips1 = $signalApiData->tpPips;
-                                                }
-                                            }
-                                        }elseif($stopLose >= $pips){
-                                            $apiData['result'] = "SL Hit";
-                                            $signalData['date'] = date("Y-m-d");
-                                            $signalData['time'] = date("H:i");
-                                            $signalData->save();
-                                            $pips1 = $stopLose;
-                                        }
-                                        if ($signalPair->categoryId == 1) {
-                                            $decimal = strlen(substr(strrchr($pips1, "."), 1));
-                                            if($decimal > 4){
-                                                $pips1 = $pips1 * 10000;
-                                            }else{
-                                                $pips1 = $pips1 * 100;
-                                            }
-                                        }elseif ($signalPair->categoryId == 2) {
-                                            $pips1 = $pips1 * 10000;
-                                        }else{
-                                            $pips1 = $pips1 * 100;
-                                        }
-                                        $apiData['pips'] = number_format((float)$pips1, 1, '.', '');
-                                    }else{
-                                        // pips Configration
-                                        $pips1 = $signalData->price - $forexApiData[0]->c;
-                                        // Result Configration
-                                        $Profits = explode('@',$signalData->takeProfit);
-                                        $profit = array_shift($Profits);
-                                        $pips = $forexApiData[0]->c - $signalData->price;
-                                        $takeProfit1 = $profit - $signalData->price;
-                                        $stopLose = $signalData->stopLose - $signalData->price;
-                                        if($takeProfit1 >= $pips){
-                                            $tpPips = $takeProfit1;
-                                            $TakeProfit = 1;
-                                            for($i=0; $i < count($Profits); $i++){
-                                                $takeProfit2 = $Profits[$i] - $signalData->price;
-                                                if($takeProfit2 >= $pips){
-                                                    $tpPips = $takeProfit2;
-                                                    if ($i == count($Profits)) {
-                                                        $TakeProfit = "Finel";
-                                                    }else{
-                                                        $TakeProfit += 1;
-                                                    }
-                                                    if ($TakeProfit == "Finel") {
-                                                        $pips1 = $Profits[$i];
-                                                        $signalData['date'] = date("Y-m-d");
-                                                        $signalData['time'] = date("H:i");
-                                                        $signalData->save();
-                                                    }
-                                                }
-                                            }
-                                            if($signalApiData->tpPips == null){
-                                                $apiData['tpPips'] = $tpPips;
-                                                $apiData['result'] = "$TakeProfit TP Hit";
-                                            }else{
-                                                if ($signalApiData->tpPips > $pips) {
-                                                    $pips1 = $signalApiData->tpPips;
-                                                }
-                                            }
-                                        }elseif($stopLose <= $pips){
-                                            $apiData['result'] = "SL Hit";
-                                            $signalData['date'] = date("Y-m-d");
-                                            $signalData['time'] = date("H:i");
-                                            $signalData->save();
-                                            $pips1 = $stopLose;
-                                        }
-                                        if ($signalPair->categoryId == 1) {
-                                            $decimal = strlen(substr(strrchr($pips1, "."), 1));
-                                            if($decimal > 4){
-                                                $pips1 = $pips1 * 10000;
-                                            }else{
-                                                $pips1 = $pips1 * 100;
-                                            }
-                                        }elseif ($signalPair->categoryId == 2) {
-                                            $pips1 = $pips1 * 10000;
-                                        }else{
-                                            $pips1 = $pips1 * 100;
-                                        }
-                                        $apiData['pips'] = number_format((float)$pips1, 1, '.', '');
-                                    }
-                                }else{
-                                    if($signalData->buySale == "Buy limit" || $signalData->buySale == "Sell limit"){
-                                        if($forexApiData[0]->c <= $signalData->price){
-                                            $signalData->orderType = "Order Executed";
-                                        }
-                                    }elseif($signalData->buySale == "Buy Stop" || $signalData->buySale == "Sell Stop"){
-                                        if($forexApiData[0]->c >= $signalData->price){
-                                            $signalData->orderType = "Order Executed";
-                                        }
-                                    }
-                                }
-                                $apiData['price'] = $forexApiData[0]->c;
-                                $apiData['opening_price'] = $forexApiData[0]->o;
-                                $apiData['high'] = $forexApiData[0]->h;
-                                $apiData['low'] = $forexApiData[0]->l;
-                                $apiData['last_update'] = $forexApiData[0]->tm;
-                                $apiData['lastUpdate'] = date('Y-m-d h:i:s');
-                                $signalApiData->fill($apiData);
-                                $signalApiData->save();
-                            }
-                        }
-                    }else {
-                        $signalData['date'] = date("Y-m-d");
-                        $signalData['time'] = date("H:i");
-                        $signalData->save();
+            if ($signalData->selectUser != "Free User" && $go == 1) {
+                if($request->session()->has('client')){
+                    $value = $request->session()->get('client');
+                    if($value['id'] != 0 && $signalData->selectUser == "Register User"){
+                        $name_page = "signalPair@" . $pairId->id;
+                        $meta = MetaTagsModel::where('name_page',$name_page)->first();
+                        $blur = 0;
+                        return view('home.signal.viewSignal',compact('signalData','comments','TotalLikes','TotalDislikes','blur'));
+                    }elseif ($value['memberType'] != 1 && $signalData->selectUser == "VIP Member") {
+                        $name_page = "signalPair@" . $pairId->id;
+                        $meta = MetaTagsModel::where('name_page',$name_page)->first();
+                        $blur = 0;
+                        return view('home.signal.viewSignal',compact('signalData','comments','TotalLikes','TotalDislikes','blur'));
+                    }else{
+                        $error = "Become VIP First";
+                        $request->session()->put("error1",$error);
+                        $blur = 1;
+                        $name_page = "signalPair@" . $pairId->id;
+                        $meta = MetaTagsModel::where('name_page',$name_page)->first();
+                        return view('home.signal.viewSignal',compact('signalData','comments','TotalLikes','TotalDislikes','meta','blur'));
                     }
                 }
-                if ($signalData->selectUser != "Free User" && $go3 == 3) {
-                    if($request->session()->has('client')){
-                        $value = $request->session()->get('client');
-                        if($value['id'] != 0 && $signalData->selectUser == "Register User"){
-                            $name_page = "signal@" . $signalData->id;
-                            $meta = MetaTagsModel::where('name_page',$name_page)->first();
-                            $blur = 0;
-                            return view('home.signal.viewSignal',compact('signalData','title','comments','TotalLikes','TotalDislikes','signalApiData','blur'));
-                        }elseif ($value['memberType'] != 1 && $signalData->selectUser == "VIP Member") {
-                            $name_page = "signal@" . $signalData->id;
-                            $meta = MetaTagsModel::where('name_page',$name_page)->first();
-                            $blur = 0;
-                            return view('home.signal.viewSignal',compact('signalData','title','comments','TotalLikes','TotalDislikes','signalApiData','blur'));
-                        }else{
-                            $error = "Become VIP First";
-                            $request->session()->put("error1",$error);
-                            $blur = 1;
-                            $name_page = "signal@" . $signalData->id;
-                            $meta = MetaTagsModel::where('name_page',$name_page)->first();
-                            return view('home.signal.viewSignal',compact('signalData','title','comments','TotalLikes','TotalDislikes','signalApiData','meta','blur'));
-                        }
-                    }
-                    $error = "Please! Login First.";
-                    $request->session()->put("error1",$error);
-                    $blur = 1;
-                    $name_page = "signal@" . $signalData->id;
-                    $meta = MetaTagsModel::where('name_page',$name_page)->first();
-                    return view('home.signal.viewSignal',compact('signalData','title','comments','TotalLikes','TotalDislikes','signalApiData','meta','blur'));
-                }
+                $error = "Please! Login First.";
+                $request->session()->put("error1",$error);
+                $blur = 1;
+                $name_page = "signalPair@" . $pairId->id;
+                $meta = MetaTagsModel::where('name_page',$name_page)->first();
+                return view('home.signal.viewSignal',compact('signalData','comments','TotalLikes','TotalDislikes','meta','blur'));
             }
-            $name_page = "signal@" . $signalData->id;
+            $name_page = "signalPair@" . $pairId->id;
             $meta = MetaTagsModel::where('name_page',$name_page)->first();
             $blur = 0;
-            return view('home.signal.viewSignal',compact('signalData','title','comments','TotalLikes','TotalDislikes','signalApiData','meta','blur'));
+            return view('home.signal.viewSignal',compact('signalData','comments','TotalLikes','TotalDislikes','meta','blur'));
         }else{
             $error = "This signal is not exist.";
             $request->session()->put("error",$error);
@@ -307,12 +139,12 @@ class SignalController extends Controller
             }
             $signalData = SignalsModel::where('id',$id)->first();
             $signalPair = SignalPairModel::where('id',$signalData->forexPairs)->first();
-                $notification = new NotificationModel;
-                $notification->userId = $userId->id;
-                $notification->userType = 1;
-                $notification->text = "Add $like in $signalPair->pair singnal.";
-                $notification->link = "https://forexustaad.com/ustaad";
-                $notification->save();
+            $notification = new NotificationModel;
+            $notification->userId = $userId->id;
+            $notification->userType = 1;
+            $notification->text = "Add $like in $signalPair->pair singnal.";
+            $notification->link = "https://forexustaad.com/ustaad";
+            $notification->save();
             // return back();
     }
     public function UserSignalRating(Request $request, $id, $id2){
@@ -350,41 +182,26 @@ class SignalController extends Controller
         }
         $success = "This signal has been verified successfully.";
         $request->session()->put("success",$success);
-            // Pusher Notification Start
-            $getUrl = $signal->GetURL();
-            $adminData = $request->session()->get("admin");
-            $messageData['userId'] = $adminData['id'];
-            $messageData['userType'] = 0;
-            $messageData['message'] = "Added a New Signal.";
-            $messageData['link'] = "signal/" . $getUrl;
-            $clientNotification = new ClientNotificationModel;
-            $clientNotification->fill($messageData);
-            $clientNotification->save();
-            $messageData['id'] = $clientNotification->id;
-            PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
-            // Pusher Notification End
-            $signalPair = SignalPairModel::where('id',$signal->forexPairs)->first();
-            $data44 = [
-                'title' => $signalPair->pair,
-                'message' => "Forexustaad Added A New Signal.",
-                'url' => "https://forexustaad.com/signal" ."/" . $getUrl,
-            ];
-            $request->session()->put('desktopNotification',$data44);
-
-
-        return back();
-    }
-    public function Comment(Request $request,$id){
-        $comments = AllCommentsModel::where('commentPageId', 1)->where('objectId', $id)->get();
-        return view('admin.comment.ViewSignalComment',compact('comments'));
-    }
-    public function CommentAdd(Request $request){
-        $reply = new AllCommentsModel;
-        $reply->commentPageId = 1;
-        $reply->fill($request->all());
-        $reply->save();
-        $success = "Your reply has been saved successfully.";
-        $request->session()->put("success",$success);
+            // // Pusher Notification Start
+            // $getUrl = $signal->GetURL();
+            // $adminData = $request->session()->get("admin");
+            // $messageData['userId'] = $adminData['id'];
+            // $messageData['userType'] = 0;
+            // $messageData['message'] = "Added a New Signal.";
+            // $messageData['link'] = "signal/" . $getUrl;
+            // $clientNotification = new ClientNotificationModel;
+            // $clientNotification->fill($messageData);
+            // $clientNotification->save();
+            // $messageData['id'] = $clientNotification->id;
+            // PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+            // // Pusher Notification End
+            // $signalPair = SignalPairModel::where('id',$signal->forexPairs)->first();
+            // $data44 = [
+            //     'title' => $signalPair->pair,
+            //     'message' => "Forexustaad Added A New Signal.",
+            //     'url' => "https://forexustaad.com/signal" ."/" . $getUrl,
+            // ];
+            // $request->session()->put('desktopNotification',$data44);
         return back();
     }
     public function Index(Request $request){
@@ -423,82 +240,30 @@ class SignalController extends Controller
         $signal->save();
         $success = "This signal has been added successfully.";
         $request->session()->put("success",$success);
-        // meta Tags save start
-            for ($i=0; $i < count($request->metaKeywords); $i++) {
-                $find = MetaKeywordsModel::where('name',$request->metaKeywords[$i])->first();
-                if($find == null){
-                    $key = new MetaKeywordsModel;
-                    $key->name = $request->metaKeywords[$i];
-                    $key->save();
-                }
-            }
-            $newMeta = new MetaTagsModel;
-            if ($request->file("image") != null) {
-                $path = $request->file("image")->store("WebImages");
-                $newMeta->image = $path;
-            }
-            $newMeta->name_page = "signal@" . $signal->id;
-            $newMeta->description = $request->metaDescription;
-            $newMeta->title = $request->metaTitle;
-            $newMeta->keywordsimp = implode(",",$request->metaKeywords);
-            $newMeta->save();
-        // meta Tags save end
         if ($signal->pending != 1) {
-            // Pusher Notification Start
-            $getUrl = $signal->GetURL();
-            $adminData = $request->session()->get("admin");
-            $messageData['userId'] = $adminData['id'];
-            $messageData['userType'] = 0;
-            $messageData['message'] = "Added a New Signal.";
-            $messageData['link'] = "signal/" . $getUrl;
-            $clientNotification = new ClientNotificationModel;
-            $clientNotification->fill($messageData);
-            $clientNotification->save();
-            $messageData['id'] = $clientNotification->id;
-            PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
-            // Pusher Notification End
-            $signalPair = SignalPairModel::where('id',$signal->forexPairs)->first();
-            $data44 = [
-                'title' => $signalPair->pair,
-                'message' => "Forexustaad Added A New Signal.",
-                'url' => "https://forexustaad.com/signal" ."/" . $getUrl,
-            ];
-            $request->session()->put('desktopNotification',$data44);
+            // // Pusher Notification Start
+            // $getUrl = $signal->GetURL();
+            // $adminData = $request->session()->get("admin");
+            // $messageData['userId'] = $adminData['id'];
+            // $messageData['userType'] = 0;
+            // $messageData['message'] = "Added a New Signal.";
+            // $messageData['link'] = "signal/" . $getUrl;
+            // $clientNotification = new ClientNotificationModel;
+            // $clientNotification->fill($messageData);
+            // $clientNotification->save();
+            // $messageData['id'] = $clientNotification->id;
+            // PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+            // // Pusher Notification End
+            // $signalPair = SignalPairModel::where('id',$signal->forexPairs)->first();
+            // $data44 = [
+            //     'title' => $signalPair->pair,
+            //     'message' => "Forexustaad Added A New Signal.",
+            //     'url' => "https://forexustaad.com/signal" ."/" . $getUrl,
+            // ];
+            // $request->session()->put('desktopNotification',$data44);
         }
         $signalPair = SignalPairModel::where('id',$signal->forexPairs)->first();
-        $signalApiKey = SignalApiKeyModel::where('id',1)->first();
 
-        if($signalPair->categoryId == 1 || $signalPair->categoryId == 2 || $signalPair->pair == "Gold" || $signalPair->pair == "Crude Oil WTI" ){
-            if ($signalPair->categoryId == 1) {
-                $data1 = file_get_contents("https://fcsapi.com/api-v3/forex/latest?symbol=$signalPair->pair&access_key=$signalApiKey->apiKey");
-            }elseif($signalPair->pair == "Gold"){
-                $data1 = file_get_contents("https://fcsapi.com/api-v3/forex/latest?symbol=XAU/USD&access_key=$signalApiKey->apiKey");
-            }elseif($signalPair->pair == "Crude Oil WTI"){
-                $data1 = file_get_contents("https://fcsapi.com/api-v3/forex/latest?symbol=WTI/USD&access_key=$signalApiKey->apiKey");
-            }elseif($signalPair->categoryId == 2){
-                $cryptoSignal = $signalPair->pair;
-                $cryptoSignal = str_replace(' ', '', $cryptoSignal);
-                $data1 = file_get_contents("https://fcsapi.com/api-v3/crypto/latest?symbol=$cryptoSignal&access_key=$signalApiKey->apiKey");
-            }
-            $daata1 =  json_decode($data1);
-            if(isset($daata1->response)){
-                $forexApiData = $daata1->response;
-                $apiData['api_id'] = $forexApiData[0]->id;
-                $apiData['symbol'] = $forexApiData[0]->s;
-                $apiData['price'] = $forexApiData[0]->c;
-                $apiData['opening_price'] = $forexApiData[0]->o;
-                $apiData['high'] = $forexApiData[0]->h;
-                $apiData['low'] = $forexApiData[0]->l;
-                $apiData['last_update'] = $forexApiData[0]->tm;
-                $apiData['signal_id'] = $signal->id;
-                $apiData['lastUpdate'] = date('Y-m-d h:i:s');
-                $newApiData = new SignalApiModel;
-                $newApiData->fill($apiData);
-                $newApiData->save();
-                $signal->price = $newApiData->price;
-                $signal->save();
-            }
-        }
         $user = $request->session()->get("admin");
         if ($user['memberId'] == 7) {
             $notification = new NotificationModel;
@@ -558,13 +323,11 @@ class SignalController extends Controller
         return back();
     }
     public function Edit(Request $request, $id){
-        $name_page = "signal@" . $id;
-        $newMeta = MetaTagsModel::where('name_page',$name_page)->first();
         $data = SignalsModel::where('id',$id)->first();
         $SelectedPair = SignalPairModel::find($data->forexPairs);
         $totalCategory = SignalPairCategoryModel::where('active',0)->get();
         $totalData = SignalPairModel::all();
-        return view('admin.signals.edit-signal',compact('data','totalCategory','totalData','SelectedPair','newMeta'));
+        return view('admin.signals.edit-signal',compact('data','totalCategory','totalData','SelectedPair'));
     }
     public function EditProcess(Request $request, $id){
         $signal = $request->all();
@@ -613,44 +376,19 @@ class SignalController extends Controller
                 $oldData->save();
             }
         }
-
-        // meta Tags save start
-            for ($i=0; $i < count($request->metaKeywords); $i++) {
-                $find = MetaKeywordsModel::where('name',$request->metaKeywords[$i])->first();
-                if($find == null){
-                    $key = new MetaKeywordsModel;
-                    $key->name = $request->metaKeywords[$i];
-                    $key->save();
-                }
-            }
-            $name_page = "signal@" . $id;
-            $newMeta = MetaTagsModel::where('name_page',$name_page)->first();
-            if($newMeta == null){
-                $newMeta = new MetaTagsModel;
-            }
-            if ($request->file("image") != null) {
-                $path = $request->file("image")->store("WebImages");
-                $newMeta->image = $path;
-            }
-            $newMeta->name_page = "signal@" . $id;
-            $newMeta->description = $request->metaDescription;
-            $newMeta->title = $request->metaTitle;
-            $newMeta->keywordsimp = implode(",",$request->metaKeywords);
-            $newMeta->save();
-        // meta Tags save end
-        // Pusher Notification Start
-        $getUrl = $data->GetURL();
-        $adminData = $request->session()->get("admin");
-        $messageData['userId'] = $adminData['id'];
-        $messageData['userType'] = 0;
-        $messageData['message'] = "Updated a Signal.";
-        $messageData['link'] = "signal/" . $getUrl;
-        $clientNotification = new ClientNotificationModel;
-        $clientNotification->fill($messageData);
-        $clientNotification->save();
-        $messageData['id'] = $clientNotification->id;
-        PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
-        // Pusher Notification End
+        // // Pusher Notification Start
+        // $getUrl = $data->GetURL();
+        // $adminData = $request->session()->get("admin");
+        // $messageData['userId'] = $adminData['id'];
+        // $messageData['userType'] = 0;
+        // $messageData['message'] = "Updated a Signal.";
+        // $messageData['link'] = "signal/" . $getUrl;
+        // $clientNotification = new ClientNotificationModel;
+        // $clientNotification->fill($messageData);
+        // $clientNotification->save();
+        // $messageData['id'] = $clientNotification->id;
+        // PusherModel::BoardCast("firstChannel1","firstEvent1",["message" => $messageData]);
+        // // Pusher Notification End
 
         // admin Notification
         $signalPair = SignalPairModel::where('id',$data->forexPairs)->first();

@@ -196,23 +196,31 @@
 	@endphp
 	<script>
 		$(document).ready(function() {
-			$('#list_comment').on('click', '.like', function (e) {
-				$current = $(this);
-				var x = $current.closest('div').find('.like').text().trim();
-				var y = parseInt($current.closest('div').find('.count').text().trim());
+			// $('#list_comment').on('click', '.like', function (e) {
+			// 	$current = $(this);
+			// 	var x = $current.closest('div').find('.like').text().trim();
+			// 	var y = parseInt($current.closest('div').find('.count').text().trim());
 
-				if (x === "Like") {
-					$current.closest('div').find('.like').text('Unlike');
-					$current.closest('div').find('.count').text(y + 1);
-				} else if (x === "Unlike"){
-					$current.closest('div').find('.like').text('Like');
-					$current.closest('div').find('.count').text(y - 1);
-				} else {
-					var replay = $current.closest('div').find('.like').text('Like');
-					$current.closest('div').find('.count').text(y - 1);
-				}
-			});
-
+			// 	if (x === "Like") {
+			// 		$current.closest('div').find('.like').text('Unlike');
+			// 		$current.closest('div').find('.count').text(y + 1);
+			// 	} else if (x === "Unlike"){
+			// 		$current.closest('div').find('.like').text('Like');
+			// 		$current.closest('div').find('.count').text(y - 1);
+			// 	} else {
+			// 		var replay = $current.closest('div').find('.like').text('Like');
+			// 		$current.closest('div').find('.count').text(y - 1);
+			// 	}
+			// });
+      @php
+        $img = URL::to('/public/assets/assets/img/user1.jpg');
+        if(Session::has('client')){
+            $value = Session::get('client');
+            if($value['image'] != null){
+                $img = URL::to('/storage/app') . "/" . $value['image'];
+            }
+        }
+      @endphp
 			$('#list_comment').on('click', '.replay', function (e) {
 				cancel_reply();
 				$current = $(this);
@@ -230,17 +238,13 @@
 					'<div class=\"col-md-12 reply_comment\">'+
 						'<div class=\"row\">'+
 							'<div class=\"avatar_comment col-md-2\">'+
-							'<img src=\"{{URL::to('/public/assets/assets/img/user1.jpg')}}\" alt=\"avatar\"/>'+
+							'<img src=\"{{$img}}\" alt=\"avatar\"/>'+
 							'</div>'+
 							'<div class=\"box_comment col-md-9\">'+
 								'<form action=\"{{URL::to('/comments/save')}}\" method="post">'+
 									'<textarea class=\"comment_replay\" name=\"comment\" placeholder=\"Add a comment...\"></textarea>'+
 									'<div class=\"box_post\">'+
 										'<div class=\"pull-right\">'+
-										'<span>'+
-											'<img src=\"{{URL::to('/public/assets/assets/img/user1.jpg')}}\" alt=\"avatar\" />'+
-											'<i class=\"fa fa-caret-down\"></i>'+
-										'</span>'+
 										'<input type=\"hidden\" name=\"memberId\" value=\"{{$value['id']}}\">'+
 										'<input type=\"hidden\" name=\"userType\" value=\"client\">'+
 										'<input type=\"hidden\" name=\"objectId\" value=\"{{$commentObjectId}}\"> '+
@@ -278,19 +282,19 @@
                     var ifd = $(this).parent().children(".likeForm1").attr('text');
                     console.log(ifd);
                     if (ifd != null && ifd != "") {
-                        var like1 = $(".totalLiked").html();
+                        var like1 = parseInt($(".totalLiked").html());
                         $(this).parent().children(".totalLiked").html(--like1);
                         $(this).parent().children(".likeForm1").attr('class','likeForm likeForm1');
                         $(this).parent().children(".likeForm1").attr('text','');
                     }
                     $(this).attr('class','likeForm disLikeForm1 text-danger');
                     $(this).attr('text','text-danger');
-                    var dislike = $(this).parent().children(".totalDisliked").html();
+                    var dislike = parseInt($(this).parent().children(".totalDisliked").html());
                     $(this).parent().children(".totalDisliked").html(++dislike);
                 }else{
                     $(this).attr('class','likeForm disLikeForm1');
                     $(this).attr('text','');
-                    var dislike = $(this).parent().children(".totalDisliked").html();
+                    var dislike = parseInt($(this).parent().children(".totalDisliked").html());
                     $(this).parent().children(".totalDisliked").html(--dislike);
                 }
             }else{
@@ -299,19 +303,19 @@
                     console.log(ifd1);
                     if (ifd1 != null && ifd1 != "") {
                     console.log(ifd1);
-                        var dislike1 = $(this).parent().children(".totalDisliked").html();
+                        var dislike1 = parseInt($(this).parent().children(".totalDisliked").html());
                         $(this).parent().children(".totalDisliked").html(--dislike1);
                         $(this).parent().children(".disLikeForm1").attr('class','likeForm disLikeForm1');
                         $(this).parent().children(".disLikeForm1").attr('text','');
                     }
                     $(this).attr('class','likeForm likeForm1 text-primary');
                     $(this).attr('text','text-primary');
-                    var like = $(this).parent().children(".totalLiked").html();
+                    var like = parseInt($(this).parent().children(".totalLiked").html());
                     $(this).parent().children(".totalLiked").html(++like);
                 }else{
                     $(this).attr('class','likeForm likeForm1');
                     $(this).attr('text','');
-                    var like = $(this).parent().children(".totalLiked").html();
+                    var like = parseInt($(this).parent().children(".totalLiked").html());
                     $(this).parent().children(".totalLiked").html(--like);
                 }
             }

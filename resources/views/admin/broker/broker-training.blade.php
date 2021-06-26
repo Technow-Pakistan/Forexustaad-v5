@@ -12,15 +12,19 @@
 						<div class="row align-items-center">
 							<div class="col-md-12">
 								<div class="page-header-title">
-									<h5 class="m-b-10">Broker Training</h5>
+									<h5 class="m-b-10">All Broker Training</h5>
 								</div>
-								<ul class="breadcrumb">
-									<li class="breadcrumb-item">
-										<a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a>
-									</li>
-									<li class="breadcrumb-item"><a href="{{URL::to('/ustaad/brokersTraining')}}/{{$value['memberId']}}">All Broker Trainings</a></li>
-									<li class="breadcrumb-item"><a href="#!">Broker Training</a></li>
-								</ul>
+								<div class="d-flex justify-content-between">
+									<ul class="breadcrumb p-0 m-0 bg-white">
+										<li class="breadcrumb-item">
+											<a href="{{URL::to('/ustaad/dashboard')}}"><i class="fa fa-home"></i></a>
+										</li>
+										<li class="breadcrumb-item"><a href="#!">All Broker Traning</a></li>
+									</ul>
+									<div>
+										<a href="{{URL::to('ustaad/brokersTrainings/new')}}">Add Broker Traning</a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -36,11 +40,10 @@
 									<table id="user-list-table" class="table nowrap">
 										<thead>
 											<tr>
-												<th>Broker</th>
 												<th>Broker Name</th>
 												<th>Training Title</th>
 												<th>Date</th>
-												
+												<th>Comments</th>
 												<th>Status</th>
 											</tr>
 										</thead>
@@ -49,16 +52,11 @@
 												@php
 													$broker = $training->GetBrokerInfo();
 												@endphp
-												<tr  draggable="true">
-													<td>
-														<div>
-															<img src="{{URL::to('storage/app')}}/{{$broker->image}}" alt="" class="img-fluid" width="150">
-														</div>
-													</td>
-													<td>{{$broker->title}}</td>
+												<tr>
 													<td>{{$training->title}}</td>
+													<td>{{$broker->title}}</td>
 													<td>{{$training->created_at->format("M d, Y")}}</td>
-												
+													<td><a href="{{URL::to('ustaad/brokersTrainings/comment')}}/{{$training->id}}">View Comments</a></td>
 													<td>
                                                         @if($training->pending == 0)
                                                             <span class="badge badge-light-success">Active</span>
@@ -84,7 +82,15 @@
 												</tr>
 											@endforeach
 										</tbody>
-										
+										<tfoot>
+											<tr>
+												<th>Broker Name</th>
+												<th>Training Title</th>
+												<th>Date</th>
+												<th>Comments</th>
+												<th>Status</th>
+											</tr>
+										</tfoot>
 									</table>
 								</div>
 							</div>

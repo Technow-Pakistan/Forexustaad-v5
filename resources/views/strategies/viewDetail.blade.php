@@ -16,18 +16,19 @@
                         </div>
                     @endif
                     <div class="family">
-                                        <div>
-                                            <h4>{{$Strategy->title}}</h4>
-                                        </div>
+                        <div>
+                            <h4>{{$Strategy->title}}</h4>
+                        </div>
 
-                                        <div class="pt-3">
-                                            @php
-                                                $Description = html_entity_decode($Strategy->description);
-                                                echo $Description;
-                                            @endphp
+                        <div class="pt-3">
+                            @php
+                                $Description = html_entity_decode($Strategy->description);
+                                echo $Description;
+                            @endphp
 
-                                        </div>
+                        </div>
                     </div>
+                    @include('comments.comment',['commentObjectId'=>$Strategy->id,'commentPage'=>11])
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 order-3 order-lg-3">
                 @include('inc.home-right-sidebar')
@@ -46,3 +47,4 @@
 </style>
 
 @include('inc.footer')
+@include('comments.css_js',['commentObjectId'=>$Strategy->id,'commentPage'=>11])

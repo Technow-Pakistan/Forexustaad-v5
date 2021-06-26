@@ -33,6 +33,7 @@
 									<table id="user-list-table" class="table nowrap">
 										<thead>
 											<tr>
+												<th>Id</th>
 												<th>Title</th>
 												<th>Category</th>
 												<th>Comments</th>
@@ -49,9 +50,8 @@
 													$c = count($count);
 												@endphp
 												<tr>
-													<td>
-														{{$post->mainTitle}}
-													</td>
+													<td>{{$post->id}}</td>
+													<td>{{$post->mainTitle}}</td>
 													<td>{{$category->mainCategory}}</td>
 													<td><a href="{{URL::to('ustaad/post/comment')}}/{{$post->id}}">View Comments</a></td>
 													<td>{{$c}}</td>
@@ -78,8 +78,10 @@
 										</tbody>
 										<tfoot>
 											<tr>
+												<th>Id</th>
 												<th>Title</th>
 												<th>Category</th>
+												<th>Comments</th>
 												<th>Tsgs</th>
 												<th>Date</th>
 												<th>Status</th>

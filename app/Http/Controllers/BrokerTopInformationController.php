@@ -14,6 +14,7 @@ use App\Models\BrokerCustomerServicesModel;
 use App\Models\BrokerReserchEducationModel;
 use App\Models\BrokerPromotionModel;
 use App\Models\NotificationModel;
+use App\Models\MetaTagsModel;
 
 class BrokerTopInformationController extends Controller
 {
@@ -68,6 +69,15 @@ class BrokerTopInformationController extends Controller
         $broker = new BrokerPromotionModel;
         $broker->brokerId = $id;
         $broker->save();
+        // meta Tags save start
+            $BrokerNewPages = ['brokerDetail@','brokerNews@','brokerPromotion@','brokerTraining@','brokerReview@'];
+            for ($i=0; $i < 5; $i++) { 
+                $newMeta = new MetaTagsModel;
+                $newMeta->name_page = $BrokerNewPages[$i] . $brokerTitle;
+                $newMeta->main = 0;
+                $newMeta->save();
+            }
+        // meta Tags save end
         if ($userID['memberId'] == 6 ) {
             $notification = new NotificationModel;
             $notification->userId = $userID->id;

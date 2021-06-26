@@ -43,6 +43,32 @@
 									<?php $url = "edit/" . $brokerReview->id; ?>
 								@endisset
 								<form action="{{URL::to('/ustaad/brokersReview')}}/{{$url}}" method="post" enctype="multipart/form-data">
+									<div class="bg-primary p-3">
+										<span type="button" class="arrow-toggle collapsed" data-toggle="collapse" data-target="#collapseH" id="collapseP">
+											<span class="fa fa-arrow-down text-white"></span>
+											<span class="fa fa-arrow-up text-white"></span>
+											<span class="h3 text-white"> Meta Tags</span>
+										</span>
+									</div>
+									<div id="collapseH" class="collapse in px-5">
+										<label for="">Keywords</label>
+										<select class="js-example-tokenizer col-sm-12" name="metaKeywords[]" multiple="multiple" required>
+											@foreach ($MetaKeywords as $metas)
+												@if($newMeta != null)
+													@php
+														$keywords = explode(',',$newMeta->keywordsimp);
+														$selectedAll = 0;
+													@endphp
+													@for($i = 0; $i< count($keywords); $i++)
+														@if($keywords[$i] == $metas->name)
+															@php   $selectedAll = 1;  @endphp
+														@endif
+													@endfor
+												@endif
+												<option value="{{$metas->name}}" {{$newMeta != null ? ($selectedAll == 1 ? 'selected' : '') : ''}}>{{$metas->name}}</option>
+											@endforeach
+										</select>
+									</div>
 									@isset($brokerReview->image)
 										<div>
 											<img src="{{URL::to('storage/app')}}/{{$brokerReview->image}}" alt="Your Image" />
